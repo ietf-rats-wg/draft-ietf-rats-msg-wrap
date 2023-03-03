@@ -175,7 +175,7 @@ and then does a 1-byte lookahead, as illustrated in the
 following pseudo code, to decide which format to use to
 decode the remainder of the byte buffer:
 
-```
+~~~
 switch b[0] {
 case 0x82:
   return CBORArray
@@ -184,7 +184,7 @@ case 0x5b:
 default:
   return CBORTag
 }
-```
+~~~
 
 # Examples
 
