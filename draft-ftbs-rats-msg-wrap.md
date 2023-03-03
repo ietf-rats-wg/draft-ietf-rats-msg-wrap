@@ -170,10 +170,10 @@ are not, and therefore apply the right decapsulation on receive.
 
 ## Decapsulation Algorithm
 
-A parser decodes the octet string into a byte buffer
-and then does a 1-byte lookahead, as illustrated in the
-following pseudo code, to decide which format to use to
-decode the remainder of the byte buffer:
+After removing any external framing (for example, the ASN.1 OCTET STRING
+if the CMW is carried in a certificate extension {{DICE-arch}}), the CMW
+decoder does a 1-byte lookahead, as illustrated in the following pseudo
+code, to decide how to decode the remainder of the byte buffer:
 
 ~~~
 switch b[0] {
