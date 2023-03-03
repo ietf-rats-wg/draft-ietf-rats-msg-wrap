@@ -168,7 +168,7 @@ A consumer can always distinguish tags that have been derived via TN(),
 which all fall in the \[1668546817, 1668612095\] range, from tags that
 are not, and therefore apply the right decapsulation on receive.
 
-## Encapsulation Decapsulation Algorithm
+## Decapsulation Algorithm
 
 A parser decodes the octet string into a byte buffer
 and then does a 1-byte lookahead, as illustrated in the
