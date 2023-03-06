@@ -287,7 +287,7 @@ This document does not make any requests to IANA.
 # Acknowledgments
 {:numbered="false"}
 
-TODO acknowledge.
-
+The authors would like to thank Carl Wallace and Carsten Bormann for their
+reviews and suggestions.
 
 [^note]: Note:
