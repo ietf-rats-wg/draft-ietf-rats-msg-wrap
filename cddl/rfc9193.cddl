@@ -1,0 +1,34 @@
+; from RFC9193
+Content-Type-ABNF = '
+
+Content-Type   = Media-Type-Name *( *SP ";" *SP parameter )
+parameter      = token "=" ( token / quoted-string )
+
+token          = 1*tchar
+tchar          = "!" / "#" / "$" / "%" / "&" / "\'" / "*"
+               / "+" / "-" / "." / "^" / "_" / "`" / "|" / "~"
+               / DIGIT / ALPHA
+quoted-string  = %x22 *( qdtext / quoted-pair ) %x22
+qdtext         = SP / %x21 / %x23-5B / %x5D-7E
+quoted-pair    = "\" ( SP / VCHAR )
+
+Media-Type-Name = type-name "/" subtype-name
+
+type-name = restricted-name
+subtype-name = restricted-name
+
+restricted-name = restricted-name-first *126restricted-name-chars
+restricted-name-first  = ALPHA / DIGIT
+restricted-name-chars  = ALPHA / DIGIT / "!" / "#" /
+                         "$" / "&" / "-" / "^" / "_"
+restricted-name-chars =/ "." ; Characters before first dot always
+                             ; specify a facet name
+restricted-name-chars =/ "+" ; Characters after last plus always
+                             ; specify a structured syntax suffix
+
+DIGIT     =  %x30-39           ; 0 - 9
+POS-DIGIT =  %x31-39           ; 1 - 9
+ALPHA     =  %x41-5A / %x61-7A ; A - Z / a - z
+SP        =  %x20
+VCHAR     =  %x21-7E           ; printable ASCII (no SP)
+'
