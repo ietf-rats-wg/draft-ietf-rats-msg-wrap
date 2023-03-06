@@ -1,0 +1,3 @@
+cmw-cbor-tag<bytes> = #6.<coap-cf-tag-number>(bytes)
+
+coap-cf-tag-number = 1668546817..1668612095

@@ -28,8 +28,7 @@ author:
    organization: arm
    email: thomas.fossati@arm.com
  - name: Hannes Tschofenig
-   organization: arm
-   email: hannes.tschofenig@arm.com
+   email: hannes.tschofenig@gmx.net
 
 normative:
   RFC4648: base64
@@ -44,8 +43,10 @@ normative:
     =: RFC8949
 
 informative:
-  I-D.ietf-rats-architecture: rats-arch
+  RFC9193: senml-cf
+  RFC9334: rats-arch
   I-D.ietf-rats-eat: rats-eat
+  I-D.ietf-rats-eat-media-type: rats-eat-mt
   I-D.ietf-rats-ar4si: rats-ar4si
   I-D.fossati-tls-attestation: tls-a
   DICE-arch:
@@ -72,7 +73,7 @@ byte string and prepends a CBOR tag to convey the type information.
 The RATS architecture defines a handful of conceptual messages
 (see {{Section 8 of -rats-arch}}), such as evidence and attestation results.
 Each conceptual message can have multiple claims encoding and serialization
-formats ({{Section 9 of -rats-arch}}). Such serialized message may
+formats ({{Section 9 of -rats-arch}}). Such serialized messages may
 have to be transported via different protocols - for example, evidence
 using an EAT {{-rats-eat}} encoding serialized as a CBOR payload in
 a "background check" topological arrangement, or attestation results as
@@ -92,8 +93,8 @@ These encapsulation formats are designed to be:
   by the embedding protocol (or the storage system) to convey exact
   typing information.
 
-* Based on media types - which allows amortising their registration cost
-  across many different usage scenarios.
+* Based on media types {{-media-types}} - which allows amortising their
+  registration cost across many different usage scenarios.
 
 A protocol designer could use these formats, for example, to convey
 evidence, endorsements or reference values in certificates and CRLs
@@ -113,25 +114,40 @@ data formats.
 The reader is assumed to be familiar with the vocabulary and concepts
 defined in {{-rats-arch}}.
 
+This document reuses the terms defined in {{Section 2 of -senml-cf}}
+(e.g., "Content-Type").
+
 # Conceptual Message Wrapper Encodings
 
 Two types of RATS Conceptual Message Wrapper (CMW) are specified in this
 document:
 
-1. a CMW using a CBOR or a JSON array ({{type-n-val}})
-
-2. a CMW based on CBOR tags ({{cbor-tag}}).
+1. A CMW using a CBOR or JSON array ({{type-n-val}});
+1. A CMW based on CBOR tags ({{cbor-tag}}).
 
 ## CMW Array {#type-n-val}
 
-The CMW array illustrated in {{fig-cddl}} is composed of two members:
+The CMW array format is defined in {{fig-cddl-array}}.  (To improve clarity,
+the `Content-Type` ABNF is defined separately in {{rfc9193-abnf}}.)
 
-* type: either a text string representing a media-type (and optional
-  parameters) {{-media-types}} or an unsigned integer corresponding to a
-  CoAP Content-Format {{-coap}}
+~~~ cddl
+{::include cddl/cmw-array.cddl}
+~~~
+{: #fig-cddl-array artwork-align="left"
+   title="CDDL definition of the Array format"}
 
-* value: the RATS conceptual message serialized according to the
-  value defined in the type member.
+It is composed of two members:
+
+{: vspace="0"}
+
+`type`:
+: Either a text string representing a Content-Type (e.g., an EAT media type
+{{-rats-eat-mt}}) or an unsigned Integer corresponding to a CoAP Content-Format
+number ({{Section 12.3 of -coap}}.
+
+`value`:
+: The RATS conceptual message serialized according to the
+value defined in the type member.
 
 A CMW array can be encoded as CBOR {{-cbor}} or JSON {{-json}}.
 
@@ -140,33 +156,37 @@ filename safe alphabet (Section 5 of {{-base64}}) without padding.
 
 When using CBOR, the value field is encoded as a CBOR byte string.
 
-~~~ cddl
-{::include cddl/cmw.cddl}
-~~~
-{: #fig-cddl artwork-align="left"
-   title="CDDL definition"}
-
 ## CMW CBOR Tags {#cbor-tag}
 
-CBOR Tags used as CMW are derived from CoAP Content Format values.
-If a CoAP Content Format exists for a RATS conceptual message, the
-TN() transform defined in {{Appendix B of RFC9277}} can be used to
+CBOR Tags used as CMW are derived from CoAP Content-Format numbers.
+If a CoAP content format exists for a RATS conceptual message, the
+`TN()` transform defined in {{Appendix B of RFC9277}} can be used to
 derive a corresponding CBOR tag in range \[1668546817, 1668612095\].
 
-The RATS conceptual message is first serialized according to the Content
-Format associated with the tag and then encoded as a CBOR byte string,
-to which the tag is prepended.
+The RATS conceptual message is first serialized according to the
+Content-Format number associated with the CBOR tag and then encoded as a
+CBOR byte string, to which the tag is prepended.
+
+The CMW CBOR Tag is defined in {{fig-cddl-cbor-tag}}.
+
+~~~ cddl
+{::include cddl/cmw-cbor-tag.cddl}
+~~~
+{: #fig-cddl-cbor-tag artwork-align="left"
+   title="CDDL definition of the CBOR Tag format"}
 
 ### Use of Pre-existing CBOR Tags
 
 If a CBOR tag has been registered in association with a certain RATS
-conceptual message independently of a CoAP Content Format (i.e., it is
-not obtained by applying the TN() transform), it can be readily used as
-an encapsulation without the extra processing described in {{cbor-tag}}.
+conceptual message independently of a CoAP content format (i.e., it is
+not obtained by applying the `TN()` transform), it can be readily used
+as an encapsulation without the extra processing described in
+{{cbor-tag}}.
 
-A consumer can always distinguish tags that have been derived via TN(),
-which all fall in the \[1668546817, 1668612095\] range, from tags that
-are not, and therefore apply the right decapsulation on receive.
+A consumer can always distinguish tags that have been derived via
+`TN()`, which all fall in the \[1668546817, 1668612095\] range, from
+tags that are not, and therefore apply the right decapsulation on
+receive.
 
 ## Decapsulation Algorithm
 
@@ -176,41 +196,68 @@ decoder does a 1-byte lookahead, as illustrated in the following pseudo
 code, to decide how to decode the remainder of the byte buffer:
 
 ~~~
-switch b[0] {
-case 0x82:
-  return CBORArray
-case 0x5b:
-  return JSONArray
-default:
-  return CBORTag
+func CMWDecode(b []byte) (CMW, error) {
+    if len(b) < CMWMinSize {
+        return CMW{}, errors.New("CMW too short")
+    }
+
+    switch b[0] {
+    case 0x82:
+        return cborArrayDecode(b)
+    case 0x5b:
+        return jsonArrayDecode(b)
+    default:
+        return cborTagDecode(b)
+    }
 }
 ~~~
 
 # Examples
 
-The (equivalent) examples below assume the media-type
+The (equivalent) examples below assume the Media-Type-Name
 `application/vnd.example.rats-conceptual-msg` has been registered
-alongside a corresponding CoAP content format `30001`.  The CBOR tag
-`1668576818` is derived applying the TN transform as described in
-{{cbor-tag}}.
+alongside a corresponding CoAP Content-Format number `30001`.  The CBOR
+tag `1668576818` is derived applying the `TN()` transform as described
+in {{cbor-tag}}.
 
-~~~ cbor-diag
-{::include cddl/example-cbor-1.diag}
-~~~
-{: #fig-example-cbor artwork-align="left"
-   title="CBOR encoding"}
+## JSON Array
 
 ~~~ cbor-diag
 {::include cddl/example-json-1.diag}
 ~~~
-{: #fig-example-json artwork-align="left"
-   title="JSON encoding"}
+
+## CBOR Array
+
+~~~ cbor-diag
+{::include cddl/example-cbor-1.diag}
+~~~
+
+with the following wire representation:
+
+~~~
+{::include cddl/example-cbor-1.pretty}
+~~~
+
+## CBOR Tag {#cbor-tag-example}
 
 ~~~ cbor-diag
 1668576818(h'abcdabcd')
 ~~~
-{: #fig-example-cbor-tag artwork-align="left"
-   title="CBOR tag"}
+
+with the following wire representation:
+
+~~~
+{::include cddl/example-cbor-tag-1.pretty}
+~~~
+
+# Registering a Media Type for Evidence
+
+[^note] Not sure whether this advice should go.
+
+When registering a new media type for evidence, in addition to its
+syntactical description, the author SHOULD provide a public and stable
+description of the signing and appraisal procedures associated with
+the data format.
 
 # Security Considerations
 
@@ -225,17 +272,22 @@ will result in incorrect processing of the encapsulated
 messages and this will subsequently lead to a processing
 error.
 
-
 # IANA Considerations
 
-When registering a new media type for evidence, in addition to its
-syntactical description, the author SHOULD provide a public and stable
-description of the signing and appraisal procedures associated with
-the data format.
+This document does not make any requests to IANA.
 
 --- back
+
+# RFC9193 ABNF {#rfc9193-abnf}
+
+~~~ cddl
+{::include cddl/rfc9193.cddl}
+~~~
 
 # Acknowledgments
 {:numbered="false"}
 
 TODO acknowledge.
+
+
+[^note]: Note:

@@ -9,3 +9,16 @@ else
 	git clone -q --depth 10 $(CLONE_ARGS) \
 	    -b main https://github.com/martinthomson/i-d-template $(LIBDIR)
 endif
+
+EXAMPLES_DIAG := $(wildcard cddl/example*.diag)
+EXAMPLES_PRETTY := $(EXAMPLES_DIAG:.diag=.pretty)
+CDDL_FILES := cddl/cmw-array.cddl
+CDDL_FILES += cddl/cmw-cbor-tag.cddl
+
+$(drafts_txt):: $(EXAMPLES_DIAG) $(EXAMPLES_PRETTY) $(CDDL_FILES)
+
+$(EXAMPLES_PRETTY): $(EXAMPLES_DIAG)
+	$(MAKE) -C cddl
+
+clean::
+	$(MAKE) -C cddl clean
