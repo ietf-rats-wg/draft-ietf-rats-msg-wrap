@@ -142,8 +142,8 @@ It is composed of two members:
 
 `type`:
 : Either a text string representing a Content-Type (e.g., an EAT media type
-{{-rats-eat-mt}}) or an unsigned Integer corresponding to a CoAP Content-Format
-number ({{Section 12.3 of -coap}}.
+{{-rats-eat-mt}}) or an unsigned integer corresponding to a CoAP Content-Format
+number ({{Section 12.3 of -coap}}).
 
 `value`:
 : The RATS conceptual message serialized according to the
