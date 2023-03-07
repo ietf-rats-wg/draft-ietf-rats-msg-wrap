@@ -1,0 +1,302 @@
+
+
+
+
+Remote ATtestation ProcedureS                              H. Tschofenig
+Internet-Draft                                                       arm
+Intended status: Standards Track                              H. Birkolz
+Expires: 15 April 2023                                    Fraunhofer SIT
+                                                                N. Smith
+                                                                   Intel
+                                                              T. Fossati
+                                                                     arm
+                                                         12 October 2022
+
+
+                    RATS Conceptual Messages Wrapper
+                    draft-ftbs-rats-msg-wrap-latest
+
+Abstract
+
+   This document defines two encapsulation formats for RATS conceptual
+   messages.
+
+Discussion Venues
+
+   This note is to be removed before publishing as an RFC.
+
+   Discussion of this document takes place on the Remote ATtestation
+   ProcedureS Working Group mailing list (rats@ietf.org), which is
+   archived at https://mailarchive.ietf.org/arch/browse/rats/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 15 April 2023.
+
+Copyright Notice
+
+   Copyright (c) 2022 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction
+   2.  Conventions and Definitions
+   3.  Conceptual Message Wrapper Encodings
+     3.1.  Type and Value Array
+     3.2.  CBOR Tags derived from CoAP Content Formats
+   4.  Examples
+   5.  Security Considerations
+   6.  IANA Considerations
+   7.  References
+     7.1.  Normative References
+     7.2.  Informative References
+   Acknowledgments
+   Authors' Addresses
+
+1.  Introduction
+
+   This document defines two encapsulation formats for RATS conceptual
+   messages (Section 8 of [I-D.ietf-rats-architecture]).
+
+   TODO use cases (TLS, cert extensions, long-term storage, use in API
+   payloads, other)
+
+2.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+   In this document, CDDL [RFC8610] [RFC9165] is used to describe the
+   data formats.
+
+   The reader is assumed to be familiar with the vocabulary and concepts
+   defined in [I-D.ietf-rats-architecture].
+
+3.  Conceptual Message Wrapper Encodings
+
+   Two different RATS Conceptual Message Wrapper (CMW) data types are
+   defined: one using a CBOR or JSON array (Section 3.1), another using
+   CBOR tags (Section 3.2).
+
+3.1.  Type and Value Array
+
+   The CMW described in Figure 1 is a CDDL array of two elements:
+
+   *  type: a string encoding a media type [RFC6838] or an unsigned
+      integer corresponding to a CoAP Content-Format [RFC7252]
+
+   *  value: the RATS conceptual message serialisation according to the
+      specified type.
+
+   This kind of CMW can be encoded as CBOR [STD94] or JSON [RFC8259].
+
+   When using JSON, the value field is encoded as Base64 using the URL
+   and filename safe alphabet (Section 5 of [RFC4648]) without padding.
+
+   When using CBOR, the value field is serialized as a CBOR bytes
+   string.
+
+  cmw = [ type, value ]
+
+  type = coap-content-format / media-type
+
+  coap-content-format = uint .size 2
+  media-type = text .abnf ("media-type" .cat RFC6838)
+
+  value = cbor-bytes / base64-string
+
+  cbor-bytes = bytes
+  base64-string = text .regexp "[A-Za-z0-9_-]+"
+
+  RFC6838 = '
+  media-type = type-name "/" subtype-name *1("+" suffix) parameters
+
+  type-name = restricted-name
+  subtype-name = restricted-name
+
+  ; see https://www.iana.org/assignments/media-type-structured-suffix/
+  suffix = "xml" / "json" / "ber" / "cbor" / "der" / "fastinfoset" /
+           "wbxml" / "zip" / "tlv" / "json-seq" / "sqlite3" / "jwt" /
+           "gzip" / "cbor-seq" / "zstd"
+
+  parameters = *(";" parameter-name "=" parameter-value)
+
+  parameter-name = restricted-name
+  parameter-value = *VCHAR
+
+  restricted-name = restricted-name-first *126restricted-name-chars
+  restricted-name-first  = ALPHA / DIGIT
+  restricted-name-chars  = ALPHA / DIGIT / "!" / "#" / "$" / "&" / "-" /
+                           "^" / "_"
+  restricted-name-chars =/ "." ; Characters before first dot always
+                               ; specify a facet name
+  restricted-name-chars =/ "+" ; Characters after last plus always
+                               ; specify a structured syntax suffix
+
+  VCHAR = %x21-7E            ; Visible (printing) characters
+  ALPHA = %x41-5A / %x61-7A  ; A-Z / a-z
+  DIGIT = %x30-39            ; 0-9
+  '
+
+                        Figure 1: CDDL definition
+
+3.2.  CBOR Tags derived from CoAP Content Formats
+
+   If a CoAP Content Format exists for the RATS conceptual message, the
+   TN() transform defined in Appendix B of [RFC9277] can be used to
+   derive a CBOR tag in range [1668546817, 1668612095].
+
+4.  Examples
+
+   The (equivalent) examples below assume the media type application/
+   vnd.example.rats-conceptual-msg has been registered alongside a
+   corresponding CoAP content format 30001.  The CBOR tag 1668576818 is
+   derived applying the TN transform as described in Section 3.2.
+
+   [
+     30001,
+     h'abcdabcd'
+   ]
+
+                          Figure 2: CBOR encoding
+
+   [
+     "application/vnd.example.rats-conceptual-msg",
+     "q82rzQ"
+   ]
+
+                          Figure 3: JSON encoding
+
+   1668576818(h'abcdabcd')
+
+                             Figure 4: CBOR tag
+
+5.  Security Considerations
+
+   TODO Security
+
+6.  IANA Considerations
+
+   When registering a new media type for evidence, in addition to its
+   syntactical description, the author SHOULD provide a public and
+   stable description of the signing and appraisal procedures associated
+   with the data format.
+
+7.  References
+
+7.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
+              Encodings", RFC 4648, DOI 10.17487/RFC4648, October 2006,
+              <https://www.rfc-editor.org/rfc/rfc4648>.
+
+   [RFC6838]  Freed, N., Klensin, J., and T. Hansen, "Media Type
+              Specifications and Registration Procedures", BCP 13,
+              RFC 6838, DOI 10.17487/RFC6838, January 2013,
+              <https://www.rfc-editor.org/rfc/rfc6838>.
+
+   [RFC7252]  Shelby, Z., Hartke, K., and C. Bormann, "The Constrained
+              Application Protocol (CoAP)", RFC 7252,
+              DOI 10.17487/RFC7252, June 2014,
+              <https://www.rfc-editor.org/rfc/rfc7252>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC8259]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
+              Interchange Format", STD 90, RFC 8259,
+              DOI 10.17487/RFC8259, December 2017,
+              <https://www.rfc-editor.org/rfc/rfc8259>.
+
+   [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
+              Definition Language (CDDL): A Notational Convention to
+              Express Concise Binary Object Representation (CBOR) and
+              JSON Data Structures", RFC 8610, DOI 10.17487/RFC8610,
+              June 2019, <https://www.rfc-editor.org/rfc/rfc8610>.
+
+   [RFC9165]  Bormann, C., "Additional Control Operators for the Concise
+              Data Definition Language (CDDL)", RFC 9165,
+              DOI 10.17487/RFC9165, December 2021,
+              <https://www.rfc-editor.org/rfc/rfc9165>.
+
+   [RFC9277]  Richardson, M. and C. Bormann, "On Stable Storage for
+              Items in Concise Binary Object Representation (CBOR)",
+              RFC 9277, DOI 10.17487/RFC9277, August 2022,
+              <https://www.rfc-editor.org/rfc/rfc9277>.
+
+   [STD94]    Bormann, C. and P. Hoffman, "Concise Binary Object
+              Representation (CBOR)", STD 94, RFC 8949,
+              DOI 10.17487/RFC8949, December 2020,
+              <https://www.rfc-editor.org/rfc/rfc8949>.
+
+7.2.  Informative References
+
+   [I-D.ietf-rats-architecture]
+              Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
+              W. Pan, "Remote Attestation Procedures Architecture", Work
+              in Progress, Internet-Draft, draft-ietf-rats-architecture-
+              22, 28 September 2022,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
+              architecture-22>.
+
+Acknowledgments
+
+   TODO acknowledge.
+
+   *  vim: tw=72 ts=4 sw=4 et
+
+Authors' Addresses
+
+   Hannes Tschofenig
+   arm
+   Email: hannes.tschofenig@arm.com
+
+
+   Henk Birkolz
+   Fraunhofer SIT
+   Email: henk.birkholz@sit.fraunhofer.de
+
+
+   Ned Smith
+   Intel
+   Email: ned.smith@intel.com
+
+
+   Thomas Fossati
+   arm
+   Email: thomas.fossati@arm.com
