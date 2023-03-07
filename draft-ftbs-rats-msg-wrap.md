@@ -261,16 +261,14 @@ the data format.
 
 # Security Considerations
 
-This document defines two encapsulation formats for RATS
-conceptual messages. The messages themselves and their
-encoding ensure security protection. For this reason
-there are no further security requirements raised by
-the introduction of this encapsulation.
+This document defines two encapsulation formats for RATS conceptual
+messages. The messages themselves and their encoding ensure security
+protection. For this reason there are no further security requirements
+raised by the introduction of this encapsulation.
 
-Changing the encapsulation of a payload by an adversary
-will result in incorrect processing of the encapsulated
-messages and this will subsequently lead to a processing
-error.
+Changing the encapsulation of a payload by an adversary will result in
+incorrect processing of the encapsulated messages and this will
+subsequently lead to a processing error.
 
 # IANA Considerations
 
@@ -283,6 +281,13 @@ This document does not make any requests to IANA.
 ~~~ cddl
 {::include cddl/rfc9193.cddl}
 ~~~
+
+# Open Issues
+
+<cref>Note to RFC Editor: please remove before publication.</cref>
+
+The list of currently open issues for this documents can be found at
+[](https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues).
 
 # Acknowledgments
 {:numbered="false"}
