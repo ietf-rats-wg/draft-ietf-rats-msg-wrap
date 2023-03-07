@@ -276,7 +276,7 @@ This document does not make any requests to IANA.
 
 --- back
 
-# RFC9193 ABNF {#rfc9193-abnf}
+# RFC9193 Content-Type ABNF {#rfc9193-abnf}
 
 ~~~ cddl
 {::include cddl/rfc9193.cddl}
