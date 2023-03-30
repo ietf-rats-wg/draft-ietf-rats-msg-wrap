@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-12-22T00:57:50.652286+00:00",
+  "timestamp": "2023-03-30T00:43:37.392509+00:00",
   "repo": "thomas-fossati/draft-ftbs-rats-msg-wrap",
   "labels": [
     {
@@ -107,31 +107,39 @@
       "id": "I_kwDOIGCt2M5UdJ7L",
       "title": "clearly describe encap/decap algorithm",
       "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/10",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "In order to avoid misunderstandings, it'd be beneficial to describe the encap/decap algorithms in a more explicit manner",
       "createdAt": "2022-10-20T16:30:57Z",
-      "updatedAt": "2022-10-20T16:30:57Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2023-03-06T09:31:25Z",
+      "closedAt": "2023-03-06T09:31:25Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "body": "Maybe add this bit from the TCG spec:\r\n\r\n```\r\nA parser decodes the octet string into a byte buffer\r\nand then does a 1-byte lookahead, as illustrated in the\r\nfollowing pseudo code, to decide which format to use to\r\ndecode the remainder of the byte buffer:\r\n```\r\n```golang\r\nswitch b[0] {\r\ncase 0x82:\r\n  return CBORArray\r\ncase 0x5b:\r\n  return JSONArray\r\ndefault:\r\n  return CBORTag\r\n}\r\n```\r\n",
+          "createdAt": "2023-03-02T14:22:32Z",
+          "updatedAt": "2023-03-02T14:22:32Z"
+        }
+      ]
     },
     {
       "number": 11,
       "id": "I_kwDOIGCt2M5Vm6MQ",
       "title": "fix IANA section",
       "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/11",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "nedmsmith",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Should include \u201cThis document does not require any IANA actions.\u201d\r\ndiscuss if normative for authors should exist here.",
       "createdAt": "2022-11-04T15:30:27Z",
-      "updatedAt": "2022-11-04T15:30:27Z",
-      "closedAt": null,
+      "updatedAt": "2023-03-06T16:51:22Z",
+      "closedAt": "2023-03-06T16:51:22Z",
       "comments": []
     },
     {
@@ -139,15 +147,15 @@
       "id": "I_kwDOIGCt2M5V1A4T",
       "title": "Reuse terminology from RFC 9193",
       "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/12",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "RFC9193 provides an [excellent glossary](https://www.rfc-editor.org/rfc/rfc9193.html#name-terminology) for all things \"media types\".  We should stick to that.\r\n\r\n",
       "createdAt": "2022-11-08T10:59:18Z",
-      "updatedAt": "2022-11-08T10:59:18Z",
-      "closedAt": null,
+      "updatedAt": "2023-03-06T16:51:23Z",
+      "closedAt": "2023-03-06T16:51:23Z",
       "comments": []
     },
     {
@@ -155,15 +163,15 @@
       "id": "I_kwDOIGCt2M5V1F93",
       "title": "RFC6383 rule in the CDDL is wrong",
       "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/13",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Email from @cabo:\r\n\r\n> The CDDL rule RFC6383 doesn\u2019t quite mirror what RFC 6383 actually says.\r\n> You put in a new rule for suffixes, but the way you are using \u201c+\u201d, these will become part of the restricted-name; maybe you need to take out\r\n>\r\n```\r\n   restricted-name-chars =/ \"+\" ; Characters after last plus always\r\n                                ; specify a structured syntax suffix\r\n```",
       "createdAt": "2022-11-08T11:11:37Z",
-      "updatedAt": "2022-11-08T11:17:53Z",
-      "closedAt": null,
+      "updatedAt": "2023-03-06T16:51:23Z",
+      "closedAt": "2023-03-06T16:51:23Z",
       "comments": []
     },
     {
@@ -171,15 +179,15 @@
       "id": "I_kwDOIGCt2M5W5uFB",
       "title": "Carl's review points",
       "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/14",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "* In the third sentence of intro, message should be plural\r\n* The definition of RFC6838 in the CDDL looks to be incomplete\r\n* Re: suffixes, I was assuming certificate extension support would use the DER/BER values. What about CRL extensions? Is PEM needed as well?\r\n* The structured suffix link in Section 3.1 is broken.\r\n* Maybe reference EAT media types spec as initial values of interest.",
       "createdAt": "2022-11-21T13:41:14Z",
-      "updatedAt": "2022-11-21T13:42:19Z",
-      "closedAt": null,
+      "updatedAt": "2023-03-08T11:44:56Z",
+      "closedAt": "2023-03-06T17:30:51Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -187,6 +195,27 @@
           "body": "/cc @carl-wallace",
           "createdAt": "2022-11-21T13:42:19Z",
           "updatedAt": "2022-11-21T13:42:19Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "body": "* [x] In the third sentence of intro, message should be plural\r\n* [x] The definition of RFC6838 in the CDDL looks to be incomplete\r\n* [x] The structured suffix link in Section 3.1 is broken.\r\n* [x] Maybe reference EAT media types spec as initial values of interest.\r\n\r\n> Re: suffixes, I was assuming certificate extension support would use the DER/BER values. What about CRL extensions? Is PEM needed as well?\r\n\r\nI am not sure I understand.  I'll seek clarification from Carl on the list.\r\n",
+          "createdAt": "2023-03-06T14:32:04Z",
+          "updatedAt": "2023-03-06T14:32:04Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "body": "The leftover point is tracked in #18 ",
+          "createdAt": "2023-03-06T17:30:51Z",
+          "updatedAt": "2023-03-06T17:30:51Z"
+        },
+        {
+          "author": "carl-wallace",
+          "authorAssociation": "NONE",
+          "body": "I was asking how the enumerated list of suffixes (in the -01 draft) applied to certificates and CRLs. I was assuming that ber/der signified certificates and was asking if something was needed for CRLs and whether or not PEM support was necessary. Upon re-reading, the ber/der assumption was wrong (the suffix is more general than certificates). Whether or not PEM is needed may be worth considering but it's not really relevant to this draft. I'd just ignore that comment.",
+          "createdAt": "2023-03-08T11:44:56Z",
+          "updatedAt": "2023-03-08T11:44:56Z"
         }
       ]
     },
@@ -200,11 +229,83 @@
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
-      "body": "See https://mailarchive.ietf.org/arch/msg/rats/Bmlxnu0GmnRMsP6WEq3CBjLVm0k/\r\n\r\n(TODO: refine into smaller issues)",
+      "body": "See https://mailarchive.ietf.org/arch/msg/rats/Bmlxnu0GmnRMsP6WEq3CBjLVm0k/\r\n",
       "createdAt": "2022-12-20T10:31:12Z",
-      "updatedAt": "2022-12-20T10:31:12Z",
+      "updatedAt": "2023-03-21T10:30:49Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "body": "Below are some suggestions/questions regarding the RATS Conceptual Messages Wrapper draft (draft-ftbs-rats-msg-wrap-00).\r\n\r\n## \ufeffAbstract\r\n* [ ] Should the spec have a broader title/focus since there appears to be nothing to limit usage to RATS conceptual messages?\r\n* [ ] How does this draft relate to the EAT Media Types draft? That draft states that is \"defines media types to be used for Entity Attestation Token (EAT) payloads independently of the RATS Conceptual Message in which they manifest themselves.\" Does this mean a separate media-type would be used with the encapsulation mechanisms defined in this draft?\r\n\r\n## Section 1\r\n* [ ] In the first sentence of the second paragraph, what is being registered or used interoperably? This would clarify what \"their\" means in the second sentence. I think the media type notion might need to be introduced before this paragraph.\r\n\r\n## Section 3.1\r\n* [ ] Is there any reason to not use `.det` with indentation of the RFC6838 definition? I think that'd be easier to read.\r\n\r\n## Section 3.2\r\n* [ ] What if a CoAP Content Format does not exist for the media type? I am assuming a media-type value is used, but it may be worth stating that.\r\n* [ ] Are tag definitions intended to adhere to the same limitations defined for the value field in the array, i.e., `cbor-bytes / base64-string` serialized per the tag number? If not, what would govern the type?\r\n\r\n## Section 4\r\n* [x] I think it would be helpful to include ASCII hex of the CBOR encodings in addition to the diagnostic (i.e., `8219753144ABCDABCD` and `DA6374763244ABCDABCD`).\r\n* [ ] It may be worth including a CBOR example with a media-type value. This could possibly be as a second hypothetical for which no CoAP content format has been defined or as an example with parameters of the same type as current example.\r\n* [ ] It may be worth showing the CDDL definition of the resulting tag as it may appear in some protocol definition, i.e.. `example_tag = #6.1668576818(bstr)`.",
+          "createdAt": "2023-03-06T17:32:55Z",
+          "updatedAt": "2023-03-21T10:30:49Z"
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "id": "I_kwDOIGCt2M5gE51M",
+      "title": "One remaining point from Carl",
+      "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/18",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [
+        "help wanted"
+      ],
+      "body": "This is a left over from #14 \r\n\r\n> Re: suffixes, I was assuming certificate extension support would use the DER/BER values. What about CRL extensions? Is PEM needed as well?",
+      "createdAt": "2023-03-06T17:29:10Z",
+      "updatedAt": "2023-03-07T21:00:53Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "body": "TODO: seek clarification from Carl on the list.",
+          "createdAt": "2023-03-06T17:29:21Z",
+          "updatedAt": "2023-03-06T17:29:21Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "body": "@carl-wallace, I wanted to reply to your original message but I am unable to find it...\r\n\r\nThe trivial answer to your:\r\n\r\n> What about CRL extensions? Is PEM needed as well?\r\n\r\nwould be \"yes.\"  However, it's not clear to me whether you expect / suggest an action for CMW?\r\n\r\n",
+          "createdAt": "2023-03-07T21:00:53Z",
+          "updatedAt": "2023-03-07T21:00:53Z"
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "I_kwDOIGCt2M5heylI",
+      "title": "registration flow",
+      "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/19",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "To help understanding what are the (registration) preconditions for using a specific CMW format, it _may_ be useful to stick the picture below somewhere.\r\n\r\n```\r\n        .-------------.    .---------.\r\n       | Reuse EAT     |  | Register  |\r\n       | media type    |  | new media |\r\n       | + eat_profile |  | type      |\r\n        `--+----+-----'    `-+----+--'\r\n           |    |            |    |\r\n           |  .-+------------+-.  |\r\n           | |  |  Register  |  | |\r\n         .-(-+-'   new CoAP   `-+-(-.\r\n        |  | |  Content-Format  | |  |\r\n        |  |  `-------+--------'  |  |\r\n        |  |          |           |  |\r\n        |  |          v           |  |\r\n        |  |   .--------------.   |  |  .--------.\r\n        |  |  | Automatically  |  |  | | Existing |\r\n        |  |  | derive CBOR    |  |  | | CBOR     |\r\n        |  |  | tag [RFC9277]  |  |  | | tag      |\r\n        |  |   `------+-------'   |  |  `---+----'\r\n        |  |          |           |  |      |\r\n        |  |          |.----------(--(-----'\r\n        |  |          |           |  |\r\n        |  |          v           |  |\r\n        |  |   .----------------. |  |\r\n        |  |  /  CBOR tag CMW  /  |  |\r\n        v  v `----------------'   v  v\r\n    .--------------------------------------.\r\n   /             Array CMW                /\r\n  `--------------------------------------'\r\n```",
+      "createdAt": "2023-03-22T10:14:05Z",
+      "updatedAt": "2023-03-24T10:25:26Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Suggest bottom box be labeled \"Type and Value CMW\"",
+          "createdAt": "2023-03-22T17:28:38Z",
+          "updatedAt": "2023-03-22T17:28:38Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "body": "> Suggest bottom box be labeled \"Type and Value CMW\"\r\n\r\nupdated to \"Array CMW\" and \"CBOR tag CMW\"",
+          "createdAt": "2023-03-24T10:25:26Z",
+          "updatedAt": "2023-03-24T10:25:26Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -869,6 +970,176 @@
           ]
         }
       ]
+    },
+    {
+      "number": 16,
+      "id": "PR_kwDOIGCt2M5LJgwX",
+      "title": "Update draft-ftbs-rats-msg-wrap.md",
+      "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/16",
+      "state": "MERGED",
+      "author": "nedmsmith",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "nedmsmith"
+      ],
+      "labels": [],
+      "body": "added section on enclapsulation decapsulation algorithm",
+      "createdAt": "2023-03-02T17:03:50Z",
+      "updatedAt": "2023-03-06T09:31:28Z",
+      "baseRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "4fa7a453398c51c1dcb01f6c6a60fea1de8e057c",
+      "headRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "headRefName": "10-clearly-describe-encapdecap-algorithm",
+      "headRefOid": "03ab92f849843bf0f31715f296b344f106dea8d3",
+      "closedAt": "2023-03-06T09:31:23Z",
+      "mergedAt": "2023-03-06T09:31:23Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "bd327f57a9a31e02914156284cbc50cfbebe4913"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5O0fkY",
+          "commit": {
+            "abbreviatedOid": "986ae9f"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "thanks Ned.  I have inlined a few editorial suggestions.",
+          "createdAt": "2023-03-02T18:20:43Z",
+          "updatedAt": "2023-03-02T18:25:24Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "the content seems to be limited to the decap algorithm\r\n\r\n```suggestion\r\n## Decapsulation Algorithm\r\n```",
+              "createdAt": "2023-03-02T18:20:43Z",
+              "updatedAt": "2023-03-02T18:25:24Z"
+            },
+            {
+              "originalPosition": 9,
+              "body": "the existence of an external framing is not a necessity\r\n\r\n```suggestion\r\nAfter removing any external framing (for example, the ASN.1 OCTET STRING\r\nif the CMW is carried in a certificate extension {{DICE-arch}}), the CMW\r\ndecoder does a 1-byte lookahead, as illustrated in the following pseudo\r\ncode, to decide how to decode the remainder of the byte buffer:\r\n```",
+              "createdAt": "2023-03-02T18:21:48Z",
+              "updatedAt": "2023-03-02T18:25:24Z"
+            },
+            {
+              "originalPosition": 20,
+              "body": "kramdown-rfc uses `~~~` to delimit block codes.\r\n```suggestion\r\n~~~\r\nswitch b[0] {\r\ncase 0x82:\r\n  return CBORArrayDecode(b)\r\ncase 0x5b:\r\n  return JSONArrayDecode(b)\r\ndefault:\r\n  return CBORTagDecode(b)\r\n}\r\n~~~\r\n```",
+              "createdAt": "2023-03-02T18:23:09Z",
+              "updatedAt": "2023-03-02T18:25:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5O9CFX",
+          "commit": {
+            "abbreviatedOid": "03ab92f"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "\ud83d\udea2 it",
+          "createdAt": "2023-03-03T21:35:51Z",
+          "updatedAt": "2023-03-03T21:35:51Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5PBCpl",
+          "commit": {
+            "abbreviatedOid": "03ab92f"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "lgtm",
+          "createdAt": "2023-03-06T07:58:30Z",
+          "updatedAt": "2023-03-06T07:58:30Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "id": "PR_kwDOIGCt2M5LYMQx",
+      "title": "address most open issues",
+      "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/17",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #11\r\nFix #12\r\nFix #13\r\nPartially address #14\r\n\r\nAlso:\r\n* add decoder code (incomplete)\r\n* add CDDL 2 for the CBOR tag format\r\n* add hex (wire) representations",
+      "createdAt": "2023-03-06T14:52:17Z",
+      "updatedAt": "2023-03-06T16:51:24Z",
+      "baseRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "bd327f57a9a31e02914156284cbc50cfbebe4913",
+      "headRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "headRefName": "most-open-issues",
+      "headRefOid": "8cd4218ce7484eaabc11126e1a70be5adfad2871",
+      "closedAt": "2023-03-06T16:51:20Z",
+      "mergedAt": "2023-03-06T16:51:20Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "0c99c9f9eab1256b9412cd379b41e6b51a79410b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5PErds",
+          "commit": {
+            "abbreviatedOid": "8cd4218"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-03-06T16:00:16Z",
+          "updatedAt": "2023-03-06T16:00:16Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5PE9ug",
+          "commit": {
+            "abbreviatedOid": "8cd4218"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "checked the cddl part, skimmed the code part",
+          "createdAt": "2023-03-06T16:34:38Z",
+          "updatedAt": "2023-03-06T16:34:38Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "id": "PR_kwDOIGCt2M5NLgdl",
+      "title": "add a CM indicator to the array form",
+      "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/20",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "A draft proposal.  Note that this is slightly different from what discussed in the email thread in that the bit map is done using an integer type (rather than a byte string) in order make the CBOR and JSON representations more uniform.",
+      "createdAt": "2023-03-29T15:28:47Z",
+      "updatedAt": "2023-03-29T15:29:23Z",
+      "baseRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "eb7002957d7b613e2c71106039bd26963fa256c1",
+      "headRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "headRefName": "cm-ind",
+      "headRefOid": "c91b6610d2b063a1373051fcd37941437aa93400",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
