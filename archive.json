@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-03-30T00:43:37.392509+00:00",
+  "timestamp": "2023-04-02T00:43:37.818247+00:00",
   "repo": "thomas-fossati/draft-ftbs-rats-msg-wrap",
   "labels": [
     {
@@ -231,15 +231,15 @@
       "labels": [],
       "body": "See https://mailarchive.ietf.org/arch/msg/rats/Bmlxnu0GmnRMsP6WEq3CBjLVm0k/\r\n",
       "createdAt": "2022-12-20T10:31:12Z",
-      "updatedAt": "2023-03-21T10:30:49Z",
+      "updatedAt": "2023-03-31T16:34:38Z",
       "closedAt": null,
       "comments": [
         {
           "author": "thomas-fossati",
           "authorAssociation": "OWNER",
-          "body": "Below are some suggestions/questions regarding the RATS Conceptual Messages Wrapper draft (draft-ftbs-rats-msg-wrap-00).\r\n\r\n## \ufeffAbstract\r\n* [ ] Should the spec have a broader title/focus since there appears to be nothing to limit usage to RATS conceptual messages?\r\n* [ ] How does this draft relate to the EAT Media Types draft? That draft states that is \"defines media types to be used for Entity Attestation Token (EAT) payloads independently of the RATS Conceptual Message in which they manifest themselves.\" Does this mean a separate media-type would be used with the encapsulation mechanisms defined in this draft?\r\n\r\n## Section 1\r\n* [ ] In the first sentence of the second paragraph, what is being registered or used interoperably? This would clarify what \"their\" means in the second sentence. I think the media type notion might need to be introduced before this paragraph.\r\n\r\n## Section 3.1\r\n* [ ] Is there any reason to not use `.det` with indentation of the RFC6838 definition? I think that'd be easier to read.\r\n\r\n## Section 3.2\r\n* [ ] What if a CoAP Content Format does not exist for the media type? I am assuming a media-type value is used, but it may be worth stating that.\r\n* [ ] Are tag definitions intended to adhere to the same limitations defined for the value field in the array, i.e., `cbor-bytes / base64-string` serialized per the tag number? If not, what would govern the type?\r\n\r\n## Section 4\r\n* [x] I think it would be helpful to include ASCII hex of the CBOR encodings in addition to the diagnostic (i.e., `8219753144ABCDABCD` and `DA6374763244ABCDABCD`).\r\n* [ ] It may be worth including a CBOR example with a media-type value. This could possibly be as a second hypothetical for which no CoAP content format has been defined or as an example with parameters of the same type as current example.\r\n* [ ] It may be worth showing the CDDL definition of the resulting tag as it may appear in some protocol definition, i.e.. `example_tag = #6.1668576818(bstr)`.",
+          "body": "Below are some suggestions/questions regarding the RATS Conceptual Messages Wrapper draft (draft-ftbs-rats-msg-wrap-00).\r\n\r\n## \ufeffAbstract\r\n* [x] Should the spec have a broader title/focus since there appears to be nothing to limit usage to RATS conceptual messages?\r\n\r\n> While the mechanism is generic -- at least in part, now that we added the CM indicator to the array serialisation -- we want to keep the scope limited to RATS messages.\r\n\r\n* [x] How does this draft relate to the EAT Media Types draft? That draft states that is \"defines media types to be used for Entity Attestation Token (EAT) payloads independently of the RATS Conceptual Message in which they manifest themselves.\" Does this mean a separate media-type would be used with the encapsulation mechanisms defined in this draft?\r\n\r\n> This encap is intended for tunnelling RATS messages in protocols that don't use media types as first class type identifiers themselves.  The relation of this spec with the EAT media type I-D is one of \"consumer\": if EAT MT has a type that is good for the message, we can use it.\r\n\r\n## Section 1\r\n* [ ] In the first sentence of the second paragraph, what is being registered or used interoperably? This would clarify what \"their\" means in the second sentence. I think the media type notion might need to be introduced before this paragraph.\r\n\r\n## Section 3.1\r\n* [x] Is there any reason to not use `.det` with indentation of the RFC6838 definition? I think that'd be easier to read.\r\n\r\n> To improve readability this has now been separated into its own section.\r\n\r\n## Section 3.2\r\n* [ ] What if a CoAP Content Format does not exist for the media type? I am assuming a media-type value is used, but it may be worth stating that.\r\n* [ ] Are tag definitions intended to adhere to the same limitations defined for the value field in the array, i.e., `cbor-bytes / base64-string` serialized per the tag number? If not, what would govern the type?\r\n\r\n## Section 4\r\n* [x] I think it would be helpful to include ASCII hex of the CBOR encodings in addition to the diagnostic (i.e., `8219753144ABCDABCD` and `DA6374763244ABCDABCD`).\r\n\r\n> Agreed; we have added the CBOR \"pretty\" output to the examples.\r\n\r\n* [ ] It may be worth including a CBOR example with a media-type value. This could possibly be as a second hypothetical for which no CoAP content format has been defined or as an example with parameters of the same type as current example.\r\n* [ ] It may be worth showing the CDDL definition of the resulting tag as it may appear in some protocol definition, i.e.. `example_tag = #6.1668576818(bstr)`.",
           "createdAt": "2023-03-06T17:32:55Z",
-          "updatedAt": "2023-03-21T10:30:49Z"
+          "updatedAt": "2023-03-31T16:34:38Z"
         }
       ]
     },
@@ -1140,6 +1140,106 @@
       "mergeCommit": null,
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 21,
+      "id": "PR_kwDOIGCt2M5NXjWh",
+      "title": "add the registration howto to the appendix ",
+      "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/21",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #19 ",
+      "createdAt": "2023-03-31T16:12:45Z",
+      "updatedAt": "2023-03-31T20:50:42Z",
+      "baseRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "eb7002957d7b613e2c71106039bd26963fa256c1",
+      "headRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "headRefName": "flow",
+      "headRefOid": "7284c3e6f031890dcbcb8521c8fcfd1a0937e82f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5RfnGJ",
+          "commit": {
+            "abbreviatedOid": "7284c3e"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-03-31T16:21:02Z",
+          "updatedAt": "2023-03-31T16:21:02Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5Rg6es",
+          "commit": {
+            "abbreviatedOid": "7284c3e"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-03-31T20:50:41Z",
+          "updatedAt": "2023-03-31T20:50:42Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "note that CoRIM uses the same scheme (i.e., base + profile) as EAT",
+              "createdAt": "2023-03-31T20:50:41Z",
+              "updatedAt": "2023-03-31T20:50:42Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "id": "PR_kwDOIGCt2M5NXycu",
+      "title": "clarify intro",
+      "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/22",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Attempt at addressing Carl's confusion on \u00a71:\r\n\r\n\"In the first sentence of the second paragraph, what is being registered or used interoperably? This would clarify what \"their\" means in the second sentence. I think the media type notion might need to be introduced before this paragraph.\"",
+      "createdAt": "2023-03-31T17:07:20Z",
+      "updatedAt": "2023-03-31T17:37:18Z",
+      "baseRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "eb7002957d7b613e2c71106039bd26963fa256c1",
+      "headRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "headRefName": "clarify-intro",
+      "headRefOid": "0d34d7940b98ef05589b3628d4a1949139616cf5",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5Rf-9W",
+          "commit": {
+            "abbreviatedOid": "0d34d79"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2023-03-31T17:37:18Z",
+          "updatedAt": "2023-03-31T17:37:18Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
