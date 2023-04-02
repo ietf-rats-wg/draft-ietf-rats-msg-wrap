@@ -282,6 +282,44 @@ This document does not make any requests to IANA.
 {::include cddl/rfc9193.cddl}
 ~~~
 
+# Registering and Using CMWs
+
+{{fig-howto-cmw}} describes the registration preconditions for using
+CMWs in either array or CBOR tag forms.
+
+~~~ aasvg
+       .---------------.   .---------.
+      | Reuse EAT/CoRIM | | Register  |
+      | media type(s)   | | new media |
+      | + profile       | | type      |
+       `---+----+------'   `-+----+--'
+           |    |            |    |
+           |  .-+------------+-.  |
+           | |  |  Register  |  | |
+         .-(-+-'   new CoAP   `-+-(-.
+        |  | |  Content-Format  | |  |
+        |  |  `-------+--------'  |  |
+        |  |          |           |  |
+        |  |          v           |  |
+        |  |   .--------------.   |  |  .--------.
+        |  |  | Automatically  |  |  | | Existing |
+        |  |  | derive CBOR    |  |  | | CBOR     |
+        |  |  | tag [RFC9277]  |  |  | | tag      |
+        |  |   `------+-------'   |  |  `---+----'
+        |  |          |           |  |      |
+        |  |          |.----------(--(-----'
+        |  |          |           |  |
+        |  |          v           |  |
+        |  |   .----------------. |  |
+        |  |  /  CBOR tag CMW  /  |  |
+        v  v `----------------'   v  v
+    .--------------------------------------.
+   /             Array CMW                /
+  `--------------------------------------'
+~~~
+{: #fig-howto-cmw artwork-align="left"
+   title="How To CMW"}
+
 # Open Issues
 
 <cref>Note to RFC Editor: please remove before publication.</cref>
