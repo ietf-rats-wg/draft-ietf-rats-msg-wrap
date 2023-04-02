@@ -288,11 +288,11 @@ This document does not make any requests to IANA.
 CMWs in either array or CBOR tag forms.
 
 ~~~ aasvg
-        .-------------.    .---------.
-       | Reuse EAT     |  | Register  |
-       | media type    |  | new media |
-       | + eat_profile |  | type      |
-        `--+----+-----'    `-+----+--'
+       .---------------.   .---------.
+      | Reuse EAT/CoRIM | | Register  |
+      | media type(s)   | | new media |
+      | + profile       | | type      |
+       `---+----+------'   `-+----+--'
            |    |            |    |
            |  .-+------------+-.  |
            | |  |  Register  |  | |
