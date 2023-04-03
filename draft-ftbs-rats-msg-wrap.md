@@ -226,6 +226,10 @@ in {{cbor-tag}}.
 {::include cddl/example-json-1.diag}
 ~~~
 
+Note that a CoAP Content-Format number can also be used with the JSON array
+form.  That may be the case when it is known that the receiver can handle CoAP
+Content-Formats and it is crucial to save bytes.
+
 ## CBOR Array
 
 ~~~ cbor-diag
@@ -236,6 +240,15 @@ with the following wire representation:
 
 ~~~
 {::include cddl/example-cbor-1.pretty}
+~~~
+
+Note that a Media-Type-Name can also be used with the CBOR array form,
+for example if it is known that the receiver cannot handle CoAP
+Content-Formats, or (unlike the case in point) if a CoAP Content-Format
+number has not been registrered.
+
+~~~ cbor-diag
+{::include cddl/example-cbor-2.diag}
 ~~~
 
 ## CBOR Tag {#cbor-tag-example}
