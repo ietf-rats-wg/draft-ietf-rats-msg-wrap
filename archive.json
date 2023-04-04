@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-04-02T00:43:37.818247+00:00",
+  "timestamp": "2023-04-04T00:41:02.790350+00:00",
   "repo": "thomas-fossati/draft-ftbs-rats-msg-wrap",
   "labels": [
     {
@@ -231,15 +231,15 @@
       "labels": [],
       "body": "See https://mailarchive.ietf.org/arch/msg/rats/Bmlxnu0GmnRMsP6WEq3CBjLVm0k/\r\n",
       "createdAt": "2022-12-20T10:31:12Z",
-      "updatedAt": "2023-03-31T16:34:38Z",
+      "updatedAt": "2023-04-03T09:07:42Z",
       "closedAt": null,
       "comments": [
         {
           "author": "thomas-fossati",
           "authorAssociation": "OWNER",
-          "body": "Below are some suggestions/questions regarding the RATS Conceptual Messages Wrapper draft (draft-ftbs-rats-msg-wrap-00).\r\n\r\n## \ufeffAbstract\r\n* [x] Should the spec have a broader title/focus since there appears to be nothing to limit usage to RATS conceptual messages?\r\n\r\n> While the mechanism is generic -- at least in part, now that we added the CM indicator to the array serialisation -- we want to keep the scope limited to RATS messages.\r\n\r\n* [x] How does this draft relate to the EAT Media Types draft? That draft states that is \"defines media types to be used for Entity Attestation Token (EAT) payloads independently of the RATS Conceptual Message in which they manifest themselves.\" Does this mean a separate media-type would be used with the encapsulation mechanisms defined in this draft?\r\n\r\n> This encap is intended for tunnelling RATS messages in protocols that don't use media types as first class type identifiers themselves.  The relation of this spec with the EAT media type I-D is one of \"consumer\": if EAT MT has a type that is good for the message, we can use it.\r\n\r\n## Section 1\r\n* [ ] In the first sentence of the second paragraph, what is being registered or used interoperably? This would clarify what \"their\" means in the second sentence. I think the media type notion might need to be introduced before this paragraph.\r\n\r\n## Section 3.1\r\n* [x] Is there any reason to not use `.det` with indentation of the RFC6838 definition? I think that'd be easier to read.\r\n\r\n> To improve readability this has now been separated into its own section.\r\n\r\n## Section 3.2\r\n* [ ] What if a CoAP Content Format does not exist for the media type? I am assuming a media-type value is used, but it may be worth stating that.\r\n* [ ] Are tag definitions intended to adhere to the same limitations defined for the value field in the array, i.e., `cbor-bytes / base64-string` serialized per the tag number? If not, what would govern the type?\r\n\r\n## Section 4\r\n* [x] I think it would be helpful to include ASCII hex of the CBOR encodings in addition to the diagnostic (i.e., `8219753144ABCDABCD` and `DA6374763244ABCDABCD`).\r\n\r\n> Agreed; we have added the CBOR \"pretty\" output to the examples.\r\n\r\n* [ ] It may be worth including a CBOR example with a media-type value. This could possibly be as a second hypothetical for which no CoAP content format has been defined or as an example with parameters of the same type as current example.\r\n* [ ] It may be worth showing the CDDL definition of the resulting tag as it may appear in some protocol definition, i.e.. `example_tag = #6.1668576818(bstr)`.",
+          "body": "Below are some suggestions/questions regarding the RATS Conceptual Messages Wrapper draft (draft-ftbs-rats-msg-wrap-00).\r\n\r\n## \ufeffAbstract\r\n* [x] Should the spec have a broader title/focus since there appears to be nothing to limit usage to RATS conceptual messages?\r\n\r\n> While the mechanism is generic -- at least in part, now that we added the CM indicator to the array serialisation -- we want to keep the scope limited to RATS messages.\r\n\r\n* [x] How does this draft relate to the EAT Media Types draft? That draft states that is \"defines media types to be used for Entity Attestation Token (EAT) payloads independently of the RATS Conceptual Message in which they manifest themselves.\" Does this mean a separate media-type would be used with the encapsulation mechanisms defined in this draft?\r\n\r\n> This encap is intended for tunnelling RATS messages in protocols that don't use media types as first class type identifiers themselves.  The relation of this spec with the EAT media type I-D is one of \"consumer\": if EAT MT has a type that is good for the message, we can use it.\r\n\r\n## Section 1\r\n* [x] In the first sentence of the second paragraph, what is being registered or used interoperably? This would clarify what \"their\" means in the second sentence. I think the media type notion might need to be introduced before this paragraph.\r\n\r\n> In #22, I hope I have explained a bit better the basic reason for providing a single encap, and what registrations we are amortising.\r\n\r\n## Section 3.1\r\n* [x] Is there any reason to not use `.det` with indentation of the RFC6838 definition? I think that'd be easier to read.\r\n\r\n> To improve readability this has now been separated into its own section.\r\n\r\n## Section 3.2\r\n* [x] What if a CoAP Content Format does not exist for the media type? I am assuming a media-type value is used, but it may be worth stating that.\r\n\r\n> Done in #23\r\n\r\n* [x] Are tag definitions intended to adhere to the same limitations defined for the value field in the array, i.e., `cbor-bytes / base64-string` serialized per the tag number? If not, what would govern the type?\r\n\r\n> This is stated in \u00a73.2: _\"[...] encoded as a CBOR byte string, to which the tag is prepended.\"_\r\n\r\n## Section 4\r\n* [x] I think it would be helpful to include ASCII hex of the CBOR encodings in addition to the diagnostic (i.e., `8219753144ABCDABCD` and `DA6374763244ABCDABCD`).\r\n\r\n> Agreed; we have added the CBOR \"pretty\" output to the examples.\r\n\r\n* [x] It may be worth including a CBOR example with a media-type value. This could possibly be as a second hypothetical for which no CoAP content format has been defined or as an example with parameters of the same type as current example.\r\n\r\n> Done in #23\r\n\r\n* [x] It may be worth showing the CDDL definition of the resulting tag as it may appear in some protocol definition, i.e.. `example_tag = #6.1668576818(bstr)`.\r\n\r\n> We have now used a brand new CDDL feature ([\"non-literal CBOR tag numbers\"](https://www.ietf.org/archive/id/draft-bormann-cbor-cddl-2-draft-01.html#section-2.2)) in \u00a73.2 to do that in a generic way.\r\n",
           "createdAt": "2023-03-06T17:32:55Z",
-          "updatedAt": "2023-03-31T16:34:38Z"
+          "updatedAt": "2023-04-03T09:07:42Z"
         }
       ]
     },
@@ -248,7 +248,7 @@
       "id": "I_kwDOIGCt2M5gE51M",
       "title": "One remaining point from Carl",
       "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/18",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "OWNER",
       "assignees": [],
@@ -257,8 +257,8 @@
       ],
       "body": "This is a left over from #14 \r\n\r\n> Re: suffixes, I was assuming certificate extension support would use the DER/BER values. What about CRL extensions? Is PEM needed as well?",
       "createdAt": "2023-03-06T17:29:10Z",
-      "updatedAt": "2023-03-07T21:00:53Z",
-      "closedAt": null,
+      "updatedAt": "2023-04-03T09:10:26Z",
+      "closedAt": "2023-04-03T09:10:26Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -273,6 +273,13 @@
           "body": "@carl-wallace, I wanted to reply to your original message but I am unable to find it...\r\n\r\nThe trivial answer to your:\r\n\r\n> What about CRL extensions? Is PEM needed as well?\r\n\r\nwould be \"yes.\"  However, it's not clear to me whether you expect / suggest an action for CMW?\r\n\r\n",
           "createdAt": "2023-03-07T21:00:53Z",
           "updatedAt": "2023-03-07T21:00:53Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "body": "@carl-wallace I am closing this (for now).  Feel free to reopen it if you think there is an action needed from us.",
+          "createdAt": "2023-04-03T09:10:26Z",
+          "updatedAt": "2023-04-03T09:10:26Z"
         }
       ]
     },
@@ -281,15 +288,15 @@
       "id": "I_kwDOIGCt2M5heylI",
       "title": "registration flow",
       "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/19",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "To help understanding what are the (registration) preconditions for using a specific CMW format, it _may_ be useful to stick the picture below somewhere.\r\n\r\n```\r\n        .-------------.    .---------.\r\n       | Reuse EAT     |  | Register  |\r\n       | media type    |  | new media |\r\n       | + eat_profile |  | type      |\r\n        `--+----+-----'    `-+----+--'\r\n           |    |            |    |\r\n           |  .-+------------+-.  |\r\n           | |  |  Register  |  | |\r\n         .-(-+-'   new CoAP   `-+-(-.\r\n        |  | |  Content-Format  | |  |\r\n        |  |  `-------+--------'  |  |\r\n        |  |          |           |  |\r\n        |  |          v           |  |\r\n        |  |   .--------------.   |  |  .--------.\r\n        |  |  | Automatically  |  |  | | Existing |\r\n        |  |  | derive CBOR    |  |  | | CBOR     |\r\n        |  |  | tag [RFC9277]  |  |  | | tag      |\r\n        |  |   `------+-------'   |  |  `---+----'\r\n        |  |          |           |  |      |\r\n        |  |          |.----------(--(-----'\r\n        |  |          |           |  |\r\n        |  |          v           |  |\r\n        |  |   .----------------. |  |\r\n        |  |  /  CBOR tag CMW  /  |  |\r\n        v  v `----------------'   v  v\r\n    .--------------------------------------.\r\n   /             Array CMW                /\r\n  `--------------------------------------'\r\n```",
       "createdAt": "2023-03-22T10:14:05Z",
-      "updatedAt": "2023-03-24T10:25:26Z",
-      "closedAt": null,
+      "updatedAt": "2023-04-02T17:35:11Z",
+      "closedAt": "2023-04-02T17:35:11Z",
       "comments": [
         {
           "author": "nedmsmith",
@@ -1146,24 +1153,26 @@
       "id": "PR_kwDOIGCt2M5NXjWh",
       "title": "add the registration howto to the appendix ",
       "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/21",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Fix #19 ",
       "createdAt": "2023-03-31T16:12:45Z",
-      "updatedAt": "2023-03-31T20:50:42Z",
+      "updatedAt": "2023-04-02T17:35:13Z",
       "baseRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "eb7002957d7b613e2c71106039bd26963fa256c1",
       "headRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
       "headRefName": "flow",
-      "headRefOid": "7284c3e6f031890dcbcb8521c8fcfd1a0937e82f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "1326297a681d2012587d9ce821b349d2007cc50f",
+      "closedAt": "2023-04-02T17:35:10Z",
+      "mergedAt": "2023-04-02T17:35:10Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "98a29543f38891630c2ef69059bf4b2238aea65b"
+      },
       "comments": [],
       "reviews": [
         {
@@ -1198,6 +1207,26 @@
               "updatedAt": "2023-03-31T20:50:42Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5Ri9QH",
+          "commit": {
+            "abbreviatedOid": "7284c3e"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-04-02T17:34:25Z",
+          "updatedAt": "2023-04-02T17:34:25Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "done in [1326297](https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/21/commits/1326297a681d2012587d9ce821b349d2007cc50f)",
+              "createdAt": "2023-04-02T17:34:25Z",
+              "updatedAt": "2023-04-02T17:34:25Z"
+            }
+          ]
         }
       ]
     },
@@ -1211,9 +1240,9 @@
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
-      "body": "Attempt at addressing Carl's confusion on \u00a71:\r\n\r\n\"In the first sentence of the second paragraph, what is being registered or used interoperably? This would clarify what \"their\" means in the second sentence. I think the media type notion might need to be introduced before this paragraph.\"",
+      "body": "Attempt at addressing Carl's confusion on \u00a71:\r\n\r\n\"In the first sentence of the second paragraph, what is being registered or used interoperably? This would clarify what \"their\" means in the second sentence. I think the media type notion might need to be introduced before this paragraph.\"\r\n\r\nPartially addresses #15 \r\n",
       "createdAt": "2023-03-31T17:07:20Z",
-      "updatedAt": "2023-03-31T17:37:18Z",
+      "updatedAt": "2023-04-03T09:10:56Z",
       "baseRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "eb7002957d7b613e2c71106039bd26963fa256c1",
@@ -1237,6 +1266,46 @@
           "body": "LGTM",
           "createdAt": "2023-03-31T17:37:18Z",
           "updatedAt": "2023-03-31T17:37:18Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "id": "PR_kwDOIGCt2M5Nd9Yw",
+      "title": "more examples",
+      "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/23",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Partially addresses #15",
+      "createdAt": "2023-04-03T09:06:21Z",
+      "updatedAt": "2023-04-03T15:06:17Z",
+      "baseRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "98a29543f38891630c2ef69059bf4b2238aea65b",
+      "headRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "headRefName": "more-examples",
+      "headRefOid": "baf7e2b2f98cdc0e0b30361837b81b094fe47b29",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5RnPTV",
+          "commit": {
+            "abbreviatedOid": "baf7e2b"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-04-03T15:06:17Z",
+          "updatedAt": "2023-04-03T15:06:17Z",
           "comments": []
         }
       ]
