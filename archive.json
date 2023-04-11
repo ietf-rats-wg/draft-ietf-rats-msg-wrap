@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-04-04T00:41:02.790350+00:00",
+  "timestamp": "2023-04-11T00:41:42.074823+00:00",
   "repo": "thomas-fossati/draft-ftbs-rats-msg-wrap",
   "labels": [
     {
@@ -313,6 +313,60 @@
           "updatedAt": "2023-03-24T10:25:26Z"
         }
       ]
+    },
+    {
+      "number": 24,
+      "id": "I_kwDOIGCt2M5jAnpj",
+      "title": "cm-type added to CMW array / record",
+      "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/24",
+      "state": "OPEN",
+      "author": "nedmsmith",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "There has been a discussion thread related to adding cm-type to the CMW array / record as a way to indicate which RATS conceptual messages are behind the wrapper. The following CDDL is suggested:\r\n\r\n```\r\ncmw = [ type, value, cm-bits ]\r\ncm-bits = uint .bits cm-type\r\ncm-type = &(\r\n                reference-values: 0\r\n                endorsements: 1\r\n                evidence: 2\r\n                attestation-results: 3\r\n}\r\n```\r\nThe justification for cm-bits is that a conceptual message structure could contain more than one type of conceptual message. For example a corim could contain conditional endorsed values given a stateful environment-map. Additionally, it could contain trust anchor stores, or attestation results and all of the conceptual messages that were used as Verifier inputs. ",
+      "createdAt": "2023-04-10T17:34:50Z",
+      "updatedAt": "2023-04-10T18:10:31Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "body": "Are trust anchor stores another type of conceptual messages?\r\n\r\nAnd more generally: do we envisage the set of conceptual messages to be extensible?\r\n\r\nBecause that'd also require specifying the procedures for adding new bits to `cm-type`.",
+          "createdAt": "2023-04-10T17:57:03Z",
+          "updatedAt": "2023-04-10T17:57:03Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Are trust anchor stores another type of conceptual messages?\r\n> \r\n> And more generally: do we envisage the set of conceptual messages to be extensible?\r\n> \r\n> Because that'd also require specifying the procedures for adding new bits to `cm-type`.\r\n\r\nIt is a philosophical question IMO. Trust anchors could be Endorsements if a vendor wishes to delegate well-known TA too a less well-known TA. \r\nTAs could be a form of appraisal policy where appraisal policies are also conceptual messages (though out of scope under the current charter), they could be added in the future. So, yes conceptual messages are extensible IMO.\r\nYes, it makes sense to describe procedures for adding new bits to cm-type. Presumably, it adds an entry to the cm-type enumeration list. Bits not in the enumeration list but included in the uint .bits probably should be ignored unless a profile dictates otherwise.",
+          "createdAt": "2023-04-10T18:07:31Z",
+          "updatedAt": "2023-04-10T18:07:31Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "body": "> It is a philosophical question IMO. Trust anchors could be Endorsements if a vendor wishes to delegate well-known TA too a less well-known TA. TAs could be a form of appraisal policy where appraisal policies are also conceptual messages (though out of scope under the current charter), they could be added in the future. So, yes conceptual messages are extensible IMO. Yes, it makes sense to describe procedures for adding new bits to cm-type. Presumably, it adds an entry to the cm-type enumeration list. Bits not in the enumeration list but included in the uint .bits probably should be ignored unless a profile dictates otherwise.\r\n\r\nOK, I'll add something to that effect to #20 \r\n",
+          "createdAt": "2023-04-10T18:10:31Z",
+          "updatedAt": "2023-04-10T18:10:31Z"
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "id": "I_kwDOIGCt2M5jA7BR",
+      "title": "tagged-cmw-record",
+      "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/25",
+      "state": "OPEN",
+      "author": "nedmsmith",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Given a use case for an attestation results or other message that conveys other CMs that are relevant to a particular attestation result. Does it make sense to continue following the convention of using tagged cbor - as in:\r\n```\r\ntagged-cmw-record = #6.4711(bytes .cbor cmw-array)\r\n```\r\nA possible triple record structure that treats other CMs as triple objects might be:\r\n```\r\nar-triple-record = [ \r\n     attester: stateful-environment-map,\r\n     ar-claims: [ + $ar-claims-type-choice ] \r\n]\r\n$ar-claims-type-choice /= tagged-cmw-record\r\n```\r\nThe argument against is that cmw-array already has tagged values and the little bit of CDDL inside of `ar-claims:` isn't enough to warrant needing a CBOR tag. \r\nThe argument for is that all `$ar-claims-type-choice` possibilities are expected to be `tagged-xxx` values that can be dispatched by a parser dispatcher following a consistent convention. ",
+      "createdAt": "2023-04-10T18:43:14Z",
+      "updatedAt": "2023-04-10T18:43:14Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -1132,9 +1186,9 @@
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
-      "body": "A draft proposal.  Note that this is slightly different from what discussed in the email thread in that the bit map is done using an integer type (rather than a byte string) in order make the CBOR and JSON representations more uniform.",
+      "body": "A draft proposal.  Note that this is slightly different from what discussed in the email thread in that the bit map is done using an integer type (rather than a byte string) in order make the CBOR and JSON representations more uniform.\r\n\r\nAddress #24 ",
       "createdAt": "2023-03-29T15:28:47Z",
-      "updatedAt": "2023-03-29T15:29:23Z",
+      "updatedAt": "2023-04-10T17:57:39Z",
       "baseRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "eb7002957d7b613e2c71106039bd26963fa256c1",
