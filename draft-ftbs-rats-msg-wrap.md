@@ -212,19 +212,20 @@ decoder does a 1-byte lookahead, as illustrated in the following pseudo
 code, to decide how to decode the remainder of the byte buffer:
 
 ~~~
-func CMWDecode(b []byte) (CMW, error) {
-    if len(b) < CMWMinSize {
-        return CMW{}, errors.New("CMW too short")
-    }
+func CMWTypeSniff(b []byte) (CMW, error) {
+  if len(b) == 0 {
+    return Unknown
+  }
 
-    switch b[0] {
-    case 0x82, 0x83:
-        return cborArrayDecode(b)
-    case 0x5b:
-        return jsonArrayDecode(b)
-    default:
-        return cborTagDecode(b)
-    }
+  if b[0] == 0x82 || b[0] == 0x83 {
+    return CBORArray
+  } else if b[0] >= 0xc0 && b[0] <= 0xdf {
+    return CBORTag
+  } else if b[0] == 0x5b {
+    return JSONArray
+  }
+
+  return Unknown
 }
 ~~~
 
