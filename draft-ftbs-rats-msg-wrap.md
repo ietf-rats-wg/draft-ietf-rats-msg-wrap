@@ -218,7 +218,7 @@ func CMWDecode(b []byte) (CMW, error) {
     }
 
     switch b[0] {
-    case 0x82:
+    case 0x82, 0x83:
         return cborArrayDecode(b)
     case 0x5b:
         return jsonArrayDecode(b)
