@@ -62,9 +62,12 @@ This document defines two encapsulation formats for RATS conceptual
 messages (i.e., evidence, attestation results, endorsements and
 reference values.)
 
-The first format uses a CBOR or JSON array with two members: one for the
-type, another for the value.  The other format wraps the value in a CBOR
-byte string and prepends a CBOR tag to convey the type information.
+The first format uses a CBOR or JSON array with two mandatory members,
+one for the type, another for the value, and a third optional member
+complementing the type field that says which kind of conceptual
+message(s) are carried in the value.
+The other format wraps the value in a CBOR byte string and prepends a
+CBOR tag to convey the type information.
 
 --- middle
 
@@ -133,13 +136,17 @@ document:
 The CMW array format is defined in {{fig-cddl-array}}.  (To improve clarity,
 the `Content-Type` ABNF is defined separately in {{rfc9193-abnf}}.)
 
+The CDDL generic `JC<>` is used where there is a variance between CBOR
+and JSON. The first argument is the CDDL for JSON and the second is the
+CDDL for CBOR.
+
 ~~~ cddl
 {::include cddl/cmw-array.cddl}
 ~~~
 {: #fig-cddl-array artwork-align="left"
    title="CDDL definition of the Array format"}
 
-It is composed of two members:
+It is composed of three members:
 
 {: vspace="0"}
 
@@ -151,6 +158,16 @@ number ({{Section 12.3 of -coap}}).
 `value`:
 : The RATS conceptual message serialized according to the
 value defined in the type member.
+
+`ind`:
+: An optional bitmap that indicates which conceptual message(s) types
+are carried in the `value` field.  Any combination (i.e., any value
+between 1 and 15, included) is allowed.  This is useful only if the
+`type` is potentially ambiguous, for example if the base media type is
+not profiled (e.g., `application/eat+cwt`) or if the same profile
+identifier is shared by different conceptual messages, and there is no
+further context available to the CMW consumer to decide.
+[^issue] https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/26
 
 A CMW array can be encoded as CBOR {{-cbor}} or JSON {{-json}}.
 
@@ -199,19 +216,20 @@ decoder does a 1-byte lookahead, as illustrated in the following pseudo
 code, to decide how to decode the remainder of the byte buffer:
 
 ~~~
-func CMWDecode(b []byte) (CMW, error) {
-    if len(b) < CMWMinSize {
-        return CMW{}, errors.New("CMW too short")
-    }
+func CMWTypeSniff(b []byte) (CMW, error) {
+  if len(b) == 0 {
+    return Unknown
+  }
 
-    switch b[0] {
-    case 0x82:
-        return cborArrayDecode(b)
-    case 0x5b:
-        return jsonArrayDecode(b)
-    default:
-        return cborTagDecode(b)
-    }
+  if b[0] == 0x82 || b[0] == 0x83 {
+    return CBORArray
+  } else if b[0] >= 0xc0 && b[0] <= 0xdf {
+    return CBORTag
+  } else if b[0] == 0x5b {
+    return JSONArray
+  }
+
+  return Unknown
 }
 ~~~
 
@@ -338,10 +356,10 @@ CMWs in either array or CBOR tag forms.
 
 # Open Issues
 
-<cref>Note to RFC Editor: please remove before publication.</cref>
-
 The list of currently open issues for this documents can be found at
 [](https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues).
+
+<cref>Note to RFC Editor: please remove before publication.</cref>
 
 # Acknowledgments
 {:numbered="false"}
@@ -350,3 +368,4 @@ The authors would like to thank Carl Wallace and Carsten Bormann for their
 reviews and suggestions.
 
 [^note]: Note:
+[^issue]: Open issue:

@@ -7,6 +7,7 @@ SHELL := /bin/bash
 # leave cmw-cbor-tag out for now as it needs CDDL 2.0
 CDDL_FRAG := cmw-array.cddl
 CDDL_FRAG += rfc9193.cddl
+CDDL_FRAG += jc.cddl
 
 CDDL_FILE := cmw.cddl
 
