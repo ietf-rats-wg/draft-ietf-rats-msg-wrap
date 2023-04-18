@@ -73,16 +73,19 @@ byte string and prepends a CBOR tag to convey the type information.
 The RATS architecture defines a handful of conceptual messages
 (see {{Section 8 of -rats-arch}}), such as evidence and attestation results.
 Each conceptual message can have multiple claims encoding and serialization
-formats ({{Section 9 of -rats-arch}}). Such serialized messages may
-have to be transported via different protocols - for example, evidence
-using an EAT {{-rats-eat}} encoding serialized as a CBOR payload in
-a "background check" topological arrangement, or attestation results as
-Attestation Results for Secure Interactions (AR4SI) {{-rats-ar4si}} payloads
-in "passport" mode.
+formats ({{Section 9 of -rats-arch}}).
+Throughout their lifetime, RATS conceptual message are typically transported
+over different protocols.
+For example, EAT {{-rats-eat}} evidence in a "background check" topological
+arrangement first flows from Attester to Relying Party, and then from Relying
+Party to Verifier, over separate protocol legs.
+Attestation Results for Secure Interactions (AR4SI) {{-rats-ar4si}} payloads in
+"passport" mode would go first from Verifier to Attester and then, at a later
+point in time and over a different channel, from Attester to Relying Party.
 
-In order to minimize the cost associated with registration and maximize
-interoperability, it is desirable to reuse their typing information
-across such boundaries.
+It is desirable to reuse any typing information associated with the messages
+across such protocol boundaries in order to minimize the cost associated with
+type registrations and maximize interoperability.
 
 This document defines two encapsulation formats for RATS conceptual
 messages that aim to achieve the goals stated above.
