@@ -166,7 +166,7 @@ carried in the `value` field.  Any combination (i.e., any value between
 potentially ambiguous and there is no further context available to the
 CMW consumer to decide.  For example, this might be the case if the base
 media type is not profiled (e.g., `application/eat+cwt`), if the `value`
-field contains multiple different conceptual messages (e.g.,
+field contains multiple conceptual messages with different types (e.g.,
 `application/signed-corim+cbor`), or if the same profile identifier is
 shared by different conceptual messages.
 [^issue] https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/26
