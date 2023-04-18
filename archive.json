@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-04-11T00:41:42.074823+00:00",
+  "timestamp": "2023-04-18T00:40:01.459827+00:00",
   "repo": "thomas-fossati/draft-ftbs-rats-msg-wrap",
   "labels": [
     {
@@ -1188,19 +1188,53 @@
       "labels": [],
       "body": "A draft proposal.  Note that this is slightly different from what discussed in the email thread in that the bit map is done using an integer type (rather than a byte string) in order make the CBOR and JSON representations more uniform.\r\n\r\nAddress #24 ",
       "createdAt": "2023-03-29T15:28:47Z",
-      "updatedAt": "2023-04-10T17:57:39Z",
+      "updatedAt": "2023-04-17T17:53:00Z",
       "baseRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "eb7002957d7b613e2c71106039bd26963fa256c1",
       "headRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
       "headRefName": "cm-ind",
-      "headRefOid": "c91b6610d2b063a1373051fcd37941437aa93400",
+      "headRefOid": "dfa89d6fd43178d76d44db04c96a16afca178381",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5SxWco",
+          "commit": {
+            "abbreviatedOid": "dfa89d6"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "see suggested text at line 164",
+          "createdAt": "2023-04-17T17:50:52Z",
+          "updatedAt": "2023-04-17T17:51:55Z",
+          "comments": [
+            {
+              "originalPosition": 44,
+              "body": "```suggestion\r\nnot profiled (e.g., `application/eat+cwt`) or if the `value` field contains multiple values having different `cm-type` values or if the same profile\r\n```",
+              "createdAt": "2023-04-17T17:50:52Z",
+              "updatedAt": "2023-04-17T17:51:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5SxXMo",
+          "commit": {
+            "abbreviatedOid": "dfa89d6"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-04-17T17:53:00Z",
+          "updatedAt": "2023-04-17T17:53:00Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 21,
