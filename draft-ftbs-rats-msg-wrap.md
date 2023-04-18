@@ -164,6 +164,7 @@ between 1 and 15, included) is allowed.  This is useful only if the
 not profiled (e.g., `application/eat+cwt`) or if the same profile
 identifier is shared by different conceptual messages, and there is no
 further context available to the CMW consumer to decide.
+[^issue] https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/26
 
 A CMW array can be encoded as CBOR {{-cbor}} or JSON {{-json}}.
 
@@ -301,10 +302,10 @@ This document does not make any requests to IANA.
 
 # Open Issues
 
-<cref>Note to RFC Editor: please remove before publication.</cref>
-
 The list of currently open issues for this documents can be found at
 [](https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues).
+
+<cref>Note to RFC Editor: please remove before publication.</cref>
 
 # Acknowledgments
 {:numbered="false"}
@@ -313,3 +314,4 @@ The authors would like to thank Carl Wallace and Carsten Bormann for their
 reviews and suggestions.
 
 [^note]: Note:
+[^issue]: Open issue:
