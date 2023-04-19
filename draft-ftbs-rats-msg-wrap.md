@@ -43,6 +43,7 @@ normative:
     =: RFC8949
 
 informative:
+  RFC7942: impl-status
   RFC9193: senml-cf
   RFC9334: rats-arch
   I-D.ietf-rats-eat: rats-eat
@@ -292,6 +293,41 @@ When registering a new media type for evidence, in addition to its
 syntactical description, the author SHOULD provide a public and stable
 description of the signing and appraisal procedures associated with
 the data format.
+
+# Implementation Status
+
+This section records the status of known implementations of the protocol
+defined by this specification at the time of posting of this Internet-Draft,
+and is based on a proposal described in {{-impl-status}}.
+The description of implementations in this section is intended to assist the
+IETF in its decision processes in progressing drafts to RFCs.
+Please note that the listing of any individual implementation here does not
+imply endorsement by the IETF.
+Furthermore, no effort has been spent to verify the information presented here
+that was supplied by IETF contributors.
+This is not intended as, and must not be construed to be, a catalog of
+available implementations or their features.
+Readers are advised to note that other implementations may exist.
+
+According to {{-impl-status}}, "this will allow reviewers and working groups to
+assign due consideration to documents that have the benefit of running code,
+which may serve as evidence of valuable experimentation and feedback that have
+made the implemented protocols more mature.
+It is up to the individual working groups to use this information as they see
+fit".
+
+## Project Veraison
+
+The organization responsible for this implementation is Project Veraison, a
+Linux Foundation project hosted at the Confidential Computing Consortium.
+
+The software, hosted at [](https://github.com/veraison/cmw), provides a Golang
+package that allows encoding and decoding of CMW payloads.
+The implementation covers all the features presented in this draft.
+The maturity level is alpha.
+The license is Apache 2.0.
+The developers can be contacted on the Zulip channel:
+[](https://veraison.zulipchat.com/#narrow/stream/383526-CMW/).
 
 # Security Considerations
 
