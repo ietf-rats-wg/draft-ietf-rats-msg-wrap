@@ -5,11 +5,11 @@
 Remote ATtestation ProcedureS                                 H. Birkolz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 8 September 2023                                          Intel
+Expires: 21 October 2023                                           Intel
                                                               T. Fossati
                                                                      arm
                                                            H. Tschofenig
-                                                            7 March 2023
+                                                           19 April 2023
 
 
                     RATS Conceptual Messages Wrapper
@@ -21,10 +21,12 @@ Abstract
    messages (i.e., evidence, attestation results, endorsements and
    reference values.)
 
-   The first format uses a CBOR or JSON array with two members: one for
-   the type, another for the value.  The other format wraps the value in
-   a CBOR byte string and prepends a CBOR tag to convey the type
-   information.
+   The first format uses a CBOR or JSON array with two mandatory
+   members, one for the type, another for the value, and a third
+   optional member complementing the type field that says which kind of
+   conceptual message(s) are carried in the value.  The other format
+   wraps the value in a CBOR byte string and prepends a CBOR tag to
+   convey the type information.
 
 Discussion Venues
 
@@ -52,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 September 2023.
+   This Internet-Draft will expire on 21 October 2023.
 
 Copyright Notice
 
@@ -81,14 +83,18 @@ Table of Contents
      4.1.  JSON Array
      4.2.  CBOR Array
      4.3.  CBOR Tag
+     4.4.  CBOR Array with explicit CM indicator
    5.  Registering a Media Type for Evidence
-   6.  Security Considerations
-   7.  IANA Considerations
-   8.  References
-     8.1.  Normative References
-     8.2.  Informative References
+   6.  Implementation Status
+     6.1.  Project Veraison
+   7.  Security Considerations
+   8.  IANA Considerations
+   9.  References
+     9.1.  Normative References
+     9.2.  Informative References
    Appendix A.  RFC9193 Content-Type ABNF
-   Appendix B.  Open Issues
+   Appendix B.  Registering and Using CMWs
+   Appendix C.  Open Issues
    Acknowledgments
    Authors' Addresses
 
@@ -97,17 +103,21 @@ Table of Contents
    The RATS architecture defines a handful of conceptual messages (see
    Section 8 of [RFC9334]), such as evidence and attestation results.
    Each conceptual message can have multiple claims encoding and
-   serialization formats (Section 9 of [RFC9334]).  Such serialized
-   messages may have to be transported via different protocols - for
-   example, evidence using an EAT [I-D.ietf-rats-eat] encoding
-   serialized as a CBOR payload in a "background check" topological
-   arrangement, or attestation results as Attestation Results for Secure
+   serialization formats (Section 9 of [RFC9334]).  Throughout their
+   lifetime, RATS conceptual message are typically transported over
+   different protocols.  For example, EAT [I-D.ietf-rats-eat] evidence
+   in a "background check" topological arrangement first flows from
+   Attester to Relying Party, and then from Relying Party to Verifier,
+   over separate protocol legs.  Attestation Results for Secure
    Interactions (AR4SI) [I-D.ietf-rats-ar4si] payloads in "passport"
-   mode.
+   mode would go first from Verifier to Attester and then, at a later
+   point in time and over a different channel, from Attester to Relying
+   Party.
 
-   In order to minimize the cost associated with registration and
-   maximize interoperability, it is desirable to reuse their typing
-   information across such boundaries.
+   It is desirable to reuse any typing information associated with the
+   messages across such protocol boundaries in order to minimize the
+   cost associated with type registrations and maximize
+   interoperability.
 
    This document defines two encapsulation formats for RATS conceptual
    messages that aim to achieve the goals stated above.
@@ -160,21 +170,31 @@ Table of Contents
    The CMW array format is defined in Figure 1.  (To improve clarity,
    the Content-Type ABNF is defined separately in Appendix A.)
 
-   cmw-array = cmw-array-cbor / cmw-array-json
+   The CDDL generic JC<> is used where there is a variance between CBOR
+   and JSON.  The first argument is the CDDL for JSON and the second is
+   the CDDL for CBOR.
 
-   cmw-array-cbor = [ type, bytes ]
+   cmw-array = [
+     type: coap-content-format / media-type
+     value: JC<base64-string, bytes>
+     ? ind: uint .bits cm-type
+   ]
 
-   cmw-array-json = [ type, base64-string ]
-
-   type = coap-content-format / media-type
    coap-content-format = uint .size 2
    media-type = text .abnf ("Content-Type" .cat Content-Type-ABNF)
 
    base64-string = text .regexp "[A-Za-z0-9_-]+"
 
+   cm-type = &(
+     reference-values: 0
+     endorsements: 1
+     evidence: 2
+     attestation-result: 3
+   )
+
                Figure 1: CDDL definition of the Array format
 
-   It is composed of two members:
+   It is composed of three members:
 
    type:
       Either a text string representing a Content-Type (e.g., an EAT
@@ -185,6 +205,18 @@ Table of Contents
    value:
       The RATS conceptual message serialized according to the value
       defined in the type member.
+
+   ind:
+      An optional bitmap that indicates which conceptual message(s)
+      types are carried in the value field.  Any combination (i.e., any
+      value between 1 and 15, included) is allowed.  This is useful only
+      if the type is potentially ambiguous, for example if the base
+      media type is not profiled (e.g., application/eat+cwt) or if the
+      same profile identifier is shared by different conceptual
+      messages, and there is no further context available to the CMW
+      consumer to decide.
+      // Open issue: https://github.com/thomas-fossati/draft-ftbs-rats-
+      msg-wrap/issues/26
 
    A CMW array can be encoded as CBOR [STD94] or JSON [RFC8259].
 
@@ -232,28 +264,34 @@ Table of Contents
    following pseudo code, to decide how to decode the remainder of the
    byte buffer:
 
-   func CMWDecode(b []byte) (CMW, error) {
-       if len(b) < CMWMinSize {
-           return CMW{}, errors.New("CMW too short")
-       }
+   func CMWTypeSniff(b []byte) (CMW, error) {
+     if len(b) == 0 {
+       return Unknown
+     }
 
-       switch b[0] {
-       case 0x82:
-           return cborArrayDecode(b)
-       case 0x5b:
-           return jsonArrayDecode(b)
-       default:
-           return cborTagDecode(b)
-       }
+     if b[0] == 0x82 || b[0] == 0x83 {
+       return CBORArray
+     } else if b[0] >= 0xc0 && b[0] <= 0xdf {
+       return CBORTag
+     } else if b[0] == 0x5b {
+       return JSONArray
+     }
+
+     return Unknown
    }
 
 4.  Examples
 
-   The (equivalent) examples below assume the Media-Type-Name
-   application/vnd.example.rats-conceptual-msg has been registered
-   alongside a corresponding CoAP Content-Format number 30001.  The CBOR
-   tag 1668576818 is derived applying the TN() transform as described in
+   The (equivalent) examples in Section 4.1, Section 4.2, and
+   Section 4.3 assume that the Media-Type-Name application/
+   vnd.example.rats-conceptual-msg has been registered alongside a
+   corresponding CoAP Content-Format number 30001.  The CBOR tag
+   1668576818 is derived applying the TN() transform as described in
    Section 3.2.
+
+   The example in Section 4.4 is a signed CoRIM payload with an explicit
+   CM indicator 0b0000_0011 (3), meaning that the wrapped message
+   contains both Reference Values and Endorsements.
 
 4.1.  JSON Array
 
@@ -261,6 +299,10 @@ Table of Contents
      "application/vnd.example.rats-conceptual-msg",
      "q82rzQ"
    ]
+
+   Note that a CoAP Content-Format number can also be used with the JSON
+   array form.  That may be the case when it is known that the receiver
+   can handle CoAP Content-Formats and it is crucial to save bytes.
 
 4.2.  CBOR Array
 
@@ -276,6 +318,16 @@ Table of Contents
       44          # bytes(4)
          abcdabcd # "\xABͫ\xCD"
 
+   Note that a Media-Type-Name can also be used with the CBOR array
+   form, for example if it is known that the receiver cannot handle CoAP
+   Content-Formats, or (unlike the case in point) if a CoAP Content-
+   Format number has not been registrered.
+
+   [
+     "application/vnd.example.rats-conceptual-msg",
+     h'abcdabcd'
+   ]
+
 4.3.  CBOR Tag
 
    1668576818(h'abcdabcd')
@@ -285,6 +337,24 @@ Table of Contents
    da 63747632    # tag(1668576818)
       44          # bytes(4)
          abcdabcd # "\xABͫ\xCD"
+
+4.4.  CBOR Array with explicit CM indicator
+
+   [
+     "application/signed-corim+cbor",
+     h'd28443a10126a1',
+     3
+   ]
+
+   with the following wire representation:
+
+ 83                                    # array(3)
+    78 1d                              # text(29)
+       6170706c69636174696f6e2f7369676e65642d636f72696d2b63626f72
+                                       # "application/signed-corim+cbor"
+    47                                 # bytes(7)
+       d28443a10126a1                  # "҄C\xA1\u0001&\xA1"
+    03                                 # unsigned(3)
 
 5.  Registering a Media Type for Evidence
 
@@ -296,7 +366,42 @@ Table of Contents
    stable description of the signing and appraisal procedures associated
    with the data format.
 
-6.  Security Considerations
+6.  Implementation Status
+
+   This section records the status of known implementations of the
+   protocol defined by this specification at the time of posting of this
+   Internet-Draft, and is based on a proposal described in [RFC7942].
+   The description of implementations in this section is intended to
+   assist the IETF in its decision processes in progressing drafts to
+   RFCs.  Please note that the listing of any individual implementation
+   here does not imply endorsement by the IETF.  Furthermore, no effort
+   has been spent to verify the information presented here that was
+   supplied by IETF contributors.  This is not intended as, and must not
+   be construed to be, a catalog of available implementations or their
+   features.  Readers are advised to note that other implementations may
+   exist.
+
+   According to [RFC7942], "this will allow reviewers and working groups
+   to assign due consideration to documents that have the benefit of
+   running code, which may serve as evidence of valuable experimentation
+   and feedback that have made the implemented protocols more mature.
+   It is up to the individual working groups to use this information as
+   they see fit".
+
+6.1.  Project Veraison
+
+   The organization responsible for this implementation is Project
+   Veraison, a Linux Foundation project hosted at the Confidential
+   Computing Consortium.
+
+   The software, hosted at https://github.com/veraison/cmw, provides a
+   Golang package that allows encoding and decoding of CMW payloads.
+   The implementation covers all the features presented in this draft.
+   The maturity level is alpha.  The license is Apache 2.0.  The
+   developers can be contacted on the Zulip channel:
+   https://veraison.zulipchat.com/#narrow/stream/383526-CMW/.
+
+7.  Security Considerations
 
    This document defines two encapsulation formats for RATS conceptual
    messages.  The messages themselves and their encoding ensure security
@@ -307,13 +412,13 @@ Table of Contents
    in incorrect processing of the encapsulated messages and this will
    subsequently lead to a processing error.
 
-7.  IANA Considerations
+8.  IANA Considerations
 
    This document does not make any requests to IANA.
 
-8.  References
+9.  References
 
-8.1.  Normative References
+9.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -364,7 +469,7 @@ Table of Contents
               DOI 10.17487/RFC8949, December 2020,
               <https://www.rfc-editor.org/rfc/rfc8949>.
 
-8.2.  Informative References
+9.2.  Informative References
 
    [DICE-arch]
               Trusted Computing Group, "DICE Attestation Architecture",
@@ -373,13 +478,13 @@ Table of Contents
               r23-final.pdf>.
 
    [I-D.fossati-tls-attestation]
-              Tschofenig, H., Fossati, T., Howard, P., Mihalcea, I., and
+              Tschofenig, H., Sheffer, Y., Howard, P., Mihalcea, I., and
               Y. Deshpande, "Using Attestation in Transport Layer
               Security (TLS) and Datagram Transport Layer Security
               (DTLS)", Work in Progress, Internet-Draft, draft-fossati-
-              tls-attestation-02, 24 October 2022,
+              tls-attestation-03, 13 March 2023,
               <https://datatracker.ietf.org/doc/html/draft-fossati-tls-
-              attestation-02>.
+              attestation-03>.
 
    [I-D.ietf-rats-ar4si]
               Voit, E., Birkholz, H., Hardjono, T., Fossati, T., and V.
@@ -398,9 +503,14 @@ Table of Contents
    [I-D.ietf-rats-eat-media-type]
               Lundblade, L., Birkholz, H., and T. Fossati, "EAT Media
               Types", Work in Progress, Internet-Draft, draft-ietf-rats-
-              eat-media-type-01, 19 October 2022,
+              eat-media-type-02, 10 March 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              eat-media-type-01>.
+              eat-media-type-02>.
+
+   [RFC7942]  Sheffer, Y. and A. Farrel, "Improving Awareness of Running
+              Code: The Implementation Status Section", BCP 205,
+              RFC 7942, DOI 10.17487/RFC7942, July 2016,
+              <https://www.rfc-editor.org/rfc/rfc7942>.
 
    [RFC9193]  Keränen, A. and C. Bormann, "Sensor Measurement Lists
               (SenML) Fields for Indicating Data Value Content-Format",
@@ -449,13 +559,49 @@ Appendix A.  RFC9193 Content-Type ABNF
    VCHAR     =  %x21-7E           ; printable ASCII (no SP)
    '
 
-Appendix B.  Open Issues
+Appendix B.  Registering and Using CMWs
 
+   Figure 3 describes the registration preconditions for using CMWs in
+   either array or CBOR tag forms.
 
-   // Note to RFC Editor: please remove before publication.
+          .---------------.   .---------.
+         | Reuse EAT/CoRIM | | Register  |
+         | media type(s)   | | new media |
+         | + profile       | | type      |
+          `---+----+------'   `-+----+--'
+              |    |            |    |
+              |  .-+------------+-.  |
+              | |  |  Register  |  | |
+            .-(-+-'   new CoAP   `-+-(-.
+           |  | |  Content-Format  | |  |
+           |  |  `-------+--------'  |  |
+           |  |          |           |  |
+           |  |          v           |  |
+           |  |   .--------------.   |  |  .--------.
+           |  |  | Automatically  |  |  | | Existing |
+           |  |  | derive CBOR    |  |  | | CBOR     |
+           |  |  | tag [RFC9277]  |  |  | | tag      |
+           |  |   `------+-------'   |  |  `---+----'
+           |  |          |           |  |      |
+           |  |          |.----------(--(-----'
+           |  |          |           |  |
+           |  |          v           |  |
+           |  |   .----------------. |  |
+           |  |  /  CBOR tag CMW  /  |  |
+           v  v `----------------'   v  v
+       .--------------------------------------.
+      /             Array CMW                /
+     `--------------------------------------'
+
+                            Figure 3: How To CMW
+
+Appendix C.  Open Issues
 
    The list of currently open issues for this documents can be found at
    https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues.
+
+
+   // Note to RFC Editor: please remove before publication.
 
 Acknowledgments
 

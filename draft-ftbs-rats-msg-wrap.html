@@ -2,7 +2,7 @@
 <html lang="en" class="Internet-Draft">
 <head>
 <meta charset="utf-8">
-<meta content="Common,Inherited,Latin" name="scripts">
+<meta content="Common,Cyrillic,Inherited,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
 <title>RATS Conceptual Messages Wrapper</title>
 <meta content="Henk Birkolz" name="author">
@@ -13,31 +13,32 @@
        This document defines two encapsulation formats for RATS conceptual
 messages (i.e., evidence, attestation results, endorsements and
 reference values.) 
-       The first format uses a CBOR or JSON array with two members: one for the
-type, another for the value.  The other format wraps the value in a CBOR
-byte string and prepends a CBOR tag to convey the type information. 
+       The first format uses a CBOR or JSON array with two mandatory members,
+one for the type, another for the value, and a third optional member
+complementing the type field that says which kind of conceptual
+message(s) are carried in the value.
+The other format wraps the value in a CBOR byte string and prepends a
+CBOR tag to convey the type information. 
     " name="description">
-<meta content="xml2rfc 3.16.0" name="generator">
+<meta content="xml2rfc 3.17.1" name="generator">
 <meta content="evidence" name="keyword">
 <meta content="attestation result" name="keyword">
 <meta content="endorsement" name="keyword">
 <meta content="reference value" name="keyword">
 <meta content="draft-ftbs-rats-msg-wrap-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.16.0
-    Python 3.10.9
+  xml2rfc 3.17.1
+    Python 3.10.10
     appdirs 1.4.4
     ConfigArgParse 1.5.3
     google-i18n-address 2.5.2
-    html5lib 1.1
     intervaltree 3.1.0
     Jinja2 3.1.2
     lxml 4.9.2
-    MarkupSafe 2.1.2
     pycountry 22.3.5
     PyYAML 6.0
     requests 2.28.2
-    setuptools 67.5.1
+    setuptools 67.6.1
     six 1.16.0
     wcwidth 0.2.6
 -->
@@ -1058,11 +1059,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">RATS CMW</td>
-<td class="right">March 2023</td>
+<td class="right">April 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkolz, et al.</td>
-<td class="center">Expires 8 September 2023</td>
+<td class="center">Expires 21 October 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1075,12 +1076,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ftbs-rats-msg-wrap-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-03-07" class="published">7 March 2023</time>
+<time datetime="2023-04-19" class="published">19 April 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-09-08">8 September 2023</time></dd>
+<dd class="expires"><time datetime="2023-10-21">21 October 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1107,9 +1108,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-abstract-1">This document defines two encapsulation formats for RATS conceptual
 messages (i.e., evidence, attestation results, endorsements and
 reference values.)<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-<p id="section-abstract-2">The first format uses a CBOR or JSON array with two members: one for the
-type, another for the value.  The other format wraps the value in a CBOR
-byte string and prepends a CBOR tag to convey the type information.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">The first format uses a CBOR or JSON array with two mandatory members,
+one for the type, another for the value, and a third optional member
+complementing the type field that says which kind of conceptual
+message(s) are carried in the value.
+The other format wraps the value in a CBOR byte string and prepends a
+CBOR tag to convey the type information.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-discussion-venues">
@@ -1141,7 +1145,7 @@ byte string and prepends a CBOR tag to convey the type information.<a href="#sec
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 8 September 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 21 October 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1207,39 +1211,53 @@ byte string and prepends a CBOR tag to convey the type information.<a href="#sec
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
                 <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-cbor-tag" class="internal xref">CBOR Tag</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4">
+                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-cbor-array-with-explicit-cm" class="internal xref">CBOR Array with explicit CM indicator</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-registering-a-media-type-fo" class="internal xref">Registering a Media Type for Evidence</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-references" class="internal xref">References</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-implementation-status" class="internal xref">Implementation Status</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
-                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-project-veraison" class="internal xref">Project Veraison</a></p>
 </li>
             </ul>
 </li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-rfc9193-content-type-abnf" class="internal xref">RFC9193 Content-Type ABNF</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
+                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-open-issues" class="internal xref">Open Issues</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-rfc9193-content-type-abnf" class="internal xref">RFC9193 Content-Type ABNF</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-registering-and-using-cmws" class="internal xref">Registering and Using CMWs</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-open-issues" class="internal xref">Open Issues</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1253,15 +1271,18 @@ byte string and prepends a CBOR tag to convey the type information.<a href="#sec
 <p id="section-1-1">The RATS architecture defines a handful of conceptual messages
 (see <span><a href="https://rfc-editor.org/rfc/rfc9334#section-8" class="relref">Section 8</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>), such as evidence and attestation results.
 Each conceptual message can have multiple claims encoding and serialization
-formats (<span><a href="https://rfc-editor.org/rfc/rfc9334#section-9" class="relref">Section 9</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>). Such serialized messages may
-have to be transported via different protocols - for example, evidence
-using an EAT <span>[<a href="#I-D.ietf-rats-eat" class="cite xref">I-D.ietf-rats-eat</a>]</span> encoding serialized as a CBOR payload in
-a "background check" topological arrangement, or attestation results as
-Attestation Results for Secure Interactions (AR4SI) <span>[<a href="#I-D.ietf-rats-ar4si" class="cite xref">I-D.ietf-rats-ar4si</a>]</span> payloads
-in "passport" mode.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">In order to minimize the cost associated with registration and maximize
-interoperability, it is desirable to reuse their typing information
-across such boundaries.<a href="#section-1-2" class="pilcrow">¶</a></p>
+formats (<span><a href="https://rfc-editor.org/rfc/rfc9334#section-9" class="relref">Section 9</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>).
+Throughout their lifetime, RATS conceptual message are typically transported
+over different protocols.
+For example, EAT <span>[<a href="#I-D.ietf-rats-eat" class="cite xref">I-D.ietf-rats-eat</a>]</span> evidence in a "background check" topological
+arrangement first flows from Attester to Relying Party, and then from Relying
+Party to Verifier, over separate protocol legs.
+Attestation Results for Secure Interactions (AR4SI) <span>[<a href="#I-D.ietf-rats-ar4si" class="cite xref">I-D.ietf-rats-ar4si</a>]</span> payloads in
+"passport" mode would go first from Verifier to Attester and then, at a later
+point in time and over a different channel, from Attester to Relying Party.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">It is desirable to reuse any typing information associated with the messages
+across such protocol boundaries in order to minimize the cost associated with
+type registrations and maximize interoperability.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">This document defines two encapsulation formats for RATS conceptual
 messages that aim to achieve the goals stated above.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">These encapsulation formats are designed to be:<a href="#section-1-4" class="pilcrow">¶</a></p>
@@ -1320,49 +1341,71 @@ document:<a href="#section-3-1" class="pilcrow">¶</a></p>
         </h3>
 <p id="section-3.1-1">The CMW array format is defined in <a href="#fig-cddl-array" class="auto internal xref">Figure 1</a>.  (To improve clarity,
 the <code>Content-Type</code> ABNF is defined separately in <a href="#rfc9193-abnf" class="auto internal xref">Appendix A</a>.)<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">The CDDL generic <code>JC&lt;&gt;</code> is used where there is a variance between CBOR
+and JSON. The first argument is the CDDL for JSON and the second is the
+CDDL for CBOR.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-of-the-arra"></span><div id="fig-cddl-array">
 <figure id="figure-1">
-          <div class="alignLeft art-cddl art-text artwork" id="section-3.1-2.1">
+          <div class="alignLeft art-cddl art-text artwork" id="section-3.1-3.1">
 <pre>
-cmw-array = cmw-array-cbor / cmw-array-json
+cmw-array = [
+  type: coap-content-format / media-type
+  value: JC&lt;base64-string, bytes&gt;
+  ? ind: uint .bits cm-type
+]
 
-cmw-array-cbor = [ type, bytes ]
-
-cmw-array-json = [ type, base64-string ]
-
-type = coap-content-format / media-type
 coap-content-format = uint .size 2
 media-type = text .abnf ("Content-Type" .cat Content-Type-ABNF)
 
 base64-string = text .regexp "[A-Za-z0-9_-]+"
+
+cm-type = &amp;(
+  reference-values: 0
+  endorsements: 1
+  evidence: 2
+  attestation-result: 3
+)
 </pre>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
 <a href="#name-cddl-definition-of-the-arra" class="selfRef">CDDL definition of the Array format</a>
           </figcaption></figure>
 </div>
-<p id="section-3.1-3">It is composed of two members:<a href="#section-3.1-3" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-3.1-4">
-          <dt id="section-3.1-4.1">
+<p id="section-3.1-4">It is composed of three members:<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlNewline" id="section-3.1-5">
+          <dt id="section-3.1-5.1">
 <code>type</code>:</dt>
-          <dd style="margin-left: 1.5em" id="section-3.1-4.2">
-            <p id="section-3.1-4.2.1">Either a text string representing a Content-Type (e.g., an EAT media type
+          <dd style="margin-left: 1.5em" id="section-3.1-5.2">
+            <p id="section-3.1-5.2.1">Either a text string representing a Content-Type (e.g., an EAT media type
 <span>[<a href="#I-D.ietf-rats-eat-media-type" class="cite xref">I-D.ietf-rats-eat-media-type</a>]</span>) or an unsigned integer corresponding to a CoAP Content-Format
-number (<span><a href="https://rfc-editor.org/rfc/rfc7252#section-12.3" class="relref">Section 12.3</a> of [<a href="#RFC7252" class="cite xref">RFC7252</a>]</span>).<a href="#section-3.1-4.2.1" class="pilcrow">¶</a></p>
+number (<span><a href="https://rfc-editor.org/rfc/rfc7252#section-12.3" class="relref">Section 12.3</a> of [<a href="#RFC7252" class="cite xref">RFC7252</a>]</span>).<a href="#section-3.1-5.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-3.1-4.3">
+<dt id="section-3.1-5.3">
 <code>value</code>:</dt>
-          <dd style="margin-left: 1.5em" id="section-3.1-4.4">
-            <p id="section-3.1-4.4.1">The RATS conceptual message serialized according to the
-value defined in the type member.<a href="#section-3.1-4.4.1" class="pilcrow">¶</a></p>
+          <dd style="margin-left: 1.5em" id="section-3.1-5.4">
+            <p id="section-3.1-5.4.1">The RATS conceptual message serialized according to the
+value defined in the type member.<a href="#section-3.1-5.4.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-3.1-5.5">
+<code>ind</code>:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.1-5.6">
+            <p id="section-3.1-5.6.1">An optional bitmap that indicates which conceptual message(s) types
+are carried in the <code>value</code> field.  Any combination (i.e., any value
+between 1 and 15, included) is allowed.  This is useful only if the
+<code>type</code> is potentially ambiguous, for example if the base media type is
+not profiled (e.g., <code>application/eat+cwt</code>) or if the same profile
+identifier is shared by different conceptual messages, and there is no
+further context available to the CMW consumer to decide.
+<span class="cref" id="issue">Open issue:</span> https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/26<a href="#section-3.1-5.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
-<p id="section-3.1-5">A CMW array can be encoded as CBOR <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> or JSON <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
-<p id="section-3.1-6">When using JSON, the value field is encoded as Base64 using the URL and
-filename safe alphabet (Section 5 of <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>) without padding.<a href="#section-3.1-6" class="pilcrow">¶</a></p>
-<p id="section-3.1-7">When using CBOR, the value field is encoded as a CBOR byte string.<a href="#section-3.1-7" class="pilcrow">¶</a></p>
+<p id="section-3.1-6">A CMW array can be encoded as CBOR <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> or JSON <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>.<a href="#section-3.1-6" class="pilcrow">¶</a></p>
+<p id="section-3.1-7">When using JSON, the value field is encoded as Base64 using the URL and
+filename safe alphabet (Section 5 of <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>) without padding.<a href="#section-3.1-7" class="pilcrow">¶</a></p>
+<p id="section-3.1-8">When using CBOR, the value field is encoded as a CBOR byte string.<a href="#section-3.1-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="cbor-tag">
@@ -1420,19 +1463,20 @@ decoder does a 1-byte lookahead, as illustrated in the following pseudo
 code, to decide how to decode the remainder of the byte buffer:<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3.3-2">
 <pre>
-func CMWDecode(b []byte) (CMW, error) {
-    if len(b) &lt; CMWMinSize {
-        return CMW{}, errors.New("CMW too short")
-    }
+func CMWTypeSniff(b []byte) (CMW, error) {
+  if len(b) == 0 {
+    return Unknown
+  }
 
-    switch b[0] {
-    case 0x82:
-        return cborArrayDecode(b)
-    case 0x5b:
-        return jsonArrayDecode(b)
-    default:
-        return cborTagDecode(b)
-    }
+  if b[0] == 0x82 || b[0] == 0x83 {
+    return CBORArray
+  } else if b[0] &gt;= 0xc0 &amp;&amp; b[0] &lt;= 0xdf {
+    return CBORTag
+  } else if b[0] == 0x5b {
+    return JSONArray
+  }
+
+  return Unknown
 }
 </pre><a href="#section-3.3-2" class="pilcrow">¶</a>
 </div>
@@ -1445,12 +1489,15 @@ func CMWDecode(b []byte) (CMW, error) {
       <h2 id="name-examples">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-examples" class="section-name selfRef">Examples</a>
       </h2>
-<p id="section-4-1">The (equivalent) examples below assume the Media-Type-Name
-<code>application/vnd.example.rats-conceptual-msg</code> has been registered
-alongside a corresponding CoAP Content-Format number <code>30001</code>.  The CBOR
-tag <code>1668576818</code> is derived applying the <code>TN()</code> transform as described
-in <a href="#cbor-tag" class="auto internal xref">Section 3.2</a>.<a href="#section-4-1" class="pilcrow">¶</a></p>
-<div id="json-array">
+<p id="section-4-1">The (equivalent) examples in <a href="#ex-ja" class="auto internal xref">Section 4.1</a>, <a href="#ex-ca" class="auto internal xref">Section 4.2</a>, and <a href="#ex-ct" class="auto internal xref">Section 4.3</a> assume that
+the Media-Type-Name <code>application/vnd.example.rats-conceptual-msg</code> has been
+registered alongside a corresponding CoAP Content-Format number <code>30001</code>.  The
+CBOR tag <code>1668576818</code> is derived applying the <code>TN()</code> transform as described in
+<a href="#cbor-tag" class="auto internal xref">Section 3.2</a>.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-2">The example in <a href="#ex-ca-ind" class="auto internal xref">Section 4.4</a> is a signed CoRIM payload with an explicit CM
+indicator <code>0b0000_0011</code> (3), meaning that the wrapped message contains both
+Reference Values and Endorsements.<a href="#section-4-2" class="pilcrow">¶</a></p>
+<div id="ex-ja">
 <section id="section-4.1">
         <h3 id="name-json-array">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-json-array" class="section-name selfRef">JSON Array</a>
@@ -1463,9 +1510,12 @@ in <a href="#cbor-tag" class="auto internal xref">Section 3.2</a>.<a href="#sect
 ]
 </pre><a href="#section-4.1-1" class="pilcrow">¶</a>
 </div>
+<p id="section-4.1-2">Note that a CoAP Content-Format number can also be used with the JSON array
+form.  That may be the case when it is known that the receiver can handle CoAP
+Content-Formats and it is crucial to save bytes.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="cbor-array">
+<div id="ex-ca">
 <section id="section-4.2">
         <h3 id="name-cbor-array">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-cbor-array" class="section-name selfRef">CBOR Array</a>
@@ -1487,9 +1537,21 @@ in <a href="#cbor-tag" class="auto internal xref">Section 3.2</a>.<a href="#sect
       abcdabcd # "\xABͫ\xCD"
 </pre><a href="#section-4.2-3" class="pilcrow">¶</a>
 </div>
+<p id="section-4.2-4">Note that a Media-Type-Name can also be used with the CBOR array form,
+for example if it is known that the receiver cannot handle CoAP
+Content-Formats, or (unlike the case in point) if a CoAP Content-Format
+number has not been registrered.<a href="#section-4.2-4" class="pilcrow">¶</a></p>
+<div class="lang-cbor-diag sourcecode" id="section-4.2-5">
+<pre>
+[
+  "application/vnd.example.rats-conceptual-msg",
+  h'abcdabcd'
+]
+</pre><a href="#section-4.2-5" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
-<div id="cbor-tag-example">
+<div id="ex-ct">
 <section id="section-4.3">
         <h3 id="name-cbor-tag">
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-cbor-tag" class="section-name selfRef">CBOR Tag</a>
@@ -1509,6 +1571,34 @@ da 63747632    # tag(1668576818)
 </div>
 </section>
 </div>
+<div id="ex-ca-ind">
+<section id="section-4.4">
+        <h3 id="name-cbor-array-with-explicit-cm">
+<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-cbor-array-with-explicit-cm" class="section-name selfRef">CBOR Array with explicit CM indicator</a>
+        </h3>
+<div class="lang-cbor-diag sourcecode" id="section-4.4-1">
+<pre>
+[
+  "application/signed-corim+cbor",
+  h'd28443a10126a1',
+  3
+]
+</pre><a href="#section-4.4-1" class="pilcrow">¶</a>
+</div>
+<p id="section-4.4-2">with the following wire representation:<a href="#section-4.4-2" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4.4-3">
+<pre>
+83                                    # array(3)
+   78 1d                              # text(29)
+      6170706c69636174696f6e2f7369676e65642d636f72696d2b63626f72
+                                      # "application/signed-corim+cbor"
+   47                                 # bytes(7)
+      d28443a10126a1                  # "҄C\xA1\u0001&amp;\xA1"
+   03                                 # unsigned(3)
+</pre><a href="#section-4.4-3" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
 </section>
 </div>
 <div id="registering-a-media-type-for-evidence">
@@ -1523,35 +1613,76 @@ description of the signing and appraisal procedures associated with
 the data format.<a href="#section-5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="security-considerations">
+<div id="implementation-status">
 <section id="section-6">
-      <h2 id="name-security-considerations">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      <h2 id="name-implementation-status">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-implementation-status" class="section-name selfRef">Implementation Status</a>
       </h2>
-<p id="section-6-1">This document defines two encapsulation formats for RATS conceptual
+<p id="section-6-1">This section records the status of known implementations of the protocol
+defined by this specification at the time of posting of this Internet-Draft,
+and is based on a proposal described in <span>[<a href="#RFC7942" class="cite xref">RFC7942</a>]</span>.
+The description of implementations in this section is intended to assist the
+IETF in its decision processes in progressing drafts to RFCs.
+Please note that the listing of any individual implementation here does not
+imply endorsement by the IETF.
+Furthermore, no effort has been spent to verify the information presented here
+that was supplied by IETF contributors.
+This is not intended as, and must not be construed to be, a catalog of
+available implementations or their features.
+Readers are advised to note that other implementations may exist.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2">According to <span>[<a href="#RFC7942" class="cite xref">RFC7942</a>]</span>, "this will allow reviewers and working groups to
+assign due consideration to documents that have the benefit of running code,
+which may serve as evidence of valuable experimentation and feedback that have
+made the implemented protocols more mature.
+It is up to the individual working groups to use this information as they see
+fit".<a href="#section-6-2" class="pilcrow">¶</a></p>
+<div id="project-veraison">
+<section id="section-6.1">
+        <h3 id="name-project-veraison">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-project-veraison" class="section-name selfRef">Project Veraison</a>
+        </h3>
+<p id="section-6.1-1">The organization responsible for this implementation is Project Veraison, a
+Linux Foundation project hosted at the Confidential Computing Consortium.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-2">The software, hosted at <span><a href="https://github.com/veraison/cmw">https://github.com/veraison/cmw</a></span>, provides a Golang
+package that allows encoding and decoding of CMW payloads.
+The implementation covers all the features presented in this draft.
+The maturity level is alpha.
+The license is Apache 2.0.
+The developers can be contacted on the Zulip channel:
+<span><a href="https://veraison.zulipchat.com/#narrow/stream/383526-CMW/">https://veraison.zulipchat.com/#narrow/stream/383526-CMW/</a></span>.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-7">
+      <h2 id="name-security-considerations">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-7-1">This document defines two encapsulation formats for RATS conceptual
 messages. The messages themselves and their encoding ensure security
 protection. For this reason there are no further security requirements
-raised by the introduction of this encapsulation.<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2">Changing the encapsulation of a payload by an adversary will result in
+raised by the introduction of this encapsulation.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">Changing the encapsulation of a payload by an adversary will result in
 incorrect processing of the encapsulated messages and this will
-subsequently lead to a processing error.<a href="#section-6-2" class="pilcrow">¶</a></p>
+subsequently lead to a processing error.<a href="#section-7-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
-<section id="section-7">
+<section id="section-8">
       <h2 id="name-iana-considerations">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-7-1">This document does not make any requests to IANA.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-8-1">This document does not make any requests to IANA.<a href="#section-8-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<section id="section-8">
+<section id="section-9">
       <h2 id="name-references">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-references" class="section-name selfRef">References</a>
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
-<section id="section-8.1">
+<section id="section-9.1">
         <h3 id="name-normative-references">
-<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
 <dt id="RFC2119">[RFC2119]</dt>
@@ -1596,9 +1727,9 @@ subsequently lead to a processing error.<a href="#section-6-2" class="pilcrow">�
 <dd class="break"></dd>
 </dl>
 </section>
-<section id="section-8.2">
+<section id="section-9.2">
         <h3 id="name-informative-references">
-<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
 <dt id="DICE-arch">[DICE-arch]</dt>
@@ -1607,7 +1738,7 @@ subsequently lead to a processing error.<a href="#section-6-2" class="pilcrow">�
 <dd class="break"></dd>
 <dt id="I-D.fossati-tls-attestation">[I-D.fossati-tls-attestation]</dt>
         <dd>
-<span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Howard, P.</span>, <span class="refAuthor">Mihalcea, I.</span>, and <span class="refAuthor">Y. Deshpande</span>, <span class="refTitle">"Using Attestation in Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-fossati-tls-attestation-02</span>, <time datetime="2022-10-24" class="refDate">24 October 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-fossati-tls-attestation-02">https://datatracker.ietf.org/doc/html/draft-fossati-tls-attestation-02</a>&gt;</span>. </dd>
+<span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Howard, P.</span>, <span class="refAuthor">Mihalcea, I.</span>, and <span class="refAuthor">Y. Deshpande</span>, <span class="refTitle">"Using Attestation in Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-fossati-tls-attestation-03</span>, <time datetime="2023-03-13" class="refDate">13 March 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-fossati-tls-attestation-03">https://datatracker.ietf.org/doc/html/draft-fossati-tls-attestation-03</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-ar4si">[I-D.ietf-rats-ar4si]</dt>
         <dd>
@@ -1619,7 +1750,11 @@ subsequently lead to a processing error.<a href="#section-6-2" class="pilcrow">�
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-eat-media-type">[I-D.ietf-rats-eat-media-type]</dt>
         <dd>
-<span class="refAuthor">Lundblade, L.</span>, <span class="refAuthor">Birkholz, H.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"EAT Media Types"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-eat-media-type-01</span>, <time datetime="2022-10-19" class="refDate">19 October 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-media-type-01">https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-media-type-01</a>&gt;</span>. </dd>
+<span class="refAuthor">Lundblade, L.</span>, <span class="refAuthor">Birkholz, H.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"EAT Media Types"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-eat-media-type-02</span>, <time datetime="2023-03-10" class="refDate">10 March 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-media-type-02">https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-media-type-02</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7942">[RFC7942]</dt>
+        <dd>
+<span class="refAuthor">Sheffer, Y.</span> and <span class="refAuthor">A. Farrel</span>, <span class="refTitle">"Improving Awareness of Running Code: The Implementation Status Section"</span>, <span class="seriesInfo">BCP 205</span>, <span class="seriesInfo">RFC 7942</span>, <span class="seriesInfo">DOI 10.17487/RFC7942</span>, <time datetime="2016-07" class="refDate">July 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7942">https://www.rfc-editor.org/rfc/rfc7942</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9193">[RFC9193]</dt>
         <dd>
@@ -1677,27 +1812,157 @@ VCHAR     =  %x21-7E           ; printable ASCII (no SP)
 </div>
 </section>
 </div>
-<div id="open-issues">
+<div id="registering-and-using-cmws">
 <section id="appendix-B">
-      <h2 id="name-open-issues">
-<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-open-issues" class="section-name selfRef">Open Issues</a>
+      <h2 id="name-registering-and-using-cmws">
+<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-registering-and-using-cmws" class="section-name selfRef">Registering and Using CMWs</a>
       </h2>
-<p id="appendix-B-1"><span class="cref">Note to RFC Editor: please remove before publication.</span><a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<p id="appendix-B-2">The list of currently open issues for this documents can be found at
-<span><a href="https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues">https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues</a></span>.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
+<p id="appendix-B-1"><a href="#fig-howto-cmw" class="auto internal xref">Figure 3</a> describes the registration preconditions for using
+CMWs in either array or CBOR tag forms.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<span id="name-how-to-cmw"></span><div id="fig-howto-cmw">
+<figure id="figure-3">
+        <div id="appendix-B-2.1">
+          <div class="alignLeft art-svg artwork" id="appendix-B-2.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="496" width="400" viewBox="0 0 400 496" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px">
+              <path d="M 40,48 L 40,80" fill="none" stroke="black"></path>
+              <path d="M 56,176 L 56,424" fill="none" stroke="black"></path>
+              <path d="M 80,96 L 80,152" fill="none" stroke="black"></path>
+              <path d="M 80,168 L 80,424" fill="none" stroke="black"></path>
+              <path d="M 96,144 L 96,176" fill="none" stroke="black"></path>
+              <path d="M 104,256 L 104,288" fill="none" stroke="black"></path>
+              <path d="M 120,96 L 120,144" fill="none" stroke="black"></path>
+              <path d="M 168,192 L 168,232" fill="none" stroke="black"></path>
+              <path d="M 168,304 L 168,376" fill="none" stroke="black"></path>
+              <path d="M 184,48 L 184,80" fill="none" stroke="black"></path>
+              <path d="M 200,48 L 200,80" fill="none" stroke="black"></path>
+              <path d="M 224,96 L 224,144" fill="none" stroke="black"></path>
+              <path d="M 240,256 L 240,288" fill="none" stroke="black"></path>
+              <path d="M 248,144 L 248,176" fill="none" stroke="black"></path>
+              <path d="M 264,96 L 264,152" fill="none" stroke="black"></path>
+              <path d="M 264,168 L 264,328" fill="none" stroke="black"></path>
+              <path d="M 264,344 L 264,424" fill="none" stroke="black"></path>
+              <path d="M 288,176 L 288,328" fill="none" stroke="black"></path>
+              <path d="M 288,344 L 288,424" fill="none" stroke="black"></path>
+              <path d="M 296,48 L 296,80" fill="none" stroke="black"></path>
+              <path d="M 304,256 L 304,288" fill="none" stroke="black"></path>
+              <path d="M 344,304 L 344,320" fill="none" stroke="black"></path>
+              <path d="M 392,256 L 392,288" fill="none" stroke="black"></path>
+              <path d="M 56,32 L 168,32" fill="none" stroke="black"></path>
+              <path d="M 216,32 L 280,32" fill="none" stroke="black"></path>
+              <path d="M 56,96 L 168,96" fill="none" stroke="black"></path>
+              <path d="M 216,96 L 280,96" fill="none" stroke="black"></path>
+              <path d="M 112,128 L 232,128" fill="none" stroke="black"></path>
+              <path d="M 72,160 L 104,160" fill="none" stroke="black"></path>
+              <path d="M 240,160 L 272,160" fill="none" stroke="black"></path>
+              <path d="M 112,192 L 232,192" fill="none" stroke="black"></path>
+              <path d="M 120,240 L 224,240" fill="none" stroke="black"></path>
+              <path d="M 320,240 L 376,240" fill="none" stroke="black"></path>
+              <path d="M 120,304 L 224,304" fill="none" stroke="black"></path>
+              <path d="M 320,304 L 376,304" fill="none" stroke="black"></path>
+              <path d="M 184,336 L 328,336" fill="none" stroke="black"></path>
+              <path d="M 112,384 L 248,384" fill="none" stroke="black"></path>
+              <path d="M 96,416 L 232,416" fill="none" stroke="black"></path>
+              <path d="M 24,432 L 336,432" fill="none" stroke="black"></path>
+              <path d="M 8,464 L 320,464" fill="none" stroke="black"></path>
+              <path d="M 8,464 L 24,432" fill="none" stroke="black"></path>
+              <path d="M 96,416 L 112,384" fill="none" stroke="black"></path>
+              <path d="M 232,416 L 248,384" fill="none" stroke="black"></path>
+              <path d="M 320,464 L 336,432" fill="none" stroke="black"></path>
+              <path d="M 56,32 C 47.16936,32 40,39.16936 40,48" fill="none" stroke="black"></path>
+              <path d="M 168,32 C 176.83064,32 184,39.16936 184,48" fill="none" stroke="black"></path>
+              <path d="M 216,32 C 207.16936,32 200,39.16936 200,48" fill="none" stroke="black"></path>
+              <path d="M 280,32 C 288.83064,32 296,39.16936 296,48" fill="none" stroke="black"></path>
+              <path d="M 56,96 C 47.16936,96 40,88.83064 40,80" fill="none" stroke="black"></path>
+              <path d="M 168,96 C 176.83064,96 184,88.83064 184,80" fill="none" stroke="black"></path>
+              <path d="M 216,96 C 207.16936,96 200,88.83064 200,80" fill="none" stroke="black"></path>
+              <path d="M 280,96 C 288.83064,96 296,88.83064 296,80" fill="none" stroke="black"></path>
+              <path d="M 112,128 C 103.16936,128 96,135.16936 96,144" fill="none" stroke="black"></path>
+              <path d="M 232,128 C 240.83064,128 248,135.16936 248,144" fill="none" stroke="black"></path>
+              <path d="M 72,160 C 63.16936,160 56,167.16936 56,176" fill="none" stroke="black"></path>
+              <path d="M 104,160 C 112.83064,160 120,152.83064 120,144" fill="none" stroke="black"></path>
+              <path d="M 240,160 C 231.16936,160 224,152.83064 224,144" fill="none" stroke="black"></path>
+              <path d="M 272,160 C 280.83064,160 288,167.16936 288,176" fill="none" stroke="black"></path>
+              <path d="M 112,192 C 103.16936,192 96,184.83064 96,176" fill="none" stroke="black"></path>
+              <path d="M 232,192 C 240.83064,192 248,184.83064 248,176" fill="none" stroke="black"></path>
+              <path d="M 120,240 C 111.16936,240 104,247.16936 104,256" fill="none" stroke="black"></path>
+              <path d="M 224,240 C 232.83064,240 240,247.16936 240,256" fill="none" stroke="black"></path>
+              <path d="M 320,240 C 311.16936,240 304,247.16936 304,256" fill="none" stroke="black"></path>
+              <path d="M 376,240 C 384.83064,240 392,247.16936 392,256" fill="none" stroke="black"></path>
+              <path d="M 120,304 C 111.16936,304 104,296.83064 104,288" fill="none" stroke="black"></path>
+              <path d="M 224,304 C 232.83064,304 240,296.83064 240,288" fill="none" stroke="black"></path>
+              <path d="M 320,304 C 311.16936,304 304,296.83064 304,288" fill="none" stroke="black"></path>
+              <path d="M 376,304 C 384.83064,304 392,296.83064 392,288" fill="none" stroke="black"></path>
+              <path d="M 184,336 C 175.16936,336 168,343.16936 168,352" fill="none" stroke="black"></path>
+              <path d="M 328,336 C 336.83064,336 344,328.83064 344,320" fill="none" stroke="black"></path>
+              <polygon class="arrowhead" points="296,424 284,418.4 284,429.6" fill="black" transform="rotate(90,288,424)"></polygon>
+              <path class="jump" d="M 288,344 C 282,344 282,328 288,328" fill="none" stroke="black"></path>
+              <polygon class="arrowhead" points="272,424 260,418.4 260,429.6" fill="black" transform="rotate(90,264,424)"></polygon>
+              <path class="jump" d="M 264,344 C 258,344 258,328 264,328" fill="none" stroke="black"></path>
+              <path class="jump" d="M 264,168 C 258,168 258,152 264,152" fill="none" stroke="black"></path>
+              <polygon class="arrowhead" points="176,376 164,370.4 164,381.6" fill="black" transform="rotate(90,168,376)"></polygon>
+              <polygon class="arrowhead" points="176,232 164,226.4 164,237.6" fill="black" transform="rotate(90,168,232)"></polygon>
+              <polygon class="arrowhead" points="88,424 76,418.4 76,429.6" fill="black" transform="rotate(90,80,424)"></polygon>
+              <path class="jump" d="M 80,168 C 74,168 74,152 80,152" fill="none" stroke="black"></path>
+              <polygon class="arrowhead" points="64,424 52,418.4 52,429.6" fill="black" transform="rotate(90,56,424)"></polygon>
+              <g class="text">
+                <text x="72" y="52">Reuse</text>
+                <text x="136" y="52">EAT/CoRIM</text>
+                <text x="244" y="52">Register</text>
+                <text x="72" y="68">media</text>
+                <text x="128" y="68">type(s)</text>
+                <text x="224" y="68">new</text>
+                <text x="264" y="68">media</text>
+                <text x="56" y="84">+</text>
+                <text x="96" y="84">profile</text>
+                <text x="228" y="84">type</text>
+                <text x="172" y="148">Register</text>
+                <text x="152" y="164">new</text>
+                <text x="188" y="164">CoAP</text>
+                <text x="172" y="180">Content-Format</text>
+                <text x="168" y="260">Automatically</text>
+                <text x="348" y="260">Existing</text>
+                <text x="140" y="276">derive</text>
+                <text x="188" y="276">CBOR</text>
+                <text x="332" y="276">CBOR</text>
+                <text x="128" y="292">tag</text>
+                <text x="184" y="292">[RFC9277]</text>
+                <text x="328" y="292">tag</text>
+                <text x="140" y="404">CBOR</text>
+                <text x="176" y="404">tag</text>
+                <text x="208" y="404">CMW</text>
+                <text x="144" y="452">Array</text>
+                <text x="184" y="452">CMW</text>
+              </g>
+            </svg><a href="#appendix-B-2.1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-how-to-cmw" class="selfRef">How To CMW</a>
+        </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="open-issues">
+<section id="appendix-C">
+      <h2 id="name-open-issues">
+<a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-open-issues" class="section-name selfRef">Open Issues</a>
+      </h2>
+<p id="appendix-C-1">The list of currently open issues for this documents can be found at
+<span><a href="https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues">https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues</a></span>.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+<p id="appendix-C-2"><span class="cref">Note to RFC Editor: please remove before publication.</span><a href="#appendix-C-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="acknowledgments">
-<section id="appendix-C">
+<section id="appendix-D">
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-C-1">The authors would like to thank Carl Wallace and Carsten Bormann for their
-reviews and suggestions.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+<p id="appendix-D-1">The authors would like to thank Carl Wallace and Carsten Bormann for their
+reviews and suggestions.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-D">
+<section id="appendix-E">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
