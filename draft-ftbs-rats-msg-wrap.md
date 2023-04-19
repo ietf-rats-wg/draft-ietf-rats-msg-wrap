@@ -236,13 +236,17 @@ func CMWTypeSniff(b []byte) (CMW, error) {
 
 # Examples
 
-The (equivalent) examples below assume the Media-Type-Name
-`application/vnd.example.rats-conceptual-msg` has been registered
-alongside a corresponding CoAP Content-Format number `30001`.  The CBOR
-tag `1668576818` is derived applying the `TN()` transform as described
-in {{cbor-tag}}.
+The (equivalent) examples in {{ex-ja}}, {{ex-ca}}, and {{ex-ct}} assume that
+the Media-Type-Name `application/vnd.example.rats-conceptual-msg` has been
+registered alongside a corresponding CoAP Content-Format number `30001`.  The
+CBOR tag `1668576818` is derived applying the `TN()` transform as described in
+{{cbor-tag}}.
 
-## JSON Array
+The example in {{ex-ca-ind}} is a signed CoRIM payload with an explicit CM
+indicator `0b0000_0011` (3), meaning that the wrapped message contains both
+Reference Values and Endorsements.
+
+## JSON Array {#ex-ja}
 
 ~~~ cbor-diag
 {::include cddl/example-json-1.diag}
@@ -252,7 +256,7 @@ Note that a CoAP Content-Format number can also be used with the JSON array
 form.  That may be the case when it is known that the receiver can handle CoAP
 Content-Formats and it is crucial to save bytes.
 
-## CBOR Array
+## CBOR Array {#ex-ca}
 
 ~~~ cbor-diag
 {::include cddl/example-cbor-1.diag}
@@ -273,7 +277,7 @@ number has not been registrered.
 {::include cddl/example-cbor-2.diag}
 ~~~
 
-## CBOR Tag {#cbor-tag-example}
+## CBOR Tag {#ex-ct}
 
 ~~~ cbor-diag
 1668576818(h'abcdabcd')
@@ -283,6 +287,24 @@ with the following wire representation:
 
 ~~~
 {::include cddl/example-cbor-tag-1.pretty}
+~~~
+
+## CBOR Array with explicit CM indicator {#ex-ca-ind}
+
+~~~ cbor-diag
+{::include cddl/example-cbor-3.diag}
+~~~
+
+with the following wire representation:
+
+~~~
+83                                    # array(3)
+   78 1d                              # text(29)
+      6170706c69636174696f6e2f7369676e65642d636f72696d2b63626f72
+                                      # "application/signed-corim+cbor"
+   47                                 # bytes(7)
+      d28443a10126a1                  # "҄C\xA1\u0001&\xA1"
+   03                                 # unsigned(3)
 ~~~
 
 # Registering a Media Type for Evidence
