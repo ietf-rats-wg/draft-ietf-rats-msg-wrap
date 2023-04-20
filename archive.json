@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-04-18T00:40:01.459827+00:00",
+  "timestamp": "2023-04-20T00:39:42.922770+00:00",
   "repo": "thomas-fossati/draft-ftbs-rats-msg-wrap",
   "labels": [
     {
@@ -231,7 +231,7 @@
       "labels": [],
       "body": "See https://mailarchive.ietf.org/arch/msg/rats/Bmlxnu0GmnRMsP6WEq3CBjLVm0k/\r\n",
       "createdAt": "2022-12-20T10:31:12Z",
-      "updatedAt": "2023-04-03T09:07:42Z",
+      "updatedAt": "2023-04-19T11:43:43Z",
       "closedAt": null,
       "comments": [
         {
@@ -240,6 +240,13 @@
           "body": "Below are some suggestions/questions regarding the RATS Conceptual Messages Wrapper draft (draft-ftbs-rats-msg-wrap-00).\r\n\r\n## \ufeffAbstract\r\n* [x] Should the spec have a broader title/focus since there appears to be nothing to limit usage to RATS conceptual messages?\r\n\r\n> While the mechanism is generic -- at least in part, now that we added the CM indicator to the array serialisation -- we want to keep the scope limited to RATS messages.\r\n\r\n* [x] How does this draft relate to the EAT Media Types draft? That draft states that is \"defines media types to be used for Entity Attestation Token (EAT) payloads independently of the RATS Conceptual Message in which they manifest themselves.\" Does this mean a separate media-type would be used with the encapsulation mechanisms defined in this draft?\r\n\r\n> This encap is intended for tunnelling RATS messages in protocols that don't use media types as first class type identifiers themselves.  The relation of this spec with the EAT media type I-D is one of \"consumer\": if EAT MT has a type that is good for the message, we can use it.\r\n\r\n## Section 1\r\n* [x] In the first sentence of the second paragraph, what is being registered or used interoperably? This would clarify what \"their\" means in the second sentence. I think the media type notion might need to be introduced before this paragraph.\r\n\r\n> In #22, I hope I have explained a bit better the basic reason for providing a single encap, and what registrations we are amortising.\r\n\r\n## Section 3.1\r\n* [x] Is there any reason to not use `.det` with indentation of the RFC6838 definition? I think that'd be easier to read.\r\n\r\n> To improve readability this has now been separated into its own section.\r\n\r\n## Section 3.2\r\n* [x] What if a CoAP Content Format does not exist for the media type? I am assuming a media-type value is used, but it may be worth stating that.\r\n\r\n> Done in #23\r\n\r\n* [x] Are tag definitions intended to adhere to the same limitations defined for the value field in the array, i.e., `cbor-bytes / base64-string` serialized per the tag number? If not, what would govern the type?\r\n\r\n> This is stated in \u00a73.2: _\"[...] encoded as a CBOR byte string, to which the tag is prepended.\"_\r\n\r\n## Section 4\r\n* [x] I think it would be helpful to include ASCII hex of the CBOR encodings in addition to the diagnostic (i.e., `8219753144ABCDABCD` and `DA6374763244ABCDABCD`).\r\n\r\n> Agreed; we have added the CBOR \"pretty\" output to the examples.\r\n\r\n* [x] It may be worth including a CBOR example with a media-type value. This could possibly be as a second hypothetical for which no CoAP content format has been defined or as an example with parameters of the same type as current example.\r\n\r\n> Done in #23\r\n\r\n* [x] It may be worth showing the CDDL definition of the resulting tag as it may appear in some protocol definition, i.e.. `example_tag = #6.1668576818(bstr)`.\r\n\r\n> We have now used a brand new CDDL feature ([\"non-literal CBOR tag numbers\"](https://www.ietf.org/archive/id/draft-bormann-cbor-cddl-2-draft-01.html#section-2.2)) in \u00a73.2 to do that in a generic way.\r\n",
           "createdAt": "2023-03-06T17:32:55Z",
           "updatedAt": "2023-04-03T09:07:42Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "body": "hi Carl, we think we addressed all your points.  See https://thomas-fossati.github.io/draft-ftbs-rats-msg-wrap/draft-ftbs-rats-msg-wrap.html\r\n\r\nCould you please check when you have some spare time?\r\n\r\n/cc @carl-wallace ",
+          "createdAt": "2023-04-19T11:43:42Z",
+          "updatedAt": "2023-04-19T11:43:42Z"
         }
       ]
     },
@@ -364,9 +371,48 @@
       "labels": [],
       "body": "Given a use case for an attestation results or other message that conveys other CMs that are relevant to a particular attestation result. Does it make sense to continue following the convention of using tagged cbor - as in:\r\n```\r\ntagged-cmw-record = #6.4711(bytes .cbor cmw-array)\r\n```\r\nA possible triple record structure that treats other CMs as triple objects might be:\r\n```\r\nar-triple-record = [ \r\n     attester: stateful-environment-map,\r\n     ar-claims: [ + $ar-claims-type-choice ] \r\n]\r\n$ar-claims-type-choice /= tagged-cmw-record\r\n```\r\nThe argument against is that cmw-array already has tagged values and the little bit of CDDL inside of `ar-claims:` isn't enough to warrant needing a CBOR tag. \r\nThe argument for is that all `$ar-claims-type-choice` possibilities are expected to be `tagged-xxx` values that can be dispatched by a parser dispatcher following a consistent convention. ",
       "createdAt": "2023-04-10T18:43:14Z",
-      "updatedAt": "2023-04-10T18:43:14Z",
+      "updatedAt": "2023-04-18T09:30:17Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "body": "> Given a use case for an attestation results or other message that conveys other CMs that are relevant to a particular attestation result. Does it make sense to continue following the convention of using tagged cbor - as in:\r\n> \r\n> ```\r\n> tagged-cmw-record = #6.4711(bytes .cbor cmw-array)\r\n> ```\r\n> \r\n> A possible triple record structure that treats other CMs as triple objects might be:\r\n> \r\n> ```\r\n> ar-triple-record = [ \r\n>      attester: stateful-environment-map,\r\n>      ar-claims: [ + $ar-claims-type-choice ] \r\n> ]\r\n> $ar-claims-type-choice /= tagged-cmw-record\r\n> ```\r\n> \r\n> The argument against is that cmw-array already has tagged values and the little bit of CDDL inside of `ar-claims:` isn't enough to warrant needing a CBOR tag. The argument for is that all `$ar-claims-type-choice` possibilities are expected to be `tagged-xxx` values that can be dispatched by a parser dispatcher following a consistent convention.\r\n\r\nIn the context of a triple's object type choice, I think it makes total sense to add the extra tag.",
+          "createdAt": "2023-04-18T09:30:17Z",
+          "updatedAt": "2023-04-18T09:30:17Z"
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "id": "I_kwDOIGCt2M5js0nZ",
+      "title": "extensibility of CM indicators?",
+      "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/26",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Policies (for evidence and attestation results) as well as trust anchors are other CMs that we may want to support.\r\n\r\nWe should think whether we want the CM-IND bitmask to be extensible - e.g., via\r\n```\r\ncm-type /= &(\r\n  yacm: bit_position\r\n)\r\n```\r\nor we just capture all the existing CM in the RATS architecture and seal it once and for all.",
+      "createdAt": "2023-04-18T09:13:49Z",
+      "updatedAt": "2023-04-18T17:37:43Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I believe it should be extensible so that a future revision of the architecture that needed to define more clearly hybrid roles such as verifier to verifier or lead attester to verifier where partially processed or intermediate results are forwarded. This may include forwarding appraisal policies which currently isn't defined in cm-type due to WG scope, but is defined in the architecture.",
+          "createdAt": "2023-04-18T16:48:27Z",
+          "updatedAt": "2023-04-18T16:48:27Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "body": "I'm fine with this, it looks like a sensible approach.\r\nIt's only a bit more hassle to handle the IANA registry :-)",
+          "createdAt": "2023-04-18T17:37:43Z",
+          "updatedAt": "2023-04-18T17:37:43Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -1181,24 +1227,26 @@
       "id": "PR_kwDOIGCt2M5NLgdl",
       "title": "add a CM indicator to the array form",
       "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/20",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "A draft proposal.  Note that this is slightly different from what discussed in the email thread in that the bit map is done using an integer type (rather than a byte string) in order make the CBOR and JSON representations more uniform.\r\n\r\nAddress #24 ",
       "createdAt": "2023-03-29T15:28:47Z",
-      "updatedAt": "2023-04-17T17:53:00Z",
+      "updatedAt": "2023-04-18T16:32:13Z",
       "baseRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "eb7002957d7b613e2c71106039bd26963fa256c1",
       "headRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
       "headRefName": "cm-ind",
-      "headRefOid": "dfa89d6fd43178d76d44db04c96a16afca178381",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "42a3a30409b03e770dfbad3fb6c0c08d060ca1d6",
+      "closedAt": "2023-04-18T13:04:34Z",
+      "mergedAt": "2023-04-18T13:04:33Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "5afda423e8cae6e4bd9842bf20a4e8993ef1be4d"
+      },
       "comments": [],
       "reviews": [
         {
@@ -1233,6 +1281,26 @@
           "createdAt": "2023-04-17T17:53:00Z",
           "updatedAt": "2023-04-17T17:53:00Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5S4a0i",
+          "commit": {
+            "abbreviatedOid": "dfa89d6"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-04-18T16:32:12Z",
+          "updatedAt": "2023-04-18T16:32:13Z",
+          "comments": [
+            {
+              "originalPosition": 44,
+              "body": "done in https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/29",
+              "createdAt": "2023-04-18T16:32:12Z",
+              "updatedAt": "2023-04-18T16:32:13Z"
+            }
+          ]
         }
       ]
     },
@@ -1323,24 +1391,26 @@
       "id": "PR_kwDOIGCt2M5NXycu",
       "title": "clarify intro",
       "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/22",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Attempt at addressing Carl's confusion on \u00a71:\r\n\r\n\"In the first sentence of the second paragraph, what is being registered or used interoperably? This would clarify what \"their\" means in the second sentence. I think the media type notion might need to be introduced before this paragraph.\"\r\n\r\nPartially addresses #15 \r\n",
       "createdAt": "2023-03-31T17:07:20Z",
-      "updatedAt": "2023-04-03T09:10:56Z",
+      "updatedAt": "2023-04-18T13:03:30Z",
       "baseRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "eb7002957d7b613e2c71106039bd26963fa256c1",
       "headRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
       "headRefName": "clarify-intro",
       "headRefOid": "0d34d7940b98ef05589b3628d4a1949139616cf5",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2023-04-18T13:03:26Z",
+      "mergedAt": "2023-04-18T13:03:26Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "eb528a9648ce44402cbc4c119e4d281f50f6d94c"
+      },
       "comments": [],
       "reviews": [
         {
@@ -1363,24 +1433,26 @@
       "id": "PR_kwDOIGCt2M5Nd9Yw",
       "title": "more examples",
       "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/23",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Partially addresses #15",
       "createdAt": "2023-04-03T09:06:21Z",
-      "updatedAt": "2023-04-03T15:06:17Z",
+      "updatedAt": "2023-04-18T13:03:50Z",
       "baseRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "98a29543f38891630c2ef69059bf4b2238aea65b",
       "headRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
       "headRefName": "more-examples",
       "headRefOid": "baf7e2b2f98cdc0e0b30361837b81b094fe47b29",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2023-04-18T13:03:47Z",
+      "mergedAt": "2023-04-18T13:03:47Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "8dc0c9f4761dd9426ccc5f5f38f2afcd6b4179a2"
+      },
       "comments": [],
       "reviews": [
         {
@@ -1395,6 +1467,137 @@
           "createdAt": "2023-04-03T15:06:17Z",
           "updatedAt": "2023-04-03T15:06:17Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "id": "PR_kwDOIGCt2M5OlSrP",
+      "title": "add an example with CM indicator",
+      "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/27",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-04-18T13:52:19Z",
+      "updatedAt": "2023-04-19T11:37:26Z",
+      "baseRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "5afda423e8cae6e4bd9842bf20a4e8993ef1be4d",
+      "headRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "headRefName": "cm-ind-examples",
+      "headRefOid": "2a1c4986c6cb8bb6b7f302ee88f8a272aeed2637",
+      "closedAt": "2023-04-19T11:37:23Z",
+      "mergedAt": "2023-04-19T11:37:23Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "256b2bd43d664d2477e220ffab01a83eaa2d6a04"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5S4jRj",
+          "commit": {
+            "abbreviatedOid": "2a1c498"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-04-18T16:51:18Z",
+          "updatedAt": "2023-04-18T16:51:18Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "id": "PR_kwDOIGCt2M5OlX8I",
+      "title": "add an implementation status section",
+      "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/28",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-04-18T14:04:12Z",
+      "updatedAt": "2023-04-19T11:37:11Z",
+      "baseRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "5afda423e8cae6e4bd9842bf20a4e8993ef1be4d",
+      "headRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "headRefName": "impl-status",
+      "headRefOid": "1ea8b9961d5479fd48713936bb927dd3c77abecb",
+      "closedAt": "2023-04-19T11:37:07Z",
+      "mergedAt": "2023-04-19T11:37:07Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "904e2232966a7b7938d23e7f735c5dfbbae819b4"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5S4j3z",
+          "commit": {
+            "abbreviatedOid": "1ea8b99"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-04-18T16:52:52Z",
+          "updatedAt": "2023-04-18T16:52:52Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "id": "PR_kwDOIGCt2M5OmN-5",
+      "title": "Added missed review suggestion [1]",
+      "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/29",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Added missed review suggestion [1], and rearranged the surrounding prose accordingly.\r\n\r\n[1] https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/20#discussion_r1169088805",
+      "createdAt": "2023-04-18T16:21:25Z",
+      "updatedAt": "2023-04-18T17:38:59Z",
+      "baseRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "5afda423e8cae6e4bd9842bf20a4e8993ef1be4d",
+      "headRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "headRefName": "ned-missing-suggestion",
+      "headRefOid": "9e4b3adaf7f7f178367bdecefc4905a098f764e4",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5S4lMM",
+          "commit": {
+            "abbreviatedOid": "0d45aab"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-04-18T16:56:20Z",
+          "updatedAt": "2023-04-18T16:56:36Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "```suggestion\r\nfield contains multiple conceptual messages with different types (e.g.,\r\n```",
+              "createdAt": "2023-04-18T16:56:20Z",
+              "updatedAt": "2023-04-18T17:38:54Z"
+            }
+          ]
         }
       ]
     }
