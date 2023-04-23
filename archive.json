@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-04-20T00:39:42.922770+00:00",
+  "timestamp": "2023-04-23T00:45:04.150597+00:00",
   "repo": "thomas-fossati/draft-ftbs-rats-msg-wrap",
   "labels": [
     {
@@ -231,7 +231,7 @@
       "labels": [],
       "body": "See https://mailarchive.ietf.org/arch/msg/rats/Bmlxnu0GmnRMsP6WEq3CBjLVm0k/\r\n",
       "createdAt": "2022-12-20T10:31:12Z",
-      "updatedAt": "2023-04-19T11:43:43Z",
+      "updatedAt": "2023-04-20T19:56:36Z",
       "closedAt": null,
       "comments": [
         {
@@ -247,6 +247,13 @@
           "body": "hi Carl, we think we addressed all your points.  See https://thomas-fossati.github.io/draft-ftbs-rats-msg-wrap/draft-ftbs-rats-msg-wrap.html\r\n\r\nCould you please check when you have some spare time?\r\n\r\n/cc @carl-wallace ",
           "createdAt": "2023-04-19T11:43:42Z",
           "updatedAt": "2023-04-19T11:43:42Z"
+        },
+        {
+          "author": "carl-wallace",
+          "authorAssociation": "NONE",
+          "body": "Yep. Thanks. A few nits/comments:\n\n \n\n- In third sentence of first paragraph in section 1, \u201cRATS conceptual message\u201d should be plural.\n\n- In the cm-type definition, attestation-result should probably be plural.\n\n- In the first sentence of section 3.2, \"may be derived from CoAP Content-Format numbers\" may be more accurate given section 3.2.1's allowance for other registered tags.\n\n- I wonder if including <coap-cf-tag-number> in the definition of cmw-cbor-tag<bytes> is right given other values can be used. Maybe #6.<uint>(bytes) for the definition with coap-cf-tag-number defining the range where a registered tag is not in use? I'm not sure if it's better to have a definition like #6.<cmw-cbor-tag> that does not cover the range of what is acceptable or something overly broad like #6.<uint> (or if I am just missing something here).\n\n- Should the lookahead for CBORTag be bounded on 0xdb instead of 0xdf? The jump table in RFC 8949 has 0xdb as highest value.\n\n \n\nFrom: Thomas Fossati ***@***.***>\nReply-To: thomas-fossati/draft-ftbs-rats-msg-wrap ***@***.***>\nDate: Wednesday, April 19, 2023 at 7:43 AM\nTo: thomas-fossati/draft-ftbs-rats-msg-wrap ***@***.***>\nCc: Carl Wallace ***@***.***>, Mention ***@***.***>\nSubject: Re: [thomas-fossati/draft-ftbs-rats-msg-wrap] Carl's in depth review (Issue #15)\n\n \n\nhi Carl, we think we addressed all your points. See https://thomas-fossati.github.io/draft-ftbs-rats-msg-wrap/draft-ftbs-rats-msg-wrap.html\n\nCould you please check when you have some spare time?\n\n/cc @carl-wallace\n\n\u2014\nReply to this email directly, view it on GitHub, or unsubscribe.\nYou are receiving this because you were mentioned.Message ID: ***@***.***>\n\n",
+          "createdAt": "2023-04-20T19:56:36Z",
+          "updatedAt": "2023-04-20T19:56:36Z"
         }
       ]
     },
