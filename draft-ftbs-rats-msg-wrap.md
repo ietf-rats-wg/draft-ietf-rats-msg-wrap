@@ -78,7 +78,7 @@ The RATS architecture defines a handful of conceptual messages
 (see {{Section 8 of -rats-arch}}), such as evidence and attestation results.
 Each conceptual message can have multiple claims encoding and serialization
 formats ({{Section 9 of -rats-arch}}).
-Throughout their lifetime, RATS conceptual message are typically transported
+Throughout their lifetime, RATS conceptual messages are typically transported
 over different protocols.
 For example, EAT {{-rats-eat}} evidence in a "background check" topological
 arrangement first flows from Attester to Relying Party, and then from Relying
@@ -179,7 +179,7 @@ When using CBOR, the value field is encoded as a CBOR byte string.
 
 ## CMW CBOR Tags {#cbor-tag}
 
-CBOR Tags used as CMW are derived from CoAP Content-Format numbers.
+CBOR Tags used as CMW may be derived from CoAP Content-Format numbers.
 If a CoAP content format exists for a RATS conceptual message, the
 `TN()` transform defined in {{Appendix B of RFC9277}} can be used to
 derive a corresponding CBOR tag in range \[1668546817, 1668612095\].
@@ -224,7 +224,7 @@ func CMWTypeSniff(b []byte) (CMW, error) {
 
   if b[0] == 0x82 || b[0] == 0x83 {
     return CBORArray
-  } else if b[0] >= 0xc0 && b[0] <= 0xdf {
+  } else if b[0] >= 0xc0 && b[0] <= 0xdb {
     return CBORTag
   } else if b[0] == 0x5b {
     return JSONArray
