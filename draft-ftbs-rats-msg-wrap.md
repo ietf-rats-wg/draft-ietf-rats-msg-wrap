@@ -161,13 +161,15 @@ number ({{Section 12.3 of -coap}}).
 value defined in the type member.
 
 `ind`:
-: An optional bitmap that indicates which conceptual message(s) types
-are carried in the `value` field.  Any combination (i.e., any value
-between 1 and 15, included) is allowed.  This is useful only if the
-`type` is potentially ambiguous, for example if the base media type is
-not profiled (e.g., `application/eat+cwt`) or if the same profile
-identifier is shared by different conceptual messages, and there is no
-further context available to the CMW consumer to decide.
+: An optional bitmap that indicates which conceptual message types are
+carried in the `value` field.  Any combination (i.e., any value between
+1 and 15, included) is allowed.  This is useful only if the `type` is
+potentially ambiguous and there is no further context available to the
+CMW consumer to decide.  For example, this might be the case if the base
+media type is not profiled (e.g., `application/eat+cwt`), if the `value`
+field contains multiple conceptual messages with different types (e.g.,
+both reference values and endorsements within the same `application/signed-corim+cbor`), or if the same profile identifier is
+shared by different conceptual messages.
 [^issue] https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/26
 
 A CMW array can be encoded as CBOR {{-cbor}} or JSON {{-json}}.
