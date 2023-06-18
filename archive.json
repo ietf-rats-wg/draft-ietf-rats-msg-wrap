@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-04-25T00:41:41.926726+00:00",
+  "timestamp": "2023-06-18T00:53:13.585363+00:00",
   "repo": "thomas-fossati/draft-ftbs-rats-msg-wrap",
   "labels": [
     {
@@ -1573,25 +1573,35 @@
       "id": "PR_kwDOIGCt2M5OmN-5",
       "title": "Added missed review suggestion [1]",
       "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/29",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Added missed review suggestion [1], and rearranged the surrounding prose accordingly.\r\n\r\n[1] https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/20#discussion_r1169088805",
       "createdAt": "2023-04-18T16:21:25Z",
-      "updatedAt": "2023-04-18T17:38:59Z",
+      "updatedAt": "2023-06-15T12:31:14Z",
       "baseRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "5afda423e8cae6e4bd9842bf20a4e8993ef1be4d",
       "headRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
       "headRefName": "ned-missing-suggestion",
-      "headRefOid": "9e4b3adaf7f7f178367bdecefc4905a098f764e4",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "e28702a2f2d6ad178fed1ac299f295aa4c5b6fc8",
+      "closedAt": "2023-06-15T12:31:14Z",
+      "mergedAt": "2023-06-15T12:31:14Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "8e95596e766e22d3920dd8b85ef98f4b40edb1cb"
+      },
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": ":ship: it",
+          "createdAt": "2023-06-15T12:29:15Z",
+          "updatedAt": "2023-06-15T12:29:15Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOIGCt2M5S4lMM",
@@ -1612,6 +1622,112 @@
               "updatedAt": "2023-04-18T17:38:54Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5YTApY",
+          "commit": {
+            "abbreviatedOid": "9e4b3ad"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2023-06-15T11:46:21Z",
+          "updatedAt": "2023-06-15T11:46:44Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "would \"different types\" not require at two examples?",
+              "createdAt": "2023-06-15T11:46:21Z",
+              "updatedAt": "2023-06-15T11:46:44Z"
+            },
+            {
+              "originalPosition": 19,
+              "body": "Also, maybe example?",
+              "createdAt": "2023-06-15T11:46:36Z",
+              "updatedAt": "2023-06-15T11:46:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5YTNRX",
+          "commit": {
+            "abbreviatedOid": "9e4b3ad"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-06-15T12:17:08Z",
+          "updatedAt": "2023-06-15T12:17:08Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "There is no such thing that I could reference now.  Although it exists in principle, and IIRC Ned had a use case for that.",
+              "createdAt": "2023-06-15T12:17:08Z",
+              "updatedAt": "2023-06-15T12:17:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5YTRCq",
+          "commit": {
+            "abbreviatedOid": "9e4b3ad"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-06-15T12:25:35Z",
+          "updatedAt": "2023-06-15T12:25:35Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "```suggestion\r\nboth reference values and endorsements within the same `application/signed-corim+cbor`), or if the same profile identifier is\r\n```",
+              "createdAt": "2023-06-15T12:25:35Z",
+              "updatedAt": "2023-06-15T12:25:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5YTSh_",
+          "commit": {
+            "abbreviatedOid": "e28702a"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-06-15T12:28:52Z",
+          "updatedAt": "2023-06-15T12:28:59Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "good enough for CfA, I think.",
+              "createdAt": "2023-06-15T12:28:52Z",
+              "updatedAt": "2023-06-15T12:28:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5YTTWA",
+          "commit": {
+            "abbreviatedOid": "9e4b3ad"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-06-15T12:30:37Z",
+          "updatedAt": "2023-06-15T12:30:37Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "done in [e28702a](https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/29/commits/e28702a2f2d6ad178fed1ac299f295aa4c5b6fc8)",
+              "createdAt": "2023-06-15T12:30:37Z",
+              "updatedAt": "2023-06-15T12:30:37Z"
+            }
+          ]
         }
       ]
     },
@@ -1620,26 +1736,42 @@
       "id": "PR_kwDOIGCt2M5O_Fjt",
       "title": "apply Carl's suggestions and fixes",
       "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/30",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "apply Carl's suggestions and fixes at [1]\r\n\r\n[1] https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/15#issuecomment-1516870623",
       "createdAt": "2023-04-24T10:29:57Z",
-      "updatedAt": "2023-04-24T15:21:13Z",
+      "updatedAt": "2023-06-15T12:31:45Z",
       "baseRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "256b2bd43d664d2477e220ffab01a83eaa2d6a04",
       "headRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
       "headRefName": "carls-review-nits",
       "headRefOid": "89a931dab29a243f00669f654a6c5531de948376",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2023-06-15T12:31:41Z",
+      "mergedAt": "2023-06-15T12:31:41Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "af0432bd7014a5e6efa19c47d19f92e9cfcaaaba"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5YTBN9",
+          "commit": {
+            "abbreviatedOid": "89a931d"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-06-15T11:47:53Z",
+          "updatedAt": "2023-06-15T11:47:53Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
