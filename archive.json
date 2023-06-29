@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-06-18T00:53:13.585363+00:00",
+  "timestamp": "2023-06-29T00:52:25.480668+00:00",
   "repo": "thomas-fossati/draft-ftbs-rats-msg-wrap",
   "labels": [
     {
@@ -385,7 +385,7 @@
       "labels": [],
       "body": "Given a use case for an attestation results or other message that conveys other CMs that are relevant to a particular attestation result. Does it make sense to continue following the convention of using tagged cbor - as in:\r\n```\r\ntagged-cmw-record = #6.4711(bytes .cbor cmw-array)\r\n```\r\nA possible triple record structure that treats other CMs as triple objects might be:\r\n```\r\nar-triple-record = [ \r\n     attester: stateful-environment-map,\r\n     ar-claims: [ + $ar-claims-type-choice ] \r\n]\r\n$ar-claims-type-choice /= tagged-cmw-record\r\n```\r\nThe argument against is that cmw-array already has tagged values and the little bit of CDDL inside of `ar-claims:` isn't enough to warrant needing a CBOR tag. \r\nThe argument for is that all `$ar-claims-type-choice` possibilities are expected to be `tagged-xxx` values that can be dispatched by a parser dispatcher following a consistent convention. ",
       "createdAt": "2023-04-10T18:43:14Z",
-      "updatedAt": "2023-04-18T09:30:17Z",
+      "updatedAt": "2023-06-28T20:24:55Z",
       "closedAt": null,
       "comments": [
         {
@@ -394,6 +394,13 @@
           "body": "> Given a use case for an attestation results or other message that conveys other CMs that are relevant to a particular attestation result. Does it make sense to continue following the convention of using tagged cbor - as in:\r\n> \r\n> ```\r\n> tagged-cmw-record = #6.4711(bytes .cbor cmw-array)\r\n> ```\r\n> \r\n> A possible triple record structure that treats other CMs as triple objects might be:\r\n> \r\n> ```\r\n> ar-triple-record = [ \r\n>      attester: stateful-environment-map,\r\n>      ar-claims: [ + $ar-claims-type-choice ] \r\n> ]\r\n> $ar-claims-type-choice /= tagged-cmw-record\r\n> ```\r\n> \r\n> The argument against is that cmw-array already has tagged values and the little bit of CDDL inside of `ar-claims:` isn't enough to warrant needing a CBOR tag. The argument for is that all `$ar-claims-type-choice` possibilities are expected to be `tagged-xxx` values that can be dispatched by a parser dispatcher following a consistent convention.\r\n\r\nIn the context of a triple's object type choice, I think it makes total sense to add the extra tag.",
           "createdAt": "2023-04-18T09:30:17Z",
           "updatedAt": "2023-04-18T09:30:17Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Did this issue get resolved?",
+          "createdAt": "2023-06-28T20:24:54Z",
+          "updatedAt": "2023-06-28T20:24:54Z"
         }
       ]
     },
@@ -427,6 +434,27 @@
           "updatedAt": "2023-04-18T17:37:43Z"
         }
       ]
+    },
+    {
+      "number": 31,
+      "id": "I_kwDOIGCt2M5qFSba",
+      "title": "CWT registry for CMW",
+      "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/31",
+      "state": "OPEN",
+      "author": "nedmsmith",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "hannestschofenig",
+        "nedmsmith",
+        "thomas-fossati",
+        "henkbirkholz"
+      ],
+      "labels": [],
+      "body": "CMWs aren't necessarily signed which means the CMW could be included inside of a signed container. For example, a CMW certificate extension allows the CMW to be signed via an X.509 certificate.\r\n\r\nA CWT is also a signed container that could contain a CMW. However, there isn't a CWT registry entry for CMW.\r\n\r\nThis issue proposes adding an IANA Considerations section:\r\n\r\nIANA is requested to allocate the following tags in the \"CWT Claims\" registry, preferably with the specific CWT Claim value requested:\r\n\r\n| Claim Name | Claim Description              | JWT Claim Name  | Claim Key | Claim Value Type                                             | Change Controller       | Reference                |       \r\n| ------------ | ------------------------- | ------------------ | ---------- | ------------------------------------------- | ------------------------ | ------------------- |\r\n|     cmw         | A CMW , see {{&SELF}}    |           cmw              |        11        | JSON Array, or CBOR Array, or CBOR Tag    | [IESG]                      | [this specification ] |\r\n",
+      "createdAt": "2023-06-28T21:01:20Z",
+      "updatedAt": "2023-06-28T21:03:04Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
