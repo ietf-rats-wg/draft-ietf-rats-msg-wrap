@@ -366,7 +366,29 @@ subsequently lead to a processing error.
 
 # IANA Considerations
 
-This document does not make any requests to IANA.
+IANA is requested to register the following claims.
+
+   // RFC editor: please remove this paragraph.
+
+   RFC Editor: Please make the following adjustments and remove this
+   paragraph.  Replace "*this document*" with this RFC number.  In the
+   following, the claims with "Claim Key: TBD" need to be assigned a
+   value in the Specification Required Range, preferably around 299.
+
+   *  Claim Name: cmw
+
+   *  Claim Description: A conceptual message wrapper
+
+   *  JWT Claim Name: "cmw"
+
+   *  CWT Claim Key: 299
+
+   *  Claim Value Type(s): JSON Array, CBOR Array, or CBOR Tag
+
+   *  Change Controller: IETF
+
+   *  Specification Document(s): *this document*
+
 
 --- back
 
