@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-06-29T00:52:25.480668+00:00",
+  "timestamp": "2023-08-10T00:44:56.511609+00:00",
   "repo": "thomas-fossati/draft-ftbs-rats-msg-wrap",
   "labels": [
     {
@@ -438,7 +438,7 @@
     {
       "number": 31,
       "id": "I_kwDOIGCt2M5qFSba",
-      "title": "CWT registry for CMW",
+      "title": "CWT/JWT registries for an unsigned CMW",
       "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/31",
       "state": "OPEN",
       "author": "nedmsmith",
@@ -452,9 +452,17 @@
       "labels": [],
       "body": "CMWs aren't necessarily signed which means the CMW could be included inside of a signed container. For example, a CMW certificate extension allows the CMW to be signed via an X.509 certificate.\r\n\r\nA CWT is also a signed container that could contain a CMW. However, there isn't a CWT registry entry for CMW.\r\n\r\nThis issue proposes adding an IANA Considerations section:\r\n\r\nIANA is requested to allocate the following tags in the \"CWT Claims\" registry, preferably with the specific CWT Claim value requested:\r\n\r\n| Claim Name | Claim Description              | JWT Claim Name  | Claim Key | Claim Value Type                                             | Change Controller       | Reference                |       \r\n| ------------ | ------------------------- | ------------------ | ---------- | ------------------------------------------- | ------------------------ | ------------------- |\r\n|     cmw         | A CMW , see {{&SELF}}    |           cmw              |        11        | JSON Array, or CBOR Array, or CBOR Tag    | [IESG]                      | [this specification ] |\r\n",
       "createdAt": "2023-06-28T21:01:20Z",
-      "updatedAt": "2023-06-28T21:03:04Z",
+      "updatedAt": "2023-08-09T00:02:20Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The CWT registry identifies the contents as either a CBOR array or CBOR tag as described in sections 4.2 and 4.3 respectively.\r\n\r\nThe JWT registry identifies the contents as a JSON array. ",
+          "createdAt": "2023-08-09T00:02:20Z",
+          "updatedAt": "2023-08-09T00:02:20Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -1800,6 +1808,34 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 32,
+      "id": "PR_kwDOIGCt2M5XfCct",
+      "title": "Update draft-ftbs-rats-msg-wrap.md",
+      "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/32",
+      "state": "OPEN",
+      "author": "nedmsmith",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "nedmsmith"
+      ],
+      "labels": [],
+      "body": "Added IANA section for JWT and CWT registry entries for a 'cmw' element within a JWT or CWT. This allows any unsigned CMW message type definition to be included as a JWT or CWT payload. Fixes Issue #31 ",
+      "createdAt": "2023-08-09T00:24:02Z",
+      "updatedAt": "2023-08-09T00:27:56Z",
+      "baseRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "af0432bd7014a5e6efa19c47d19f92e9cfcaaaba",
+      "headRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "headRefName": "add-iana-section",
+      "headRefOid": "cf1870e9e76ffbe4f2664fa3a5d42e25cd3b56e6",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
