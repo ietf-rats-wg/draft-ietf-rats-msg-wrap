@@ -41,6 +41,8 @@ normative:
   STD94:
     -: cbor
     =: RFC8949
+  IANA.cwt:
+  IANA.jwt:
 
 informative:
   RFC7942: impl-status
@@ -56,6 +58,9 @@ informative:
     title: "DICE Attestation Architecture"
     target: https://trustedcomputinggroup.org/wp-content/uploads/DICE-Attestation-Architecture-r23-final.pdf
     date: March, 2021
+
+entity:
+  SELF: "RFCthis"
 
 --- abstract
 
@@ -366,29 +371,30 @@ subsequently lead to a processing error.
 
 # IANA Considerations
 
-IANA is requested to register the following claims.
+[^rfced] replace "{{&SELF}}" with the RFC number assigned to this document.
 
-   // RFC editor: please remove this paragraph.
+## CWT `cmw` Claim Registration
 
-   RFC Editor: Please make the following adjustments and remove this
-   paragraph.  Replace "*this document*" with this RFC number.  In the
-   following, the claims with "Claim Key: TBD" need to be assigned a
-   value in the Specification Required Range, preferably around 299.
+IANA is requested to add a new `cmw` claim to the "CBOR Web Token (CWT) Claims" registry {{IANA.cwt}} as follows:
 
-   *  Claim Name: cmw
+* Claim Name: cmw
+* Claim Description: A RATS Conceptual Message wrapper
+* Claim Key: TBD
+* Claim Value Type(s): CBOR Array, or CBOR Tag
+* Change Controller: IETF
+* Specification Document(s): {{type-n-val}} and {{cbor-tag}} of {{&SELF}}
 
-   *  Claim Description: A conceptual message wrapper
+The suggested value for the Claim Key is 299.
 
-   *  JWT Claim Name: "cmw"
+## JWT `cmw` Claim Registration
 
-   *  CWT Claim Key: 299
+IANA is requested to add a new `cmw` claim to the "JSON Web Token Claims" sub-registry of the "JSON Web Token (JWT)" registry {{IANA.jwt}} as follows:
 
-   *  Claim Value Type(s): JSON Array, CBOR Array, or CBOR Tag
-
-   *  Change Controller: IETF
-
-   *  Specification Document(s): *this document*
-
+* Claim Name: cmw
+* Claim Description: A RATS Conceptual Message wrapper
+* Claim Value Type(s): JSON Array
+* Change Controller: IETF
+* Specification Document(s): {{type-n-val}} of {{&SELF}}
 
 --- back
 
@@ -451,3 +457,4 @@ reviews and suggestions.
 
 [^note]: Note:
 [^issue]: Open issue:
+[^rfced]: RFC Editor:
