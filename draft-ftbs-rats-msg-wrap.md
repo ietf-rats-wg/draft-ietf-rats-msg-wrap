@@ -75,6 +75,8 @@ message(s) are carried in the value.
 The other format wraps the value in a CBOR byte string and prepends a
 CBOR tag to convey the type information.
 
+An associated CBOR tag, as well as JWT and CWT claims are also defined to allow embedding these formats into CBOR-based protocols and web tokens.
+
 --- middle
 
 # Introduction
@@ -378,7 +380,7 @@ subsequently lead to a processing error.
 IANA is requested to add a new `cmw` claim to the "CBOR Web Token (CWT) Claims" registry {{IANA.cwt}} as follows:
 
 * Claim Name: cmw
-* Claim Description: A RATS Conceptual Message wrapper
+* Claim Description: A RATS Conceptual Message Wrapper
 * Claim Key: TBD
 * Claim Value Type(s): CBOR Array, or CBOR Tag
 * Change Controller: IETF
@@ -391,10 +393,18 @@ The suggested value for the Claim Key is 299.
 IANA is requested to add a new `cmw` claim to the "JSON Web Token Claims" sub-registry of the "JSON Web Token (JWT)" registry {{IANA.jwt}} as follows:
 
 * Claim Name: cmw
-* Claim Description: A RATS Conceptual Message wrapper
+* Claim Description: A RATS Conceptual Message Wrapper
 * Claim Value Type(s): JSON Array
 * Change Controller: IETF
 * Specification Document(s): {{type-n-val}} of {{&SELF}}
+
+## CBOR Tag Registration
+
+IANA is requested to add the following tag to the "CBOR Tags" {{!IANA.cbor-tags}} registry.
+
+| CBOR Tag | Data Item | Semantics | Reference |
+|----------|-----------|-----------|-----------|
+| TBD      | CBOR array, CBOR tag | RATS Conceptual Message Wrapper | {{type-n-val}} and {{cbor-tag}} of {{&SELF}} |
 
 --- back
 
