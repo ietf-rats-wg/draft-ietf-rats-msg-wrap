@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-08-10T00:44:56.511609+00:00",
+  "timestamp": "2023-10-05T00:37:10.172621+00:00",
   "repo": "thomas-fossati/draft-ftbs-rats-msg-wrap",
   "labels": [
     {
@@ -224,15 +224,15 @@
       "id": "I_kwDOIGCt2M5ZqlNO",
       "title": "Carl's in depth review",
       "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/15",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "See https://mailarchive.ietf.org/arch/msg/rats/Bmlxnu0GmnRMsP6WEq3CBjLVm0k/\r\n",
       "createdAt": "2022-12-20T10:31:12Z",
-      "updatedAt": "2023-04-24T10:31:02Z",
-      "closedAt": null,
+      "updatedAt": "2023-10-04T08:13:10Z",
+      "closedAt": "2023-10-04T08:13:10Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -261,6 +261,13 @@
           "body": "> Yep. Thanks.\r\n\r\nCool, thanks for checking (and for the further comments).\r\n\r\n> A few nits/comments: [...]\r\n\r\ndone in https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/30",
           "createdAt": "2023-04-24T10:31:01Z",
           "updatedAt": "2023-04-24T10:31:01Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "body": "Carl's original review was addressed in #22 and #23.\r\n\r\nThe follow-up re-review (https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/15#issuecomment-1516870623) has been addressed in #30 ",
+          "createdAt": "2023-10-04T08:13:10Z",
+          "updatedAt": "2023-10-04T08:13:10Z"
         }
       ]
     },
@@ -340,15 +347,15 @@
       "id": "I_kwDOIGCt2M5jAnpj",
       "title": "cm-type added to CMW array / record",
       "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/24",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "nedmsmith",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "There has been a discussion thread related to adding cm-type to the CMW array / record as a way to indicate which RATS conceptual messages are behind the wrapper. The following CDDL is suggested:\r\n\r\n```\r\ncmw = [ type, value, cm-bits ]\r\ncm-bits = uint .bits cm-type\r\ncm-type = &(\r\n                reference-values: 0\r\n                endorsements: 1\r\n                evidence: 2\r\n                attestation-results: 3\r\n}\r\n```\r\nThe justification for cm-bits is that a conceptual message structure could contain more than one type of conceptual message. For example a corim could contain conditional endorsed values given a stateful environment-map. Additionally, it could contain trust anchor stores, or attestation results and all of the conceptual messages that were used as Verifier inputs. ",
       "createdAt": "2023-04-10T17:34:50Z",
-      "updatedAt": "2023-04-10T18:10:31Z",
-      "closedAt": null,
+      "updatedAt": "2023-10-04T08:19:22Z",
+      "closedAt": "2023-10-04T08:19:21Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -370,6 +377,13 @@
           "body": "> It is a philosophical question IMO. Trust anchors could be Endorsements if a vendor wishes to delegate well-known TA too a less well-known TA. TAs could be a form of appraisal policy where appraisal policies are also conceptual messages (though out of scope under the current charter), they could be added in the future. So, yes conceptual messages are extensible IMO. Yes, it makes sense to describe procedures for adding new bits to cm-type. Presumably, it adds an entry to the cm-type enumeration list. Bits not in the enumeration list but included in the uint .bits probably should be ignored unless a profile dictates otherwise.\r\n\r\nOK, I'll add something to that effect to #20 \r\n",
           "createdAt": "2023-04-10T18:10:31Z",
           "updatedAt": "2023-04-10T18:10:31Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "body": "This issue has been addressed in #20 \r\n\r\nThe remaining question about extensibility:\r\n\r\n> [...] it makes sense to describe procedures for adding new bits to cm-type. Presumably, it adds an entry to the cm-type enumeration list. Bits not in the enumeration list but included in the uint .bits probably should be ignored unless a profile dictates otherwise.\r\n\r\nis tracked by #26 ",
+          "createdAt": "2023-10-04T08:19:21Z",
+          "updatedAt": "2023-10-04T08:19:21Z"
         }
       ]
     },
@@ -385,7 +399,7 @@
       "labels": [],
       "body": "Given a use case for an attestation results or other message that conveys other CMs that are relevant to a particular attestation result. Does it make sense to continue following the convention of using tagged cbor - as in:\r\n```\r\ntagged-cmw-record = #6.4711(bytes .cbor cmw-array)\r\n```\r\nA possible triple record structure that treats other CMs as triple objects might be:\r\n```\r\nar-triple-record = [ \r\n     attester: stateful-environment-map,\r\n     ar-claims: [ + $ar-claims-type-choice ] \r\n]\r\n$ar-claims-type-choice /= tagged-cmw-record\r\n```\r\nThe argument against is that cmw-array already has tagged values and the little bit of CDDL inside of `ar-claims:` isn't enough to warrant needing a CBOR tag. \r\nThe argument for is that all `$ar-claims-type-choice` possibilities are expected to be `tagged-xxx` values that can be dispatched by a parser dispatcher following a consistent convention. ",
       "createdAt": "2023-04-10T18:43:14Z",
-      "updatedAt": "2023-06-28T20:24:55Z",
+      "updatedAt": "2023-10-04T15:47:16Z",
       "closedAt": null,
       "comments": [
         {
@@ -401,6 +415,20 @@
           "body": "Did this issue get resolved?",
           "createdAt": "2023-06-28T20:24:54Z",
           "updatedAt": "2023-06-28T20:24:54Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "body": "> Did this issue get resolved?\r\n\r\nThe question is who should be responsible for registering the tag:\r\n* CMW itself, or\r\n* the spec using CMW\r\n\r\n(For the record, I am fine either way.)",
+          "createdAt": "2023-10-04T08:22:06Z",
+          "updatedAt": "2023-10-04T08:22:31Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think it would be convenient for this I-D to allocate a CBOR tag for `tagged-cmw-record`.\r\nE.g.: `tagged-cmw-record = #6.TBA(cmw-record)`",
+          "createdAt": "2023-10-04T15:47:16Z",
+          "updatedAt": "2023-10-04T15:47:16Z"
         }
       ]
     },
