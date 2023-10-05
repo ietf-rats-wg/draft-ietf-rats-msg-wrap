@@ -25,7 +25,7 @@ author:
    organization: Intel
    email: ned.smith@intel.com
  - name: Thomas Fossati
-   organization: arm
+   organization: Linaro
    email: thomas.fossati@arm.com
  - name: Hannes Tschofenig
    email: hannes.tschofenig@gmx.net
@@ -75,7 +75,8 @@ message(s) are carried in the value.
 The other format wraps the value in a CBOR byte string and prepends a
 CBOR tag to convey the type information.
 
-This document defines a corresponding CBOR tag, as well as JWT and CWT claims.  These allow embedding the wrapped conceptual messages into CBOR-based protocols and web tokens.
+This document also defines a corresponding CBOR tag, as well as JWT and CWT claims.
+These allow embedding the wrapped conceptual messages into CBOR-based protocols and web tokens, respectively.
 
 --- middle
 
