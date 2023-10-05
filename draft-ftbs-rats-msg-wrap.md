@@ -309,15 +309,6 @@ with the following wire representation:
    03                                 # unsigned(3)
 ~~~
 
-# Registering a Media Type for Evidence
-
-[^note] Not sure whether this advice should go.
-
-When registering a new media type for evidence, in addition to its
-syntactical description, the author SHOULD provide a public and stable
-description of the signing and appraisal procedures associated with
-the data format.
-
 # Implementation Status
 
 This section records the status of known implementations of the protocol
