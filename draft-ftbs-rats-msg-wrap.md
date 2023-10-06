@@ -41,6 +41,11 @@ normative:
   STD94:
     -: cbor
     =: RFC8949
+  IANA.cwt:
+  IANA.jwt:
+  BCP26:
+    -: ianacons
+    =: RFC8126
 
 informative:
   RFC7942: impl-status
@@ -57,6 +62,9 @@ informative:
     target: https://trustedcomputinggroup.org/wp-content/uploads/DICE-Attestation-Architecture-r23-final.pdf
     date: March, 2021
 
+entity:
+  SELF: "RFCthis"
+
 --- abstract
 
 This document defines two encapsulation formats for RATS conceptual
@@ -69,6 +77,8 @@ complementing the type field that says which kind of conceptual
 message(s) are carried in the value.
 The other format wraps the value in a CBOR byte string and prepends a
 CBOR tag to convey the type information.
+
+This document defines a corresponding CBOR tag, as well as JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims.  These allow embedding the wrapped conceptual messages into CBOR-based protocols and web tokens.
 
 --- middle
 
@@ -170,12 +180,12 @@ media type is not profiled (e.g., `application/eat+cwt`), if the `value`
 field contains multiple conceptual messages with different types (e.g.,
 both reference values and endorsements within the same `application/signed-corim+cbor`), or if the same profile identifier is
 shared by different conceptual messages.
-[^issue] https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/26
+Future specifications may add new values to the `ind` field; see {{iana-ind-ext}}.
 
 A CMW array can be encoded as CBOR {{-cbor}} or JSON {{-json}}.
 
 When using JSON, the value field is encoded as Base64 using the URL and
-filename safe alphabet (Section 5 of {{-base64}}) without padding.
+filename safe alphabet ({{Section 5 of -base64}}) without padding.
 
 When using CBOR, the value field is encoded as a CBOR byte string.
 
@@ -357,7 +367,74 @@ subsequently lead to a processing error.
 
 # IANA Considerations
 
-This document does not make any requests to IANA.
+[^rfced] replace "{{&SELF}}" with the RFC number assigned to this document.
+
+## CWT `cmw` Claim Registration
+
+IANA is requested to add a new `cmw` claim to the "CBOR Web Token (CWT) Claims" registry {{IANA.cwt}} as follows:
+
+* Claim Name: cmw
+* Claim Description: A RATS Conceptual Message Wrapper
+* Claim Key: TBD
+* Claim Value Type(s): CBOR Array, or CBOR Tag
+* Change Controller: IETF
+* Specification Document(s): {{type-n-val}} and {{cbor-tag}} of {{&SELF}}
+
+The suggested value for the Claim Key is 299.
+
+## JWT `cmw` Claim Registration
+
+IANA is requested to add a new `cmw` claim to the "JSON Web Token Claims" sub-registry of the "JSON Web Token (JWT)" registry {{IANA.jwt}} as follows:
+
+* Claim Name: cmw
+* Claim Description: A RATS Conceptual Message Wrapper
+* Claim Value Type(s): JSON Array
+* Change Controller: IETF
+* Specification Document(s): {{type-n-val}} of {{&SELF}}
+
+## CBOR Tag Registration
+
+IANA is requested to add the following tag to the "CBOR Tags" {{!IANA.cbor-tags}} registry.
+
+| CBOR Tag | Data Item | Semantics | Reference |
+|----------|-----------|-----------|-----------|
+| TBD      | CBOR array, CBOR tag | RATS Conceptual Message Wrapper | {{type-n-val}} and {{cbor-tag}} of {{&SELF}} |
+
+## RATS Conceptual Message Wrapper (CMW) Indicators Registry {#iana-ind-ext}
+
+This specification defines a new "RATS Conceptual Message Wrapper (CMW) Indicators" registry, with the policy "Expert Review" ({{Section 4.5 of -ianacons}}).
+
+The objective is to have Indicators values registered for all RATS Conceptual Messages ({{Section 8 of -rats-arch}}).
+
+### Instructions for the Designated Expert {#de-instructions}
+
+The expert is instructed to add the values incrementally.
+
+Acceptable values are those corresponding to RATS Conceptual Messages defined by the RATS architecture {{-rats-arch}} and any of its updates.
+
+### Structure of Entries
+
+Each entry in the registry must include:
+
+{:vspace}
+Indicator value:
+: A number corresponding to the bit position in the `cm-ind` bitmap.
+
+Conceptual Message name:
+: A text string describing the RATS conceptual message this indicator corresponds to.
+
+Reference:
+: A reference to a document, if available, or the registrant.
+
+The initial registrations for the registry are detailed in {{tab-ind-regs}}.
+
+| Indicator value | Conceptual Message name | Reference |
+|-----------------|-------------------------|-----------|
+| 0 | Reference Values | {{&SELF}} |
+| 1 | Endorsements | {{&SELF}} |
+| 2 | Evidence | {{&SELF}} |
+| 3 | Attestation Results | {{&SELF}} |
+{: #tab-ind-regs title="CMW Indicators Registry Initial Contents"}
 
 --- back
 
@@ -420,3 +497,4 @@ reviews and suggestions.
 
 [^note]: Note:
 [^issue]: Open issue:
+[^rfced]: RFC Editor:
