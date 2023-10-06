@@ -78,7 +78,7 @@ message(s) are carried in the value.
 The other format wraps the value in a CBOR byte string and prepends a
 CBOR tag to convey the type information.
 
-This document defines a corresponding CBOR tag, as well as JWT and CWT claims.  These allow embedding the wrapped conceptual messages into CBOR-based protocols and web tokens.
+This document defines a corresponding CBOR tag, as well as JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims.  These allow embedding the wrapped conceptual messages into CBOR-based protocols and web tokens.
 
 --- middle
 
