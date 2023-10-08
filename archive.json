@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-10-05T00:37:10.172621+00:00",
+  "timestamp": "2023-10-08T00:39:41.137808+00:00",
   "repo": "thomas-fossati/draft-ftbs-rats-msg-wrap",
   "labels": [
     {
@@ -392,15 +392,15 @@
       "id": "I_kwDOIGCt2M5jA7BR",
       "title": "tagged-cmw-record",
       "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/25",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "nedmsmith",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Given a use case for an attestation results or other message that conveys other CMs that are relevant to a particular attestation result. Does it make sense to continue following the convention of using tagged cbor - as in:\r\n```\r\ntagged-cmw-record = #6.4711(bytes .cbor cmw-array)\r\n```\r\nA possible triple record structure that treats other CMs as triple objects might be:\r\n```\r\nar-triple-record = [ \r\n     attester: stateful-environment-map,\r\n     ar-claims: [ + $ar-claims-type-choice ] \r\n]\r\n$ar-claims-type-choice /= tagged-cmw-record\r\n```\r\nThe argument against is that cmw-array already has tagged values and the little bit of CDDL inside of `ar-claims:` isn't enough to warrant needing a CBOR tag. \r\nThe argument for is that all `$ar-claims-type-choice` possibilities are expected to be `tagged-xxx` values that can be dispatched by a parser dispatcher following a consistent convention. ",
       "createdAt": "2023-04-10T18:43:14Z",
-      "updatedAt": "2023-10-04T15:47:16Z",
-      "closedAt": null,
+      "updatedAt": "2023-10-06T14:52:08Z",
+      "closedAt": "2023-10-06T14:52:07Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -429,6 +429,20 @@
           "body": "I think it would be convenient for this I-D to allocate a CBOR tag for `tagged-cmw-record`.\r\nE.g.: `tagged-cmw-record = #6.TBA(cmw-record)`",
           "createdAt": "2023-10-04T15:47:16Z",
           "updatedAt": "2023-10-04T15:47:16Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "body": "quick note: this tag is to be used only for the CBOR array- and CBOR tag-based serialisations.",
+          "createdAt": "2023-10-05T11:38:44Z",
+          "updatedAt": "2023-10-05T11:38:44Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "body": "Fixed in #33",
+          "createdAt": "2023-10-06T14:52:07Z",
+          "updatedAt": "2023-10-06T14:52:07Z"
         }
       ]
     },
@@ -437,15 +451,15 @@
       "id": "I_kwDOIGCt2M5js0nZ",
       "title": "extensibility of CM indicators?",
       "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/26",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Policies (for evidence and attestation results) as well as trust anchors are other CMs that we may want to support.\r\n\r\nWe should think whether we want the CM-IND bitmask to be extensible - e.g., via\r\n```\r\ncm-type /= &(\r\n  yacm: bit_position\r\n)\r\n```\r\nor we just capture all the existing CM in the RATS architecture and seal it once and for all.",
       "createdAt": "2023-04-18T09:13:49Z",
-      "updatedAt": "2023-04-18T17:37:43Z",
-      "closedAt": null,
+      "updatedAt": "2023-10-06T09:30:33Z",
+      "closedAt": "2023-10-06T09:30:33Z",
       "comments": [
         {
           "author": "nedmsmith",
@@ -468,7 +482,7 @@
       "id": "I_kwDOIGCt2M5qFSba",
       "title": "CWT/JWT registries for an unsigned CMW",
       "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues/31",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "nedmsmith",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -480,8 +494,8 @@
       "labels": [],
       "body": "CMWs aren't necessarily signed which means the CMW could be included inside of a signed container. For example, a CMW certificate extension allows the CMW to be signed via an X.509 certificate.\r\n\r\nA CWT is also a signed container that could contain a CMW. However, there isn't a CWT registry entry for CMW.\r\n\r\nThis issue proposes adding an IANA Considerations section:\r\n\r\nIANA is requested to allocate the following tags in the \"CWT Claims\" registry, preferably with the specific CWT Claim value requested:\r\n\r\n| Claim Name | Claim Description              | JWT Claim Name  | Claim Key | Claim Value Type                                             | Change Controller       | Reference                |       \r\n| ------------ | ------------------------- | ------------------ | ---------- | ------------------------------------------- | ------------------------ | ------------------- |\r\n|     cmw         | A CMW , see {{&SELF}}    |           cmw              |        11        | JSON Array, or CBOR Array, or CBOR Tag    | [IESG]                      | [this specification ] |\r\n",
       "createdAt": "2023-06-28T21:01:20Z",
-      "updatedAt": "2023-08-09T00:02:20Z",
-      "closedAt": null,
+      "updatedAt": "2023-10-06T14:52:38Z",
+      "closedAt": "2023-10-06T14:52:38Z",
       "comments": [
         {
           "author": "nedmsmith",
@@ -489,6 +503,13 @@
           "body": "The CWT registry identifies the contents as either a CBOR array or CBOR tag as described in sections 4.2 and 4.3 respectively.\r\n\r\nThe JWT registry identifies the contents as a JSON array. ",
           "createdAt": "2023-08-09T00:02:20Z",
           "updatedAt": "2023-08-09T00:02:20Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "body": "Fixed in #33 ",
+          "createdAt": "2023-10-06T14:52:38Z",
+          "updatedAt": "2023-10-06T14:52:38Z"
         }
       ]
     }
@@ -1840,30 +1861,438 @@
     {
       "number": 32,
       "id": "PR_kwDOIGCt2M5XfCct",
-      "title": "Update draft-ftbs-rats-msg-wrap.md",
+      "title": "JWT/CWT claims and CBOR tag for CMWs",
       "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/32",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "nedmsmith",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
         "nedmsmith"
       ],
       "labels": [],
-      "body": "Added IANA section for JWT and CWT registry entries for a 'cmw' element within a JWT or CWT. This allows any unsigned CMW message type definition to be included as a JWT or CWT payload. Fixes Issue #31 ",
+      "body": "Added IANA section for JWT and CWT registry entries for a 'cmw' element within a JWT or CWT. This allows any unsigned CMW message type definition to be included as a JWT or CWT payload.\r\n\r\nAlso added a CBOR tag for explicit typing of CBOR based serialisations (array and tag).\r\n\r\nFixes #25\r\nFixes #31 \r\n\r\n\r\n",
       "createdAt": "2023-08-09T00:24:02Z",
-      "updatedAt": "2023-08-09T00:27:56Z",
+      "updatedAt": "2023-10-06T09:37:03Z",
       "baseRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "af0432bd7014a5e6efa19c47d19f92e9cfcaaaba",
       "headRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
       "headRefName": "add-iana-section",
-      "headRefOid": "cf1870e9e76ffbe4f2664fa3a5d42e25cd3b56e6",
-      "closedAt": null,
+      "headRefOid": "b288559f5c0e6e506ef81fa8af5bd233756a707e",
+      "closedAt": "2023-10-06T09:37:03Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "body": "Superseded by #33\r\n",
+          "createdAt": "2023-10-06T09:37:03Z",
+          "updatedAt": "2023-10-06T09:37:03Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5i61fT",
+          "commit": {
+            "abbreviatedOid": "ba70b30"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "a dodgy, CoI-infested approval :-)",
+          "createdAt": "2023-10-05T11:22:05Z",
+          "updatedAt": "2023-10-05T11:22:05Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5i8z84",
+          "commit": {
+            "abbreviatedOid": "50659a8"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-05T15:03:44Z",
+          "updatedAt": "2023-10-05T15:03:44Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "```suggestion\r\nThis document defines a corresponding CBOR tag, as well as JWT and CWT claims.  These allow embedding the wrapped conceptual messages into CBOR-based protocols and web tokens.\r\n```",
+              "createdAt": "2023-10-05T15:03:44Z",
+              "updatedAt": "2023-10-05T15:09:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5i80MC",
+          "commit": {
+            "abbreviatedOid": "50659a8"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-05T15:04:11Z",
+          "updatedAt": "2023-10-05T15:04:12Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "Maybe:\r\nformats -> data structures?",
+              "createdAt": "2023-10-05T15:04:11Z",
+              "updatedAt": "2023-10-05T15:04:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5i83wh",
+          "commit": {
+            "abbreviatedOid": "50659a8"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-05T15:09:53Z",
+          "updatedAt": "2023-10-05T15:09:53Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "I have updated your suggestion:\r\n* to fix some mismatched grammar, and\r\n* change \"formats\" into \"wrapped conceptual messages\"",
+              "createdAt": "2023-10-05T15:09:53Z",
+              "updatedAt": "2023-10-05T15:09:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5i88RC",
+          "commit": {
+            "abbreviatedOid": "50659a8"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-05T15:17:20Z",
+          "updatedAt": "2023-10-05T15:17:20Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "Maybe say \"...into CBOR-based protocols and structures, e.g., web tokens.\"",
+              "createdAt": "2023-10-05T15:17:20Z",
+              "updatedAt": "2023-10-05T15:17:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5i88bO",
+          "commit": {
+            "abbreviatedOid": "50659a8"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-05T15:17:41Z",
+          "updatedAt": "2023-10-05T15:17:41Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": ":sparkles: lgtm",
+              "createdAt": "2023-10-05T15:17:41Z",
+              "updatedAt": "2023-10-05T15:17:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5i88k_",
+          "commit": {
+            "abbreviatedOid": "50659a8"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "LGTM",
+          "createdAt": "2023-10-05T15:18:01Z",
+          "updatedAt": "2023-10-05T15:18:01Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5i89OK",
+          "commit": {
+            "abbreviatedOid": "de98cf3"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "see suggested edit",
+          "createdAt": "2023-10-05T15:19:19Z",
+          "updatedAt": "2023-10-05T15:19:41Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nThis document defines a corresponding CBOR tag, as well as JWT and CWT claims.  These allow embedding the wrapped conceptual messages into CBOR-based protocols and structures, e.g., web tokens.\r\n```",
+              "createdAt": "2023-10-05T15:19:19Z",
+              "updatedAt": "2023-10-05T15:19:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5i8_df",
+          "commit": {
+            "abbreviatedOid": "de98cf3"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-05T15:23:43Z",
+          "updatedAt": "2023-10-05T15:23:43Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Ned, the problem with the suggestion is that JWT is not a CBOR-based structure.\r\n\r\nThe two sentences are structured symmetrically:\r\n* CBOR tag -> CBOR-based protocols\r\n* JWT and CTW claims -> web tokens\r\n\r\nMaybe we should add a \"respectively\" to make the connection more explicit?",
+              "createdAt": "2023-10-05T15:23:43Z",
+              "updatedAt": "2023-10-05T15:23:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5i8_9l",
+          "commit": {
+            "abbreviatedOid": "de98cf3"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-05T15:24:44Z",
+          "updatedAt": "2023-10-05T15:24:44Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "OK",
+              "createdAt": "2023-10-05T15:24:44Z",
+              "updatedAt": "2023-10-05T15:24:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5i9ICx",
+          "commit": {
+            "abbreviatedOid": "de98cf3"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-05T15:41:01Z",
+          "updatedAt": "2023-10-05T15:41:01Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "see b288559f5c0e6e506ef81fa8af5bd233756a707e\r\n",
+              "createdAt": "2023-10-05T15:41:01Z",
+              "updatedAt": "2023-10-05T15:41:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5jB1Uv",
+          "commit": {
+            "abbreviatedOid": "b288559"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "lgtm",
+          "createdAt": "2023-10-06T09:01:23Z",
+          "updatedAt": "2023-10-06T09:01:23Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 33,
+      "id": "PR_kwDOIGCt2M5cB3Qi",
+      "title": "Extensibility rules for CM indicators",
+      "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/33",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Add IANA paraphernalia to handle registrations of new CM indicators.\r\n\r\nFix #26 \r\n\r\n\r\n(This PR sits on top of #32, the relevant commit here is [2dddc46](https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/33/commits/2dddc46f5fa8030ee09425482c02043460fd3374))",
+      "createdAt": "2023-10-05T16:09:55Z",
+      "updatedAt": "2023-10-06T09:30:37Z",
+      "baseRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "af0432bd7014a5e6efa19c47d19f92e9cfcaaaba",
+      "headRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "headRefName": "extentensible-cm-indicators",
+      "headRefOid": "c4a51342688f8f313f879eb139f98ca2f5aa88ea",
+      "closedAt": "2023-10-06T09:30:32Z",
+      "mergedAt": "2023-10-06T09:30:32Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "a573d92da24d85e5a13bc8a13f6889c9fa465d6e"
+      },
+      "comments": [
+        {
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fine for me.",
+          "createdAt": "2023-10-06T09:14:54Z",
+          "updatedAt": "2023-10-06T09:14:54Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5i9fHe",
+          "commit": {
+            "abbreviatedOid": "2dddc46"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2023-10-05T16:31:21Z",
+          "updatedAt": "2023-10-05T16:31:21Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5jB05i",
+          "commit": {
+            "abbreviatedOid": "2dddc46"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-10-06T09:00:18Z",
+          "updatedAt": "2023-10-06T09:00:18Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5jB6Tp",
+          "commit": {
+            "abbreviatedOid": "2dddc46"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-06T09:14:24Z",
+          "updatedAt": "2023-10-06T09:14:24Z",
+          "comments": [
+            {
+              "originalPosition": 26,
+              "body": "```suggestion\r\nThis document defines a corresponding CBOR tag, as well as JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims.  These allow embedding the wrapped conceptual messages into CBOR-based protocols and web tokens.\r\n```",
+              "createdAt": "2023-10-06T09:14:24Z",
+              "updatedAt": "2023-10-06T09:14:25Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 34,
+      "id": "PR_kwDOIGCt2M5cB4jO",
+      "title": "removing a out-of-scope section",
+      "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/34",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "$title ",
+      "createdAt": "2023-10-05T16:14:06Z",
+      "updatedAt": "2023-10-06T08:52:39Z",
+      "baseRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "af0432bd7014a5e6efa19c47d19f92e9cfcaaaba",
+      "headRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "headRefName": "remove-spurious-section",
+      "headRefOid": "437d25c1eea2d588381d2984ad1585333dff745c",
+      "closedAt": "2023-10-05T19:15:46Z",
+      "mergedAt": "2023-10-05T19:15:46Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "46cbde8c024370b5873dcd2aa6232f986e58bd19"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5i9fcJ",
+          "commit": {
+            "abbreviatedOid": "437d25c"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2023-10-05T16:32:04Z",
+          "updatedAt": "2023-10-05T16:32:04Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5jBxxE",
+          "commit": {
+            "abbreviatedOid": "437d25c"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "I liked the notion that \"better define media-type for your CMs!\", but the text can survive without.",
+          "createdAt": "2023-10-06T08:52:39Z",
+          "updatedAt": "2023-10-06T08:52:39Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 35,
+      "id": "PR_kwDOIGCt2M5cF8DH",
+      "title": "s/web tokens/web APIs/g",
+      "url": "https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/pull/35",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "${issue_title}",
+      "createdAt": "2023-10-06T10:12:01Z",
+      "updatedAt": "2023-10-06T14:53:01Z",
+      "baseRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "10ee8859b9804e0588f17a1863b88acd3382a12f",
+      "headRepository": "thomas-fossati/draft-ftbs-rats-msg-wrap",
+      "headRefName": "web-tokens",
+      "headRefOid": "e600e5a0c906d6b198323599cffe99ef7fa825d8",
+      "closedAt": "2023-10-06T14:52:57Z",
+      "mergedAt": "2023-10-06T14:52:57Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "412f49655c25a4b6b297e16bda907c7f3c516b14"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5jCsck",
+          "commit": {
+            "abbreviatedOid": "e600e5a"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-10-06T11:17:33Z",
+          "updatedAt": "2023-10-06T11:17:33Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
