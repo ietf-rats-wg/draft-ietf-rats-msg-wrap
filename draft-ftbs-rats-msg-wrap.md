@@ -18,7 +18,7 @@ smart_quotes: no
 pi: [toc, sortrefs, symrefs]
 
 author:
- - name: Henk Birkolz
+ - name: Henk Birkholz
    organization: Fraunhofer SIT
    email: henk.birkholz@sit.fraunhofer.de
  - name: Ned Smith
