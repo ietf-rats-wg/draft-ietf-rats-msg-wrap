@@ -3,7 +3,7 @@ v: 3
 
 title: "RATS Conceptual Messages Wrapper"
 abbrev: "RATS CMW"
-docname: draft-ftbs-rats-msg-wrap-latest
+docname: draft-ietf-rats-msg-wrap-latest
 category: std
 consensus: true
 submissionType: IETF
