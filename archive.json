@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-12-12T00:40:02.620713+00:00",
+  "timestamp": "2023-12-14T00:39:02.360713+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -512,6 +512,38 @@
           "updatedAt": "2023-10-06T14:52:38Z"
         }
       ]
+    },
+    {
+      "number": 37,
+      "id": "I_kwDOIGCt2M55jUyE",
+      "title": "missing `JC<>` definition",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/37",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "We use the `JC` CDDL macro, but we don't define it.\r\n\r\nWe need to add:\r\n\r\n```\r\nJSON-ONLY<J> = J .feature \"json\"\r\nCBOR-ONLY<C> = C .feature \"cbor\"\r\n\r\nJC<J,C> = JSON-ONLY<J> / CBOR-ONLY<C>\r\n```\r\n\r\nmaybe in a \"conglomerate\" CDDL -- (That, or use a CDDL 2 `import` directive.)",
+      "createdAt": "2023-12-13T09:30:21Z",
+      "updatedAt": "2023-12-13T09:30:34Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 38,
+      "id": "I_kwDOIGCt2M55oSB6",
+      "title": "`s/cmw-array/cmw-record/g`",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/38",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "We should change the `cmw-array` to `cmw-record` so people don\u2019t get the wrong impression that cmw-array is an array of cmw.\r\n\r\nA `cmw-collection` might be an appropriate name for an array of cmw.\r\n\r\n\r\n(These points were originally raised by @nedmsmith)",
+      "createdAt": "2023-12-13T23:07:02Z",
+      "updatedAt": "2023-12-13T23:07:02Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
