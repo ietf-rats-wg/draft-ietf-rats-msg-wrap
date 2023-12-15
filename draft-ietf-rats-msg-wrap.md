@@ -319,6 +319,26 @@ with the following wire representation:
    03                                 # unsigned(3)
 ~~~
 
+# CMW Collections {#cmw-coll}
+
+Composite and layered attesters produce evidence made of multiple evidence "bits".
+
+For example, in data centre servers, it is not uncommon for separate attesting environments (AE) to serve a subsection of the entire machine.
+One AE measures and attests to what was booted on the main CPU, another AE measures and attests to what was booted on a SmartNIC plugged into a PCIe slot, and a third one measures and attests to what was booted on the machine's GPU.
+
+To address the composite attester use case, this document defines a CMW "collection" as a container that aggregates several CMW evidence "bits," each with its unique name.
+
+The CMW collection ({{fig-cddl-collection}}) is defined as a CBOR map or JSON object with CMW values.
+The keys can be strings or integers, representing a unique label that identifies an evidence "bit" within the composite evidence.
+
+~~~ cddl
+{::include cddl/cmw-collection.cddl}
+~~~
+{: #fig-cddl-collection artwork-align="left"
+   title="CDDL definition of the CMW collection format"}
+
+Although initially designed for the composite attester use case, the CMW collection can be repurposed for other use cases requiring CMW aggregation.
+
 # Implementation Status
 
 This section records the status of known implementations of the protocol
@@ -354,7 +374,7 @@ The license is Apache 2.0.
 The developers can be contacted on the Zulip channel:
 [](https://veraison.zulipchat.com/#narrow/stream/383526-CMW/).
 
-# Security Considerations
+# Security Considerations {#seccons}
 
 This document defines two encapsulation formats for RATS conceptual
 messages. The messages themselves and their encoding ensure security
@@ -435,6 +455,210 @@ The initial registrations for the registry are detailed in {{tab-ind-regs}}.
 | 2 | Evidence | {{&SELF}} |
 | 3 | Attestation Results | {{&SELF}} |
 {: #tab-ind-regs title="CMW Indicators Registry Initial Contents"}
+
+## Media Types
+
+IANA is requested to add the following media types to the "Media Types" registry {{!IANA.media-types}}.
+
+| Name | Template | Reference |
+|-----------------|-------------------------|-----------|
+| `cmw+cbor` | `application/cmw+cbor` | {{type-n-val}} and {{cbor-tag}} of {{&SELF}} |
+| `cmw+json` | `application/cmw+json` | {{type-n-val}} of {{&SELF}} |
+| `cmw-collection+cbor`| `application/cmw-collection+cbor` | {{cmw-coll}} of {{&SELF}} |
+| `cmw-collection+json | `application/cmw-collection+json` | {{cmw-coll}} of {{&SELF}} |
+{: #tab-mt-regs title="CMW Media Types"}
+
+### `application/cmw+cbor`
+
+{:compact}
+Type name:
+: application
+
+Subtype name:
+: cmw+cbor
+
+Required parameters:
+: n/a
+
+Optional parameters:
+: n/a
+
+Encoding considerations:
+: binary (CBOR)
+
+Security considerations:
+: {{seccons}} of {{&SELF}}
+
+Interoperability considerations:
+: n/a
+
+Published specification:
+: {{&SELF}}
+
+Applications that use this media type:
+: Attesters, Verifiers, Endorsers and Reference-Value providers, Relying Parties that need to transfer CMW payloads over HTTP(S), CoAP(S), and other transports.
+
+Fragment identifier considerations:
+: The syntax and semantics of fragment identifiers are as specified for "application/cbor". (No fragment identification syntax is currently defined for "application/cbor".)
+
+Person & email address to contact for further information:
+: RATS WG mailing list (rats@ietf.org)
+
+Intended usage:
+: COMMON
+
+Restrictions on usage:
+: none
+
+Author/Change controller:
+: IETF
+
+Provisional registration:
+: no
+
+### `application/cmw+json`
+
+{:compact}
+Type name:
+: application
+
+Subtype name:
+: cmw+json
+
+Required parameters:
+: n/a
+
+Optional parameters:
+: n/a
+
+Encoding considerations:
+: binary (JSON is UTF-8-encoded text)
+
+Security considerations:
+: {{seccons}} of {{&SELF}}
+
+Interoperability considerations:
+: n/a
+
+Published specification:
+: {{&SELF}}
+
+Applications that use this media type:
+: Attesters, Verifiers, Endorsers and Reference-Value providers, Relying Parties that need to transfer CMW payloads over HTTP(S), CoAP(S), and other transports.
+
+Fragment identifier considerations:
+: The syntax and semantics of fragment identifiers are as specified for "application/json". (No fragment identification syntax is currently defined for "application/json".)
+
+Person & email address to contact for further information:
+: RATS WG mailing list (rats@ietf.org)
+
+Intended usage:
+: COMMON
+
+Restrictions on usage:
+: none
+
+Author/Change controller:
+: IETF
+
+Provisional registration:
+: no
+
+## `application/cmw-collection+cbor`
+
+{:compact}
+Type name:
+: application
+
+Subtype name:
+: cmw-collection+cbor
+
+Required parameters:
+: n/a
+
+Optional parameters:
+: n/a
+
+Encoding considerations:
+: binary (CBOR)
+
+Security considerations:
+: {{seccons}} of {{&SELF}}
+
+Interoperability considerations:
+: n/a
+
+Published specification:
+: {{&SELF}}
+
+Applications that use this media type:
+: Attesters, Verifiers, Endorsers and Reference-Value providers, Relying Parties that need to transfer collections of CMW payloads over HTTP(S), CoAP(S), and other transports.
+
+Fragment identifier considerations:
+: The syntax and semantics of fragment identifiers are as specified for "application/cbor". (No fragment identification syntax is currently defined for "application/cbor".)
+
+Person & email address to contact for further information:
+: RATS WG mailing list (rats@ietf.org)
+
+Intended usage:
+: COMMON
+
+Restrictions on usage:
+: none
+
+Author/Change controller:
+: IETF
+
+Provisional registration:
+: no
+
+### `application/cmw-collection+json`
+
+{:compact}
+Type name:
+: application
+
+Subtype name:
+: cmw-collection+json
+
+Required parameters:
+: n/a
+
+Optional parameters:
+: n/a
+
+Encoding considerations:
+: binary (JSON is UTF-8-encoded text)
+
+Security considerations:
+: {{seccons}} of {{&SELF}}
+
+Interoperability considerations:
+: n/a
+
+Published specification:
+: {{&SELF}}
+
+Applications that use this media type:
+: Attesters, Verifiers, Endorsers and Reference-Value providers, Relying Parties that need to transfer collections of CMW payloads over HTTP(S), CoAP(S), and other transports.
+
+Fragment identifier considerations:
+: The syntax and semantics of fragment identifiers are as specified for "application/json". (No fragment identification syntax is currently defined for "application/json".)
+
+Person & email address to contact for further information:
+: RATS WG mailing list (rats@ietf.org)
+
+Intended usage:
+: COMMON
+
+Restrictions on usage:
+: none
+
+Author/Change controller:
+: IETF
+
+Provisional registration:
+: no
 
 --- back
 
