@@ -323,10 +323,10 @@ with the following wire representation:
 
 Composite and layered attesters produce evidence made of multiple evidence "bits".
 
-For example, in data centre servers, it is not uncommon for separate attesting environments (AE) to serve a subsection of the entire machine.
-One AE measures and attests to what was booted on the main CPU, another AE measures and attests to what was booted on a SmartNIC plugged into a PCIe slot, and a third one measures and attests to what was booted on the machine's GPU.
+For example, in data center servers, it is not uncommon for separate attesting environments (AE) to serve a subsection of the entire machine.
+One AE might measure and attest to what was booted on the main CPU, while another AE might measure and attest to what was booted on a SmartNIC plugged into a PCIe slot, and a third AE might measure and attest to what was booted on the machine's GPU.
 
-To address the composite attester use case, this document defines a CMW "collection" as a container that aggregates several CMW evidence "bits," each with its unique name.
+To address the composite Attester use case, this document defines a CMW "collection" as a container that holds several CMW evidence conceptual messages, each with a label that is unique within the scope of the collection.
 
 The CMW collection ({{fig-cddl-collection}}) is defined as a CBOR map or JSON object with CMW values.
 The keys can be strings or integers, representing a unique label that identifies an evidence "bit" within the composite evidence.
