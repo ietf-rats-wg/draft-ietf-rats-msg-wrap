@@ -329,7 +329,9 @@ One AE might measure and attest to what was booted on the main CPU, while anothe
 To address the composite Attester use case, this document defines a CMW "collection" as a container that holds several CMW evidence conceptual messages, each with a label that is unique within the scope of the collection.
 
 The CMW collection ({{fig-cddl-collection}}) is defined as a CBOR map or JSON object with CMW values.
-The keys can be strings or integers, representing a unique label that identifies an evidence "bit" within the composite evidence.
+The position of a cmw entry in the `cmw-collection` is not significant.
+Instead, the labels identify a conceptual message that corresponds to a component of a system.
+Labels can be strings or integers that serve as a mnemonic for different conceptual messages in the collection.
 
 ~~~ cddl
 {::include cddl/cmw-collection.cddl}
