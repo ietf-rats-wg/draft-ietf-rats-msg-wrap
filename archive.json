@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-12-14T00:39:02.360713+00:00",
+  "timestamp": "2023-12-17T00:42:34.593394+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -542,6 +542,54 @@
       "body": "We should change the `cmw-array` to `cmw-record` so people don\u2019t get the wrong impression that cmw-array is an array of cmw.\r\n\r\nA `cmw-collection` might be an appropriate name for an array of cmw.\r\n\r\n\r\n(These points were originally raised by @nedmsmith)",
       "createdAt": "2023-12-13T23:07:02Z",
       "updatedAt": "2023-12-13T23:07:02Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 39,
+      "id": "I_kwDOIGCt2M55ymds",
+      "title": "CMW collections",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/39",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Composite and layered attesters produce evidence that can be composed of multiple individual evidence \"bits\".\r\n\r\nA CMW \"collection\" is a container that aggregates several CMW evidence \"bits,\" each with its unique \"name.\"\r\n\r\n```\r\ncmw-collection = {\r\n  + (int / text) => cmw\r\n}\r\n```\r\nwhere\r\n```\r\ncmw = cmw-array / cmw-cbor-tag<bytes>\r\n```\r\n\r\nNote that this proposal addresses roughly the same scope as @simonfrost-arm's [EAT collections](https://github.com/SimonFrost-Arm/draft-frost-rats-eat-collection), and intentionally makes a very similar serialisation.",
+      "createdAt": "2023-12-15T09:40:23Z",
+      "updatedAt": "2023-12-15T09:40:23Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 40,
+      "id": "I_kwDOIGCt2M55zC46",
+      "title": "Add media types for CMW",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/40",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The document should define an `application/cmw` media type to be used when CMWs are carried by transports that use media types to identify their payloads.  E.g.:\r\n\r\n```http\r\nPOST /verify HTTP/1.1\r\nHost: verifier.example\r\nContent-Type: application/cmw+json\r\n\r\n[\r\n  \"application/eat+jwt\",\r\n  \"eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9...\"\r\n]\r\n```\r\n\r\nNote that #39 should provide a similar `application/cmw-collection` media type to be used for composite evidence formats that use a CMW collection as their encapsulation:\r\n\r\n```http\r\nPOST /verify HTTP/1.1\r\nHost: verifier.example\r\nContent-Type: application/cmw-collection+json\r\n\r\n{\r\n  \"cpu\": [\r\n    \"application/eat+jwt\",\r\n    \"ZXlKaGJHY2lPaUpGVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5Lg...\"\r\n  ],\r\n  \"gpu\": [\r\n    \"application/ucs+json\",\r\n    \"eyJlYXRfbm9uY2UiOiAiamtkOEtMLTg9UWx6ZzQifQ\"\r\n  ]\r\n}\r\n```",
+      "createdAt": "2023-12-15T10:29:41Z",
+      "updatedAt": "2023-12-15T10:29:41Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 41,
+      "id": "I_kwDOIGCt2M55zGi8",
+      "title": "base64 applies _always_",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/41",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The document says:\r\n\r\n> _\"When using JSON, the value field is encoded as Base64 using the URL and filename safe alphabet (Section 5 of RFC4648) without padding.\"_\r\n\r\nwe should add a note saying that the base64 encap always applies, even if the evidence format is already textual (e.g., a JWT).\r\n",
+      "createdAt": "2023-12-15T10:34:31Z",
+      "updatedAt": "2023-12-15T10:34:31Z",
       "closedAt": null,
       "comments": []
     }
@@ -2365,6 +2413,186 @@
           "createdAt": "2023-12-01T21:15:05Z",
           "updatedAt": "2023-12-01T21:15:05Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 42,
+      "id": "PR_kwDOIGCt2M5iIB8f",
+      "title": "Add CMW collections and media types",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/42",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Also fix idnits warning about use of non-ASCII characters\r\n\r\nFix #39\r\nFix #40",
+      "createdAt": "2023-12-15T16:18:24Z",
+      "updatedAt": "2023-12-16T18:06:04Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "bda1a4f3f0cd152ef094a4d6757ea2d48f693ead",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "collection+media-types",
+      "headRefOid": "7bb53e3d5bf3dc03e93876fd743a855bf12cb1d8",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think the dependency triple can model that. Independent means the appraisal contexts are separate.",
+          "createdAt": "2023-12-16T01:08:38Z",
+          "updatedAt": "2023-12-16T08:34:20Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I think the dependency triple can model that. Independent means the appraisal contexts are separate.\r\n\r\nOK, thanks. Now I understand what you were trying to say.  However, I still think that the highlighted bit is too context-sensitive and may not apply to all cases.  I'd prefer to drop it.",
+          "createdAt": "2023-12-16T08:37:06Z",
+          "updatedAt": "2023-12-16T08:37:06Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Ok\r\nSent from my iPhone\r\n\r\nOn Dec 16, 2023, at 12:37\u202fAM, Thomas Fossati ***@***.***> wrote:\r\n\r\n\ufeff\r\n\r\nI think the dependency triple can model that. Independent means the appraisal contexts are separate.\r\n\r\nOK, thanks. Now I understand what you were trying to say. However, I still think that the highlighted bit is too context-sensitive and may not apply to all cases. I'd prefer to drop it.\r\n\r\n\u2014\r\nReply to this email directly, view it on GitHub<https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/42#issuecomment-1858762397>, or unsubscribe<https://github.com/notifications/unsubscribe-auth/ABPMCSGC24A6RUCEQESB2D3YJVMTZAVCNFSM6AAAAABAWVTTP6VHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMYTQNJYG43DEMZZG4>.\r\nYou are receiving this because your review was requested.Message ID: ***@***.***>\r\n",
+          "createdAt": "2023-12-16T17:29:13Z",
+          "updatedAt": "2023-12-16T17:29:13Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Ok\r\n\r\ncool, see [7bb53e3](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/42/commits/7bb53e3d5bf3dc03e93876fd743a855bf12cb1d8)",
+          "createdAt": "2023-12-16T18:06:03Z",
+          "updatedAt": "2023-12-16T18:06:03Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5qXvWN",
+          "commit": {
+            "abbreviatedOid": "3089734"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Several suggested changes in line.",
+          "createdAt": "2023-12-15T17:48:55Z",
+          "updatedAt": "2023-12-15T18:18:46Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\nFor example, in data center servers, it is not uncommon for separate attesting environments (AE) to serve a subsection of the entire machine.\r\n```",
+              "createdAt": "2023-12-15T17:48:55Z",
+              "updatedAt": "2023-12-15T18:18:46Z"
+            },
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\nOne AE might measure and attest to what was booted on the main CPU, while another AE might measure and attest to what was booted on a SmartNIC plugged into a PCIe slot, and a third AE might measure and attest to what was booted on the machine's GPU.\r\n```",
+              "createdAt": "2023-12-15T17:50:53Z",
+              "updatedAt": "2023-12-15T18:18:46Z"
+            },
+            {
+              "originalPosition": 11,
+              "body": "```suggestion\r\nTo address the composite Attester use case, this document defines a CMW \"collection\" as a container that holds several CMW evidence conceptual messages, each with a label that is unique within the scope of the collection.\r\n```",
+              "createdAt": "2023-12-15T17:53:32Z",
+              "updatedAt": "2023-12-15T19:52:47Z"
+            },
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\r\nThe position of a cmw entry in the `cmw-collection` is not significant.\r\nInstead, the labels identify a conceptual message that corresponds to a component of a system.\r\nLabels can be strings or integers that serve as a mnemonic for different conceptual messages in the collection.\r\n```",
+              "createdAt": "2023-12-15T17:59:48Z",
+              "updatedAt": "2023-12-16T18:04:08Z"
+            },
+            {
+              "originalPosition": 22,
+              "body": "```suggestion\r\nAlthough initially designed for the composite attester use case,\r\nthe CMW collection can be repurposed for other use cases such as CMW aggregation.\r\nCMW aggregation might be used by a lead Attester to bundle Evidence obtained from multiple\r\nAttesters that rely on a lead Attester for connectivity to a remote Verifier.\r\n```",
+              "createdAt": "2023-12-15T18:17:21Z",
+              "updatedAt": "2023-12-15T18:18:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5qYoUe",
+          "commit": {
+            "abbreviatedOid": "3089734"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-12-15T19:55:23Z",
+          "updatedAt": "2023-12-15T19:55:24Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "I am not sure\r\n\r\n> _\"[b]ut each conceptual message is processed independently.\"_\r\n\r\nis always valid.  For example, in a CCA collection the two CMWs are chained and one (the realm) can't be processed independently from the other (the platform).",
+              "createdAt": "2023-12-15T19:55:23Z",
+              "updatedAt": "2023-12-15T19:55:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5qYpEh",
+          "commit": {
+            "abbreviatedOid": "3089734"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-12-15T19:58:07Z",
+          "updatedAt": "2023-12-15T19:58:07Z",
+          "comments": [
+            {
+              "originalPosition": 22,
+              "body": "hmm, L342-343 seem to be restating the composite attester use case, which is already explained in L324-329.",
+              "createdAt": "2023-12-15T19:58:07Z",
+              "updatedAt": "2023-12-15T19:58:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5qYrIS",
+          "commit": {
+            "abbreviatedOid": "9471487"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-12-15T20:04:26Z",
+          "updatedAt": "2023-12-15T20:04:26Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "Are you saying the reference values for the realm can be used to appraise the platform and vise versa?",
+              "createdAt": "2023-12-15T20:04:26Z",
+              "updatedAt": "2023-12-15T20:04:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5qZYO2",
+          "commit": {
+            "abbreviatedOid": "3089734"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-12-15T22:58:19Z",
+          "updatedAt": "2023-12-15T22:58:20Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "What I mean is that in CCA, the two processes are interrelated. Specifically, you can't start evaluating the realm part until you've ensured that the delegated key's attestation (which is included in the platform part) is good.\r\n\r\n",
+              "createdAt": "2023-12-15T22:58:20Z",
+              "updatedAt": "2023-12-15T22:58:20Z"
+            }
+          ]
         }
       ]
     }
