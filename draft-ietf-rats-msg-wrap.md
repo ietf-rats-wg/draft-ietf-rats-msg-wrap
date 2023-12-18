@@ -321,7 +321,7 @@ with the following wire representation:
 
 # CMW Collections {#cmw-coll}
 
-Composite and layered attesters produce evidence made of multiple evidence "bits".
+Layered attesters and composite devices ({{Sections 3.2 and 3.3 of -rats-arch}}) generate evidence that consists of multiple parts.
 
 For example, in data center servers, it is not uncommon for separate attesting environments (AE) to serve a subsection of the entire machine.
 One AE might measure and attest to what was booted on the main CPU, while another AE might measure and attest to what was booted on a SmartNIC plugged into a PCIe slot, and a third AE might measure and attest to what was booted on the machine's GPU.
