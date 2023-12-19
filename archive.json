@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-12-17T00:42:34.593394+00:00",
+  "timestamp": "2023-12-19T00:39:31.756889+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2428,13 +2428,13 @@
       "labels": [],
       "body": "Also fix idnits warning about use of non-ASCII characters\r\n\r\nFix #39\r\nFix #40",
       "createdAt": "2023-12-15T16:18:24Z",
-      "updatedAt": "2023-12-16T18:06:04Z",
+      "updatedAt": "2023-12-18T10:48:54Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "bda1a4f3f0cd152ef094a4d6757ea2d48f693ead",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "collection+media-types",
-      "headRefOid": "7bb53e3d5bf3dc03e93876fd743a855bf12cb1d8",
+      "headRefOid": "566c8a5c29b61e1d2632fe04bec74072ba11a7db",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -2591,6 +2591,118 @@
               "body": "What I mean is that in CCA, the two processes are interrelated. Specifically, you can't start evaluating the realm part until you've ensured that the delegated key's attestation (which is included in the platform part) is good.\r\n\r\n",
               "createdAt": "2023-12-15T22:58:20Z",
               "updatedAt": "2023-12-15T22:58:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5qbZF-",
+          "commit": {
+            "abbreviatedOid": "7bb53e3"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-12-18T00:04:43Z",
+          "updatedAt": "2023-12-18T00:04:44Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "Is cmw-cbor-tag< > a macro? If so, where is it defined?",
+              "createdAt": "2023-12-18T00:04:43Z",
+              "updatedAt": "2023-12-18T00:04:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5qbZLA",
+          "commit": {
+            "abbreviatedOid": "7bb53e3"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-12-18T00:05:29Z",
+          "updatedAt": "2023-12-18T00:10:27Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "I don't especially like the colloquialism. ",
+              "createdAt": "2023-12-18T00:05:29Z",
+              "updatedAt": "2023-12-18T00:10:27Z"
+            },
+            {
+              "originalPosition": 22,
+              "body": "Maybe try rewording L324-329 to be more succinct and less colloquial?",
+              "createdAt": "2023-12-18T00:07:46Z",
+              "updatedAt": "2023-12-18T00:10:27Z"
+            },
+            {
+              "originalPosition": 44,
+              "body": "Is there a media type for anything that a tagged CBOR (i.e., its a CBOR tags registered tag)? \r\ne.g.: \"application/tagged+cbor\"",
+              "createdAt": "2023-12-18T00:09:58Z",
+              "updatedAt": "2023-12-18T00:10:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5qelSm",
+          "commit": {
+            "abbreviatedOid": "7bb53e3"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-12-18T10:07:20Z",
+          "updatedAt": "2023-12-18T10:07:20Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "> Is `cmw-cbor-tag< >` a macro? If so, where is it defined?\r\n\r\nIt's defined in [Figure 2](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-00.html#figure-2) of the CMW document.  It uses CDDL 2 [\"Non-literal Tag Numbers\"](https://www.ietf.org/archive/id/draft-ietf-cbor-update-8610-grammar-02.html#section-3.2).",
+              "createdAt": "2023-12-18T10:07:20Z",
+              "updatedAt": "2023-12-18T10:07:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5qel8a",
+          "commit": {
+            "abbreviatedOid": "7bb53e3"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-12-18T10:08:30Z",
+          "updatedAt": "2023-12-18T10:08:30Z",
+          "comments": [
+            {
+              "originalPosition": 44,
+              "body": "no",
+              "createdAt": "2023-12-18T10:08:30Z",
+              "updatedAt": "2023-12-18T10:08:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5qesR6",
+          "commit": {
+            "abbreviatedOid": "7bb53e3"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-12-18T10:17:05Z",
+          "updatedAt": "2023-12-18T10:17:05Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "see [ac1bfe3](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/42/commits/ac1bfe37b332e70249093b959ff8dc34a153a520)",
+              "createdAt": "2023-12-18T10:17:05Z",
+              "updatedAt": "2023-12-18T10:17:05Z"
             }
           ]
         }
