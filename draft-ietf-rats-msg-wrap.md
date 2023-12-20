@@ -720,6 +720,7 @@ The list of currently open issues for this documents can be found at
 
 The authors would like to thank Carl Wallace and Carsten Bormann for their
 reviews and suggestions.
+The definition of a CMW collection has been modelled on a proposal originally made by Simon Frost for an EAT-based Evidence collection type.  The CMW collection intentionally attains binary compatibility with Simon's design and aims at superseding it by also generalizing on the allowed Evidence formats.
 
 [^note]: Note:
 [^issue]: Open issue:
