@@ -1,0 +1,7 @@
+cmw-collection = {
+  + cmw-collection-entry-label => cmw
+}
+
+cmw-collection-entry-label = text / int .feature "cbor"
+
+; cmw = cmw-array / cmw-cbor-tag<bytes> .feature "cbor"
