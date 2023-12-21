@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-12-19T00:39:31.756889+00:00",
+  "timestamp": "2023-12-21T00:38:47.240724+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2428,13 +2428,13 @@
       "labels": [],
       "body": "Also fix idnits warning about use of non-ASCII characters\r\n\r\nFix #39\r\nFix #40",
       "createdAt": "2023-12-15T16:18:24Z",
-      "updatedAt": "2023-12-18T10:48:54Z",
+      "updatedAt": "2023-12-20T17:24:34Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "bda1a4f3f0cd152ef094a4d6757ea2d48f693ead",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "collection+media-types",
-      "headRefOid": "566c8a5c29b61e1d2632fe04bec74072ba11a7db",
+      "headRefOid": "5d7a38b18f0c4e4d54c3280e98081aea4993848c",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -2457,9 +2457,9 @@
         {
           "author": "nedmsmith",
           "authorAssociation": "COLLABORATOR",
-          "body": "Ok\r\nSent from my iPhone\r\n\r\nOn Dec 16, 2023, at 12:37\u202fAM, Thomas Fossati ***@***.***> wrote:\r\n\r\n\ufeff\r\n\r\nI think the dependency triple can model that. Independent means the appraisal contexts are separate.\r\n\r\nOK, thanks. Now I understand what you were trying to say. However, I still think that the highlighted bit is too context-sensitive and may not apply to all cases. I'd prefer to drop it.\r\n\r\n\u2014\r\nReply to this email directly, view it on GitHub<https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/42#issuecomment-1858762397>, or unsubscribe<https://github.com/notifications/unsubscribe-auth/ABPMCSGC24A6RUCEQESB2D3YJVMTZAVCNFSM6AAAAABAWVTTP6VHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMYTQNJYG43DEMZZG4>.\r\nYou are receiving this because your review was requested.Message ID: ***@***.***>\r\n",
+          "body": "Ok",
           "createdAt": "2023-12-16T17:29:13Z",
-          "updatedAt": "2023-12-16T17:29:13Z"
+          "updatedAt": "2023-12-20T17:04:01Z"
         },
         {
           "author": "thomas-fossati",
@@ -2705,6 +2705,39 @@
               "updatedAt": "2023-12-18T10:17:05Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5qoijh",
+          "commit": {
+            "abbreviatedOid": "3089734"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-12-19T14:38:45Z",
+          "updatedAt": "2023-12-19T14:38:45Z",
+          "comments": [
+            {
+              "originalPosition": 22,
+              "body": "see [ac1bfe3](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/42/commits/ac1bfe37b332e70249093b959ff8dc34a153a520)",
+              "createdAt": "2023-12-19T14:38:45Z",
+              "updatedAt": "2023-12-19T14:38:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5qp4P7",
+          "commit": {
+            "abbreviatedOid": "566c8a5"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-12-19T17:12:56Z",
+          "updatedAt": "2023-12-19T17:12:56Z",
+          "comments": []
         }
       ]
     }
