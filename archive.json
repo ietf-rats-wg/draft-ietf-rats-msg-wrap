@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-12-21T00:38:47.240724+00:00",
+  "timestamp": "2023-12-24T00:41:38.557124+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -550,15 +550,15 @@
       "id": "I_kwDOIGCt2M55ymds",
       "title": "CMW collections",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/39",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Composite and layered attesters produce evidence that can be composed of multiple individual evidence \"bits\".\r\n\r\nA CMW \"collection\" is a container that aggregates several CMW evidence \"bits,\" each with its unique \"name.\"\r\n\r\n```\r\ncmw-collection = {\r\n  + (int / text) => cmw\r\n}\r\n```\r\nwhere\r\n```\r\ncmw = cmw-array / cmw-cbor-tag<bytes>\r\n```\r\n\r\nNote that this proposal addresses roughly the same scope as @simonfrost-arm's [EAT collections](https://github.com/SimonFrost-Arm/draft-frost-rats-eat-collection), and intentionally makes a very similar serialisation.",
       "createdAt": "2023-12-15T09:40:23Z",
-      "updatedAt": "2023-12-15T09:40:23Z",
-      "closedAt": null,
+      "updatedAt": "2023-12-21T09:19:30Z",
+      "closedAt": "2023-12-21T09:19:30Z",
       "comments": []
     },
     {
@@ -566,15 +566,15 @@
       "id": "I_kwDOIGCt2M55zC46",
       "title": "Add media types for CMW",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/40",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The document should define an `application/cmw` media type to be used when CMWs are carried by transports that use media types to identify their payloads.  E.g.:\r\n\r\n```http\r\nPOST /verify HTTP/1.1\r\nHost: verifier.example\r\nContent-Type: application/cmw+json\r\n\r\n[\r\n  \"application/eat+jwt\",\r\n  \"eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9...\"\r\n]\r\n```\r\n\r\nNote that #39 should provide a similar `application/cmw-collection` media type to be used for composite evidence formats that use a CMW collection as their encapsulation:\r\n\r\n```http\r\nPOST /verify HTTP/1.1\r\nHost: verifier.example\r\nContent-Type: application/cmw-collection+json\r\n\r\n{\r\n  \"cpu\": [\r\n    \"application/eat+jwt\",\r\n    \"ZXlKaGJHY2lPaUpGVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5Lg...\"\r\n  ],\r\n  \"gpu\": [\r\n    \"application/ucs+json\",\r\n    \"eyJlYXRfbm9uY2UiOiAiamtkOEtMLTg9UWx6ZzQifQ\"\r\n  ]\r\n}\r\n```",
       "createdAt": "2023-12-15T10:29:41Z",
-      "updatedAt": "2023-12-15T10:29:41Z",
-      "closedAt": null,
+      "updatedAt": "2023-12-21T09:19:30Z",
+      "closedAt": "2023-12-21T09:19:30Z",
       "comments": []
     },
     {
@@ -2421,24 +2421,26 @@
       "id": "PR_kwDOIGCt2M5iIB8f",
       "title": "Add CMW collections and media types",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/42",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Also fix idnits warning about use of non-ASCII characters\r\n\r\nFix #39\r\nFix #40",
       "createdAt": "2023-12-15T16:18:24Z",
-      "updatedAt": "2023-12-20T17:24:34Z",
+      "updatedAt": "2023-12-21T09:19:32Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "bda1a4f3f0cd152ef094a4d6757ea2d48f693ead",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "collection+media-types",
       "headRefOid": "5d7a38b18f0c4e4d54c3280e98081aea4993848c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2023-12-21T09:19:29Z",
+      "mergedAt": "2023-12-21T09:19:29Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "6cfab6b8d76674699ddde39d57a63756f0d8a5ca"
+      },
       "comments": [
         {
           "author": "nedmsmith",
