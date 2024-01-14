@@ -469,8 +469,8 @@ IANA is requested to add the following media types to the "Media Types" registry
 |-----------------|-------------------------|-----------|
 | `cmw+cbor` | `application/cmw+cbor` | {{type-n-val}} and {{cbor-tag}} of {{&SELF}} |
 | `cmw+json` | `application/cmw+json` | {{type-n-val}} of {{&SELF}} |
-| `cmw-collection+cbor`| `application/cmw-collection+cbor` | {{cmw-coll}} of {{&SELF}} |
-| `cmw-collection+json | `application/cmw-collection+json` | {{cmw-coll}} of {{&SELF}} |
+| `cmw-collection+cbor` | `application/cmw-collection+cbor` | {{cmw-coll}} of {{&SELF}} |
+| `cmw-collection+json` | `application/cmw-collection+json` | {{cmw-coll}} of {{&SELF}} |
 {: #tab-mt-regs title="CMW Media Types"}
 
 ### `application/cmw+cbor`
