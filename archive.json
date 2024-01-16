@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-01-14T00:43:29.970796+00:00",
+  "timestamp": "2024-01-16T00:40:00.483252+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2740,6 +2740,113 @@
           "createdAt": "2023-12-19T17:12:56Z",
           "updatedAt": "2023-12-19T17:12:56Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 43,
+      "id": "PR_kwDOIGCt2M5kBZsB",
+      "title": "add the CBOR tag CDDL (using NLTN) to the testing machinery",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/43",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Carsten added NLTN support in cddl v0.10.5 :-)\r\n\r\nAlso add a \"collected CDDL\" and therefore\r\nFix #37",
+      "createdAt": "2024-01-14T12:12:27Z",
+      "updatedAt": "2024-01-14T14:09:12Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "6cfab6b8d76674699ddde39d57a63756f0d8a5ca",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "cbor-tag-in-cddl",
+      "headRefOid": "76d350079ac9e2585ba4eb309d1e3d8353f340e7",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5sfpXo",
+          "commit": {
+            "abbreviatedOid": "30dab46"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-01-14T13:56:08Z",
+          "updatedAt": "2024-01-14T13:56:08Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\nA further CMW \"collection\" type that holds together multiple CMW items is defined in {{cmw-coll}}.\r\n```",
+              "createdAt": "2024-01-14T13:56:08Z",
+              "updatedAt": "2024-01-14T13:56:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5sfpa_",
+          "commit": {
+            "abbreviatedOid": "6b5a79a"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-01-14T13:57:18Z",
+          "updatedAt": "2024-01-14T13:57:19Z",
+          "comments": [
+            {
+              "originalPosition": 27,
+              "body": "```suggestion\r\nTo address the composite Attester use case, this document defines a CMW \"collection\" as a container that holds several CMW items, each with a label that is unique within the scope of the collection.\r\n```",
+              "createdAt": "2024-01-14T13:57:19Z",
+              "updatedAt": "2024-01-14T13:57:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5sfpeP",
+          "commit": {
+            "abbreviatedOid": "390d2c6"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-01-14T13:58:30Z",
+          "updatedAt": "2024-01-14T13:58:30Z",
+          "comments": [
+            {
+              "originalPosition": 31,
+              "body": "```suggestion\r\nInstead, the labels identify a conceptual message that, in the case of a composite attester, should typically correspond to a component of a system.\r\n```",
+              "createdAt": "2024-01-14T13:58:30Z",
+              "updatedAt": "2024-01-14T13:58:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5sfphd",
+          "commit": {
+            "abbreviatedOid": "e97071c"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-01-14T13:59:48Z",
+          "updatedAt": "2024-01-14T13:59:49Z",
+          "comments": [
+            {
+              "originalPosition": 43,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2024-01-14T13:59:49Z",
+              "updatedAt": "2024-01-14T13:59:49Z"
+            }
+          ]
         }
       ]
     }
