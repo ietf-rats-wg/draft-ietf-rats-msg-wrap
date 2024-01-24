@@ -569,7 +569,7 @@ Author/Change controller:
 Provisional registration:
 : no
 
-## `application/cmw-collection+cbor`
+### `application/cmw-collection+cbor`
 
 {:compact}
 Type name:
