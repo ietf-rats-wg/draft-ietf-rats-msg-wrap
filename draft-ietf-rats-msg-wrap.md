@@ -32,6 +32,9 @@ author:
 
 normative:
   RFC4648: base64
+  RFC5280: pkix
+  RFC5912:
+  RFC6268:
   RFC6838: media-types
   RFC7252: coap
   RFC8259: json
@@ -46,6 +49,7 @@ normative:
   BCP26:
     -: ianacons
     =: RFC8126
+  X.680: CCITT.X680.1994
 
 informative:
   RFC7942: impl-status
@@ -55,12 +59,13 @@ informative:
   I-D.ietf-rats-eat-media-type: rats-eat-mt
   I-D.ietf-rats-ar4si: rats-ar4si
   I-D.fossati-tls-attestation: tls-a
+  I-D.ietf-lamps-csr-attestation: csr-a
   DICE-arch:
     author:
       org: "Trusted Computing Group"
     title: "DICE Attestation Architecture"
-    target: https://trustedcomputinggroup.org/wp-content/uploads/DICE-Attestation-Architecture-r23-final.pdf
-    date: March, 2021
+    target: https://trustedcomputinggroup.org/wp-content/uploads/DICE-Attestation-Architecture-Version-1.1-Revision-18_pub.pdf
+    date: January, 2024
 
 entity:
   SELF: "RFCthis"
@@ -342,6 +347,74 @@ with the following wire representation:
    47                                 # bytes(7)
       d28443a10126a1                  # "҄C\xA1\u0001&\xA1"
    03                                 # unsigned(3)
+~~~
+
+# Transporting CMW and CMW Collections in X.509 Messages {#x509}
+
+There are cases where CMW and CMW collection payloads need to be transported in PKIX messages, for example in Certificate Signing Requests (CSR) {{-csr-a}}, or in X.509 Certificates and Certificate revocation lists (CRL) {{DICE-arch}}.
+
+For CMW, Section 6.1.8 of {{DICE-arch}} defines the ConceptualMessageWrapper format and the associated extension object identifier.
+
+This section specifies the CMWCollection extension to carry CMW collection objects.
+
+The CMWCollection extension MAY be included in X.509 Certificates, CRLs {{-pkix}}, and CSRs.
+
+The CMWCollection extension MUST be identified by the following object identifier:
+
+~~~asn.1
+id-pe-cmw-collection  OBJECT IDENTIFIER ::=
+        { iso(1) identified-organization(3) dod(6) internet(1)
+          security(5) mechanisms(5) pkix(7) id-pe(1) TBD }
+~~~
+
+This extension MUST NOT be marked critical.
+
+The CMWCollection extension MUST have the following syntax:
+
+~~~asn.1
+CMWCollection ::= OCTET STRING
+~~~
+
+The CMWCollection MUST contain the JSON or CBOR serialization of a CMW collection object.
+
+## ASN.1 Module {#asn1-x509}
+
+This section provides an ASN.1 module {{X.680}} for the CMWCollection extension, following the conventions established in {{RFC5912}} and {{RFC6268}}.
+
+
+~~~asn.1
+CMWCollectionExtn
+  { iso(1) identified-organization(3) dod(6) internet(1)
+    security(5) mechanisms(5) pkix(7) id-mod(0)
+    id-mod-cmw-collection-extn(TBD) }
+
+DEFINITIONS IMPLICIT TAGS ::=
+BEGIN
+
+IMPORTS
+  EXTENSION
+  FROM PKIX-CommonTypes-2009  -- RFC 5912
+    { iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) id-mod(0)
+      id-mod-pkixCommon-02(57) } ;
+
+-- CMWCollection Extension
+
+ext-CMWCollection EXTENSION ::= {
+  SYNTAX CMWCollection
+  IDENTIFIED BY id-pe-cmw-collection }
+
+-- CMWCollection Extension OID
+
+id-pe-cmw-collection  OBJECT IDENTIFIER  ::=
+   { iso(1) identified-organization(3) dod(6) internet(1)
+     security(5) mechanisms(5) pkix(7) id-pe(1) TBD }
+
+-- CMWCollection Extension Syntax
+
+CMWCollection ::= OCTET STRING
+
+END
 ~~~
 
 # Implementation Status
@@ -664,6 +737,12 @@ Author/Change controller:
 
 Provisional registration:
 : no
+
+## New SMI Numbers Registrations
+
+IANA is requested to assign an object identifier (OID) for the CMWCollection extension defined in {{x509}} in the "Certificate Extension" sub-registry of the "SMI Numbers" {{!IANA.smi-numbers}} registry.
+
+IANA is requested to assign an object identifier (OID) for the ASN.1 Module defined in {{asn1-x509}} in the "Module Identifier" sub-registry of the "SMI Numbers" {{!IANA.smi-numbers}} registry.
 
 --- back
 
