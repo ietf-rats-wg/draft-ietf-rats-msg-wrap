@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-01-23T00:41:15.836155+00:00",
+  "timestamp": "2024-01-25T00:40:40.650422+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -590,6 +590,67 @@
       "body": "The document says:\r\n\r\n> _\"When using JSON, the value field is encoded as Base64 using the URL and filename safe alphabet (Section 5 of RFC4648) without padding.\"_\r\n\r\nwe should add a note saying that the base64 encap always applies, even if the evidence format is already textual (e.g., a JWT).\r\n",
       "createdAt": "2023-12-15T10:34:31Z",
       "updatedAt": "2023-12-15T10:34:31Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 44,
+      "id": "I_kwDOIGCt2M589Un3",
+      "title": "request an OID for embedding CMWs in certs",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/44",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Current work in TCG DICE and IETF \"attested CSR\" requires embedding CMWs in X.509 artefacts (certs and CSRs).\r\n\r\nWe should register the relevant OIDs with IANA.",
+      "createdAt": "2024-01-23T16:17:21Z",
+      "updatedAt": "2024-01-23T20:30:25Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The TCG specification is publicly available here: https://trustedcomputinggroup.org/wp-content/uploads/DICE-Attestation-Architecture-Version-1.1-Revision-18_pub.pdf",
+          "createdAt": "2024-01-23T18:17:13Z",
+          "updatedAt": "2024-01-23T18:17:13Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Given cmw I-D more recently included cmw-collection, would it make sense for it to also define an ASN.1 form and register an OID?",
+          "createdAt": "2024-01-23T18:18:22Z",
+          "updatedAt": "2024-01-23T18:18:22Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> The TCG specification is publicly available here: https://trustedcomputinggroup.org/wp-content/uploads/DICE-Attestation-Architecture-Version-1.1-Revision-18_pub.pdf\r\n\r\nMy bad! I missed this definition from DICE-AA:\r\n```asn.1\r\ntcg-dice-conceptual-message-wrapper OBJECT IDENTIFIER ::= {tcg-dice 9}\r\n```\r\n\r\nI guess it can be used as-is?\r\n\r\n> Given cmw I-D more recently included cmw-collection, would it make sense for it to also define an ASN.1 form and register an OID?\r\n\r\nOK, what's left is registering one OID for the collection, i.e.:\r\n\r\n```asn.1\r\ncmw-collection OBJECT IDENTIFIER ::= { TBD }\r\n\r\nCMWCollection ::= OCTET STRING\r\n```\r\n\r\n@hannestschofenig @nedmsmith?\r\n",
+          "createdAt": "2024-01-23T20:27:40Z",
+          "updatedAt": "2024-01-23T20:27:40Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "LGTM",
+          "createdAt": "2024-01-23T20:30:25Z",
+          "updatedAt": "2024-01-23T20:30:25Z"
+        }
+      ]
+    },
+    {
+      "number": 46,
+      "id": "I_kwDOIGCt2M59GS2_",
+      "title": "\u00a73.4 (CMW collection) needs some TLC",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/46",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "@henkbirkholz has the following comments regarding prose in \u00a73.4:\r\n\r\n* https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/45#discussion_r1465003510\r\n* https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/45#discussion_r1465004847\r\n* https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/45/commits/8c5dcc304cd21a6c6672c3c2ca47fa70f315ee29#r1465272666",
+      "createdAt": "2024-01-24T17:56:57Z",
+      "updatedAt": "2024-01-24T17:56:58Z",
       "closedAt": null,
       "comments": []
     }
@@ -2755,18 +2816,26 @@
       "labels": [],
       "body": "Carsten added NLTN support in cddl v0.10.5 :-)\r\n\r\nAlso add a \"collected CDDL\" and therefore\r\nFix #37",
       "createdAt": "2024-01-14T12:12:27Z",
-      "updatedAt": "2024-01-14T14:09:12Z",
+      "updatedAt": "2024-01-24T12:49:37Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "6cfab6b8d76674699ddde39d57a63756f0d8a5ca",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "cbor-tag-in-cddl",
-      "headRefOid": "76d350079ac9e2585ba4eb309d1e3d8353f340e7",
+      "headRefOid": "956b46a441400c63555f5888d129491dcd474590",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@henkbirkholz @nedmsmith @hannestschofenig ping!",
+          "createdAt": "2024-01-24T08:44:08Z",
+          "updatedAt": "2024-01-24T08:44:08Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOIGCt2M5sfpXo",
@@ -2845,6 +2914,313 @@
               "body": "```suggestion\r\n```",
               "createdAt": "2024-01-14T13:59:49Z",
               "updatedAt": "2024-01-14T13:59:49Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 45,
+      "id": "PR_kwDOIGCt2M5k8LTq",
+      "title": "add x.509 extension for CMW collections ",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/45",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR is on top of #43.  The commit to review is ebdbc07",
+      "createdAt": "2024-01-24T11:14:00Z",
+      "updatedAt": "2024-01-24T18:05:10Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "6cfab6b8d76674699ddde39d57a63756f0d8a5ca",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "oid",
+      "headRefOid": "ebdbc0719a2aaade32a1093d5948d1cce290df08",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "To be clear:\r\n\r\n* #43 is just adding Carsten's new CDDL machinery to our build/test/assemble.  It is also moving the \"collection\" section closer to the rest.  It's not changing *anything* in the contents.  Basically, this should just be merged as-is as it's purely mechanical work (and a bit of lift and shift).\r\n* #45 (this one) needs some more serious scrutiny, especially from people with x.509 knowledge.  This is built on top of the other's branch that's why you are seeing the other commits, and the reason why I pointed to the *only* commit that is relevant for review in the description.",
+          "createdAt": "2024-01-24T16:59:12Z",
+          "updatedAt": "2024-01-24T16:59:12Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5tw2um",
+          "commit": {
+            "abbreviatedOid": "8c5dcc3"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-01-24T14:33:14Z",
+          "updatedAt": "2024-01-24T14:33:15Z",
+          "comments": [
+            {
+              "originalPosition": 65,
+              "body": "\"component of a system\" seems too vague. Either a component is a AE or a TE. I assume you mean AE, but that is unspecified in text.",
+              "createdAt": "2024-01-24T14:33:14Z",
+              "updatedAt": "2024-01-24T14:33:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5tw3P3",
+          "commit": {
+            "abbreviatedOid": "8c5dcc3"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-01-24T14:34:08Z",
+          "updatedAt": "2024-01-24T14:34:09Z",
+          "comments": [
+            {
+              "originalPosition": 66,
+              "body": "As an Attester's TEs cannot produce Conceptual Messages this would mean you always mean AE?",
+              "createdAt": "2024-01-24T14:34:09Z",
+              "updatedAt": "2024-01-24T14:34:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5tw5Ft",
+          "commit": {
+            "abbreviatedOid": "8c5dcc3"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-01-24T14:37:21Z",
+          "updatedAt": "2024-01-24T14:37:21Z",
+          "comments": [
+            {
+              "originalPosition": 93,
+              "body": ":+1: reusing this section for CMW in CSR",
+              "createdAt": "2024-01-24T14:37:21Z",
+              "updatedAt": "2024-01-24T14:37:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5tyasM",
+          "commit": {
+            "abbreviatedOid": "8c5dcc3"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-01-24T17:02:06Z",
+          "updatedAt": "2024-01-24T17:02:06Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "This has changed the meaning.  The *or* seem to present alternatives, but that's not the case: in the composite attester multiple AEs co-exist in parallel.",
+              "createdAt": "2024-01-24T17:02:06Z",
+              "updatedAt": "2024-01-24T17:02:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5tylJf",
+          "commit": {
+            "abbreviatedOid": "8c5dcc3"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-01-24T17:24:48Z",
+          "updatedAt": "2024-01-24T17:24:48Z",
+          "comments": [
+            {
+              "originalPosition": 65,
+              "body": "Probably should be 'target environment'",
+              "createdAt": "2024-01-24T17:24:48Z",
+              "updatedAt": "2024-01-24T17:24:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5tyojy",
+          "commit": {
+            "abbreviatedOid": "8c5dcc3"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-01-24T17:32:11Z",
+          "updatedAt": "2024-01-24T17:32:11Z",
+          "comments": [
+            {
+              "originalPosition": 66,
+              "body": "The ambiguous part is the meaning of 'correspond'. Either the label identifies the AE that produced the evidence, or it identifies the TEs that are the subject of claims collection. The label, nevertheless, is a hint. The cmw contents should describe system structure in terms of TE composition. ",
+              "createdAt": "2024-01-24T17:32:11Z",
+              "updatedAt": "2024-01-24T17:38:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5ty1Rr",
+          "commit": {
+            "abbreviatedOid": "8c5dcc3"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-01-24T17:52:24Z",
+          "updatedAt": "2024-01-24T17:52:24Z",
+          "comments": [
+            {
+              "originalPosition": 65,
+              "body": "Sure, that's great :-) but can we have the discussion about refining \u00a73.4 in another PR, please?  This PR is just concerned with registering an OID for the CMW collection extension.",
+              "createdAt": "2024-01-24T17:52:24Z",
+              "updatedAt": "2024-01-24T17:52:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5ty1sR",
+          "commit": {
+            "abbreviatedOid": "8c5dcc3"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-01-24T17:53:23Z",
+          "updatedAt": "2024-01-24T17:53:24Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "I am going to revert [8c5dcc3](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/45/commits/8c5dcc304cd21a6c6672c3c2ca47fa70f315ee29) and create a new issue where to wordsmith \u00a73.4",
+              "createdAt": "2024-01-24T17:53:24Z",
+              "updatedAt": "2024-01-24T17:53:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5tyzQX",
+          "commit": {
+            "abbreviatedOid": "8c5dcc3"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-01-24T17:47:36Z",
+          "updatedAt": "2024-01-24T17:56:20Z",
+          "comments": [
+            {
+              "originalPosition": 140,
+              "body": "`CMWCollectionExtn` doesn't appear to be consumed by anything. Why is it needed?",
+              "createdAt": "2024-01-24T17:47:37Z",
+              "updatedAt": "2024-01-24T17:56:20Z"
+            },
+            {
+              "originalPosition": 150,
+              "body": "This appears to be boilerplate. Should this be explained better? Seems to leave the reader guessing at its significance.",
+              "createdAt": "2024-01-24T17:49:43Z",
+              "updatedAt": "2024-01-24T17:56:20Z"
+            },
+            {
+              "originalPosition": 5,
+              "body": "OK",
+              "createdAt": "2024-01-24T17:55:56Z",
+              "updatedAt": "2024-01-24T17:56:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5ty3tk",
+          "commit": {
+            "abbreviatedOid": "8c5dcc3"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-01-24T17:58:00Z",
+          "updatedAt": "2024-01-24T17:58:00Z",
+          "comments": [
+            {
+              "originalPosition": 65,
+              "body": "Opened #46 to track this",
+              "createdAt": "2024-01-24T17:58:00Z",
+              "updatedAt": "2024-01-24T17:58:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5ty3y7",
+          "commit": {
+            "abbreviatedOid": "8c5dcc3"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-01-24T17:58:12Z",
+          "updatedAt": "2024-01-24T17:58:12Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Opened #46 to track this",
+              "createdAt": "2024-01-24T17:58:12Z",
+              "updatedAt": "2024-01-24T17:58:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5ty58k",
+          "commit": {
+            "abbreviatedOid": "8c5dcc3"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-01-24T18:03:16Z",
+          "updatedAt": "2024-01-24T18:03:16Z",
+          "comments": [
+            {
+              "originalPosition": 140,
+              "body": "This is the name of the ASN.1 module.\r\n\r\nIt's the name it'll be given when it lands in the [IANA registry](https://www.iana.org/assignments/smi-numbers/smi-numbers.xhtml#smi-numbers-1.3.6.1.5.5.7.0).\r\n\r\nWe are slaves to X.680 :)",
+              "createdAt": "2024-01-24T18:03:16Z",
+              "updatedAt": "2024-01-24T18:03:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5ty6w1",
+          "commit": {
+            "abbreviatedOid": "8c5dcc3"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-01-24T18:05:10Z",
+          "updatedAt": "2024-01-24T18:05:10Z",
+          "comments": [
+            {
+              "originalPosition": 150,
+              "body": "That's how the PKIX registration machinery is set up.",
+              "createdAt": "2024-01-24T18:05:10Z",
+              "updatedAt": "2024-01-24T18:05:10Z"
             }
           ]
         }
