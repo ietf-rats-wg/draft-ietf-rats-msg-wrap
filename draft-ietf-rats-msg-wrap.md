@@ -353,7 +353,7 @@ with the following wire representation:
 
 There are cases where CMW and CMW collection payloads need to be transported in PKIX messages, for example in Certificate Signing Requests (CSRs) {{-csr-a}}, or in X.509 Certificates and Certificate Revocation Lists (CRLs) {{DICE-arch}}.
 
-For CMW, Section 6.1.8 of {{DICE-arch}} defines the ConceptualMessageWrapper format and the associated extension object identifier.
+For CMW, Section 6.1.8 of {{DICE-arch}} already defines the ConceptualMessageWrapper format and the associated object identifier.
 
 This section specifies the CMWCollection extension to carry CMW collection objects.
 
