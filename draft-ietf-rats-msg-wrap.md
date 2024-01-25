@@ -142,10 +142,13 @@ document:
 1. A CMW using a CBOR or JSON array ({{type-n-val}});
 1. A CMW based on CBOR tags ({{cbor-tag}}).
 
+A further CMW "collection" type that holds together multiple CMW items is defined in {{cmw-coll}}.
+
+The collected CDDL is in {{collected-cddl}}.
+
 ## CMW Array {#type-n-val}
 
-The CMW array format is defined in {{fig-cddl-array}}.  (To improve clarity,
-the `Content-Type` ABNF is defined separately in {{rfc9193-abnf}}.)
+The CMW array format is defined in {{fig-cddl-array}}.
 
 The CDDL generic `JC<>` is used where there is a variance between CBOR
 and JSON. The first argument is the CDDL for JSON and the second is the
@@ -246,6 +249,28 @@ func CMWTypeSniff(b []byte) (CMW, error) {
 }
 ~~~
 
+## CMW Collections {#cmw-coll}
+
+Layered attesters and composite devices ({{Sections 3.2 and 3.3 of -rats-arch}}) generate evidence that consists of multiple parts.
+
+For example, in data center servers, it is not uncommon for separate attesting environments (AE) to serve a subsection of the entire machine.
+One AE might measure and attest to what was booted on the main CPU, while another AE might measure and attest to what was booted on a SmartNIC plugged into a PCIe slot, and a third AE might measure and attest to what was booted on the machine's GPU.
+
+To address the composite Attester use case, this document defines a CMW "collection" as a container that holds several CMW items, each with a label that is unique within the scope of the collection.
+
+The CMW collection ({{fig-cddl-collection}}) is defined as a CBOR map or JSON object with CMW values.
+The position of a `cmw` entry in the `cmw-collection` is not significant.
+Instead, the labels identify a conceptual message that, in the case of a composite attester, should typically correspond to a component of a system.
+Labels can be strings or integers that serve as a mnemonic for different conceptual messages in the collection.
+
+~~~ cddl
+{::include cddl/cmw-collection.cddl}
+~~~
+{: #fig-cddl-collection artwork-align="left"
+   title="CDDL definition of the CMW collection format"}
+
+Although initially designed for the composite attester use case, the CMW collection can be repurposed for other use cases requiring CMW aggregation.
+
 # Examples
 
 The (equivalent) examples in {{ex-ja}}, {{ex-ca}}, and {{ex-ct}} assume that
@@ -292,7 +317,7 @@ number has not been registrered.
 ## CBOR Tag {#ex-ct}
 
 ~~~ cbor-diag
-1668576818(h'abcdabcd')
+{::include cddl/example-cbor-tag-1.diag}
 ~~~
 
 with the following wire representation:
@@ -318,28 +343,6 @@ with the following wire representation:
       d28443a10126a1                  # "҄C\xA1\u0001&\xA1"
    03                                 # unsigned(3)
 ~~~
-
-# CMW Collections {#cmw-coll}
-
-Layered attesters and composite devices ({{Sections 3.2 and 3.3 of -rats-arch}}) generate evidence that consists of multiple parts.
-
-For example, in data center servers, it is not uncommon for separate attesting environments (AE) to serve a subsection of the entire machine.
-One AE might measure and attest to what was booted on the main CPU, while another AE might measure and attest to what was booted on a SmartNIC plugged into a PCIe slot, and a third AE might measure and attest to what was booted on the machine's GPU.
-
-To address the composite Attester use case, this document defines a CMW "collection" as a container that holds several CMW evidence conceptual messages, each with a label that is unique within the scope of the collection.
-
-The CMW collection ({{fig-cddl-collection}}) is defined as a CBOR map or JSON object with CMW values.
-The position of a `cmw` entry in the `cmw-collection` is not significant.
-Instead, the labels identify a conceptual message that corresponds to a component of a system.
-Labels can be strings or integers that serve as a mnemonic for different conceptual messages in the collection.
-
-~~~ cddl
-{::include cddl/cmw-collection.cddl}
-~~~
-{: #fig-cddl-collection artwork-align="left"
-   title="CDDL definition of the CMW collection format"}
-
-Although initially designed for the composite attester use case, the CMW collection can be repurposed for other use cases requiring CMW aggregation.
 
 # Implementation Status
 
@@ -466,8 +469,8 @@ IANA is requested to add the following media types to the "Media Types" registry
 |-----------------|-------------------------|-----------|
 | `cmw+cbor` | `application/cmw+cbor` | {{type-n-val}} and {{cbor-tag}} of {{&SELF}} |
 | `cmw+json` | `application/cmw+json` | {{type-n-val}} of {{&SELF}} |
-| `cmw-collection+cbor`| `application/cmw-collection+cbor` | {{cmw-coll}} of {{&SELF}} |
-| `cmw-collection+json | `application/cmw-collection+json` | {{cmw-coll}} of {{&SELF}} |
+| `cmw-collection+cbor` | `application/cmw-collection+cbor` | {{cmw-coll}} of {{&SELF}} |
+| `cmw-collection+json` | `application/cmw-collection+json` | {{cmw-coll}} of {{&SELF}} |
 {: #tab-mt-regs title="CMW Media Types"}
 
 ### `application/cmw+cbor`
@@ -566,7 +569,7 @@ Author/Change controller:
 Provisional registration:
 : no
 
-## `application/cmw-collection+cbor`
+### `application/cmw-collection+cbor`
 
 {:compact}
 Type name:
@@ -664,10 +667,10 @@ Provisional registration:
 
 --- back
 
-# RFC9193 Content-Type ABNF {#rfc9193-abnf}
+## Collected CDDL {#collected-cddl}
 
 ~~~ cddl
-{::include cddl/rfc9193.cddl}
+{::include cddl/cmw.cddl}
 ~~~
 
 # Registering and Using CMWs
