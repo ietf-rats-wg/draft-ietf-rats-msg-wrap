@@ -37,7 +37,9 @@ normative:
   RFC6268:
   RFC6838: media-types
   RFC7252: coap
-  RFC8259: json
+  STD90:
+    -: json
+    =: RFC8259
   RFC8610: cddl
   RFC9165: cddlplus
   RFC9277:
