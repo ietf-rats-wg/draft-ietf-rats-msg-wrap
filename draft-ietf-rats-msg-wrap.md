@@ -374,15 +374,17 @@ This extension MUST NOT be marked critical.
 The CMWCollection extension MUST have the following syntax:
 
 ~~~asn.1
-CMWCollection ::= OCTET STRING
+CMWCollection ::= CHOICE {
+    json UTF8String,
+    cbor OCTET STRING,
+}
 ~~~
 
-The CMWCollection MUST contain the JSON or CBOR serialization of a CMW collection object.
+The CMWCollection MUST contain the serialized CMW collection object in JSON or CBOR format, using the appropriate CHOICE entry.
 
 ## ASN.1 Module {#asn1-x509}
 
 This section provides an ASN.1 module {{X.680}} for the CMWCollection extension, following the conventions established in {{RFC5912}} and {{RFC6268}}.
-
 
 ~~~asn.1
 CMWCollectionExtn
@@ -414,7 +416,10 @@ id-pe-cmw-collection  OBJECT IDENTIFIER  ::=
 
 -- CMWCollection Extension Syntax
 
-CMWCollection ::= OCTET STRING
+CMWCollection ::= CHOICE {
+    json UTF8String,
+    cbor OCTET STRING,
+}
 
 END
 ~~~
