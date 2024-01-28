@@ -1,7 +1,7 @@
 ---
 v: 3
 
-title: "RATS Conceptual Messages Wrapper"
+title: "RATS Conceptual Messages Wrapper (CMW)"
 abbrev: "RATS CMW"
 docname: draft-ietf-rats-msg-wrap-latest
 category: std
@@ -78,7 +78,7 @@ This document defines two encapsulation formats for RATS conceptual
 messages (i.e., evidence, attestation results, endorsements and
 reference values.)
 
-The first format uses a CBOR or JSON array with two mandatory members,
+The first encapsulation format uses a CBOR or JSON array with two mandatory members,
 one for the type, another for the value, and a third optional member
 complementing the type field that says which kind of conceptual
 message(s) are carried in the value.
@@ -92,21 +92,30 @@ This document also defines a corresponding CBOR tag, as well as JSON Web Tokens 
 # Introduction
 
 The RATS architecture defines a handful of conceptual messages
-(see {{Section 8 of -rats-arch}}), such as evidence and attestation results.
+(see {{Section 8 of -rats-arch}}), such as Evidence and Attestation Results.
 Each conceptual message can have multiple claims encoding and serialization
-formats ({{Section 9 of -rats-arch}}).
-Throughout their lifetime, RATS conceptual messages are typically transported
-over different protocols.
-For example, EAT {{-rats-eat}} evidence in a "background check" topological
+formats ({{Section 9 of -rats-arch}}). Throughout their lifetime, RATS
+conceptual messages are typically transported over different protocols.
+For example, 
+
+- EAT {{-rats-eat}} evidence in a "background check" topological
 arrangement first flows from Attester to Relying Party, and then from Relying
 Party to Verifier, over separate protocol legs.
-Attestation Results for Secure Interactions (AR4SI) {{-rats-ar4si}} payloads in
-"passport" mode would go first from Verifier to Attester and then, at a later
-point in time and over a different channel, from Attester to Relying Party.
+
+- Attestation Results for Secure Interactions (AR4SI) {{-rats-ar4si}} payloads in
+"passport" mode would be sent by the Verifier to the Attester and then, at a later
+point in time and over a different channel, from the Attester to the Relying Party.
 
 It is desirable to reuse any typing information associated with the messages
 across such protocol boundaries in order to minimize the cost associated with
-type registrations and maximize interoperability.
+type registrations and maximize interoperability. With the CMW format described
+in this document protocol designers do not need to update protocol specifications
+to support different conceptual messages. This approach reduces the implementation
+effort for developers to support different attestation technologies. For example,
+an implementer of a Relying Party application does not need to parse
+attestation related conceptual messages, such as different Evidence formats,
+but can instead utilize the CMW format to be agnostic to the attestation
+technology.
 
 This document defines two encapsulation formats for RATS conceptual
 messages that aim to achieve the goals stated above.
@@ -121,8 +130,8 @@ These encapsulation formats are designed to be:
   registration cost across many different usage scenarios.
 
 A protocol designer could use these formats, for example, to convey
-evidence, endorsements or reference values in certificates and CRLs
-extensions ({{DICE-arch}}), to embed attestation results or evidence as
+Evidence, Endorsements and reference values in certificates and CRLs
+extensions ({{DICE-arch}}), to embed Attestation Results or Evidence as
 first class authentication credentials in TLS handshake messages
 {{-tls-a}}, to transport attestation-related payloads in RESTful APIs,
 or for stable storage of attestation results in form of file system
