@@ -75,8 +75,8 @@ entity:
 --- abstract
 
 This document defines two encapsulation formats for RATS conceptual
-messages (i.e., evidence, attestation results, endorsements and
-reference values.)
+messages (i.e., Evidence, Attestation Results, Endorsements and
+Reference Values.)
 
 The first encapsulation format uses a CBOR or JSON array with two mandatory members,
 one for the type, another for the value, and a third optional member
@@ -127,11 +127,11 @@ These encapsulation formats have been specifically designed to possess the follo
 * They are based on media types {{-media-types}}, which allows the cost of their registration to be spread across numerous usage scenarios.
 
 A protocol designer could use these formats, for example, to convey
-Evidence, Endorsements and reference values in certificates and CRLs
+Evidence, Endorsements and Reference Values in certificates and CRLs
 extensions ({{DICE-arch}}), to embed Attestation Results or Evidence as
 first-class authentication credentials in TLS handshake messages
 {{-tls-a}}, to transport attestation-related payloads in RESTful APIs,
-or for stable storage of attestation results in the form of file system
+or for stable storage of Attestation Results in the form of file system
 objects.
 
 # Conventions and Definitions
@@ -194,7 +194,7 @@ potentially ambiguous and there is no further context available to the
 CMW consumer to decide.  For example, this might be the case if the base
 media type is not profiled (e.g., `application/eat+cwt`), if the `value`
 field contains multiple conceptual messages with different types (e.g.,
-both reference values and endorsements within the same `application/signed-corim+cbor`), or if the same profile identifier is
+both Reference Values and Endorsements within the same `application/signed-corim+cbor`), or if the same profile identifier is
 shared by different conceptual messages.
 Future specifications may add new values to the `ind` field; see {{iana-ind-ext}}.
 
@@ -264,7 +264,7 @@ func CMWTypeSniff(b []byte) (CMW, error) {
 
 ## CMW Collections {#cmw-coll}
 
-Layered attesters and composite devices ({{Sections 3.2 and 3.3 of -rats-arch}}) generate evidence that consists of multiple parts.
+Layered Attesters and composite devices ({{Sections 3.2 and 3.3 of -rats-arch}}) generate Evidence that consists of multiple parts.
 
 For example, in data center servers, it is not uncommon for separate attesting environments (AE) to serve a subsection of the entire machine.
 One AE might measure and attest to what was booted on the main CPU, while another AE might measure and attest to what was booted on a SmartNIC plugged into a PCIe slot, and a third AE might measure and attest to what was booted on the machine's GPU.
@@ -273,7 +273,7 @@ To address the composite Attester use case, this document defines a CMW "collect
 
 The CMW collection ({{fig-cddl-collection}}) is defined as a CBOR map or JSON object with CMW values.
 The position of a `cmw` entry in the `cmw-collection` is not significant.
-Instead, the labels identify a conceptual message that, in the case of a composite attester, should typically correspond to a component of a system.
+Instead, the labels identify a conceptual message that, in the case of a composite Attester, should typically correspond to a component of a system.
 Labels can be strings or integers that serve as a mnemonic for different conceptual messages in the collection.
 
 ~~~ cddl
@@ -282,7 +282,7 @@ Labels can be strings or integers that serve as a mnemonic for different concept
 {: #fig-cddl-collection artwork-align="left"
    title="CDDL definition of the CMW collection format"}
 
-Although initially designed for the composite attester use case, the CMW collection can be repurposed for other use cases requiring CMW aggregation.
+Although initially designed for the composite Attester use case, the CMW collection can be repurposed for other use cases requiring CMW aggregation.
 
 # Examples
 
