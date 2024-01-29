@@ -113,7 +113,7 @@ in this document protocol designers do not need to update protocol specification
 to support different conceptual messages. This approach reduces the implementation
 effort for developers to support different attestation technologies. For example,
 an implementer of a Relying Party application does not need to parse
-attestation related conceptual messages, such as different Evidence formats,
+attestation-related conceptual messages, such as different Evidence formats,
 but can instead utilize the CMW format to be agnostic to the attestation
 technology.
 
