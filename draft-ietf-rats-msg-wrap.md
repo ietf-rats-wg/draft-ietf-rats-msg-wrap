@@ -107,7 +107,7 @@ Party to Verifier, over separate protocol legs.
 point in time and over a different channel, from the Attester to the Relying Party.
 
 It is desirable to reuse any typing information associated with the messages
-across such protocol boundaries in order to minimize the cost associated with
+across such protocol boundaries to minimize the cost associated with
 type registrations and maximize interoperability. With the CMW format described
 in this document protocol designers do not need to update protocol specifications
 to support different conceptual messages. This approach reduces the implementation
