@@ -109,7 +109,7 @@ point in time and over a different channel, from the Attester to the Relying Par
 It is desirable to reuse any typing information associated with the messages
 across such protocol boundaries to minimize the cost associated with
 type registrations and maximize interoperability. With the CMW format described
-in this document protocol designers do not need to update protocol specifications
+in this document, protocol designers do not need to update protocol specifications
 to support different conceptual messages. This approach reduces the implementation
 effort for developers to support different attestation technologies. For example,
 an implementer of a Relying Party application does not need to parse
@@ -120,21 +120,18 @@ technology.
 This document defines two encapsulation formats for RATS conceptual
 messages that aim to achieve the goals stated above.
 
-These encapsulation formats are designed to be:
+These encapsulation formats have been specifically designed to possess the following characteristics:
 
-* Self-describing - which removes the dependency on the framing provided
-  by the embedding protocol (or the storage system) to convey exact
-  typing information.
+* They are self-describing, which means that they can convey precise typing information without relying on the framing provided by the embedding protocol or the storage system.
 
-* Based on media types {{-media-types}} - which allows amortising their
-  registration cost across many different usage scenarios.
+* They are based on media types {{-media-types}}, which allows the cost of their registration to be spread across numerous usage scenarios.
 
 A protocol designer could use these formats, for example, to convey
 Evidence, Endorsements and reference values in certificates and CRLs
 extensions ({{DICE-arch}}), to embed Attestation Results or Evidence as
 first-class authentication credentials in TLS handshake messages
 {{-tls-a}}, to transport attestation-related payloads in RESTful APIs,
-or for stable storage of attestation results in form of file system
+or for stable storage of attestation results in the form of file system
 objects.
 
 # Conventions and Definitions
