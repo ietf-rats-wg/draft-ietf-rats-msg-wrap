@@ -132,7 +132,7 @@ These encapsulation formats are designed to be:
 A protocol designer could use these formats, for example, to convey
 Evidence, Endorsements and reference values in certificates and CRLs
 extensions ({{DICE-arch}}), to embed Attestation Results or Evidence as
-first class authentication credentials in TLS handshake messages
+first-class authentication credentials in TLS handshake messages
 {{-tls-a}}, to transport attestation-related payloads in RESTful APIs,
 or for stable storage of attestation results in form of file system
 objects.
