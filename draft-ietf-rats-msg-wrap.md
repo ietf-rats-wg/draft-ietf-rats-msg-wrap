@@ -98,7 +98,7 @@ formats ({{Section 9 of -rats-arch}}). Throughout their lifetime, RATS
 conceptual messages are typically transported over different protocols.
 For example, 
 
-- EAT {{-rats-eat}} evidence in a "background check" topological
+- EAT {{-rats-eat}} Evidence in a "background check" topological
 arrangement first flows from Attester to Relying Party, and then from Relying
 Party to Verifier, over separate protocol legs.
 
