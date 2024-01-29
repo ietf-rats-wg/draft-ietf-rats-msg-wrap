@@ -96,7 +96,7 @@ The RATS architecture defines a handful of conceptual messages
 Each conceptual message can have multiple claims encoding and serialization
 formats ({{Section 9 of -rats-arch}}). Throughout their lifetime, RATS
 conceptual messages are typically transported over different protocols.
-For example, 
+For example,
 
 - EAT {{-rats-eat}} Evidence in a "background check" topological
 arrangement first flows from Attester to Relying Party, and then from Relying
