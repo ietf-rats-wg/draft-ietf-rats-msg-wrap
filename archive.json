@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-01-28T00:40:08.125422+00:00",
+  "timestamp": "2024-01-30T00:37:33.430663+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -675,15 +675,15 @@
       "id": "I_kwDOIGCt2M59Tdqs",
       "title": "improve the ASN.1 definition of CMWCollection",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/49",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Discussion starting here:\r\n* https://mailarchive.ietf.org/arch/msg/rats/eFBCC1JxC573SkDSp6yWZ4J_dyM/\r\n\r\nWe may want to define CMWCollection with finer granularity, e.g.:\r\n```asn.1\r\nCMWCollection ::= CHOICE {\r\n    json UTF8String,\r\n    cbor OCTET STRING,\r\n}\r\n```",
       "createdAt": "2024-01-26T13:53:49Z",
-      "updatedAt": "2024-01-28T00:01:08Z",
-      "closedAt": null,
+      "updatedAt": "2024-01-29T10:32:52Z",
+      "closedAt": "2024-01-29T10:32:52Z",
       "comments": [
         {
           "author": "nedmsmith",
@@ -3423,24 +3423,26 @@
       "id": "PR_kwDOIGCt2M5lOapU",
       "title": "Refine ASN.1 definition of the collection",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/50",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fix #49",
       "createdAt": "2024-01-27T11:55:31Z",
-      "updatedAt": "2024-01-28T00:02:24Z",
+      "updatedAt": "2024-01-29T10:32:54Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "41ae8be79886b7daa74b3c57324a8cca504e480b",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "collection-choice",
       "headRefOid": "e0161db766bcc142f3fbcfd3e7bc5ce01e40ab2f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-01-29T10:32:51Z",
+      "mergedAt": "2024-01-29T10:32:51Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "4846d61a60473fa7ef25e1bfb2751d476b90e802"
+      },
       "comments": [],
       "reviews": [
         {
@@ -3454,6 +3456,215 @@
           "body": "",
           "createdAt": "2024-01-28T00:02:24Z",
           "updatedAt": "2024-01-28T00:02:24Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5uH3pg",
+          "commit": {
+            "abbreviatedOid": "e0161db"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks for the quick reaction",
+          "createdAt": "2024-01-28T14:29:56Z",
+          "updatedAt": "2024-01-28T14:29:56Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5uKuQ8",
+          "commit": {
+            "abbreviatedOid": "e0161db"
+          },
+          "author": "carl-wallace",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-01-29T10:12:55Z",
+          "updatedAt": "2024-01-29T10:12:55Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 51,
+      "id": "PR_kwDOIGCt2M5lQ4T5",
+      "title": "Updated Introduction",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/51",
+      "state": "MERGED",
+      "author": "hannestschofenig",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-01-28T19:52:45Z",
+      "updatedAt": "2024-01-29T18:24:21Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "41ae8be79886b7daa74b3c57324a8cca504e480b",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "hannestschofenig-patch-1",
+      "headRefOid": "f52226617861713c0940d1fc6b8bbf2ae1b8d81f",
+      "closedAt": "2024-01-29T10:33:52Z",
+      "mergedAt": "2024-01-29T10:33:52Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "a97840f2309966603921c0b294a48e64b762bb24"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5uIIMZ",
+          "commit": {
+            "abbreviatedOid": "d0f97f3"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "good stuff, thanks!\r\n\r\nWhile the iron is hot, I have a suggestion for removing some awkwardness from L123-130:\r\n\r\n---\r\n\r\nThe following encapsulation formats have been specifically designed to possess the following characteristics:\r\n- They are self-describing, which means that they can convey precise typing information without relying on the framing provided by the embedding protocol or the storage system.\r\n- They are based on media types {{-media-types}}, which allows the cost of their registration to be spread across numerous usage scenarios.\r\n\r\n---\r\n\r\n",
+          "createdAt": "2024-01-28T20:20:06Z",
+          "updatedAt": "2024-01-28T20:30:24Z",
+          "comments": [
+            {
+              "originalPosition": 52,
+              "body": "```suggestion\r\nattestation-related conceptual messages, such as different Evidence formats,\r\n```",
+              "createdAt": "2024-01-28T20:20:06Z",
+              "updatedAt": "2024-01-28T20:30:24Z"
+            },
+            {
+              "originalPosition": 66,
+              "body": "```suggestion\r\nextensions ({{DICE-arch}}), to embed Attestation Results or Evidence as\r\nfirst-class authentication credentials in TLS handshake messages\r\n```",
+              "createdAt": "2024-01-28T20:20:52Z",
+              "updatedAt": "2024-01-28T20:30:24Z"
+            },
+            {
+              "originalPosition": 45,
+              "body": "```suggestion\r\nacross such protocol boundaries to minimize the cost associated with\r\n```",
+              "createdAt": "2024-01-28T20:22:24Z",
+              "updatedAt": "2024-01-28T20:30:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5uKvOC",
+          "commit": {
+            "abbreviatedOid": "54c80e4"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-01-29T10:14:49Z",
+          "updatedAt": "2024-01-29T10:14:49Z",
+          "comments": [
+            {
+              "originalPosition": 33,
+              "body": "```suggestion\r\n- EAT {{-rats-eat}} Evidence in a \"background check\" topological\r\n```",
+              "createdAt": "2024-01-29T10:14:49Z",
+              "updatedAt": "2024-01-29T10:14:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5uPOwU",
+          "commit": {
+            "abbreviatedOid": "f522266"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Reference Values should be capitalized to follow the convention consistently.",
+          "createdAt": "2024-01-29T18:23:35Z",
+          "updatedAt": "2024-01-29T18:24:21Z",
+          "comments": [
+            {
+              "originalPosition": 76,
+              "body": "> Evidence, Endorsements and reference values in certificates and CRLs\r\n\r\nEvidence, Endorsements and Reference Values in certificates and CRLs",
+              "createdAt": "2024-01-29T18:23:35Z",
+              "updatedAt": "2024-01-29T18:24:21Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 52,
+      "id": "PR_kwDOIGCt2M5lT04c",
+      "title": "fix-lint",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/52",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-01-29T10:45:11Z",
+      "updatedAt": "2024-01-29T16:52:50Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "a97840f2309966603921c0b294a48e64b762bb24",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "fix-lint",
+      "headRefOid": "7f947094b623ed4a23dfdb184cc9623be9eeb040",
+      "closedAt": "2024-01-29T16:52:47Z",
+      "mergedAt": "2024-01-29T16:52:47Z",
+      "mergedBy": "hannestschofenig",
+      "mergeCommit": {
+        "oid": "d68935903816d6b23d40b46d5561b269b80acae6"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5uOISg",
+          "commit": {
+            "abbreviatedOid": "7f94709"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-01-29T16:52:43Z",
+          "updatedAt": "2024-01-29T16:52:43Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 53,
+      "id": "PR_kwDOIGCt2M5lXzsi",
+      "title": "mass capitalisation",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/53",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-01-29T20:22:11Z",
+      "updatedAt": "2024-01-29T22:04:35Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "d68935903816d6b23d40b46d5561b269b80acae6",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "capitalisation",
+      "headRefOid": "9b491304ed9cb14e0e7202c09e2efc99f56f52f8",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5uQqY6",
+          "commit": {
+            "abbreviatedOid": "9b49130"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-01-29T22:04:35Z",
+          "updatedAt": "2024-01-29T22:04:35Z",
           "comments": []
         }
       ]
