@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-01-30T00:37:33.430663+00:00",
+  "timestamp": "2024-02-01T00:39:15.652109+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -693,6 +693,22 @@
           "updatedAt": "2024-01-28T00:01:07Z"
         }
       ]
+    },
+    {
+      "number": 54,
+      "id": "I_kwDOIGCt2M59oh4_",
+      "title": "rebalancing abstract & intro",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/54",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The abstract has too much details, whilst the intro is lightweight on the tech front.  I suggest we move most of the abstract contents to the bottom of the intro.",
+      "createdAt": "2024-01-30T12:42:27Z",
+      "updatedAt": "2024-01-30T12:42:27Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -3634,24 +3650,26 @@
       "id": "PR_kwDOIGCt2M5lXzsi",
       "title": "mass capitalisation",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/53",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-01-29T20:22:11Z",
-      "updatedAt": "2024-01-29T22:04:35Z",
+      "updatedAt": "2024-01-30T06:59:11Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "d68935903816d6b23d40b46d5561b269b80acae6",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "capitalisation",
       "headRefOid": "9b491304ed9cb14e0e7202c09e2efc99f56f52f8",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-01-30T06:59:11Z",
+      "mergedAt": "2024-01-30T06:59:11Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "921eb6c9b9199f6346f7490a1b0d1bfdfe2c5a5a"
+      },
       "comments": [],
       "reviews": [
         {
