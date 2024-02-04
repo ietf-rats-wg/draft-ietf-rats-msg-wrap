@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-01T00:39:15.652109+00:00",
+  "timestamp": "2024-02-04T00:40:32.157651+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -709,6 +709,72 @@
       "updatedAt": "2024-01-30T12:42:27Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 55,
+      "id": "I_kwDOIGCt2M5-GKZu",
+      "title": "Request for clarification: array length and mixed encoding",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/55",
+      "state": "OPEN",
+      "author": "deeglaze",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I'm noodling through the idea of a modular evidence collection daemon that just runs installed binaries in a certain location and assembles a cmw-collection together to send off, and I'm wondering how much interpretation of the output it would need, assuming all the binaries output a legal CMW of either CBOR or JSON encoding.\r\n\r\nWhen JC<> is used, it's only when the CDDL pun breaks down and you need base64 encoding for binary. If you have your cmw-collection as a CBOR map, and we can use, say, the basename of the evidence collection binary to key the result, but the result is just bytes that are either CBOR or JSON, that doesn't seem to fit into the \"cmw is either CBOR or JSON\".\r\n\r\nIt seems that certainly a JSON cmw-collection that contains a CBOR-encoded cmw does not parse unless you're allowed to wantonly swap your interpretation of the CDDL as for JSON or CBOR as you see fit (say with the decapsulation algorithm), given that `cmw` doesn't have a base64 encoded string alternate to store a CBOR-encoded cmw.\r\n\r\nCan we say that\r\n\r\n```\r\ncmw-collection = {\r\n  + cmw-collection-entry-label => cmw\r\n}\r\n```\r\n\r\nshould be\r\n\r\n```\r\ncmw-collection = {\r\n  + cmw-collection-entry-label => cmw-decap\r\n}\r\ncmw-decap = JC<jc-cmw, bytes .cbor cmw>\r\njc-cmw = cmw / base64-cmw\r\nbase64-cmw = base64-string .cbor cmw\r\n```\r\n\r\nI'm unsure if the `.cbor` control operator is allowed to be applied to a base64-string technically it's for byte strings and since \"one can use CDDL with JSON by limiting oneself to what can be represented in JSON.  Roughly speaking, this means leaving out byte strings\"\r\n\r\nI don't think we can use `bytes .cbor cmw` without inserting the major type byte 0x04 before the output of any of the evidence modules, so do we just define a `.feature cmw-decap` to apply the decap algorithm to arbitrary bytes instead of this JC stuff?",
+      "createdAt": "2024-02-02T18:40:31Z",
+      "updatedAt": "2024-02-03T21:41:01Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "I would similarly ask for cmw to itself contain cmw-collection, since something producing evidence could itself be amassing evidence, and you end up with a tree rather than having to flatten it and potentially have conflicting keys.",
+          "createdAt": "2024-02-02T18:47:46Z",
+          "updatedAt": "2024-02-02T18:47:46Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Is this different from cmw-collection containing a cmw / cmw-collection?",
+          "createdAt": "2024-02-02T20:17:32Z",
+          "updatedAt": "2024-02-02T20:17:32Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": ">I'm wondering how much interpretation of the output it would need, assuming all the binaries output a legal CMW of either CBOR or JSON encoding.\r\n\r\nThe I-D describes an ASN.1 encoding that distinguishes between cbor and json. \r\n```\r\nCMWCollection ::= CHOICE {\r\n    json UTF8String,\r\n    cbor OCTET STRING,\r\n}\r\n```\r\nIs the request to give the same attention to the CDDL description?",
+          "createdAt": "2024-02-02T20:21:49Z",
+          "updatedAt": "2024-02-02T20:22:20Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "> > I'm wondering how much interpretation of the output it would need, assuming all the binaries output a legal CMW of either CBOR or JSON encoding.\r\n> \r\n> The I-D describes an ASN.1 encoding that distinguishes between cbor and json.\r\n> \r\n> ```\r\n> CMWCollection ::= CHOICE {\r\n>     json UTF8String,\r\n>     cbor OCTET STRING,\r\n> }\r\n> ```\r\n> \r\n> Is the request to give the same attention to the CDDL description?\r\n\r\nNot exactly, since I'm asking about mixed representation across values. If I'm accumulating evidence from A and B, where A produces a CBOR CMW, and B produces a JSON CMW, I would rather not do a full translation from one to the other for fear of corrupting the data and taking too much processing time, so I would like to produce a cbor-encoded map {\"A\" => cbor bytes, \"B\" => json string}. If A were to produce a CMW collection instead of CMW, since it's an aggregator itself, then I'd like to not have to open it up and re-encode the key => value mappings in the overall CMW collection, since I might have conflicting keys. I also am not particularly sure what `.feature \"cbor\"` means\u2013\"if I am being interpreted as CBOR\" or \"If I am to be interpreted as CBOR\" or something else, since one depends on context, and the other is a kind of context switching device.",
+          "createdAt": "2024-02-02T20:50:45Z",
+          "updatedAt": "2024-02-02T20:50:45Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": ">not particularly sure what .feature \"cbor\" means\r\n\r\nSee https://www.ietf.org/archive/id/draft-ietf-cbor-cddl-control-02.html \r\nI believe `int .feature \"cbor\"` is saying the integer is encoded as a cbor integer.",
+          "createdAt": "2024-02-02T21:07:50Z",
+          "updatedAt": "2024-02-02T21:12:21Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> [a]ssuming all the binaries output a legal CMW of either CBOR or JSON encoding.\r\n\r\n[ _challenging assumptions_ \ud83d\ude3a ]\r\n\r\nWhy don't you let the repackager do the repackager and the providers do the providers?  I.e., the binaries return their evidence payload plus the associated media type, and the daemon puts together the CMWs and wraps them in a CBOR or JSON collection.\r\n",
+          "createdAt": "2024-02-03T11:02:29Z",
+          "updatedAt": "2024-02-03T21:41:01Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "The \"plus\" there is the problem then, since now I need to specify an output format for the binaries that isn't the standard CMW / CMW-collection. What you're suggesting to me sounds like \"binaries return their cmw-array value and cmw-array content type in some format for the repackager to wrap as a CMW.\" The third component of the cmw-array is just lost or somehow inferred? No, that \"some format\" to me is a CMW. I don't want plugin authors to have to implement both serialization formats as requested by the repackager to fit the final output type because that just becomes bloat.\r\n\r\nTo be parsimonious with resources due to static linking overhead, some evidence collectors may want to produce an output that is already a collection of multiple evidence formats. The cc-trusted-api and go-tpm-tools clients collect multiple evidence formats already, so changing the output format for the collection is a nicer thought than splitting each format into a different binary. We therefore have either a CMW or some sort of CMW collection as allowed response types. What format do we specify?\r\n\r\nI could say it's a mixed format of JSON or CBOR CMWs given as a definite length array of definite length octet strings for the repackager to decode and repackage into a CMW-collection of its own, but the entry labels would need to be generated somehow.\r\n\r\n```\r\n4 bytes: num_outputs in system endianness\r\nVariable: num_outputs-many output\r\n\r\nwhere an output is\r\n4 bytes: length in system endianness\r\nlength: payload bytes\r\n```\r\n\r\nPart of the assumption to be fair is that there is going to be a standard evidence request format and evidence response format, and the response doesn't necessarily need to be a CMW or CMW collection, though it'd be nicer if it were\u2013the collection CMW / CMW-collection output of either CBOR or JSON to repackage as a single CMW collection leads to the relabeling problem I described in OP. In JSON, the label could be the provider's name followed by the index of the position in the output, and in CBOR it could just be the index of the position in the output added to the current index to the output CMW\u2013the label is thus very different. The text describing the labels suggests that they aren't arbitrary but could hold semantic meaning like a mnemonic. I don't know how that works for the integer format, but it's not explicitly specified to be irrelevant:\r\n\r\n> Instead, the labels identify a conceptual message that, in the case of a composite Attester, should typically\r\n> correspond to a component of a system.  Labels can be strings or integers that serve as a mnemonic for different\r\n> conceptual messages in the collection.\r\n\r\nThe goal of being for either an aggregate attester OR a CMW aggregator should account for the multiple allowed wire formats. I don't see that without either\r\n\r\na. a tree format for CMW-collection with mixed representation\r\nb. change the current map format to an array to remove any implied meaning for labels.\r\n",
+          "createdAt": "2024-02-03T20:53:58Z",
+          "updatedAt": "2024-02-03T20:53:58Z"
+        }
+      ]
     }
   ],
   "pulls": [
