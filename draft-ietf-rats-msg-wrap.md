@@ -74,18 +74,11 @@ entity:
 
 --- abstract
 
-This document defines two encapsulation formats for RATS conceptual
-messages (i.e., Evidence, Attestation Results, Endorsements and
-Reference Values.)
+This document defines the RATS conceptual message wrapper (CMW) format, a type of encapsulation format that can be used for any RATS messages, such as Evidence, Attestation Results, Endorsements, and Reference Values.
+Additionally, the document describes a collection type that enables the aggregation of one or more CMWs into a single message.
 
-The first encapsulation format uses a CBOR or JSON array with two mandatory members,
-one for the type, another for the value, and a third optional member
-complementing the type field that says which kind of conceptual
-message(s) are carried in the value.
-The other format wraps the value in a CBOR byte string and prepends a
-CBOR tag to convey the type information.
-
-This document also defines a corresponding CBOR tag, as well as JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims.  These allow embedding the wrapped conceptual messages into CBOR-based protocols and web APIs, respectively.
+This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
+These allow embedding the wrapped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols.
 
 --- middle
 
@@ -133,6 +126,9 @@ first-class authentication credentials in TLS handshake messages
 {{-tls-a}}, to transport attestation-related payloads in RESTful APIs,
 or for stable storage of Attestation Results in the form of file system
 objects.
+
+This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
+These allow embedding the wrapped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols.
 
 # Conventions and Definitions
 
