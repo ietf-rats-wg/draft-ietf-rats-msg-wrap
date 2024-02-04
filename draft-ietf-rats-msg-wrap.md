@@ -200,10 +200,11 @@ Future specifications may add new values to the `ind` field; see {{iana-ind-ext}
 
 A CMW array can be encoded as CBOR {{-cbor}} or JSON {{-json}}.
 
-When using JSON, the value field is encoded as Base64 using the URL and
+When using JSON, the value field MUST be encoded as Base64 using the URL and
 filename safe alphabet ({{Section 5 of -base64}}) without padding.
+This always applies, even if the conceptual message format is already textual (e.g., a JWT EAT).
 
-When using CBOR, the value field is encoded as a CBOR byte string.
+When using CBOR, the value field MUST be encoded as a CBOR byte string.
 
 ## CMW CBOR Tags {#cbor-tag}
 
