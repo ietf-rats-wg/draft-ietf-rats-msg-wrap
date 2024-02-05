@@ -357,6 +357,28 @@ with the following wire representation:
    03                                 # unsigned(3)
 ~~~
 
+## CBOR Collection
+
+The following example is a CBOR collection with two CBOR CMWs (array and tag):
+
+~~~
+{::include cddl/collection-example-cbor-1.diag}
+~~~
+
+with the following wire representation:
+
+~~~
+{::include cddl/collection-example-cbor-1.pretty}
+~~~
+
+## JSON Collection
+
+The following example is a JSON collection with two JSON CMWs:
+
+~~~
+{::include cddl/collection-example-json-1.diag}
+~~~
+
 # Transporting CMW and CMW Collections in X.509 Messages {#x509}
 
 There are cases where CMW and CMW collection payloads need to be transported in PKIX messages, for example in Certificate Signing Requests (CSRs) {{-csr-a}}, or in X.509 Certificates and Certificate Revocation Lists (CRLs) {{DICE-arch}}.
