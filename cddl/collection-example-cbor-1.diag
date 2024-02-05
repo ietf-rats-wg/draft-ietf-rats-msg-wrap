@@ -1,0 +1,7 @@
+{
+  "array": [
+    "application/my",
+    h'deadbeef'
+  ],
+  "tag": 123(h'cacacaca')
+}

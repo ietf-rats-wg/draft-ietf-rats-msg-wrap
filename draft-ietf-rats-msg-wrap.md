@@ -299,7 +299,7 @@ Reference Values and Endorsements.
 ## JSON Array {#ex-ja}
 
 ~~~ cbor-diag
-{::include cddl/example-json-1.diag}
+{::include cddl/cmw-example-json-1.diag}
 ~~~
 
 Note that a CoAP Content-Format number can also be used with the JSON array
@@ -309,13 +309,13 @@ Content-Formats and it is crucial to save bytes.
 ## CBOR Array {#ex-ca}
 
 ~~~ cbor-diag
-{::include cddl/example-cbor-1.diag}
+{::include cddl/cmw-example-cbor-1.diag}
 ~~~
 
 with the following wire representation:
 
 ~~~
-{::include cddl/example-cbor-1.pretty}
+{::include cddl/cmw-example-cbor-1.pretty}
 ~~~
 
 Note that a Media-Type-Name can also be used with the CBOR array form,
@@ -324,25 +324,25 @@ Content-Formats, or (unlike the case in point) if a CoAP Content-Format
 number has not been registrered.
 
 ~~~ cbor-diag
-{::include cddl/example-cbor-2.diag}
+{::include cddl/cmw-example-cbor-2.diag}
 ~~~
 
 ## CBOR Tag {#ex-ct}
 
 ~~~ cbor-diag
-{::include cddl/example-cbor-tag-1.diag}
+{::include cddl/cmw-example-cbor-tag-1.diag}
 ~~~
 
 with the following wire representation:
 
 ~~~
-{::include cddl/example-cbor-tag-1.pretty}
+{::include cddl/cmw-example-cbor-tag-1.pretty}
 ~~~
 
 ## CBOR Array with explicit CM indicator {#ex-ca-ind}
 
 ~~~ cbor-diag
-{::include cddl/example-cbor-3.diag}
+{::include cddl/cmw-example-cbor-3.diag}
 ~~~
 
 with the following wire representation:
