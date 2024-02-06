@@ -1,7 +1,13 @@
 {
-  "array": [
-    "application/my",
-    h'deadbeef'
+  "attester A": [
+    30001,
+    h'2347da55',
+    4
   ],
-  "tag": 123(h'cacacaca')
+  "attester B": 1668576818(h'2347da55'),
+  "attester C": [
+    "application/eat+jwt",
+    "ZXlKaGJH",
+    8
+  ]
 }

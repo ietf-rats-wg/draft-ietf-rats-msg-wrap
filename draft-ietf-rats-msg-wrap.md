@@ -359,7 +359,7 @@ with the following wire representation:
 
 ## CBOR Collection
 
-The following example is a CBOR collection with two CBOR CMWs (array and tag):
+The following example is a CBOR collection that assembles conceptual messages from three attesters: Evidence for attesters A and B and Attestation Result for attester C.
 
 ~~~
 {::include cddl/collection-example-cbor-1.diag}
@@ -373,7 +373,7 @@ with the following wire representation:
 
 ## JSON Collection
 
-The following example is a JSON collection with two JSON CMWs:
+The following example is a JSON collection that assembles Evidence from two attesters.
 
 ~~~
 {::include cddl/collection-example-json-1.diag}

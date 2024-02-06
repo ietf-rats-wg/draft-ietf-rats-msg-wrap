@@ -1,10 +1,12 @@
 {
-  "array 1": [
-    "application/my",
-    "e30K"
+  "attester A": [
+    "application/eat-ucs+json",
+    "e30K",
+    4
   ],
-  "array 2": [
-    "application/ear+json",
-    "YS5iLmMK"
+  "attester B": [
+    "application/eat-ucs+cbor",
+    "oA",
+    4
   ]
 }
