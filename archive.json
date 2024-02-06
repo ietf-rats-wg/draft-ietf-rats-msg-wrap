@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-04T00:40:32.157651+00:00",
+  "timestamp": "2024-02-06T00:36:57.687868+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -47,6 +47,11 @@
       "name": "wontfix",
       "description": "This will not be worked on",
       "color": "ffffff"
+    },
+    {
+      "name": "WGLC",
+      "description": "WGLC comments",
+      "color": "42B639"
     }
   ],
   "issues": [
@@ -541,9 +546,24 @@
       "labels": [],
       "body": "We should change the `cmw-array` to `cmw-record` so people don\u2019t get the wrong impression that cmw-array is an array of cmw.\r\n\r\nA `cmw-collection` might be an appropriate name for an array of cmw.\r\n\r\n\r\n(These points were originally raised by @nedmsmith)",
       "createdAt": "2023-12-13T23:07:02Z",
-      "updatedAt": "2023-12-13T23:07:02Z",
+      "updatedAt": "2024-02-04T18:20:28Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@nedmsmith: checking if this is still needed?",
+          "createdAt": "2024-02-04T13:01:12Z",
+          "updatedAt": "2024-02-04T13:01:12Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Now is the time to change it if we're going to. It's a nit. But technically both maps and records can be used to make arrays. ",
+          "createdAt": "2024-02-04T18:20:27Z",
+          "updatedAt": "2024-02-04T18:20:27Z"
+        }
+      ]
     },
     {
       "number": 39,
@@ -582,15 +602,15 @@
       "id": "I_kwDOIGCt2M55zGi8",
       "title": "base64 applies _always_",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/41",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The document says:\r\n\r\n> _\"When using JSON, the value field is encoded as Base64 using the URL and filename safe alphabet (Section 5 of RFC4648) without padding.\"_\r\n\r\nwe should add a note saying that the base64 encap always applies, even if the evidence format is already textual (e.g., a JWT).\r\n",
       "createdAt": "2023-12-15T10:34:31Z",
-      "updatedAt": "2023-12-15T10:34:31Z",
-      "closedAt": null,
+      "updatedAt": "2024-02-04T18:17:18Z",
+      "closedAt": "2024-02-04T18:17:18Z",
       "comments": []
     },
     {
@@ -650,24 +670,39 @@
       "labels": [],
       "body": "@henkbirkholz has the following comments regarding prose in \u00a73.4:\r\n\r\n* https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/45#discussion_r1465003510\r\n* https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/45#discussion_r1465004847\r\n* https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/45/commits/8c5dcc304cd21a6c6672c3c2ca47fa70f315ee29#r1465272666",
       "createdAt": "2024-01-24T17:56:57Z",
-      "updatedAt": "2024-01-24T17:56:58Z",
+      "updatedAt": "2024-02-05T17:31:51Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "Seems we're going with merged #45? Everybody actually happy with that? (non-blocking)",
+          "createdAt": "2024-02-05T17:26:09Z",
+          "updatedAt": "2024-02-05T17:26:09Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Seems we're going with merged #45? Everybody actually happy with that? (non-blocking)\r\n\r\nNote that #45 has none of the editorial suggestions you provided in the review.\r\n\r\nI guess you need to decide whether the current state of the section is acceptable or if you want to tweak it.",
+          "createdAt": "2024-02-05T17:31:50Z",
+          "updatedAt": "2024-02-05T17:31:50Z"
+        }
+      ]
     },
     {
       "number": 47,
       "id": "I_kwDOIGCt2M59PEyv",
       "title": "mention PKIX encaps in abstract and intro",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/47",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The newly added PKIX extension(s) should be mentioned in the abstract and introductory text.",
       "createdAt": "2024-01-25T20:17:20Z",
-      "updatedAt": "2024-01-25T20:17:20Z",
-      "closedAt": null,
+      "updatedAt": "2024-02-04T18:27:01Z",
+      "closedAt": "2024-02-04T18:27:01Z",
       "comments": []
     },
     {
@@ -699,15 +734,15 @@
       "id": "I_kwDOIGCt2M59oh4_",
       "title": "rebalancing abstract & intro",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/54",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The abstract has too much details, whilst the intro is lightweight on the tech front.  I suggest we move most of the abstract contents to the bottom of the intro.",
       "createdAt": "2024-01-30T12:42:27Z",
-      "updatedAt": "2024-01-30T12:42:27Z",
-      "closedAt": null,
+      "updatedAt": "2024-02-04T18:27:00Z",
+      "closedAt": "2024-02-04T18:27:00Z",
       "comments": []
     },
     {
@@ -722,7 +757,7 @@
       "labels": [],
       "body": "I'm noodling through the idea of a modular evidence collection daemon that just runs installed binaries in a certain location and assembles a cmw-collection together to send off, and I'm wondering how much interpretation of the output it would need, assuming all the binaries output a legal CMW of either CBOR or JSON encoding.\r\n\r\nWhen JC<> is used, it's only when the CDDL pun breaks down and you need base64 encoding for binary. If you have your cmw-collection as a CBOR map, and we can use, say, the basename of the evidence collection binary to key the result, but the result is just bytes that are either CBOR or JSON, that doesn't seem to fit into the \"cmw is either CBOR or JSON\".\r\n\r\nIt seems that certainly a JSON cmw-collection that contains a CBOR-encoded cmw does not parse unless you're allowed to wantonly swap your interpretation of the CDDL as for JSON or CBOR as you see fit (say with the decapsulation algorithm), given that `cmw` doesn't have a base64 encoded string alternate to store a CBOR-encoded cmw.\r\n\r\nCan we say that\r\n\r\n```\r\ncmw-collection = {\r\n  + cmw-collection-entry-label => cmw\r\n}\r\n```\r\n\r\nshould be\r\n\r\n```\r\ncmw-collection = {\r\n  + cmw-collection-entry-label => cmw-decap\r\n}\r\ncmw-decap = JC<jc-cmw, bytes .cbor cmw>\r\njc-cmw = cmw / base64-cmw\r\nbase64-cmw = base64-string .cbor cmw\r\n```\r\n\r\nI'm unsure if the `.cbor` control operator is allowed to be applied to a base64-string technically it's for byte strings and since \"one can use CDDL with JSON by limiting oneself to what can be represented in JSON.  Roughly speaking, this means leaving out byte strings\"\r\n\r\nI don't think we can use `bytes .cbor cmw` without inserting the major type byte 0x04 before the output of any of the evidence modules, so do we just define a `.feature cmw-decap` to apply the decap algorithm to arbitrary bytes instead of this JC stuff?",
       "createdAt": "2024-02-02T18:40:31Z",
-      "updatedAt": "2024-02-03T21:41:01Z",
+      "updatedAt": "2024-02-04T17:15:14Z",
       "closedAt": null,
       "comments": [
         {
@@ -773,8 +808,87 @@
           "body": "The \"plus\" there is the problem then, since now I need to specify an output format for the binaries that isn't the standard CMW / CMW-collection. What you're suggesting to me sounds like \"binaries return their cmw-array value and cmw-array content type in some format for the repackager to wrap as a CMW.\" The third component of the cmw-array is just lost or somehow inferred? No, that \"some format\" to me is a CMW. I don't want plugin authors to have to implement both serialization formats as requested by the repackager to fit the final output type because that just becomes bloat.\r\n\r\nTo be parsimonious with resources due to static linking overhead, some evidence collectors may want to produce an output that is already a collection of multiple evidence formats. The cc-trusted-api and go-tpm-tools clients collect multiple evidence formats already, so changing the output format for the collection is a nicer thought than splitting each format into a different binary. We therefore have either a CMW or some sort of CMW collection as allowed response types. What format do we specify?\r\n\r\nI could say it's a mixed format of JSON or CBOR CMWs given as a definite length array of definite length octet strings for the repackager to decode and repackage into a CMW-collection of its own, but the entry labels would need to be generated somehow.\r\n\r\n```\r\n4 bytes: num_outputs in system endianness\r\nVariable: num_outputs-many output\r\n\r\nwhere an output is\r\n4 bytes: length in system endianness\r\nlength: payload bytes\r\n```\r\n\r\nPart of the assumption to be fair is that there is going to be a standard evidence request format and evidence response format, and the response doesn't necessarily need to be a CMW or CMW collection, though it'd be nicer if it were\u2013the collection CMW / CMW-collection output of either CBOR or JSON to repackage as a single CMW collection leads to the relabeling problem I described in OP. In JSON, the label could be the provider's name followed by the index of the position in the output, and in CBOR it could just be the index of the position in the output added to the current index to the output CMW\u2013the label is thus very different. The text describing the labels suggests that they aren't arbitrary but could hold semantic meaning like a mnemonic. I don't know how that works for the integer format, but it's not explicitly specified to be irrelevant:\r\n\r\n> Instead, the labels identify a conceptual message that, in the case of a composite Attester, should typically\r\n> correspond to a component of a system.  Labels can be strings or integers that serve as a mnemonic for different\r\n> conceptual messages in the collection.\r\n\r\nThe goal of being for either an aggregate attester OR a CMW aggregator should account for the multiple allowed wire formats. I don't see that without either\r\n\r\na. a tree format for CMW-collection with mixed representation\r\nb. change the current map format to an array to remove any implied meaning for labels.\r\n",
           "createdAt": "2024-02-03T20:53:58Z",
           "updatedAt": "2024-02-03T20:53:58Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> [n]ow I need to specify an output format for the binaries that isn't the standard CMW / CMW-collection.\r\n\r\nThe daemon and its plugins all live under the same system roof, isn't it?\r\n\r\nCan't each binary return evidence in the native format using something equivalent to:\r\n\r\n```c\r\nint collect_evidence(\r\n    const uint8_t nonce[64],\r\n    uint8_t **evidence, size_t *evidence_sz,\r\n    struct media_type *mt\r\n);\r\n```\r\n\r\n",
+          "createdAt": "2024-02-04T09:38:21Z",
+          "updatedAt": "2024-02-04T09:38:40Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> a. a tree format for CMW-collection\r\n\r\nthis one is trivial:\r\n\r\n```cddl\r\ncmw-collection = {\r\n  + cmw-collection-entry-label => cmw / cmw-collection\r\n}\r\n```\r\n\r\n> with mixed representation\r\n\r\nI am afraid this one isn't.",
+          "createdAt": "2024-02-04T10:00:09Z",
+          "updatedAt": "2024-02-04T10:00:09Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "\n> ```cddl\n> \n> cmw-collection = {\n> \n>   + cmw-collection-entry-label => cmw / cmw-collection\n> \n> }\n> \n> ```\n+1\n",
+          "createdAt": "2024-02-04T17:15:13Z",
+          "updatedAt": "2024-02-04T17:15:13Z"
         }
       ]
+    },
+    {
+      "number": 58,
+      "id": "I_kwDOIGCt2M5-Mt1L",
+      "title": "\"Endorsement\", rather than \"Endorsements\"",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/58",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "In Table 2 in 7.4.2 shouldn't  it be \"Endorsement\"? It's just one endorsement per conceptual message, right?\r\n\r\nRef values is correct as plural. Evidence is fine too.\r\n\r\nAttestation Results could be singular, but seems OK plural.\r\n\r\n",
+      "createdAt": "2024-02-04T19:09:47Z",
+      "updatedAt": "2024-02-05T17:54:49Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "So there are never more than one Endorsements?",
+          "createdAt": "2024-02-05T17:24:20Z",
+          "updatedAt": "2024-02-05T17:24:20Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> So there are never more than one Endorsements?\r\n\r\nThe plurality refers to Claims. A single conceptual message can have more than one Claim. Endorsements are not a special case. If you change all the entries in the table to include \"Claims\" the entries would be Reference Value Claims, Endorsement Claims, Evidence Claims, etc... ",
+          "createdAt": "2024-02-05T17:30:02Z",
+          "updatedAt": "2024-02-05T17:30:02Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "> So there are never more than one Endorsements?\r\n\r\nCan a conceptual message contain more than one endorsement or not? Seems like it could go either way. If it can contain more than one, you'd need to make it an array (which is beyond the scope of this draft).\r\n\r\nRATs architecture uses plurality for these terms, but could be discussing \"messages\" rather than a \"message\". https://www.rfc-editor.org/rfc/rfc9334.html#name-conceptual-messages\r\n\r\nThe plurality of \"attestation results\" and \"reference values\" is kind of ambiguous. It makes a lot of sense to have many references values in a conceptual message.\r\n\r\nNot a big deal either way, but seemed worth cross-checking.\r\n",
+          "createdAt": "2024-02-05T17:54:48Z",
+          "updatedAt": "2024-02-05T17:54:48Z"
+        }
+      ]
+    },
+    {
+      "number": 59,
+      "id": "I_kwDOIGCt2M5-R3O5",
+      "title": "Clarify use of the CWT claim",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/59",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "[Laurence email to rats@ietf.org](https://mailarchive.ietf.org/arch/msg/rats/9uDu-DOOrbYIX5tND0muaVREJBM/):\r\n\r\n> _Maybe some clarification about the use of the CWT claim to carry the conceptual message? If the CWT is an EAT and the conceptual message is an EAT, you have an EAT in an EAT and it looks a lot like a nested token. But I don\u2019t think that\u2019s what is intended at all. The surrounding EAT in this case is just convenient transport. It is not binding to or attesting to the enclosed EAT.\r\n> One way to do this would for the examples to be more expansive._",
+      "createdAt": "2024-02-05T13:49:43Z",
+      "updatedAt": "2024-02-05T13:49:43Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -3749,6 +3863,169 @@
           "body": "",
           "createdAt": "2024-01-29T22:04:35Z",
           "updatedAt": "2024-01-29T22:04:35Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 56,
+      "id": "PR_kwDOIGCt2M5l8hur",
+      "title": "Increase clarity around wrapping",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/56",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #41",
+      "createdAt": "2024-02-04T12:11:29Z",
+      "updatedAt": "2024-02-04T18:17:48Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "921eb6c9b9199f6346f7490a1b0d1bfdfe2c5a5a",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "always-b64",
+      "headRefOid": "1f883fbd4e6d163f713969be1ad7b374af48cf84",
+      "closedAt": "2024-02-04T18:17:17Z",
+      "mergedAt": "2024-02-04T18:17:17Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "9fd85947d810f9e8e11c68a9c0f56118dfe6072d"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5u9E4H",
+          "commit": {
+            "abbreviatedOid": "1f883fb"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-04T17:17:56Z",
+          "updatedAt": "2024-02-04T17:17:56Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5u9Lnq",
+          "commit": {
+            "abbreviatedOid": "1f883fb"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Small change but important. ",
+          "createdAt": "2024-02-04T17:46:10Z",
+          "updatedAt": "2024-02-04T17:46:10Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 57,
+      "id": "PR_kwDOIGCt2M5l8j-8",
+      "title": "Rebalance text distribution between Abstract and Intro",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/57",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #54\r\nFix #47",
+      "createdAt": "2024-02-04T12:44:15Z",
+      "updatedAt": "2024-02-04T18:27:02Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "9fd85947d810f9e8e11c68a9c0f56118dfe6072d",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "rebalance-intro",
+      "headRefOid": "6ab7ec6a952eadecf03647a27a9b21f8aa284f9d",
+      "closedAt": "2024-02-04T18:27:00Z",
+      "mergedAt": "2024-02-04T18:27:00Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "98730fde434623416c05beebea1e9e60621fcb0a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5u9Lmm",
+          "commit": {
+            "abbreviatedOid": "ace3857"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "This is a good re-arrangement of the text",
+          "createdAt": "2024-02-04T17:45:36Z",
+          "updatedAt": "2024-02-04T17:45:36Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5u9MwM",
+          "commit": {
+            "abbreviatedOid": "6ab7ec6"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-04T18:21:55Z",
+          "updatedAt": "2024-02-04T18:21:55Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 60,
+      "id": "PR_kwDOIGCt2M5mCc6O",
+      "title": "CI: allow different top-level productions",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/60",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Allow different top-level productions in the CI machinery. This enables adding the collection type alongside the CMW. In the future this can be easily extended to allow other embeddings (e.g., CWT/EAT).",
+      "createdAt": "2024-02-05T15:24:28Z",
+      "updatedAt": "2024-02-05T17:46:49Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "98730fde434623416c05beebea1e9e60621fcb0a",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "coll-examples",
+      "headRefOid": "d54f2d93e0d0bdec739e1de50403dadaf28e500a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5vDf4E",
+          "commit": {
+            "abbreviatedOid": "8d39f65"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-02-05T16:05:09Z",
+          "updatedAt": "2024-02-05T16:05:09Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5vEPl-",
+          "commit": {
+            "abbreviatedOid": "ab7deec"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-02-05T17:25:08Z",
+          "updatedAt": "2024-02-05T17:25:08Z",
           "comments": []
         }
       ]
