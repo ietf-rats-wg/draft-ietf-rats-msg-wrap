@@ -10,12 +10,15 @@ else
 	    -b main https://github.com/martinthomson/i-d-template $(LIBDIR)
 endif
 
-EXAMPLES_DIAG := $(wildcard cddl/example*.diag)
+include cddl/frags.mk
+
+EXAMPLES_DIAG := $(addprefix cddl/,$(CMW_EXAMPLES))
+EXAMPLES_DIAG += $(addprefix cddl/,$(COLLECTION_EXAMPLES))
+
 EXAMPLES_PRETTY := $(EXAMPLES_DIAG:.diag=.pretty)
-CDDL_FILES := cddl/cmw-array.cddl
-CDDL_FILES += cddl/cmw-cbor-tag.cddl
-CDDL_FILES += cddl/cmw-start.cddl
-CDDL_FILES += cddl/cmw-collection.cddl
+
+CDDL_FILES := $(addprefix cddl/,$(CMW_FRAGS))
+CDDL_FILES += $(addprefix cddl/,$(COLLECTION_FRAGS))
 
 $(drafts_txt):: $(EXAMPLES_DIAG) $(EXAMPLES_PRETTY) $(CDDL_FILES)
 

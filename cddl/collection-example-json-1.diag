@@ -1,0 +1,12 @@
+{
+  "attester A": [
+    "application/eat-ucs+json",
+    "e30K",
+    4
+  ],
+  "attester B": [
+    "application/eat-ucs+cbor",
+    "oA",
+    4
+  ]
+}
