@@ -5,7 +5,7 @@ Content-Type   = Media-Type-Name *( *SP ";" *SP parameter )
 parameter      = token "=" ( token / quoted-string )
 
 token          = 1*tchar
-tchar          = "!" / "#" / "$" / "%" / "&" / "\'" / "*"
+tchar          = "!" / "#" / "$" / "%" / "&" / %x27 / "*"
                / "+" / "-" / "." / "^" / "_" / "`" / "|" / "~"
                / DIGIT / ALPHA
 quoted-string  = %x22 *( qdtext / quoted-pair ) %x22
