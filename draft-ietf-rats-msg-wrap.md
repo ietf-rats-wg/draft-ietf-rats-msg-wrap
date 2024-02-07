@@ -443,7 +443,7 @@ id-pe-cmw-collection  OBJECT IDENTIFIER  ::=
 
 CMWCollection ::= CHOICE {
     json UTF8String,
-    cbor OCTET STRING,
+    cbor OCTET STRING
 }
 
 END
