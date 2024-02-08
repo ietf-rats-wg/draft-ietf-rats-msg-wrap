@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-06T00:36:57.687868+00:00",
+  "timestamp": "2024-02-08T00:37:05.963014+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -757,7 +757,7 @@
       "labels": [],
       "body": "I'm noodling through the idea of a modular evidence collection daemon that just runs installed binaries in a certain location and assembles a cmw-collection together to send off, and I'm wondering how much interpretation of the output it would need, assuming all the binaries output a legal CMW of either CBOR or JSON encoding.\r\n\r\nWhen JC<> is used, it's only when the CDDL pun breaks down and you need base64 encoding for binary. If you have your cmw-collection as a CBOR map, and we can use, say, the basename of the evidence collection binary to key the result, but the result is just bytes that are either CBOR or JSON, that doesn't seem to fit into the \"cmw is either CBOR or JSON\".\r\n\r\nIt seems that certainly a JSON cmw-collection that contains a CBOR-encoded cmw does not parse unless you're allowed to wantonly swap your interpretation of the CDDL as for JSON or CBOR as you see fit (say with the decapsulation algorithm), given that `cmw` doesn't have a base64 encoded string alternate to store a CBOR-encoded cmw.\r\n\r\nCan we say that\r\n\r\n```\r\ncmw-collection = {\r\n  + cmw-collection-entry-label => cmw\r\n}\r\n```\r\n\r\nshould be\r\n\r\n```\r\ncmw-collection = {\r\n  + cmw-collection-entry-label => cmw-decap\r\n}\r\ncmw-decap = JC<jc-cmw, bytes .cbor cmw>\r\njc-cmw = cmw / base64-cmw\r\nbase64-cmw = base64-string .cbor cmw\r\n```\r\n\r\nI'm unsure if the `.cbor` control operator is allowed to be applied to a base64-string technically it's for byte strings and since \"one can use CDDL with JSON by limiting oneself to what can be represented in JSON.  Roughly speaking, this means leaving out byte strings\"\r\n\r\nI don't think we can use `bytes .cbor cmw` without inserting the major type byte 0x04 before the output of any of the evidence modules, so do we just define a `.feature cmw-decap` to apply the decap algorithm to arbitrary bytes instead of this JC stuff?",
       "createdAt": "2024-02-02T18:40:31Z",
-      "updatedAt": "2024-02-04T17:15:14Z",
+      "updatedAt": "2024-02-08T00:12:36Z",
       "closedAt": null,
       "comments": [
         {
@@ -829,6 +829,20 @@
           "body": "\n> ```cddl\n> \n> cmw-collection = {\n> \n>   + cmw-collection-entry-label => cmw / cmw-collection\n> \n> }\n> \n> ```\n+1\n",
           "createdAt": "2024-02-04T17:15:13Z",
           "updatedAt": "2024-02-04T17:15:13Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "An alternative (put forward by @nedmsmith) is to squash the productions:\r\n\r\n```cddl\r\ncmw = cmw-array / cmw-tag / cmw-collection\r\n```",
+          "createdAt": "2024-02-06T09:09:39Z",
+          "updatedAt": "2024-02-06T09:09:39Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "I still don't see how nesting the trees is going to help if some output trees are JSON and others are CBOR and we need to aggregate into a single format. If we can register a tag that implies the bytes within constitute a JSON CMW-collection, then we can say \r\n\r\n```\r\ncmw = cmw-array / JC<base64-string, cmw-tag> / cmw-collection\r\n```\r\n\r\nA tag in CBOR can swap to JSON, and a baes64-string in JSON can be interpreted as a serialized CBOR cmw-collection",
+          "createdAt": "2024-02-08T00:12:35Z",
+          "updatedAt": "2024-02-08T00:12:35Z"
         }
       ]
     },
@@ -3982,24 +3996,26 @@
       "id": "PR_kwDOIGCt2M5mCc6O",
       "title": "CI: allow different top-level productions",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/60",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Allow different top-level productions in the CI machinery. This enables adding the collection type alongside the CMW. In the future this can be easily extended to allow other embeddings (e.g., CWT/EAT).",
       "createdAt": "2024-02-05T15:24:28Z",
-      "updatedAt": "2024-02-05T17:46:49Z",
+      "updatedAt": "2024-02-06T09:51:14Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "98730fde434623416c05beebea1e9e60621fcb0a",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "coll-examples",
-      "headRefOid": "d54f2d93e0d0bdec739e1de50403dadaf28e500a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "1abf78e806b1d0ab8fcec04453dcd47a14f58fa4",
+      "closedAt": "2024-02-06T09:51:14Z",
+      "mergedAt": "2024-02-06T09:51:14Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "8e4262deaa174c610c98231a76301ad9ea6f865c"
+      },
       "comments": [],
       "reviews": [
         {
@@ -4029,6 +4045,76 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 61,
+      "id": "PR_kwDOIGCt2M5mSNNj",
+      "title": "fix ASN.1",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/61",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Remove spurious comma noted by Russ",
+      "createdAt": "2024-02-07T16:42:43Z",
+      "updatedAt": "2024-02-07T16:54:56Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "8e4262deaa174c610c98231a76301ad9ea6f865c",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "asn1-fix",
+      "headRefOid": "2e87a7d875b2ee39c723c62dc850a3b195c2a042",
+      "closedAt": "2024-02-07T16:54:51Z",
+      "mergedAt": "2024-02-07T16:54:51Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "b5dc84abaf8ed00fabf72ce3fde067e6a21f47c2"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5vXGWi",
+          "commit": {
+            "abbreviatedOid": "2e87a7d"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-02-07T16:54:06Z",
+          "updatedAt": "2024-02-07T16:54:06Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 62,
+      "id": "PR_kwDOIGCt2M5mUbG7",
+      "title": "Update rfc9193.cddl",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/62",
+      "state": "OPEN",
+      "author": "nedmsmith",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "nedmsmith"
+      ],
+      "labels": [],
+      "body": "changed tchar use of escaped character to use hex value %x27",
+      "createdAt": "2024-02-07T23:43:19Z",
+      "updatedAt": "2024-02-07T23:44:33Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "b5dc84abaf8ed00fabf72ce3fde067e6a21f47c2",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "fix-tchar-rfc9193",
+      "headRefOid": "2d9ee9b38488747fa8ed0c9a992100b427b54546",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
