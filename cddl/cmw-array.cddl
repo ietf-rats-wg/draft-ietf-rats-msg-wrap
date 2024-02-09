@@ -1,17 +1,11 @@
-cmw-array = [
-  type: coap-content-format / media-type
-  value: JC<base64-string, bytes>
+json-array = [
+  type: media-type
+  value: base64-string
   ? ind: uint .bits cm-type
 ]
 
-coap-content-format = uint .size 2
-media-type = text .abnf ("Content-Type" .cat Content-Type-ABNF)
-
-base64-string = text .regexp "[A-Za-z0-9_-]+"
-
-cm-type = &(
-  reference-values: 0
-  endorsements: 1
-  evidence: 2
-  attestation-results: 3
-)
+cbor-array = [
+  type: coap-content-format-type / media-type
+  value: bytes
+  ? ind: uint .bits cm-type
+]

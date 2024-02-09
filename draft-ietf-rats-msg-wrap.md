@@ -153,15 +153,15 @@ document:
 
 A further CMW "collection" type that holds together multiple CMW items is defined in {{cmw-coll}}.
 
+A CMW "tunnel" type is also defined in {{cmw-tunnel}} to allow transporting CBOR CMWs in JSON collections and vice-versa.
+
 The collected CDDL is in {{collected-cddl}}.
 
 ## CMW Array {#type-n-val}
 
-The CMW array format is defined in {{fig-cddl-array}}.
-
-The CDDL generic `JC<>` is used where there is a variance between CBOR
-and JSON. The first argument is the CDDL for JSON and the second is the
-CDDL for CBOR.
+The format of the CMW array is shown in {{fig-cddl-array}}.
+The JSON {{-json}} and CBOR {{-cbor}} representations are provided separately.
+Both the `json-array` and `cbor-array` have the same fields except for slight differences in the types discussed below.
 
 ~~~ cddl
 {::include cddl/cmw-array.cddl}
@@ -169,7 +169,7 @@ CDDL for CBOR.
 {: #fig-cddl-array artwork-align="left"
    title="CDDL definition of the Array format"}
 
-It is composed of three members:
+Each contains three members:
 
 {: vspace="0"}
 
@@ -177,10 +177,15 @@ It is composed of three members:
 : Either a text string representing a Content-Type (e.g., an EAT media type
 {{-rats-eat-mt}}) or an unsigned integer corresponding to a CoAP Content-Format
 number ({{Section 12.3 of -coap}}).
+The latter MUST NOT be used in the JSON serialization.
 
 `value`:
 : The RATS conceptual message serialized according to the
 value defined in the type member.
+When using JSON, the value field MUST be encoded as Base64 using the URL and
+filename safe alphabet ({{Section 5 of -base64}}) without padding.
+This always applies, even if the conceptual message format is already textual (e.g., a JWT EAT).
+When using CBOR, the value field MUST be encoded as a CBOR byte string.
 
 `ind`:
 : An optional bitmap that indicates which conceptual message types are
@@ -194,13 +199,6 @@ both Reference Values and Endorsements within the same `application/signed-corim
 shared by different conceptual messages.
 Future specifications may add new values to the `ind` field; see {{iana-ind-ext}}.
 
-A CMW array can be encoded as CBOR {{-cbor}} or JSON {{-json}}.
-
-When using JSON, the value field MUST be encoded as Base64 using the URL and
-filename safe alphabet ({{Section 5 of -base64}}) without padding.
-This always applies, even if the conceptual message format is already textual (e.g., a JWT EAT).
-
-When using CBOR, the value field MUST be encoded as a CBOR byte string.
 
 ## CMW CBOR Tags {#cbor-tag}
 
@@ -234,6 +232,57 @@ A consumer can always distinguish tags that have been derived via
 tags that are not, and therefore apply the right decapsulation on
 receive.
 
+## CMW Collections {#cmw-coll}
+
+Layered Attesters and composite devices ({{Sections 3.2 and 3.3 of -rats-arch}}) generate Evidence that consists of multiple parts.
+
+For example, in data center servers, it is not uncommon for separate attesting environments (AE) to serve a subsection of the entire machine.
+One AE might measure and attest to what was booted on the main CPU, while another AE might measure and attest to what was booted on a SmartNIC plugged into a PCIe slot, and a third AE might measure and attest to what was booted on the machine's GPU.
+
+To address the composite Attester use case, this document defines a CMW "collection" as a container that holds several CMW items, each with a label that is unique within the scope of the collection.
+
+The CMW collection ({{fig-cddl-collection}}) is defined as a CBOR map or JSON object with CMW values, either native or "tunnelled" ({{cmw-tunnel}}).
+The position of a `cmw` entry in the `cmw-collection` is not significant.
+Instead, the labels identify a conceptual message that, in the case of a composite Attester, should typically correspond to a component of a system.
+Labels can be strings (or integers in the CBOR serialization) that serve as a mnemonic for different conceptual messages in the collection.
+Since the collection type is recursive, implementations may limit the allowed depth of nesting.
+
+~~~ cddl
+{::include cddl/cmw-collection.cddl}
+~~~
+{: #fig-cddl-collection artwork-align="left"
+   title="CDDL definition of the CMW collection format"}
+
+Although initially designed for the composite Attester use case, the CMW collection can be repurposed for other use cases requiring CMW aggregation.
+
+## CMW Tunnel {#cmw-tunnel}
+
+The CMW tunnel type ({{fig-cddl-tunnel}}) allows for moving a CMW in one serialization format, either JSON or CBOR, into a collection that uses the opposite serialization format.
+
+Both tunnel types are arrays with two elements.
+The first element, a fixed text string starting with a `#`, acts as a "magic" number.
+The `#`, which is not an acceptable start symbol for the `Content-Type` production ({{collected-cddl}}), makes it possible to disambiguate a CMW tunnel from a CMW array.
+
+~~~ cddl
+{::include cddl/cmw-tunnel.cddl}
+~~~
+{: #fig-cddl-tunnel artwork-align="left"
+   title="CDDL definition of the CMW tunnel format"}
+
+The conversion algorithms are described in the following sub sections.
+
+### CBOR-to-JSON
+
+The CBOR byte string of the serialised CBOR CMW is encoded as Base64 using the URL and filename safe alphabet ({{Section 5 of -base64}}) without padding.
+The obtained string is added as the second element of the `c2j-tunnel` array.
+The `c2j-tunnel` array is serialized as JSON.
+
+### JSON-to-CBOR
+
+The UTF-8 string of the serialized JSON CMW is encoded as a CBOR byte string (Major type 2).
+The byte string is added as the second element of the `j2c-tunnel` array.
+The `j2c-tunnel` array is serialized as CBOR.
+
 ## Decapsulation Algorithm
 
 After removing any external framing (for example, the ASN.1 OCTET STRING
@@ -253,33 +302,15 @@ func CMWTypeSniff(b []byte) (CMW, error) {
     return CBORTag
   } else if b[0] == 0x5b {
     return JSONArray
+  } else if b[0] == 0x7b {
+    return JSONCollection
+  } else if (b[0] >= 0xa0 && b[0] <= 0xbb) || b[0] == 0xbf {
+    return CBORCollection
   }
 
   return Unknown
 }
 ~~~
-
-## CMW Collections {#cmw-coll}
-
-Layered Attesters and composite devices ({{Sections 3.2 and 3.3 of -rats-arch}}) generate Evidence that consists of multiple parts.
-
-For example, in data center servers, it is not uncommon for separate attesting environments (AE) to serve a subsection of the entire machine.
-One AE might measure and attest to what was booted on the main CPU, while another AE might measure and attest to what was booted on a SmartNIC plugged into a PCIe slot, and a third AE might measure and attest to what was booted on the machine's GPU.
-
-To address the composite Attester use case, this document defines a CMW "collection" as a container that holds several CMW items, each with a label that is unique within the scope of the collection.
-
-The CMW collection ({{fig-cddl-collection}}) is defined as a CBOR map or JSON object with CMW values.
-The position of a `cmw` entry in the `cmw-collection` is not significant.
-Instead, the labels identify a conceptual message that, in the case of a composite Attester, should typically correspond to a component of a system.
-Labels can be strings or integers that serve as a mnemonic for different conceptual messages in the collection.
-
-~~~ cddl
-{::include cddl/cmw-collection.cddl}
-~~~
-{: #fig-cddl-collection artwork-align="left"
-   title="CDDL definition of the CMW collection format"}
-
-Although initially designed for the composite Attester use case, the CMW collection can be repurposed for other use cases requiring CMW aggregation.
 
 # Examples
 
@@ -296,7 +327,7 @@ Reference Values and Endorsements.
 ## JSON Array {#ex-ja}
 
 ~~~ cbor-diag
-{::include cddl/cmw-example-json-1.diag}
+{::include cddl/cmw-example-1.json}
 ~~~
 
 Note that a CoAP Content-Format number can also be used with the JSON array
@@ -306,13 +337,13 @@ Content-Formats and it is crucial to save bytes.
 ## CBOR Array {#ex-ca}
 
 ~~~ cbor-diag
-{::include cddl/cmw-example-cbor-1.diag}
+{::include cddl/cmw-example-1.diag}
 ~~~
 
 with the following wire representation:
 
 ~~~
-{::include cddl/cmw-example-cbor-1.pretty}
+{::include cddl/cmw-example-1.pretty}
 ~~~
 
 Note that a Media-Type-Name can also be used with the CBOR array form,
@@ -321,25 +352,25 @@ Content-Formats, or (unlike the case in point) if a CoAP Content-Format
 number has not been registrered.
 
 ~~~ cbor-diag
-{::include cddl/cmw-example-cbor-2.diag}
+{::include cddl/cmw-example-2.diag}
 ~~~
 
 ## CBOR Tag {#ex-ct}
 
 ~~~ cbor-diag
-{::include cddl/cmw-example-cbor-tag-1.diag}
+{::include cddl/cmw-example-tag-1.diag}
 ~~~
 
 with the following wire representation:
 
 ~~~
-{::include cddl/cmw-example-cbor-tag-1.pretty}
+{::include cddl/cmw-example-tag-1.pretty}
 ~~~
 
 ## CBOR Array with explicit CM indicator {#ex-ca-ind}
 
 ~~~ cbor-diag
-{::include cddl/cmw-example-cbor-3.diag}
+{::include cddl/cmw-example-3.diag}
 ~~~
 
 with the following wire representation:
@@ -359,13 +390,19 @@ with the following wire representation:
 The following example is a CBOR collection that assembles conceptual messages from three attesters: Evidence for attesters A and B and Attestation Result for attester C.
 
 ~~~
-{::include cddl/collection-example-cbor-1.diag}
+{::include cddl/collection-example-1.diag}
 ~~~
 
 with the following wire representation:
 
 ~~~
-{::include cddl/collection-example-cbor-1.pretty}
+{::include cddl/collection-example-1.pretty}
+~~~
+
+The following example shows the use of a tunnelled type to move a JSON array to a CBOR collection:
+
+~~~
+{::include cddl/collection-example-2.diag}
 ~~~
 
 ## JSON Collection
@@ -373,20 +410,25 @@ with the following wire representation:
 The following example is a JSON collection that assembles Evidence from two attesters.
 
 ~~~
-{::include cddl/collection-example-json-1.diag}
+{::include cddl/collection-example-1.json}
+~~~
+
+The following example shows the use of a tunnelled type to move a CBOR array to a JSON collection:
+
+~~~
+{::include cddl/collection-example-2.json}
 ~~~
 
 # Transporting CMW and CMW Collections in X.509 Messages {#x509}
 
-There are cases where CMW and CMW collection payloads need to be transported in PKIX messages, for example in Certificate Signing Requests (CSRs) {{-csr-a}}, or in X.509 Certificates and Certificate Revocation Lists (CRLs) {{DICE-arch}}.
+There are cases where CMW need to be transported in PKIX messages, for example in Certificate Signing Requests (CSRs) {{-csr-a}}, or in X.509 Certificates and Certificate Revocation Lists (CRLs) {{DICE-arch}}.
 
-For CMW, Section 6.1.8 of {{DICE-arch}} already defines the ConceptualMessageWrapper format and the associated object identifier.
 
-This section specifies the CMWCollection extension to carry CMW collection objects.
+This section specifies the CMW extension to carry CMW objects.
 
-The CMWCollection extension MAY be included in X.509 Certificates, CRLs {{-pkix}}, and CSRs.
+The CMW extension MAY be included in X.509 Certificates, CRLs {{-pkix}}, and CSRs.
 
-The CMWCollection extension MUST be identified by the following object identifier:
+The CMW extension MUST be identified by the following object identifier:
 
 ~~~asn.1
 id-pe-cmw-collection  OBJECT IDENTIFIER ::=
@@ -396,23 +438,23 @@ id-pe-cmw-collection  OBJECT IDENTIFIER ::=
 
 This extension MUST NOT be marked critical.
 
-The CMWCollection extension MUST have the following syntax:
+The CMW extension MUST have the following syntax:
 
 ~~~asn.1
-CMWCollection ::= CHOICE {
+CMW ::= CHOICE {
     json UTF8String,
-    cbor OCTET STRING,
+    cbor OCTET STRING
 }
 ~~~
 
-The CMWCollection MUST contain the serialized CMW collection object in JSON or CBOR format, using the appropriate CHOICE entry.
+The CMW MUST contain the serialized CMW object in JSON or CBOR format, using the appropriate CHOICE entry.
 
 ## ASN.1 Module {#asn1-x509}
 
-This section provides an ASN.1 module {{X.680}} for the CMWCollection extension, following the conventions established in {{RFC5912}} and {{RFC6268}}.
+This section provides an ASN.1 module {{X.680}} for the CMW extension, following the conventions established in {{RFC5912}} and {{RFC6268}}.
 
 ~~~asn.1
-CMWCollectionExtn
+CMWExtn
   { iso(1) identified-organization(3) dod(6) internet(1)
     security(5) mechanisms(5) pkix(7) id-mod(0)
     id-mod-cmw-collection-extn(TBD) }
@@ -427,27 +469,33 @@ IMPORTS
       security(5) mechanisms(5) pkix(7) id-mod(0)
       id-mod-pkixCommon-02(57) } ;
 
--- CMWCollection Extension
+-- CMW Extension
 
-ext-CMWCollection EXTENSION ::= {
-  SYNTAX CMWCollection
+ext-CMW EXTENSION ::= {
+  SYNTAX CMW
   IDENTIFIED BY id-pe-cmw-collection }
 
--- CMWCollection Extension OID
+-- CMW Extension OID
 
 id-pe-cmw-collection  OBJECT IDENTIFIER  ::=
    { iso(1) identified-organization(3) dod(6) internet(1)
      security(5) mechanisms(5) pkix(7) id-pe(1) TBD }
 
--- CMWCollection Extension Syntax
+-- CMW Extension Syntax
 
-CMWCollection ::= CHOICE {
+CMW ::= CHOICE {
     json UTF8String,
     cbor OCTET STRING
 }
 
 END
 ~~~
+
+## Compatibility with DICE `ConceptualMessageWrapper`
+
+Section 6.1.8 of {{DICE-arch}} defines the ConceptualMessageWrapper format and the associated object identifier.
+The CMW format defined in {{DICE-arch}} allows only a subset of the CMW grammar defined in this document.
+Specifically, the tunnel and collection formats cannot be encoded using DICE CMWs.
 
 # Implementation Status
 
@@ -506,7 +554,7 @@ IANA is requested to add a new `cmw` claim to the "CBOR Web Token (CWT) Claims" 
 * Claim Name: cmw
 * Claim Description: A RATS Conceptual Message Wrapper
 * Claim Key: TBD
-* Claim Value Type(s): CBOR Array, or CBOR Tag
+* Claim Value Type(s): CBOR Map, CBOR Array, or CBOR Tag
 * Change Controller: IETF
 * Specification Document(s): {{type-n-val}} and {{cbor-tag}} of {{&SELF}}
 
@@ -518,7 +566,7 @@ IANA is requested to add a new `cmw` claim to the "JSON Web Token Claims" sub-re
 
 * Claim Name: cmw
 * Claim Description: A RATS Conceptual Message Wrapper
-* Claim Value Type(s): JSON Array
+* Claim Value Type(s): JSON Object or JSON Array
 * Change Controller: IETF
 * Specification Document(s): {{type-n-val}} of {{&SELF}}
 
@@ -528,7 +576,7 @@ IANA is requested to add the following tag to the "CBOR Tags" {{!IANA.cbor-tags}
 
 | CBOR Tag | Data Item | Semantics | Reference |
 |----------|-----------|-----------|-----------|
-| TBD      | CBOR array, CBOR tag | RATS Conceptual Message Wrapper | {{type-n-val}} and {{cbor-tag}} of {{&SELF}} |
+| TBD      | CBOR map, CBOR array, CBOR tag | RATS Conceptual Message Wrapper | {{type-n-val}}, {{cbor-tag}} and {{cmw-coll}} of {{&SELF}} |
 
 ## RATS Conceptual Message Wrapper (CMW) Indicators Registry {#iana-ind-ext}
 
@@ -572,10 +620,8 @@ IANA is requested to add the following media types to the "Media Types" registry
 
 | Name | Template | Reference |
 |-----------------|-------------------------|-----------|
-| `cmw+cbor` | `application/cmw+cbor` | {{type-n-val}} and {{cbor-tag}} of {{&SELF}} |
-| `cmw+json` | `application/cmw+json` | {{type-n-val}} of {{&SELF}} |
-| `cmw-collection+cbor` | `application/cmw-collection+cbor` | {{cmw-coll}} of {{&SELF}} |
-| `cmw-collection+json` | `application/cmw-collection+json` | {{cmw-coll}} of {{&SELF}} |
+| `cmw+cbor` | `application/cmw+cbor` | {{type-n-val}}, {{cbor-tag}} and {{cmw-coll}} of {{&SELF}} |
+| `cmw+json` | `application/cmw+json` | {{type-n-val}} and {{cmw-coll}} of {{&SELF}} |
 {: #tab-mt-regs title="CMW Media Types"}
 
 ### `application/cmw+cbor`
@@ -674,105 +720,9 @@ Author/Change controller:
 Provisional registration:
 : no
 
-### `application/cmw-collection+cbor`
-
-{:compact}
-Type name:
-: application
-
-Subtype name:
-: cmw-collection+cbor
-
-Required parameters:
-: n/a
-
-Optional parameters:
-: n/a
-
-Encoding considerations:
-: binary (CBOR)
-
-Security considerations:
-: {{seccons}} of {{&SELF}}
-
-Interoperability considerations:
-: n/a
-
-Published specification:
-: {{&SELF}}
-
-Applications that use this media type:
-: Attesters, Verifiers, Endorsers and Reference-Value providers, Relying Parties that need to transfer collections of CMW payloads over HTTP(S), CoAP(S), and other transports.
-
-Fragment identifier considerations:
-: The syntax and semantics of fragment identifiers are as specified for "application/cbor". (No fragment identification syntax is currently defined for "application/cbor".)
-
-Person & email address to contact for further information:
-: RATS WG mailing list (rats@ietf.org)
-
-Intended usage:
-: COMMON
-
-Restrictions on usage:
-: none
-
-Author/Change controller:
-: IETF
-
-Provisional registration:
-: no
-
-### `application/cmw-collection+json`
-
-{:compact}
-Type name:
-: application
-
-Subtype name:
-: cmw-collection+json
-
-Required parameters:
-: n/a
-
-Optional parameters:
-: n/a
-
-Encoding considerations:
-: binary (JSON is UTF-8-encoded text)
-
-Security considerations:
-: {{seccons}} of {{&SELF}}
-
-Interoperability considerations:
-: n/a
-
-Published specification:
-: {{&SELF}}
-
-Applications that use this media type:
-: Attesters, Verifiers, Endorsers and Reference-Value providers, Relying Parties that need to transfer collections of CMW payloads over HTTP(S), CoAP(S), and other transports.
-
-Fragment identifier considerations:
-: The syntax and semantics of fragment identifiers are as specified for "application/json". (No fragment identification syntax is currently defined for "application/json".)
-
-Person & email address to contact for further information:
-: RATS WG mailing list (rats@ietf.org)
-
-Intended usage:
-: COMMON
-
-Restrictions on usage:
-: none
-
-Author/Change controller:
-: IETF
-
-Provisional registration:
-: no
-
 ## New SMI Numbers Registrations
 
-IANA is requested to assign an object identifier (OID) for the CMWCollection extension defined in {{x509}} in the "Certificate Extension" sub-registry of the "SMI Numbers" {{!IANA.smi-numbers}} registry.
+IANA is requested to assign an object identifier (OID) for the CMW extension defined in {{x509}} in the "Certificate Extension" sub-registry of the "SMI Numbers" {{!IANA.smi-numbers}} registry.
 
 IANA is requested to assign an object identifier (OID) for the ASN.1 Module defined in {{asn1-x509}} in the "Module Identifier" sub-registry of the "SMI Numbers" {{!IANA.smi-numbers}} registry.
 
@@ -781,7 +731,7 @@ IANA is requested to assign an object identifier (OID) for the ASN.1 Module defi
 ## Collected CDDL {#collected-cddl}
 
 ~~~ cddl
-{::include cddl/cmw.cddl}
+{::include cddl/cmw-autogen.cddl}
 ~~~
 
 # Registering and Using CMWs
@@ -832,8 +782,16 @@ The list of currently open issues for this documents can be found at
 # Acknowledgments
 {:numbered="false"}
 
-The authors would like to thank Carl Wallace and Carsten Bormann for their
-reviews and suggestions.
+The authors would like to thank
+Carl Wallace,
+Carsten Bormann,
+Dionna Glaze,
+Laurence Lundblade,
+Russ Housley,
+and
+Tom Jones
+for their reviews and suggestions.
+
 The definition of a CMW collection has been modelled on a proposal originally made by Simon Frost for an EAT-based Evidence collection type.  The CMW collection intentionally attains binary compatibility with Simon's design and aims at superseding it by also generalizing on the allowed Evidence formats.
 
 [^note]: Note:

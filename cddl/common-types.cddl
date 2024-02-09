@@ -1,0 +1,12 @@
+media-type = text .abnf ("Content-Type" .cat Content-Type-ABNF)
+base64-string = text .regexp "[A-Za-z0-9_-]+"
+
+cm-type = &(
+  reference-values: 0
+  endorsements: 1
+  evidence: 2
+  attestation-results: 3
+)
+
+coap-content-format-type = uint .size 2
+
