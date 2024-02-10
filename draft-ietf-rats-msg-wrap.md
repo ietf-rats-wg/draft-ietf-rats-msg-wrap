@@ -169,7 +169,7 @@ Both the `json-array` and `cbor-array` have the same fields except for slight di
 {: #fig-cddl-array artwork-align="left"
    title="CDDL definition of the Array format"}
 
-Each contains three members:
+Each contains two or three members:
 
 {: vspace="0"}
 
@@ -260,7 +260,7 @@ Although initially designed for the composite Attester use case, the CMW collect
 The CMW tunnel type ({{fig-cddl-tunnel}}) allows for moving a CMW in one serialization format, either JSON or CBOR, into a collection that uses the opposite serialization format.
 
 Both tunnel types are arrays with two elements.
-The first element, a fixed text string starting with a `#`, acts as a "magic" number.
+The first element, a fixed text string starting with a `#`, acts as a sentinel value.
 The `#`, which is not an acceptable start symbol for the `Content-Type` production ({{collected-cddl}}), makes it possible to disambiguate a CMW tunnel from a CMW array.
 
 ~~~ cddl
@@ -269,7 +269,7 @@ The `#`, which is not an acceptable start symbol for the `Content-Type` producti
 {: #fig-cddl-tunnel artwork-align="left"
    title="CDDL definition of the CMW tunnel format"}
 
-The conversion algorithms are described in the following sub sections.
+The conversion algorithms are described in the following subsections.
 
 ### CBOR-to-JSON
 
