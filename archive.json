@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-08T00:37:05.963014+00:00",
+  "timestamp": "2024-02-11T00:40:37.485820+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -757,7 +757,7 @@
       "labels": [],
       "body": "I'm noodling through the idea of a modular evidence collection daemon that just runs installed binaries in a certain location and assembles a cmw-collection together to send off, and I'm wondering how much interpretation of the output it would need, assuming all the binaries output a legal CMW of either CBOR or JSON encoding.\r\n\r\nWhen JC<> is used, it's only when the CDDL pun breaks down and you need base64 encoding for binary. If you have your cmw-collection as a CBOR map, and we can use, say, the basename of the evidence collection binary to key the result, but the result is just bytes that are either CBOR or JSON, that doesn't seem to fit into the \"cmw is either CBOR or JSON\".\r\n\r\nIt seems that certainly a JSON cmw-collection that contains a CBOR-encoded cmw does not parse unless you're allowed to wantonly swap your interpretation of the CDDL as for JSON or CBOR as you see fit (say with the decapsulation algorithm), given that `cmw` doesn't have a base64 encoded string alternate to store a CBOR-encoded cmw.\r\n\r\nCan we say that\r\n\r\n```\r\ncmw-collection = {\r\n  + cmw-collection-entry-label => cmw\r\n}\r\n```\r\n\r\nshould be\r\n\r\n```\r\ncmw-collection = {\r\n  + cmw-collection-entry-label => cmw-decap\r\n}\r\ncmw-decap = JC<jc-cmw, bytes .cbor cmw>\r\njc-cmw = cmw / base64-cmw\r\nbase64-cmw = base64-string .cbor cmw\r\n```\r\n\r\nI'm unsure if the `.cbor` control operator is allowed to be applied to a base64-string technically it's for byte strings and since \"one can use CDDL with JSON by limiting oneself to what can be represented in JSON.  Roughly speaking, this means leaving out byte strings\"\r\n\r\nI don't think we can use `bytes .cbor cmw` without inserting the major type byte 0x04 before the output of any of the evidence modules, so do we just define a `.feature cmw-decap` to apply the decap algorithm to arbitrary bytes instead of this JC stuff?",
       "createdAt": "2024-02-02T18:40:31Z",
-      "updatedAt": "2024-02-08T00:12:36Z",
+      "updatedAt": "2024-02-08T19:14:04Z",
       "closedAt": null,
       "comments": [
         {
@@ -843,6 +843,90 @@
           "body": "I still don't see how nesting the trees is going to help if some output trees are JSON and others are CBOR and we need to aggregate into a single format. If we can register a tag that implies the bytes within constitute a JSON CMW-collection, then we can say \r\n\r\n```\r\ncmw = cmw-array / JC<base64-string, cmw-tag> / cmw-collection\r\n```\r\n\r\nA tag in CBOR can swap to JSON, and a baes64-string in JSON can be interpreted as a serialized CBOR cmw-collection",
           "createdAt": "2024-02-08T00:12:35Z",
           "updatedAt": "2024-02-08T00:12:35Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I still don't see how nesting the trees is going to help if some output trees are JSON and others are CBOR and we need to aggregate into a single format\r\n\r\nYou are right, it doesn't help with mixtures of formats.\r\n\r\n> If we can register a tag that implies the bytes within constitute a JSON CMW-collection, then we can say\r\n> \r\n> ```\r\n> cmw = cmw-array / JC<base64-string, cmw-tag> / cmw-collection\r\n> ```\r\n> \r\n> A tag in CBOR can swap to JSON, and a baes64-string in JSON can be interpreted as a serialized CBOR cmw-collection\r\n\r\nI am not sure that will work as written, but the gist is clear: we need tunnels :-)\r\n\r\nAnd given the tunnelling is symmetrical we might use a common shape by registering a couple of new media types (since tags are not a JSON thing):\r\n\r\n```\r\nj2c-tunnel = [ \"application/cmw-j2c-tunnel\", text .b64u json-CMW ]\r\nc2j-tunnel = [ \"application/cmw-c2j-tunnel\", text .b64u cbor-CMW ]\r\n```\r\n\r\nwhere:\r\n```\r\njson-CMW = array / collection\r\ncbor-CMW = tag / array / collection\r\n```\r\n\r\nand the tunneling procedures are:\r\n\r\n#### :mountain_railway: JSON-to-CBOR CMW :mountain_railway:\r\n\r\n* input: the UTF-8 string with the serialised JSON CMW\r\n* apply b64urlsafe encoding\r\n* stick it into the second slot of the `j2c-tunnel` tuple\r\n* output: the `j2c-tunnel` tuple as a CBOR array\r\n\r\n#### :mountain_railway: CBOR-to-JSON CMW :mountain_railway:\r\n\r\n* input: the byte array with the serialised CBOR CMW\r\n* apply b64urlsafe encoding\r\n* stick it into the second slot of the `c2j-tunnel`\r\n* output: the `c2j-tunnel` tuple as a JSON array\r\n\r\n\r\n",
+          "createdAt": "2024-02-08T14:06:42Z",
+          "updatedAt": "2024-02-08T14:06:42Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "Why does the JSON to CBOR tunnel need to be base64 encoded? The cmw-array value type is bytes, not text.",
+          "createdAt": "2024-02-08T16:13:50Z",
+          "updatedAt": "2024-02-08T16:13:50Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Why does the JSON to CBOR tunnel need to be base64 encoded?\r\n\r\nI made it like that purely for aesthetic/symmetry reasons.\r\n\r\n",
+          "createdAt": "2024-02-08T16:19:02Z",
+          "updatedAt": "2024-02-08T16:19:02Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "The symmetry breaks the current cmw-array schema and adds encoding bloat for aesthetics, so I'd recommend keeping it to bytes.",
+          "createdAt": "2024-02-08T16:20:01Z",
+          "updatedAt": "2024-02-08T16:20:01Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "To be clear, I have no strong opinions.  We could do:\r\n```\r\nj2c-tunnel = [ \"application/cmw-j2c-tunnel\", text .json json-CMW ]\r\nc2j-tunnel = [ \"application/cmw-c2j-tunnel\", text .b64u cbor-CMW ]\r\n```\r\nand change the tunnelling procedure accordingly.\r\n\r\n\r\n\r\n",
+          "createdAt": "2024-02-08T16:23:00Z",
+          "updatedAt": "2024-02-08T16:23:00Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> The symmetry breaks the current cmw-array schema\r\n\r\nnote that the `j2c-tunnel` array is not strictly a `cmw-array`; we can do whatever we want with that without fear of breaking anything.\r\n\r\n> so I'd recommend keeping it to bytes.\r\n\r\nWFM\r\n\r\n",
+          "createdAt": "2024-02-08T16:27:06Z",
+          "updatedAt": "2024-02-08T16:27:06Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "Is the idea for this to not match cmw-array and instead be a different alternate? That changes the parsing complexity from LL(1) to LL(2), no? I would think we have this be a media type for cmw-array and a new cm-type bit for \"tunnel\"?",
+          "createdAt": "2024-02-08T16:28:03Z",
+          "updatedAt": "2024-02-08T16:28:03Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Relevant to this discussion, one of @carl-wallace's WGLC comments in https://mailarchive.ietf.org/arch/msg/rats/xY2mwu790UOGnhFAUduGj5ddo3Y/\r\n\r\n> _\"I think this came up relative to the collections draft a while back but I forget how it was handled (and did not go looking just now). How would one encode artifacts that use different encoding types, i.e., a CBOR evidence and a JSON result? The collection concept is analogous to the submodules part of EAT, and that addresses the various nesting possibilities.\"_",
+          "createdAt": "2024-02-08T16:34:00Z",
+          "updatedAt": "2024-02-08T17:08:32Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Is the idea for this to not match cmw-array and instead be a different alternate? That changes the parsing complexity from LL(1) to LL(2), no? I would think we have this be a media type for cmw-array and a new cm-type bit for \"tunnel\"?\r\n\r\nThe complete (loose) grammar I have in mind is this:\r\n\r\n```\r\ncmw = json-CMW / cbor-CMW\r\n\r\njson-CMW = json-array / json-collection\r\ncbor-CMW = cbor-array / cbor-collection / cbor-tag\r\n\r\nc2j-tunnel = [ \"#cmw-c2j-tunnel\", text ]\r\nj2c-tunnel = [ \"#cmw-j2c-tunnel\", bytes ]\r\n\r\njson-array = [ text, text ]\r\njson-collection = { + text => json-CMW / c2j-tunnel }\r\n\r\ncbor-array = [ uint / text, bytes ]\r\ncbor-collection = { + (int / text) => cbor-CMW / j2c-tunnel }\r\ncbor-tag = #6.<0..18446744073709551615>(bytes)\r\n```\r\n\r\n> Updated according to https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/55#issuecomment-1934673175\r\n",
+          "createdAt": "2024-02-08T17:04:38Z",
+          "updatedAt": "2024-02-08T19:14:04Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "I think we do have to specify that the media type in a cmw-array cannot be  \"application/cmw-j2c-tunnel\" (conversely for JSON), OR we have to say that `ind` may not be present in a cmw-array if the media type is  \"application/cmw-j2c-tunnel\". Right now the alternates parse ambiguously.",
+          "createdAt": "2024-02-08T17:48:05Z",
+          "updatedAt": "2024-02-08T17:48:05Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I think we do have to specify that the media type in a cmw-array cannot be \"application/cmw-j2c-tunnel\" (conversely for JSON), OR we have to say that `ind` may not be present in a cmw-array if the media type is \"application/cmw-j2c-tunnel\". Right now the alternates parse ambiguously.\r\n\r\nYes, absolutely.  The two tunnel media types are effectively magic numbers.\r\n",
+          "createdAt": "2024-02-08T17:57:00Z",
+          "updatedAt": "2024-02-08T17:57:00Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > I think we do have to specify that the media type in a cmw-array cannot be \"application/cmw-j2c-tunnel\" (conversely for JSON), OR we have to say that `ind` may not be present in a cmw-array if the media type is \"application/cmw-j2c-tunnel\". Right now the alternates parse ambiguously.\r\n> \r\n> Yes, absolutely. The two tunnel media types are effectively magic numbers.\r\n\r\nAn alternative would be to use as a magic number something that doesn't parse as a media-type string (i.e., anything `(!ALPHA && !DIGIT)`), say `\"!\"` for CBOR and `\"#\"` for JSON, or less concisely but a bit more self-descriptively `\"#cmw-c2j-tunnel\"` and `\"#cmw-j2c-tunnel\"`.)\r\n\r\nThis would also spare us from registering two mostly useless new media types :-)\r\n\r\n",
+          "createdAt": "2024-02-08T18:04:56Z",
+          "updatedAt": "2024-02-08T18:10:08Z"
         }
       ]
     },
@@ -901,6 +985,38 @@
       "body": "[Laurence email to rats@ietf.org](https://mailarchive.ietf.org/arch/msg/rats/9uDu-DOOrbYIX5tND0muaVREJBM/):\r\n\r\n> _Maybe some clarification about the use of the CWT claim to carry the conceptual message? If the CWT is an EAT and the conceptual message is an EAT, you have an EAT in an EAT and it looks a lot like a nested token. But I don\u2019t think that\u2019s what is intended at all. The surrounding EAT in this case is just convenient transport. It is not binding to or attesting to the enclosed EAT.\r\n> One way to do this would for the examples to be more expansive._",
       "createdAt": "2024-02-05T13:49:43Z",
       "updatedAt": "2024-02-05T13:49:43Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 63,
+      "id": "I_kwDOIGCt2M5-s7xM",
+      "title": "Two security considerations",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/63",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "## UCCS is not protected\r\n\r\nIn https://mailarchive.ietf.org/arch/msg/rats/xY2mwu790UOGnhFAUduGj5ddo3Y/ Carl notes:\r\n> _\"The security considerations section says that \u201cmessages themselves and their encoding ensure security protection.\u201d This is not true for UCCS, which is part of the referenced EAT media type spec.\"_\r\n\r\n## Intra-element binding in collections\r\n\r\nIn a private conversation between Ned and I:\r\n> _\"[t]here should be a way to ensure the integrity of the collection as soon as the collection is formed.\"_.\r\n\r\nRe: intra-element binding, see also: https://www.ietf.org/archive/id/draft-frost-rats-eat-collection-03.html#section-4.1",
+      "createdAt": "2024-02-08T17:21:16Z",
+      "updatedAt": "2024-02-08T17:21:16Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 64,
+      "id": "I_kwDOIGCt2M5-s9n7",
+      "title": "ASN.1 encoding clarifications",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/64",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Carl's review (https://mailarchive.ietf.org/arch/msg/rats/xY2mwu790UOGnhFAUduGj5ddo3Y/)\r\n\r\n> _\"In section 5, it may be worth calling out that the encoded CMWCollection is encoded as an OCTET STRING as the extnValue field of this extension. Section 4.2 in RFC5280 makes this point but I\u2019ve seen the outer OCTET STRING left out in a couple of attestation-related contexts. The pseudo code about removing \u201cthe ASN.1 OCTET STRING\u201d in Section 3.3. could further this misimpression since there are two OCTET STRING layers wrapping a CBOR value. Maybe add something like: \u201cThe DER encoded CMWCollection is the value of the octet string for the extnValue field of the extension\u201d.\"_",
+      "createdAt": "2024-02-08T17:25:47Z",
+      "updatedAt": "2024-02-08T17:25:47Z",
       "closedAt": null,
       "comments": []
     }
@@ -4093,7 +4209,7 @@
       "id": "PR_kwDOIGCt2M5mUbG7",
       "title": "Update rfc9193.cddl",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/62",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "nedmsmith",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -4102,19 +4218,142 @@
       "labels": [],
       "body": "changed tchar use of escaped character to use hex value %x27",
       "createdAt": "2024-02-07T23:43:19Z",
-      "updatedAt": "2024-02-07T23:44:33Z",
+      "updatedAt": "2024-02-08T01:06:03Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "b5dc84abaf8ed00fabf72ce3fde067e6a21f47c2",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "fix-tchar-rfc9193",
       "headRefOid": "2d9ee9b38488747fa8ed0c9a992100b427b54546",
+      "closedAt": "2024-02-08T01:05:13Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Updated ruby doesn't have this issue.",
+          "createdAt": "2024-02-08T01:06:02Z",
+          "updatedAt": "2024-02-08T01:06:02Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 65,
+      "id": "PR_kwDOIGCt2M5mggmF",
+      "title": "add tunnelling and treat collections as CMWs",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/65",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "* merge collection in the top-level CMW production\r\n* rework the X.509 extension (CMWCollection -> CMW)\r\n* remove special-casing collection in all IANA registrations\r\n* add bi-directional tunnelling between JSON and CBOR serialisations\r\n* rework CDDL assembly & test\r\n* add new examples\r\n\r\nFix #55",
+      "createdAt": "2024-02-09T18:12:42Z",
+      "updatedAt": "2024-02-10T12:03:23Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "b5dc84abaf8ed00fabf72ce3fde067e6a21f47c2",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "tunnels",
+      "headRefOid": "9b2061b033093da481de1ae76dce9c8efc091805",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze",
+          "createdAt": "2024-02-09T18:13:51Z",
+          "updatedAt": "2024-02-09T18:13:51Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "Looks good apart from nits. Thanks Thomas :)",
+          "createdAt": "2024-02-09T21:05:17Z",
+          "updatedAt": "2024-02-09T21:05:17Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5vpngT",
+          "commit": {
+            "abbreviatedOid": "f867dbb"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-09T20:54:14Z",
+          "updatedAt": "2024-02-09T20:54:14Z",
+          "comments": [
+            {
+              "originalPosition": 26,
+              "body": "Do you not say \"two to three\" when one is optional?",
+              "createdAt": "2024-02-09T20:54:14Z",
+              "updatedAt": "2024-02-09T20:54:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5vpoqU",
+          "commit": {
+            "abbreviatedOid": "f867dbb"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-09T20:58:29Z",
+          "updatedAt": "2024-02-09T20:58:29Z",
+          "comments": [
+            {
+              "originalPosition": 92,
+              "body": "Although everything is encoded as numbers on computers, saying that a string starting with `#` is a magic number doesn't sound right to me. In these cases I use the term \"sentinel value\".",
+              "createdAt": "2024-02-09T20:58:29Z",
+              "updatedAt": "2024-02-09T20:58:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5vpo5c",
+          "commit": {
+            "abbreviatedOid": "f867dbb"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-09T20:59:16Z",
+          "updatedAt": "2024-02-09T20:59:16Z",
+          "comments": [
+            {
+              "originalPosition": 101,
+              "body": "Inconsistent use of \"subsection\" and \"sub section\" within the same doc. I recommend the former.",
+              "createdAt": "2024-02-09T20:59:16Z",
+              "updatedAt": "2024-02-09T20:59:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5vpwL3",
+          "commit": {
+            "abbreviatedOid": "f867dbb"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM. Some of the word choice suggestions seem reasonable to incorporate. These could be refined later also.",
+          "createdAt": "2024-02-09T21:21:29Z",
+          "updatedAt": "2024-02-09T21:21:29Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
