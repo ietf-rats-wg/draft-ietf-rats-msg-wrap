@@ -2,5 +2,5 @@ start = cmw
 
 cmw = json-CMW / cbor-CMW
 
-json-CMW = json-array / json-collection
-cbor-CMW = cbor-array / cbor-collection / cbor-tag
+json-CMW = json-record / json-collection
+cbor-CMW = cbor-record / cbor-collection / cbor-tag
