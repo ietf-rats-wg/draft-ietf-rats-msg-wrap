@@ -1,10 +1,10 @@
-json-array = [
+json-record = [
   type: media-type
   value: base64-string
   ? ind: uint .bits cm-type
 ]
 
-cbor-array = [
+cbor-record = [
   type: coap-content-format-type / media-type
   value: bytes
   ? ind: uint .bits cm-type
