@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-13T00:37:47.075230+00:00",
+  "timestamp": "2024-02-15T00:37:42.133481+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -4252,7 +4252,7 @@
       "labels": [],
       "body": "* merge collection in the top-level CMW production\r\n* rework the X.509 extension (CMWCollection -> CMW)\r\n* remove special-casing collection in all IANA registrations\r\n* add bi-directional tunnelling between JSON and CBOR serialisations\r\n* rework CDDL assembly & test\r\n* add new examples\r\n\r\nFix #55",
       "createdAt": "2024-02-09T18:12:42Z",
-      "updatedAt": "2024-02-10T12:03:23Z",
+      "updatedAt": "2024-02-15T00:06:11Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "b5dc84abaf8ed00fabf72ce3fde067e6a21f47c2",
@@ -4277,6 +4277,69 @@
           "body": "Looks good apart from nits. Thanks Thomas :)",
           "createdAt": "2024-02-09T21:05:17Z",
           "updatedAt": "2024-02-09T21:05:17Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "After reviewing the cddl naming I think the following would be more intuitive choices:\r\n```\r\ncmw = cmwj / cmwc\r\ncmwj = cmwj-record / cmwj-collection\r\ncmwc = cmwc-record / cmwc-collection / cmw-cbor-tag\r\ncmwj-collection = { + text => cmwj / cmw-c2j-tunnel }\r\ncbor-collection = { + (int / text) => cmwc / cmw-j2c-tunnel }\r\ncmw-c2j-tunnel = [ \"#cmw-c2j-tunnel\", base64-string ]\r\ncmw-j2c-tunnel = [ \"#cmw-j2c-tunnel\", bytes ]\r\ncmw-cbor-tag = #6.<0..18446744073709551615>(bytes)\r\ncmwj-record = [\r\n  type: media-type\r\n  value: base64-string\r\n  ? ind: uint .bits cm-type\r\n]\r\ncmwc-record = [\r\n  type: coap-content-format-type / media-type\r\n  value: bytes\r\n  ? ind: uint .bits cm-type\r\n]\r\n```",
+          "createdAt": "2024-02-13T19:30:57Z",
+          "updatedAt": "2024-02-13T19:30:57Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> After reviewing the cddl naming I think the following would be more intuitive choices:\r\n> \r\n> ```\r\n> cmw = cmwj / cmwc\r\n> [...]\r\n> ```\r\n\r\nThe choice of avoiding extra prefixes was on purpose.  With CDDL 2 imports I'd expect modules that depend on cmw to\r\n```\r\n;# import rfcxxxx as cmw\r\n```\r\nand then use it as\r\n```\r\nmy = {\r\n  evidence: cmw.json_array\r\n}\r\n```\r\nIf we add `cmw` to all the data items we end up with\r\n```\r\nmy = {\r\n  evidence: cmw.cmwj\r\n}\r\n```\r\nwhich stutters.\r\n\r\n",
+          "createdAt": "2024-02-14T17:32:51Z",
+          "updatedAt": "2024-02-14T17:32:51Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": ">With CDDL 2 imports\r\n\r\nWhich version of cddl tooling recognizes CDDL2 `;#` imports?\r\nAre we married to `-array` vs. `-record`? ",
+          "createdAt": "2024-02-14T17:36:23Z",
+          "updatedAt": "2024-02-14T18:00:24Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Applying the `;#` imports convention the full schema looks like the following(?):\r\n```\r\ncmw = cmwj / cmwc\r\ncmwj = json-record / json-collection\r\ncmwc = cbor-record / cbor-collection / cbor-tag\r\njson-collection = { + text => cmwj / c2j-tunnel }\r\ncbor-collection = { + (int / text) => cmwc / j2c-tunnel }\r\nc2j-tunnel = [ \"#cmw-c2j-tunnel\", base64-string ]\r\nj2c-tunnel = [ \"#cmw-j2c-tunnel\", bytes ]\r\ncbor-tag = #6.<0..18446744073709551615>(bytes)\r\njson-record = [\r\n  type: media-type\r\n  value: base64-string\r\n  ? ind: uint .bits cm-type\r\n]\r\ncbor-record = [\r\n  type: coap-content-format-type / media-type\r\n  value: bytes\r\n  ? ind: uint .bits cm-type\r\n]\r\n```",
+          "createdAt": "2024-02-14T18:05:32Z",
+          "updatedAt": "2024-02-14T18:05:32Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "BTW: should there be a tunnel for X.509 encoded CMWs?",
+          "createdAt": "2024-02-14T20:59:46Z",
+          "updatedAt": "2024-02-14T20:59:46Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "I thought CMWs were only added as an extension to a certificate as added context to understand a signature, not as another way to aggregate CMWs, no?",
+          "createdAt": "2024-02-14T21:36:53Z",
+          "updatedAt": "2024-02-14T21:36:53Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I thought CMWs were only added as an extension to a certificate as added context to understand a signature, not as another way to aggregate CMWs, no?\r\n\r\nA cmw-collection, conceptually, is a representation of a \"slice\" of an attested system. A certificate path is used by DICE layering to report evidence for a slice that is analogous to at boot sequence (typically). A cmw-collection could be used in the same way to report a slice through a system. The end of the cert path might still be a TE that has evidence, but not represented in a cert, maybe its a CWT / JWT. The collection therefore, is the cert path plus the token / tokens. The CMW extension to X.509 allows the evidence (as a certificate payload) to be cbor/json while continuing to use X.509 signature format. The certificate is just a container, the same way a token is just a container. A cmw-collection can contain either signed or unsigned payloads (the media-type can be used to signal which form). It's possible to include an x.509 collection in a cwt/jwt using the x5bag claim. Oddly, this is added to the protected headers rather than the payload. But semantically, it is a cmw-collection, but not a first class citizen cmw-collection. It might be as simple as defining an xtoc-tunnel as x5bag. ",
+          "createdAt": "2024-02-14T22:00:15Z",
+          "updatedAt": "2024-02-14T22:00:15Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "I don't see that specifically as a CMW but as a media-type for DICE evidence the form of an x.509 certificate path, no? The tunnel is just here because the CDDL permits both JSON and CBOR.",
+          "createdAt": "2024-02-14T23:06:38Z",
+          "updatedAt": "2024-02-14T23:06:38Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I don't see that specifically as a CMW but as a media-type for DICE evidence the form of an x.509 certificate path, no? The tunnel is just here because the CDDL permits both JSON and CBOR.\r\n\r\nA cmw  could contain a PEM certificate i.e., media-type=\"application/pem-certificate-chain\". If the surrounding cmw-collection is in cbor format, it might make sense to convert the pem cert to cbor. The motivation may be similar to the motivation that wants to convert a jwt to cbor.\r\n\r\nThis is different from the ASN.1 that requires a CMW certificate extension to choose either JSON / CBOR formatting as the end result could be a PEM encoded certificate regardless. \r\n\r\nIt is reasonable for attesting environments to produce a certificate as a form of evidence (as in many DICE implementations) or as an endorsement  (as a root-of-trust key typically has a mfg issued certificate). \r\n\r\nThe current definition would allow cmw-collection to include a PEM certificate, but wouldn't be able to perform the binary/text, text/binary translations outlined by the tunnelling mechanism. If its relevant to convert JSON (text) to CBOR (binary) then it seems relevant to convert PEM (text) to CBOR (binary). I don't see the need to convert PEM (text) to JSON (text) since both are text based approaches. \r\n\r\nIf the cmw-collection processor can handle equally, text and binary representations, then I don't see the value of tunnels.\r\n",
+          "createdAt": "2024-02-15T00:06:10Z",
+          "updatedAt": "2024-02-15T00:06:10Z"
         }
       ],
       "reviews": [
