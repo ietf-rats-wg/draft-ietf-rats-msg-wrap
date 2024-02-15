@@ -148,7 +148,7 @@ This document reuses the terms defined in {{Section 2 of -senml-cf}}
 Two types of RATS Conceptual Message Wrapper (CMW) are specified in this
 document:
 
-1. A CMW using a CBOR or JSON array ({{type-n-val}});
+1. A CMW using a CBOR or JSON record ({{type-n-val}});
 1. A CMW based on CBOR tags ({{cbor-tag}}).
 
 A further CMW "collection" type that holds together multiple CMW items is defined in {{cmw-coll}}.
@@ -157,17 +157,17 @@ A CMW "tunnel" type is also defined in {{cmw-tunnel}} to allow transporting CBOR
 
 The collected CDDL is in {{collected-cddl}}.
 
-## CMW Array {#type-n-val}
+## CMW Record {#type-n-val}
 
-The format of the CMW array is shown in {{fig-cddl-array}}.
+The format of the CMW record is shown in {{fig-cddl-record}}.
 The JSON {{-json}} and CBOR {{-cbor}} representations are provided separately.
-Both the `json-array` and `cbor-array` have the same fields except for slight differences in the types discussed below.
+Both the `json-record` and `cbor-record` have the same fields except for slight differences in the types discussed below.
 
 ~~~ cddl
-{::include cddl/cmw-array.cddl}
+{::include cddl/cmw-record.cddl}
 ~~~
-{: #fig-cddl-array artwork-align="left"
-   title="CDDL definition of the Array format"}
+{: #fig-cddl-record artwork-align="left"
+   title="CDDL definition of the Record format"}
 
 Each contains two or three members:
 
@@ -261,7 +261,7 @@ The CMW tunnel type ({{fig-cddl-tunnel}}) allows for moving a CMW in one seriali
 
 Both tunnel types are arrays with two elements.
 The first element, a fixed text string starting with a `#`, acts as a sentinel value.
-The `#`, which is not an acceptable start symbol for the `Content-Type` production ({{collected-cddl}}), makes it possible to disambiguate a CMW tunnel from a CMW array.
+The `#`, which is not an acceptable start symbol for the `Content-Type` production ({{collected-cddl}}), makes it possible to disambiguate a CMW tunnel from a CMW record.
 
 ~~~ cddl
 {::include cddl/cmw-tunnel.cddl}
@@ -297,11 +297,11 @@ func CMWTypeSniff(b []byte) (CMW, error) {
   }
 
   if b[0] == 0x82 || b[0] == 0x83 {
-    return CBORArray
+    return CBORRecord
   } else if b[0] >= 0xc0 && b[0] <= 0xdb {
     return CBORTag
   } else if b[0] == 0x5b {
-    return JSONArray
+    return JSONRecord
   } else if b[0] == 0x7b {
     return JSONCollection
   } else if (b[0] >= 0xa0 && b[0] <= 0xbb) || b[0] == 0xbf {
@@ -324,17 +324,17 @@ The example in {{ex-ca-ind}} is a signed CoRIM payload with an explicit CM
 indicator `0b0000_0011` (3), meaning that the wrapped message contains both
 Reference Values and Endorsements.
 
-## JSON Array {#ex-ja}
+## JSON Record {#ex-ja}
 
 ~~~ cbor-diag
 {::include cddl/cmw-example-1.json}
 ~~~
 
-Note that a CoAP Content-Format number can also be used with the JSON array
+Note that a CoAP Content-Format number can also be used with the JSON record
 form.  That may be the case when it is known that the receiver can handle CoAP
 Content-Formats and it is crucial to save bytes.
 
-## CBOR Array {#ex-ca}
+## CBOR Record {#ex-ca}
 
 ~~~ cbor-diag
 {::include cddl/cmw-example-1.diag}
@@ -346,7 +346,7 @@ with the following wire representation:
 {::include cddl/cmw-example-1.pretty}
 ~~~
 
-Note that a Media-Type-Name can also be used with the CBOR array form,
+Note that a Media-Type-Name can also be used with the CBOR record form,
 for example if it is known that the receiver cannot handle CoAP
 Content-Formats, or (unlike the case in point) if a CoAP Content-Format
 number has not been registrered.
@@ -367,7 +367,7 @@ with the following wire representation:
 {::include cddl/cmw-example-tag-1.pretty}
 ~~~
 
-## CBOR Array with explicit CM indicator {#ex-ca-ind}
+## CBOR Record with explicit CM indicator {#ex-ca-ind}
 
 ~~~ cbor-diag
 {::include cddl/cmw-example-3.diag}
@@ -399,7 +399,7 @@ with the following wire representation:
 {::include cddl/collection-example-1.pretty}
 ~~~
 
-The following example shows the use of a tunnelled type to move a JSON array to a CBOR collection:
+The following example shows the use of a tunnelled type to move a JSON record to a CBOR collection:
 
 ~~~
 {::include cddl/collection-example-2.diag}
@@ -413,7 +413,7 @@ The following example is a JSON collection that assembles Evidence from two atte
 {::include cddl/collection-example-1.json}
 ~~~
 
-The following example shows the use of a tunnelled type to move a CBOR array to a JSON collection:
+The following example shows the use of a tunnelled type to move a CBOR record to a JSON collection:
 
 ~~~
 {::include cddl/collection-example-2.json}
@@ -737,7 +737,8 @@ IANA is requested to assign an object identifier (OID) for the ASN.1 Module defi
 # Registering and Using CMWs
 
 {{fig-howto-cmw}} describes the registration preconditions for using
-CMWs in either array or CBOR tag forms.
+CMWs in either CMW record or CBOR tag forms.
+When using CMW collection, the preconditions apply for each entry in the collection.
 
 ~~~ aasvg
        .---------------.   .---------.
@@ -766,11 +767,11 @@ CMWs in either array or CBOR tag forms.
         |  |  /  CBOR tag CMW  /  |  |
         v  v `----------------'   v  v
     .--------------------------------------.
-   /             Array CMW                /
+   /                 CMW                  /
   `--------------------------------------'
 ~~~
 {: #fig-howto-cmw artwork-align="left"
-   title="How To CMW"}
+   title="How To Create a CMW"}
 
 # Open Issues
 
