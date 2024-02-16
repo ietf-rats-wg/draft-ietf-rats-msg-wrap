@@ -12,13 +12,11 @@ endif
 
 include cddl/frags.mk
 
-EXAMPLES_DIAG := $(addprefix cddl/,$(CMW_EXAMPLES))
-EXAMPLES_DIAG += $(addprefix cddl/,$(COLLECTION_EXAMPLES))
-
+EXAMPLES_JSON := $(addprefix cddl/,$(CMW_JSON_EXAMPLES))
+EXAMPLES_DIAG := $(addprefix cddl/,$(CMW_CBOR_EXAMPLES))
 EXAMPLES_PRETTY := $(EXAMPLES_DIAG:.diag=.pretty)
 
 CDDL_FILES := $(addprefix cddl/,$(CMW_FRAGS))
-CDDL_FILES += $(addprefix cddl/,$(COLLECTION_FRAGS))
 
 $(drafts_txt):: $(EXAMPLES_DIAG) $(EXAMPLES_PRETTY) $(CDDL_FILES)
 

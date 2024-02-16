@@ -1,5 +1,2 @@
-cmw-collection = {
-  + cmw-collection-entry-label => cmw
-}
-
-cmw-collection-entry-label = text / int .feature "cbor"
+json-collection = { + text => json-CMW / c2j-tunnel }
+cbor-collection = { + (int / text) => cbor-CMW / j2c-tunnel }

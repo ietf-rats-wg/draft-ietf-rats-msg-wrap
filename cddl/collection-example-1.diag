@@ -7,7 +7,7 @@
   "attester B": 1668576818(h'2347da55'),
   "attester C": [
     "application/eat+jwt",
-    "ZXlKaGJH",
+    h'4c693475',
     8
   ]
 }
