@@ -285,10 +285,8 @@ The `j2c-tunnel` array is serialized as CBOR.
 
 ## Decapsulation Algorithm
 
-After removing any external framing (for example, the ASN.1 OCTET STRING
-if the CMW is carried in a certificate extension {{DICE-arch}}), the CMW
-decoder does a 1-byte lookahead, as illustrated in the following pseudo
-code, to decide how to decode the remainder of the byte buffer:
+Once any external framing is removed (for example, if the CMW is carried in a certificate extension), the CMW decoder performs a 1-byte lookahead to determine how to decode the remaining byte buffer.
+The following pseudo-code illustrates this process:
 
 ~~~
 func CMWTypeSniff(b []byte) (CMW, error) {
@@ -419,10 +417,9 @@ The following example shows the use of a tunnelled type to move a CBOR record to
 {::include cddl/collection-example-2.json}
 ~~~
 
-# Transporting CMW and CMW Collections in X.509 Messages {#x509}
+# Transporting CMW in X.509 Messages {#x509}
 
 There are cases where CMW need to be transported in PKIX messages, for example in Certificate Signing Requests (CSRs) {{-csr-a}}, or in X.509 Certificates and Certificate Revocation Lists (CRLs) {{DICE-arch}}.
-
 
 This section specifies the CMW extension to carry CMW objects.
 
@@ -448,6 +445,8 @@ CMW ::= CHOICE {
 ~~~
 
 The CMW MUST contain the serialized CMW object in JSON or CBOR format, using the appropriate CHOICE entry.
+
+The DER-encoded CMW is the value of the OCTET STRING for the extnValue field of the extension.
 
 ## ASN.1 Module {#asn1-x509}
 
