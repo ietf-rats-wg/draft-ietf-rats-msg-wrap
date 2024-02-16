@@ -1,4 +1,5 @@
 CMW_FRAGS := cmw-start.cddl
+CMW_FRAGS += cmw.cddl
 CMW_FRAGS += cmw-record.cddl
 CMW_FRAGS += cmw-cbor-tag.cddl
 CMW_FRAGS += cmw-collection.cddl

@@ -1,1 +1,4 @@
-cmw = cmw-array / cmw-cbor-tag<bytes> .feature "cbor"
+cmw = json-CMW / cbor-CMW
+
+json-CMW = json-record / json-collection
+cbor-CMW = cbor-record / cbor-collection / cbor-tag
