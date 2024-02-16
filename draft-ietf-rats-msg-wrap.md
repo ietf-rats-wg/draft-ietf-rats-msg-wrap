@@ -11,7 +11,7 @@ submissionType: IETF
 ipr: trust200902
 area: "Security"
 workgroup: "Remote ATtestation ProcedureS"
-keyword: [ evidence, attestation result, endorsement, reference value ]
+keyword: [ evidence, attestation results, endorsements, reference values ]
 
 stand_alone: yes
 smart_quotes: no
@@ -387,7 +387,7 @@ with the following wire representation:
 
 ## CBOR Collection
 
-The following example is a CBOR collection that assembles conceptual messages from three attesters: Evidence for attesters A and B and Attestation Result for attester C.
+The following example is a CBOR collection that assembles conceptual messages from three attesters: Evidence for attesters A and B and Attestation Results for attester C.
 
 ~~~
 {::include cddl/collection-example-1.diag}
