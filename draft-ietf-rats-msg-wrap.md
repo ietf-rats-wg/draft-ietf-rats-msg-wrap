@@ -11,7 +11,7 @@ submissionType: IETF
 ipr: trust200902
 area: "Security"
 workgroup: "Remote ATtestation ProcedureS"
-keyword: [ evidence, attestation result, endorsement, reference value ]
+keyword: [ evidence, attestation results, endorsements, reference values ]
 
 stand_alone: yes
 smart_quotes: no
@@ -37,6 +37,7 @@ normative:
   RFC6268:
   RFC6838: media-types
   RFC7252: coap
+  RFC7519: jwt
   STD90:
     -: json
     =: RFC8259
@@ -56,10 +57,14 @@ normative:
 informative:
   RFC7942: impl-status
   RFC9193: senml-cf
+  STD96:
+    -: cose
+    =: RFC9052
   RFC9334: rats-arch
   I-D.ietf-rats-eat: rats-eat
   I-D.ietf-rats-eat-media-type: rats-eat-mt
   I-D.ietf-rats-ar4si: rats-ar4si
+  I-D.ietf-rats-uccs: rats-uccs
   I-D.fossati-tls-attestation: tls-a
   I-D.ietf-lamps-csr-attestation: csr-a
   DICE-arch:
@@ -385,7 +390,7 @@ with the following wire representation:
 
 ## CBOR Collection
 
-The following example is a CBOR collection that assembles conceptual messages from three attesters: Evidence for attesters A and B and Attestation Result for attester C.
+The following example is a CBOR collection that assembles conceptual messages from three attesters: Evidence for attesters A and B and Attestation Results for attester C.
 
 ~~~
 {::include cddl/collection-example-1.diag}
@@ -415,6 +420,14 @@ The following example shows the use of a tunnelled type to move a CBOR record to
 
 ~~~
 {::include cddl/collection-example-2.json}
+~~~
+
+## Use in JWT
+
+The following example shows the use of the `cmw` JWT claim to transport a CMW collection in a JWT {{-jwt}}:
+
+~~~
+{::include cddl/eat-example-1.json}
 ~~~
 
 # Transporting CMW in X.509 Messages {#x509}
@@ -533,14 +546,15 @@ The developers can be contacted on the Zulip channel:
 
 # Security Considerations {#seccons}
 
-This document defines two encapsulation formats for RATS conceptual
-messages. The messages themselves and their encoding ensure security
-protection. For this reason there are no further security requirements
-raised by the introduction of this encapsulation.
+This document introduces two encapsulation formats for RATS conceptual messages.
+RATS conceptual messages are typically secured using cryptography.
+If the messages are already protected, then there are no additional security requirements imposed by the introduction of this encapsulation.
+If an adversary tries to modify the payload encapsulation, it will result in incorrect processing of the encapsulated message and lead to an error.
+If the messages are not protected, additional security must be added at a different layer.
+As an example, a CMW record containing an UCCS {{-rats-uccs}} can be signed using COSE Sign1 {{-cose}}.
 
-Changing the encapsulation of a payload by an adversary will result in
-incorrect processing of the encapsulated messages and this will
-subsequently lead to a processing error.
+This document introduces a format for holding multiple CMW items in a collection.
+If the collection is not protected from tampering by external security measures (such as object security primitives) or internal mechanisms (such as intra-item binding), an attacker could easily manipulate the collection's contents.
 
 # IANA Considerations
 

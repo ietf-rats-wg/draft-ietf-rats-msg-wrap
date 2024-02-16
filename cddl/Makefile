@@ -5,8 +5,9 @@ SHELL := /bin/bash
 include cddl-check-template.mk
 include frags.mk
 
-check:: check-cmw check-cmw-examples
+check:: check-cmw check-cmw-examples check-eat check-eat-examples
 
 $(eval $(call cddl_check_template,cmw,$(CMW_FRAGS),$(CMW_CBOR_EXAMPLES),$(CMW_JSON_EXAMPLES)))
+$(eval $(call cddl_check_template,eat,$(EAT_FRAGS),$(EAT_CBOR_EXAMPLES),$(EAT_JSON_EXAMPLES)))
 
 clean: ; rm -f $(CLEANFILES)
