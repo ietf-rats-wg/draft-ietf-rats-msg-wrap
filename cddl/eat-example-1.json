@@ -1,0 +1,15 @@
+{
+  "cmw": {
+    "attester A": [
+      "application/eat-ucs+json",
+      "e30K",
+      4
+    ],
+    "attester B (tunnelled)": [
+      "#cmw-c2j-tunnel",
+      "g3gYYXBwbGljYXRpb24vZWF0LXVjcytjYm9yQaAE"
+    ]
+  },
+  "iss": "evidence collection daemon",
+  "exp": 1300819380
+}
