@@ -16,3 +16,13 @@ CMW_CBOR_EXAMPLES += collection-example-2.diag
 CMW_JSON_EXAMPLES := cmw-example-1.json
 CMW_JSON_EXAMPLES += collection-example-1.json
 CMW_JSON_EXAMPLES += collection-example-2.json
+
+EAT_FRAGS := eat-start.cddl
+EAT_FRAGS += cmw-start.cddl
+EAT_FRAGS += cmw-record.cddl
+EAT_FRAGS += cmw-collection.cddl
+EAT_FRAGS += cmw-tunnel.cddl
+EAT_FRAGS += common-types.cddl
+EAT_FRAGS += rfc9193.cddl
+
+EAT_JSON_EXAMPLES := eat-example-1.json

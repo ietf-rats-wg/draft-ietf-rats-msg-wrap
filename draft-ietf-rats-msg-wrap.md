@@ -37,6 +37,7 @@ normative:
   RFC6268:
   RFC6838: media-types
   RFC7252: coap
+  RFC7519: jwt
   STD90:
     -: json
     =: RFC8259
@@ -417,6 +418,14 @@ The following example shows the use of a tunnelled type to move a CBOR record to
 
 ~~~
 {::include cddl/collection-example-2.json}
+~~~
+
+## Use in JWT
+
+The following example shows the use of the `cmw` JWT claim to transport a CMW collection in a JWT {{-jwt}}:
+
+~~~
+{::include cddl/eat-example-1.json}
 ~~~
 
 # Transporting CMW and CMW Collections in X.509 Messages {#x509}
