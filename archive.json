@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-15T00:37:42.133481+00:00",
+  "timestamp": "2024-02-18T00:39:58.557615+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -539,15 +539,15 @@
       "id": "I_kwDOIGCt2M55oSB6",
       "title": "`s/cmw-array/cmw-record/g`",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/38",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "We should change the `cmw-array` to `cmw-record` so people don\u2019t get the wrong impression that cmw-array is an array of cmw.\r\n\r\nA `cmw-collection` might be an appropriate name for an array of cmw.\r\n\r\n\r\n(These points were originally raised by @nedmsmith)",
       "createdAt": "2023-12-13T23:07:02Z",
-      "updatedAt": "2024-02-04T18:20:28Z",
-      "closedAt": null,
+      "updatedAt": "2024-02-16T07:27:08Z",
+      "closedAt": "2024-02-16T07:27:08Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -670,7 +670,7 @@
       "labels": [],
       "body": "@henkbirkholz has the following comments regarding prose in \u00a73.4:\r\n\r\n* https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/45#discussion_r1465003510\r\n* https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/45#discussion_r1465004847\r\n* https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/45/commits/8c5dcc304cd21a6c6672c3c2ca47fa70f315ee29#r1465272666",
       "createdAt": "2024-01-24T17:56:57Z",
-      "updatedAt": "2024-02-05T17:31:51Z",
+      "updatedAt": "2024-02-16T15:31:54Z",
       "closedAt": null,
       "comments": [
         {
@@ -686,6 +686,13 @@
           "body": "> Seems we're going with merged #45? Everybody actually happy with that? (non-blocking)\r\n\r\nNote that #45 has none of the editorial suggestions you provided in the review.\r\n\r\nI guess you need to decide whether the current state of the section is acceptable or if you want to tweak it.",
           "createdAt": "2024-02-05T17:31:50Z",
           "updatedAt": "2024-02-05T17:31:50Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@henkbirkholz is this issue still valid?  Or can it be closed?",
+          "createdAt": "2024-02-16T15:31:53Z",
+          "updatedAt": "2024-02-16T15:31:53Z"
         }
       ]
     },
@@ -750,15 +757,15 @@
       "id": "I_kwDOIGCt2M5-GKZu",
       "title": "Request for clarification: array length and mixed encoding",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/55",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "deeglaze",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "I'm noodling through the idea of a modular evidence collection daemon that just runs installed binaries in a certain location and assembles a cmw-collection together to send off, and I'm wondering how much interpretation of the output it would need, assuming all the binaries output a legal CMW of either CBOR or JSON encoding.\r\n\r\nWhen JC<> is used, it's only when the CDDL pun breaks down and you need base64 encoding for binary. If you have your cmw-collection as a CBOR map, and we can use, say, the basename of the evidence collection binary to key the result, but the result is just bytes that are either CBOR or JSON, that doesn't seem to fit into the \"cmw is either CBOR or JSON\".\r\n\r\nIt seems that certainly a JSON cmw-collection that contains a CBOR-encoded cmw does not parse unless you're allowed to wantonly swap your interpretation of the CDDL as for JSON or CBOR as you see fit (say with the decapsulation algorithm), given that `cmw` doesn't have a base64 encoded string alternate to store a CBOR-encoded cmw.\r\n\r\nCan we say that\r\n\r\n```\r\ncmw-collection = {\r\n  + cmw-collection-entry-label => cmw\r\n}\r\n```\r\n\r\nshould be\r\n\r\n```\r\ncmw-collection = {\r\n  + cmw-collection-entry-label => cmw-decap\r\n}\r\ncmw-decap = JC<jc-cmw, bytes .cbor cmw>\r\njc-cmw = cmw / base64-cmw\r\nbase64-cmw = base64-string .cbor cmw\r\n```\r\n\r\nI'm unsure if the `.cbor` control operator is allowed to be applied to a base64-string technically it's for byte strings and since \"one can use CDDL with JSON by limiting oneself to what can be represented in JSON.  Roughly speaking, this means leaving out byte strings\"\r\n\r\nI don't think we can use `bytes .cbor cmw` without inserting the major type byte 0x04 before the output of any of the evidence modules, so do we just define a `.feature cmw-decap` to apply the decap algorithm to arbitrary bytes instead of this JC stuff?",
       "createdAt": "2024-02-02T18:40:31Z",
-      "updatedAt": "2024-02-08T19:14:04Z",
-      "closedAt": null,
+      "updatedAt": "2024-02-16T07:27:07Z",
+      "closedAt": "2024-02-16T07:27:07Z",
       "comments": [
         {
           "author": "deeglaze",
@@ -935,17 +942,19 @@
       "id": "I_kwDOIGCt2M5-Mt1L",
       "title": "\"Endorsement\", rather than \"Endorsements\"",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/58",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "laurencelundblade",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "thomas-fossati"
+      ],
       "labels": [
         "WGLC"
       ],
       "body": "In Table 2 in 7.4.2 shouldn't  it be \"Endorsement\"? It's just one endorsement per conceptual message, right?\r\n\r\nRef values is correct as plural. Evidence is fine too.\r\n\r\nAttestation Results could be singular, but seems OK plural.\r\n\r\n",
       "createdAt": "2024-02-04T19:09:47Z",
-      "updatedAt": "2024-02-05T17:54:49Z",
-      "closedAt": null,
+      "updatedAt": "2024-02-16T20:43:49Z",
+      "closedAt": "2024-02-16T20:43:49Z",
       "comments": [
         {
           "author": "henkbirkholz",
@@ -967,6 +976,27 @@
           "body": "> So there are never more than one Endorsements?\r\n\r\nCan a conceptual message contain more than one endorsement or not? Seems like it could go either way. If it can contain more than one, you'd need to make it an array (which is beyond the scope of this draft).\r\n\r\nRATs architecture uses plurality for these terms, but could be discussing \"messages\" rather than a \"message\". https://www.rfc-editor.org/rfc/rfc9334.html#name-conceptual-messages\r\n\r\nThe plurality of \"attestation results\" and \"reference values\" is kind of ambiguous. It makes a lot of sense to have many references values in a conceptual message.\r\n\r\nNot a big deal either way, but seemed worth cross-checking.\r\n",
           "createdAt": "2024-02-05T17:54:48Z",
           "updatedAt": "2024-02-05T17:54:48Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Can a conceptual message contain more than one endorsement or not? Seems like it could go either way. If it can contain more than one, you'd need to make it an array (which is beyond the scope of this draft).\r\n\r\nYes, it can.  For example, a CoRIM payload potentially contains several endorsements (and reference values too.)\r\n\r\n> RATs architecture uses plurality for these terms, but could be discussing \"messages\" rather than a \"message\". https://www.rfc-editor.org/rfc/rfc9334.html#name-conceptual-messages\r\n\r\nThis is a good pointer, thanks!  I'm going to make sure we have the terms consistently in the plural form.",
+          "createdAt": "2024-02-16T14:45:33Z",
+          "updatedAt": "2024-02-16T14:45:33Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "> > Can a conceptual message contain more than one endorsement or not? Seems like it could go either way. If it can contain more than one, you'd need to make it an array (which is beyond the scope of this draft).\r\n> \r\n> Yes, it can. For example, a CoRIM payload potentially contains several endorsements (and reference values too.)\r\n\r\nTo go on a bit more. I think a reference value *set* is equivalent to an endorsement. A conceptual message might contain several reference value sets like it might contain multiple endorsements.\r\n\r\nOr call it a reference value \"bundle\" or whatever you like.",
+          "createdAt": "2024-02-16T19:10:44Z",
+          "updatedAt": "2024-02-16T19:10:44Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > > Can a conceptual message contain more than one endorsement or not? Seems like it could go either way. If it can contain more than one, you'd need to make it an array (which is beyond the scope of this draft).\r\n> > \r\n> > \r\n> > Yes, it can. For example, a CoRIM payload potentially contains several endorsements (and reference values too.)\r\n> \r\n> To go on a bit more. I think a reference value _set_ is equivalent to an endorsement. A conceptual message might contain several reference value sets like it might contain multiple endorsements.\r\n> \r\n> Or call it a reference value \"bundle\" or whatever you like.\r\n\r\nI'd rather not add new terminology.\r\n\r\n`cm-ind` is a bit map, so one can signal the presence of multiple different conceptual messages within the same CMW.\r\n",
+          "createdAt": "2024-02-16T19:24:54Z",
+          "updatedAt": "2024-02-16T19:24:54Z"
         }
       ]
     },
@@ -975,33 +1005,47 @@
       "id": "I_kwDOIGCt2M5-R3O5",
       "title": "Clarify use of the CWT claim",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/59",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "thomas-fossati"
+      ],
       "labels": [
         "WGLC"
       ],
       "body": "[Laurence email to rats@ietf.org](https://mailarchive.ietf.org/arch/msg/rats/9uDu-DOOrbYIX5tND0muaVREJBM/):\r\n\r\n> _Maybe some clarification about the use of the CWT claim to carry the conceptual message? If the CWT is an EAT and the conceptual message is an EAT, you have an EAT in an EAT and it looks a lot like a nested token. But I don\u2019t think that\u2019s what is intended at all. The surrounding EAT in this case is just convenient transport. It is not binding to or attesting to the enclosed EAT.\r\n> One way to do this would for the examples to be more expansive._",
       "createdAt": "2024-02-05T13:49:43Z",
-      "updatedAt": "2024-02-05T13:49:43Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-02-16T20:43:30Z",
+      "closedAt": "2024-02-16T20:43:30Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@nedmsmith IIRC you had a use case for this, right?\r\nCould we convert it into an example?",
+          "createdAt": "2024-02-16T15:02:12Z",
+          "updatedAt": "2024-02-16T15:02:12Z"
+        }
+      ]
     },
     {
       "number": 63,
       "id": "I_kwDOIGCt2M5-s7xM",
       "title": "Two security considerations",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/63",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
-      "labels": [],
+      "assignees": [
+        "thomas-fossati"
+      ],
+      "labels": [
+        "WGLC"
+      ],
       "body": "## UCCS is not protected\r\n\r\nIn https://mailarchive.ietf.org/arch/msg/rats/xY2mwu790UOGnhFAUduGj5ddo3Y/ Carl notes:\r\n> _\"The security considerations section says that \u201cmessages themselves and their encoding ensure security protection.\u201d This is not true for UCCS, which is part of the referenced EAT media type spec.\"_\r\n\r\n## Intra-element binding in collections\r\n\r\nIn a private conversation between Ned and I:\r\n> _\"[t]here should be a way to ensure the integrity of the collection as soon as the collection is formed.\"_.\r\n\r\nRe: intra-element binding, see also: https://www.ietf.org/archive/id/draft-frost-rats-eat-collection-03.html#section-4.1",
       "createdAt": "2024-02-08T17:21:16Z",
-      "updatedAt": "2024-02-08T17:21:16Z",
-      "closedAt": null,
+      "updatedAt": "2024-02-16T20:44:07Z",
+      "closedAt": "2024-02-16T20:44:07Z",
       "comments": []
     },
     {
@@ -1009,16 +1053,89 @@
       "id": "I_kwDOIGCt2M5-s9n7",
       "title": "ASN.1 encoding clarifications",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/64",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "thomas-fossati"
+      ],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "Carl's review (https://mailarchive.ietf.org/arch/msg/rats/xY2mwu790UOGnhFAUduGj5ddo3Y/)\r\n\r\n> _\"In section 5, it may be worth calling out that the encoded CMWCollection is encoded as an OCTET STRING as the extnValue field of this extension. Section 4.2 in RFC5280 makes this point but I\u2019ve seen the outer OCTET STRING left out in a couple of attestation-related contexts. The pseudo code about removing \u201cthe ASN.1 OCTET STRING\u201d in Section 3.3. could further this misimpression since there are two OCTET STRING layers wrapping a CBOR value. Maybe add something like: \u201cThe DER encoded CMWCollection is the value of the octet string for the extnValue field of the extension\u201d.\"_",
+      "createdAt": "2024-02-08T17:25:47Z",
+      "updatedAt": "2024-02-16T20:45:28Z",
+      "closedAt": "2024-02-16T20:45:28Z",
+      "comments": []
+    },
+    {
+      "number": 66,
+      "id": "I_kwDOIGCt2M5_SZLl",
+      "title": "Default content type?",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/66",
+      "state": "OPEN",
+      "author": "deeglaze",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I'm having trouble determining which content type to suggest for any of the evidence formats I'm working with, given that they're all binary formats specified by vendors or the TCG. Is the intention for AMD, Intel, TCG, and CNCF to all apply for application content types for formats they will specify themselves? I wouldn't want to say application/cbor for binary that doesn't have the major type tag for CBOR bytes, for example. The `ind` field is for hinting at the expected interpretation of the underspecified media type, so it'd be nice to have an appropriate underspecified media type that is basically \"binary evidence for RATS\". The examples use undefined example media types and the `application/eat+jwt` type, but nothing prior to attestation results that can be sent to a remote attestation verifier.\r\n\r\nI'd say we should encourage folks to avoid using cmw-collection labels as \"standard\" ways to interpret the data carried in the value, but while a format is developed for a new form of attestation, it'd be nice to have a kind of catch-all for underspecified binary evidence content.",
+      "createdAt": "2024-02-15T02:38:36Z",
+      "updatedAt": "2024-02-16T17:26:53Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Have you already considered using the [`vnd`](https://datatracker.ietf.org/doc/html/rfc6838#section-3.2) or [`prs`](https://datatracker.ietf.org/doc/html/rfc6838#section-3.3) sub-trees?  They happen to have pretty relaxed registration policies.\r\n\r\nWhen we originally chose to use media types for the type system, one of the major selling points was the possibility of using these kinds of non-standard trees precisely to cover the case you are describing.",
+          "createdAt": "2024-02-15T19:17:36Z",
+          "updatedAt": "2024-02-15T19:17:36Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "Oh interesting I didn't know this piece \"public exposure and review of media types to be registered in the vendor tree are not required\" \r\n\r\nI was worried at the small number of vnd. entries in the media-types table.",
+          "createdAt": "2024-02-15T20:04:31Z",
+          "updatedAt": "2024-02-15T20:04:31Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@deeglaze do you think we need to add prose to the draft to address your questions?",
+          "createdAt": "2024-02-16T15:33:27Z",
+          "updatedAt": "2024-02-16T15:33:27Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "It might be important to distinguish between formats that are truly vendor specific and formats that are based on a standard format but underspecified. This could happen if the vendor extends the standard (and doesn't define the extensions in a profile) or has an underspecified profile.",
+          "createdAt": "2024-02-16T17:26:53Z",
+          "updatedAt": "2024-02-16T17:26:53Z"
+        }
+      ]
+    },
+    {
+      "number": 72,
+      "id": "I_kwDOIGCt2M5_f-Jr",
+      "title": "two `cmw` definitions",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/72",
+      "state": "OPEN",
+      "author": "nedmsmith",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "Carl's review (https://mailarchive.ietf.org/arch/msg/rats/xY2mwu790UOGnhFAUduGj5ddo3Y/)\r\n\r\n> _\"In section 5, it may be worth calling out that the encoded CMWCollection is encoded as an OCTET STRING as the extnValue field of this extension. Section 4.2 in RFC5280 makes this point but I\u2019ve seen the outer OCTET STRING left out in a couple of attestation-related contexts. The pseudo code about removing \u201cthe ASN.1 OCTET STRING\u201d in Section 3.3. could further this misimpression since there are two OCTET STRING layers wrapping a CBOR value. Maybe add something like: \u201cThe DER encoded CMWCollection is the value of the octet string for the extnValue field of the extension\u201d.\"_",
-      "createdAt": "2024-02-08T17:25:47Z",
-      "updatedAt": "2024-02-08T17:25:47Z",
+      "body": "I'm confused by cmw-start.cddl and cmw.cddl. Each has a definition for `cmw`.  frags.mk ignores cmw.cddl so possibly removal of cmw.cddl is needed? However, I prefer the convention that the \"start\" file contains only the start directive. This makes it easy to replace with a different start vector for debugging purposes. It would be better to put the cmw definition in cmw.cddl and include it in the frags.mk IMHO.",
+      "createdAt": "2024-02-16T17:41:52Z",
+      "updatedAt": "2024-02-16T18:33:43Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "You are right.  I spotted the dead code while working on #71, which removes `cmw.cddl` for good.",
+          "createdAt": "2024-02-16T18:33:42Z",
+          "updatedAt": "2024-02-16T18:33:42Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -4245,21 +4362,21 @@
       "id": "PR_kwDOIGCt2M5mggmF",
       "title": "add tunnelling and treat collections as CMWs",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/65",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "* merge collection in the top-level CMW production\r\n* rework the X.509 extension (CMWCollection -> CMW)\r\n* remove special-casing collection in all IANA registrations\r\n* add bi-directional tunnelling between JSON and CBOR serialisations\r\n* rework CDDL assembly & test\r\n* add new examples\r\n\r\nFix #55",
       "createdAt": "2024-02-09T18:12:42Z",
-      "updatedAt": "2024-02-15T00:06:11Z",
+      "updatedAt": "2024-02-16T07:27:25Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "b5dc84abaf8ed00fabf72ce3fde067e6a21f47c2",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "tunnels",
       "headRefOid": "9b2061b033093da481de1ae76dce9c8efc091805",
-      "closedAt": null,
+      "closedAt": "2024-02-16T07:27:25Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -4340,6 +4457,62 @@
           "body": "> I don't see that specifically as a CMW but as a media-type for DICE evidence the form of an x.509 certificate path, no? The tunnel is just here because the CDDL permits both JSON and CBOR.\r\n\r\nA cmw  could contain a PEM certificate i.e., media-type=\"application/pem-certificate-chain\". If the surrounding cmw-collection is in cbor format, it might make sense to convert the pem cert to cbor. The motivation may be similar to the motivation that wants to convert a jwt to cbor.\r\n\r\nThis is different from the ASN.1 that requires a CMW certificate extension to choose either JSON / CBOR formatting as the end result could be a PEM encoded certificate regardless. \r\n\r\nIt is reasonable for attesting environments to produce a certificate as a form of evidence (as in many DICE implementations) or as an endorsement  (as a root-of-trust key typically has a mfg issued certificate). \r\n\r\nThe current definition would allow cmw-collection to include a PEM certificate, but wouldn't be able to perform the binary/text, text/binary translations outlined by the tunnelling mechanism. If its relevant to convert JSON (text) to CBOR (binary) then it seems relevant to convert PEM (text) to CBOR (binary). I don't see the need to convert PEM (text) to JSON (text) since both are text based approaches. \r\n\r\nIf the cmw-collection processor can handle equally, text and binary representations, then I don't see the value of tunnels.\r\n",
           "createdAt": "2024-02-15T00:06:10Z",
           "updatedAt": "2024-02-15T00:06:10Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "What de you mean to convert the pem to cbor? A base64-encoded string is still representable as bytes in the cbor schema. If there's a cbor encoding of certificate chains, wouldn't you just use that media type instead? I feel like I'm missing something.",
+          "createdAt": "2024-02-15T01:03:59Z",
+          "updatedAt": "2024-02-15T01:03:59Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > I don't see that specifically as a CMW but as a media-type for DICE evidence the form of an x.509 certificate path, no? The tunnel is just here because the CDDL permits both JSON and CBOR.\r\n> \r\n> A cmw could contain a PEM certificate i.e., media-type=\"application/pem-certificate-chain\". If the surrounding cmw-collection is in cbor format, it might make sense to convert the pem cert to cbor.\r\n\r\nI don't think so.  The PEM cert is just bytes stashed in the `cbor-array.value`.\r\nThe `cbor-array.type` will tell the receiver how to interpret it.  There is no reason for doing any format conversion.\r\n\r\n> The motivation may be similar to the motivation that wants to convert a jwt to cbor.\r\n\r\nSorry, I don't see the analogy.\r\n\r\n> It is reasonable for attesting environments to produce a certificate as a form of evidence (as in many DICE implementations) or as an endorsement (as a root-of-trust key typically has a mfg issued certificate).\r\n\r\nAbsolutely.  But, as Dionna [pointed out](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/65#issuecomment-1944946698), in a CMW world, this is handled with media types.\r\n\r\n> If the cmw-collection processor can handle equally, text and binary representations, then I don't see the value of tunnels.\r\n\r\nThe use case for tunnels is when one needs to aggregate already constructed CMWs (rather than raw evidence), and those CMWs have a different serialisation than the one used/implemented by the aggregator.\r\n",
+          "createdAt": "2024-02-15T09:18:00Z",
+          "updatedAt": "2024-02-15T09:18:00Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > With CDDL 2 imports\r\n> \r\n> Which version of cddl tooling recognizes CDDL2 `;#` imports?\r\n\r\nThe latest `cddlc`.\r\n\r\n> Are we married to `-array` vs. `-record`?\r\n\r\nI am neutral.  It's only some search & replace over the CDDL and the prose which I am too lazy to tackle at the moment :-)\r\n\r\n",
+          "createdAt": "2024-02-15T10:00:04Z",
+          "updatedAt": "2024-02-15T10:00:04Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > Are we married to `-array` vs. `-record`?\r\n> I am neutral. It's only some search & replace over the CDDL and the prose which I am too lazy to tackle at the moment :-)\r\n\r\nSee PR #67 ",
+          "createdAt": "2024-02-15T17:37:31Z",
+          "updatedAt": "2024-02-15T17:37:31Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > > Are we married to `-array` vs. `-record`?\r\n> > > I am neutral. It's only some search & replace over the CDDL and the prose which I am too lazy to tackle at the moment :-)\r\n> \r\n> See PR #67\r\n\r\nAwesome, thanks!  Can we merge this one?",
+          "createdAt": "2024-02-15T17:42:30Z",
+          "updatedAt": "2024-02-15T17:42:30Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Awesome, thanks! Can we merge this one?\r\n\r\nNote: I pulled from tunnels branch which pulled in PR #65 changes. Maybe #65 isn't needed if #67 is merged?",
+          "createdAt": "2024-02-15T17:44:52Z",
+          "updatedAt": "2024-02-15T17:44:52Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > Awesome, thanks! Can we merge this one?\r\n> \r\n> Note: I pulled from tunnels branch which pulled in PR #65 changes. Maybe #65 isn't needed if #67 is merged?\r\n\r\nWe could close this and move everything there (including the \"Fixes\" annotations).  Or we could merge this and then you rebase #67 on main.\r\n\r\nAs you prefer.",
+          "createdAt": "2024-02-15T18:27:01Z",
+          "updatedAt": "2024-02-15T18:27:01Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Superseded by #67",
+          "createdAt": "2024-02-16T07:27:25Z",
+          "updatedAt": "2024-02-16T07:27:25Z"
         }
       ],
       "reviews": [
@@ -4414,6 +4587,282 @@
           "body": "LGTM. Some of the word choice suggestions seem reasonable to incorporate. These could be refined later also.",
           "createdAt": "2024-02-09T21:21:29Z",
           "updatedAt": "2024-02-09T21:21:29Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 67,
+      "id": "PR_kwDOIGCt2M5nAZcp",
+      "title": "Cmw record tweak",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/67",
+      "state": "MERGED",
+      "author": "nedmsmith",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "nedmsmith"
+      ],
+      "labels": [],
+      "body": "NOTE: This is a PR pulled from the tunnels branch (https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/tree/tunnels) to pickup changes made by tunnels. The tunnels PR and this PR may need to be squashed together.\r\n\r\nChanged cmw-array.cddl and related cddl structures like cbor-array to cbor-record. Updated figure 5 to use CMW instead of CMW Array and added text related to cmw collection. Changed wording to reflect the cmw record convention except where it impacted CBOR encoding.\r\n\r\nFix #55 \r\nFix #38 ",
+      "createdAt": "2024-02-15T17:30:11Z",
+      "updatedAt": "2024-02-16T17:27:56Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "b5dc84abaf8ed00fabf72ce3fde067e6a21f47c2",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "cmw-record-tweak",
+      "headRefOid": "7399617f65ab7e631eeb122bec379250dcfd94ec",
+      "closedAt": "2024-02-16T07:27:06Z",
+      "mergedAt": "2024-02-16T07:27:06Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "9b4944fb076fead5a98e30d1b56f77ec6781a8c3"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5wRE-3",
+          "commit": {
+            "abbreviatedOid": "7399617"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-15T18:24:46Z",
+          "updatedAt": "2024-02-15T18:24:46Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 68,
+      "id": "PR_kwDOIGCt2M5nFiCO",
+      "title": "Clarify x.509 extension wrapping",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/68",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "thomas-fossati"
+      ],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "Fix #64",
+      "createdAt": "2024-02-16T13:08:09Z",
+      "updatedAt": "2024-02-16T20:45:30Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "174c62f80509c82eb1852938b924671aadec8d47",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "asn1-clarifications",
+      "headRefOid": "4bde879a262475671423c08dbedb298fdbf23daf",
+      "closedAt": "2024-02-16T20:45:27Z",
+      "mergedAt": "2024-02-16T20:45:27Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "ec6c9729d58d8ceb3612c03d72127ee5fbdbfbeb"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5wYh7m",
+          "commit": {
+            "abbreviatedOid": "bf37879"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-02-16T15:56:19Z",
+          "updatedAt": "2024-02-16T15:56:19Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 69,
+      "id": "PR_kwDOIGCt2M5nF4YC",
+      "title": "expand security considerations",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/69",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "thomas-fossati"
+      ],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "* deal with UCCS\r\n* describe risks associated with collections\r\n\r\nFix #63",
+      "createdAt": "2024-02-16T14:05:19Z",
+      "updatedAt": "2024-02-16T20:44:08Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "9b4944fb076fead5a98e30d1b56f77ec6781a8c3",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "seccons++",
+      "headRefOid": "a76d5cb0e624897533d1f3ccd72ea1770c4312fc",
+      "closedAt": "2024-02-16T20:44:06Z",
+      "mergedAt": "2024-02-16T20:44:06Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "174c62f80509c82eb1852938b924671aadec8d47"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5wYmA_",
+          "commit": {
+            "abbreviatedOid": "a76d5cb"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-02-16T16:02:16Z",
+          "updatedAt": "2024-02-16T16:02:16Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 70,
+      "id": "PR_kwDOIGCt2M5nGKAH",
+      "title": "align conceptual messages to the plural form",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/70",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "thomas-fossati"
+      ],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "Following https://www.rfc-editor.org/rfc/rfc9334.html#name-conceptual-messages\r\n\r\nFix #58",
+      "createdAt": "2024-02-16T14:47:33Z",
+      "updatedAt": "2024-02-16T20:43:51Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "9b4944fb076fead5a98e30d1b56f77ec6781a8c3",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "consistency",
+      "headRefOid": "1b9bc51ecb29d61b30a4cd473853f1d15bcd11e3",
+      "closedAt": "2024-02-16T20:43:48Z",
+      "mergedAt": "2024-02-16T20:43:48Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "cea70b2d7bb6612bc1b173e9ec168536ef8fade0"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5wYkFP",
+          "commit": {
+            "abbreviatedOid": "1b9bc51"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-02-16T15:59:43Z",
+          "updatedAt": "2024-02-16T15:59:43Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 71,
+      "id": "PR_kwDOIGCt2M5nGaWk",
+      "title": "add CWT example",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/71",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "thomas-fossati"
+      ],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "Fix #59",
+      "createdAt": "2024-02-16T15:29:54Z",
+      "updatedAt": "2024-02-16T20:43:33Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "9b4944fb076fead5a98e30d1b56f77ec6781a8c3",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "eat-example",
+      "headRefOid": "74c8ee23bbcc6188ca58c31139e6954bced5bbe2",
+      "closedAt": "2024-02-16T20:43:29Z",
+      "mergedAt": "2024-02-16T20:43:29Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "d1edc0b15d9bc96d8a35b261f3aedfc85cf72d77"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5wYjnn",
+          "commit": {
+            "abbreviatedOid": "74c8ee2"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-02-16T15:58:44Z",
+          "updatedAt": "2024-02-16T15:58:44Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 73,
+      "id": "PR_kwDOIGCt2M5nH37w",
+      "title": "Fixed orphaned cmw.cddl file",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/73",
+      "state": "OPEN",
+      "author": "nedmsmith",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Moved contents of cmw-start.cddl to cmw.cddl except for the single line `start = cmw` and updated frags.mk to include cmw.cddl\r\n\r\nThis PR fixes issue #72",
+      "createdAt": "2024-02-16T19:16:12Z",
+      "updatedAt": "2024-02-16T19:35:06Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "9b4944fb076fead5a98e30d1b56f77ec6781a8c3",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "fix-orphan-cmw-cddl",
+      "headRefOid": "48321dd016825bebcd4a8845abecd14c1b60b058",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> this is already fixed in #71\r\n\r\nI missed that. #73 also moves extra statements in cmw-start.cddl into cmw.cddl. Maybe it's a style nit, but it really bugs me to have anything but the start=xxx in a start.cddl file.",
+          "createdAt": "2024-02-16T19:35:05Z",
+          "updatedAt": "2024-02-16T19:35:05Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5wZ_2o",
+          "commit": {
+            "abbreviatedOid": "48321dd"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "this is already fixed in #71",
+          "createdAt": "2024-02-16T19:28:48Z",
+          "updatedAt": "2024-02-16T19:28:48Z",
           "comments": []
         }
       ]
