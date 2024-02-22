@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-20T00:36:34.456929+00:00",
+  "timestamp": "2024-02-22T00:37:04.810408+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -1125,7 +1125,7 @@
       "labels": [],
       "body": "I'm confused by cmw-start.cddl and cmw.cddl. Each has a definition for `cmw`.  frags.mk ignores cmw.cddl so possibly removal of cmw.cddl is needed? However, I prefer the convention that the \"start\" file contains only the start directive. This makes it easy to replace with a different start vector for debugging purposes. It would be better to put the cmw definition in cmw.cddl and include it in the frags.mk IMHO.",
       "createdAt": "2024-02-16T17:41:52Z",
-      "updatedAt": "2024-02-16T18:33:43Z",
+      "updatedAt": "2024-02-21T12:40:11Z",
       "closedAt": null,
       "comments": [
         {
@@ -1134,6 +1134,107 @@
           "body": "You are right.  I spotted the dead code while working on #71, which removes `cmw.cddl` for good.",
           "createdAt": "2024-02-16T18:33:42Z",
           "updatedAt": "2024-02-16T18:33:42Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This has been addressed in #71.  @nedmsmith could you confirm?",
+          "createdAt": "2024-02-21T12:40:09Z",
+          "updatedAt": "2024-02-21T12:40:09Z"
+        }
+      ]
+    },
+    {
+      "number": 74,
+      "id": "I_kwDOIGCt2M5_2KjL",
+      "title": "Add prose for example meanings of labels in cmw-collection",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/74",
+      "state": "OPEN",
+      "author": "deeglaze",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I had asked before if we could make the labels of the cmwc non-semantic because of the aggregation issue, and now I'm wondering about how we connect this with something like tls-attestation. The only notions of evidence are the media types, so each is inherently understood to be unique to the form of evidence.\r\n\r\nHere's an example: Both Intel TDX and AMD SEV-SNP have their attestation reports made available through the Linux configfs-tsm system. If we are to create a media type like application/vnd.linux.configfs-tsm, then the two forms of attestation report that SEV can give through that interface would be indistinguishable. We have the raw attestation report from the AMD SP, and we have the service attestation reports that are either individual or a manifest of all available services. There's reason to collect multiple reports for the same connection given the different services and necessary service versions. The disambiguation here makes sense as a reason to have labels, but it's not clear in the text.\r\n\r\nHaving said that, I don't know how to say, \"I can give you service evidence in application/vnd.linux.configfs-tsm format, and I can give you a raw attestation in application/vnd.linux.configfs-tsm format.\" with `evidence_propose`, similarly there is no way to request a specific evidence form from the other side.\r\n\r\nIf the content type has to uniquely identify the content for propose/request, I don't see a reason to have labels or `ind`. If it's not meant to uniquely identify the content for propose/request, then tls-attestation needs to be amended to allow for label-based disambiguation. I don't see a reason to add label-based disambiguation to the TLS extensions if we keep the integer type for CBOR keys, since the JSON vs CBOR format request shouldn't matter to the TLS protocol, right?",
+      "createdAt": "2024-02-20T17:29:20Z",
+      "updatedAt": "2024-02-21T10:12:10Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> application/vnd.linux.configfs-tsm\r\n\r\nWouldn't a vendor-specific evidence type be chosen by the vendor that produced it, for example: `application/vnd.tdx`? Would an OS process re-wrap the content with a different vendor-defined media type or would the signer of the content be the most appropriate entity to decide which media type to use?",
+          "createdAt": "2024-02-20T17:44:40Z",
+          "updatedAt": "2024-02-20T17:44:40Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > application/vnd.linux.configfs-tsm\r\n> \r\n> Wouldn't a vendor-specific evidence type be chosen by the vendor that produced it, for example: `application/vnd.tdx`?\r\n\r\nI'd have thought the same.  Why would the TSM backend not return its native media type?\r\n",
+          "createdAt": "2024-02-20T18:21:34Z",
+          "updatedAt": "2024-02-20T18:21:34Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "We could do that, though not everything is signed. There's the service manifest for example, that when you request a service attestation, you get SHA-512(nonce || service manifest) as the new nonce in an attestation report at a higher privilege level than the guest itself can request for a raw attestation. This is all beside the point that the labels themselves aren't doing favors for discovery and request protocols.",
+          "createdAt": "2024-02-20T18:27:23Z",
+          "updatedAt": "2024-02-20T18:27:23Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": ">the labels themselves aren't doing favors for discovery and request protocols\r\n\r\nWas this usage anticipated by the cmw work? I thought the originator (signer?) of the message selects the label based on their understanding of the contents and organization of the various cmws rather than on presumed usage(s). In many cases, there could be many usages the content originator hopes to support, and wouldn't be in a position to try to accommodate all of them. \r\n\r\nHowever, using cmw for discovery and request protocols is an interesting use case on it's own. Possibly, it is just another layer of indirection and cmw is flexible enough to support multiple layers of indirection. ",
+          "createdAt": "2024-02-20T19:09:21Z",
+          "updatedAt": "2024-02-20T19:09:21Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "What are its existing usages then?\r\n\r\n\"With the CMW format described in this document, protocol designers do not need to update protocol specifications to support different conceptual messages.\"\r\n\r\nI don't know what the expected usage of a label is for protocols to consume them.",
+          "createdAt": "2024-02-20T19:22:44Z",
+          "updatedAt": "2024-02-20T19:22:44Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Labels are identifiers within a given collection that, in principle, have no absolute/global significance.  They are dependent on the usage of a collection payload within a protocol context.\r\n\r\nIf one is using CMW in protocol X, one could attribute specific semantics to labels that would be interpreted in a precise way within X.",
+          "createdAt": "2024-02-20T19:43:09Z",
+          "updatedAt": "2024-02-20T19:43:52Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> \"With the CMW format described in this document, protocol designers do not need to update protocol specifications to support different conceptual messages.\"\r\n\r\nThis only means that protocols that use CMWs don't need to update anything if (e.g.) a new evidence format is added.",
+          "createdAt": "2024-02-20T19:51:08Z",
+          "updatedAt": "2024-02-20T19:51:08Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "9334 says: \"The lead Attester collects Evidence from other\r\n   Attesters and conveys it to a Verifier.  Collection of Evidence from\r\n   sub-entities may itself be a form of Claims collection that results\r\n   in Evidence asserted by the lead Attester.  The lead Attester\r\n   generates Evidence about the layout of the whole composite device,\r\n   while sub-Attesters generate Evidence about their respective\r\n   (sub-)modules.\" \r\nFrom a cmw context, the collection of Evidence needs to be bundled up in some fashion. The lead Attester is presumed to know enough about device composition to create the bundle. The `cmw-collection` structure from draft-ietf-rats-msg-wrap seems to fit this use case. The label then is a hint that helps the Verifier decide which cmw to crack open first, etc. Maybe the design of the Verifier ignores the label since it expects to crack open all of them? A different Verifier, say one that supports a profile, might use the label to encode the name of one of the sub-attesters and direct Evidence from that sub-attester to a subroutine that is tuned for that type of attester? ",
+          "createdAt": "2024-02-20T19:54:10Z",
+          "updatedAt": "2024-02-20T19:55:06Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> If one is using CMW in protocol X, one could attribute specific semantics to labels that would be interpreted in a precise way within X.\r\n\r\nThis use case assumes the protocol endpoint is also the creator of the cmw message. In a composite device architecture, this may not be the case for all cmws that are generated by the device.",
+          "createdAt": "2024-02-20T19:59:03Z",
+          "updatedAt": "2024-02-20T19:59:03Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "> The lead Attester is presumed to know enough about device composition to create the bundle.\r\n\r\nI think that it has information that can be discovered by enumerating subattesters in an install directory, but not intimate knowledge that subattesters will have. If we're putting significance on labels for verifiers to interpret as they see fit, I'm still a bit at a loss why CBOR is allowed to use integer keys when JSON can only use strings. The serialization choice is confusing. At least for the int in type: in CBOR has a specific meaning that translates through registered CoAP values to the normal Content-type string. For labels it's so open-ended that you may end up with it carrying way more semantic content than one would hope it to carry.\r\n\r\nPerhaps I'm reading too deeply into the close symmetries between CMW and the TLS extensions from the tls-attestation draft and it's the TLS attestation doc that should be revised. Still, is there any proposed use of labels so far that uses them for semantic content? Your responses don't suggest as much. Thomas, do you have an existence proof for your protocol X?",
+          "createdAt": "2024-02-20T21:12:09Z",
+          "updatedAt": "2024-02-20T21:12:09Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > The lead Attester is presumed to know enough about device composition to create the bundle.\r\n>\r\n> I think that it has information that can be discovered by enumerating subattesters in an install directory, but not intimate knowledge that subattesters will have.\r\n\r\nA _generic_ lead attester, like the \"evidence collection daemon\" (`ecd(8)` for short), has to have some way to discover its subattesters' arrangement.  Either via static configuration or some form of dynamic discovery (e.g., the one you suggest above).\r\n\r\nThis arrangement is going to be reflected in the CWM collection labelling, which is one facet of the `ecd(8)`'s external-facing interface, i.e., its \"protocol\".\r\n\r\nIn my fantasy, the protocol objects returned by `ecd(8)` are EAT containing the CMW collection as one of the claims, e.g.:\r\n\r\n```json\r\n{\r\n  \"cmw\": {\r\n    \"cpu.0\": [\r\n      \"application/vnd.A\",\r\n      \"...\"\r\n    ],\r\n    \"gpu.0\": [\r\n      \"application/vnd.B\",\r\n      \"...\"\r\n    ],\r\n    \"nic.0\": [\r\n      \"application/vnd.C\",\r\n      \"...\"\r\n    ],\r\n    \"nic.1\": [\r\n      \"application/vnd.D\",\r\n      \"...\"\r\n    ]\r\n  },\r\n  \"iss\": \"ecd v0.0.1\",\r\n  \"exp\": 2024129268,\r\n  \"eat_profile\": \"tag:github.com,2024:deeglaze/ecd\"\r\n}\r\n```\r\n\r\n",
+          "createdAt": "2024-02-21T10:12:09Z",
+          "updatedAt": "2024-02-21T10:12:09Z"
         }
       ]
     }
@@ -4824,21 +4925,21 @@
       "id": "PR_kwDOIGCt2M5nH37w",
       "title": "Fixed orphaned cmw.cddl file",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/73",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "nedmsmith",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Moved contents of cmw-start.cddl to cmw.cddl except for the single line `start = cmw` and updated frags.mk to include cmw.cddl\r\n\r\nThis PR fixes issue #72",
       "createdAt": "2024-02-16T19:16:12Z",
-      "updatedAt": "2024-02-16T19:35:06Z",
+      "updatedAt": "2024-02-21T17:25:11Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "9b4944fb076fead5a98e30d1b56f77ec6781a8c3",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "fix-orphan-cmw-cddl",
       "headRefOid": "48321dd016825bebcd4a8845abecd14c1b60b058",
-      "closedAt": null,
+      "closedAt": "2024-02-21T17:25:11Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -4849,6 +4950,13 @@
           "body": "> this is already fixed in #71\r\n\r\nI missed that. #73 also moves extra statements in cmw-start.cddl into cmw.cddl. Maybe it's a style nit, but it really bugs me to have anything but the start=xxx in a start.cddl file.",
           "createdAt": "2024-02-16T19:35:05Z",
           "updatedAt": "2024-02-16T19:35:05Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fixed in PR #71",
+          "createdAt": "2024-02-21T17:25:11Z",
+          "updatedAt": "2024-02-21T17:25:11Z"
         }
       ],
       "reviews": [
