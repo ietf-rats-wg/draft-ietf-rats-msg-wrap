@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-22T00:37:04.810408+00:00",
+  "timestamp": "2024-02-25T00:40:30.405689+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -1118,15 +1118,15 @@
       "id": "I_kwDOIGCt2M5_f-Jr",
       "title": "two `cmw` definitions",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/72",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "nedmsmith",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "I'm confused by cmw-start.cddl and cmw.cddl. Each has a definition for `cmw`.  frags.mk ignores cmw.cddl so possibly removal of cmw.cddl is needed? However, I prefer the convention that the \"start\" file contains only the start directive. This makes it easy to replace with a different start vector for debugging purposes. It would be better to put the cmw definition in cmw.cddl and include it in the frags.mk IMHO.",
       "createdAt": "2024-02-16T17:41:52Z",
-      "updatedAt": "2024-02-21T12:40:11Z",
-      "closedAt": null,
+      "updatedAt": "2024-02-22T11:00:47Z",
+      "closedAt": "2024-02-22T11:00:46Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -1141,6 +1141,13 @@
           "body": "This has been addressed in #71.  @nedmsmith could you confirm?",
           "createdAt": "2024-02-21T12:40:09Z",
           "updatedAt": "2024-02-21T12:40:09Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> This has been addressed in #71. @nedmsmith could you confirm?\r\n\r\nOK, I've got indirect confirmation by your closing of #73 \ud83d\ude04 ",
+          "createdAt": "2024-02-22T11:00:46Z",
+          "updatedAt": "2024-02-22T11:00:46Z"
         }
       ]
     },
