@@ -1,2 +1,9 @@
-json-collection = { + text => json-CMW / c2j-tunnel }
-cbor-collection = { + (int / text) => cbor-CMW / j2c-tunnel }
+json-collection = {
+  ? "__cmwc_t": ~uri / oid
+  + text => json-CMW / c2j-tunnel
+}
+
+cbor-collection = {
+  ? "__cmwc_t": ~uri / oid
+  + (int / text) => cbor-CMW / j2c-tunnel
+}
