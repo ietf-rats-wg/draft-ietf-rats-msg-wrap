@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-25T00:40:30.405689+00:00",
+  "timestamp": "2024-02-27T00:36:54.852387+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -1163,7 +1163,7 @@
       "labels": [],
       "body": "I had asked before if we could make the labels of the cmwc non-semantic because of the aggregation issue, and now I'm wondering about how we connect this with something like tls-attestation. The only notions of evidence are the media types, so each is inherently understood to be unique to the form of evidence.\r\n\r\nHere's an example: Both Intel TDX and AMD SEV-SNP have their attestation reports made available through the Linux configfs-tsm system. If we are to create a media type like application/vnd.linux.configfs-tsm, then the two forms of attestation report that SEV can give through that interface would be indistinguishable. We have the raw attestation report from the AMD SP, and we have the service attestation reports that are either individual or a manifest of all available services. There's reason to collect multiple reports for the same connection given the different services and necessary service versions. The disambiguation here makes sense as a reason to have labels, but it's not clear in the text.\r\n\r\nHaving said that, I don't know how to say, \"I can give you service evidence in application/vnd.linux.configfs-tsm format, and I can give you a raw attestation in application/vnd.linux.configfs-tsm format.\" with `evidence_propose`, similarly there is no way to request a specific evidence form from the other side.\r\n\r\nIf the content type has to uniquely identify the content for propose/request, I don't see a reason to have labels or `ind`. If it's not meant to uniquely identify the content for propose/request, then tls-attestation needs to be amended to allow for label-based disambiguation. I don't see a reason to add label-based disambiguation to the TLS extensions if we keep the integer type for CBOR keys, since the JSON vs CBOR format request shouldn't matter to the TLS protocol, right?",
       "createdAt": "2024-02-20T17:29:20Z",
-      "updatedAt": "2024-02-21T10:12:10Z",
+      "updatedAt": "2024-02-26T10:09:51Z",
       "closedAt": null,
       "comments": [
         {
@@ -1242,8 +1242,38 @@
           "body": "> > The lead Attester is presumed to know enough about device composition to create the bundle.\r\n>\r\n> I think that it has information that can be discovered by enumerating subattesters in an install directory, but not intimate knowledge that subattesters will have.\r\n\r\nA _generic_ lead attester, like the \"evidence collection daemon\" (`ecd(8)` for short), has to have some way to discover its subattesters' arrangement.  Either via static configuration or some form of dynamic discovery (e.g., the one you suggest above).\r\n\r\nThis arrangement is going to be reflected in the CWM collection labelling, which is one facet of the `ecd(8)`'s external-facing interface, i.e., its \"protocol\".\r\n\r\nIn my fantasy, the protocol objects returned by `ecd(8)` are EAT containing the CMW collection as one of the claims, e.g.:\r\n\r\n```json\r\n{\r\n  \"cmw\": {\r\n    \"cpu.0\": [\r\n      \"application/vnd.A\",\r\n      \"...\"\r\n    ],\r\n    \"gpu.0\": [\r\n      \"application/vnd.B\",\r\n      \"...\"\r\n    ],\r\n    \"nic.0\": [\r\n      \"application/vnd.C\",\r\n      \"...\"\r\n    ],\r\n    \"nic.1\": [\r\n      \"application/vnd.D\",\r\n      \"...\"\r\n    ]\r\n  },\r\n  \"iss\": \"ecd v0.0.1\",\r\n  \"exp\": 2024129268,\r\n  \"eat_profile\": \"tag:github.com,2024:deeglaze/ecd\"\r\n}\r\n```\r\n\r\n",
           "createdAt": "2024-02-21T10:12:09Z",
           "updatedAt": "2024-02-21T10:12:09Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "I'm confused. My understanding is that EAT is a representation of attestation results, which comes after the appraisal of evidence. I'm concerned with transmitting evidence to the verifier to then turn into attestation results that would be wrapped in an EAT to send along to the RP.\r\n\r\nThe \"Taming attestation for the cloud native world with Parsec\" talk Paul pointed me to says their model also expects to only send along a CMW (around 21 minutes in) https://youtu.be/NJKi3O0hhPo?si=P3_vimu4gUgKckWt&t=1280",
+          "createdAt": "2024-02-25T22:28:42Z",
+          "updatedAt": "2024-02-25T22:28:42Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I'm confused. My understanding is that EAT is a representation of attestation results, which comes after the appraisal of evidence.\r\n\r\nNo, EAT is a *generic* data format for attestation-related claims-sets, including Evidence (e.g., [PSA](https://datatracker.ietf.org/doc/draft-tschofenig-rats-psa-token/)) and Attestation Results (e.g., [EAR](https://datatracker.ietf.org/doc/draft-fv-rats-ear)).\r\n",
+          "createdAt": "2024-02-26T10:09:50Z",
+          "updatedAt": "2024-02-26T10:09:50Z"
         }
       ]
+    },
+    {
+      "number": 75,
+      "id": "I_kwDOIGCt2M6Abb3M",
+      "title": "the type of a collection",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/75",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Since #67 a CMW can also be a collection.\r\n\r\nBut now we have introduced a slight asymmetry: the typing mechanism we have for non-collection CMWs does not apply to collections, i.e., collections don't have an intrinsic way to describe their overall type.\r\n\r\nClearly, one can always define the media type of a given collection, but that's an extrinsic property and is not always useful.\r\n\r\nProblems linked to this asymmetry have popped up in the use of CMW collections with the X.509 wrapper where the OID is not a sufficient indication for the processor to make sense of the wrapped CMW collection as a whole.\r\n\r\nOne possibility is to reuse the EAT approach and reserve a specific label for a type indicator, e.g.:\r\n\r\n```\r\njson-collection = {\r\n  ? \"__cmwc_t\": uri / oid\r\n  + text => json-CMW / c2j-tunnel\r\n}\r\ncbor-collection = {\r\n  ? \"__cmwc_t\": uri / oid\r\n  + (int / text) => cbor-CMW / j2c-tunnel\r\n}\r\n```\r\n\r\n(Note the use of CDDL's [cut](https://datatracker.ietf.org/doc/html/rfc8610#section-3.5.4) in the definition which prevents further matching on the same \"reserved\" label.)\r\n\r\nNote that we could derive automatic media types using the base `application/cmw+cbor` (or `application/cmw+json`) and add a `t` parameter with the value of the `__cmwc_t` key.",
+      "createdAt": "2024-02-26T17:06:03Z",
+      "updatedAt": "2024-02-26T17:09:19Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -4981,6 +5011,40 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 76,
+      "id": "PR_kwDOIGCt2M5n8iHz",
+      "title": "add a type indicator for collections",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/76",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "First stab at #75",
+      "createdAt": "2024-02-26T17:37:45Z",
+      "updatedAt": "2024-02-26T17:38:09Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "ec6c9729d58d8ceb3612c03d72127ee5fbdbfbeb",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "typed-coll",
+      "headRefOid": "62d5fc2138a5507a46a19c3cdc8f4d711ac9518f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze",
+          "createdAt": "2024-02-26T17:38:08Z",
+          "updatedAt": "2024-02-26T17:38:08Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
