@@ -250,8 +250,9 @@ The CMW collection ({{fig-cddl-collection}}) is defined as a CBOR map or JSON ob
 The position of a `cmw` entry in the `cmw-collection` is not significant.
 Instead, the labels identify a conceptual message that, in the case of a composite Attester, should typically correspond to a component of a system.
 Labels can be strings (or integers in the CBOR serialization) that serve as a mnemonic for different conceptual messages in the collection.
-The `"__cmwc_t"` label is reserved for associating an optional type to the overall collection.
-The collection type is either a URI or an object identifier (OID).
+The `"__cmwc_t"` key is reserved for associating an optional type to the overall collection and MUST NOT be used for a label.
+The collection type is either a Uniform Resource Identifier (URI) or an object identifier (OID).
+The OID is always absolute and never relative.
 
 Since the collection type is recursive, implementations may limit the allowed depth of nesting.
 
@@ -654,7 +655,7 @@ Required parameters:
 : n/a
 
 Optional parameters:
-: `cmwc_t` (CMW collection type in string format.  The parameter value is case-insensitive.)
+: `cmwc_t` (CMW collection type in string format.  The parameter value is case-insensitive.  It MUST NOT be used for CMW that are not collections.)
 
 Encoding considerations:
 : binary (CBOR)
@@ -702,7 +703,7 @@ Required parameters:
 : n/a
 
 Optional parameters:
-: `cmwc_t` (CMW collection type in string format.  The parameter value is case-insensitive.)
+: `cmwc_t` (CMW collection type in string format.  The parameter value is case-insensitive.  It MUST NOT be used for CMW that are not collections.)
 
 Encoding considerations:
 : binary (JSON is UTF-8-encoded text)
