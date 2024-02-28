@@ -1,1 +1,1 @@
-cbor-tag = #6.<0..18446744073709551615>(bytes)
+cbor-tag<tn, $fmt> = #6.<tn>(bytes .cbor $fmt)

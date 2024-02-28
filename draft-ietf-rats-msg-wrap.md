@@ -216,13 +216,23 @@ The RATS conceptual message is first serialized according to the
 Content-Format number associated with the CBOR tag and then encoded as a
 CBOR byte string, to which the tag is prepended.
 
-The CMW CBOR Tag is defined in {{fig-cddl-cbor-tag}}.
+The CMW CBOR Tag is defined in {{fig-cddl-cbor-tag}} as a macro with two parameters:
+
+* `tn`, the CBOR tag number
+* `$fmt`, the definition of the associated conceptual message
 
 ~~~ cddl
 {::include cddl/cmw-cbor-tag.cddl}
 ~~~
 {: #fig-cddl-cbor-tag artwork-align="left"
-   title="CDDL definition of the CBOR Tag format"}
+   title="CDDL definition of the CBOR Tag format macro"}
+
+To add a new CMW, the `$cbor-tag` type socket is extended with a new instance of the CMW CBOR Tag macro.
+For example, to associate conceptual messages of type `my-evidence` with CBOR Tag `1668576819`, one would extend `$cbor-tag` as follows:
+
+~~~ cddl
+{::include cddl/cmw-example-tag-1668576819-def.cddl}
+~~~
 
 ### Use of Pre-existing CBOR Tags
 
@@ -749,7 +759,7 @@ IANA is requested to assign an object identifier (OID) for the ASN.1 Module defi
 ## Collected CDDL {#collected-cddl}
 
 ~~~ cddl
-{::include cddl/cmw-autogen.cddl}
+{::include cddl/collected-cddl-autogen.cddl}
 ~~~
 
 # Registering and Using CMWs
