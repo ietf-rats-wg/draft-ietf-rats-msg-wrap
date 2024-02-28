@@ -1,0 +1,5 @@
+$cbor-tag /= cbor-tag<1668576819, my>
+
+my = {
+  1: text
+}
