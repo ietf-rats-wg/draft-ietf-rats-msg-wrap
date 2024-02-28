@@ -1,5 +1,5 @@
 $cbor-tag /= cbor-tag<1668576819, my-evidence>
 
 my-evidence = {
-  &(nonce-label: 10) => bstr .size (8..64)
+  &(eat_nonce: 10) => bstr .size (8..64)
 }

@@ -759,7 +759,7 @@ IANA is requested to assign an object identifier (OID) for the ASN.1 Module defi
 ## Collected CDDL {#collected-cddl}
 
 ~~~ cddl
-{::include cddl/cmw-autogen.cddl}
+{::include cddl/collected-cddl-autogen.cddl}
 ~~~
 
 # Registering and Using CMWs
