@@ -228,7 +228,7 @@ The CMW CBOR Tag is defined in {{fig-cddl-cbor-tag}} as a macro with two paramet
    title="CDDL definition of the CBOR Tag format macro"}
 
 To add a new CMW, the `$cbor-tag` type socket is extended with a new instance of the CMW CBOR Tag macro.
-For example, to associate conceptual messages of type `my` with CBOR Tag `1668576819`, one would extend `$cbor-tag` as follows:
+For example, to associate conceptual messages of type `my-evidence` with CBOR Tag `1668576819`, one would extend `$cbor-tag` as follows:
 
 ~~~ cddl
 {::include cddl/cmw-example-tag-1668576819-def.cddl}
