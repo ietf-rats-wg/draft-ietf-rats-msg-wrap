@@ -258,8 +258,8 @@ To address the composite Attester use case, this document defines a CMW "collect
 
 The CMW collection ({{fig-cddl-collection}}) is defined as a CBOR map or JSON object with CMW values, either native or "tunnelled" ({{cmw-tunnel}}).
 The position of a `cmw` entry in the `cmw-collection` is not significant.
-Instead, the labels identify a conceptual message that, in the case of a composite Attester, should typically correspond to a component of a system.
 Labels can be strings (or integers in the CBOR serialization) that serve as a mnemonic for different conceptual messages in the collection.
+
 The `"__cmwc_t"` key is reserved for associating an optional type to the overall collection and MUST NOT be used for a label.
 The collection type is either a Uniform Resource Identifier (URI) or an object identifier (OID).
 The OID is always absolute and never relative.
@@ -273,6 +273,13 @@ Since the collection type is recursive, implementations may limit the allowed de
    title="CDDL definition of the CMW collection format"}
 
 Although initially designed for the composite Attester use case, the CMW collection can be repurposed for other use cases requiring CMW aggregation.
+
+### CMW Collections' role in composite Attester topology
+
+A CMW Collection's tree structure is not required to be a spanning tree of the a system's composite Attester topology, i.e, it need not be a reflection of domain membership nor domain dependency.
+If a label changes Verifier state beyond a "hint" (e.g., for better Verifier performance or human comprehension), we say that it carries semantic content.
+If a label carries semantic content, the collection itself is a form of evidence that SHOULD be attested.
+When a label carries semantic content that is not bound to other forms of evidence contained in the collection, the collection SHOULD be signed by an attestation key, e.g., by including the collection in a signed EAT {{-rats-eat}}.
 
 ## CMW Tunnel {#cmw-tunnel}
 
