@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-29T00:37:05.559269+00:00",
+  "timestamp": "2024-03-03T00:39:32.640468+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -1186,7 +1186,7 @@
       "labels": [],
       "body": "I had asked before if we could make the labels of the cmwc non-semantic because of the aggregation issue, and now I'm wondering about how we connect this with something like tls-attestation. The only notions of evidence are the media types, so each is inherently understood to be unique to the form of evidence.\r\n\r\nHere's an example: Both Intel TDX and AMD SEV-SNP have their attestation reports made available through the Linux configfs-tsm system. If we are to create a media type like application/vnd.linux.configfs-tsm, then the two forms of attestation report that SEV can give through that interface would be indistinguishable. We have the raw attestation report from the AMD SP, and we have the service attestation reports that are either individual or a manifest of all available services. There's reason to collect multiple reports for the same connection given the different services and necessary service versions. The disambiguation here makes sense as a reason to have labels, but it's not clear in the text.\r\n\r\nHaving said that, I don't know how to say, \"I can give you service evidence in application/vnd.linux.configfs-tsm format, and I can give you a raw attestation in application/vnd.linux.configfs-tsm format.\" with `evidence_propose`, similarly there is no way to request a specific evidence form from the other side.\r\n\r\nIf the content type has to uniquely identify the content for propose/request, I don't see a reason to have labels or `ind`. If it's not meant to uniquely identify the content for propose/request, then tls-attestation needs to be amended to allow for label-based disambiguation. I don't see a reason to add label-based disambiguation to the TLS extensions if we keep the integer type for CBOR keys, since the JSON vs CBOR format request shouldn't matter to the TLS protocol, right?",
       "createdAt": "2024-02-20T17:29:20Z",
-      "updatedAt": "2024-02-28T16:40:34Z",
+      "updatedAt": "2024-03-01T16:11:40Z",
       "closedAt": null,
       "comments": [
         {
@@ -1286,6 +1286,13 @@
           "body": "@deeglaze, is there anything actionable related to this issue?\r\n\r\nIf so, could you please suggest some text?\r\n\r\nIf not, could this be closed?",
           "createdAt": "2024-02-28T16:40:33Z",
           "updatedAt": "2024-02-28T16:40:33Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "I'll suggest some text.",
+          "createdAt": "2024-03-01T16:11:39Z",
+          "updatedAt": "2024-03-01T16:11:39Z"
         }
       ]
     },
@@ -5212,6 +5219,58 @@
           ]
         }
       ]
+    },
+    {
+      "number": 78,
+      "id": "PR_kwDOIGCt2M5obuCe",
+      "title": "Add a section detailing CMW collection label usage",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/78",
+      "state": "OPEN",
+      "author": "deeglaze",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "This is to address Issue#74. A CMW collection type exists to organize individual attesters' results and not fracture the space of representations of composite attester results. The topologies however are still subject to Verifier scrutiny. If the topology is not present in a measured boot chain signed by some other attester, and the only trusted witness of the complete assembly of a system is the CMW collection itself, we must be careful to ensure that the meaning of labels is properly documented (with a profile) and integrity-protected (with a signature).",
+      "createdAt": "2024-03-01T17:17:28Z",
+      "updatedAt": "2024-03-01T17:17:28Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "817fbfeeb50b95d42d4d59b31a480fe23bf8e42a",
+      "headRepository": "deeglaze/draft-ietf-rats-msg-wrap",
+      "headRefName": "cmwlabels",
+      "headRefOid": "799da83fc02f72ca06b74ea3f244508db436b35b",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 79,
+      "id": "PR_kwDOIGCt2M5ob6Ov",
+      "title": "CCC attestation SIG presentation",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/79",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "In preparation for presenting CMW to the attestation SIG",
+      "createdAt": "2024-03-01T17:48:47Z",
+      "updatedAt": "2024-03-01T18:11:39Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "817fbfeeb50b95d42d4d59b31a480fe23bf8e42a",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "materials",
+      "headRefOid": "17216a4d60c3c885334a72502eedb4eda2eaf442",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
