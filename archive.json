@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-03-03T00:39:32.640468+00:00",
+  "timestamp": "2024-03-05T00:37:03.254778+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -5251,26 +5251,55 @@
       "id": "PR_kwDOIGCt2M5ob6Ov",
       "title": "CCC attestation SIG presentation",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/79",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "In preparation for presenting CMW to the attestation SIG",
       "createdAt": "2024-03-01T17:48:47Z",
-      "updatedAt": "2024-03-01T18:11:39Z",
+      "updatedAt": "2024-03-03T16:25:05Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "817fbfeeb50b95d42d4d59b31a480fe23bf8e42a",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "materials",
       "headRefOid": "17216a4d60c3c885334a72502eedb4eda2eaf442",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-03-03T16:25:04Z",
+      "mergedAt": "2024-03-03T16:25:04Z",
+      "mergedBy": "hannestschofenig",
+      "mergeCommit": {
+        "oid": "ace9ef08b0abe553fdc99f393a9937d3c74b81e1"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5yBqJp",
+          "commit": {
+            "abbreviatedOid": "17216a4"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Looks great. We should give that presentation in the IETF as well",
+          "createdAt": "2024-03-03T16:22:43Z",
+          "updatedAt": "2024-03-03T16:22:43Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5yBqPM",
+          "commit": {
+            "abbreviatedOid": "17216a4"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-03-03T16:24:53Z",
+          "updatedAt": "2024-03-03T16:24:53Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
