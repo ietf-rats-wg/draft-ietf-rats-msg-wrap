@@ -64,8 +64,16 @@ Added more examples
 
 # Next Steps
 
--05 with some further CDDL-related improvements
+-05 with some further CDDL-related and editorial improvements
 
 2nd WGLC?
 
----
+```
+                     cmw-05            |--| = 1w
+                       |
+                       v
+                 |--|--|--|--|--|--|-> t
+                 ^      ^      ^
+                 |      '______'
+                now     2nd WGLC
+```
