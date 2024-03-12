@@ -216,6 +216,25 @@ $ echo -n g3gYYXBwbGljYXRpb24vZWF0LXVjcytjYm9yQaAE | base64 -d | cbor2diag.rb
 
 ---
 
+## Carrying the collecion in an X.509 extension
+
+```
+-- CMW Extension OID
+
+id-pe-cmw-collection  OBJECT IDENTIFIER  ::=
+   { iso(1) identified-organization(3) dod(6) internet(1)
+     security(5) mechanisms(5) pkix(7) id-pe(1) TBD }
+
+-- CMW Extension Syntax
+
+CMW ::= CHOICE {
+    json UTF8String,
+    cbor OCTET STRING
+}
+```
+
+---
+
 # Collection sealing
 
 ## Intra-collection locking
@@ -253,3 +272,4 @@ where:
 
 ---
 
+# FIN
