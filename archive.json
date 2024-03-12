@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-03-10T00:40:22.152728+00:00",
+  "timestamp": "2024-03-12T00:36:55.929662+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -5232,7 +5232,7 @@
       "labels": [],
       "body": "This is to address Issue#74. A CMW collection type exists to organize individual attesters' results and not fracture the space of representations of composite attester results. The topologies however are still subject to Verifier scrutiny. If the topology is not present in a measured boot chain signed by some other attester, and the only trusted witness of the complete assembly of a system is the CMW collection itself, we must be careful to ensure that the meaning of labels is properly documented (with a profile) and integrity-protected (with a signature).",
       "createdAt": "2024-03-01T17:17:28Z",
-      "updatedAt": "2024-03-01T17:17:28Z",
+      "updatedAt": "2024-03-11T23:29:42Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "817fbfeeb50b95d42d4d59b31a480fe23bf8e42a",
@@ -5244,7 +5244,28 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5zBoa0",
+          "commit": {
+            "abbreviatedOid": "799da83"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Suggested wording.",
+          "createdAt": "2024-03-11T23:28:42Z",
+          "updatedAt": "2024-03-11T23:29:42Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "```suggestion\r\nWhen a label carries semantic content that is not bound to other forms of evidence contained in the CMW, the CMW SHOULD be signed by an attestation key, e.g., by including the CMW in a signed EAT {{-rats-eat}}.\r\n```\r\nJustification: a cmw can be a cmw-record, cmw-collection, or cbor-tag",
+              "createdAt": "2024-03-11T23:28:42Z",
+              "updatedAt": "2024-03-11T23:29:42Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 79,
@@ -5297,6 +5318,46 @@
           "body": "",
           "createdAt": "2024-03-03T16:24:53Z",
           "updatedAt": "2024-03-03T16:24:53Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 80,
+      "id": "PR_kwDOIGCt2M5pNs0u",
+      "title": "IETF 119 slides: small tweak",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/80",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-03-11T08:56:17Z",
+      "updatedAt": "2024-03-11T23:24:58Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "ace9ef08b0abe553fdc99f393a9937d3c74b81e1",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "ietf-119-slides-tweaks",
+      "headRefOid": "cee54f3697298fe45b790320a119f6aea04cbd6d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5zBmHu",
+          "commit": {
+            "abbreviatedOid": "cee54f3"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-03-11T23:24:58Z",
+          "updatedAt": "2024-03-11T23:24:58Z",
           "comments": []
         }
       ]
