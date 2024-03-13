@@ -64,8 +64,24 @@ Added more examples
 
 # Next Steps
 
--05 with some further CDDL-related improvements
+[.column]
 
-2nd WGLC?
+* Get a document shepherd (Ionuț Mihalcea volunteered)
 
----
+* -05 with some further CDDL-related and editorial improvements
+  * [#81 "Trust contexts to consider"](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/81) 
+  * [#74 "Add prose for example meanings of labels in cmw-collection"](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/74)
+
+* 2nd WGLC?
+
+[.column]
+
+```
+     cmw-05            |--| = 1w
+       |
+       v
+ |--|--|--|--|--|--|-> t
+ ^      ^      ^
+ |      '______'
+now     2nd WGLC
+```
