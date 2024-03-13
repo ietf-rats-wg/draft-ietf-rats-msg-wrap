@@ -64,6 +64,8 @@ Added more examples
 
 # Next Steps
 
+[.column]
+
 * Get a document shepherd (Ionuț Mihalcea volunteered)
 
 * -05 with some further CDDL-related and editorial improvements
@@ -72,12 +74,14 @@ Added more examples
 
 * 2nd WGLC?
 
+[.column]
+
 ```
-                     cmw-05            |--| = 1w
-                       |
-                       v
-                 |--|--|--|--|--|--|-> t
-                 ^      ^      ^
-                 |      '______'
-                now     2nd WGLC
+     cmw-05            |--| = 1w
+       |
+       v
+ |--|--|--|--|--|--|-> t
+ ^      ^      ^
+ |      '______'
+now     2nd WGLC
 ```
