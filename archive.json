@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-03-12T00:36:55.929662+00:00",
+  "timestamp": "2024-03-14T00:36:52.139900+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -1335,6 +1335,22 @@
           "updatedAt": "2024-02-27T10:57:24Z"
         }
       ]
+    },
+    {
+      "number": 81,
+      "id": "I_kwDOIGCt2M6CEcS-",
+      "title": "Trust contexts to consider",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/81",
+      "state": "OPEN",
+      "author": "MikeCamel",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "1. do I trust this party to create a measurement (this isn't that important, I suspect, as we should always verify!)\r\n2. do I trust this party to verify the measurement?\r\n3. do I trust this party to attest to another party (or possibly the linkage to another party)?\r\n4. do I trust this party to create a topology of trust relationships?\r\n\r\nThese are clearly different trust contexts, but people don't understand very well that contexts must be separated, so we should call this out and ensure that the semantics we're creating support them from the very initial version and any implementation (or people will combine them, and implementations will allow combinations to support previous versions, which is a Bad Thing[tm]).",
+      "createdAt": "2024-03-12T16:56:44Z",
+      "updatedAt": "2024-03-12T16:56:44Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -5327,24 +5343,26 @@
       "id": "PR_kwDOIGCt2M5pNs0u",
       "title": "IETF 119 slides: small tweak",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/80",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-03-11T08:56:17Z",
-      "updatedAt": "2024-03-11T23:24:58Z",
+      "updatedAt": "2024-03-13T16:14:44Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "ace9ef08b0abe553fdc99f393a9937d3c74b81e1",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "ietf-119-slides-tweaks",
-      "headRefOid": "cee54f3697298fe45b790320a119f6aea04cbd6d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "661ba75503e0368f6230af865e65c6c580d50dd4",
+      "closedAt": "2024-03-13T16:14:40Z",
+      "mergedAt": "2024-03-13T16:14:40Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "99370fcf8bb2bd018e48fc51a155ea88bcc101d9"
+      },
       "comments": [],
       "reviews": [
         {
@@ -5359,8 +5377,47 @@
           "createdAt": "2024-03-11T23:24:58Z",
           "updatedAt": "2024-03-11T23:24:58Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5zT7fw",
+          "commit": {
+            "abbreviatedOid": "661ba75"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-03-13T16:02:10Z",
+          "updatedAt": "2024-03-13T16:02:10Z",
+          "comments": []
         }
       ]
+    },
+    {
+      "number": 82,
+      "id": "PR_kwDOIGCt2M5paRFv",
+      "title": "CCC presentation += X.509 wrapping",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/82",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-03-12T17:05:39Z",
+      "updatedAt": "2024-03-12T17:05:51Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "ace9ef08b0abe553fdc99f393a9937d3c74b81e1",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "ccc-sig-slides+x509",
+      "headRefOid": "a0b0a7f9b2617cd680f29b18bf51b3bb199241aa",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
