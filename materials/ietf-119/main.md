@@ -10,7 +10,19 @@ autoscale: true
 
 ---
 
-# Status Update
+# Quick Recap
+
+* Wrapper format for transporting *any* attestation message in *any* "hosting" protocol
+* JSON and CBOR serialisations
+* Typing based on Media Types [[RFC6838]](https://rfc-editor.org/rfc/rfc6838)
+
+For more details see:
+
+* [Presentation @ CCC Attestation SIG](https://github.com/CCC-Attestation/meetings/blob/main/materials/ThomasFossati_CMW.pdf)
+
+---
+
+# Updates
 
 * (1st) WGLC concluded
 * Relation with other drafts
@@ -60,6 +72,10 @@ Added more examples
 
 [draft-ietf-lamps-csr-attestation](https://datatracker.ietf.org/doc/draft-ietf-lamps-csr-attestation/)
 
+[draft-bft-rats-kat](https://datatracker.ietf.org/doc/draft-bft-rats-kat/)
+
+[draft-fossati-tls-attestation](https://datatracker.ietf.org/doc/draft-fossati-tls-attestation/)
+
 ---
 
 # Next Steps
@@ -85,3 +101,7 @@ Added more examples
  |      '______'
 now     2nd WGLC
 ```
+
+---
+
+# FIN
