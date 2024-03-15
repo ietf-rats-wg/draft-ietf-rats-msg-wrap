@@ -594,7 +594,6 @@ IANA is requested to add a new `cmw` claim to the "JSON Web Token Claims" sub-re
 
 * Claim Name: cmw
 * Claim Description: A RATS Conceptual Message Wrapper
-* Claim Value Type(s): JSON Object or JSON Array
 * Change Controller: IETF
 * Specification Document(s): {{type-n-val}} of {{&SELF}}
 
