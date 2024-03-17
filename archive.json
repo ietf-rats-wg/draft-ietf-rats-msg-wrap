@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-03-14T00:36:52.139900+00:00",
+  "timestamp": "2024-03-17T00:40:09.260477+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -1349,6 +1349,22 @@
       "body": "1. do I trust this party to create a measurement (this isn't that important, I suspect, as we should always verify!)\r\n2. do I trust this party to verify the measurement?\r\n3. do I trust this party to attest to another party (or possibly the linkage to another party)?\r\n4. do I trust this party to create a topology of trust relationships?\r\n\r\nThese are clearly different trust contexts, but people don't understand very well that contexts must be separated, so we should call this out and ensure that the semantics we're creating support them from the very initial version and any implementation (or people will combine them, and implementations will allow combinations to support previous versions, which is a Bad Thing[tm]).",
       "createdAt": "2024-03-12T16:56:44Z",
       "updatedAt": "2024-03-12T16:56:44Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 83,
+      "id": "I_kwDOIGCt2M6CYjqN",
+      "title": "Remove Claim Value Type(s) from IANA Consideration section for JWT",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/83",
+      "state": "OPEN",
+      "author": "nedmsmith",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Remove Claim Value Type(s): JSON Object or JSON Array should be removed since JWT registry doesn't have this field defined.",
+      "createdAt": "2024-03-15T00:05:49Z",
+      "updatedAt": "2024-03-15T00:05:49Z",
       "closedAt": null,
       "comments": []
     }
@@ -5412,6 +5428,82 @@
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "ccc-sig-slides+x509",
       "headRefOid": "a0b0a7f9b2617cd680f29b18bf51b3bb199241aa",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 84,
+      "id": "PR_kwDOIGCt2M5psPQ7",
+      "title": "Remove text in IANA considerations for JWT",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/84",
+      "state": "MERGED",
+      "author": "nedmsmith",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "JWT registry doesn't have \"Claim Value Type(s)\" field.",
+      "createdAt": "2024-03-15T00:09:24Z",
+      "updatedAt": "2024-03-15T20:52:38Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "99370fcf8bb2bd018e48fc51a155ea88bcc101d9",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "nedmsmith-JWT-claim-value-types",
+      "headRefOid": "06b9f09fd1bbd2b8a276800e2c3605a952ba4f16",
+      "closedAt": "2024-03-15T20:52:35Z",
+      "mergedAt": "2024-03-15T20:52:35Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "1bf06f2f83b810989b1f77ca99e31dfb162886ac"
+      },
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fix #83 ",
+          "createdAt": "2024-03-15T04:25:08Z",
+          "updatedAt": "2024-03-15T04:25:08Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5zhPRZ",
+          "commit": {
+            "abbreviatedOid": "06b9f09"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "thanks!",
+          "createdAt": "2024-03-15T04:23:24Z",
+          "updatedAt": "2024-03-15T04:23:24Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 85,
+      "id": "PR_kwDOIGCt2M5pzWFt",
+      "title": "add recap slide and more related docs",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/85",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-03-15T22:00:22Z",
+      "updatedAt": "2024-03-15T22:00:41Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "1bf06f2f83b810989b1f77ca99e31dfb162886ac",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "ietf-119-slides-tweaks-2",
+      "headRefOid": "a4490ff59712dc9b7105b8b5c53c645f74efeebe",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
