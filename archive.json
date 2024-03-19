@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-03-17T00:40:09.260477+00:00",
+  "timestamp": "2024-03-19T00:37:16.787044+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -1367,6 +1367,30 @@
       "updatedAt": "2024-03-15T00:05:49Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 86,
+      "id": "I_kwDOIGCt2M6Cwdpw",
+      "title": "which OID arc should we use?",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/86",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "@ounsworth [commented](https://zulip.ietf.org/#narrow/stream/45-rats/topic/ietf-119/near/109103) on the [CMW extension](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-04.html#section-5.1):\r\n\r\n> [\u00a76.3 of draft-ietf-lamps-csr-attestation-08](https://www.ietf.org/archive/id/draft-ietf-lamps-csr-attestation-08.html#section-6.3) defines a new registry: _\"SMI Security for PKIX Evidence Statement Formats\"_ which might be a better place to put it?\r\n\r\nSince CMW is not evidence-only, the name of the CSR-attestation registry should be probably tweaked to match the extended semantic.\r\n\r\ncc @mcr",
+      "createdAt": "2024-03-19T00:21:23Z",
+      "updatedAt": "2024-03-19T00:22:59Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Twin issue: https://github.com/lamps-wg/csr-attestation/issues/109",
+          "createdAt": "2024-03-19T00:22:58Z",
+          "updatedAt": "2024-03-19T00:22:58Z"
+        }
+      ]
     }
   ],
   "pulls": [
