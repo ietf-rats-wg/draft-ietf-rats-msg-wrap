@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-05-02T00:38:33.211793+00:00",
+  "timestamp": "2024-05-05T00:42:10.980605+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -1082,15 +1082,15 @@
       "id": "I_kwDOIGCt2M5_SZLl",
       "title": "Default content type?",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/66",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "deeglaze",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "I'm having trouble determining which content type to suggest for any of the evidence formats I'm working with, given that they're all binary formats specified by vendors or the TCG. Is the intention for AMD, Intel, TCG, and CNCF to all apply for application content types for formats they will specify themselves? I wouldn't want to say application/cbor for binary that doesn't have the major type tag for CBOR bytes, for example. The `ind` field is for hinting at the expected interpretation of the underspecified media type, so it'd be nice to have an appropriate underspecified media type that is basically \"binary evidence for RATS\". The examples use undefined example media types and the `application/eat+jwt` type, but nothing prior to attestation results that can be sent to a remote attestation verifier.\r\n\r\nI'd say we should encourage folks to avoid using cmw-collection labels as \"standard\" ways to interpret the data carried in the value, but while a format is developed for a new form of attestation, it'd be nice to have a kind of catch-all for underspecified binary evidence content.",
       "createdAt": "2024-02-15T02:38:36Z",
-      "updatedAt": "2024-02-28T23:30:55Z",
-      "closedAt": null,
+      "updatedAt": "2024-05-02T16:17:11Z",
+      "closedAt": "2024-05-02T16:17:11Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -1133,6 +1133,20 @@
           "body": "> > It might be important to distinguish between formats that are truly vendor specific and formats that are based on a standard format but underspecified. This could happen if the vendor extends the standard (and doesn't define the extensions in a profile) or has an underspecified profile.\r\n> \r\n> Do you think we should add these considerations to the CMW document?\r\n> \r\n> Or is there a separate \"Considerations on the use of media types in RATS\" document that we should start putting together?\r\n\r\nMaybe the latter is best.",
           "createdAt": "2024-02-28T23:30:53Z",
           "updatedAt": "2024-02-28T23:30:53Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Is there anything to do here or can we close the issue?",
+          "createdAt": "2024-05-02T15:48:20Z",
+          "updatedAt": "2024-05-02T15:48:20Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "I think we just need a CMW usage best practices doc.",
+          "createdAt": "2024-05-02T16:17:11Z",
+          "updatedAt": "2024-05-02T16:17:11Z"
         }
       ]
     },
@@ -1186,7 +1200,7 @@
       "labels": [],
       "body": "I had asked before if we could make the labels of the cmwc non-semantic because of the aggregation issue, and now I'm wondering about how we connect this with something like tls-attestation. The only notions of evidence are the media types, so each is inherently understood to be unique to the form of evidence.\r\n\r\nHere's an example: Both Intel TDX and AMD SEV-SNP have their attestation reports made available through the Linux configfs-tsm system. If we are to create a media type like application/vnd.linux.configfs-tsm, then the two forms of attestation report that SEV can give through that interface would be indistinguishable. We have the raw attestation report from the AMD SP, and we have the service attestation reports that are either individual or a manifest of all available services. There's reason to collect multiple reports for the same connection given the different services and necessary service versions. The disambiguation here makes sense as a reason to have labels, but it's not clear in the text.\r\n\r\nHaving said that, I don't know how to say, \"I can give you service evidence in application/vnd.linux.configfs-tsm format, and I can give you a raw attestation in application/vnd.linux.configfs-tsm format.\" with `evidence_propose`, similarly there is no way to request a specific evidence form from the other side.\r\n\r\nIf the content type has to uniquely identify the content for propose/request, I don't see a reason to have labels or `ind`. If it's not meant to uniquely identify the content for propose/request, then tls-attestation needs to be amended to allow for label-based disambiguation. I don't see a reason to add label-based disambiguation to the TLS extensions if we keep the integer type for CBOR keys, since the JSON vs CBOR format request shouldn't matter to the TLS protocol, right?",
       "createdAt": "2024-02-20T17:29:20Z",
-      "updatedAt": "2024-03-01T16:11:40Z",
+      "updatedAt": "2024-05-02T15:41:54Z",
       "closedAt": null,
       "comments": [
         {
@@ -1357,15 +1371,15 @@
       "id": "I_kwDOIGCt2M6CYjqN",
       "title": "Remove Claim Value Type(s) from IANA Consideration section for JWT",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/83",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "nedmsmith",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Remove Claim Value Type(s): JSON Object or JSON Array should be removed since JWT registry doesn't have this field defined.",
       "createdAt": "2024-03-15T00:05:49Z",
-      "updatedAt": "2024-03-15T00:05:49Z",
-      "closedAt": null,
+      "updatedAt": "2024-05-02T15:43:40Z",
+      "closedAt": "2024-05-02T15:43:40Z",
       "comments": []
     },
     {
@@ -5286,9 +5300,9 @@
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
-      "body": "This is to address Issue#74. A CMW collection type exists to organize individual attesters' results and not fracture the space of representations of composite attester results. The topologies however are still subject to Verifier scrutiny. If the topology is not present in a measured boot chain signed by some other attester, and the only trusted witness of the complete assembly of a system is the CMW collection itself, we must be careful to ensure that the meaning of labels is properly documented (with a profile) and integrity-protected (with a signature).",
+      "body": "This is to address Issue #74. A CMW collection type exists to organize individual attesters' results and not fracture the space of representations of composite attester results. The topologies however are still subject to Verifier scrutiny. If the topology is not present in a measured boot chain signed by some other attester, and the only trusted witness of the complete assembly of a system is the CMW collection itself, we must be careful to ensure that the meaning of labels is properly documented (with a profile) and integrity-protected (with a signature).",
       "createdAt": "2024-03-01T17:17:28Z",
-      "updatedAt": "2024-03-11T23:29:42Z",
+      "updatedAt": "2024-05-02T15:40:59Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "817fbfeeb50b95d42d4d59b31a480fe23bf8e42a",
@@ -5438,26 +5452,44 @@
       "id": "PR_kwDOIGCt2M5paRFv",
       "title": "CCC presentation += X.509 wrapping",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/82",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "documentation"
+      ],
       "body": "",
       "createdAt": "2024-03-12T17:05:39Z",
-      "updatedAt": "2024-03-12T17:05:51Z",
+      "updatedAt": "2024-05-02T18:04:17Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "ace9ef08b0abe553fdc99f393a9937d3c74b81e1",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "ccc-sig-slides+x509",
       "headRefOid": "a0b0a7f9b2617cd680f29b18bf51b3bb199241aa",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-05-02T18:04:14Z",
+      "mergedAt": "2024-05-02T18:04:14Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "a06b7f19bf7b60bb6e8632a50b75580ce437ba27"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M55XHiF",
+          "commit": {
+            "abbreviatedOid": "a0b0a7f"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-05-02T15:37:54Z",
+          "updatedAt": "2024-05-02T15:37:54Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 84,
@@ -5514,26 +5546,44 @@
       "id": "PR_kwDOIGCt2M5pzWFt",
       "title": "add recap slide and more related docs",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/85",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "documentation"
+      ],
       "body": "",
       "createdAt": "2024-03-15T22:00:22Z",
-      "updatedAt": "2024-03-15T22:00:41Z",
+      "updatedAt": "2024-05-02T18:04:36Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "1bf06f2f83b810989b1f77ca99e31dfb162886ac",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "ietf-119-slides-tweaks-2",
       "headRefOid": "a4490ff59712dc9b7105b8b5c53c645f74efeebe",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-05-02T18:04:34Z",
+      "mergedAt": "2024-05-02T18:04:34Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "f5784076c2419bd2a7ae642e84c2ce072a09d561"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M55XHtq",
+          "commit": {
+            "abbreviatedOid": "a4490ff"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-05-02T15:38:14Z",
+          "updatedAt": "2024-05-02T15:38:14Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
