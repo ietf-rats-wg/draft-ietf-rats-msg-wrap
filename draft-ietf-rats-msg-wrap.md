@@ -448,7 +448,8 @@ The following example shows the use of the `cmw` JWT claim to transport a CMW co
 
 # Transporting CMW in X.509 Messages {#x509}
 
-There are cases where CMW need to be transported in PKIX messages, for example in Certificate Signing Requests (CSRs) {{-csr-a}}, or in X.509 Certificates and Certificate Revocation Lists (CRLs) {{DICE-arch}}.
+CMW may need to be transported in PKIX messages, such as Certificate Signing Requests (CSRs) or in X.509 Certificates and Certificate Revocation Lists (CRLs).
+The former use is documented in {{-csr-a}}, the latter in Section 6.1 of {{DICE-arch}}.
 
 This section specifies the CMW extension to carry CMW objects.
 
