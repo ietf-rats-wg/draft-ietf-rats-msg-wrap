@@ -67,6 +67,7 @@ informative:
   I-D.ietf-rats-uccs: rats-uccs
   I-D.fossati-tls-attestation: tls-a
   I-D.ietf-lamps-csr-attestation: csr-a
+  I-D.ietf-rats-corim: rats-corim
   DICE-arch:
     author:
       org: "Trusted Computing Group"
@@ -337,7 +338,7 @@ registered alongside a corresponding CoAP Content-Format number `30001`.  The
 CBOR tag `1668576818` is derived applying the `TN()` transform as described in
 {{cbor-tag}}.
 
-The example in {{ex-ca-ind}} is a signed CoRIM payload with an explicit CM
+The example in {{ex-ca-ind}} is a signed CoRIM (Concise Reference Integrity Manifest) {{-rats-corim}} payload with an explicit CM
 indicator `0b0000_0011` (3), meaning that the wrapped message contains both
 Reference Values and Endorsements.
 
@@ -566,7 +567,7 @@ RATS conceptual messages are typically secured using cryptography.
 If the messages are already protected, then there are no additional security requirements imposed by the introduction of this encapsulation.
 If an adversary tries to modify the payload encapsulation, it will result in incorrect processing of the encapsulated message and lead to an error.
 If the messages are not protected, additional security must be added at a different layer.
-As an example, a CMW record containing an UCCS {{-rats-uccs}} can be signed using COSE Sign1 {{-cose}}.
+As an example, a CMW record containing an UCCS (Unprotected CWT Claims Sets) {{-rats-uccs}} can be signed using COSE Sign1 {{-cose}}.
 
 This document introduces a format for holding multiple CMW items in a collection.
 If the collection is not protected from tampering by external security measures (such as object security primitives) or internal mechanisms (such as intra-item binding), an attacker could easily manipulate the collection's contents.
