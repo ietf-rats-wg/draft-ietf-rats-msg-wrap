@@ -463,7 +463,8 @@ id-pe-cmw-collection  OBJECT IDENTIFIER ::=
           security(5) mechanisms(5) pkix(7) id-pe(1) TBD }
 ~~~
 
-This extension MUST NOT be marked critical.
+This extension SHOULD NOT be marked critical.
+It MAY be marked critical in cases where the attestation-related information is essential for granting resource access, and there is a risk that legacy relying parties would bypass such controls.
 
 The CMW extension MUST have the following syntax:
 
