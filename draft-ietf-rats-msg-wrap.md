@@ -609,7 +609,7 @@ IANA is requested to add the following tag to the "CBOR Tags" {{!IANA.cbor-tags}
 
 This specification defines a new "RATS Conceptual Message Wrapper (CMW) Indicators" registry, with the policy "Expert Review" ({{Section 4.5 of -ianacons}}).
 
-The objective is to have Indicators values registered for all RATS Conceptual Messages ({{Section 8 of -rats-arch}}).
+The objective is to have CMW Indicators values registered for all RATS Conceptual Messages ({{Section 8 of -rats-arch}}).
 
 ### Instructions for the Designated Expert {#de-instructions}
 
