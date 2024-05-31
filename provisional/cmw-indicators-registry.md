@@ -4,9 +4,9 @@ This page acts as a provisional registry for CMW Indicators values.
 
 This page will be active until [draft-ietf-rats-msg-wrap](https://datatracker.ietf.org/doc/draft-ietf-rats-msg-wrap/) is published.
 
-At (or around) that time, its contents are handed over to IANA and the page will be deleted.
+At (or around) that time, its contents will be handed over to IANA and the page will be deleted.
 
-To add new indicators, create a PR that adds the message name and the associated codepoint to the following table, adjusting the "Unassigned" range accordingly. 
+To add new indicators, create a PR that adds the message name and the associated codepoint to the table below, adjusting the "Unassigned" range accordingly. 
 
 For rationale about how to pick names and codepoints, see [Section 8.4 of draft-ietf-rats-msg-wrap](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-04.html#section-8.4).
 
