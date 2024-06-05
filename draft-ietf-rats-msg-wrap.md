@@ -643,7 +643,7 @@ The initial registrations for the registry are detailed in {{tab-ind-regs}}.
 
 ### Provisional Registration
 
-Before the creation of the registry by IANA, new codepoints can be added to the [provisional CMW Indicators registry](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/blob/provisional-registry/provisional/cmw-indicators-registry.md) by following the documented procedure.
+Before the creation of the registry by IANA, new codepoints can be added to the [provisional CMW Indicators registry](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/blob/main/provisional/cmw-indicators-registry.md) by following the documented procedure.
 
 {{tab-ind-regs}} will be regularly updated to match the contents of the provisional registry.
 
