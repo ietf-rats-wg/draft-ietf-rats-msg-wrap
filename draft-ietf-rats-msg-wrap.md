@@ -169,6 +169,9 @@ The format of the CMW record is shown in {{fig-cddl-record}}.
 The JSON {{-json}} and CBOR {{-cbor}} representations are provided separately.
 Both the `json-record` and `cbor-record` have the same fields except for slight differences in the types discussed below.
 
+A CMW record carried in a `cmw` JWT claim ({{iana-jwt}}) MUST be a `json-record`.
+A CMW record carried in a `cmw` CWT claim ({{iana-cwt}}) MUST be a `cbor-record`.
+
 ~~~ cddl
 {::include cddl/cmw-record.cddl}
 ~~~
@@ -274,6 +277,9 @@ Since the collection type is recursive, implementations may limit the allowed de
    title="CDDL definition of the CMW collection format"}
 
 Although initially designed for the composite Attester use case, the CMW collection can be repurposed for other use cases requiring CMW aggregation.
+
+A CMW collection carried in a `cmw` JWT claim ({{iana-jwt}}) MUST be a `json-collection`.
+A CMW collection carried in a `cmw` CWT claim ({{iana-cwt}}) MUST be a `cbor-collection`.
 
 ## CMW Tunnel {#cmw-tunnel}
 
@@ -578,7 +584,7 @@ If the collection is not protected from tampering by external security measures 
 
 [^rfced] replace "{{&SELF}}" with the RFC number assigned to this document.
 
-## CWT `cmw` Claim Registration
+## CWT `cmw` Claim Registration {#iana-cwt}
 
 IANA is requested to add a new `cmw` claim to the "CBOR Web Token (CWT) Claims" registry {{IANA.cwt}} as follows:
 
@@ -587,18 +593,18 @@ IANA is requested to add a new `cmw` claim to the "CBOR Web Token (CWT) Claims" 
 * Claim Key: TBD
 * Claim Value Type(s): CBOR Map, CBOR Array, or CBOR Tag
 * Change Controller: IETF
-* Specification Document(s): {{type-n-val}} and {{cbor-tag}} of {{&SELF}}
+* Specification Document(s): {{type-n-val}}, {{cmw-coll}} and {{cbor-tag}} of {{&SELF}}
 
 The suggested value for the Claim Key is 299.
 
-## JWT `cmw` Claim Registration
+## JWT `cmw` Claim Registration {#iana-jwt}
 
 IANA is requested to add a new `cmw` claim to the "JSON Web Token Claims" sub-registry of the "JSON Web Token (JWT)" registry {{IANA.jwt}} as follows:
 
 * Claim Name: cmw
 * Claim Description: A RATS Conceptual Message Wrapper
 * Change Controller: IETF
-* Specification Document(s): {{type-n-val}} of {{&SELF}}
+* Specification Document(s): {{type-n-val}} and {{cmw-coll}} of {{&SELF}}
 
 ## CBOR Tag Registration
 
@@ -827,6 +833,7 @@ Carl Wallace,
 Carsten Bormann,
 Dionna Glaze,
 Laurence Lundblade,
+Mike Jones,
 Mohit Sethi,
 Russ Housley,
 and
