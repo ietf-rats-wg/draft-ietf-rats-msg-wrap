@@ -645,6 +645,14 @@ The initial registrations for the registry are detailed in {{tab-ind-regs}}.
 | 4-31 | Unassigned | {{&SELF}} |
 {: #tab-ind-regs title="CMW Indicators Registry Initial Contents"}
 
+### Provisional Registration
+
+Before the creation of the registry by IANA, new codepoints can be added to the [provisional CMW Indicators registry](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/blob/main/provisional/cmw-indicators-registry.md) by following the documented procedure.
+
+{{tab-ind-regs}} will be regularly updated to match the contents of the provisional registry.
+
+The provisional registry will be discontinued once IANA establishes the permanent registry, which is expected to coincide with the publication of the current document.
+
 ## Media Types
 
 IANA is requested to add the following media types to the "Media Types" registry {{!IANA.media-types}}.
