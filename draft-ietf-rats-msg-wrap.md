@@ -67,6 +67,7 @@ informative:
   I-D.ietf-rats-uccs: rats-uccs
   I-D.fossati-tls-attestation: tls-a
   I-D.ietf-lamps-csr-attestation: csr-a
+  I-D.ietf-rats-corim: rats-corim
   DICE-arch:
     author:
       org: "Trusted Computing Group"
@@ -337,7 +338,7 @@ registered alongside a corresponding CoAP Content-Format number `30001`.  The
 CBOR tag `1668576818` is derived applying the `TN()` transform as described in
 {{cbor-tag}}.
 
-The example in {{ex-ca-ind}} is a signed CoRIM payload with an explicit CM
+The example in {{ex-ca-ind}} is a signed CoRIM (Concise Reference Integrity Manifest) {{-rats-corim}} payload with an explicit CM
 indicator `0b0000_0011` (3), meaning that the wrapped message contains both
 Reference Values and Endorsements.
 
@@ -447,7 +448,8 @@ The following example shows the use of the `cmw` JWT claim to transport a CMW co
 
 # Transporting CMW in X.509 Messages {#x509}
 
-There are cases where CMW need to be transported in PKIX messages, for example in Certificate Signing Requests (CSRs) {{-csr-a}}, or in X.509 Certificates and Certificate Revocation Lists (CRLs) {{DICE-arch}}.
+CMW may need to be transported in PKIX messages, such as Certificate Signing Requests (CSRs) or in X.509 Certificates and Certificate Revocation Lists (CRLs).
+The former use is documented in {{-csr-a}}, the latter in Section 6.1 of {{DICE-arch}}.
 
 This section specifies the CMW extension to carry CMW objects.
 
@@ -461,7 +463,8 @@ id-pe-cmw-collection  OBJECT IDENTIFIER ::=
           security(5) mechanisms(5) pkix(7) id-pe(1) TBD }
 ~~~
 
-This extension MUST NOT be marked critical.
+This extension SHOULD NOT be marked critical.
+It MAY be marked critical in cases where the attestation-related information is essential for granting resource access, and there is a risk that legacy relying parties would bypass such controls.
 
 The CMW extension MUST have the following syntax:
 
@@ -566,7 +569,7 @@ RATS conceptual messages are typically secured using cryptography.
 If the messages are already protected, then there are no additional security requirements imposed by the introduction of this encapsulation.
 If an adversary tries to modify the payload encapsulation, it will result in incorrect processing of the encapsulated message and lead to an error.
 If the messages are not protected, additional security must be added at a different layer.
-As an example, a CMW record containing an UCCS {{-rats-uccs}} can be signed using COSE Sign1 {{-cose}}.
+As an example, a CMW record containing an UCCS (Unprotected CWT Claims Sets) {{-rats-uccs}} can be signed using COSE Sign1 {{-cose}}.
 
 This document introduces a format for holding multiple CMW items in a collection.
 If the collection is not protected from tampering by external security measures (such as object security primitives) or internal mechanisms (such as intra-item binding), an attacker could easily manipulate the collection's contents.
@@ -816,6 +819,7 @@ Carl Wallace,
 Carsten Bormann,
 Dionna Glaze,
 Laurence Lundblade,
+Mohit Sethi,
 Russ Housley,
 and
 Tom Jones
