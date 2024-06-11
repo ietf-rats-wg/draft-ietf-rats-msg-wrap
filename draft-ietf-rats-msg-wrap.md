@@ -278,7 +278,6 @@ Although initially designed for the composite Attester use case, the CMW collect
 
 A CMW Collection's tree structure is not required to be a spanning tree of the system's composite Attester topology.
 If a label changes Verifier state beyond a "hint" (e.g., for better Verifier performance or human comprehension), we say that it carries semantic content.
-If a label carries semantic content, the collection itself is a form of evidence that SHOULD be attested.
 When a label carries semantic content that is not bound to other forms of evidence contained in the collection, the collection SHOULD be signed by an attestation key, e.g., by including the collection in a signed EAT {{-rats-eat}}.
 
 ## CMW Tunnel {#cmw-tunnel}
