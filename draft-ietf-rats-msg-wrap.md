@@ -576,12 +576,12 @@ The developers can be contacted on the Zulip channel:
 
 # Security Considerations {#seccons}
 
-This document introduces two encapsulation formats for RATS conceptual messages.
+This document introduces two encapsulation formats for RATS conceptual messages, record and tag.
 RATS conceptual messages are typically secured using cryptography.
 If the messages are already protected, then there are no additional security requirements imposed by the introduction of this encapsulation.
 If an adversary tries to modify the payload encapsulation, it will result in incorrect processing of the encapsulated message and lead to an error.
 If the messages are not protected, additional security must be added at a different layer.
-As an example, a CMW record containing an UCCS (Unprotected CWT Claims Sets) {{-rats-uccs}} can be signed using COSE Sign1 {{-cose}}.
+As an example, a `cbor-record` containing an UCCS (Unprotected CWT Claims Sets) {{-rats-uccs}} can be signed using COSE Sign1 {{-cose}}.
 
 This document introduces a format for holding multiple CMW items in a collection.
 If the collection is not protected from tampering by external security measures (such as object security primitives) or internal mechanisms (such as intra-item binding), an attacker could easily manipulate the collection's contents.
