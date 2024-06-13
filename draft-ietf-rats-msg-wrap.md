@@ -67,6 +67,7 @@ informative:
   I-D.ietf-rats-uccs: rats-uccs
   I-D.fossati-tls-attestation: tls-a
   I-D.ietf-lamps-csr-attestation: csr-a
+  I-D.ietf-rats-corim: rats-corim
   DICE-arch:
     author:
       org: "Trusted Computing Group"
@@ -168,6 +169,9 @@ The format of the CMW record is shown in {{fig-cddl-record}}.
 The JSON {{-json}} and CBOR {{-cbor}} representations are provided separately.
 Both the `json-record` and `cbor-record` have the same fields except for slight differences in the types discussed below.
 
+A CMW record carried in a `cmw` JWT claim ({{iana-jwt}}) MUST be a `json-record`.
+A CMW record carried in a `cmw` CWT claim ({{iana-cwt}}) MUST be a `cbor-record`.
+
 ~~~ cddl
 {::include cddl/cmw-record.cddl}
 ~~~
@@ -258,8 +262,8 @@ To address the composite Attester use case, this document defines a CMW "collect
 
 The CMW collection ({{fig-cddl-collection}}) is defined as a CBOR map or JSON object with CMW values, either native or "tunnelled" ({{cmw-tunnel}}).
 The position of a `cmw` entry in the `cmw-collection` is not significant.
-Instead, the labels identify a conceptual message that, in the case of a composite Attester, should typically correspond to a component of a system.
 Labels can be strings (or integers in the CBOR serialization) that serve as a mnemonic for different conceptual messages in the collection.
+
 The `"__cmwc_t"` key is reserved for associating an optional type to the overall collection and MUST NOT be used for a label.
 The collection type is either a Uniform Resource Identifier (URI) or an object identifier (OID).
 The OID is always absolute and never relative.
@@ -273,6 +277,15 @@ Since the collection type is recursive, implementations may limit the allowed de
    title="CDDL definition of the CMW collection format"}
 
 Although initially designed for the composite Attester use case, the CMW collection can be repurposed for other use cases requiring CMW aggregation.
+
+A CMW collection carried in a `cmw` JWT claim ({{iana-jwt}}) MUST be a `json-collection`.
+A CMW collection carried in a `cmw` CWT claim ({{iana-cwt}}) MUST be a `cbor-collection`.
+
+### CMW Collections' role in composite Attester topology
+
+A CMW Collection's tree structure is not required to be a spanning tree of the system's composite Attester topology.
+If a label changes Verifier state beyond a "hint" (e.g., for better Verifier performance or human comprehension), we say that it carries semantic content.
+When a label carries semantic content that is not bound to other forms of evidence contained in the collection, the collection SHOULD be signed by an attestation key, e.g., by including the collection in a signed EAT {{-rats-eat}}.
 
 ## CMW Tunnel {#cmw-tunnel}
 
@@ -337,7 +350,7 @@ registered alongside a corresponding CoAP Content-Format number `30001`.  The
 CBOR tag `1668576818` is derived applying the `TN()` transform as described in
 {{cbor-tag}}.
 
-The example in {{ex-ca-ind}} is a signed CoRIM payload with an explicit CM
+The example in {{ex-ca-ind}} is a signed CoRIM (Concise Reference Integrity Manifest) {{-rats-corim}} payload with an explicit CM
 indicator `0b0000_0011` (3), meaning that the wrapped message contains both
 Reference Values and Endorsements.
 
@@ -447,7 +460,8 @@ The following example shows the use of the `cmw` JWT claim to transport a CMW co
 
 # Transporting CMW in X.509 Messages {#x509}
 
-There are cases where CMW need to be transported in PKIX messages, for example in Certificate Signing Requests (CSRs) {{-csr-a}}, or in X.509 Certificates and Certificate Revocation Lists (CRLs) {{DICE-arch}}.
+CMW may need to be transported in PKIX messages, such as Certificate Signing Requests (CSRs) or in X.509 Certificates and Certificate Revocation Lists (CRLs).
+The former use is documented in {{-csr-a}}, the latter in Section 6.1 of {{DICE-arch}}.
 
 This section specifies the CMW extension to carry CMW objects.
 
@@ -461,7 +475,8 @@ id-pe-cmw-collection  OBJECT IDENTIFIER ::=
           security(5) mechanisms(5) pkix(7) id-pe(1) TBD }
 ~~~
 
-This extension MUST NOT be marked critical.
+This extension SHOULD NOT be marked critical.
+It MAY be marked critical in cases where the attestation-related information is essential for granting resource access, and there is a risk that legacy relying parties would bypass such controls.
 
 The CMW extension MUST have the following syntax:
 
@@ -561,12 +576,12 @@ The developers can be contacted on the Zulip channel:
 
 # Security Considerations {#seccons}
 
-This document introduces two encapsulation formats for RATS conceptual messages.
+This document introduces two encapsulation formats for RATS conceptual messages, record and tag.
 RATS conceptual messages are typically secured using cryptography.
 If the messages are already protected, then there are no additional security requirements imposed by the introduction of this encapsulation.
 If an adversary tries to modify the payload encapsulation, it will result in incorrect processing of the encapsulated message and lead to an error.
 If the messages are not protected, additional security must be added at a different layer.
-As an example, a CMW record containing an UCCS {{-rats-uccs}} can be signed using COSE Sign1 {{-cose}}.
+As an example, a `cbor-record` containing an UCCS (Unprotected CWT Claims Sets) {{-rats-uccs}} can be signed using COSE Sign1 {{-cose}}.
 
 This document introduces a format for holding multiple CMW items in a collection.
 If the collection is not protected from tampering by external security measures (such as object security primitives) or internal mechanisms (such as intra-item binding), an attacker could easily manipulate the collection's contents.
@@ -575,7 +590,7 @@ If the collection is not protected from tampering by external security measures 
 
 [^rfced] replace "{{&SELF}}" with the RFC number assigned to this document.
 
-## CWT `cmw` Claim Registration
+## CWT `cmw` Claim Registration {#iana-cwt}
 
 IANA is requested to add a new `cmw` claim to the "CBOR Web Token (CWT) Claims" registry {{IANA.cwt}} as follows:
 
@@ -584,19 +599,18 @@ IANA is requested to add a new `cmw` claim to the "CBOR Web Token (CWT) Claims" 
 * Claim Key: TBD
 * Claim Value Type(s): CBOR Map, CBOR Array, or CBOR Tag
 * Change Controller: IETF
-* Specification Document(s): {{type-n-val}} and {{cbor-tag}} of {{&SELF}}
+* Specification Document(s): {{type-n-val}}, {{cmw-coll}} and {{cbor-tag}} of {{&SELF}}
 
 The suggested value for the Claim Key is 299.
 
-## JWT `cmw` Claim Registration
+## JWT `cmw` Claim Registration {#iana-jwt}
 
 IANA is requested to add a new `cmw` claim to the "JSON Web Token Claims" sub-registry of the "JSON Web Token (JWT)" registry {{IANA.jwt}} as follows:
 
 * Claim Name: cmw
 * Claim Description: A RATS Conceptual Message Wrapper
-* Claim Value Type(s): JSON Object or JSON Array
 * Change Controller: IETF
-* Specification Document(s): {{type-n-val}} of {{&SELF}}
+* Specification Document(s): {{type-n-val}} and {{cmw-coll}} of {{&SELF}}
 
 ## CBOR Tag Registration
 
@@ -610,7 +624,7 @@ IANA is requested to add the following tag to the "CBOR Tags" {{!IANA.cbor-tags}
 
 This specification defines a new "RATS Conceptual Message Wrapper (CMW) Indicators" registry, with the policy "Expert Review" ({{Section 4.5 of -ianacons}}).
 
-The objective is to have Indicators values registered for all RATS Conceptual Messages ({{Section 8 of -rats-arch}}).
+The objective is to have CMW Indicators values registered for all RATS Conceptual Messages ({{Section 8 of -rats-arch}}).
 
 ### Instructions for the Designated Expert {#de-instructions}
 
@@ -624,7 +638,7 @@ Each entry in the registry must include:
 
 {:vspace}
 Indicator value:
-: A number corresponding to the bit position in the `cm-ind` bitmap.
+: A number corresponding to the bit position in the `ind` bitmap ({{type-n-val}}).
 
 Conceptual Message name:
 : A text string describing the RATS conceptual message this indicator corresponds to.
@@ -640,7 +654,16 @@ The initial registrations for the registry are detailed in {{tab-ind-regs}}.
 | 1 | Endorsements | {{&SELF}} |
 | 2 | Evidence | {{&SELF}} |
 | 3 | Attestation Results | {{&SELF}} |
+| 4-31 | Unassigned | {{&SELF}} |
 {: #tab-ind-regs title="CMW Indicators Registry Initial Contents"}
+
+### Provisional Registration
+
+Before the creation of the registry by IANA, new codepoints can be added to the [provisional CMW Indicators registry](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/blob/main/provisional/cmw-indicators-registry.md) by following the documented procedure.
+
+{{tab-ind-regs}} will be regularly updated to match the contents of the provisional registry.
+
+The provisional registry will be discontinued once IANA establishes the permanent registry, which is expected to coincide with the publication of the current document.
 
 ## Media Types
 
@@ -816,6 +839,8 @@ Carl Wallace,
 Carsten Bormann,
 Dionna Glaze,
 Laurence Lundblade,
+Mike Jones,
+Mohit Sethi,
 Russ Housley,
 and
 Tom Jones
