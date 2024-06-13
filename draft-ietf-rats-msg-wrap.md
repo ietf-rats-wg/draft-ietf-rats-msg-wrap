@@ -470,7 +470,7 @@ The CMW extension MAY be included in X.509 Certificates, CRLs {{-pkix}}, and CSR
 The CMW extension MUST be identified by the following object identifier:
 
 ~~~asn.1
-id-pe-cmw-collection  OBJECT IDENTIFIER ::=
+id-pe-cmw  OBJECT IDENTIFIER ::=
         { iso(1) identified-organization(3) dod(6) internet(1)
           security(5) mechanisms(5) pkix(7) id-pe(1) TBD }
 ~~~
@@ -515,11 +515,11 @@ IMPORTS
 
 ext-CMW EXTENSION ::= {
   SYNTAX CMW
-  IDENTIFIED BY id-pe-cmw-collection }
+  IDENTIFIED BY id-pe-cmw }
 
 -- CMW Extension OID
 
-id-pe-cmw-collection  OBJECT IDENTIFIER  ::=
+id-pe-cmw  OBJECT IDENTIFIER  ::=
    { iso(1) identified-organization(3) dod(6) internet(1)
      security(5) mechanisms(5) pkix(7) id-pe(1) TBD }
 
