@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-05-19T00:43:25.049366+00:00",
+  "timestamp": "2024-06-18T00:42:37.500435+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -766,7 +766,7 @@
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/55",
       "state": "CLOSED",
       "author": "deeglaze",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [
         "WGLC"
@@ -778,7 +778,7 @@
       "comments": [
         {
           "author": "deeglaze",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "I would similarly ask for cmw to itself contain cmw-collection, since something producing evidence could itself be amassing evidence, and you end up with a tree rather than having to flatten it and potentially have conflicting keys.",
           "createdAt": "2024-02-02T18:47:46Z",
           "updatedAt": "2024-02-02T18:47:46Z"
@@ -799,7 +799,7 @@
         },
         {
           "author": "deeglaze",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "> > I'm wondering how much interpretation of the output it would need, assuming all the binaries output a legal CMW of either CBOR or JSON encoding.\r\n> \r\n> The I-D describes an ASN.1 encoding that distinguishes between cbor and json.\r\n> \r\n> ```\r\n> CMWCollection ::= CHOICE {\r\n>     json UTF8String,\r\n>     cbor OCTET STRING,\r\n> }\r\n> ```\r\n> \r\n> Is the request to give the same attention to the CDDL description?\r\n\r\nNot exactly, since I'm asking about mixed representation across values. If I'm accumulating evidence from A and B, where A produces a CBOR CMW, and B produces a JSON CMW, I would rather not do a full translation from one to the other for fear of corrupting the data and taking too much processing time, so I would like to produce a cbor-encoded map {\"A\" => cbor bytes, \"B\" => json string}. If A were to produce a CMW collection instead of CMW, since it's an aggregator itself, then I'd like to not have to open it up and re-encode the key => value mappings in the overall CMW collection, since I might have conflicting keys. I also am not particularly sure what `.feature \"cbor\"` means\u2013\"if I am being interpreted as CBOR\" or \"If I am to be interpreted as CBOR\" or something else, since one depends on context, and the other is a kind of context switching device.",
           "createdAt": "2024-02-02T20:50:45Z",
           "updatedAt": "2024-02-02T20:50:45Z"
@@ -820,7 +820,7 @@
         },
         {
           "author": "deeglaze",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "The \"plus\" there is the problem then, since now I need to specify an output format for the binaries that isn't the standard CMW / CMW-collection. What you're suggesting to me sounds like \"binaries return their cmw-array value and cmw-array content type in some format for the repackager to wrap as a CMW.\" The third component of the cmw-array is just lost or somehow inferred? No, that \"some format\" to me is a CMW. I don't want plugin authors to have to implement both serialization formats as requested by the repackager to fit the final output type because that just becomes bloat.\r\n\r\nTo be parsimonious with resources due to static linking overhead, some evidence collectors may want to produce an output that is already a collection of multiple evidence formats. The cc-trusted-api and go-tpm-tools clients collect multiple evidence formats already, so changing the output format for the collection is a nicer thought than splitting each format into a different binary. We therefore have either a CMW or some sort of CMW collection as allowed response types. What format do we specify?\r\n\r\nI could say it's a mixed format of JSON or CBOR CMWs given as a definite length array of definite length octet strings for the repackager to decode and repackage into a CMW-collection of its own, but the entry labels would need to be generated somehow.\r\n\r\n```\r\n4 bytes: num_outputs in system endianness\r\nVariable: num_outputs-many output\r\n\r\nwhere an output is\r\n4 bytes: length in system endianness\r\nlength: payload bytes\r\n```\r\n\r\nPart of the assumption to be fair is that there is going to be a standard evidence request format and evidence response format, and the response doesn't necessarily need to be a CMW or CMW collection, though it'd be nicer if it were\u2013the collection CMW / CMW-collection output of either CBOR or JSON to repackage as a single CMW collection leads to the relabeling problem I described in OP. In JSON, the label could be the provider's name followed by the index of the position in the output, and in CBOR it could just be the index of the position in the output added to the current index to the output CMW\u2013the label is thus very different. The text describing the labels suggests that they aren't arbitrary but could hold semantic meaning like a mnemonic. I don't know how that works for the integer format, but it's not explicitly specified to be irrelevant:\r\n\r\n> Instead, the labels identify a conceptual message that, in the case of a composite Attester, should typically\r\n> correspond to a component of a system.  Labels can be strings or integers that serve as a mnemonic for different\r\n> conceptual messages in the collection.\r\n\r\nThe goal of being for either an aggregate attester OR a CMW aggregator should account for the multiple allowed wire formats. I don't see that without either\r\n\r\na. a tree format for CMW-collection with mixed representation\r\nb. change the current map format to an array to remove any implied meaning for labels.\r\n",
           "createdAt": "2024-02-03T20:53:58Z",
           "updatedAt": "2024-02-03T20:53:58Z"
@@ -855,7 +855,7 @@
         },
         {
           "author": "deeglaze",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "I still don't see how nesting the trees is going to help if some output trees are JSON and others are CBOR and we need to aggregate into a single format. If we can register a tag that implies the bytes within constitute a JSON CMW-collection, then we can say \r\n\r\n```\r\ncmw = cmw-array / JC<base64-string, cmw-tag> / cmw-collection\r\n```\r\n\r\nA tag in CBOR can swap to JSON, and a baes64-string in JSON can be interpreted as a serialized CBOR cmw-collection",
           "createdAt": "2024-02-08T00:12:35Z",
           "updatedAt": "2024-02-08T00:12:35Z"
@@ -869,7 +869,7 @@
         },
         {
           "author": "deeglaze",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Why does the JSON to CBOR tunnel need to be base64 encoded? The cmw-array value type is bytes, not text.",
           "createdAt": "2024-02-08T16:13:50Z",
           "updatedAt": "2024-02-08T16:13:50Z"
@@ -883,7 +883,7 @@
         },
         {
           "author": "deeglaze",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "The symmetry breaks the current cmw-array schema and adds encoding bloat for aesthetics, so I'd recommend keeping it to bytes.",
           "createdAt": "2024-02-08T16:20:01Z",
           "updatedAt": "2024-02-08T16:20:01Z"
@@ -904,7 +904,7 @@
         },
         {
           "author": "deeglaze",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Is the idea for this to not match cmw-array and instead be a different alternate? That changes the parsing complexity from LL(1) to LL(2), no? I would think we have this be a media type for cmw-array and a new cm-type bit for \"tunnel\"?",
           "createdAt": "2024-02-08T16:28:03Z",
           "updatedAt": "2024-02-08T16:28:03Z"
@@ -925,7 +925,7 @@
         },
         {
           "author": "deeglaze",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "I think we do have to specify that the media type in a cmw-array cannot be  \"application/cmw-j2c-tunnel\" (conversely for JSON), OR we have to say that `ind` may not be present in a cmw-array if the media type is  \"application/cmw-j2c-tunnel\". Right now the alternates parse ambiguously.",
           "createdAt": "2024-02-08T17:48:05Z",
           "updatedAt": "2024-02-08T17:48:05Z"
@@ -1084,7 +1084,7 @@
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/66",
       "state": "CLOSED",
       "author": "deeglaze",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "I'm having trouble determining which content type to suggest for any of the evidence formats I'm working with, given that they're all binary formats specified by vendors or the TCG. Is the intention for AMD, Intel, TCG, and CNCF to all apply for application content types for formats they will specify themselves? I wouldn't want to say application/cbor for binary that doesn't have the major type tag for CBOR bytes, for example. The `ind` field is for hinting at the expected interpretation of the underspecified media type, so it'd be nice to have an appropriate underspecified media type that is basically \"binary evidence for RATS\". The examples use undefined example media types and the `application/eat+jwt` type, but nothing prior to attestation results that can be sent to a remote attestation verifier.\r\n\r\nI'd say we should encourage folks to avoid using cmw-collection labels as \"standard\" ways to interpret the data carried in the value, but while a format is developed for a new form of attestation, it'd be nice to have a kind of catch-all for underspecified binary evidence content.",
@@ -1101,7 +1101,7 @@
         },
         {
           "author": "deeglaze",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Oh interesting I didn't know this piece \"public exposure and review of media types to be registered in the vendor tree are not required\" \r\n\r\nI was worried at the small number of vnd. entries in the media-types table.",
           "createdAt": "2024-02-15T20:04:31Z",
           "updatedAt": "2024-02-15T20:04:31Z"
@@ -1143,7 +1143,7 @@
         },
         {
           "author": "deeglaze",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "I think we just need a CMW usage best practices doc.",
           "createdAt": "2024-05-02T16:17:11Z",
           "updatedAt": "2024-05-02T16:17:11Z"
@@ -1193,15 +1193,15 @@
       "id": "I_kwDOIGCt2M5_2KjL",
       "title": "Add prose for example meanings of labels in cmw-collection",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/74",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "deeglaze",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "I had asked before if we could make the labels of the cmwc non-semantic because of the aggregation issue, and now I'm wondering about how we connect this with something like tls-attestation. The only notions of evidence are the media types, so each is inherently understood to be unique to the form of evidence.\r\n\r\nHere's an example: Both Intel TDX and AMD SEV-SNP have their attestation reports made available through the Linux configfs-tsm system. If we are to create a media type like application/vnd.linux.configfs-tsm, then the two forms of attestation report that SEV can give through that interface would be indistinguishable. We have the raw attestation report from the AMD SP, and we have the service attestation reports that are either individual or a manifest of all available services. There's reason to collect multiple reports for the same connection given the different services and necessary service versions. The disambiguation here makes sense as a reason to have labels, but it's not clear in the text.\r\n\r\nHaving said that, I don't know how to say, \"I can give you service evidence in application/vnd.linux.configfs-tsm format, and I can give you a raw attestation in application/vnd.linux.configfs-tsm format.\" with `evidence_propose`, similarly there is no way to request a specific evidence form from the other side.\r\n\r\nIf the content type has to uniquely identify the content for propose/request, I don't see a reason to have labels or `ind`. If it's not meant to uniquely identify the content for propose/request, then tls-attestation needs to be amended to allow for label-based disambiguation. I don't see a reason to add label-based disambiguation to the TLS extensions if we keep the integer type for CBOR keys, since the JSON vs CBOR format request shouldn't matter to the TLS protocol, right?",
       "createdAt": "2024-02-20T17:29:20Z",
-      "updatedAt": "2024-05-02T15:41:54Z",
-      "closedAt": null,
+      "updatedAt": "2024-06-13T07:26:04Z",
+      "closedAt": "2024-06-13T07:26:03Z",
       "comments": [
         {
           "author": "nedmsmith",
@@ -1219,7 +1219,7 @@
         },
         {
           "author": "deeglaze",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "We could do that, though not everything is signed. There's the service manifest for example, that when you request a service attestation, you get SHA-512(nonce || service manifest) as the new nonce in an attestation report at a higher privilege level than the guest itself can request for a raw attestation. This is all beside the point that the labels themselves aren't doing favors for discovery and request protocols.",
           "createdAt": "2024-02-20T18:27:23Z",
           "updatedAt": "2024-02-20T18:27:23Z"
@@ -1233,7 +1233,7 @@
         },
         {
           "author": "deeglaze",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "What are its existing usages then?\r\n\r\n\"With the CMW format described in this document, protocol designers do not need to update protocol specifications to support different conceptual messages.\"\r\n\r\nI don't know what the expected usage of a label is for protocols to consume them.",
           "createdAt": "2024-02-20T19:22:44Z",
           "updatedAt": "2024-02-20T19:22:44Z"
@@ -1268,7 +1268,7 @@
         },
         {
           "author": "deeglaze",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "> The lead Attester is presumed to know enough about device composition to create the bundle.\r\n\r\nI think that it has information that can be discovered by enumerating subattesters in an install directory, but not intimate knowledge that subattesters will have. If we're putting significance on labels for verifiers to interpret as they see fit, I'm still a bit at a loss why CBOR is allowed to use integer keys when JSON can only use strings. The serialization choice is confusing. At least for the int in type: in CBOR has a specific meaning that translates through registered CoAP values to the normal Content-type string. For labels it's so open-ended that you may end up with it carrying way more semantic content than one would hope it to carry.\r\n\r\nPerhaps I'm reading too deeply into the close symmetries between CMW and the TLS extensions from the tls-attestation draft and it's the TLS attestation doc that should be revised. Still, is there any proposed use of labels so far that uses them for semantic content? Your responses don't suggest as much. Thomas, do you have an existence proof for your protocol X?",
           "createdAt": "2024-02-20T21:12:09Z",
           "updatedAt": "2024-02-20T21:12:09Z"
@@ -1282,7 +1282,7 @@
         },
         {
           "author": "deeglaze",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "I'm confused. My understanding is that EAT is a representation of attestation results, which comes after the appraisal of evidence. I'm concerned with transmitting evidence to the verifier to then turn into attestation results that would be wrapped in an EAT to send along to the RP.\r\n\r\nThe \"Taming attestation for the cloud native world with Parsec\" talk Paul pointed me to says their model also expects to only send along a CMW (around 21 minutes in) https://youtu.be/NJKi3O0hhPo?si=P3_vimu4gUgKckWt&t=1280",
           "createdAt": "2024-02-25T22:28:42Z",
           "updatedAt": "2024-02-25T22:28:42Z"
@@ -1303,7 +1303,7 @@
         },
         {
           "author": "deeglaze",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "I'll suggest some text.",
           "createdAt": "2024-03-01T16:11:39Z",
           "updatedAt": "2024-03-01T16:11:39Z"
@@ -1362,9 +1362,17 @@
       "labels": [],
       "body": "1. do I trust this party to create a measurement (this isn't that important, I suspect, as we should always verify!)\r\n2. do I trust this party to verify the measurement?\r\n3. do I trust this party to attest to another party (or possibly the linkage to another party)?\r\n4. do I trust this party to create a topology of trust relationships?\r\n\r\nThese are clearly different trust contexts, but people don't understand very well that contexts must be separated, so we should call this out and ensure that the semantics we're creating support them from the very initial version and any implementation (or people will combine them, and implementations will allow combinations to support previous versions, which is a Bad Thing[tm]).",
       "createdAt": "2024-03-12T16:56:44Z",
-      "updatedAt": "2024-03-12T16:56:44Z",
+      "updatedAt": "2024-06-12T13:49:10Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks @MikeCamel.\r\n\r\nUsing RATS terminology, I interpret 1. as \"trusting evidence\" based on endorsements, such as those from the supply chain.  Adn I interpret 2. as \"trusting attestation results,\" meaning trusting the verifier, usually by knowing and trusting its signing key.\r\n\r\nRe: 3. and 4.  I interpret 3. as \"verifying that the expected transitive trust relationships are in place\", and 4. as a generalisation of 3, where instead of a linear chain, the trust relationships are modelled as a graph.\r\n\r\nI think 1 and 2 are particularly within CMW's scope, whilst 3 and 4 seem very relevant.  Especially when CMWs are used to describe [layered attesters](https://www.rfc-editor.org/rfc/rfc9334.html#section-3.2) (case 3) or [composite devices](https://www.rfc-editor.org/rfc/rfc9334.html#section-3.3) (case 4).\r\n\r\n\r\n",
+          "createdAt": "2024-06-12T13:49:09Z",
+          "updatedAt": "2024-06-12T13:49:09Z"
+        }
+      ]
     },
     {
       "number": 83,
@@ -1394,7 +1402,7 @@
       "labels": [],
       "body": "@ounsworth [commented](https://zulip.ietf.org/#narrow/stream/45-rats/topic/ietf-119/near/109103) on the [CMW extension](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-04.html#section-5.1):\r\n\r\n> [\u00a76.3 of draft-ietf-lamps-csr-attestation-08](https://www.ietf.org/archive/id/draft-ietf-lamps-csr-attestation-08.html#section-6.3) defines a new registry: _\"SMI Security for PKIX Evidence Statement Formats\"_ which might be a better place to put it?\r\n\r\nSince CMW is not evidence-only, the name of the CSR-attestation registry should be probably tweaked to match the extended semantic.\r\n\r\ncc @mcr",
       "createdAt": "2024-03-19T00:21:23Z",
-      "updatedAt": "2024-03-19T00:22:59Z",
+      "updatedAt": "2024-06-12T13:53:07Z",
       "closedAt": null,
       "comments": [
         {
@@ -1403,8 +1411,190 @@
           "body": "Twin issue: https://github.com/lamps-wg/csr-attestation/issues/109",
           "createdAt": "2024-03-19T00:22:58Z",
           "updatedAt": "2024-03-19T00:22:58Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Since 4 Jun, codepoint 35 has been allocated by IANA in the [\"SMI Security for PKIX Certificate Extension\"](https://www.iana.org/assignments/smi-numbers/smi-numbers.xhtml#smi-numbers-1.3.6.1.5.5.7.1) registry for CMW.",
+          "createdAt": "2024-06-12T13:53:06Z",
+          "updatedAt": "2024-06-12T13:53:06Z"
         }
       ]
+    },
+    {
+      "number": 87,
+      "id": "I_kwDOIGCt2M6KJ0ds",
+      "title": "IoTdir review",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/87",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "[Mohit's IoT directorate review](https://mailarchive.ietf.org/arch/msg/rats/w7_wMuRenwMbTTmc9l_qMayRF44/)\r\n\r\nSome minor comments:\r\n\r\n* [x] Section 4: Perhaps expand what is CoRIM and add a reference to https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-04\r\n\r\n* [x] Section 5 and 5.1: It would be helpful for readers if a short use-case explaining when CMW would be transported in CRLs could be provided. While I can guess why a CMW would be in a CSR, I could not immediately understand when a CMW would be part of a CRL. Similarly, it would be helpful to explain where and how the ASN.1 module will be used. I assume it is relevant for cases where a certificate containing a CMW extension is passed around?\r\n\r\n* [x] Section 5.2: I wonder about the consequences of having two different CMW specifications: one by the Trusted Computing Group (TCG) and the other in this draft. I downloaded the TCG specification and found a reference to this draft.  Would it be possible for future versions of the TCG specification to reuse this draft rather than creating a subset? Also, this draft states that the \"CMW extension\" \"MUST NOT be marked critical,\" whereas the TCG specification states that the \"tcg-dice-conceptual-message-wrapper extension criticality flag SHOULD be marked critical.\" In summary, I wonder if these specifications can somehow be synchronized.\r\n\r\n* [x] Section 7: Please expand UCCS on first use: unprotected CWT Claims Sets (UCCS).\r\n",
+      "createdAt": "2024-05-26T16:20:58Z",
+      "updatedAt": "2024-06-11T10:11:40Z",
+      "closedAt": "2024-06-11T10:11:40Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "For more context about the resolution of point 3, see https://mailarchive.ietf.org/arch/msg/rats/XFxvxa5EOn5q-8nRQV4Ir4DBymI/",
+          "createdAt": "2024-05-30T16:05:01Z",
+          "updatedAt": "2024-05-30T16:05:01Z"
+        }
+      ]
+    },
+    {
+      "number": 89,
+      "id": "I_kwDOIGCt2M6KrIOq",
+      "title": "media-type pre-allocation to use provisional M-T registry",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/89",
+      "state": "OPEN",
+      "author": "nedmsmith",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "hannestschofenig",
+        "nedmsmith",
+        "thomas-fossati",
+        "henkbirkholz"
+      ],
+      "labels": [],
+      "body": "We've been informed that instead of making an early allocation in the registry at https://www.iana.org/assignments/media-types, we would need to add these to the provisional standard media type registry at https://www.iana.org/assignments/provisional-standard-media-types.\r\n\r\nWhen the document is approved for publication, we would remove those entries from the provisional registry and add them to the media type registry itself.\r\n\r\nIs it OK with the CMW authors for the pre-allocation request to be modified to target the Provisional Standard Media Type Registry?\r\n",
+      "createdAt": "2024-05-30T21:21:37Z",
+      "updatedAt": "2024-05-31T09:45:42Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Is it OK with the CMW authors for the pre-allocation request to be modified to target the Provisional Standard Media Type Registry?\r\n\r\nWFM.  However, reading [Section 5.2.1 of RFC6838](https://www.rfc-editor.org/rfc/rfc6838.html#section-5.2.1):\r\n\r\n```\r\n   [a] provisional registration process is provided to\r\n   support early assignment of media type names in the standards tree.\r\n   A provisional registration MAY be submitted to IANA for standards-\r\n   tree types.  The only required fields in such registrations are the\r\n   media type name and contact information (including the standards-\r\n   related organization name).\r\n\r\n   Upon receipt of a provisional registration, IANA will check the name\r\n   and contact information, then publish the registration in a distinct\r\n   publicly visible provisional registration list.\r\n```\r\n\r\nfrom the I-D perspective, there is nothing extra to do.\r\n\r\nWe probably just need to send a request to IANA to trigger the registration in the Provisional registry.\r\n\r\n",
+          "createdAt": "2024-05-31T09:45:41Z",
+          "updatedAt": "2024-05-31T09:45:41Z"
+        }
+      ]
+    },
+    {
+      "number": 90,
+      "id": "I_kwDOIGCt2M6KrOOi",
+      "title": "Pre-allocation to RATS Conceptual Message Wrapper Indicators\" registry",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/90",
+      "state": "CLOSED",
+      "author": "nedmsmith",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "hannestschofenig",
+        "nedmsmith",
+        "thomas-fossati",
+        "henkbirkholz"
+      ],
+      "labels": [],
+      "body": "IANA is not allowed to create a new registry and create pre-allocation entries. \r\n\r\nRFC 7120 allows for early allocations from existing registries (with chair and AD approval, or just AD approval if the document is AD-sponsored), but it doesn't permit the early creation of registries.\r\n\r\nWe are looking at how to make this work for a 7120bis (no text yet), which we'll be discussing with the IESG in Vancouver, but that's not very helpful at the moment. (Logistical issues include what to do with abandoned registries given that we prefer not to delete them, whether intended registration procedure should affect the early registration procedure, and how allocations from yet-to-be-approved documents should be carried over when the IESG approves the document that contains the registry.)\r\n\r\nIn the meantime, the two options available would probably be to 1) include any other drafts' registrations in the document that contains the registry, and use a \"reference\" field to refer to those other drafts, or 2) limit the registrations in the I-D version of the registry as desired, but have the WG maintain a living registry of some kind in a wiki or in github that can contain entries for other documents. In the latter case, it would be important to make sure that nobody can add entries to that living pre-registry once IANA creates the actual registry.\r\n\r\nIANA expert also asked the CMW authors to add the following text to the IANA section, table 2, for this registry:\r\n\"4-255 | Unassigned\".",
+      "createdAt": "2024-05-30T21:44:48Z",
+      "updatedAt": "2024-05-31T15:52:39Z",
+      "closedAt": "2024-05-31T15:43:21Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "In terms of new registries, we only create the [\"CMW indicators\"](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-04.html#section-8.4), which comes pre-populated with a bunch of reasonable codepoints already.\r\n\r\nTo cover the (remote?) risk of someone wanting to add further registration in the short term, I like the idea of handling a \"provisional registry\" page as a file under revision control in the msg-wrap repo.  People wanting to add their codepoints would make a PR changing that file (and the I-D).\r\n\r\n(Let me know if you are OK with the proposal above and I'll go ahead and add the file and document the procedure in the I-D.)\r\n",
+          "createdAt": "2024-05-31T10:00:06Z",
+          "updatedAt": "2024-05-31T10:00:58Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "So, we should say no to IANA for using the provisional registry?",
+          "createdAt": "2024-05-31T15:00:25Z",
+          "updatedAt": "2024-05-31T15:00:25Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> So, we should say no to IANA for using the provisional registry?\r\n\r\nyes, we can host the provisional registry ourselves and shut it down when IANA takes over.",
+          "createdAt": "2024-05-31T15:14:40Z",
+          "updatedAt": "2024-05-31T15:14:40Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I withdrew the IANA request for CMW Indicators registry early allocation.",
+          "createdAt": "2024-05-31T15:43:21Z",
+          "updatedAt": "2024-05-31T15:43:21Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I withdrew the IANA request for CMW Indicators registry early allocation.\r\n\r\nCool.  I'll take this as a yes to my question: https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/90#issuecomment-2141676903 :-)",
+          "createdAt": "2024-05-31T15:52:38Z",
+          "updatedAt": "2024-05-31T15:52:38Z"
+        }
+      ]
+    },
+    {
+      "number": 93,
+      "id": "I_kwDOIGCt2M6LTV90",
+      "title": "Indicator for attester key certificate?",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/93",
+      "state": "CLOSED",
+      "author": "deeglaze",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "On AMD SEV-SNP, every machine has its own attestation-signing key that is cached on the node. The VMM is permitted to give the certificate to the guest in an \"auxblob\" as a means of avoiding a runtime dependency on a low query-per-second (QPS) service that provides the certificates given data that is available in the attestation reports (product, CHIP_ID and TCB_VERSION).\r\n\r\nTo help out the attestation verification service, we pass that certificate along to allow it to avoid its own fetch from a cache. My thinking was that we'd put this in the CMW under an x509 certificate content type (`application/pem-certificate-chain` maybe? `application/x-x509-ca-cert` seems like a misnomer) but with an indicator that it's an attestation key certificate, or as an endorsement with a new content type that I negotiate with AMD to register with the IANA.\r\n\r\nIs cached certificate collateral for helping interpret evidence... reference value? Endorsement? Or some new indicator? If AMD were to write its certificate provisioning service with CoRIM in mind, they might provide their x.509 certificate in a corim's cose headers, where the corim just describes the data that are currently in the x.509 extensions https://www.amd.com/content/dam/amd/en/documents/epyc-technical-docs/specifications/57230.pdf. I'm guessing since there's no reference or endorsement triple involved in giving the attestation key data... it's a new indicator? ",
+      "createdAt": "2024-06-06T01:15:18Z",
+      "updatedAt": "2024-06-11T13:02:55Z",
+      "closedAt": "2024-06-11T13:02:55Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Is cached certificate collateral for helping interpret evidence... reference value? Endorsement? Or some new indicator?\r\n\r\nLooks like `endorsements: 1` to me.",
+          "createdAt": "2024-06-11T10:21:11Z",
+          "updatedAt": "2024-06-11T10:21:11Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Good enough for me",
+          "createdAt": "2024-06-11T13:02:55Z",
+          "updatedAt": "2024-06-11T13:02:55Z"
+        }
+      ]
+    },
+    {
+      "number": 94,
+      "id": "I_kwDOIGCt2M6L3H1S",
+      "title": "`cmw` is not defined with sufficient precision",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/94",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "thomas-fossati"
+      ],
+      "labels": [],
+      "body": "Comment from Mike Jones:\r\n\r\n> _\"I believe that Section 3.1 needs to be revised to say that the json-record is the value of the \"cwm\" JWT claim and the cbor-record is the value of the \"cwm\" CWT claim.\"_\r\n",
+      "createdAt": "2024-06-11T13:45:11Z",
+      "updatedAt": "2024-06-12T09:37:26Z",
+      "closedAt": "2024-06-12T09:37:26Z",
+      "comments": []
+    },
+    {
+      "number": 96,
+      "id": "I_kwDOIGCt2M6L_8Ed",
+      "title": "naming is hard",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/96",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The name `id-pe-cmw-collection` is not a great choice: a CMW can be a record, a tag or a collection, so emphasising \"collection\" seems unwarranted.\r\n\r\nI propose we use `id-pe-cmw` instead.",
+      "createdAt": "2024-06-12T13:33:16Z",
+      "updatedAt": "2024-06-13T14:25:52Z",
+      "closedAt": "2024-06-13T14:25:52Z",
+      "comments": []
     }
   ],
   "pulls": [
@@ -4659,7 +4849,7 @@
         },
         {
           "author": "deeglaze",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Looks good apart from nits. Thanks Thomas :)",
           "createdAt": "2024-02-09T21:05:17Z",
           "updatedAt": "2024-02-09T21:05:17Z"
@@ -4701,7 +4891,7 @@
         },
         {
           "author": "deeglaze",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "I thought CMWs were only added as an extension to a certificate as added context to understand a signature, not as another way to aggregate CMWs, no?",
           "createdAt": "2024-02-14T21:36:53Z",
           "updatedAt": "2024-02-14T21:36:53Z"
@@ -4715,7 +4905,7 @@
         },
         {
           "author": "deeglaze",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "I don't see that specifically as a CMW but as a media-type for DICE evidence the form of an x.509 certificate path, no? The tunnel is just here because the CDDL permits both JSON and CBOR.",
           "createdAt": "2024-02-14T23:06:38Z",
           "updatedAt": "2024-02-14T23:06:38Z"
@@ -4729,7 +4919,7 @@
         },
         {
           "author": "deeglaze",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "What de you mean to convert the pem to cbor? A base64-encoded string is still representable as bytes in the cbor schema. If there's a cbor encoding of certificate chains, wouldn't you just use that media type instead? I feel like I'm missing something.",
           "createdAt": "2024-02-15T01:03:59Z",
           "updatedAt": "2024-02-15T01:03:59Z"
@@ -4791,7 +4981,7 @@
             "abbreviatedOid": "f867dbb"
           },
           "author": "deeglaze",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-02-09T20:54:14Z",
@@ -4811,7 +5001,7 @@
             "abbreviatedOid": "f867dbb"
           },
           "author": "deeglaze",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-02-09T20:58:29Z",
@@ -4831,7 +5021,7 @@
             "abbreviatedOid": "f867dbb"
           },
           "author": "deeglaze",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-02-09T20:59:16Z",
@@ -5295,24 +5485,26 @@
       "id": "PR_kwDOIGCt2M5obuCe",
       "title": "Add a section detailing CMW collection label usage",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/78",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "deeglaze",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
-      "body": "This is to address Issue #74. A CMW collection type exists to organize individual attesters' results and not fracture the space of representations of composite attester results. The topologies however are still subject to Verifier scrutiny. If the topology is not present in a measured boot chain signed by some other attester, and the only trusted witness of the complete assembly of a system is the CMW collection itself, we must be careful to ensure that the meaning of labels is properly documented (with a profile) and integrity-protected (with a signature).",
+      "body": "This is to address Issue #74. A CMW collection type exists to organize individual attesters' results and not fracture the space of representations of composite attester results. The topologies however are still subject to Verifier scrutiny. If the topology is not present in a measured boot chain signed by some other attester, and the only trusted witness of the complete assembly of a system is the CMW collection itself, we must be careful to ensure that the meaning of labels is properly documented (with a profile) and integrity-protected (with a signature).\r\n\r\nFix #74",
       "createdAt": "2024-03-01T17:17:28Z",
-      "updatedAt": "2024-05-02T15:40:59Z",
+      "updatedAt": "2024-06-13T07:26:03Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
-      "baseRefOid": "817fbfeeb50b95d42d4d59b31a480fe23bf8e42a",
+      "baseRefOid": "dd4a51112774fd9fd4a5d4d687770de651f5618c",
       "headRepository": "deeglaze/draft-ietf-rats-msg-wrap",
       "headRefName": "cmwlabels",
-      "headRefOid": "799da83fc02f72ca06b74ea3f244508db436b35b",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "12d253b16f6cf4e8d5c2dbc8e219b2b6015db2b4",
+      "closedAt": "2024-06-13T07:26:02Z",
+      "mergedAt": "2024-06-13T07:26:02Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "392a2ca63dde389966344a3354fb8ac5677d9917"
+      },
       "comments": [],
       "reviews": [
         {
@@ -5334,6 +5526,172 @@
               "updatedAt": "2024-03-11T23:29:42Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M58pi6q",
+          "commit": {
+            "abbreviatedOid": "799da83"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-31T16:28:20Z",
+          "updatedAt": "2024-05-31T16:29:22Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "I am not sure a reader of this document necessarily understands what \"domain membership\" and \"domain dependency\" mean.",
+              "createdAt": "2024-05-31T16:28:20Z",
+              "updatedAt": "2024-05-31T16:29:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M58pqfg",
+          "commit": {
+            "abbreviatedOid": "799da83"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-31T16:46:28Z",
+          "updatedAt": "2024-05-31T16:46:28Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "What if we delete everything after the comma starting with \"i.e.\"?",
+              "createdAt": "2024-05-31T16:46:28Z",
+              "updatedAt": "2024-05-31T16:46:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M58p8XK",
+          "commit": {
+            "abbreviatedOid": "799da83"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-31T17:26:01Z",
+          "updatedAt": "2024-05-31T17:26:01Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "> What if we delete everything after the comma starting with \"i.e.\"?\r\n\r\nWFM",
+              "createdAt": "2024-05-31T17:26:01Z",
+              "updatedAt": "2024-05-31T17:26:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M58qxkN",
+          "commit": {
+            "abbreviatedOid": "799da83"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "see suggested wording",
+          "createdAt": "2024-05-31T19:31:43Z",
+          "updatedAt": "2024-05-31T19:33:00Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "```suggestion\r\nA CMW Collection's tree structure is not required to be a spanning tree of the system's composite Attester topology.\r\n```",
+              "createdAt": "2024-05-31T19:31:43Z",
+              "updatedAt": "2024-05-31T19:33:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M58qzst",
+          "commit": {
+            "abbreviatedOid": "749f068"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-31T19:38:33Z",
+          "updatedAt": "2024-05-31T19:38:33Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "> Justification: a cmw can be a cmw-record, cmw-collection, or cbor-tag\r\n\r\nHowever, the scope here is limited to collections (the section title is \"CMW Collections' role in composite Attester topology\"), so I think using \"collection\" is OK.",
+              "createdAt": "2024-05-31T19:38:33Z",
+              "updatedAt": "2024-05-31T19:38:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M588UkT",
+          "commit": {
+            "abbreviatedOid": "749f068"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-04T12:04:33Z",
+          "updatedAt": "2024-06-04T12:04:33Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "Isn't L281 redundant given L282 restates both the content and the requirement level (i.e., SHOULD)?  If so, I suggest we drop it.\r\n\r\n```suggestion\r\n```",
+              "createdAt": "2024-06-04T12:04:33Z",
+              "updatedAt": "2024-06-05T23:11:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M59w_Lq",
+          "commit": {
+            "abbreviatedOid": "c9f5732"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks @deeglaze !",
+          "createdAt": "2024-06-11T10:15:11Z",
+          "updatedAt": "2024-06-11T10:15:11Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5-DTcp",
+          "commit": {
+            "abbreviatedOid": "c9f5732"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-13T06:15:07Z",
+          "updatedAt": "2024-06-13T06:15:13Z",
+          "comments": [
+            {
+              "originalPosition": 22,
+              "body": "JSON and CBOR are not opposites. Note see CESR.",
+              "createdAt": "2024-06-13T06:15:07Z",
+              "updatedAt": "2024-06-13T06:15:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M5-DTpe",
+          "commit": {
+            "abbreviatedOid": "c9f5732"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-13T06:15:42Z",
+          "updatedAt": "2024-06-13T06:15:42Z",
+          "comments": []
         }
       ]
     },
@@ -5581,6 +5939,386 @@
           "body": "LGTM",
           "createdAt": "2024-05-02T15:38:14Z",
           "updatedAt": "2024-05-02T15:38:14Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 88,
+      "id": "PR_kwDOIGCt2M5wmOFv",
+      "title": "IoTdir review",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/88",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "* Expand CoRIM and add ref\r\n* Expand UCCS\r\n* CMW X.509 extension: relax critical=false to SHOULD\r\n\r\nFix #87",
+      "createdAt": "2024-05-26T19:06:14Z",
+      "updatedAt": "2024-06-13T07:27:40Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "f5784076c2419bd2a7ae642e84c2ce072a09d561",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "iotdir-2/4",
+      "headRefOid": "d7ca10c95f4f8235dd30d9b1dd15cd508709d354",
+      "closedAt": "2024-06-11T10:11:39Z",
+      "mergedAt": "2024-06-11T10:11:39Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "9abbf98f4c1daef27756742fb015eccf72600cf1"
+      },
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@henkbirkholz @hannestschofenig, please review",
+          "createdAt": "2024-05-30T18:06:54Z",
+          "updatedAt": "2024-05-30T18:06:54Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Since Ned has already approved and there was no pushback, I'll merge this. ",
+          "createdAt": "2024-06-11T10:10:59Z",
+          "updatedAt": "2024-06-11T10:10:59Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M58NOvV",
+          "commit": {
+            "abbreviatedOid": "42abc45"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-28T21:02:01Z",
+          "updatedAt": "2024-05-28T21:02:01Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M58gA2y",
+          "commit": {
+            "abbreviatedOid": "d7ca10c"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-30T16:11:59Z",
+          "updatedAt": "2024-05-30T16:11:59Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 91,
+      "id": "PR_kwDOIGCt2M5xIbay",
+      "title": "apply IANA suggestion",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/91",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Explicitly mark the unallocated space in the `ind` registry as \"unassigned\".\r\n\r\nThis also effectively upper-bounds the number of different CM types to 32.",
+      "createdAt": "2024-05-31T14:04:11Z",
+      "updatedAt": "2024-05-31T16:32:14Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "f5784076c2419bd2a7ae642e84c2ce072a09d561",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "iana-suggestion",
+      "headRefOid": "4e5afde9d80c33a6d1949cfde97ed698d59713d6",
+      "closedAt": "2024-05-31T16:32:09Z",
+      "mergedAt": "2024-05-31T16:32:09Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "7f8898fbe53c9c68f87d31e4356dce04f0c5a45d"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M58ozlW",
+          "commit": {
+            "abbreviatedOid": "bcfcc66"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-05-31T14:58:36Z",
+          "updatedAt": "2024-05-31T14:58:36Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M58pY8-",
+          "commit": {
+            "abbreviatedOid": "4e5afde"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-05-31T16:10:14Z",
+          "updatedAt": "2024-05-31T16:10:14Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 92,
+      "id": "PR_kwDOIGCt2M5xJU2o",
+      "title": "create provisional cmw-indicators registry",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/92",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "fix #90 ",
+      "createdAt": "2024-05-31T16:20:54Z",
+      "updatedAt": "2024-06-13T07:31:31Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "f5784076c2419bd2a7ae642e84c2ce072a09d561",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "provisional-registry",
+      "headRefOid": "a235fb8bb6f44bc0e8d950a7aeff858b7be83106",
+      "closedAt": "2024-06-11T10:13:16Z",
+      "mergedAt": "2024-06-11T10:13:16Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "a0da98af143d8fd1ce03b2802ff3231e661e9c1a"
+      },
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Since Ned has already approved and there was no pushback, I'll merge this.",
+          "createdAt": "2024-06-11T10:12:42Z",
+          "updatedAt": "2024-06-11T10:12:42Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M58pq5V",
+          "commit": {
+            "abbreviatedOid": "6512235"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-05-31T16:47:35Z",
+          "updatedAt": "2024-05-31T16:47:35Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M58prKK",
+          "commit": {
+            "abbreviatedOid": "6512235"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-05-31T16:48:18Z",
+          "updatedAt": "2024-05-31T16:48:18Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M585xsx",
+          "commit": {
+            "abbreviatedOid": "58151b9"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-04T07:18:33Z",
+          "updatedAt": "2024-06-04T07:18:33Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "**NOTE** Before merging the URL needs to be changed to match the final location (i.e., `main` rather than the `provisional-registry` branch)",
+              "createdAt": "2024-06-04T07:18:33Z",
+              "updatedAt": "2024-06-04T07:18:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M59MpS9",
+          "commit": {
+            "abbreviatedOid": "58151b9"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-05T23:32:50Z",
+          "updatedAt": "2024-06-05T23:32:51Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nBefore the creation of the registry by IANA, new codepoints can be added to the [provisional CMW Indicators registry](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/blob/main/provisional/cmw-indicators-registry.md) by following the documented procedure.\r\n```",
+              "createdAt": "2024-06-05T23:32:50Z",
+              "updatedAt": "2024-06-05T23:32:51Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 95,
+      "id": "PR_kwDOIGCt2M5yJmov",
+      "title": "improve precision when defining the \"cmw\" claim",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/95",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #94",
+      "createdAt": "2024-06-11T19:26:48Z",
+      "updatedAt": "2024-06-13T07:31:33Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "a0da98af143d8fd1ce03b2802ff3231e661e9c1a",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "iana-fixes",
+      "headRefOid": "4214d1a94e12f8a408a45f83466ae379cdfb4a87",
+      "closedAt": "2024-06-12T09:37:25Z",
+      "mergedAt": "2024-06-12T09:37:25Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "dd4a51112774fd9fd4a5d4d687770de651f5618c"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M596GIa",
+          "commit": {
+            "abbreviatedOid": "4214d1a"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-12T08:52:56Z",
+          "updatedAt": "2024-06-12T08:52:56Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 97,
+      "id": "PR_kwDOIGCt2M5yRISe",
+      "title": "small tweaks",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/97",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-12T17:29:33Z",
+      "updatedAt": "2024-06-13T07:27:18Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "dd4a51112774fd9fd4a5d4d687770de651f5618c",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "small-edits",
+      "headRefOid": "b686ec1f25685eb097800d436bdaf93bd64316e2",
+      "closedAt": "2024-06-13T07:27:13Z",
+      "mergedAt": "2024-06-13T07:27:13Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "c73f10efea434e35b00427a5234be5cb2b2f7927"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5-DRYJ",
+          "commit": {
+            "abbreviatedOid": "b686ec1"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-13T06:09:52Z",
+          "updatedAt": "2024-06-13T06:09:52Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 98,
+      "id": "PR_kwDOIGCt2M5yUqUy",
+      "title": "CCC SIG slides tweak",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/98",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This is a tweak to the slides I presented at CCC SIG.",
+      "createdAt": "2024-06-13T07:29:00Z",
+      "updatedAt": "2024-06-13T07:31:04Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "c73f10efea434e35b00427a5234be5cb2b2f7927",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "ccc-sig-slides-tweak",
+      "headRefOid": "9b971f9ff5d62b332648430e370d7291553f7053",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 99,
+      "id": "PR_kwDOIGCt2M5yUyIR",
+      "title": "rename id-pe-cmw-collection to id-pe-cmw",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/99",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #96 ",
+      "createdAt": "2024-06-13T07:45:47Z",
+      "updatedAt": "2024-06-13T14:25:55Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "c73f10efea434e35b00427a5234be5cb2b2f7927",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "id-pe-cmw",
+      "headRefOid": "b576097183da32332428f5de53164f1c5fd5c43f",
+      "closedAt": "2024-06-13T14:25:51Z",
+      "mergedAt": "2024-06-13T14:25:51Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "09eeb624b70e08f551eab9f57494082bfddf0445"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5-HwO4",
+          "commit": {
+            "abbreviatedOid": "b576097"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-13T14:23:59Z",
+          "updatedAt": "2024-06-13T14:23:59Z",
           "comments": []
         }
       ]
