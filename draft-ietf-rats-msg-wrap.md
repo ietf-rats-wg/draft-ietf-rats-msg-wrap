@@ -771,6 +771,17 @@ Author/Change controller:
 Provisional registration:
 : no
 
+## CoAP Content Formats
+
+IANA is requested to register the following Content-Format numbers in the "CoAP Content-Formats" sub-registry, within the "Constrained RESTful Environments (CoRE) Parameters" Registry {{!IANA.core-parameters}}:
+
+| Content-Type | Content Coding | ID | Reference |
+| application/cmw+cbor | - | TBD1 | {{type-n-val}}, {{cbor-tag}} and {{cmw-coll}} of {{&SELF}} |
+| application/cmw+json | - | TBD2 | {{type-n-val}} and {{cmw-coll}} of {{&SELF}} |
+{: align="left" title="New CoAP Content Formats"}
+
+If possible, TBD1 and TBD2 should be assigned in the 256..999 range.
+
 ## New SMI Numbers Registrations
 
 IANA is requested to assign an object identifier (OID) for the CMW extension defined in {{x509}} in the "Certificate Extension" sub-registry of the "SMI Numbers" {{!IANA.smi-numbers}} registry.
