@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-06-25T00:41:52.606958+00:00",
+  "timestamp": "2024-06-27T00:42:25.446204+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -1395,15 +1395,15 @@
       "id": "I_kwDOIGCt2M6Cwdpw",
       "title": "which OID arc should we use?",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/86",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "@ounsworth [commented](https://zulip.ietf.org/#narrow/stream/45-rats/topic/ietf-119/near/109103) on the [CMW extension](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-04.html#section-5.1):\r\n\r\n> [\u00a76.3 of draft-ietf-lamps-csr-attestation-08](https://www.ietf.org/archive/id/draft-ietf-lamps-csr-attestation-08.html#section-6.3) defines a new registry: _\"SMI Security for PKIX Evidence Statement Formats\"_ which might be a better place to put it?\r\n\r\nSince CMW is not evidence-only, the name of the CSR-attestation registry should be probably tweaked to match the extended semantic.\r\n\r\ncc @mcr",
       "createdAt": "2024-03-19T00:21:23Z",
-      "updatedAt": "2024-06-12T13:53:07Z",
-      "closedAt": null,
+      "updatedAt": "2024-06-25T07:45:36Z",
+      "closedAt": "2024-06-25T07:45:36Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -1418,6 +1418,13 @@
           "body": "Since 4 Jun, codepoint 35 has been allocated by IANA in the [\"SMI Security for PKIX Certificate Extension\"](https://www.iana.org/assignments/smi-numbers/smi-numbers.xhtml#smi-numbers-1.3.6.1.5.5.7.1) registry for CMW.",
           "createdAt": "2024-06-12T13:53:06Z",
           "updatedAt": "2024-06-12T13:53:06Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I guess this can be closed on our side at least.\r\n\r\nFeel free to reopen if there is anything left to discuss.",
+          "createdAt": "2024-06-25T07:45:36Z",
+          "updatedAt": "2024-06-25T07:45:36Z"
         }
       ]
     },
@@ -1450,7 +1457,7 @@
       "id": "I_kwDOIGCt2M6KrIOq",
       "title": "media-type pre-allocation to use provisional M-T registry",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/89",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "nedmsmith",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1462,8 +1469,8 @@
       "labels": [],
       "body": "We've been informed that instead of making an early allocation in the registry at https://www.iana.org/assignments/media-types, we would need to add these to the provisional standard media type registry at https://www.iana.org/assignments/provisional-standard-media-types.\r\n\r\nWhen the document is approved for publication, we would remove those entries from the provisional registry and add them to the media type registry itself.\r\n\r\nIs it OK with the CMW authors for the pre-allocation request to be modified to target the Provisional Standard Media Type Registry?\r\n",
       "createdAt": "2024-05-30T21:21:37Z",
-      "updatedAt": "2024-05-31T09:45:42Z",
-      "closedAt": null,
+      "updatedAt": "2024-06-25T07:41:05Z",
+      "closedAt": "2024-06-25T07:00:42Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -1471,6 +1478,13 @@
           "body": "> Is it OK with the CMW authors for the pre-allocation request to be modified to target the Provisional Standard Media Type Registry?\r\n\r\nWFM.  However, reading [Section 5.2.1 of RFC6838](https://www.rfc-editor.org/rfc/rfc6838.html#section-5.2.1):\r\n\r\n```\r\n   [a] provisional registration process is provided to\r\n   support early assignment of media type names in the standards tree.\r\n   A provisional registration MAY be submitted to IANA for standards-\r\n   tree types.  The only required fields in such registrations are the\r\n   media type name and contact information (including the standards-\r\n   related organization name).\r\n\r\n   Upon receipt of a provisional registration, IANA will check the name\r\n   and contact information, then publish the registration in a distinct\r\n   publicly visible provisional registration list.\r\n```\r\n\r\nfrom the I-D perspective, there is nothing extra to do.\r\n\r\nWe probably just need to send a request to IANA to trigger the registration in the Provisional registry.\r\n\r\n",
           "createdAt": "2024-05-31T09:45:41Z",
           "updatedAt": "2024-05-31T09:45:41Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "done: https://www.iana.org/assignments/provisional-standard-media-types/provisional-standard-media-types.xhtml#provisional-standard-types",
+          "createdAt": "2024-06-25T07:00:42Z",
+          "updatedAt": "2024-06-25T07:41:05Z"
         }
       ]
     },
@@ -1595,6 +1609,75 @@
       "updatedAt": "2024-06-13T14:25:52Z",
       "closedAt": "2024-06-13T14:25:52Z",
       "comments": []
+    },
+    {
+      "number": 100,
+      "id": "I_kwDOIGCt2M6NaFmi",
+      "title": "Should we also register a couple of CoAP Content-Formats?",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/100",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "At present, we don't.  However, while we are at it, it probably makes sense.",
+      "createdAt": "2024-06-25T11:22:03Z",
+      "updatedAt": "2024-06-26T21:06:56Z",
+      "closedAt": "2024-06-26T21:06:55Z",
+      "comments": [
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "OK",
+          "createdAt": "2024-06-25T19:34:55Z",
+          "updatedAt": "2024-06-25T19:34:55Z"
+        }
+      ]
+    },
+    {
+      "number": 101,
+      "id": "I_kwDOIGCt2M6NeSFY",
+      "title": "JSON Web Token Registry pre-assignment wording change needed",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/101",
+      "state": "CLOSED",
+      "author": "nedmsmith",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "IANA experts feedback: I believe that Section 3.1 needs to be revised to say that the json-record is the value of the \u201ccwm\u201d JWT claim and the cbor-record is the value of the \u201ccwm\u201d CWT claim.  ",
+      "createdAt": "2024-06-25T19:42:01Z",
+      "updatedAt": "2024-06-26T21:09:07Z",
+      "closedAt": "2024-06-26T21:09:07Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I believe the requested prose is already in the [second paragraph of Section 3.1](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-05.html#section-3.1-2):\r\n\r\n> _\"A CMW record carried in a cmw JWT claim ([Section 8.2](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-05.html#iana-jwt)) MUST be a json-record. A CMW record carried in a cmw CWT claim ([Section 8.1](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-05.html#iana-cwt)) MUST be a cbor-record.\"_",
+          "createdAt": "2024-06-25T20:58:35Z",
+          "updatedAt": "2024-06-25T20:58:35Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Is it a problem if we also say this in section 3.1?\r\n",
+          "createdAt": "2024-06-25T21:00:54Z",
+          "updatedAt": "2024-06-25T21:00:54Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Is it a problem if we also say this in section 3.1?\r\n\r\nThe quoted sentences are taken from section 3.1.",
+          "createdAt": "2024-06-25T21:05:24Z",
+          "updatedAt": "2024-06-25T21:05:24Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This is a duplicate of #94 which has been addressed by #95 and published in -05.",
+          "createdAt": "2024-06-26T21:09:07Z",
+          "updatedAt": "2024-06-26T21:09:07Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -6322,6 +6405,74 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 102,
+      "id": "PR_kwDOIGCt2M5zl0Bm",
+      "title": "add CoAP C-F registrations",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/102",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #100",
+      "createdAt": "2024-06-26T07:04:11Z",
+      "updatedAt": "2024-06-26T21:06:55Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "09eeb624b70e08f551eab9f57494082bfddf0445",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "cf-reg",
+      "headRefOid": "f5482705e177e8a4e466df1c0f00de39bde8dc6d",
+      "closedAt": "2024-06-26T21:06:54Z",
+      "mergedAt": "2024-06-26T21:06:54Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "357604270d5d45b1c6efe399c370afc4b2af7ec3"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5_uRKH",
+          "commit": {
+            "abbreviatedOid": "f548270"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-06-26T20:04:14Z",
+          "updatedAt": "2024-06-26T20:04:14Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 103,
+      "id": "PR_kwDOIGCt2M5zsZ58",
+      "title": "Create README.md",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/103",
+      "state": "OPEN",
+      "author": "nedmsmith",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Add README.md that creates an editors copy and other things.\r\n\r\nMore tweaking of ghpages may be needed as well.",
+      "createdAt": "2024-06-26T23:36:39Z",
+      "updatedAt": "2024-06-26T23:54:22Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "357604270d5d45b1c6efe399c370afc4b2af7ec3",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "add-README.md",
+      "headRefOid": "abecc24f7dd12e3c22f615bc3f9387852fc4a303",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
