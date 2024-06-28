@@ -1555,12 +1555,12 @@ The OID is always absolute and never relative.<a href="#section-3.3-5" class="pi
 <pre>
 json-collection = {
   ? "__cmwc_t": ~uri / oid
-  + text =&gt; json-CMW / c2j-tunnel
+  + &amp;(label: text) =&gt; json-CMW / c2j-tunnel
 }
 
 cbor-collection = {
   ? "__cmwc_t": ~uri / oid
-  + (int / text) =&gt; cbor-CMW / j2c-tunnel
+  + &amp;(label: (int / text)) =&gt; cbor-CMW / j2c-tunnel
 }
 </pre>
 </div>
@@ -2692,12 +2692,12 @@ cbor-tag&lt;tn, $fmt&gt; = #6.&lt;tn&gt;(bytes .cbor $fmt)
 
 json-collection = {
   ? "__cmwc_t": ~uri / oid
-  + text =&gt; json-CMW / c2j-tunnel
+  + &amp;(label: text) =&gt; json-CMW / c2j-tunnel
 }
 
 cbor-collection = {
   ? "__cmwc_t": ~uri / oid
-  + (int / text) =&gt; cbor-CMW / j2c-tunnel
+  + &amp;(label: (int / text)) =&gt; cbor-CMW / j2c-tunnel
 }
 
 c2j-tunnel = [ "#cmw-c2j-tunnel", base64-string ]

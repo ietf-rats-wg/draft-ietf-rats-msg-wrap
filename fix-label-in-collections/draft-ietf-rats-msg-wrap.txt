@@ -350,12 +350,12 @@ Table of Contents
 
    json-collection = {
      ? "__cmwc_t": ~uri / oid
-     + text => json-CMW / c2j-tunnel
+     + &(label: text) => json-CMW / c2j-tunnel
    }
 
    cbor-collection = {
      ? "__cmwc_t": ~uri / oid
-     + (int / text) => cbor-CMW / j2c-tunnel
+     + &(label: (int / text)) => cbor-CMW / j2c-tunnel
    }
 
            Figure 3: CDDL definition of the CMW collection format
@@ -1207,12 +1207,12 @@ Appendix A.  Collected CDDL
 
    json-collection = {
      ? "__cmwc_t": ~uri / oid
-     + text => json-CMW / c2j-tunnel
+     + &(label: text) => json-CMW / c2j-tunnel
    }
 
    cbor-collection = {
      ? "__cmwc_t": ~uri / oid
-     + (int / text) => cbor-CMW / j2c-tunnel
+     + &(label: (int / text)) => cbor-CMW / j2c-tunnel
    }
 
    c2j-tunnel = [ "#cmw-c2j-tunnel", base64-string ]
