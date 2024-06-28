@@ -169,8 +169,8 @@ The format of the CMW record is shown in {{fig-cddl-record}}.
 The JSON {{-json}} and CBOR {{-cbor}} representations are provided separately.
 Both the `json-record` and `cbor-record` have the same fields except for slight differences in the types discussed below.
 
-A CMW record carried in a `cmw` JWT claim ({{iana-jwt}}) MUST be a `json-record`.
-A CMW record carried in a `cmw` CWT claim ({{iana-cwt}}) MUST be a `cbor-record`.
+A CMW record carried in a `"cmw"` JWT claim ({{iana-jwt}}) MUST be a `json-record`.
+A CMW record carried in a `"cmw"` CWT claim ({{iana-cwt}}) MUST be a `cbor-record`.
 
 ~~~ cddl
 {::include cddl/cmw-record.cddl}
@@ -278,8 +278,8 @@ Since the collection type is recursive, implementations may limit the allowed de
 
 Although initially designed for the composite Attester use case, the CMW collection can be repurposed for other use cases requiring CMW aggregation.
 
-A CMW collection carried in a `cmw` JWT claim ({{iana-jwt}}) MUST be a `json-collection`.
-A CMW collection carried in a `cmw` CWT claim ({{iana-cwt}}) MUST be a `cbor-collection`.
+A CMW collection carried in a `"cmw"` JWT claim ({{iana-jwt}}) MUST be a `json-collection`.
+A CMW collection carried in a `"cmw"` CWT claim ({{iana-cwt}}) MUST be a `cbor-collection`.
 
 ### CMW Collections' role in composite Attester topology
 
@@ -452,7 +452,7 @@ The following example shows the use of a tunnelled type to move a CBOR record to
 
 ## Use in JWT
 
-The following example shows the use of the `cmw` JWT claim to transport a CMW collection in a JWT {{-jwt}}:
+The following example shows the use of the `"cmw"` JWT claim to transport a CMW collection in a JWT {{-jwt}}:
 
 ~~~
 {::include cddl/eat-example-1.json}
@@ -846,6 +846,7 @@ The list of currently open issues for this documents can be found at
 {:numbered="false"}
 
 The authors would like to thank
+Brian Campbell,
 Carl Wallace,
 Carsten Bormann,
 Dionna Glaze,
