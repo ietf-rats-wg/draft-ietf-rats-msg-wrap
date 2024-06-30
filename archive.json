@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-06-27T00:42:25.446204+00:00",
+  "timestamp": "2024-06-30T00:46:44.951550+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -1676,6 +1676,65 @@
           "body": "This is a duplicate of #94 which has been addressed by #95 and published in -05.",
           "createdAt": "2024-06-26T21:09:07Z",
           "updatedAt": "2024-06-26T21:09:07Z"
+        }
+      ]
+    },
+    {
+      "number": 104,
+      "id": "I_kwDOIGCt2M6NuXW_",
+      "title": "Section 3.3.1 is not clear",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/104",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Carl, about #78 :\r\n\r\n> _'I read the PR but can't say that it helps much. The phrase \"If a label changes Verifier state beyond a \"hint\"\" must be evaluated from the point of view of a verifier, right? If different verifiers may elect to use or ignore a \"hint\", I don't see how this could be any other way. The rest of that sentence establishes that how a verifier acts upon a \"hint\" determines whether a label is considered to carry semantic content. This impacts the next sentence, which states that \"the collection SHOULD be signed by an attestation key\" when a label carries semantic content.  Maybe stating \"if an attester expects for a label to change Verifier state beyond a \"hint\"\" would salvage the paragraph. Separately, is \"label\" right here or should it be \"item\" or \"message\"? It might also help if \"hint\" were defined in this context as well as how the \"hint\" notion interacts with the last point made in the security considerations section.'_\r\n",
+      "createdAt": "2024-06-27T10:12:35Z",
+      "updatedAt": "2024-06-28T18:28:58Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "/cc @deeglaze ",
+          "createdAt": "2024-06-27T10:12:53Z",
+          "updatedAt": "2024-06-27T10:12:53Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "\"hint\" refers to `text`in the `json-collection` and `(int/text)` in the `cbor-collection`. \r\n\r\nWe didn't provide CDDL tagging to help with semantics. Possibly we could define them as:\r\n```\r\njson-collection = {\r\n  ? \"__cmwc_t\": ~uri / oid\r\n  + hint: text => json-CMW / c2j-tunnel\r\n}\r\n\r\ncbor-collection = {\r\n  ? \"__cmwc_t\": ~uri / oid\r\n  + hint: (int / text) => cbor-CMW / j2c-tunnel\r\n}\r\n```\r\n\r\nthen the prose in \u00a73.3.1 would be more easily connected for the reader.\r\n\r\nThe prose might be improved by:\r\n\r\n\"A CMW Collection's tree structure is not required to be a spanning tree of the system's composite Attester topology. If the hint includes semantic content for a Verifier (e.g., for better Verifier performance or human comprehension), the collection SHOULD be integrity protected, e.g., by including it in a signed token such as a CWT or JWT.\"\r\n\r\nNote: It isn't strictly necessary to include the hint in an Evidence structure. For example, DICE includes hint information in a certificate extension, but not one that is considered to be Evidence such as DiceTcbInfo. Certs can play multiple roles so it may not be exclusively an \"attestation\" key. \r\n\r\nTechnically, hints aren't Evidence because there is no expectation for matching Reference Values and because they are information intended for consumption by a Verifier. Uncorroborated Evidence is still meaningful without RVs, but the intended audience is a RP (or appraisal policy), whereas hints would not be added to an ACS.\r\n\r\nA CWT/JWT containing EAT Claims is said to be an \"EAT\" token, but a profile determines whether it is Evidence, Endorsement, or RVs. A `cmw` can contain both Evidence and non-evidence information, much like a DICE cert does. The hint information is non-evidence. \r\n\r\nA second form of integrity protection is to create a Claim that has the same semantics as the hint and put that claim in Evidence or Endorsements. This seems like an advanced alternative that doesn't need to be captured in prose as the current example is sufficient to illustrate the concept of integrity protection.\r\n\r\nIt isn't necessary to include the signed token / Evidence in a CMW collection either, as long as it is integrity protected somehow. \r\n",
+          "createdAt": "2024-06-28T17:12:00Z",
+          "updatedAt": "2024-06-28T17:36:29Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> \"hint\" refers to `text`in the `json-collection` and `(int/text)` in the `cbor-collection`.\r\n> \r\n> We didn't provide CDDL tagging to help with semantics. Possibly we could define them as:\r\n> \r\n> ```\r\n> json-collection = {\r\n>   ? \"__cmwc_t\": ~uri / oid\r\n>   + hint: text => json-CMW / c2j-tunnel\r\n> }\r\n> \r\n> cbor-collection = {\r\n>   ? \"__cmwc_t\": ~uri / oid\r\n>   + hint: (int / text) => cbor-CMW / j2c-tunnel\r\n> }\r\n> ```\r\n> \r\n> then the prose in \u00a73.3.1 would be more easily connected for the reader.\r\n\r\nWe already have the term \"label\" to refer to that, we should just use it consistently.\r\n",
+          "createdAt": "2024-06-28T17:49:41Z",
+          "updatedAt": "2024-06-28T17:50:09Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> We already have the term \"label\" to refer to that, we should just use it consistently.\r\n\r\nI didn't see `label` in the CDDL. That is the part that is potentially confusing to readers IMO.\r\n\r\nDoes this CDDL work:\r\n```\r\njson-collection = {\r\n  ? \"__cmwc_t\": ~uri / oid\r\n  + label: text => json-CMW / c2j-tunnel\r\n}\r\n\r\ncbor-collection = {\r\n  ? \"__cmwc_t\": ~uri / oid\r\n  + label: (int / text) => cbor-CMW / j2c-tunnel\r\n}\r\n```",
+          "createdAt": "2024-06-28T17:58:12Z",
+          "updatedAt": "2024-06-28T17:58:12Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > We already have the term \"label\" to refer to that, we should just use it consistently.\r\n> \r\n> I didn't see `label` in the CDDL. That is the part that is potentially confusing to readers IMO.\r\n> \r\n> Does this CDDL work:\r\n> \r\n> ```\r\n> json-collection = {\r\n>   ? \"__cmwc_t\": ~uri / oid\r\n>   + label: text => json-CMW / c2j-tunnel\r\n> }\r\n> \r\n> cbor-collection = {\r\n>   ? \"__cmwc_t\": ~uri / oid\r\n>   + label: (int / text) => cbor-CMW / j2c-tunnel\r\n> }\r\n> ```\r\n\r\nI think you need to do:\r\n```\r\n@@ -1,9 +1,9 @@\r\n json-collection = {\r\n   ? \"__cmwc_t\": ~uri / oid\r\n   + &(label: text) => json-CMW / c2j-tunnel\r\n }\r\n\r\n cbor-collection = {\r\n   ? \"__cmwc_t\": ~uri / oid\r\n   + &(label: (int / text)) => cbor-CMW / j2c-tunnel\r\n }\r\n```\r\n\r\n",
+          "createdAt": "2024-06-28T18:03:34Z",
+          "updatedAt": "2024-06-28T18:03:34Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "fixed by PR #106 ",
+          "createdAt": "2024-06-28T18:28:57Z",
+          "updatedAt": "2024-06-28T18:28:57Z"
         }
       ]
     }
@@ -6343,26 +6402,42 @@
       "id": "PR_kwDOIGCt2M5yUqUy",
       "title": "CCC SIG slides tweak",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/98",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This is a tweak to the slides I presented at CCC SIG.",
       "createdAt": "2024-06-13T07:29:00Z",
-      "updatedAt": "2024-06-13T07:31:04Z",
+      "updatedAt": "2024-06-28T21:37:06Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "c73f10efea434e35b00427a5234be5cb2b2f7927",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "ccc-sig-slides-tweak",
       "headRefOid": "9b971f9ff5d62b332648430e370d7291553f7053",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-06-28T21:37:02Z",
+      "mergedAt": "2024-06-28T21:37:02Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "c4291a0446e4b80ced4386269ae94f215c68b7af"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6AFAW7",
+          "commit": {
+            "abbreviatedOid": "9b971f9"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-06-28T19:19:39Z",
+          "updatedAt": "2024-06-28T19:19:39Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 99,
@@ -6453,26 +6528,141 @@
       "id": "PR_kwDOIGCt2M5zsZ58",
       "title": "Create README.md",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/103",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "nedmsmith",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Add README.md that creates an editors copy and other things.\r\n\r\nMore tweaking of ghpages may be needed as well.",
       "createdAt": "2024-06-26T23:36:39Z",
-      "updatedAt": "2024-06-26T23:54:22Z",
+      "updatedAt": "2024-06-27T07:20:27Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "357604270d5d45b1c6efe399c370afc4b2af7ec3",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "add-README.md",
       "headRefOid": "abecc24f7dd12e3c22f615bc3f9387852fc4a303",
+      "closedAt": "2024-06-27T07:20:18Z",
+      "mergedAt": "2024-06-27T07:20:18Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "273abbe0c382ad90bd35489fe4afa88ce2c6ef3c"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M5_0fCS",
+          "commit": {
+            "abbreviatedOid": "abecc24"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "thanks!",
+          "createdAt": "2024-06-27T07:20:00Z",
+          "updatedAt": "2024-06-27T07:20:00Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 105,
+      "id": "PR_kwDOIGCt2M5z3zeA",
+      "title": "add explicit quotes around cmw when used as a claim name",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/105",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "apparently, \\`cmw\\` is no longer enough for kramdown-rfc to add quotes when rendering to txt",
+      "createdAt": "2024-06-28T09:57:05Z",
+      "updatedAt": "2024-06-28T16:49:07Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "273abbe0c382ad90bd35489fe4afa88ce2c6ef3c",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "quotes",
+      "headRefOid": "17344bfda23263ab44560bbb253396802082dadd",
+      "closedAt": "2024-06-28T16:49:07Z",
+      "mergedAt": "2024-06-28T16:49:07Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "4c1ca4291ab01a490bbc829f061cf6a73c6ab2ef"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6ADyUz",
+          "commit": {
+            "abbreviatedOid": "17344bf"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-06-28T16:45:55Z",
+          "updatedAt": "2024-06-28T16:45:55Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 106,
+      "id": "PR_kwDOIGCt2M5z65J5",
+      "title": "Fix label in collections",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/106",
+      "state": "OPEN",
+      "author": "nedmsmith",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "nedmsmith"
+      ],
+      "labels": [],
+      "body": "updated cmw-collection.cddl to include a label.\r\nmodified prose in section 3.3.1 to better capture the need for integrity protection of label information.\r\n\r\nAddresses issue #104 ",
+      "createdAt": "2024-06-28T18:25:04Z",
+      "updatedAt": "2024-06-28T21:59:42Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "4c1ca4291ab01a490bbc829f061cf6a73c6ab2ef",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "fix-label-in-collections",
+      "headRefOid": "b2408a4d62cd774f7e6c9791336ca193646d014a",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@carl-wallace could you please check that the proposed text addresses your concern?",
+          "createdAt": "2024-06-28T21:36:21Z",
+          "updatedAt": "2024-06-28T21:36:21Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6AF6-Z",
+          "commit": {
+            "abbreviatedOid": "4de1be7"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "LGTM, I've inlined a small editorial tweak.",
+          "createdAt": "2024-06-28T21:41:13Z",
+          "updatedAt": "2024-06-28T21:42:43Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "* use \"labels\" plural\r\n* split sentence into two\r\n\r\n```suggestion\r\nIf the labels carry semantic content for a Verifier (e.g. to improve Verifier performance or aid human comprehension), the collection SHOULD be integrity protected. For example, by including it in a signed token such as a CWT or JWT.\r\n```",
+              "createdAt": "2024-06-28T21:41:13Z",
+              "updatedAt": "2024-06-28T21:42:43Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
