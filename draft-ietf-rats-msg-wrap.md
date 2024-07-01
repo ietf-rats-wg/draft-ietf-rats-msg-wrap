@@ -284,7 +284,8 @@ A CMW collection carried in a `"cmw"` CWT claim ({{iana-cwt}}) MUST be a `cbor-c
 ### CMW Collections' role in composite Attester topology
 
 A CMW Collection's tree structure is not required to be a spanning tree of the system's composite Attester topology.
-If the labels carry semantic content for a Verifier (e.g. to improve Verifier performance or aid human comprehension), the collection SHOULD be integrity protected. For example, by including it in a signed token such as a CWT or JWT.
+If the labels carry semantic content for a Verifier (e.g. to improve Verifier performance or aid human comprehension), the collection SHOULD be integrity protected.
+For example, the collection can be integrity protected by including it in a signed token such as a CWT or JWT.
 
 ## CMW Tunnel {#cmw-tunnel}
 
