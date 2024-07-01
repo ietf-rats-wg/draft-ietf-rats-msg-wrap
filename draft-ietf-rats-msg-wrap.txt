@@ -5,11 +5,11 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 30 December 2024                                          Intel
+Expires: 2 January 2025                                            Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
-                                                            28 June 2024
+                                                             1 July 2024
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 December 2024.
+   This Internet-Draft will expire on 2 January 2025.
 
 Copyright Notice
 
@@ -350,12 +350,12 @@ Table of Contents
 
    json-collection = {
      ? "__cmwc_t": ~uri / oid
-     + text => json-CMW / c2j-tunnel
+     + &(label: text) => json-CMW / c2j-tunnel
    }
 
    cbor-collection = {
      ? "__cmwc_t": ~uri / oid
-     + (int / text) => cbor-CMW / j2c-tunnel
+     + &(label: (int / text)) => cbor-CMW / j2c-tunnel
    }
 
            Figure 3: CDDL definition of the CMW collection format
@@ -371,13 +371,11 @@ Table of Contents
 3.3.1.  CMW Collections' role in composite Attester topology
 
    A CMW Collection's tree structure is not required to be a spanning
-   tree of the system's composite Attester topology.  If a label changes
-   Verifier state beyond a "hint" (e.g., for better Verifier performance
-   or human comprehension), we say that it carries semantic content.
-   When a label carries semantic content that is not bound to other
-   forms of evidence contained in the collection, the collection SHOULD
-   be signed by an attestation key, e.g., by including the collection in
-   a signed EAT [I-D.ietf-rats-eat].
+   tree of the system's composite Attester topology.  If the labels
+   carry semantic content for a Verifier (e.g. to improve Verifier
+   performance or aid human comprehension), the collection SHOULD be
+   integrity protected.  For example, the collection can be integrity
+   protected by including it in a signed token such as a CWT or JWT.
 
 3.4.  CMW Tunnel
 
@@ -1209,12 +1207,12 @@ Appendix A.  Collected CDDL
 
    json-collection = {
      ? "__cmwc_t": ~uri / oid
-     + text => json-CMW / c2j-tunnel
+     + &(label: text) => json-CMW / c2j-tunnel
    }
 
    cbor-collection = {
      ? "__cmwc_t": ~uri / oid
-     + (int / text) => cbor-CMW / j2c-tunnel
+     + &(label: (int / text)) => cbor-CMW / j2c-tunnel
    }
 
    c2j-tunnel = [ "#cmw-c2j-tunnel", base64-string ]
