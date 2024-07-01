@@ -5,11 +5,11 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 30 December 2024                                          Intel
+Expires: 2 January 2025                                            Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
-                                                            28 June 2024
+                                                             1 July 2024
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 December 2024.
+   This Internet-Draft will expire on 2 January 2025.
 
 Copyright Notice
 
@@ -374,8 +374,8 @@ Table of Contents
    tree of the system's composite Attester topology.  If the labels
    carry semantic content for a Verifier (e.g. to improve Verifier
    performance or aid human comprehension), the collection SHOULD be
-   integrity protected.  For example, by including it in a signed token
-   such as a CWT or JWT.
+   integrity protected.  For example, the collection can be integrity
+   protected by including it in a signed token such as a CWT or JWT.
 
 3.4.  CMW Tunnel
 
