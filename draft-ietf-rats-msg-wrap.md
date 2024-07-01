@@ -284,8 +284,8 @@ A CMW collection carried in a `"cmw"` CWT claim ({{iana-cwt}}) MUST be a `cbor-c
 ### CMW Collections' role in composite Attester topology
 
 A CMW Collection's tree structure is not required to be a spanning tree of the system's composite Attester topology.
-If a label changes Verifier state beyond a "hint" (e.g., for better Verifier performance or human comprehension), we say that it carries semantic content.
-When a label carries semantic content that is not bound to other forms of evidence contained in the collection, the collection SHOULD be signed by an attestation key, e.g., by including the collection in a signed EAT {{-rats-eat}}.
+If the labels carry semantic content for a Verifier (e.g. to improve Verifier performance or aid human comprehension), the collection SHOULD be integrity protected.
+For example, the collection can be integrity protected by including it in a signed token such as a CWT or JWT.
 
 ## CMW Tunnel {#cmw-tunnel}
 
