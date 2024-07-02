@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-06-30T00:46:44.951550+00:00",
+  "timestamp": "2024-07-02T00:42:27.798265+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -1684,15 +1684,15 @@
       "id": "I_kwDOIGCt2M6NuXW_",
       "title": "Section 3.3.1 is not clear",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/104",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Carl, about #78 :\r\n\r\n> _'I read the PR but can't say that it helps much. The phrase \"If a label changes Verifier state beyond a \"hint\"\" must be evaluated from the point of view of a verifier, right? If different verifiers may elect to use or ignore a \"hint\", I don't see how this could be any other way. The rest of that sentence establishes that how a verifier acts upon a \"hint\" determines whether a label is considered to carry semantic content. This impacts the next sentence, which states that \"the collection SHOULD be signed by an attestation key\" when a label carries semantic content.  Maybe stating \"if an attester expects for a label to change Verifier state beyond a \"hint\"\" would salvage the paragraph. Separately, is \"label\" right here or should it be \"item\" or \"message\"? It might also help if \"hint\" were defined in this context as well as how the \"hint\" notion interacts with the last point made in the security considerations section.'_\r\n",
       "createdAt": "2024-06-27T10:12:35Z",
-      "updatedAt": "2024-06-28T18:28:58Z",
-      "closedAt": null,
+      "updatedAt": "2024-07-01T16:52:11Z",
+      "closedAt": "2024-07-01T16:52:10Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -6612,7 +6612,7 @@
       "id": "PR_kwDOIGCt2M5z65J5",
       "title": "Fix label in collections",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/106",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "nedmsmith",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -6621,17 +6621,19 @@
       "labels": [],
       "body": "updated cmw-collection.cddl to include a label.\r\nmodified prose in section 3.3.1 to better capture the need for integrity protection of label information.\r\n\r\nAddresses issue #104 ",
       "createdAt": "2024-06-28T18:25:04Z",
-      "updatedAt": "2024-06-28T21:59:42Z",
+      "updatedAt": "2024-07-01T16:52:14Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "4c1ca4291ab01a490bbc829f061cf6a73c6ab2ef",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "fix-label-in-collections",
-      "headRefOid": "b2408a4d62cd774f7e6c9791336ca193646d014a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "a835a33d9590769178e2a04e7ea85db61227df43",
+      "closedAt": "2024-07-01T16:52:09Z",
+      "mergedAt": "2024-07-01T16:52:09Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "a26e8386579e754ebd54e5a9a0bdcbca2dc8df52"
+      },
       "comments": [
         {
           "author": "thomas-fossati",
@@ -6639,6 +6641,13 @@
           "body": "@carl-wallace could you please check that the proposed text addresses your concern?",
           "createdAt": "2024-06-28T21:36:21Z",
           "updatedAt": "2024-06-28T21:36:21Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@carl-wallace if you have any issues with the proposed text, or have clarifying suggestions, please shout.  Otherwise, we are going to merge it shortly.",
+          "createdAt": "2024-07-01T16:09:06Z",
+          "updatedAt": "2024-07-01T16:09:06Z"
         }
       ],
       "reviews": [
@@ -6661,6 +6670,52 @@
               "updatedAt": "2024-06-28T21:42:43Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6AQJ2D",
+          "commit": {
+            "abbreviatedOid": "b2408a4"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-01T15:45:49Z",
+          "updatedAt": "2024-07-01T15:45:49Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "The \"for example\" change is a sentence fragment.\r\n```suggestion\r\nIf the labels carry semantic content for a Verifier (e.g. to improve Verifier performance or aid human comprehension), the collection SHOULD be integrity protected.\r\nFor example, the collection can be integrity protected by including it in a signed token such as a CWT or JWT.\r\n```",
+              "createdAt": "2024-07-01T15:45:49Z",
+              "updatedAt": "2024-07-01T15:45:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6AQUqF",
+          "commit": {
+            "abbreviatedOid": "a835a33"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-01T16:09:24Z",
+          "updatedAt": "2024-07-01T16:09:24Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6AQfNN",
+          "commit": {
+            "abbreviatedOid": "a835a33"
+          },
+          "author": "carl-wallace",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-01T16:35:04Z",
+          "updatedAt": "2024-07-01T16:35:04Z",
+          "comments": []
         }
       ]
     }
