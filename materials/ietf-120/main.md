@@ -65,7 +65,7 @@ Ned requested some early allocations:
 
 * Assign shepherd (Ionuț Mihalcea)
 
-* Solicited feedback from Mike B who raised the only remaning open issue [#81 "Trust contexts to consider"](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/81),
+* Solicited feedback from Mike B who raised the only remaning open issue [#81 "Trust contexts to consider"](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/81)  (on `WCHAN`.)
 
 * The editors think the document is ready for a 2nd WGLC
 
