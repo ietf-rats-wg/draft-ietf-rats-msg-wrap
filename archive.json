@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-04T00:42:37.806425+00:00",
+  "timestamp": "2024-07-07T00:47:12.716763+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -6731,13 +6731,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-07-02T19:09:37Z",
-      "updatedAt": "2024-07-02T19:09:37Z",
+      "updatedAt": "2024-07-05T09:38:27Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "a26e8386579e754ebd54e5a9a0bdcbca2dc8df52",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "ietf-120",
-      "headRefOid": "250e68377b9ab9382701bf39b0d1483e2104bcd5",
+      "headRefOid": "d7400d19c2d5ff5eb34cf4a03502376b702e230f",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
