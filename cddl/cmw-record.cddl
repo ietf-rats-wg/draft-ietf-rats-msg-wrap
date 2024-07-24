@@ -1,6 +1,6 @@
 json-record = [
   type: media-type
-  value: base64-string
+  value: base64url-string
   ? ind: uint .bits cm-type
 ]
 
