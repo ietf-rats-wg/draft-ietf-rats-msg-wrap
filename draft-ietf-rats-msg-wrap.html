@@ -15,14 +15,14 @@ Additionally, the document describes a collection type that enables the aggregat
        This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
 These allow embedding the wrapped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols. 
     " name="description">
-<meta content="xml2rfc 3.21.0" name="generator">
+<meta content="xml2rfc 3.22.0" name="generator">
 <meta content="evidence" name="keyword">
 <meta content="attestation results" name="keyword">
 <meta content="endorsements" name="keyword">
 <meta content="reference values" name="keyword">
 <meta content="draft-ietf-rats-msg-wrap-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.21.0
+  xml2rfc 3.22.0
     Python 3.12.3
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
@@ -32,9 +32,8 @@ These allow embedding the wrapped conceptual messages into CBOR-based protocols,
     platformdirs 4.2.2
     pycountry 22.3.5
     PyYAML 6.0.1
-    requests 2.31.0
+    requests 2.32.3
     setuptools 69.5.1
-    six 1.16.0
     wcwidth 0.2.13
 -->
 <link href="draft-ietf-rats-msg-wrap.xml" rel="alternate" type="application/rfc+xml">
@@ -1038,7 +1037,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 2 January 2025</td>
+<td class="center">Expires 25 January 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1051,12 +1050,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-rats-msg-wrap-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-07-01" class="published">1 July 2024</time>
+<time datetime="2024-07-24" class="published">24 July 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-01-02">2 January 2025</time></dd>
+<dd class="expires"><time datetime="2025-01-25">25 January 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1115,7 +1114,7 @@ These allow embedding the wrapped conceptual messages into CBOR-based protocols,
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 2 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 25 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1417,7 +1416,7 @@ A CMW record carried in a <code>"cmw"</code> CWT claim (<a href="#iana-cwt" clas
 <pre>
 json-record = [
   type: media-type
-  value: base64-string
+  value: base64url-string
   ? ind: uint .bits cm-type
 ]
 
@@ -1596,7 +1595,7 @@ The <code>#</code>, which is not an acceptable start symbol for the <code>Conten
 <figure id="figure-4">
           <div class="alignLeft art-cddl art-text artwork" id="section-3.4-3.1">
 <pre>
-c2j-tunnel = [ "#cmw-c2j-tunnel", base64-string ]
+c2j-tunnel = [ "#cmw-c2j-tunnel", base64url-string ]
 j2c-tunnel = [ "#cmw-j2c-tunnel", bytes ]
 </pre>
 </div>
@@ -2504,6 +2503,7 @@ If the collection is not protected from tampering by external security measures 
 </div>
 </section>
 </div>
+<div id="sec-combined-references">
 <section id="section-9">
       <h2 id="name-references">
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-references" class="section-name selfRef">References</a>
@@ -2520,27 +2520,27 @@ If the collection is not protected from tampering by external security measures 
 <dd class="break"></dd>
 <dt id="IANA.cbor-tags">[IANA.cbor-tags]</dt>
         <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR) Tags"</span>, <span>&lt;<a href="http://www.iana.org/assignments/cbor-tags">http://www.iana.org/assignments/cbor-tags</a>&gt;</span>. </dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR) Tags"</span>, <time datetime="2013-09-19" class="refDate">19 September 2013</time>, <span>&lt;<a href="https://www.iana.org/assignments/cbor-tags">https://www.iana.org/assignments/cbor-tags</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IANA.core-parameters">[IANA.core-parameters]</dt>
         <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"Constrained RESTful Environments (CoRE) Parameters"</span>, <span>&lt;<a href="http://www.iana.org/assignments/core-parameters">http://www.iana.org/assignments/core-parameters</a>&gt;</span>. </dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Constrained RESTful Environments (CoRE) Parameters"</span>, <time datetime="2012-06-08" class="refDate">8 June 2012</time>, <span>&lt;<a href="https://www.iana.org/assignments/core-parameters">https://www.iana.org/assignments/core-parameters</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IANA.cwt">[IANA.cwt]</dt>
         <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"CBOR Web Token (CWT) Claims"</span>, <span>&lt;<a href="http://www.iana.org/assignments/cwt">http://www.iana.org/assignments/cwt</a>&gt;</span>. </dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"CBOR Web Token (CWT) Claims"</span>, <time datetime="2018-03-22" class="refDate">22 March 2018</time>, <span>&lt;<a href="https://www.iana.org/assignments/cwt">https://www.iana.org/assignments/cwt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IANA.jwt">[IANA.jwt]</dt>
         <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"JSON Web Token (JWT)"</span>, <span>&lt;<a href="http://www.iana.org/assignments/jwt">http://www.iana.org/assignments/jwt</a>&gt;</span>. </dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"JSON Web Token (JWT)"</span>, <time datetime="2015-01-23" class="refDate">23 January 2015</time>, <span>&lt;<a href="https://www.iana.org/assignments/jwt">https://www.iana.org/assignments/jwt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IANA.media-types">[IANA.media-types]</dt>
         <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"Media Types"</span>, <span>&lt;<a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a>&gt;</span>. </dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Media Types"</span>, <time datetime="2024-07-05" class="refDate">5 July 2024</time>, <span>&lt;<a href="https://www.iana.org/assignments/media-types">https://www.iana.org/assignments/media-types</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IANA.smi-numbers">[IANA.smi-numbers]</dt>
         <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"Structure of Management Information (SMI) Numbers (MIB Module Registrations)"</span>, <span>&lt;<a href="http://www.iana.org/assignments/smi-numbers">http://www.iana.org/assignments/smi-numbers</a>&gt;</span>. </dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Structure of Management Information (SMI) Numbers (MIB Module Registrations)"</span>, <time datetime="2024-07-05" class="refDate">5 July 2024</time>, <span>&lt;<a href="https://www.iana.org/assignments/smi-numbers">https://www.iana.org/assignments/smi-numbers</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
@@ -2617,11 +2617,11 @@ If the collection is not protected from tampering by external security measures 
 <dd class="break"></dd>
 <dt id="I-D.fossati-tls-attestation">[I-D.fossati-tls-attestation]</dt>
         <dd>
-<span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Howard, P.</span>, <span class="refAuthor">Mihalcea, I.</span>, <span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">Niemi, A.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"Using Attestation in Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-fossati-tls-attestation-06</span>, <time datetime="2024-03-19" class="refDate">19 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-fossati-tls-attestation-06">https://datatracker.ietf.org/doc/html/draft-fossati-tls-attestation-06</a>&gt;</span>. </dd>
+<span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Howard, P.</span>, <span class="refAuthor">Mihalcea, I.</span>, <span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">Niemi, A.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"Using Attestation in Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-fossati-tls-attestation-07</span>, <time datetime="2024-07-08" class="refDate">8 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-fossati-tls-attestation-07">https://datatracker.ietf.org/doc/html/draft-fossati-tls-attestation-07</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-lamps-csr-attestation">[I-D.ietf-lamps-csr-attestation]</dt>
         <dd>
-<span class="refAuthor">Ounsworth, M.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Birkholz, H.</span>, and <span class="refAuthor">M. Wiseman</span>, <span class="refTitle">"Use of Remote Attestation with Certification Signing Requests"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-csr-attestation-09</span>, <time datetime="2024-05-10" class="refDate">10 May 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-csr-attestation-09">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-csr-attestation-09</a>&gt;</span>. </dd>
+<span class="refAuthor">Ounsworth, M.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Wiseman, M.</span>, and <span class="refAuthor">N. Smith</span>, <span class="refTitle">"Use of Remote Attestation with Certification Signing Requests"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-csr-attestation-10</span>, <time datetime="2024-07-07" class="refDate">7 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-csr-attestation-10">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-csr-attestation-10</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-ar4si">[I-D.ietf-rats-ar4si]</dt>
         <dd>
@@ -2629,19 +2629,19 @@ If the collection is not protected from tampering by external security measures 
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-corim">[I-D.ietf-rats-corim]</dt>
         <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Concise Reference Integrity Manifest"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-corim-04</span>, <time datetime="2024-03-04" class="refDate">4 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-04">https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-04</a>&gt;</span>. </dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Concise Reference Integrity Manifest"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-corim-05</span>, <time datetime="2024-07-08" class="refDate">8 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-05">https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-05</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-eat">[I-D.ietf-rats-eat]</dt>
         <dd>
-<span class="refAuthor">Lundblade, L.</span>, <span class="refAuthor">Mandyam, G.</span>, <span class="refAuthor">O'Donoghue, J.</span>, and <span class="refAuthor">C. Wallace</span>, <span class="refTitle">"The Entity Attestation Token (EAT)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-eat-28</span>, <time datetime="2024-06-25" class="refDate">25 June 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-28">https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-28</a>&gt;</span>. </dd>
+<span class="refAuthor">Lundblade, L.</span>, <span class="refAuthor">Mandyam, G.</span>, <span class="refAuthor">O'Donoghue, J.</span>, and <span class="refAuthor">C. Wallace</span>, <span class="refTitle">"The Entity Attestation Token (EAT)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-eat-29</span>, <time datetime="2024-07-08" class="refDate">8 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-29">https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-29</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-eat-media-type">[I-D.ietf-rats-eat-media-type]</dt>
         <dd>
-<span class="refAuthor">Lundblade, L.</span>, <span class="refAuthor">Birkholz, H.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"EAT Media Types"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-eat-media-type-07</span>, <time datetime="2024-04-02" class="refDate">2 April 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-media-type-07">https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-media-type-07</a>&gt;</span>. </dd>
+<span class="refAuthor">Lundblade, L.</span>, <span class="refAuthor">Birkholz, H.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"EAT Media Types"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-eat-media-type-08</span>, <time datetime="2024-07-04" class="refDate">4 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-media-type-08">https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-media-type-08</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-uccs">[I-D.ietf-rats-uccs]</dt>
         <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">O'Donoghue, J.</span>, <span class="refAuthor">Cam-Winget, N.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"A CBOR Tag for Unprotected CWT Claims Sets"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-uccs-09</span>, <time datetime="2024-03-04" class="refDate">4 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-uccs-09">https://datatracker.ietf.org/doc/html/draft-ietf-rats-uccs-09</a>&gt;</span>. </dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">O'Donoghue, J.</span>, <span class="refAuthor">Cam-Winget, N.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"A CBOR Tag for Unprotected CWT Claims Sets"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-uccs-10</span>, <time datetime="2024-07-04" class="refDate">4 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-uccs-10">https://datatracker.ietf.org/doc/html/draft-ietf-rats-uccs-10</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7942">[RFC7942]</dt>
         <dd>
@@ -2663,6 +2663,7 @@ If the collection is not protected from tampering by external security measures 
 </section>
 </div>
 </section>
+</div>
 <div id="collected-cddl">
 <section id="appendix-A">
       <h2 id="name-collected-cddl">
@@ -2679,7 +2680,7 @@ cbor-CMW = cbor-record / cbor-collection / $cbor-tag
 
 json-record = [
   type: media-type
-  value: base64-string
+  value: base64url-string
   ? ind: uint .bits cm-type
 ]
 
@@ -2701,11 +2702,11 @@ cbor-collection = {
   + &amp;(label: (int / text)) =&gt; cbor-CMW / j2c-tunnel
 }
 
-c2j-tunnel = [ "#cmw-c2j-tunnel", base64-string ]
+c2j-tunnel = [ "#cmw-c2j-tunnel", base64url-string ]
 j2c-tunnel = [ "#cmw-j2c-tunnel", bytes ]
 
 media-type = text .abnf ("Content-Type" .cat Content-Type-ABNF)
-base64-string = text .regexp "[A-Za-z0-9_-]+"
+base64url-string = text .regexp "[A-Za-z0-9_-]+"
 
 cm-type = &amp;(
   reference-values: 0
@@ -2907,7 +2908,7 @@ Carl Wallace,
 Carsten Bormann,
 Dionna Glaze,
 Laurence Lundblade,
-Mike Jones,
+Michael B. Jones,
 Mohit Sethi,
 Russ Housley,
 and

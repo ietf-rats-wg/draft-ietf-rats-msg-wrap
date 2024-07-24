@@ -5,11 +5,11 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 2 January 2025                                            Intel
+Expires: 25 January 2025                                           Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
-                                                             1 July 2024
+                                                            24 July 2024
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 January 2025.
+   This Internet-Draft will expire on 25 January 2025.
 
 Copyright Notice
 
@@ -226,7 +226,7 @@ Table of Contents
 
    json-record = [
      type: media-type
-     value: base64-string
+     value: base64url-string
      ? ind: uint .bits cm-type
    ]
 
@@ -389,7 +389,7 @@ Table of Contents
    production (Appendix A), makes it possible to disambiguate a CMW
    tunnel from a CMW record.
 
-   c2j-tunnel = [ "#cmw-c2j-tunnel", base64-string ]
+   c2j-tunnel = [ "#cmw-c2j-tunnel", base64url-string ]
    j2c-tunnel = [ "#cmw-j2c-tunnel", bytes ]
 
              Figure 4: CDDL definition of the CMW tunnel format
@@ -1005,27 +1005,28 @@ Table of Contents
 
    [IANA.cbor-tags]
               IANA, "Concise Binary Object Representation (CBOR) Tags",
-              <http://www.iana.org/assignments/cbor-tags>.
+              19 September 2013,
+              <https://www.iana.org/assignments/cbor-tags>.
 
    [IANA.core-parameters]
               IANA, "Constrained RESTful Environments (CoRE)
-              Parameters",
-              <http://www.iana.org/assignments/core-parameters>.
+              Parameters", 8 June 2012,
+              <https://www.iana.org/assignments/core-parameters>.
 
-   [IANA.cwt] IANA, "CBOR Web Token (CWT) Claims",
-              <http://www.iana.org/assignments/cwt>.
+   [IANA.cwt] IANA, "CBOR Web Token (CWT) Claims", 22 March 2018,
+              <https://www.iana.org/assignments/cwt>.
 
-   [IANA.jwt] IANA, "JSON Web Token (JWT)",
-              <http://www.iana.org/assignments/jwt>.
+   [IANA.jwt] IANA, "JSON Web Token (JWT)", 23 January 2015,
+              <https://www.iana.org/assignments/jwt>.
 
    [IANA.media-types]
-              IANA, "Media Types",
-              <http://www.iana.org/assignments/media-types>.
+              IANA, "Media Types", 5 July 2024,
+              <https://www.iana.org/assignments/media-types>.
 
    [IANA.smi-numbers]
               IANA, "Structure of Management Information (SMI) Numbers
-              (MIB Module Registrations)",
-              <http://www.iana.org/assignments/smi-numbers>.
+              (MIB Module Registrations)", 5 July 2024,
+              <https://www.iana.org/assignments/smi-numbers>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1115,17 +1116,17 @@ Table of Contents
               Deshpande, Y., Niemi, A., and T. Fossati, "Using
               Attestation in Transport Layer Security (TLS) and Datagram
               Transport Layer Security (DTLS)", Work in Progress,
-              Internet-Draft, draft-fossati-tls-attestation-06, 19 March
+              Internet-Draft, draft-fossati-tls-attestation-07, 8 July
               2024, <https://datatracker.ietf.org/doc/html/draft-
-              fossati-tls-attestation-06>.
+              fossati-tls-attestation-07>.
 
    [I-D.ietf-lamps-csr-attestation]
-              Ounsworth, M., Tschofenig, H., Birkholz, H., and M.
-              Wiseman, "Use of Remote Attestation with Certification
-              Signing Requests", Work in Progress, Internet-Draft,
-              draft-ietf-lamps-csr-attestation-09, 10 May 2024,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-lamps-
-              csr-attestation-09>.
+              Ounsworth, M., Tschofenig, H., Birkholz, H., Wiseman, M.,
+              and N. Smith, "Use of Remote Attestation with
+              Certification Signing Requests", Work in Progress,
+              Internet-Draft, draft-ietf-lamps-csr-attestation-10, 7
+              July 2024, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-lamps-csr-attestation-10>.
 
    [I-D.ietf-rats-ar4si]
               Voit, E., Birkholz, H., Hardjono, T., Fossati, T., and V.
@@ -1137,30 +1138,30 @@ Table of Contents
    [I-D.ietf-rats-corim]
               Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
               W. Pan, "Concise Reference Integrity Manifest", Work in
-              Progress, Internet-Draft, draft-ietf-rats-corim-04, 4
-              March 2024, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-rats-corim-04>.
+              Progress, Internet-Draft, draft-ietf-rats-corim-05, 8 July
+              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              rats-corim-05>.
 
    [I-D.ietf-rats-eat]
               Lundblade, L., Mandyam, G., O'Donoghue, J., and C.
               Wallace, "The Entity Attestation Token (EAT)", Work in
-              Progress, Internet-Draft, draft-ietf-rats-eat-28, 25 June
+              Progress, Internet-Draft, draft-ietf-rats-eat-29, 8 July
               2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              rats-eat-28>.
+              rats-eat-29>.
 
    [I-D.ietf-rats-eat-media-type]
               Lundblade, L., Birkholz, H., and T. Fossati, "EAT Media
               Types", Work in Progress, Internet-Draft, draft-ietf-rats-
-              eat-media-type-07, 2 April 2024,
+              eat-media-type-08, 4 July 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              eat-media-type-07>.
+              eat-media-type-08>.
 
    [I-D.ietf-rats-uccs]
               Birkholz, H., O'Donoghue, J., Cam-Winget, N., and C.
               Bormann, "A CBOR Tag for Unprotected CWT Claims Sets",
-              Work in Progress, Internet-Draft, draft-ietf-rats-uccs-09,
-              4 March 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-rats-uccs-09>.
+              Work in Progress, Internet-Draft, draft-ietf-rats-uccs-10,
+              4 July 2024, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-rats-uccs-10>.
 
    [RFC7942]  Sheffer, Y. and A. Farrel, "Improving Awareness of Running
               Code: The Implementation Status Section", BCP 205,
@@ -1193,7 +1194,7 @@ Appendix A.  Collected CDDL
 
    json-record = [
      type: media-type
-     value: base64-string
+     value: base64url-string
      ? ind: uint .bits cm-type
    ]
 
@@ -1215,11 +1216,11 @@ Appendix A.  Collected CDDL
      + &(label: (int / text)) => cbor-CMW / j2c-tunnel
    }
 
-   c2j-tunnel = [ "#cmw-c2j-tunnel", base64-string ]
+   c2j-tunnel = [ "#cmw-c2j-tunnel", base64url-string ]
    j2c-tunnel = [ "#cmw-j2c-tunnel", bytes ]
 
    media-type = text .abnf ("Content-Type" .cat Content-Type-ABNF)
-   base64-string = text .regexp "[A-Za-z0-9_-]+"
+   base64url-string = text .regexp "[A-Za-z0-9_-]+"
 
    cm-type = &(
      reference-values: 0
@@ -1314,8 +1315,8 @@ Appendix C.  Open Issues
 Acknowledgments
 
    The authors would like to thank Brian Campbell, Carl Wallace, Carsten
-   Bormann, Dionna Glaze, Laurence Lundblade, Mike Jones, Mohit Sethi,
-   Russ Housley, and Tom Jones for their reviews and suggestions.
+   Bormann, Dionna Glaze, Laurence Lundblade, Michael B.  Jones, Mohit
+   Sethi, Russ Housley, and Tom Jones for their reviews and suggestions.
 
    The definition of a CMW collection has been modelled on a proposal
    originally made by Simon Frost for an EAT-based Evidence collection
