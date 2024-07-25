@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-23T00:43:56.036755+00:00",
+  "timestamp": "2024-07-25T00:43:36.097765+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -1737,6 +1737,24 @@
           "updatedAt": "2024-06-28T18:28:57Z"
         }
       ]
+    },
+    {
+      "number": 108,
+      "id": "I_kwDOIGCt2M6Qi7Xv",
+      "title": "Further comments from Mike",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/108",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "thomas-fossati"
+      ],
+      "labels": [],
+      "body": "Some [further comments](https://mailarchive.ietf.org/arch/msg/rats/3XR_dNtlNKgc6bY6C4n3biaPuko/) from Mike Jones:\r\n\r\n* [x] I suggest changing the identifier \"base64-string\" to \"base64url-string\" or \"base64url-encoded-string\".  The current name could be interpreted ambiguously by implementers. If you want to be even more precise, I'd suggest referencing the \"Base64url Encoding\" definition in Section 2 of RFC 7515.\r\n\r\n* [x] Finally, in the Acknowledgments, please change \"Mike Jones\" to \"Michael B. Jones\".  (My name is very common so I always include the middle initial in professional contexts to try to help with disambiguation.)\r\n\r\n\r\n",
+      "createdAt": "2024-07-23T12:19:45Z",
+      "updatedAt": "2024-07-24T17:30:20Z",
+      "closedAt": "2024-07-24T17:30:20Z",
+      "comments": []
     }
   ],
   "pulls": [
@@ -6744,6 +6762,48 @@
       "mergeCommit": null,
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 109,
+      "id": "PR_kwDOIGCt2M52UhsN",
+      "title": "Use `base64url-string` rather than `base64-string`",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/109",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #108 ",
+      "createdAt": "2024-07-24T10:26:47Z",
+      "updatedAt": "2024-07-24T17:30:20Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "a26e8386579e754ebd54e5a9a0bdcbca2dc8df52",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "mike",
+      "headRefOid": "9e2d1fd9eb147415a49f1c51d466bf3f6c79f2e4",
+      "closedAt": "2024-07-24T17:30:19Z",
+      "mergedAt": "2024-07-24T17:30:19Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "2ef4c996e65efb5da7fc19bfca5876f917949948"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6C9ef1",
+          "commit": {
+            "abbreviatedOid": "9e2d1fd"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-07-24T15:56:08Z",
+          "updatedAt": "2024-07-24T15:56:08Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
