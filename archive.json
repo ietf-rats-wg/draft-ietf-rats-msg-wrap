@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-11T00:49:45.789200+00:00",
+  "timestamp": "2024-08-13T00:45:38.263880+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -1754,6 +1754,24 @@
       "createdAt": "2024-07-23T12:19:45Z",
       "updatedAt": "2024-07-24T17:30:20Z",
       "closedAt": "2024-07-24T17:30:20Z",
+      "comments": []
+    },
+    {
+      "number": 110,
+      "id": "I_kwDOIGCt2M6SqHJW",
+      "title": "collection binding: expand security consideration",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/110",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "Laurence has [proposed text](https://mailarchive.ietf.org/arch/msg/rats/kruW3-EGxemSBQM_0laRoEhnHZM/) that adds more security considerations about the binding mechanisms for collection CMWs:\r\n\r\n> _When CMW is used to carry multiple evidence messages for a composite device, layered attestation or such, there should be strong binding between the evidence messages. This is to prevent attacks where evidence from a subverted part of the device is replaced by evidence from a separate non-subverted device._\r\n>\r\n> _The binding of evidence messages should be some form of attestation. For example, key material used to sign/bind an entire CMW collection should be attestation key material handled as described in RFC 9334 12.1. The binding might also be by identifiers, cross linking, signing or hashing between the members of the collection (it doesn\u2019t have to be a signature over the CMW collection)._\r\n>\r\n> _Client authenticated TLS may be used to bind a CMW collection of evidence messages, but the client key used with TLS should not be that of the end user or owner of the device or such. It should be attestation-oriented key material from the device or attester manufacturer._\r\n\r\n",
+      "createdAt": "2024-08-12T09:44:36Z",
+      "updatedAt": "2024-08-12T09:44:37Z",
+      "closedAt": null,
       "comments": []
     }
   ],
