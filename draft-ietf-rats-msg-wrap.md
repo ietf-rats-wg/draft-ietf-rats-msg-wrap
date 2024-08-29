@@ -85,6 +85,7 @@ Additionally, the document describes a collection type that enables the aggregat
 
 This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
 These allow embedding the wrapped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols.
+In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.
 
 --- middle
 
@@ -135,6 +136,7 @@ objects.
 
 This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
 These allow embedding the wrapped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols.
+In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.
 
 # Conventions and Definitions
 
@@ -850,6 +852,7 @@ Brian Campbell,
 Carl Wallace,
 Carsten Bormann,
 Dionna Glaze,
+{{{Ionuț Mihalcea}}}
 Laurence Lundblade,
 Michael B. Jones,
 Mohit Sethi,
