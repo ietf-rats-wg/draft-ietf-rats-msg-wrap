@@ -5,11 +5,11 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 25 January 2025                                           Intel
+Expires: 2 March 2025                                              Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
-                                                            24 July 2024
+                                                          29 August 2024
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 January 2025.
+   This Internet-Draft will expire on 2 March 2025.
 
 Copyright Notice
 
@@ -1005,27 +1005,26 @@ Table of Contents
 
    [IANA.cbor-tags]
               IANA, "Concise Binary Object Representation (CBOR) Tags",
-              19 September 2013,
               <https://www.iana.org/assignments/cbor-tags>.
 
    [IANA.core-parameters]
               IANA, "Constrained RESTful Environments (CoRE)
-              Parameters", 8 June 2012,
+              Parameters",
               <https://www.iana.org/assignments/core-parameters>.
 
-   [IANA.cwt] IANA, "CBOR Web Token (CWT) Claims", 22 March 2018,
+   [IANA.cwt] IANA, "CBOR Web Token (CWT) Claims",
               <https://www.iana.org/assignments/cwt>.
 
-   [IANA.jwt] IANA, "JSON Web Token (JWT)", 23 January 2015,
+   [IANA.jwt] IANA, "JSON Web Token (JWT)",
               <https://www.iana.org/assignments/jwt>.
 
    [IANA.media-types]
-              IANA, "Media Types", 5 July 2024,
+              IANA, "Media Types",
               <https://www.iana.org/assignments/media-types>.
 
    [IANA.smi-numbers]
               IANA, "Structure of Management Information (SMI) Numbers
-              (MIB Module Registrations)", 5 July 2024,
+              (MIB Module Registrations)",
               <https://www.iana.org/assignments/smi-numbers>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
@@ -1145,16 +1144,16 @@ Table of Contents
    [I-D.ietf-rats-eat]
               Lundblade, L., Mandyam, G., O'Donoghue, J., and C.
               Wallace, "The Entity Attestation Token (EAT)", Work in
-              Progress, Internet-Draft, draft-ietf-rats-eat-29, 8 July
+              Progress, Internet-Draft, draft-ietf-rats-eat-30, 2 August
               2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              rats-eat-29>.
+              rats-eat-30>.
 
    [I-D.ietf-rats-eat-media-type]
               Lundblade, L., Birkholz, H., and T. Fossati, "EAT Media
               Types", Work in Progress, Internet-Draft, draft-ietf-rats-
-              eat-media-type-08, 4 July 2024,
+              eat-media-type-09, 21 August 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              eat-media-type-08>.
+              eat-media-type-09>.
 
    [I-D.ietf-rats-uccs]
               Birkholz, H., O'Donoghue, J., Cam-Winget, N., and C.
