@@ -217,6 +217,11 @@ Table of Contents
 
    The collected CDDL is in Appendix A.
 
+   This document only defines an encapsulation, not a security format.
+   It is the responsibility of the CMW user to ensure that the CMW
+   contents have the necessary security protection.  Security
+   considerations are discussed in Section 7.
+
 3.1.  CMW Record
 
    The format of the CMW record is shown in Figure 1.  The JSON [STD90]
