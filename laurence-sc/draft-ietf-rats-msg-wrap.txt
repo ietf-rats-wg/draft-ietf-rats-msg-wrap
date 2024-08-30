@@ -5,11 +5,11 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 2 March 2025                                              Intel
+Expires: 3 March 2025                                              Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
-                                                          29 August 2024
+                                                          30 August 2024
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 March 2025.
+   This Internet-Draft will expire on 3 March 2025.
 
 Copyright Notice
 
@@ -774,12 +774,14 @@ Table of Contents
    collection.  If the collection is not protected from tampering by
    external security measures (such as object security primitives) or
    internal mechanisms (such as intra-item binding), an attacker could
-   easily manipulate the collection's contents.  In particular, when a
-   CMW is used to carry multiple Evidence messages for a composite
-   device or layered attestation, there should be strong binding between
-   the Evidence messages within the collection.  This is to prevent
-   attacks where Evidence from a subverted part of the device is
-   replaced by Evidence from a separate non-subverted device.  The
+   easily manipulate the collection's contents.  It is the
+   responsibility of the CMW collection producer to ensure that the
+   contents of the collection are integrity-protected.  In particular,
+   when a CMW is used to carry multiple Evidence messages for a
+   composite device or layered attestation, there should be strong
+   binding between the Evidence messages within the collection.  This is
+   to prevent attacks where Evidence from a subverted part of the device
+   is replaced by Evidence from a separate non-subverted device.  The
    binding of Evidence messages should be some form of attestation.  For
    example, key material used to sign/bind an entire CMW collection
    should be attestation key material handled as described in
