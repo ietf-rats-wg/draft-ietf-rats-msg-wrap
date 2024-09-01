@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-29T00:46:28.302423+00:00",
+  "timestamp": "2024-09-01T00:56:08.482529+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -1779,7 +1779,7 @@
       "id": "I_kwDOIGCt2M6S0EML",
       "title": "{abstract,intro} += media types",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/111",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -1788,8 +1788,8 @@
       ],
       "body": "@ionut-arm suggested adding the following to the abstract and intro:\r\n\r\n> _\"This document also defines a Media Type and a CoAP Content-Format for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.\"_",
       "createdAt": "2024-08-13T11:35:03Z",
-      "updatedAt": "2024-08-13T11:35:11Z",
-      "closedAt": null,
+      "updatedAt": "2024-08-29T14:46:19Z",
+      "closedAt": "2024-08-29T14:46:19Z",
       "comments": []
     }
   ],
@@ -6778,26 +6778,42 @@
       "id": "PR_kwDOIGCt2M50PK3M",
       "title": "add presentation for IETF 120",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/107",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-07-02T19:09:37Z",
-      "updatedAt": "2024-07-05T09:38:27Z",
+      "updatedAt": "2024-08-29T14:45:54Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "a26e8386579e754ebd54e5a9a0bdcbca2dc8df52",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "ietf-120",
       "headRefOid": "d7400d19c2d5ff5eb34cf4a03502376b702e230f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-08-29T14:45:50Z",
+      "mergedAt": "2024-08-29T14:45:50Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "a2e0d3b8fd3a9a85c70abe89eae3a15e8f2d75bc"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6HPrIe",
+          "commit": {
+            "abbreviatedOid": "d7400d1"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-29T14:45:10Z",
+          "updatedAt": "2024-08-29T14:45:10Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 109,
@@ -6837,6 +6853,276 @@
           "body": "LGTM",
           "createdAt": "2024-07-24T15:56:08Z",
           "updatedAt": "2024-07-24T15:56:08Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 112,
+      "id": "PR_kwDOIGCt2M552G15",
+      "title": "Say we also register the CMW media type and Content-Format",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/112",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #111",
+      "createdAt": "2024-08-29T14:41:01Z",
+      "updatedAt": "2024-08-29T14:46:18Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "2ef4c996e65efb5da7fc19bfca5876f917949948",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "mt-ionut",
+      "headRefOid": "1dc6dbc075129a000d4e6e3356c8337c155215b9",
+      "closedAt": "2024-08-29T14:46:18Z",
+      "mergedAt": "2024-08-29T14:46:18Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "a60113b1d1e964bae6a851856bfc46ac17ebf643"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6HPrZ0",
+          "commit": {
+            "abbreviatedOid": "1dc6dbc"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-29T14:45:28Z",
+          "updatedAt": "2024-08-29T14:45:28Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 113,
+      "id": "PR_kwDOIGCt2M552d3m",
+      "title": "Laurence augmented security considerations on collections",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/113",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #110",
+      "createdAt": "2024-08-29T15:15:04Z",
+      "updatedAt": "2024-08-30T09:14:20Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "a60113b1d1e964bae6a851856bfc46ac17ebf643",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "laurence-sc",
+      "headRefOid": "bade001aa171730adbe5aa82a912d60337f9a70b",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> assuming the tiny addition to 3.3 [...]\r\n\r\nSee bade001aa171730adbe5aa82a912d60337f9a70b",
+          "createdAt": "2024-08-30T09:14:18Z",
+          "updatedAt": "2024-08-30T09:14:18Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6HQJxj",
+          "commit": {
+            "abbreviatedOid": "a9c9d19"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-29T15:17:06Z",
+          "updatedAt": "2024-08-29T15:17:07Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\nIn particular, when a CMW is used to carry multiple Evidence messages for a composite device or layered attestation, there SHOULD be strong binding between the Evidence messages within the collection.\r\n```",
+              "createdAt": "2024-08-29T15:17:06Z",
+              "updatedAt": "2024-08-29T15:17:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6HQKNG",
+          "commit": {
+            "abbreviatedOid": "a9c9d19"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-29T15:17:27Z",
+          "updatedAt": "2024-08-29T15:17:27Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nThe binding of Evidence messages SHOULD be realized via Claims in Evidence and MAY be realized by elevating a CMW to an Evidence Claim.\r\n```\r\n",
+              "createdAt": "2024-08-29T15:17:27Z",
+              "updatedAt": "2024-08-29T15:22:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6HQOA-",
+          "commit": {
+            "abbreviatedOid": "a9c9d19"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-29T15:20:48Z",
+          "updatedAt": "2024-08-29T15:20:48Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "Even though:\r\n\r\n* It's not something that can be enforced at a protocol level - it's at the layer above CMW...\r\n* Some people are allergic to RFC2119-words in security considerations,\r\n\r\nI am happy to capitalise.",
+              "createdAt": "2024-08-29T15:20:48Z",
+              "updatedAt": "2024-08-30T03:23:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6HQORL",
+          "commit": {
+            "abbreviatedOid": "a9c9d19"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-29T15:21:00Z",
+          "updatedAt": "2024-08-29T15:21:00Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "`DITTO` :-D for s/should/SHOULD/\r\n\r\nI think the rest of the suggestion narrows the scope of the original.  Binding could be via special-purpose claims (intra-collection), or via signatures.  I think it's better to stay general here since the rest of the paragraph takes care of delving into the details.",
+              "createdAt": "2024-08-29T15:21:00Z",
+              "updatedAt": "2024-08-29T15:39:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6HQepa",
+          "commit": {
+            "abbreviatedOid": "a9c9d19"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-29T15:37:12Z",
+          "updatedAt": "2024-08-29T15:37:13Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "Alternatively, we simply not use named words here? Actually, I do not think that the secconsec is a good place for CAPS either.",
+              "createdAt": "2024-08-29T15:37:12Z",
+              "updatedAt": "2024-08-29T15:37:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6HQfRx",
+          "commit": {
+            "abbreviatedOid": "a9c9d19"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-29T15:37:51Z",
+          "updatedAt": "2024-08-29T15:37:51Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "Ditto `DITTO` :o)",
+              "createdAt": "2024-08-29T15:37:51Z",
+              "updatedAt": "2024-08-29T15:37:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6HZf_h",
+          "commit": {
+            "abbreviatedOid": "a9c9d19"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-30T08:40:30Z",
+          "updatedAt": "2024-08-30T08:40:30Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\nIt is the responsibility of the CMW collection producer to ensure that the contents of the collection are integrity-protected.\r\nIn particular, when a CMW is used to carry multiple Evidence messages for a composite device or layered attestation, there should be strong binding between the Evidence messages within the collection.\r\n```",
+              "createdAt": "2024-08-30T08:40:30Z",
+              "updatedAt": "2024-08-30T08:40:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6HZi-T",
+          "commit": {
+            "abbreviatedOid": "6512ecd"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-30T08:45:20Z",
+          "updatedAt": "2024-08-30T08:45:20Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "As discussed, with the new L590 these \"should\"s are clearly non-normative.",
+              "createdAt": "2024-08-30T08:45:20Z",
+              "updatedAt": "2024-08-30T08:45:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6HZjJD",
+          "commit": {
+            "abbreviatedOid": "6512ecd"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-30T08:45:36Z",
+          "updatedAt": "2024-08-30T08:45:36Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "ditto ditto ditto",
+              "createdAt": "2024-08-30T08:45:36Z",
+              "updatedAt": "2024-08-30T08:45:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6HZjxv",
+          "commit": {
+            "abbreviatedOid": "6512ecd"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "assuming the tiny addition to 3.3, this is now well-done",
+          "createdAt": "2024-08-30T08:46:34Z",
+          "updatedAt": "2024-08-30T08:46:34Z",
           "comments": []
         }
       ]
