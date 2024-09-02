@@ -166,7 +166,7 @@ A CMW "tunnel" type is also defined in {{cmw-tunnel}} to allow transporting CBOR
 The collected CDDL is in {{collected-cddl}}.
 
 This document only defines an encapsulation, not a security format.
-It is the responsibility of the CMW user to ensure that the CMW contents have the necessary security protection.
+It is the responsibility of the Attester to ensure that the CMW contents have the necessary security protection.
 Security considerations are discussed in {{seccons}}.
 
 ## CMW Record {#type-n-val}
