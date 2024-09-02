@@ -323,7 +323,7 @@ Once any external framing is removed (for example, if the CMW is carried in a ce
 The following pseudo-code illustrates this process:
 
 ~~~
-func CMWTypeSniff(b []byte) (CMW, error) {
+func CMWTypeDemux(b []byte) (CMW, error) {
   if len(b) == 0 {
     return Unknown
   }
