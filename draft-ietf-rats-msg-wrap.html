@@ -1403,6 +1403,9 @@ document:<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-3">A further CMW "collection" type that holds together multiple CMW items is defined in <a href="#cmw-coll" class="auto internal xref">Section 3.3</a>.<a href="#section-3-3" class="pilcrow">¶</a></p>
 <p id="section-3-4">A CMW "tunnel" type is also defined in <a href="#cmw-tunnel" class="auto internal xref">Section 3.4</a> to allow transporting CBOR CMWs in JSON collections and vice-versa.<a href="#section-3-4" class="pilcrow">¶</a></p>
 <p id="section-3-5">The collected CDDL is in <a href="#collected-cddl" class="auto internal xref">Appendix A</a>.<a href="#section-3-5" class="pilcrow">¶</a></p>
+<p id="section-3-6">This document only defines an encapsulation, not a security format.
+It is the responsibility of the Attester to ensure that the CMW contents have the necessary security protection.
+Security considerations are discussed in <a href="#seccons" class="auto internal xref">Section 7</a>.<a href="#section-3-6" class="pilcrow">¶</a></p>
 <div id="type-n-val">
 <section id="section-3.1">
         <h3 id="name-cmw-record">
@@ -2059,7 +2062,17 @@ If an adversary tries to modify the payload encapsulation, it will result in inc
 If the messages are not protected, additional security must be added at a different layer.
 As an example, a <code>cbor-record</code> containing an UCCS (Unprotected CWT Claims Sets) <span>[<a href="#I-D.ietf-rats-uccs" class="cite xref">I-D.ietf-rats-uccs</a>]</span> can be signed using COSE Sign1 <span>[<a href="#STD96" class="cite xref">STD96</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <p id="section-7-2">This document introduces a format for holding multiple CMW items in a collection.
-If the collection is not protected from tampering by external security measures (such as object security primitives) or internal mechanisms (such as intra-item binding), an attacker could easily manipulate the collection's contents.<a href="#section-7-2" class="pilcrow">¶</a></p>
+If the collection is not protected from tampering by external security measures (such as object security primitives) or internal mechanisms (such as intra-item binding), an attacker could easily manipulate the collection's contents.
+It is the responsibility of the Attester who creates the CMW collection to ensure that the contents of the collection are integrity-protected.
+The designer of the attestation technology is typically in charge of ensuring that the security properties are met, not the user of the conceptual message wrapper.
+In particular, when a CMW is used to carry multiple Evidence messages for a composite device or layered attestation, there should be strong binding between the Evidence messages within the collection.
+This binding is needed to prevent attacks where Evidence from a subverted part of the device is replaced by Evidence from a separate non-subverted device.
+The binding of Evidence messages should be some form of attestation.
+For example, key material used to sign/bind an entire CMW collection should be an attestation key, handled as described in <span><a href="https://rfc-editor.org/rfc/rfc9334#section-12.1" class="relref">Section 12.1</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.
+The binding does not necessarily have to be a signature over the CMW collection, it might also be achieved through identifiers, cross-linking, signing or hashing between the members of the collection.
+Client-authenticated TLS may be used to bind a CMW collection of Evidence messages.
+However, the client key used with TLS should not be that of the end-user or owner of the device.
+Instead, it should be attestation-oriented key material from the device or the attester manufacturer.<a href="#section-7-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
