@@ -792,15 +792,15 @@ Table of Contents
    replaced by Evidence from a separate non-subverted device.  The
    binding of Evidence messages should be some form of attestation.  For
    example, key material used to sign/bind an entire CMW collection
-   should be attestation key material handled as described in
-   Section 12.1 of [RFC9334].  The binding does not necessarily have to
-   be a signature over the CMW collection, it might also be achieved
-   through identifiers, cross-linking, signing or hashing between the
-   members of the collection.  Client-authenticated TLS may be used to
-   bind a CMW collection of Evidence messages.  However, the client key
-   used with TLS should not be that of the end-user or owner of the
-   device.  Instead, it should be attestation-oriented key material from
-   the device or the attester manufacturer.
+   should be an attestation key, handled as described in Section 12.1 of
+   [RFC9334].  The binding does not necessarily have to be a signature
+   over the CMW collection, it might also be achieved through
+   identifiers, cross-linking, signing or hashing between the members of
+   the collection.  Client-authenticated TLS may be used to bind a CMW
+   collection of Evidence messages.  However, the client key used with
+   TLS should not be that of the end-user or owner of the device.
+   Instead, it should be attestation-oriented key material from the
+   device or the attester manufacturer.
 
 8.  IANA Considerations
 

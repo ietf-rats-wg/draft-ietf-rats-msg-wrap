@@ -2068,7 +2068,7 @@ The designer of the attestation technology is typically in charge of ensuring th
 In particular, when a CMW is used to carry multiple Evidence messages for a composite device or layered attestation, there should be strong binding between the Evidence messages within the collection.
 This binding is needed to prevent attacks where Evidence from a subverted part of the device is replaced by Evidence from a separate non-subverted device.
 The binding of Evidence messages should be some form of attestation.
-For example, key material used to sign/bind an entire CMW collection should be attestation key material handled as described in <span><a href="https://rfc-editor.org/rfc/rfc9334#section-12.1" class="relref">Section 12.1</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.
+For example, key material used to sign/bind an entire CMW collection should be an attestation key, handled as described in <span><a href="https://rfc-editor.org/rfc/rfc9334#section-12.1" class="relref">Section 12.1</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.
 The binding does not necessarily have to be a signature over the CMW collection, it might also be achieved through identifiers, cross-linking, signing or hashing between the members of the collection.
 Client-authenticated TLS may be used to bind a CMW collection of Evidence messages.
 However, the client key used with TLS should not be that of the end-user or owner of the device.
