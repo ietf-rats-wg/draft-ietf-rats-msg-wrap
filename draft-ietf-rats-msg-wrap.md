@@ -591,7 +591,7 @@ As an example, a `cbor-record` containing an UCCS (Unprotected CWT Claims Sets) 
 
 This document introduces a format for holding multiple CMW items in a collection.
 If the collection is not protected from tampering by external security measures (such as object security primitives) or internal mechanisms (such as intra-item binding), an attacker could easily manipulate the collection's contents.
-It is the responsibility of the CMW collection producer to ensure that the contents of the collection are integrity-protected.
+It is the responsibility of the Attester, which creates the CMW collection, to ensure that the contents of the collection are integrity-protected.
 In particular, when a CMW is used to carry multiple Evidence messages for a composite device or layered attestation, there should be strong binding between the Evidence messages within the collection.
 This is to prevent attacks where Evidence from a subverted part of the device is replaced by Evidence from a separate non-subverted device.
 The binding of Evidence messages should be some form of attestation.
