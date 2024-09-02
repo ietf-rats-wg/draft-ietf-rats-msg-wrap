@@ -594,7 +594,7 @@ If the collection is not protected from tampering by external security measures 
 It is the responsibility of the Attester who creates the CMW collection to ensure that the contents of the collection are integrity-protected.
 The designer of the attestation technology is typically in charge of ensuring that the security properties are met, not the user of the conceptual message wrapper.
 In particular, when a CMW is used to carry multiple Evidence messages for a composite device or layered attestation, there should be strong binding between the Evidence messages within the collection.
-This is to prevent attacks where Evidence from a subverted part of the device is replaced by Evidence from a separate non-subverted device.
+This binding is needed to prevent attacks where Evidence from a subverted part of the device is replaced by Evidence from a separate non-subverted device.
 The binding of Evidence messages should be some form of attestation.
 For example, key material used to sign/bind an entire CMW collection should be attestation key material handled as described in {{Section 12.1 of -rats-arch}}.
 The binding does not necessarily have to be a signature over the CMW collection, it might also be achieved through identifiers, cross-linking, signing or hashing between the members of the collection.
