@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-01T00:56:08.482529+00:00",
+  "timestamp": "2024-09-03T00:46:25.233079+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -1761,7 +1761,7 @@
       "id": "I_kwDOIGCt2M6SqHJW",
       "title": "collection binding: expand security consideration",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/110",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -1770,8 +1770,8 @@
       ],
       "body": "Laurence has [proposed text](https://mailarchive.ietf.org/arch/msg/rats/kruW3-EGxemSBQM_0laRoEhnHZM/) that adds more security considerations about the binding mechanisms for collection CMWs:\r\n\r\n> _When CMW is used to carry multiple evidence messages for a composite device, layered attestation or such, there should be strong binding between the evidence messages. This is to prevent attacks where evidence from a subverted part of the device is replaced by evidence from a separate non-subverted device._\r\n>\r\n> _The binding of evidence messages should be some form of attestation. For example, key material used to sign/bind an entire CMW collection should be attestation key material handled as described in RFC 9334 12.1. The binding might also be by identifiers, cross linking, signing or hashing between the members of the collection (it doesn\u2019t have to be a signature over the CMW collection)._\r\n>\r\n> _Client authenticated TLS may be used to bind a CMW collection of evidence messages, but the client key used with TLS should not be that of the end user or owner of the device or such. It should be attestation-oriented key material from the device or attester manufacturer._\r\n\r\n",
       "createdAt": "2024-08-12T09:44:36Z",
-      "updatedAt": "2024-08-12T09:44:37Z",
-      "closedAt": null,
+      "updatedAt": "2024-09-02T15:03:43Z",
+      "closedAt": "2024-09-02T15:03:43Z",
       "comments": []
     },
     {
@@ -6904,24 +6904,26 @@
       "id": "PR_kwDOIGCt2M552d3m",
       "title": "Laurence augmented security considerations on collections",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/113",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fix #110",
       "createdAt": "2024-08-29T15:15:04Z",
-      "updatedAt": "2024-08-30T09:14:20Z",
+      "updatedAt": "2024-09-02T15:03:42Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "a60113b1d1e964bae6a851856bfc46ac17ebf643",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "laurence-sc",
-      "headRefOid": "bade001aa171730adbe5aa82a912d60337f9a70b",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "5ff5515031141756a7af01a54b13dff096604ff7",
+      "closedAt": "2024-09-02T15:03:42Z",
+      "mergedAt": "2024-09-02T15:03:42Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "cf9af0e57036fec5174d36ad0084760badaef075"
+      },
       "comments": [
         {
           "author": "thomas-fossati",
@@ -7123,6 +7125,226 @@
           "body": "assuming the tiny addition to 3.3, this is now well-done",
           "createdAt": "2024-08-30T08:46:34Z",
           "updatedAt": "2024-08-30T08:46:34Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6Hn5PQ",
+          "commit": {
+            "abbreviatedOid": "bade001"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "I have made various suggestions to improve readability.",
+          "createdAt": "2024-09-02T11:27:46Z",
+          "updatedAt": "2024-09-02T13:11:52Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nIt is the responsibility of the Attester to ensure that the CMW contents have the necessary security protection.\r\n```",
+              "createdAt": "2024-09-02T11:27:46Z",
+              "updatedAt": "2024-09-02T13:11:52Z"
+            },
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\r\nIt is the responsibility of the Attester who creates the CMW collection to ensure that the contents of the collection are integrity-protected.\r\n```",
+              "createdAt": "2024-09-02T13:04:56Z",
+              "updatedAt": "2024-09-02T13:27:16Z"
+            },
+            {
+              "originalPosition": 16,
+              "body": "```suggestion\r\nIn particular, when a CMW is used to carry multiple Evidence messages for a composite device or layered attestation, there should be strong binding between the Evidence messages within the collection.\r\n``",
+              "createdAt": "2024-09-02T13:09:19Z",
+              "updatedAt": "2024-09-02T13:55:51Z"
+            },
+            {
+              "originalPosition": 19,
+              "body": "```suggestion\r\nFor example, key material used to sign/bind an entire CMW collection should be an attestation key, handled as described in {{Section 12.1 of -rats-arch}}.\r\n```",
+              "createdAt": "2024-09-02T13:11:07Z",
+              "updatedAt": "2024-09-02T14:01:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6Ho9a0",
+          "commit": {
+            "abbreviatedOid": "bade001"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-02T13:24:35Z",
+          "updatedAt": "2024-09-02T13:24:35Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "This one seems to break the natural flow between L595 (\"In particular, ...\") and L596 (\"This is to prevent ...\").",
+              "createdAt": "2024-09-02T13:24:35Z",
+              "updatedAt": "2024-09-02T13:24:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6Ho_y0",
+          "commit": {
+            "abbreviatedOid": "bade001"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-02T13:28:41Z",
+          "updatedAt": "2024-09-02T13:28:41Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "I think the original is more accurate: S12.1 of the architecture discusses the requirements for attestation key material handling. Besides, the switch from \"should\" to \"could\" weakens the message.",
+              "createdAt": "2024-09-02T13:28:41Z",
+              "updatedAt": "2024-09-02T13:39:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6HpAGq",
+          "commit": {
+            "abbreviatedOid": "388388e"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-02T13:29:10Z",
+          "updatedAt": "2024-09-02T13:29:10Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\r\nIt is the responsibility of the Attester who creates the CMW collection to ensure that the contents of the collection are integrity-protected.\r\n```",
+              "createdAt": "2024-09-02T13:29:10Z",
+              "updatedAt": "2024-09-02T13:29:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6HpNM-",
+          "commit": {
+            "abbreviatedOid": "ef9635c"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-02T13:55:45Z",
+          "updatedAt": "2024-09-02T13:55:46Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\r\nIt is the responsibility of the Attester who creates the CMW collection to ensure that the contents of the collection are integrity-protected.\r\nThe designer of the attestation technology is typically in charge of ensuring that the security properties are met, not the user of the conceptual message wrapper.\r\n```",
+              "createdAt": "2024-09-02T13:55:45Z",
+              "updatedAt": "2024-09-02T13:58:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6HpNV0",
+          "commit": {
+            "abbreviatedOid": "ef9635c"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-02T13:56:01Z",
+          "updatedAt": "2024-09-02T13:56:01Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "Fixed. Moved the sentence",
+              "createdAt": "2024-09-02T13:56:01Z",
+              "updatedAt": "2024-09-02T13:56:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6HpNa0",
+          "commit": {
+            "abbreviatedOid": "ef9635c"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-02T13:56:11Z",
+          "updatedAt": "2024-09-02T13:56:11Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "```suggestion\r\nThis binding is needed to prevent attacks where Evidence from a subverted part of the device is replaced by Evidence from a separate non-subverted device.\r\n```",
+              "createdAt": "2024-09-02T13:56:11Z",
+              "updatedAt": "2024-09-02T14:00:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6HpNrg",
+          "commit": {
+            "abbreviatedOid": "ef9635c"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-02T13:56:43Z",
+          "updatedAt": "2024-09-02T13:56:43Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "Changed the could back to a should",
+              "createdAt": "2024-09-02T13:56:43Z",
+              "updatedAt": "2024-09-02T13:56:43Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 114,
+      "id": "PR_kwDOIGCt2M56IOO-",
+      "title": "s/Sniff/Demux/",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/114",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-02T08:19:42Z",
+      "updatedAt": "2024-09-02T13:30:18Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "a60113b1d1e964bae6a851856bfc46ac17ebf643",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "desniff",
+      "headRefOid": "13fc6389b84684cb151fd6b58a103935dfed081a",
+      "closedAt": "2024-09-02T13:30:18Z",
+      "mergedAt": "2024-09-02T13:30:18Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "f805e248ec7e84102034a006839032757c99d3d7"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6Ho5ti",
+          "commit": {
+            "abbreviatedOid": "13fc638"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "WFM",
+          "createdAt": "2024-09-02T13:17:39Z",
+          "updatedAt": "2024-09-02T13:17:39Z",
           "comments": []
         }
       ]
