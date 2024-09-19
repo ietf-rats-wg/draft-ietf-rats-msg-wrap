@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-17T00:39:38.592830+00:00",
+  "timestamp": "2024-09-19T00:49:18.026759+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -1804,9 +1804,41 @@
       "labels": [],
       "body": "### Composite attester\r\n\r\nThe lead attester wraps the collection in a signed envelope.  For example, using the `cmw` claim with EAT/JWT/CWT, or using the `id-pe-cmw` extension in a X.509 cert/CSR.\r\n\r\n### Layered attester\r\n\r\nThe collection members are chain-locked via some special-purpose \"claim\".  In practice, the attestation scheme must devise a method by which the locking property for the $i$-th layer is captured by layer $(i-1)$-th - similar to DICE.  Examples: Arm CCA delegated attestation, where the locking is obtained via $L_0$ (Platform) capturing the \"delegated\" signing key of layer $L_1$ (Realm) through the `eat_nonce` claim. ",
       "createdAt": "2024-09-15T09:09:12Z",
-      "updatedAt": "2024-09-15T12:10:50Z",
+      "updatedAt": "2024-09-18T07:54:45Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@laurencelundblade has proposed text for S3.3 in an [email](https://mailarchive.ietf.org/arch/msg/rats/-ob1tn6YCPPWoSr__Z4LNr_qMuc/) on the RATS mailing list:\r\n\r\n> Collections are multipurpose.\r\n> They may be used to carry groups of Endorsements or Reference Values, Evidence and so on.\r\n> One CMW can be a mixture of different types of messages.\r\n> One CMW can be used to carry messages related to more than one, even thousands of, devices.\r\n>\r\n> CMW itself provides no facilities for authenticity, integrity protection, privacy or attestation security.\r\n> It is up to the designer of each use case to understand the security properties necessary and add them around CMW.\r\n> Simple TLS may be sufficient, but not always.\r\n>\r\n> When a CMW is used to carry the Evidence for composite or layered attestation for a single device, the security properties needed are that of attesatation.\r\n> In particular, all the members in a CMW must be bound together so that an attacker can not replace one Evidence message showing compromise with that from a non-compromised device.\r\n> The authenticity and integrity protection MUST be attestation-oriented.\r\n>\r\n> EAT submods [ref to EAT ] provide a facility for composite and layered attestation that has built-in security and will be suitable for most attestation Evidence use cases.\r\n> CMW collections is a little more flexible for some use cases, but requires the user to design and assemble their own attestation security features.\r\n",
+          "createdAt": "2024-09-18T07:54:43Z",
+          "updatedAt": "2024-09-18T07:54:43Z"
+        }
+      ]
+    },
+    {
+      "number": 116,
+      "id": "I_kwDOIGCt2M6W5YGV",
+      "title": "Are examples realistic?",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/116",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "In the following, I don't think the example tokens are either real b64-encoded tokens or CBOR-encoded tokens. They probably should be to help people understand. For example, I don't know what 4c693475 is.\r\n\r\nIt would be a lot of work, but you could import EAT CDDL and use the .b64 and .cbor control operators to validate into them with the cddl tool. I did that with EAT and was able to make some useful corrections to my examples.\r\n\r\n```\r\n{\r\n  \"attester A\": [\r\n    30001,\r\n    h'2347da55',\r\n    4\r\n  ],\r\n  \"attester B\": 1668576818(h'2347da55'),\r\n  \"attester C\": [\r\n    \"application/eat+jwt\",\r\n    h'4c693475',\r\n    8\r\n  ]\r\n}\r\n```",
+      "createdAt": "2024-09-17T16:47:09Z",
+      "updatedAt": "2024-09-18T08:53:52Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> For example, I don't know what 4c693475 is.\r\n\r\nit's `...` base-64 encoded, i.e., the JWT delimiters.\r\n\r\nTo present something more realistic, we could replace it with the JSON claims-set from EAT's intro, sign it with HS256 and have:\r\n```\r\neyJhbGciOiJIUzI1NiJ9.eyJlYXRfbm9uY2UiOiJNSURCTkgyOGlpb2lzalB5IiwidWVpZCI6IkFnQUVpenJLM1EiLCJvZW1pZCI6NzY1NDMsInN3bmFtZSI6IkFjbWUgSW9UIE9TIiwic3d2ZXJzaW9uIjoiMy4xLjQifQ.m_nRRsJIyNq_VT4qeL2SMfgOowkfi-34QtnjeglCU3w\r\n```\r\n\r\n> It would be a lot of work, but you could import EAT CDDL and use the .b64 and .cbor control operators to validate into them with the cddl tool. I did that with EAT and was able to make some useful corrections to my examples.\r\n\r\nI'd like to minimise this kind of work at this stage.\r\n",
+          "createdAt": "2024-09-18T08:52:14Z",
+          "updatedAt": "2024-09-18T08:53:52Z"
+        }
+      ]
     }
   ],
   "pulls": [
