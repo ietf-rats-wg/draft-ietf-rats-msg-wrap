@@ -82,8 +82,9 @@ Table of Contents
      3.2.  CMW CBOR Tags
        3.2.1.  Use of Pre-existing CBOR Tags
      3.3.  CMW Collections
-       3.3.1.  CMW Collections' role in composite Attester topology
-       3.3.2.  CMW Tunnel
+       3.3.1.  Relation to EAT submods
+       3.3.2.  CMW Collections' role in composite Attester topology
+       3.3.3.  CMW Tunnel
      3.4.  Decapsulation Algorithm
    4.  Transporting COSE and JOSE Web Tokens
      4.1.  Encoding Requirements
@@ -214,7 +215,7 @@ Table of Contents
    A further CMW "collection" type that holds together multiple CMW
    items is defined in Section 3.3.
 
-   A CMW "tunnel" type is also defined in Section 3.3.2 to allow
+   A CMW "tunnel" type is also defined in Section 3.3.3 to allow
    transporting CBOR CMWs in JSON collections and vice-versa.
 
    The collected CDDL is in Appendix A.
@@ -348,7 +349,7 @@ Table of Contents
    device at a time.
 
    The CMW collection (Figure 3) is defined as a CBOR map or JSON object
-   with CMW values, either native or "tunnelled" (Section 3.3.2).  The
+   with CMW values, either native or "tunnelled" (Section 3.3.3).  The
    position of a cmw entry in the cmw-collection is not significant.
    Labels can be strings (or integers in the CBOR serialization) that
    serve as a mnemonic for different conceptual messages in the
@@ -388,10 +389,13 @@ Table of Contents
    bound together so that an attacker can not replace one Evidence
    message showing compromise with that from a non-compromised device.
    The authenticity and integrity protection MUST be attestation-
-   oriented.
+   oriented.  For further security considerations about collections, see
+   Section 8.2.
 
-   Note that EAT submods (Section 4.2.18 of [I-D.ietf-rats-eat]) provide
-   a facility for aggregating attestation that has built-in security and
+3.3.1.  Relation to EAT submods
+
+   EAT submods (Section 4.2.18 of [I-D.ietf-rats-eat]) provide a
+   facility for aggregating attestation that has built-in security and
    will be suitable for some of the same attestation Evidence use cases
    covered by CMW collections.  However, compared to CMW collections,
    EAT submods are limited in two ways:
@@ -402,7 +406,7 @@ Table of Contents
        their top-down structure does not fit the bottom-up way in which
        the chain of trust is built in layered attestation.
 
-3.3.1.  CMW Collections' role in composite Attester topology
+3.3.2.  CMW Collections' role in composite Attester topology
 
    A CMW Collection's tree structure is not required to be a spanning
    tree of the system's composite Attester topology.  If the labels
@@ -411,7 +415,7 @@ Table of Contents
    integrity protected.  For example, the collection can be integrity
    protected by including it in a signed token such as a CWT or JWT.
 
-3.3.2.  CMW Tunnel
+3.3.3.  CMW Tunnel
 
    The CMW tunnel type (Figure 4) allows for moving a CMW in one
    serialization format, either JSON or CBOR, into a collection that
@@ -430,14 +434,14 @@ Table of Contents
 
    The conversion algorithms are described in the following subsections.
 
-3.3.2.1.  CBOR-to-JSON
+3.3.3.1.  CBOR-to-JSON
 
    The CBOR byte string of the serialised CBOR CMW is encoded as Base64
    using the URL and filename safe alphabet (Section 5 of [RFC4648])
    without padding.  The obtained string is added as the second element
    of the c2j-tunnel array.  The c2j-tunnel array is serialized as JSON.
 
-3.3.2.2.  JSON-to-CBOR
+3.3.3.2.  JSON-to-CBOR
 
    The UTF-8 string of the serialized JSON CMW is encoded as a CBOR byte
    string (Major type 2).  The byte string is added as the second
