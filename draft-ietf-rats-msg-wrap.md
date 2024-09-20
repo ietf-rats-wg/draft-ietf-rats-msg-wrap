@@ -30,6 +30,12 @@ author:
  - name: Hannes Tschofenig
    email: hannes.tschofenig@gmx.net
 
+contributor:
+ - name: Laurence Lundblade
+   organization: Security Theory LLC
+   email: lgl@securitytheory.com
+   contribution: Laurence contributed significant improvements around the security requirements and considerations for CMW collections.
+
 normative:
   RFC4648: base64
   RFC5280: pkix
