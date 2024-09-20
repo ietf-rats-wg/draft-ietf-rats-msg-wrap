@@ -290,8 +290,11 @@ A secure channel (e.g., using TLS) or some form of object security (e.g., using 
 When a CMW is used to carry the Evidence for composite or layered attestation for a single device, the security properties needed are that of attestation.
 In particular, all the members in a CMW must be bound together so that an attacker can not replace one Evidence message showing compromise with that from a non-compromised device.
 The authenticity and integrity protection MUST be attestation-oriented.
+For further security considerations about collections, see {{seccons-coll}}.
 
-Note that EAT submods ({{Section 4.2.18 of -rats-eat}}) provide a facility for aggregating attestation that has built-in security and will be suitable for some of the same attestation Evidence use cases covered by CMW collections.
+### Relation to EAT `submods`
+
+EAT submods ({{Section 4.2.18 of -rats-eat}}) provide a facility for aggregating attestation that has built-in security and will be suitable for some of the same attestation Evidence use cases covered by CMW collections.
 However, compared to CMW collections, EAT submods are limited in two ways:
 
 1. Only EAT-formatted payloads are supported,
@@ -614,7 +617,7 @@ If an adversary tries to modify the payload encapsulation, it will result in inc
 If the messages are not protected, additional security must be added at a different layer.
 As an example, a `cbor-record` containing an UCCS (Unprotected CWT Claims Sets) {{-rats-uccs}} can be signed using COSE Sign1 {{-cose}}.
 
-## Collections
+## Collections {#seccons-coll}
 
 If the collection is not protected from tampering by external security measures (such as object security primitives) or internal mechanisms (such as intra-item binding), an attacker could easily manipulate the collection's contents.
 It is the responsibility of the Attester who creates the CMW collection to ensure that the contents of the collection are integrity-protected.
