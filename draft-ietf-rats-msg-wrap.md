@@ -629,7 +629,7 @@ For example, key material used to sign/bind an entire CMW collection should be a
 The binding does not necessarily have to be a signature over the CMW collection, it might also be achieved through identifiers, cross-linking, signing or hashing between the members of the collection.
 Client-authenticated TLS may be used to bind a CMW collection of Evidence messages.
 However, the client key used with TLS should not be that of the end-user or owner of the device.
-Instead, it must be attestation-oriented key material from the device or the attester manufacturer.
+Instead, it should be attestation-oriented key material from the device or the attester manufacturer.
 
 # IANA Considerations
 
