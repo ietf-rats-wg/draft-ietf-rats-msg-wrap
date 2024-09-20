@@ -847,8 +847,8 @@ Table of Contents
    linking, signing or hashing between the members of the collection.
    Client-authenticated TLS may be used to bind a CMW collection of
    Evidence messages.  However, the client key used with TLS should not
-   be that of the end-user or owner of the device.  Instead, it must be
-   attestation-oriented key material from the device or the attester
+   be that of the end-user or owner of the device.  Instead, it should
+   be attestation-oriented key material from the device or the attester
    manufacturer.
 
 9.  IANA Considerations
