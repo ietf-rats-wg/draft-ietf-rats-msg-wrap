@@ -124,6 +124,7 @@ Table of Contents
    Appendix B.  Registering and Using CMWs
    Appendix C.  Open Issues
    Acknowledgments
+   Contributors
    Authors' Addresses
 
 1.  Introduction
@@ -1403,6 +1404,16 @@ Acknowledgments
    type.  The CMW collection intentionally attains binary compatibility
    with Simon's design and aims at superseding it by also generalizing
    on the allowed Evidence formats.
+
+Contributors
+
+   Laurence Lundblade
+   Security Theory LLC
+   Email: lgl@securitytheory.com
+
+
+   Laurence contributed significant improvements around the security
+   requirements and considerations for CMW collections.
 
 Authors' Addresses
 
