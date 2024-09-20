@@ -366,11 +366,11 @@ Their definitions are provided in {{iana-jwt}} and {{iana-cwt}} respectively.
 
 ## Encoding Requirements
 
-A CMW collection carried in a `"cmw"` JWT claim ({{iana-jwt}}) MUST be a `json-collection`.
-A CMW collection carried in a `"cmw"` CWT claim ({{iana-cwt}}) MUST be a `cbor-collection`.
+A CMW collection carried in a `"cmw"` JWT claim MUST be a `json-collection`.
+A CMW collection carried in a `"cmw"` CWT claim MUST be a `cbor-collection`.
 
-A CMW record carried in a `"cmw"` JWT claim ({{iana-jwt}}) MUST be a `json-record`.
-A CMW record carried in a `"cmw"` CWT claim ({{iana-cwt}}) MUST be a `cbor-record`.
+A CMW record carried in a `"cmw"` JWT claim MUST be a `json-record`.
+A CMW record carried in a `"cmw"` CWT claim MUST be a `cbor-record`.
 
 # Transporting CMW in X.509 Messages {#x509}
 
