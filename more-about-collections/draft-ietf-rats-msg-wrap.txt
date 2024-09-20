@@ -478,7 +478,7 @@ Table of Contents
    Tokens (JWT) and CBOR Web Tokens (CWT).
 
    Their definitions are provided in Section 9.2 and Section 9.1
-   respectively..
+   respectively.
 
 4.1.  Encoding Requirements
 
