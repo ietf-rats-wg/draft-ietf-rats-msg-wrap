@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-19T00:49:18.026759+00:00",
+  "timestamp": "2024-09-22T00:54:28.207438+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -7394,6 +7394,113 @@
           "createdAt": "2024-09-02T13:17:39Z",
           "updatedAt": "2024-09-02T13:17:39Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 117,
+      "id": "PR_kwDOIGCt2M58Maws",
+      "title": "More on collections security",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/117",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Due to the reflow of S3.3 I created a separate section to hold CMW/JWT-related considerations.   That, in turn, necessitated moving the X.509 section to a closer place.\r\n\r\nFix #115",
+      "createdAt": "2024-09-20T17:24:35Z",
+      "updatedAt": "2024-09-21T06:19:38Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "cf9af0e57036fec5174d36ad0084760badaef075",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "more-about-collections",
+      "headRefOid": "7dfdadfbadc0f3bcb65808967b3be46fa1aca423",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6KNuAH",
+          "commit": {
+            "abbreviatedOid": "a5c08c1"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-20T17:29:35Z",
+          "updatedAt": "2024-09-20T17:29:35Z",
+          "comments": [
+            {
+              "originalPosition": 82,
+              "body": "```suggestion\r\nTheir definitions are provided in {{iana-jwt}} and {{iana-cwt}} respectively.\r\n```",
+              "createdAt": "2024-09-20T17:29:35Z",
+              "updatedAt": "2024-09-20T17:29:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6KNulD",
+          "commit": {
+            "abbreviatedOid": "e60615d"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-20T17:30:47Z",
+          "updatedAt": "2024-09-20T17:30:47Z",
+          "comments": [
+            {
+              "originalPosition": 90,
+              "body": "```suggestion\r\nA CMW collection carried in a `\"cmw\"` JWT claim MUST be a `json-collection`.\r\nA CMW collection carried in a `\"cmw\"` CWT claim MUST be a `cbor-collection`.\r\n\r\nA CMW record carried in a `\"cmw\"` JWT claim MUST be a `json-record`.\r\nA CMW record carried in a `\"cmw\"` CWT claim MUST be a `cbor-record`.\r\n```",
+              "createdAt": "2024-09-20T17:30:47Z",
+              "updatedAt": "2024-09-20T17:30:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6KNzYr",
+          "commit": {
+            "abbreviatedOid": "22ff537"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-20T17:36:59Z",
+          "updatedAt": "2024-09-20T17:37:00Z",
+          "comments": [
+            {
+              "originalPosition": 291,
+              "body": "```suggestion\r\nInstead, it should be attestation-oriented key material from the device or the attester manufacturer.\r\n```",
+              "createdAt": "2024-09-20T17:36:59Z",
+              "updatedAt": "2024-09-20T17:37:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6KQ0Il",
+          "commit": {
+            "abbreviatedOid": "1b02f22"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-21T06:15:27Z",
+          "updatedAt": "2024-09-21T06:15:27Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "```suggestion\r\n2. Their top-down structure does not align with the bottom-up approach layered attesters use to build the chain of trust, making them unsuitable for modelling layered attestation.\r\n```",
+              "createdAt": "2024-09-21T06:15:27Z",
+              "updatedAt": "2024-09-21T06:19:24Z"
+            }
+          ]
         }
       ]
     }
