@@ -367,7 +367,7 @@ func CMWTypeDemux(b []byte) (CMW, error) {
 }
 ~~~
 
-# Transporting COSE and JOSE Web Tokens
+# Transporting CMW in COSE and JOSE Web Tokens
 
 To allow embedding CMWs and CMW collections into CBOR-based protocols and web APIs, this document defines two `"cmw"` claims for JSON Web Tokens (JWT) and CBOR Web Tokens (CWT).
 
