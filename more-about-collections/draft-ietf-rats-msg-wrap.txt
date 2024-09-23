@@ -5,11 +5,11 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 25 March 2025                                             Intel
+Expires: 27 March 2025                                             Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
-                                                       21 September 2024
+                                                       23 September 2024
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 March 2025.
+   This Internet-Draft will expire on 27 March 2025.
 
 Copyright Notice
 
@@ -86,7 +86,7 @@ Table of Contents
        3.3.2.  CMW Collections' role in composite Attester topology
        3.3.3.  CMW Tunnel
      3.4.  Decapsulation Algorithm
-   4.  Transporting COSE and JOSE Web Tokens
+   4.  Transporting CMW in COSE and JOSE Web Tokens
      4.1.  Encoding Requirements
    5.  Transporting CMW in X.509 Messages
      5.1.  ASN.1 Module
@@ -476,7 +476,7 @@ Table of Contents
      return Unknown
    }
 
-4.  Transporting COSE and JOSE Web Tokens
+4.  Transporting CMW in COSE and JOSE Web Tokens
 
    To allow embedding CMWs and CMW collections into CBOR-based protocols
    and web APIs, this document defines two "cmw" claims for JSON Web
