@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-22T00:54:28.207438+00:00",
+  "timestamp": "2024-09-24T00:51:19.171800+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -7409,13 +7409,13 @@
       "labels": [],
       "body": "Due to the reflow of S3.3 I created a separate section to hold CMW/JWT-related considerations.   That, in turn, necessitated moving the X.509 section to a closer place.\r\n\r\nFix #115",
       "createdAt": "2024-09-20T17:24:35Z",
-      "updatedAt": "2024-09-21T06:19:38Z",
+      "updatedAt": "2024-09-23T15:22:05Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "cf9af0e57036fec5174d36ad0084760badaef075",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "more-about-collections",
-      "headRefOid": "7dfdadfbadc0f3bcb65808967b3be46fa1aca423",
+      "headRefOid": "03b8317bae922f10fa2ccc0a27dc54406a9e3dd2",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -7501,6 +7501,39 @@
               "updatedAt": "2024-09-21T06:19:24Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6KXRx0",
+          "commit": {
+            "abbreviatedOid": "7dfdadf"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-23T07:45:11Z",
+          "updatedAt": "2024-09-23T07:45:12Z",
+          "comments": [
+            {
+              "originalPosition": 94,
+              "body": "```suggestion\r\n# Transporting CMW in COSE and JOSE Web Tokens\r\n```",
+              "createdAt": "2024-09-23T07:45:12Z",
+              "updatedAt": "2024-09-23T07:45:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6KcHb3",
+          "commit": {
+            "abbreviatedOid": "03b8317"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-09-23T15:22:05Z",
+          "updatedAt": "2024-09-23T15:22:05Z",
+          "comments": []
         }
       ]
     }
