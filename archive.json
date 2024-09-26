@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-24T00:51:19.171800+00:00",
+  "timestamp": "2024-09-26T00:50:36.842167+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -7409,13 +7409,13 @@
       "labels": [],
       "body": "Due to the reflow of S3.3 I created a separate section to hold CMW/JWT-related considerations.   That, in turn, necessitated moving the X.509 section to a closer place.\r\n\r\nFix #115",
       "createdAt": "2024-09-20T17:24:35Z",
-      "updatedAt": "2024-09-23T15:22:05Z",
+      "updatedAt": "2024-09-25T16:55:35Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "cf9af0e57036fec5174d36ad0084760badaef075",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "more-about-collections",
-      "headRefOid": "03b8317bae922f10fa2ccc0a27dc54406a9e3dd2",
+      "headRefOid": "a2cb293697e648f3c00727d6970e353df9872272",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
