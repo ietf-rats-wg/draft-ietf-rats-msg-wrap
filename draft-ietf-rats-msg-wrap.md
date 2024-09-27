@@ -303,7 +303,7 @@ For further security considerations about collections, see {{seccons-coll}}.
 EAT submods ({{Section 4.2.18 of -rats-eat}}) provide a facility for aggregating attestation that has built-in security and will be suitable for some of the same attestation Evidence use cases covered by CMW collections.
 However, compared to CMW collections, EAT submods are limited in two ways:
 
-1. {{EAT}} allows carrying non-EAT-formatted types by augmenting the $EAT-CBOR-Tagged-Token socket or the $JSON-Selector socket. However, these need to be specified in subsequent standard documents updating the EAT specification,
+1. EAT {{-rats-eat}} allows carrying non-EAT-formatted types by augmenting the $EAT-CBOR-Tagged-Token socket or the $JSON-Selector socket. However, these need to be specified in subsequent standard documents updating the EAT specification,
 2. Their top-down structure does not align well with the bottom-up approach layered attesters use to build the chain of trust, making them not ideal for modelling layered attestation.
 
 ### CMW Collections' role in composite Attester topology
