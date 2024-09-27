@@ -5,11 +5,11 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 29 March 2025                                             Intel
+Expires: 31 March 2025                                             Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
-                                                       25 September 2024
+                                                       27 September 2024
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 March 2025.
+   This Internet-Draft will expire on 31 March 2025.
 
 Copyright Notice
 
@@ -401,7 +401,10 @@ Table of Contents
    covered by CMW collections.  However, compared to CMW collections,
    EAT submods are limited in two ways:
 
-   1.  Only EAT-formatted payloads are supported,
+   1.  EAT [I-D.ietf-rats-eat] allows carrying non-EAT-formatted types
+       by augmenting the $EAT-CBOR-Tagged-Token socket or the $JSON-
+       Selector socket.  However, these need to be specified in
+       subsequent standard documents updating the EAT specification,
 
    2.  Their top-down structure does not align well with the bottom-up
        approach layered attesters use to build the chain of trust,
@@ -1232,9 +1235,9 @@ Table of Contents
    [I-D.ietf-rats-eat-media-type]
               Lundblade, L., Birkholz, H., and T. Fossati, "EAT Media
               Types", Work in Progress, Internet-Draft, draft-ietf-rats-
-              eat-media-type-09, 21 August 2024,
+              eat-media-type-10, 26 September 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              eat-media-type-09>.
+              eat-media-type-10>.
 
    [I-D.ietf-rats-uccs]
               Birkholz, H., O'Donoghue, J., Cam-Winget, N., and C.
