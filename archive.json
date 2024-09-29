@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-26T00:50:36.842167+00:00",
+  "timestamp": "2024-09-29T00:55:19.216847+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -7409,13 +7409,13 @@
       "labels": [],
       "body": "Due to the reflow of S3.3 I created a separate section to hold CMW/JWT-related considerations.   That, in turn, necessitated moving the X.509 section to a closer place.\r\n\r\nFix #115",
       "createdAt": "2024-09-20T17:24:35Z",
-      "updatedAt": "2024-09-25T16:55:35Z",
+      "updatedAt": "2024-09-27T15:06:15Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "cf9af0e57036fec5174d36ad0084760badaef075",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "more-about-collections",
-      "headRefOid": "a2cb293697e648f3c00727d6970e353df9872272",
+      "headRefOid": "cc0c401905f3d5afdb888f4f081c7ba3e074e0cc",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -7534,6 +7534,159 @@
           "createdAt": "2024-09-23T15:22:05Z",
           "updatedAt": "2024-09-23T15:22:05Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6K4MRn",
+          "commit": {
+            "abbreviatedOid": "a2cb293"
+          },
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "state": "CHANGES_REQUESTED",
+          "body": "I haven't actually finished the review, but wanted to get this comment to you now because I'm kind of buried in some other work right now and won't get to the full review right away.",
+          "createdAt": "2024-09-26T03:20:21Z",
+          "updatedAt": "2024-09-26T03:21:15Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "You can make an EAT submod a format other than EAT by defining a type for it. In CBOR-format EATs, that's just defining a new CBOR tag to identify it. Might be a bit weird to define a CBOR tag to identify an X.509 format attestation, but it is possible.\r\n\r\nSo I don't think 1. is true.\r\n\r\nA more correct statement would be that EAT can't represent layered attestation when the topmost/outermost/lead attestation is not EAT format.\r\n\r\nEAT seems fine for most layered attestation (see recent email to rats). Seems to me that CCA is doing rather unusual layered attestation. CCA attestation evidence spans devices, right? That's unusual for attestation IMO and beyond what I imagined anyone doing in EAT (and RATS).\r\n\r\nEAT should not be presented as being unsuitable or bad at layered attestation.\r\n\r\nMaybe say something like, while EAT submods are fine for most layered attestation, CMW is more flexible and can represent more complex or unusual layered attestation like a bottom-up chain of trust.",
+              "createdAt": "2024-09-26T03:20:21Z",
+              "updatedAt": "2024-09-26T03:21:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6K6jVa",
+          "commit": {
+            "abbreviatedOid": "a2cb293"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-26T09:08:36Z",
+          "updatedAt": "2024-09-26T09:08:36Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "> You can make an EAT submod a format other than EAT by defining a type for it. In CBOR-format EATs, that's just defining a new CBOR tag to identify it. Might be a bit weird to define a CBOR tag to identify an X.509 format attestation, but it is possible.\r\n>\r\n> So I don't think 1. is true.\r\n\r\nThis is not what I understand from reading  [4.2.18. submods (Submodules)](https://ietf-rats-wg.github.io/eat/draft-ietf-rats-eat.html#section-4.2.18).  There is no mention of the possibility of incorporating non-EAT tokens/claims-sets.  \r\n\r\nCan you point me to the relevant text?\r\n\r\n> A more correct statement would be that EAT can't represent layered attestation when the topmost/outermost/lead attestation is not EAT format.\r\n> \r\n> EAT seems fine for most layered attestation (see recent email to rats). Seems to me that CCA is doing rather unusual layered attestation. CCA attestation evidence spans devices, right? That's unusual for attestation IMO and beyond what I imagined anyone doing in EAT (and RATS).\r\n> \r\n> EAT should not be presented as being unsuitable or bad at layered attestation.\r\n> \r\n> Maybe say something like, while EAT submods are fine for most layered attestation, CMW is more flexible and can represent more complex or unusual layered attestation like a bottom-up chain of trust.\r\n\r\nWe can certainly curate the text to avoid sounding adversarial vs EAT (that's certainly not my intent, on the contrary, I think EAT and CMW are an excellent pair.)\r\n\r\nHowever, I stand by my assessment that submods are not great at layered attestation because they go counter the \"natural\" construction of the chain of trust of the device.\r\n\r\nTypically (e.g., DICE, Arm CCA), the layer below signs the layer above, not the opposite.  As I also said on the list, it could be my bias, but this doesn't look either complex or unusual to me.",
+              "createdAt": "2024-09-26T09:08:36Z",
+              "updatedAt": "2024-09-26T09:53:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6K7NLA",
+          "commit": {
+            "abbreviatedOid": "a2cb293"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "lgtm",
+          "createdAt": "2024-09-26T10:20:46Z",
+          "updatedAt": "2024-09-26T10:20:46Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6LGgg5",
+          "commit": {
+            "abbreviatedOid": "a2cb293"
+          },
+          "author": "carl-wallace",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-27T13:23:10Z",
+          "updatedAt": "2024-09-27T13:23:10Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "Re: incorporating non-EAT tokens/claims-sets, I think Laurence is referring to the fact that $EAT-CBOR-Tagged-Token is extensible. The potential for adding new types is noted in section 4.2.18 as follows:\r\n\r\n```\r\nThe addition of further types is accomplished by augmenting the $EAT-CBOR-Tagged-Token socket or the $JSON-Selector socket.\r\n```\r\n\r\nYou are correct the text does not explicitly call out that ASN.1 types, or other, could be accommodated this way but the means to support such is there. ",
+              "createdAt": "2024-09-27T13:23:10Z",
+              "updatedAt": "2024-09-27T13:23:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6LGxyr",
+          "commit": {
+            "abbreviatedOid": "a2cb293"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-27T13:49:49Z",
+          "updatedAt": "2024-09-27T13:49:49Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "Thanks for the pointer!\r\n\r\nWould it be fair to say something like:\r\n\r\n> _\"* {{EAT}} allows carrying non-EAT-formatted types by augmenting the `$EAT-CBOR-Tagged-Token` socket or the `$JSON-Selector` socket. However, these need to be specified in subsequent standard documents updating the EAT specification.\"_\r\n\r\n?",
+              "createdAt": "2024-09-27T13:49:49Z",
+              "updatedAt": "2024-09-27T13:51:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6LG0xd",
+          "commit": {
+            "abbreviatedOid": "a2cb293"
+          },
+          "author": "carl-wallace",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-27T13:54:52Z",
+          "updatedAt": "2024-09-27T13:54:52Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "I think so.",
+              "createdAt": "2024-09-27T13:54:52Z",
+              "updatedAt": "2024-09-27T13:54:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6LG3HO",
+          "commit": {
+            "abbreviatedOid": "a2cb293"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-27T13:58:53Z",
+          "updatedAt": "2024-09-27T13:58:54Z",
+          "comments": [
+            {
+              "originalPosition": 60,
+              "body": "```suggestion\r\n1. {{EAT}} allows carrying non-EAT-formatted types by augmenting the $EAT-CBOR-Tagged-Token socket or the $JSON-Selector socket. However, these need to be specified in subsequent standard documents updating the EAT specification,\r\n```",
+              "createdAt": "2024-09-27T13:58:54Z",
+              "updatedAt": "2024-09-27T13:58:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6LHZsI",
+          "commit": {
+            "abbreviatedOid": "a2cb293"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-27T14:59:38Z",
+          "updatedAt": "2024-09-27T14:59:38Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "Integrated in [39e1f53](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/117/commits/39e1f533af004805e30967fba3284101ac4c9a7f)",
+              "createdAt": "2024-09-27T14:59:38Z",
+              "updatedAt": "2024-09-27T14:59:38Z"
+            }
+          ]
         }
       ]
     }
