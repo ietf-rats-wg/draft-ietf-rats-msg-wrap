@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-29T00:55:19.216847+00:00",
+  "timestamp": "2024-10-01T00:55:58.248627+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -1828,7 +1828,7 @@
       "labels": [],
       "body": "In the following, I don't think the example tokens are either real b64-encoded tokens or CBOR-encoded tokens. They probably should be to help people understand. For example, I don't know what 4c693475 is.\r\n\r\nIt would be a lot of work, but you could import EAT CDDL and use the .b64 and .cbor control operators to validate into them with the cddl tool. I did that with EAT and was able to make some useful corrections to my examples.\r\n\r\n```\r\n{\r\n  \"attester A\": [\r\n    30001,\r\n    h'2347da55',\r\n    4\r\n  ],\r\n  \"attester B\": 1668576818(h'2347da55'),\r\n  \"attester C\": [\r\n    \"application/eat+jwt\",\r\n    h'4c693475',\r\n    8\r\n  ]\r\n}\r\n```",
       "createdAt": "2024-09-17T16:47:09Z",
-      "updatedAt": "2024-09-18T08:53:52Z",
+      "updatedAt": "2024-09-30T03:21:17Z",
       "closedAt": null,
       "comments": [
         {
@@ -1837,6 +1837,13 @@
           "body": "> For example, I don't know what 4c693475 is.\r\n\r\nit's `...` base-64 encoded, i.e., the JWT delimiters.\r\n\r\nTo present something more realistic, we could replace it with the JSON claims-set from EAT's intro, sign it with HS256 and have:\r\n```\r\neyJhbGciOiJIUzI1NiJ9.eyJlYXRfbm9uY2UiOiJNSURCTkgyOGlpb2lzalB5IiwidWVpZCI6IkFnQUVpenJLM1EiLCJvZW1pZCI6NzY1NDMsInN3bmFtZSI6IkFjbWUgSW9UIE9TIiwic3d2ZXJzaW9uIjoiMy4xLjQifQ.m_nRRsJIyNq_VT4qeL2SMfgOowkfi-34QtnjeglCU3w\r\n```\r\n\r\n> It would be a lot of work, but you could import EAT CDDL and use the .b64 and .cbor control operators to validate into them with the cddl tool. I did that with EAT and was able to make some useful corrections to my examples.\r\n\r\nI'd like to minimise this kind of work at this stage.\r\n",
           "createdAt": "2024-09-18T08:52:14Z",
           "updatedAt": "2024-09-18T08:53:52Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "The b64 decoders I tried, two of them, don't decode  4c693475 to ...  Encoding ... gives Li4uC\r\n\r\nI know it's a lot of work (and you have many docs to worry about!).  I did all this work for EAT.\r\n\r\nIf you don't do this, probably adding a note to indicate what they are so people don't try to interpret and get confused like I did. ",
+          "createdAt": "2024-09-30T03:21:16Z",
+          "updatedAt": "2024-09-30T03:21:16Z"
         }
       ]
     }
@@ -7409,7 +7416,7 @@
       "labels": [],
       "body": "Due to the reflow of S3.3 I created a separate section to hold CMW/JWT-related considerations.   That, in turn, necessitated moving the X.509 section to a closer place.\r\n\r\nFix #115",
       "createdAt": "2024-09-20T17:24:35Z",
-      "updatedAt": "2024-09-27T15:06:15Z",
+      "updatedAt": "2024-09-30T13:19:40Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "cf9af0e57036fec5174d36ad0084760badaef075",
@@ -7685,6 +7692,179 @@
               "body": "Integrated in [39e1f53](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/117/commits/39e1f533af004805e30967fba3284101ac4c9a7f)",
               "createdAt": "2024-09-27T14:59:38Z",
               "updatedAt": "2024-09-27T14:59:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6LTxvs",
+          "commit": {
+            "abbreviatedOid": "a2cb293"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-30T11:28:49Z",
+          "updatedAt": "2024-09-30T11:28:49Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "Taking this a step further, we may as well drop this and add a new subsection _\"Transporting CMW in EAT submods\"_ that defines the sockets extensions:\r\n\r\n```\r\n$EAT-CBOR-Tagged-Token /= #6.TBD(cbor-CMW)\r\n```\r\nand\r\n```\r\n$JSON-Selector /= [type: \"CMW\", nested-token: json-CMW]\r\n```\r\n\r\nWhere:\r\n\r\n* `cbor-CMW` and `json-CMW` are defined in [Appendix A of CMW](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-08.html#appendix-A)\r\n* `6.TBD` is the CBOR tag [requested for CMW](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-08.html#section-8.3)\r\n\r\n\r\n@carl-wallace @laurencelundblade @gmandyam would that work?",
+              "createdAt": "2024-09-30T11:28:49Z",
+              "updatedAt": "2024-09-30T11:29:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6LU9Vl",
+          "commit": {
+            "abbreviatedOid": "a2cb293"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-30T13:19:40Z",
+          "updatedAt": "2024-09-30T13:19:40Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "A preview of that is in the `cmw-in-submods` branch: https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/118/commits/701013c19a80b30d9f58338736015ed8d12e8d56",
+              "createdAt": "2024-09-30T13:19:40Z",
+              "updatedAt": "2024-09-30T13:19:40Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 118,
+      "id": "PR_kwDOIGCt2M59Hkvo",
+      "title": "Allow plugging CMW into EAT submods",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/118",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-30T13:18:30Z",
+      "updatedAt": "2024-09-30T21:49:04Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "cf9af0e57036fec5174d36ad0084760badaef075",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "cmw-in-submods",
+      "headRefOid": "701013c19a80b30d9f58338736015ed8d12e8d56",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6LXCo5",
+          "commit": {
+            "abbreviatedOid": "701013c"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-30T16:36:00Z",
+          "updatedAt": "2024-09-30T16:51:45Z",
+          "comments": [
+            {
+              "originalPosition": 31,
+              "body": "I don't understand why this text should be removed.",
+              "createdAt": "2024-09-30T16:36:00Z",
+              "updatedAt": "2024-09-30T16:51:45Z"
+            },
+            {
+              "originalPosition": 50,
+              "body": "I'm not sure what these lines are compelling me to do. Why aren't lines 292 - 294 sufficient to convey that expectation that security of the CMW isn't part of this document? The normative wording seems to contradict the previous paragraph. It seems to acknowledge an additional security consideration that an active attacker could drop portions of the collection - which is an attack that is reasonably covered in lines 292-294.",
+              "createdAt": "2024-09-30T16:43:16Z",
+              "updatedAt": "2024-09-30T16:51:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6LYkbp",
+          "commit": {
+            "abbreviatedOid": "701013c"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-30T20:09:11Z",
+          "updatedAt": "2024-09-30T20:09:11Z",
+          "comments": [
+            {
+              "originalPosition": 31,
+              "body": "It's not removed, it's just been expanded in L269:\r\n\r\n> _\"To allow aggregation of multiple, potentially non-homogeneous evidence formats collected from different AEs, this document ...\"_",
+              "createdAt": "2024-09-30T20:09:11Z",
+              "updatedAt": "2024-09-30T20:09:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6LYrff",
+          "commit": {
+            "abbreviatedOid": "701013c"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-30T20:27:14Z",
+          "updatedAt": "2024-09-30T20:27:14Z",
+          "comments": [
+            {
+              "originalPosition": 50,
+              "body": "This captures the third point from [Laurence's email](https://mailarchive.ietf.org/arch/msg/rats/hMz-UQMchfmGeXq7saLWToXvndk/):\r\n\r\n> _\"The third thing is discussion of security when the use case is attestation Evidence, in which case the full attestation security model is necessary (which is more than integrity protection or a CWT).\"_",
+              "createdAt": "2024-09-30T20:27:14Z",
+              "updatedAt": "2024-09-30T20:27:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6LZKs5",
+          "commit": {
+            "abbreviatedOid": "701013c"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-30T21:46:10Z",
+          "updatedAt": "2024-09-30T21:46:10Z",
+          "comments": [
+            {
+              "originalPosition": 50,
+              "body": "The wording seems awkward. Is it different from: \"A CMW collection is subject to a variety of security threats such as insertion / removal of CMW contents, replay, misdirection, snooping, etc.\"",
+              "createdAt": "2024-09-30T21:46:10Z",
+              "updatedAt": "2024-09-30T21:46:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6LZOAr",
+          "commit": {
+            "abbreviatedOid": "701013c"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-30T21:49:04Z",
+          "updatedAt": "2024-09-30T21:49:04Z",
+          "comments": [
+            {
+              "originalPosition": 50,
+              "body": "Since CMW doesn't define security mechanisms, it seems impossible for an implementer to satisfy the MUST requirement. I'm not sure what \"attestation oriented\" means. It reads like normative on some other spec besides this spec.",
+              "createdAt": "2024-09-30T21:49:04Z",
+              "updatedAt": "2024-09-30T21:49:04Z"
             }
           ]
         }
