@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-01T00:55:58.248627+00:00",
+  "timestamp": "2024-10-03T00:50:55.589146+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -7416,7 +7416,7 @@
       "labels": [],
       "body": "Due to the reflow of S3.3 I created a separate section to hold CMW/JWT-related considerations.   That, in turn, necessitated moving the X.509 section to a closer place.\r\n\r\nFix #115",
       "createdAt": "2024-09-20T17:24:35Z",
-      "updatedAt": "2024-09-30T13:19:40Z",
+      "updatedAt": "2024-10-01T11:22:38Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "cf9af0e57036fec5174d36ad0084760badaef075",
@@ -7732,6 +7732,26 @@
               "body": "A preview of that is in the `cmw-in-submods` branch: https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/118/commits/701013c19a80b30d9f58338736015ed8d12e8d56",
               "createdAt": "2024-09-30T13:19:40Z",
               "updatedAt": "2024-09-30T13:19:40Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6LeEYv",
+          "commit": {
+            "abbreviatedOid": "a2cb293"
+          },
+          "author": "carl-wallace",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-01T11:22:38Z",
+          "updatedAt": "2024-10-01T11:22:38Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "Adding use of submod extensibility here seems like a good idea to me.",
+              "createdAt": "2024-10-01T11:22:38Z",
+              "updatedAt": "2024-10-01T11:22:38Z"
             }
           ]
         }
