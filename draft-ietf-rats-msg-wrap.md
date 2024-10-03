@@ -291,11 +291,11 @@ Since the collection type is recursive, implementations may limit the allowed de
 
 CMW itself provides no facilities for authenticity, integrity protection, privacy or attestation security.
 It is up to the designer of each use case to understand the security properties necessary and add them around the collection.
-A secure channel (e.g., using TLS) or some form of object security (e.g., using JWT) may be sufficient, but not always.
+See {{Section 12.2 of -rats-arch}} for an overview of Conceptual Message protection requirements.
 
 When a CMW is used to carry the Evidence for composite or layered attestation for a single device, the security properties needed are that of attestation.
 In particular, all the members in a CMW must be bound together so that an attacker can not replace one Evidence message showing compromise with that from a non-compromised device.
-The authenticity and integrity protection MUST be attestation-oriented.
+The Attesters, especially in handling their cryptographic key material, are expected to comply with the considerations in {{Section 12.1 of -rats-arch}} for authenticity and integrity protection.
 For further security considerations about collections, see {{seccons-coll}}.
 
 ### Relation to EAT `submods`
