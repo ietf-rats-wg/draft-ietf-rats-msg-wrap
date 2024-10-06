@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-03T00:50:55.589146+00:00",
+  "timestamp": "2024-10-06T00:55:02.938209+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -7769,13 +7769,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-09-30T13:18:30Z",
-      "updatedAt": "2024-09-30T21:49:04Z",
+      "updatedAt": "2024-10-03T09:03:17Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "cf9af0e57036fec5174d36ad0084760badaef075",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "cmw-in-submods",
-      "headRefOid": "701013c19a80b30d9f58338736015ed8d12e8d56",
+      "headRefOid": "5c5928ada08d417c74e6321581bf2a0d8d3aab56",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -7885,6 +7885,46 @@
               "body": "Since CMW doesn't define security mechanisms, it seems impossible for an implementer to satisfy the MUST requirement. I'm not sure what \"attestation oriented\" means. It reads like normative on some other spec besides this spec.",
               "createdAt": "2024-09-30T21:49:04Z",
               "updatedAt": "2024-09-30T21:49:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6LxoEY",
+          "commit": {
+            "abbreviatedOid": "701013c"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-03T09:01:47Z",
+          "updatedAt": "2024-10-03T09:01:47Z",
+          "comments": [
+            {
+              "originalPosition": 50,
+              "body": "> Since CMW doesn't define security mechanisms, it seems impossible for an implementer to satisfy the MUST requirement.\r\n\r\nI agree that the MUST here is unenforceable.  I'll remove it and rephrase Laurence's point to keep the same \"strength of signal\" without bothering RFC2119. \r\n\r\n> I'm not sure what \"attestation oriented\" means. It reads like normative on some other spec besides this spec.\r\n\r\nHe means obeying https://www.rfc-editor.org/rfc/rfc9334.html#section-12.1",
+              "createdAt": "2024-10-03T09:01:47Z",
+              "updatedAt": "2024-10-03T09:01:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6LxozA",
+          "commit": {
+            "abbreviatedOid": "701013c"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-03T09:03:17Z",
+          "updatedAt": "2024-10-03T09:03:17Z",
+          "comments": [
+            {
+              "originalPosition": 50,
+              "body": "Please see https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/118/commits/5c5928ada08d417c74e6321581bf2a0d8d3aab56",
+              "createdAt": "2024-10-03T09:03:17Z",
+              "updatedAt": "2024-10-03T09:03:18Z"
             }
           ]
         }
