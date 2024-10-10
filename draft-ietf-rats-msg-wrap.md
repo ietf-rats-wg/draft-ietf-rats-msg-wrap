@@ -20,7 +20,7 @@ pi: [toc, sortrefs, symrefs]
 author:
  - name: Henk Birkholz
    organization: Fraunhofer SIT
-   email: henk.birkholz@sit.fraunhofer.de
+   email: henk.birkholz@ietf.contact
  - name: Ned Smith
    organization: Intel
    email: ned.smith@intel.com
