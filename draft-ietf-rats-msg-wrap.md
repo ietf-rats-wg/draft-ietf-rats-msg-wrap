@@ -27,8 +27,11 @@ author:
  - name: Thomas Fossati
    organization: Linaro
    email: thomas.fossati@linaro.org
- - name: Hannes Tschofenig
-   email: hannes.tschofenig@gmx.net
+ -
+   name: Hannes Tschofenig
+   org: University of Applied Sciences Bonn-Rhein-Sieg
+   abbrev: H-BRS
+   email: Hannes.Tschofenig@gmx.net
 
 normative:
   RFC4648: base64
