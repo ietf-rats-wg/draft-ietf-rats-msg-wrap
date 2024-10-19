@@ -293,10 +293,7 @@ CMW itself provides no facilities for authenticity, integrity protection, privac
 It is up to the designer of each use case to understand the security properties necessary and add them around the collection.
 A secure channel (e.g., using TLS) or some form of object security (e.g., using JWT) may be sufficient, but not always.
 
-When a CMW is used to carry the Evidence for composite or layered attestation for a single device, the security properties needed are that of attestation.
-In particular, all the members in a CMW must be bound together so that an attacker can not replace one Evidence message showing compromise with that from a non-compromised device.
-The authenticity and integrity protection MUST be attestation-oriented.
-For further security considerations about collections, see {{seccons-coll}}.
+When a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically bound to prevent an attacker from replacing compromised Evidence with that of a non-compromised device. The protection of authenticity and integrity MUST be provided by the attestation technology. For additional security considerations related to collections, refer to {{seccons-coll}}.
 
 ### Relation to EAT `submods`
 
