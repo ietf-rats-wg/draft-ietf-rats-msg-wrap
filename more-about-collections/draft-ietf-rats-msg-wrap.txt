@@ -506,7 +506,8 @@ Table of Contents
    [I-D.ietf-lamps-csr-attestation], while its application in X.509
    Certificates and CRLs is detailed in Section 6.1 of [DICE-arch].
 
-   This section specifies the CMW extension to carry CMW objects.
+   This section outlines the CMW extension designed to carry CMW
+   objects.
 
    The CMW extension MAY be included in X.509 Certificates, CRLs
    [RFC5280], and CSRs.
