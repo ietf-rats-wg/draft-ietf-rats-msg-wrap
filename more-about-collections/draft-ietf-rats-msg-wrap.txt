@@ -5,11 +5,11 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 31 March 2025                                             Intel
+Expires: 22 April 2025                                             Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
-                                                       27 September 2024
+                                                         19 October 2024
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 March 2025.
+   This Internet-Draft will expire on 22 April 2025.
 
 Copyright Notice
 
@@ -340,14 +340,14 @@ Table of Contents
    "collection" as a container that holds several CMW items, each with a
    label that is unique within the scope of the collection.
 
-   Even though initially designed to support the layered Attester and
-   composite device use cases, the CMW collection can be repurposed for
-   other use cases requiring aggregation of RATS conceptual messages.
-   For example, collections may be used to carry groups of Endorsements
-   or Reference Values, Attestation Results, and so on.  One CMW
-   collection can be a mixture of different types of messages.  One CMW
-   collection can be used to carry messages related to more than one
-   device at a time.
+   Although originally designed to support layered Attester and
+   composite device use cases, the CMW collection can be adapted for
+   other scenarios that require the aggregation of RATS conceptual
+   messages.  For example, collections may be used to carry groups of
+   Endorsements or Reference Values, Attestation Results, and so on.
+   One CMW collection can be a mixture of different types of messages.
+   One CMW collection can be used to carry messages related to more than
+   one device at a time.
 
    The CMW collection (Figure 3) is defined as a CBOR map or JSON object
    with CMW values, either native or "tunnelled" (Section 3.3.3).  The
@@ -1206,9 +1206,9 @@ Table of Contents
               Ounsworth, M., Tschofenig, H., Birkholz, H., Wiseman, M.,
               and N. Smith, "Use of Remote Attestation with
               Certification Signing Requests", Work in Progress,
-              Internet-Draft, draft-ietf-lamps-csr-attestation-11, 18
-              September 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-lamps-csr-attestation-11>.
+              Internet-Draft, draft-ietf-lamps-csr-attestation-12, 12
+              October 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-lamps-csr-attestation-12>.
 
    [I-D.ietf-rats-ar4si]
               Voit, E., Birkholz, H., Hardjono, T., Fossati, T., and V.
@@ -1221,9 +1221,9 @@ Table of Contents
    [I-D.ietf-rats-corim]
               Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
               W. Pan, "Concise Reference Integrity Manifest", Work in
-              Progress, Internet-Draft, draft-ietf-rats-corim-05, 8 July
-              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              rats-corim-05>.
+              Progress, Internet-Draft, draft-ietf-rats-corim-06, 18
+              October 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-corim-06>.
 
    [I-D.ietf-rats-eat]
               Lundblade, L., Mandyam, G., O'Donoghue, J., and C.
@@ -1235,9 +1235,9 @@ Table of Contents
    [I-D.ietf-rats-eat-media-type]
               Lundblade, L., Birkholz, H., and T. Fossati, "EAT Media
               Types", Work in Progress, Internet-Draft, draft-ietf-rats-
-              eat-media-type-10, 26 September 2024,
+              eat-media-type-11, 10 October 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              eat-media-type-10>.
+              eat-media-type-11>.
 
    [I-D.ietf-rats-uccs]
               Birkholz, H., O'Donoghue, J., Cam-Winget, N., and C.
