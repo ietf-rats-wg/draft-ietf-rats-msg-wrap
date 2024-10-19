@@ -410,7 +410,7 @@ CMW ::= CHOICE {
 }
 ~~~
 
-The CMW MUST contain the serialized CMW object in JSON or CBOR format, using the appropriate CHOICE entry.
+The CMW MUST include the serialized CMW object in either JSON or CBOR format, utilizing the appropriate CHOICE entry.
 
 The DER-encoded CMW is the value of the OCTET STRING for the extnValue field of the extension.
 
