@@ -268,7 +268,7 @@ For example, in data center servers, it is not uncommon for separate attesting e
 One AE might measure and attest to what was booted on the main CPU, while another AE might measure and attest to what was booted on a SmartNIC plugged into a PCIe slot, and a third AE might measure and attest to what was booted on the machine's GPU.
 To allow aggregation of multiple, potentially non-homogeneous evidence formats collected from different AEs, this document defines a CMW "collection" as a container that holds several CMW items, each with a label that is unique within the scope of the collection.
 
-Even though initially designed to support the layered Attester and composite device use cases, the CMW collection can be repurposed for other use cases requiring aggregation of RATS conceptual messages.
+Although originally designed to support layered Attester and composite device use cases, the CMW collection can be adapted for other scenarios that require the aggregation of RATS conceptual messages.
 For example, collections may be used to carry groups of Endorsements or Reference Values, Attestation Results, and so on.
 One CMW collection can be a mixture of different types of messages.
 One CMW collection can be used to carry messages related to more than one device at a time.
