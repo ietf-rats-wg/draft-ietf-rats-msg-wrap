@@ -379,11 +379,11 @@ Table of Contents
            Figure 3: CDDL definition of the CMW collection format
 
    CMW itself provides no facilities for authenticity, integrity
-   protection, privacy or attestation security.  It is up to the
-   designer of each use case to understand the security properties
-   necessary and add them around the collection.  A secure channel
-   (e.g., using TLS) or some form of object security (e.g., using JWT)
-   may be sufficient, but not always.
+   protection, or confidentiality.  It is up to the designer of each use
+   case to understand the security properties necessary and add them
+   around the collection.  A secure channel (e.g., using TLS) or some
+   form of object security (e.g., using JWT) may be sufficient, but not
+   always.
 
    When a CMW is used to carry the Evidence for composite or layered
    attestation for a single device, the security properties needed are
