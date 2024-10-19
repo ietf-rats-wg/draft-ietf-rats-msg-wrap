@@ -370,7 +370,7 @@ func CMWTypeDemux(b []byte) (CMW, error) {
 
 To facilitate the embedding of CMWs and CMW collections in CBOR-based protocols and web APIs, this document defines two `"cmw"` claims for use with JSON Web Tokens (JWT) and CBOR Web Tokens (CWT).
 
-Their definitions are provided in {{iana-jwt}} and {{iana-cwt}} respectively.
+The definitions for these claims can be found in {{iana-jwt}} and {{iana-cwt}}, respectively.
 
 ## Encoding Requirements
 
