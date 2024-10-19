@@ -384,7 +384,7 @@ A CMW record carried in a `"cmw"` CWT claim MUST be a `cbor-record`.
 # Transporting CMW in X.509 Messages {#x509}
 
 CMW may need to be transported in PKIX messages, such as Certificate Signing Requests (CSRs) or in X.509 Certificates and Certificate Revocation Lists (CRLs).
-The former use is documented in {{-csr-a}}, the latter in Section 6.1 of {{DICE-arch}}.
+The use of CMW in CSRs is documented in {{-csr-a}}, while its application in X.509 Certificates and CRLs is detailed in Section 6.1 of {{DICE-arch}}.
 
 This section specifies the CMW extension to carry CMW objects.
 
