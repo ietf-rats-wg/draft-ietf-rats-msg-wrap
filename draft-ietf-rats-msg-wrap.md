@@ -458,7 +458,7 @@ END
 ## Compatibility with DICE `ConceptualMessageWrapper`
 
 Section 6.1.8 of {{DICE-arch}} specifies the ConceptualMessageWrapper (CMW) format and its corresponding object identifier.
-The CMW format defined in {{DICE-arch}} allows only a subset of the CMW grammar defined in this document.
+The CMW format outlined in {{DICE-arch}} permits only a subset of the CMW grammar defined in this document.
 In particular, the tunnel and collection formats cannot be encoded using DICE CMWs.
 
 # Examples
