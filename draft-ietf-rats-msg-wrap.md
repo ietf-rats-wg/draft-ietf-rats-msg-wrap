@@ -289,7 +289,7 @@ Since the collection type is recursive, implementations may limit the allowed de
 {: #fig-cddl-collection artwork-align="left"
    title="CDDL definition of the CMW collection format"}
 
-CMW itself provides no facilities for authenticity, integrity protection, privacy or attestation security.
+CMW itself provides no facilities for authenticity, integrity protection, or confidentiality.
 It is up to the designer of each use case to understand the security properties necessary and add them around the collection.
 A secure channel (e.g., using TLS) or some form of object security (e.g., using JWT) may be sufficient, but not always.
 
