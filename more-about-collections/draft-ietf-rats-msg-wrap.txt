@@ -485,8 +485,8 @@ Table of Contents
    protocols and web APIs, this document defines two "cmw" claims for
    use with JSON Web Tokens (JWT) and CBOR Web Tokens (CWT).
 
-   Their definitions are provided in Section 9.2 and Section 9.1
-   respectively.
+   The definitions for these claims can be found in Section 9.2 and
+   Section 9.1, respectively.
 
 4.1.  Encoding Requirements
 
