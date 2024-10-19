@@ -344,10 +344,11 @@ Table of Contents
    composite device use cases, the CMW collection can be adapted for
    other scenarios that require the aggregation of RATS conceptual
    messages.  For instance, collections may be used to group
-   Endorsements, Reference Values, Attestation Results, and more.  One
-   CMW collection can be a mixture of different types of messages.  One
-   CMW collection can be used to carry messages related to more than one
-   device at a time.
+   Endorsements, Reference Values, Attestation Results, and more.  A
+   single CMW collection can contain a mix of different message types,
+   and it can also be used to carry messages related to multiple devices
+   simultaneously.  One CMW collection can be used to carry messages
+   related to more than one device at a time.
 
    The CMW collection (Figure 3) is defined as a CBOR map or JSON object
    with CMW values, either native or "tunnelled" (Section 3.3.3).  The
