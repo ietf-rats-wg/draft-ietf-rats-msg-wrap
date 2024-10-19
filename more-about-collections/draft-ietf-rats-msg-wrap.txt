@@ -482,9 +482,9 @@ Table of Contents
 
 4.  Transporting CMW in COSE and JOSE Web Tokens
 
-   To allow embedding CMWs and CMW collections into CBOR-based protocols
-   and web APIs, this document defines two "cmw" claims for JSON Web
-   Tokens (JWT) and CBOR Web Tokens (CWT).
+   To facilitate the embedding of CMWs and CMW collections in CBOR-based
+   protocols and web APIs, this document defines two "cmw" claims for
+   use with JSON Web Tokens (JWT) and CBOR Web Tokens (CWT).
 
    Their definitions are provided in Section 9.2 and Section 9.1
    respectively.
