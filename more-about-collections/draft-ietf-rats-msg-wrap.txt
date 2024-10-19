@@ -347,8 +347,7 @@ Table of Contents
    Endorsements, Reference Values, Attestation Results, and more.  A
    single CMW collection can contain a mix of different message types,
    and it can also be used to carry messages related to multiple devices
-   simultaneously.  One CMW collection can be used to carry messages
-   related to more than one device at a time.
+   simultaneously.
 
    The CMW collection (Figure 3) is defined as a CBOR map or JSON object
    with CMW values, either native or "tunnelled" (Section 3.3.3).  The
