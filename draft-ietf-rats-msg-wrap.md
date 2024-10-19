@@ -289,7 +289,7 @@ Since the collection type is recursive, implementations may limit the allowed de
    title="CDDL definition of the CMW collection format"}
 
 CMW itself provides no facilities for authenticity, integrity protection, or confidentiality.
-It is up to the designer of each use case to understand the security properties necessary and add them around the collection.
+It is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly.
 A secure channel (e.g., via TLS) or object-level security (e.g., using JWT) may suffice in some scenarios, but not in all.
 
 When a CMW is used to carry the Evidence for composite or layered attestation for a single device, the security properties needed are that of attestation.
