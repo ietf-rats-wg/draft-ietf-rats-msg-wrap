@@ -271,7 +271,6 @@ To allow aggregation of multiple, potentially non-homogeneous evidence formats c
 Although originally designed to support layered Attester and composite device use cases, the CMW collection can be adapted for other scenarios that require the aggregation of RATS conceptual messages.
 For instance, collections may be used to group Endorsements, Reference Values, Attestation Results, and more.
 A single CMW collection can contain a mix of different message types, and it can also be used to carry messages related to multiple devices simultaneously.
-One CMW collection can be used to carry messages related to more than one device at a time.
 
 The CMW collection ({{fig-cddl-collection}}) is defined as a CBOR map or JSON object with CMW values, either native or "tunnelled" ({{cmw-tunnel}}).
 The position of a `cmw` entry in the `cmw-collection` is not significant.
