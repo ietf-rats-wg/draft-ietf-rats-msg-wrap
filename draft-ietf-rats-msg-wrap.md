@@ -291,7 +291,7 @@ Since the collection type is recursive, implementations may limit the allowed de
 
 CMW itself provides no facilities for authenticity, integrity protection, or confidentiality.
 It is up to the designer of each use case to understand the security properties necessary and add them around the collection.
-A secure channel (e.g., using TLS) or some form of object security (e.g., using JWT) may be sufficient, but not always.
+A secure channel (e.g., via TLS) or object-level security (e.g., using JWT) may suffice in some scenarios, but not in all.
 
 When a CMW is used to carry the Evidence for composite or layered attestation for a single device, the security properties needed are that of attestation.
 In particular, all the members in a CMW must be bound together so that an attacker can not replace one Evidence message showing compromise with that from a non-compromised device.
