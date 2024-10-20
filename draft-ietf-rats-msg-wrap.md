@@ -20,21 +20,24 @@ pi: [toc, sortrefs, symrefs]
 author:
  - name: Henk Birkholz
    organization: Fraunhofer SIT
-   email: henk.birkholz@sit.fraunhofer.de
+   email: henk.birkholz@ietf.contact
  - name: Ned Smith
    organization: Intel
    email: ned.smith@intel.com
  - name: Thomas Fossati
    organization: Linaro
    email: thomas.fossati@linaro.org
- - name: Hannes Tschofenig
-   email: hannes.tschofenig@gmx.net
+ -
+   name: Hannes Tschofenig
+   org: University of Applied Sciences Bonn-Rhein-Sieg
+   abbrev: H-BRS
+   email: Hannes.Tschofenig@gmx.net
 
 contributor:
  - name: Laurence Lundblade
    organization: Security Theory LLC
    email: lgl@securitytheory.com
-   contribution: Laurence contributed significant improvements around the security requirements and considerations for CMW collections.
+   contribution: Laurence made significant contributions to enhancing the security requirements and considerations for CMW collections.
 
 normative:
   RFC4648: base64
@@ -268,10 +271,9 @@ For example, in data center servers, it is not uncommon for separate attesting e
 One AE might measure and attest to what was booted on the main CPU, while another AE might measure and attest to what was booted on a SmartNIC plugged into a PCIe slot, and a third AE might measure and attest to what was booted on the machine's GPU.
 To allow aggregation of multiple, potentially non-homogeneous evidence formats collected from different AEs, this document defines a CMW "collection" as a container that holds several CMW items, each with a label that is unique within the scope of the collection.
 
-Even though initially designed to support the layered Attester and composite device use cases, the CMW collection can be repurposed for other use cases requiring aggregation of RATS conceptual messages.
-For example, collections may be used to carry groups of Endorsements or Reference Values, Attestation Results, and so on.
-One CMW collection can be a mixture of different types of messages.
-One CMW collection can be used to carry messages related to more than one device at a time.
+Although originally designed to support layered Attester and composite device use cases, the CMW collection can be adapted for other scenarios that require the aggregation of RATS conceptual messages.
+For instance, collections may be used to group Endorsements, Reference Values, Attestation Results, and more.
+A single CMW collection can contain a mix of different message types, and it can also be used to carry messages related to multiple devices simultaneously.
 
 The CMW collection ({{fig-cddl-collection}}) is defined as a CBOR map or JSON object with CMW values, either native or "tunnelled" ({{cmw-tunnel}}).
 The position of a `cmw` entry in the `cmw-collection` is not significant.
@@ -289,22 +291,23 @@ Since the collection type is recursive, implementations may limit the allowed de
 {: #fig-cddl-collection artwork-align="left"
    title="CDDL definition of the CMW collection format"}
 
-CMW itself provides no facilities for authenticity, integrity protection, privacy or attestation security.
-It is up to the designer of each use case to understand the security properties necessary and add them around the collection.
-See {{Section 12.2 of -rats-arch}} for an overview of Conceptual Message protection requirements.
+
+CMW itself provides no facilities for authenticity, integrity protection, or confidentiality.
+It is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly.
+A secure channel (e.g., via TLS) or object-level security (e.g., using JWT) may suffice in some scenarios, but not in all.
 
 When a CMW is used to carry the Evidence for composite or layered attestation for a single device, the security properties needed are that of attestation.
 In particular, all the members in a CMW must be bound together so that an attacker can not replace one Evidence message showing compromise with that from a non-compromised device.
-The Attesters, especially in handling their cryptographic key material, are expected to comply with the considerations in {{Section 12.1 of -rats-arch}} for authenticity and integrity protection.
+The authenticity and integrity protection MUST be attestation-oriented.
 For further security considerations about collections, see {{seccons-coll}}.
 
 ### Relation to EAT `submods`
 
 EAT submods ({{Section 4.2.18 of -rats-eat}}) provide a facility for aggregating attestation that has built-in security and will be suitable for some of the same attestation Evidence use cases covered by CMW collections.
+However, compared to CMW collections, EAT submods are limited in two ways:
 
-However, compared to CMW collections, EAT submods are not ideal for modelling layered attestation because their top-down structure does not align well with the bottom-up approach layered attesters use to build the chain of trust.
-
-This specification (see {{submods}}) extends EAT to allow carrying CMW in EAT `submods`.
+1. EAT {{-rats-eat}} allows carrying non-EAT-formatted types by augmenting the $EAT-CBOR-Tagged-Token socket or the $JSON-Selector socket. However, these need to be specified in subsequent standard documents updating the EAT specification,
+2. Their top-down structure does not align well with the bottom-up approach layered attesters use to build the chain of trust, making them not ideal for modelling layered attestation.
 
 ### CMW Collections' role in composite Attester topology
 
@@ -369,9 +372,9 @@ func CMWTypeDemux(b []byte) (CMW, error) {
 
 # Transporting CMW in COSE and JOSE Web Tokens
 
-To allow embedding CMWs and CMW collections into CBOR-based protocols and web APIs, this document defines two `"cmw"` claims for JSON Web Tokens (JWT) and CBOR Web Tokens (CWT).
+To facilitate the embedding of CMWs and CMW collections in CBOR-based protocols and web APIs, this document defines two `"cmw"` claims for use with JSON Web Tokens (JWT) and CBOR Web Tokens (CWT).
 
-Their definitions are provided in {{iana-jwt}} and {{iana-cwt}} respectively.
+The definitions for these claims can be found in {{iana-jwt}} and {{iana-cwt}}, respectively.
 
 ## Encoding Requirements
 
@@ -384,9 +387,10 @@ A CMW record carried in a `"cmw"` CWT claim MUST be a `cbor-record`.
 # Transporting CMW in X.509 Messages {#x509}
 
 CMW may need to be transported in PKIX messages, such as Certificate Signing Requests (CSRs) or in X.509 Certificates and Certificate Revocation Lists (CRLs).
-The former use is documented in {{-csr-a}}, the latter in Section 6.1 of {{DICE-arch}}.
 
-This section specifies the CMW extension to carry CMW objects.
+The use of CMW in CSRs is documented in {{-csr-a}}, while its application in X.509 Certificates and CRLs is detailed in Section 6.1 of {{DICE-arch}}.
+
+This section outlines the CMW extension designed to carry CMW objects.
 
 The CMW extension MAY be included in X.509 Certificates, CRLs {{-pkix}}, and CSRs.
 
@@ -410,7 +414,7 @@ CMW ::= CHOICE {
 }
 ~~~
 
-The CMW MUST contain the serialized CMW object in JSON or CBOR format, using the appropriate CHOICE entry.
+The CMW MUST include the serialized CMW object in either JSON or CBOR format, utilizing the appropriate CHOICE entry.
 
 The DER-encoded CMW is the value of the OCTET STRING for the extnValue field of the extension.
 
@@ -458,9 +462,9 @@ END
 
 ## Compatibility with DICE `ConceptualMessageWrapper`
 
-Section 6.1.8 of {{DICE-arch}} defines the ConceptualMessageWrapper format and the associated object identifier.
-The CMW format defined in {{DICE-arch}} allows only a subset of the CMW grammar defined in this document.
-Specifically, the tunnel and collection formats cannot be encoded using DICE CMWs.
+Section 6.1.8 of {{DICE-arch}} specifies the ConceptualMessageWrapper (CMW) format and its corresponding object identifier.
+The CMW format outlined in {{DICE-arch}} permits only a subset of the CMW grammar defined in this document.
+In particular, the tunnel and collection formats cannot be encoded using DICE CMWs.
 
 # Transporting CMW in EAT `submods` {#submods}
 
@@ -920,8 +924,7 @@ Brian Campbell,
 Carl Wallace,
 Carsten Bormann,
 Dionna Glaze,
-{{{Ionuț Mihalcea}}}
-Laurence Lundblade,
+{{{Ionuț Mihalcea}}},
 Michael B. Jones,
 Mohit Sethi,
 Russ Housley,
