@@ -37,7 +37,7 @@ contributor:
  - name: Laurence Lundblade
    organization: Security Theory LLC
    email: lgl@securitytheory.com
-   contribution: Laurence contributed significant improvements around the security requirements and considerations for CMW collections.
+   contribution: Laurence made significant contributions to enhancing the security requirements and considerations for CMW collections.
 
 normative:
   RFC4648: base64
@@ -291,6 +291,7 @@ Since the collection type is recursive, implementations may limit the allowed de
 {: #fig-cddl-collection artwork-align="left"
    title="CDDL definition of the CMW collection format"}
 
+
 CMW itself provides no facilities for authenticity, integrity protection, or confidentiality.
 It is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly.
 A secure channel (e.g., via TLS) or object-level security (e.g., using JWT) may suffice in some scenarios, but not in all.
@@ -386,6 +387,7 @@ A CMW record carried in a `"cmw"` CWT claim MUST be a `cbor-record`.
 # Transporting CMW in X.509 Messages {#x509}
 
 CMW may need to be transported in PKIX messages, such as Certificate Signing Requests (CSRs) or in X.509 Certificates and Certificate Revocation Lists (CRLs).
+
 The use of CMW in CSRs is documented in {{-csr-a}}, while its application in X.509 Certificates and CRLs is detailed in Section 6.1 of {{DICE-arch}}.
 
 This section outlines the CMW extension designed to carry CMW objects.
@@ -463,6 +465,25 @@ END
 Section 6.1.8 of {{DICE-arch}} specifies the ConceptualMessageWrapper (CMW) format and its corresponding object identifier.
 The CMW format outlined in {{DICE-arch}} permits only a subset of the CMW grammar defined in this document.
 In particular, the tunnel and collection formats cannot be encoded using DICE CMWs.
+
+# Transporting CMW in EAT `submods` {#submods}
+
+{{Section 4.2.18 of -rats-eat}} allows carrying non-EAT-formatted types in EAT submods by augmenting the `$EAT-CBOR-Tagged-Token` socket or the `$JSON-Selector` socket.
+
+The following CDDL adds `cbor-CMW` and `json-CMW` to EAT using such extension points:
+
+~~~ cddl
+$EAT-CBOR-Tagged-Token /= #6.CPA765(cbor-CMW)
+
+$JSON-Selector /= [ type: "CMW", nested-token: json-CMW ]
+~~~
+
+Where:
+
+* `cbor-CMW` and `json-CMW` are defined in {{collected-cddl}}, and
+* `CPA765` is the CBOR tag for CMW ({{iana-cbor-tag}}).
+
+[^rfced] This document uses the CPA (code point allocation) convention described in {{?I-D.bormann-cbor-draft-numbers}}. For each usage of the term "CPA", please remove the prefix "CPA" from the indicated value and replace the residue with the value assigned by IANA; perform an analogous substitution for all other occurrences of the prefix "CPA" in the document. Finally, please remove this note.
 
 # Examples
 
@@ -665,13 +686,13 @@ IANA is requested to add a new `cmw` claim to the "JSON Web Token Claims" sub-re
 * Change Controller: IETF
 * Specification Document(s): {{type-n-val}} and {{cmw-coll}} of {{&SELF}}
 
-## CBOR Tag Registration
+## CBOR Tag Registration {#iana-cbor-tag}
 
 IANA is requested to add the following tag to the "CBOR Tags" {{!IANA.cbor-tags}} registry.
 
 | CBOR Tag | Data Item | Semantics | Reference |
 |----------|-----------|-----------|-----------|
-| TBD      | CBOR map, CBOR array, CBOR tag | RATS Conceptual Message Wrapper | {{type-n-val}}, {{cbor-tag}} and {{cmw-coll}} of {{&SELF}} |
+| CPA765 | CBOR map, CBOR array, CBOR tag | RATS Conceptual Message Wrapper | {{type-n-val}}, {{cbor-tag}} and {{cmw-coll}} of {{&SELF}} |
 
 ## RATS Conceptual Message Wrapper (CMW) Indicators Registry {#iana-ind-ext}
 
@@ -893,7 +914,7 @@ When using CMW collection, the preconditions apply for each entry in the collect
 The list of currently open issues for this documents can be found at
 [](https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues).
 
-<cref>Note to RFC Editor: please remove before publication.</cref>
+[^rfced] please remove before publication.
 
 # Acknowledgments
 {:numbered="false"}
@@ -903,8 +924,7 @@ Brian Campbell,
 Carl Wallace,
 Carsten Bormann,
 Dionna Glaze,
-{{{Ionuț Mihalcea}}}
-Laurence Lundblade,
+{{{Ionuț Mihalcea}}},
 Michael B. Jones,
 Mohit Sethi,
 Russ Housley,
