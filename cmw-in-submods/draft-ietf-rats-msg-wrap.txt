@@ -5,11 +5,12 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 6 April 2025                                              Intel
+Expires: 23 April 2025                                             Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
-                                                          3 October 2024
+                                                                   H-BRS
+                                                         20 October 2024
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -57,7 +58,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 April 2025.
+   This Internet-Draft will expire on 23 April 2025.
 
 Copyright Notice
 
@@ -341,14 +342,14 @@ Table of Contents
    "collection" as a container that holds several CMW items, each with a
    label that is unique within the scope of the collection.
 
-   Even though initially designed to support the layered Attester and
-   composite device use cases, the CMW collection can be repurposed for
-   other use cases requiring aggregation of RATS conceptual messages.
-   For example, collections may be used to carry groups of Endorsements
-   or Reference Values, Attestation Results, and so on.  One CMW
-   collection can be a mixture of different types of messages.  One CMW
-   collection can be used to carry messages related to more than one
-   device at a time.
+   Although originally designed to support layered Attester and
+   composite device use cases, the CMW collection can be adapted for
+   other scenarios that require the aggregation of RATS conceptual
+   messages.  For instance, collections may be used to group
+   Endorsements, Reference Values, Attestation Results, and more.  A
+   single CMW collection can contain a mix of different message types,
+   and it can also be used to carry messages related to multiple devices
+   simultaneously.
 
    The CMW collection (Figure 3) is defined as a CBOR map or JSON object
    with CMW values, either native or "tunnelled" (Section 3.3.3).  The
@@ -379,21 +380,19 @@ Table of Contents
            Figure 3: CDDL definition of the CMW collection format
 
    CMW itself provides no facilities for authenticity, integrity
-   protection, privacy or attestation security.  It is up to the
-   designer of each use case to understand the security properties
-   necessary and add them around the collection.  See Section 12.2 of
-   [RFC9334] for an overview of Conceptual Message protection
-   requirements.
+   protection, or confidentiality.  It is the responsibility of the
+   designer for each use case to determine the necessary security
+   properties and implement them accordingly.  A secure channel (e.g.,
+   via TLS) or object-level security (e.g., using JWT) may suffice in
+   some scenarios, but not in all.
 
    When a CMW is used to carry the Evidence for composite or layered
    attestation for a single device, the security properties needed are
    that of attestation.  In particular, all the members in a CMW must be
    bound together so that an attacker can not replace one Evidence
    message showing compromise with that from a non-compromised device.
-   The Attesters, especially in handling their cryptographic key
-   material, are expected to comply with the considerations in
-   Section 12.1 of [RFC9334] for authenticity and integrity protection.
-   For further security considerations about collections, see
+   The authenticity and integrity protection MUST be attestation-
+   oriented.  For further security considerations about collections, see
    Section 9.2.
 
 3.3.1.  Relation to EAT submods
@@ -401,15 +400,17 @@ Table of Contents
    EAT submods (Section 4.2.18 of [I-D.ietf-rats-eat]) provide a
    facility for aggregating attestation that has built-in security and
    will be suitable for some of the same attestation Evidence use cases
-   covered by CMW collections.
+   covered by CMW collections.  However, compared to CMW collections,
+   EAT submods are limited in two ways:
 
-   However, compared to CMW collections, EAT submods are not ideal for
-   modelling layered attestation because their top-down structure does
-   not align well with the bottom-up approach layered attesters use to
-   build the chain of trust.
+   1.  EAT [I-D.ietf-rats-eat] allows carrying non-EAT-formatted types
+       by augmenting the $EAT-CBOR-Tagged-Token socket or the $JSON-
+       Selector socket.  However, these need to be specified in
+       subsequent standard documents updating the EAT specification,
 
-   This specification (see Section 6) extends EAT to allow carrying CMW
-   in EAT submods.
+   2.  Their top-down structure does not align well with the bottom-up
+       approach layered attesters use to build the chain of trust,
+       making them not ideal for modelling layered attestation.
 
 3.3.2.  CMW Collections' role in composite Attester topology
 
@@ -482,12 +483,12 @@ Table of Contents
 
 4.  Transporting CMW in COSE and JOSE Web Tokens
 
-   To allow embedding CMWs and CMW collections into CBOR-based protocols
-   and web APIs, this document defines two "cmw" claims for JSON Web
-   Tokens (JWT) and CBOR Web Tokens (CWT).
+   To facilitate the embedding of CMWs and CMW collections in CBOR-based
+   protocols and web APIs, this document defines two "cmw" claims for
+   use with JSON Web Tokens (JWT) and CBOR Web Tokens (CWT).
 
-   Their definitions are provided in Section 10.2 and Section 10.1
-   respectively.
+   The definitions for these claims can be found in Section 10.2 and
+   Section 10.1, respectively.
 
 4.1.  Encoding Requirements
 
@@ -502,11 +503,14 @@ Table of Contents
 
    CMW may need to be transported in PKIX messages, such as Certificate
    Signing Requests (CSRs) or in X.509 Certificates and Certificate
-   Revocation Lists (CRLs).  The former use is documented in
-   [I-D.ietf-lamps-csr-attestation], the latter in Section 6.1 of
-   [DICE-arch].
+   Revocation Lists (CRLs).
 
-   This section specifies the CMW extension to carry CMW objects.
+   The use of CMW in CSRs is documented in
+   [I-D.ietf-lamps-csr-attestation], while its application in X.509
+   Certificates and CRLs is detailed in Section 6.1 of [DICE-arch].
+
+   This section outlines the CMW extension designed to carry CMW
+   objects.
 
    The CMW extension MAY be included in X.509 Certificates, CRLs
    [RFC5280], and CSRs.
@@ -530,8 +534,8 @@ Table of Contents
        cbor OCTET STRING
    }
 
-   The CMW MUST contain the serialized CMW object in JSON or CBOR
-   format, using the appropriate CHOICE entry.
+   The CMW MUST include the serialized CMW object in either JSON or CBOR
+   format, utilizing the appropriate CHOICE entry.
 
    The DER-encoded CMW is the value of the OCTET STRING for the
    extnValue field of the extension.
@@ -579,11 +583,11 @@ Table of Contents
 
 5.2.  Compatibility with DICE ConceptualMessageWrapper
 
-   Section 6.1.8 of [DICE-arch] defines the ConceptualMessageWrapper
-   format and the associated object identifier.  The CMW format defined
-   in [DICE-arch] allows only a subset of the CMW grammar defined in
-   this document.  Specifically, the tunnel and collection formats
-   cannot be encoded using DICE CMWs.
+   Section 6.1.8 of [DICE-arch] specifies the ConceptualMessageWrapper
+   (CMW) format and its corresponding object identifier.  The CMW format
+   outlined in [DICE-arch] permits only a subset of the CMW grammar
+   defined in this document.  In particular, the tunnel and collection
+   formats cannot be encoded using DICE CMWs.
 
 6.  Transporting CMW in EAT submods
 
@@ -1241,9 +1245,9 @@ Table of Contents
               Ounsworth, M., Tschofenig, H., Birkholz, H., Wiseman, M.,
               and N. Smith, "Use of Remote Attestation with
               Certification Signing Requests", Work in Progress,
-              Internet-Draft, draft-ietf-lamps-csr-attestation-11, 18
-              September 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-lamps-csr-attestation-11>.
+              Internet-Draft, draft-ietf-lamps-csr-attestation-12, 12
+              October 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-lamps-csr-attestation-12>.
 
    [I-D.ietf-rats-ar4si]
               Voit, E., Birkholz, H., Hardjono, T., Fossati, T., and V.
@@ -1256,9 +1260,9 @@ Table of Contents
    [I-D.ietf-rats-corim]
               Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
               W. Pan, "Concise Reference Integrity Manifest", Work in
-              Progress, Internet-Draft, draft-ietf-rats-corim-05, 8 July
-              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              rats-corim-05>.
+              Progress, Internet-Draft, draft-ietf-rats-corim-06, 18
+              October 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-corim-06>.
 
    [I-D.ietf-rats-eat]
               Lundblade, L., Mandyam, G., O'Donoghue, J., and C.
@@ -1270,9 +1274,9 @@ Table of Contents
    [I-D.ietf-rats-eat-media-type]
               Lundblade, L., Birkholz, H., and T. Fossati, "EAT Media
               Types", Work in Progress, Internet-Draft, draft-ietf-rats-
-              eat-media-type-10, 26 September 2024,
+              eat-media-type-11, 10 October 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              eat-media-type-10>.
+              eat-media-type-11>.
 
    [I-D.ietf-rats-uccs]
               Birkholz, H., O'Donoghue, J., Cam-Winget, N., and C.
@@ -1433,9 +1437,8 @@ Appendix C.  Open Issues
 Acknowledgments
 
    The authors would like to thank Brian Campbell, Carl Wallace, Carsten
-   Bormann, Dionna Glaze, Ionuț Mihalcea Laurence Lundblade, Michael B.
-   Jones, Mohit Sethi, Russ Housley, and Tom Jones for their reviews and
-   suggestions.
+   Bormann, Dionna Glaze, Ionuț Mihalcea, Michael B.  Jones, Mohit
+   Sethi, Russ Housley, and Tom Jones for their reviews and suggestions.
 
    The definition of a CMW collection has been modelled on a proposal
    originally made by Simon Frost for an EAT-based Evidence collection
@@ -1450,14 +1453,14 @@ Contributors
    Email: lgl@securitytheory.com
 
 
-   Laurence contributed significant improvements around the security
+   Laurence made significant contributions to enhancing the security
    requirements and considerations for CMW collections.
 
 Authors' Addresses
 
    Henk Birkholz
    Fraunhofer SIT
-   Email: henk.birkholz@sit.fraunhofer.de
+   Email: henk.birkholz@ietf.contact
 
 
    Ned Smith
@@ -1471,4 +1474,5 @@ Authors' Addresses
 
 
    Hannes Tschofenig
-   Email: hannes.tschofenig@gmx.net
+   University of Applied Sciences Bonn-Rhein-Sieg
+   Email: Hannes.Tschofenig@gmx.net
