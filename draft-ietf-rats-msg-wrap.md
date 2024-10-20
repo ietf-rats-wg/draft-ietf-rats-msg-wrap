@@ -20,21 +20,24 @@ pi: [toc, sortrefs, symrefs]
 author:
  - name: Henk Birkholz
    organization: Fraunhofer SIT
-   email: henk.birkholz@sit.fraunhofer.de
+   email: henk.birkholz@ietf.contact
  - name: Ned Smith
    organization: Intel
    email: ned.smith@intel.com
  - name: Thomas Fossati
    organization: Linaro
    email: thomas.fossati@linaro.org
- - name: Hannes Tschofenig
-   email: hannes.tschofenig@gmx.net
+ -
+   name: Hannes Tschofenig
+   org: University of Applied Sciences Bonn-Rhein-Sieg
+   abbrev: H-BRS
+   email: Hannes.Tschofenig@gmx.net
 
 contributor:
  - name: Laurence Lundblade
    organization: Security Theory LLC
    email: lgl@securitytheory.com
-   contribution: Laurence contributed significant improvements around the security requirements and considerations for CMW collections.
+   contribution: Laurence made significant contributions to enhancing the security requirements and considerations for CMW collections.
 
 normative:
   RFC4648: base64
@@ -268,10 +271,9 @@ For example, in data center servers, it is not uncommon for separate attesting e
 One AE might measure and attest to what was booted on the main CPU, while another AE might measure and attest to what was booted on a SmartNIC plugged into a PCIe slot, and a third AE might measure and attest to what was booted on the machine's GPU.
 To allow aggregation of multiple, potentially non-homogeneous evidence formats collected from different AEs, this document defines a CMW "collection" as a container that holds several CMW items, each with a label that is unique within the scope of the collection.
 
-Even though initially designed to support the layered Attester and composite device use cases, the CMW collection can be repurposed for other use cases requiring aggregation of RATS conceptual messages.
-For example, collections may be used to carry groups of Endorsements or Reference Values, Attestation Results, and so on.
-One CMW collection can be a mixture of different types of messages.
-One CMW collection can be used to carry messages related to more than one device at a time.
+Although originally designed to support layered Attester and composite device use cases, the CMW collection can be adapted for other scenarios that require the aggregation of RATS conceptual messages.
+For instance, collections may be used to group Endorsements, Reference Values, Attestation Results, and more.
+A single CMW collection can contain a mix of different message types, and it can also be used to carry messages related to multiple devices simultaneously.
 
 The CMW collection ({{fig-cddl-collection}}) is defined as a CBOR map or JSON object with CMW values, either native or "tunnelled" ({{cmw-tunnel}}).
 The position of a `cmw` entry in the `cmw-collection` is not significant.
@@ -289,11 +291,14 @@ Since the collection type is recursive, implementations may limit the allowed de
 {: #fig-cddl-collection artwork-align="left"
    title="CDDL definition of the CMW collection format"}
 
-CMW itself provides no facilities for authenticity, integrity protection, privacy or attestation security.
-It is up to the designer of each use case to understand the security properties necessary and add them around the collection.
-A secure channel (e.g., using TLS) or some form of object security (e.g., using JWT) may be sufficient, but not always.
 
-When a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically bound to prevent an attacker from replacing compromised Evidence with that of a non-compromised device. The protection of authenticity and integrity MUST be provided by the attestation technology. For additional security considerations related to collections, refer to {{seccons-coll}}.
+CMW itself provides no facilities for authenticity, integrity protection, or confidentiality.
+It is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly.
+A secure channel (e.g., via TLS) or object-level security (e.g., using JWT) may suffice in some scenarios, but not in all.
+
+When a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically
+bound to prevent an attacker from replacing compromised Evidence with that of a non-compromised device. The protection of authenticity and integrity
+MUST be provided by the attestation technology. For additional security considerations related to collections, refer to {{seccons-coll}}.
 
 ### Relation to EAT `submods`
 
@@ -366,9 +371,9 @@ func CMWTypeDemux(b []byte) (CMW, error) {
 
 # Transporting CMW in COSE and JOSE Web Tokens
 
-To allow embedding CMWs and CMW collections into CBOR-based protocols and web APIs, this document defines two `"cmw"` claims for JSON Web Tokens (JWT) and CBOR Web Tokens (CWT).
+To facilitate the embedding of CMWs and CMW collections in CBOR-based protocols and web APIs, this document defines two `"cmw"` claims for use with JSON Web Tokens (JWT) and CBOR Web Tokens (CWT).
 
-Their definitions are provided in {{iana-jwt}} and {{iana-cwt}} respectively.
+The definitions for these claims can be found in {{iana-jwt}} and {{iana-cwt}}, respectively.
 
 ## Encoding Requirements
 
@@ -381,9 +386,10 @@ A CMW record carried in a `"cmw"` CWT claim MUST be a `cbor-record`.
 # Transporting CMW in X.509 Messages {#x509}
 
 CMW may need to be transported in PKIX messages, such as Certificate Signing Requests (CSRs) or in X.509 Certificates and Certificate Revocation Lists (CRLs).
-The former use is documented in {{-csr-a}}, the latter in Section 6.1 of {{DICE-arch}}.
 
-This section specifies the CMW extension to carry CMW objects.
+The use of CMW in CSRs is documented in {{-csr-a}}, while its application in X.509 Certificates and CRLs is detailed in Section 6.1 of {{DICE-arch}}.
+
+This section outlines the CMW extension designed to carry CMW objects.
 
 The CMW extension MAY be included in X.509 Certificates, CRLs {{-pkix}}, and CSRs.
 
@@ -407,7 +413,7 @@ CMW ::= CHOICE {
 }
 ~~~
 
-The CMW MUST contain the serialized CMW object in JSON or CBOR format, using the appropriate CHOICE entry.
+The CMW MUST include the serialized CMW object in either JSON or CBOR format, utilizing the appropriate CHOICE entry.
 
 The DER-encoded CMW is the value of the OCTET STRING for the extnValue field of the extension.
 
@@ -455,9 +461,28 @@ END
 
 ## Compatibility with DICE `ConceptualMessageWrapper`
 
-Section 6.1.8 of {{DICE-arch}} defines the ConceptualMessageWrapper format and the associated object identifier.
-The CMW format defined in {{DICE-arch}} allows only a subset of the CMW grammar defined in this document.
-Specifically, the tunnel and collection formats cannot be encoded using DICE CMWs.
+Section 6.1.8 of {{DICE-arch}} specifies the ConceptualMessageWrapper (CMW) format and its corresponding object identifier.
+The CMW format outlined in {{DICE-arch}} permits only a subset of the CMW grammar defined in this document.
+In particular, the tunnel and collection formats cannot be encoded using DICE CMWs.
+
+# Transporting CMW in EAT `submods` {#submods}
+
+{{Section 4.2.18 of -rats-eat}} allows carrying non-EAT-formatted types in EAT submods by augmenting the `$EAT-CBOR-Tagged-Token` socket or the `$JSON-Selector` socket.
+
+The following CDDL adds `cbor-CMW` and `json-CMW` to EAT using such extension points:
+
+~~~ cddl
+$EAT-CBOR-Tagged-Token /= #6.CPA765(cbor-CMW)
+
+$JSON-Selector /= [ type: "CMW", nested-token: json-CMW ]
+~~~
+
+Where:
+
+* `cbor-CMW` and `json-CMW` are defined in {{collected-cddl}}, and
+* `CPA765` is the CBOR tag for CMW ({{iana-cbor-tag}}).
+
+[^rfced] This document uses the CPA (code point allocation) convention described in {{?I-D.bormann-cbor-draft-numbers}}. For each usage of the term "CPA", please remove the prefix "CPA" from the indicated value and replace the residue with the value assigned by IANA; perform an analogous substitution for all other occurrences of the prefix "CPA" in the document. Finally, please remove this note.
 
 # Examples
 
@@ -660,13 +685,13 @@ IANA is requested to add a new `cmw` claim to the "JSON Web Token Claims" sub-re
 * Change Controller: IETF
 * Specification Document(s): {{type-n-val}} and {{cmw-coll}} of {{&SELF}}
 
-## CBOR Tag Registration
+## CBOR Tag Registration {#iana-cbor-tag}
 
 IANA is requested to add the following tag to the "CBOR Tags" {{!IANA.cbor-tags}} registry.
 
 | CBOR Tag | Data Item | Semantics | Reference |
 |----------|-----------|-----------|-----------|
-| TBD      | CBOR map, CBOR array, CBOR tag | RATS Conceptual Message Wrapper | {{type-n-val}}, {{cbor-tag}} and {{cmw-coll}} of {{&SELF}} |
+| CPA765 | CBOR map, CBOR array, CBOR tag | RATS Conceptual Message Wrapper | {{type-n-val}}, {{cbor-tag}} and {{cmw-coll}} of {{&SELF}} |
 
 ## RATS Conceptual Message Wrapper (CMW) Indicators Registry {#iana-ind-ext}
 
@@ -888,7 +913,7 @@ When using CMW collection, the preconditions apply for each entry in the collect
 The list of currently open issues for this documents can be found at
 [](https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues).
 
-<cref>Note to RFC Editor: please remove before publication.</cref>
+[^rfced] please remove before publication.
 
 # Acknowledgments
 {:numbered="false"}
@@ -898,8 +923,7 @@ Brian Campbell,
 Carl Wallace,
 Carsten Bormann,
 Dionna Glaze,
-{{{Ionuț Mihalcea}}}
-Laurence Lundblade,
+{{{Ionuț Mihalcea}}},
 Michael B. Jones,
 Mohit Sethi,
 Russ Housley,
