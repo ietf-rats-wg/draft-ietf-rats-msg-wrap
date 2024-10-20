@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-17T00:51:08.482037+00:00",
+  "timestamp": "2024-10-20T00:55:40.462345+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -7416,13 +7416,13 @@
       "labels": [],
       "body": "Due to the reflow of S3.3 I created a separate section to hold CMW/JWT-related considerations.   That, in turn, necessitated moving the X.509 section to a closer place.\r\n\r\nFix #115",
       "createdAt": "2024-09-20T17:24:35Z",
-      "updatedAt": "2024-10-01T11:22:38Z",
+      "updatedAt": "2024-10-19T19:27:31Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "cf9af0e57036fec5174d36ad0084760badaef075",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "more-about-collections",
-      "headRefOid": "cc0c401905f3d5afdb888f4f081c7ba3e074e0cc",
+      "headRefOid": "c4e73095a58826076c12598699afc3afb773bc54",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -7754,6 +7754,319 @@
               "updatedAt": "2024-10-01T11:22:38Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6N1sFd",
+          "commit": {
+            "abbreviatedOid": "cc0c401"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-19T18:21:46Z",
+          "updatedAt": "2024-10-19T18:21:47Z",
+          "comments": [
+            {
+              "originalPosition": 44,
+              "body": "```suggestion\r\nCMW itself provides no facilities for authenticity, integrity protection, or confidentiality.\r\n```",
+              "createdAt": "2024-10-19T18:21:47Z",
+              "updatedAt": "2024-10-19T18:21:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6N1sUm",
+          "commit": {
+            "abbreviatedOid": "cc0c401"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-19T18:22:52Z",
+          "updatedAt": "2024-10-19T18:22:52Z",
+          "comments": [
+            {
+              "originalPosition": 45,
+              "body": "```suggestion\r\nIt is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly.\r\n```",
+              "createdAt": "2024-10-19T18:22:52Z",
+              "updatedAt": "2024-10-19T18:22:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6N1sWj",
+          "commit": {
+            "abbreviatedOid": "cc0c401"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-19T18:23:07Z",
+          "updatedAt": "2024-10-19T18:23:08Z",
+          "comments": [
+            {
+              "originalPosition": 46,
+              "body": "```suggestion\r\nA secure channel (e.g., via TLS) or object-level security (e.g., using JWT) may suffice in some scenarios, but not in all.\r\n```",
+              "createdAt": "2024-10-19T18:23:08Z",
+              "updatedAt": "2024-10-19T18:23:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6N1szf",
+          "commit": {
+            "abbreviatedOid": "cc0c401"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-19T18:26:43Z",
+          "updatedAt": "2024-10-19T18:26:43Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "```suggestion\r\nAlthough originally designed to support layered Attester and composite device use cases, the CMW collection can be adapted for other scenarios that require the aggregation of RATS conceptual messages.\r\n```",
+              "createdAt": "2024-10-19T18:26:43Z",
+              "updatedAt": "2024-10-19T18:26:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6N1sz9",
+          "commit": {
+            "abbreviatedOid": "cc0c401"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-19T18:27:02Z",
+          "updatedAt": "2024-10-19T18:27:03Z",
+          "comments": [
+            {
+              "originalPosition": 33,
+              "body": "```suggestion\r\nFor instance, collections may be used to group Endorsements, Reference Values, Attestation Results, and more.\r\n```",
+              "createdAt": "2024-10-19T18:27:02Z",
+              "updatedAt": "2024-10-19T18:27:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6N1s0_",
+          "commit": {
+            "abbreviatedOid": "cc0c401"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-19T18:27:45Z",
+          "updatedAt": "2024-10-19T18:27:45Z",
+          "comments": [
+            {
+              "originalPosition": 34,
+              "body": "```suggestion\r\nA single CMW collection can contain a mix of different message types, and it can also be used to carry messages related to multiple devices simultaneously.\r\n```",
+              "createdAt": "2024-10-19T18:27:45Z",
+              "updatedAt": "2024-10-19T18:27:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6N1s1c",
+          "commit": {
+            "abbreviatedOid": "cc0c401"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-19T18:27:57Z",
+          "updatedAt": "2024-10-19T18:27:58Z",
+          "comments": [
+            {
+              "originalPosition": 35,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2024-10-19T18:27:57Z",
+              "updatedAt": "2024-10-19T18:27:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6N1tlc",
+          "commit": {
+            "abbreviatedOid": "cc0c401"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-19T18:34:52Z",
+          "updatedAt": "2024-10-19T18:34:52Z",
+          "comments": [
+            {
+              "originalPosition": 98,
+              "body": "```suggestion\r\nThe definitions for these claims can be found in {{iana-jwt}} and {{iana-cwt}}, respectively.\r\n```",
+              "createdAt": "2024-10-19T18:34:52Z",
+              "updatedAt": "2024-10-19T18:34:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6N1uKR",
+          "commit": {
+            "abbreviatedOid": "cc0c401"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-19T18:36:56Z",
+          "updatedAt": "2024-10-19T18:36:56Z",
+          "comments": [
+            {
+              "originalPosition": 96,
+              "body": "```suggestion\r\nTo facilitate the embedding of CMWs and CMW collections in CBOR-based protocols and web APIs, this document defines two `\"cmw\"` claims for use with JSON Web Tokens (JWT) and CBOR Web Tokens (CWT).\r\n```",
+              "createdAt": "2024-10-19T18:36:56Z",
+              "updatedAt": "2024-10-19T18:36:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6N1uRq",
+          "commit": {
+            "abbreviatedOid": "cc0c401"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-19T18:39:35Z",
+          "updatedAt": "2024-10-19T18:39:35Z",
+          "comments": [
+            {
+              "originalPosition": 113,
+              "body": "```suggestion\r\nThis section outlines the CMW extension designed to carry CMW objects.\r\n```",
+              "createdAt": "2024-10-19T18:39:35Z",
+              "updatedAt": "2024-10-19T18:39:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6N1uUW",
+          "commit": {
+            "abbreviatedOid": "cc0c401"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-19T18:40:39Z",
+          "updatedAt": "2024-10-19T18:40:39Z",
+          "comments": [
+            {
+              "originalPosition": 111,
+              "body": "```suggestion\r\nThe use of CMW in CSRs is documented in {{-csr-a}}, while its application in X.509 Certificates and CRLs is detailed in Section 6.1 of {{DICE-arch}}.\r\n```",
+              "createdAt": "2024-10-19T18:40:39Z",
+              "updatedAt": "2024-10-19T18:40:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6N1uV4",
+          "commit": {
+            "abbreviatedOid": "cc0c401"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-19T18:41:28Z",
+          "updatedAt": "2024-10-19T18:41:28Z",
+          "comments": [
+            {
+              "originalPosition": 137,
+              "body": "```suggestion\r\nThe CMW MUST include the serialized CMW object in either JSON or CBOR format, utilizing the appropriate CHOICE entry.\r\n```",
+              "createdAt": "2024-10-19T18:41:28Z",
+              "updatedAt": "2024-10-19T18:41:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6N1uq4",
+          "commit": {
+            "abbreviatedOid": "cc0c401"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-19T18:44:33Z",
+          "updatedAt": "2024-10-19T18:44:34Z",
+          "comments": [
+            {
+              "originalPosition": 185,
+              "body": "```suggestion\r\nSection 6.1.8 of {{DICE-arch}} specifies the ConceptualMessageWrapper (CMW) format and its corresponding object identifier.\r\n```",
+              "createdAt": "2024-10-19T18:44:33Z",
+              "updatedAt": "2024-10-19T18:44:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6N1u7F",
+          "commit": {
+            "abbreviatedOid": "cc0c401"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-19T18:44:54Z",
+          "updatedAt": "2024-10-19T18:44:55Z",
+          "comments": [
+            {
+              "originalPosition": 186,
+              "body": "```suggestion\r\nThe CMW format outlined in {{DICE-arch}} permits only a subset of the CMW grammar defined in this document.\r\n```",
+              "createdAt": "2024-10-19T18:44:54Z",
+              "updatedAt": "2024-10-19T18:44:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6N1u9t",
+          "commit": {
+            "abbreviatedOid": "cc0c401"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-19T18:45:06Z",
+          "updatedAt": "2024-10-19T18:45:07Z",
+          "comments": [
+            {
+              "originalPosition": 187,
+              "body": "```suggestion\r\nIn particular, the tunnel and collection formats cannot be encoded using DICE CMWs.\r\n```",
+              "createdAt": "2024-10-19T18:45:06Z",
+              "updatedAt": "2024-10-19T18:45:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6N1zWc",
+          "commit": {
+            "abbreviatedOid": "c4e7309"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-10-19T19:27:31Z",
+          "updatedAt": "2024-10-19T19:27:31Z",
+          "comments": []
         }
       ]
     },
@@ -7769,7 +8082,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-09-30T13:18:30Z",
-      "updatedAt": "2024-10-03T09:03:17Z",
+      "updatedAt": "2024-10-19T19:20:44Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "cf9af0e57036fec5174d36ad0084760badaef075",
@@ -7927,6 +8240,19 @@
               "updatedAt": "2024-10-03T09:03:18Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6N1x5F",
+          "commit": {
+            "abbreviatedOid": "5c5928a"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-10-19T19:20:44Z",
+          "updatedAt": "2024-10-19T19:20:44Z",
+          "comments": []
         }
       ]
     },
@@ -7968,6 +8294,86 @@
           "body": "",
           "createdAt": "2024-10-10T10:09:32Z",
           "updatedAt": "2024-10-10T10:09:32Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 120,
+      "id": "PR_kwDOIGCt2M5_L4lG",
+      "title": "Updated author info",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/120",
+      "state": "OPEN",
+      "author": "hannestschofenig",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-19T17:16:33Z",
+      "updatedAt": "2024-10-19T19:15:26Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "0292fc225f5acb3ce7465d336cf3acc2f7575d87",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "hannestschofenig-patch-1",
+      "headRefOid": "887a4df6b82161b8ddf9acc13a2566a5359c8008",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6N1xHO",
+          "commit": {
+            "abbreviatedOid": "887a4df"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-10-19T19:15:26Z",
+          "updatedAt": "2024-10-19T19:15:26Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 121,
+      "id": "PR_kwDOIGCt2M5_L_Zb",
+      "title": "Re-wording of the paragraph",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/121",
+      "state": "OPEN",
+      "author": "hannestschofenig",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-19T18:33:42Z",
+      "updatedAt": "2024-10-19T19:15:01Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "more-about-collections",
+      "baseRefOid": "cc0c401905f3d5afdb888f4f081c7ba3e074e0cc",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "hannestschofenig-patch-2",
+      "headRefOid": "cea1277c3341b39726a778a49991b4de9e9050df",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6N1xGX",
+          "commit": {
+            "abbreviatedOid": "cea1277"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-10-19T19:15:01Z",
+          "updatedAt": "2024-10-19T19:15:01Z",
           "comments": []
         }
       ]
