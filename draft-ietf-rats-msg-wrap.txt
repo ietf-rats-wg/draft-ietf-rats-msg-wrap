@@ -9,6 +9,7 @@ Expires: 23 April 2025                                             Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
+                                                                   H-BRS
                                                          20 October 2024
 
 
@@ -1437,4 +1438,5 @@ Authors' Addresses
 
 
    Hannes Tschofenig
-   Email: hannes.tschofenig@gmx.net
+   University of Applied Sciences Bonn-Rhein-Sieg
+   Email: Hannes.Tschofenig@gmx.net
