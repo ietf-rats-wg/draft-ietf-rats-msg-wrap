@@ -1595,9 +1595,10 @@ cbor-collection = {
 <p id="section-3.3-7">CMW itself provides no facilities for authenticity, integrity protection, or confidentiality.
 It is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly.
 A secure channel (e.g., via TLS) or object-level security (e.g., using JWT) may suffice in some scenarios, but not in all.<a href="#section-3.3-7" class="pilcrow">¶</a></p>
-<p id="section-3.3-8">When a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically
-bound to prevent an attacker from replacing compromised Evidence with that of a non-compromised device. The protection of authenticity and integrity
-<span class="bcp14">MUST</span> be provided by the attestation technology. For additional security considerations related to collections, refer to <a href="#seccons-coll" class="auto internal xref">Section 9.2</a>.<a href="#section-3.3-8" class="pilcrow">¶</a></p>
+<p id="section-3.3-8">When a CMW is used to carry the Evidence for composite or layered attestation for a single device, the security properties needed are that of attestation.
+In particular, all the members in a CMW must be bound together so that an attacker can not replace one Evidence message showing compromise with that from a non-compromised device.
+The authenticity and integrity protection <span class="bcp14">MUST</span> be attestation-oriented.
+For further security considerations about collections, see <a href="#seccons-coll" class="auto internal xref">Section 9.2</a>.<a href="#section-3.3-8" class="pilcrow">¶</a></p>
 <div id="relation-to-eat-submods">
 <section id="section-3.3.1">
           <h4 id="name-relation-to-eat-submods">
