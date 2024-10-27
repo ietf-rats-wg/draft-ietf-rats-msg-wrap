@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-24T00:51:08.798793+00:00",
+  "timestamp": "2024-10-27T00:55:25.254037+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -1846,6 +1846,22 @@
           "updatedAt": "2024-09-30T03:21:16Z"
         }
       ]
+    },
+    {
+      "number": 123,
+      "id": "I_kwDOIGCt2M6bsz8X",
+      "title": "Expected use of cmw and CF in IANA section could be more clear",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/123",
+      "state": "OPEN",
+      "author": "nedmsmith",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Section 10.3 defines the CBOR tag `CPA765` and section 6. defines the expected content as `CMW`. \r\n\r\nSection 10.6 requests TBD1 and TBD2 from CF registry. Section 3.2 defines $cbor-tag socket and uses example `tn` and `$fmt` inputs to the macro. But it doesn't describe if the macro should be used for the TBD1 input.  There is an example that defines $cbor-tag as `cbor-tag<1668576818, any>`. But it isn't clear if 1668576818 is the intended TN result from TBD1 or if the intended $fmt is `any`.  In other words, is the following macro definition intended?\r\n```\r\n; 1668576818 = tn(TBD1)\r\n$cbor-tag /= cbor-tag<1668576818, any>\r\n; or possibly\r\n$cbor-tag /= cbor-tag<1668576818, cmw>\r\n```\r\nThe various media-type / content-format names use `cmw` (e.g., `cmw+cbor`, `cmw+json`), but there isn't text that explicitly associates the I-D use of \"CMW\" with the cddl `cmw`.  The top level `cmw` isn't discussed in the normative part of the I-D. For example, it would be helpful if the following cddl was described in section 3.\r\n```\r\ncmw = json-CMW / cbor-CMW\r\n\r\njson-CMW = json-record / json-collection\r\ncbor-CMW = cbor-record / cbor-collection / $cbor-tag\r\n```\r\nwith text that equates CMW with `cmw`. \r\n",
+      "createdAt": "2024-10-24T17:42:40Z",
+      "updatedAt": "2024-10-24T17:42:40Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
