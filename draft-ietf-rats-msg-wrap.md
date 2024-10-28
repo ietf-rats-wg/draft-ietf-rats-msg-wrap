@@ -95,6 +95,7 @@ Additionally, the document describes a collection type that enables the aggregat
 This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
 These allow embedding the wrapped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols.
 In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.
+Finally, this specification extends EAT to allow carrying CMWs in EAT submods.
 
 --- middle
 
@@ -146,6 +147,7 @@ objects.
 This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
 These allow embedding the wrapped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols.
 In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.
+Finally, this specification extends EAT to allow carrying CMWs in EAT submods ({{Section 4.2.18 of -rats-eat}}).
 
 # Conventions and Definitions
 
@@ -299,14 +301,6 @@ A secure channel (e.g., via TLS) or object-level security (e.g., using JWT) may 
 When a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically
 bound to prevent an attacker from replacing Evidence from a compromised device with Evidence from a non-compromised device. The protection of authenticity and integrity
 MUST be provided by the attestation technology. For additional security considerations related to collections, refer to {{seccons-coll}}.
-
-### Relation to EAT `submods`
-
-EAT submods ({{Section 4.2.18 of -rats-eat}}) provide a facility for aggregating attestation that has built-in security and will be suitable for some of the same attestation Evidence use cases covered by CMW collections.
-However, compared to CMW collections, EAT submods are limited in two ways:
-
-1. EAT {{-rats-eat}} allows carrying non-EAT-formatted types by augmenting the $EAT-CBOR-Tagged-Token socket or the $JSON-Selector socket. However, these need to be specified in subsequent standard documents updating the EAT specification,
-2. Their top-down structure does not align well with the bottom-up approach layered attesters use to build the chain of trust, making them not ideal for modelling layered attestation.
 
 ### CMW Collections' role in composite Attester topology
 
@@ -465,7 +459,7 @@ Section 6.1.8 of {{DICE-arch}} specifies the ConceptualMessageWrapper (CMW) form
 The CMW format outlined in {{DICE-arch}} permits only a subset of the CMW grammar defined in this document.
 In particular, the tunnel and collection formats cannot be encoded using DICE CMWs.
 
-# Transporting CMW in EAT `submods` {#submods}
+# Transporting CMW in EAT submods {#submods}
 
 {{Section 4.2.18 of -rats-eat}} allows carrying non-EAT-formatted types in EAT submods by augmenting the `$EAT-CBOR-Tagged-Token` socket or the `$JSON-Selector` socket.
 
