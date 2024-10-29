@@ -147,7 +147,7 @@ objects.
 This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
 These allow embedding the wrapped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols.
 In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.
-Finally, this specification extends EAT to allow carrying CMWs in EAT submods ({{Section 4.2.18 of -rats-eat}}).
+Finally, this specification extends EAT to allow carrying CMWs in EAT submods.
 
 # Conventions and Definitions
 
