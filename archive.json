@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-27T00:55:25.254037+00:00",
+  "timestamp": "2024-10-29T00:52:43.898969+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -8425,6 +8425,46 @@
       "mergeCommit": null,
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 124,
+      "id": "PR_kwDOIGCt2M6AJhFK",
+      "title": "remove \"relation with EAT submods\" section",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/124",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This section is not needed anymore.",
+      "createdAt": "2024-10-28T19:26:50Z",
+      "updatedAt": "2024-10-28T19:28:46Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "39e6c7720a94d78331684dff33a47b334169ccbe",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "submods-cons",
+      "headRefOid": "10c9bc36f3f86faae24b85546f5446043c434ecc",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6PDX7R",
+          "commit": {
+            "abbreviatedOid": "10c9bc3"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-10-28T19:28:46Z",
+          "updatedAt": "2024-10-28T19:28:46Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
