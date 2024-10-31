@@ -297,7 +297,7 @@ It is the responsibility of the designer for each use case to determine the nece
 A secure channel (e.g., via TLS) or object-level security (e.g., using JWT) may suffice in some scenarios, but not in all.
 
 When a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically
-bound to prevent an attacker from replacing compromised Evidence with that of a non-compromised device. The protection of authenticity and integrity
+bound to prevent an attacker from replacing Evidence from a compromised device with Evidence from a non-compromised device. The protection of authenticity and integrity
 MUST be provided by the attestation technology. For additional security considerations related to collections, refer to {{seccons-coll}}.
 
 ### Relation to EAT `submods`
