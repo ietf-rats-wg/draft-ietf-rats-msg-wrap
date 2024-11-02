@@ -293,23 +293,24 @@ Table of Contents
    Content-Format number associated with the CBOR tag and then encoded
    as a CBOR byte string, to which the tag is prepended.
 
-   The CMW CBOR Tag is defined in Figure 2 as a macro with two
-   parameters:
+   The CMW CBOR Tag is defined in Figure 2 using two different macros.
+   One for "native" CBOR types, the other for all other types.  Both
+   macros take the CBOR tag number tn as a parameter.  The cbor-tagged-
+   cbor macro also takes the CDDL definition of the associated
+   conceptual message fmt as a second parameter.
 
-   *  tn, the CBOR tag number
+   cbor-tagged-cbor<tn, fmt> = #6.<tn>(bytes .cbor fmt)
 
-   *  $fmt, the definition of the associated conceptual message
+   cbor-tagged-data<tn> = #6.<tn>(bytes)
 
-   cbor-tag<tn, $fmt> = #6.<tn>(bytes .cbor $fmt)
-
-           Figure 2: CDDL definition of the CBOR Tag format macro
+          Figure 2: CDDL definition of the CBOR Tag format macros
 
    To add a new CMW, the $cbor-tag type socket is extended with a new
    instance of the CMW CBOR Tag macro.  For example, to associate
    conceptual messages of type my-evidence with CBOR Tag 1668576819, one
    would extend $cbor-tag as follows:
 
-   $cbor-tag /= cbor-tag<1668576819, my-evidence>
+   $cbor-tag /= cbor-tagged-cbor<1668576819, my-evidence>
 
    my-evidence = {
      &(eat_nonce: 10) => bstr .size (8..64)
@@ -1325,7 +1326,9 @@ Appendix A.  Collected CDDL
      ? ind: uint .bits cm-type
    ]
 
-   cbor-tag<tn, $fmt> = #6.<tn>(bytes .cbor $fmt)
+   cbor-tagged-cbor<tn, fmt> = #6.<tn>(bytes .cbor fmt)
+
+   cbor-tagged-data<tn> = #6.<tn>(bytes)
 
    json-collection = {
      ? "__cmwc_t": ~uri / oid

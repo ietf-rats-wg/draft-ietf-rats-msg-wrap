@@ -1558,36 +1558,33 @@ derive a corresponding CBOR tag in range [1668546817, 1668612095].<a href="#sect
 <p id="section-3.2-2">The RATS conceptual message is first serialized according to the
 Content-Format number associated with the CBOR tag and then encoded as a
 CBOR byte string, to which the tag is prepended.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.2-3">The CMW CBOR Tag is defined in <a href="#fig-cddl-cbor-tag" class="auto internal xref">Figure 2</a> as a macro with two parameters:<a href="#section-3.2-3" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-3.2-4.1">
-            <p id="section-3.2-4.1.1"><code>tn</code>, the CBOR tag number<a href="#section-3.2-4.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.2-4.2">
-            <p id="section-3.2-4.2.1"><code>$fmt</code>, the definition of the associated conceptual message<a href="#section-3.2-4.2.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
+<p id="section-3.2-3">The CMW CBOR Tag is defined in <a href="#fig-cddl-cbor-tag" class="auto internal xref">Figure 2</a> using two different macros.
+One for "native" CBOR types, the other for all other types.
+Both macros take the CBOR tag number <code>tn</code> as a parameter.
+The <code>cbor-tagged-cbor</code> macro also takes the CDDL definition of the associated conceptual message <code>fmt</code> as a second parameter.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-of-the-cbor"></span><div id="fig-cddl-cbor-tag">
 <figure id="figure-2">
-          <div class="alignLeft art-cddl art-text artwork" id="section-3.2-5.1">
+          <div class="alignLeft art-cddl art-text artwork" id="section-3.2-4.1">
 <pre>
-cbor-tag&lt;tn, $fmt&gt; = #6.&lt;tn&gt;(bytes .cbor $fmt)
+cbor-tagged-cbor&lt;tn, fmt&gt; = #6.&lt;tn&gt;(bytes .cbor fmt)
+
+cbor-tagged-data&lt;tn&gt; = #6.&lt;tn&gt;(bytes)
 </pre>
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
-<a href="#name-cddl-definition-of-the-cbor" class="selfRef">CDDL definition of the CBOR Tag format macro</a>
+<a href="#name-cddl-definition-of-the-cbor" class="selfRef">CDDL definition of the CBOR Tag format macros</a>
           </figcaption></figure>
 </div>
-<p id="section-3.2-6">To add a new CMW, the <code>$cbor-tag</code> type socket is extended with a new instance of the CMW CBOR Tag macro.
-For example, to associate conceptual messages of type <code>my-evidence</code> with CBOR Tag <code>1668576819</code>, one would extend <code>$cbor-tag</code> as follows:<a href="#section-3.2-6" class="pilcrow">¶</a></p>
-<div class="lang-cddl sourcecode" id="section-3.2-7">
+<p id="section-3.2-5">To add a new CMW, the <code>$cbor-tag</code> type socket is extended with a new instance of the CMW CBOR Tag macro.
+For example, to associate conceptual messages of type <code>my-evidence</code> with CBOR Tag <code>1668576819</code>, one would extend <code>$cbor-tag</code> as follows:<a href="#section-3.2-5" class="pilcrow">¶</a></p>
+<div class="lang-cddl sourcecode" id="section-3.2-6">
 <pre>
-$cbor-tag /= cbor-tag&lt;1668576819, my-evidence&gt;
+$cbor-tag /= cbor-tagged-cbor&lt;1668576819, my-evidence&gt;
 
 my-evidence = {
   &amp;(eat_nonce: 10) =&gt; bstr .size (8..64)
 }
-</pre><a href="#section-3.2-7" class="pilcrow">¶</a>
+</pre><a href="#section-3.2-6" class="pilcrow">¶</a>
 </div>
 <div id="use-of-pre-existing-cbor-tags">
 <section id="section-3.2.1">
@@ -2860,7 +2857,9 @@ cbor-record = [
   ? ind: uint .bits cm-type
 ]
 
-cbor-tag&lt;tn, $fmt&gt; = #6.&lt;tn&gt;(bytes .cbor $fmt)
+cbor-tagged-cbor&lt;tn, fmt&gt; = #6.&lt;tn&gt;(bytes .cbor fmt)
+
+cbor-tagged-data&lt;tn&gt; = #6.&lt;tn&gt;(bytes)
 
 json-collection = {
   ? "__cmwc_t": ~uri / oid
