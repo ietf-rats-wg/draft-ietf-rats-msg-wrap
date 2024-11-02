@@ -14,7 +14,8 @@
 Additionally, the document describes a collection type that enables the aggregation of one or more CMWs into a single message. 
        This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
 These allow embedding the wrapped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols.
-In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols. 
+In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.
+Finally, this specification extends EAT to allow carrying CMWs in EAT submods. 
     " name="description">
 <meta content="xml2rfc 3.23.2" name="generator">
 <meta content="evidence" name="keyword">
@@ -1138,7 +1139,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
 Additionally, the document describes a collection type that enables the aggregation of one or more CMWs into a single message.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <p id="section-abstract-2">This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
 These allow embedding the wrapped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols.
-In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.
+Finally, this specification extends EAT to allow carrying CMWs in EAT submods.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-discussion-venues">
@@ -1223,13 +1225,10 @@ In addition, a Media Type and a CoAP Content-Format are defined for transporting
                 <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-cmw-collections" class="internal xref">CMW Collections</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.1">
-                    <p id="section-toc.1-1.3.2.3.2.1.1"><a href="#section-3.3.1" class="auto internal xref">3.3.1</a>.  <a href="#name-relation-to-eat-submods" class="internal xref">Relation to EAT <code>submods</code></a></p>
+                    <p id="section-toc.1-1.3.2.3.2.1.1"><a href="#section-3.3.1" class="auto internal xref">3.3.1</a>.  <a href="#name-cmw-collections-role-in-com" class="internal xref">CMW Collections' role in composite Attester topology</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.2">
-                    <p id="section-toc.1-1.3.2.3.2.2.1"><a href="#section-3.3.2" class="auto internal xref">3.3.2</a>.  <a href="#name-cmw-collections-role-in-com" class="internal xref">CMW Collections' role in composite Attester topology</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.3">
-                    <p id="section-toc.1-1.3.2.3.2.3.1"><a href="#section-3.3.3" class="auto internal xref">3.3.3</a>.  <a href="#name-cmw-tunnel" class="internal xref">CMW Tunnel</a></p>
+                    <p id="section-toc.1-1.3.2.3.2.2.1"><a href="#section-3.3.2" class="auto internal xref">3.3.2</a>.  <a href="#name-cmw-tunnel" class="internal xref">CMW Tunnel</a></p>
 </li>
                 </ul>
 </li>
@@ -1258,7 +1257,7 @@ In addition, a Media Type and a CoAP Content-Format are defined for transporting
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-transporting-cmw-in-eat-sub" class="internal xref">Transporting CMW in EAT <code>submods</code></a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-transporting-cmw-in-eat-sub" class="internal xref">Transporting CMW in EAT submods</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-examples" class="internal xref">Examples</a></p>
@@ -1436,7 +1435,8 @@ or for stable storage of Attestation Results in the form of file system
 objects.<a href="#section-1-7" class="pilcrow">¶</a></p>
 <p id="section-1-8">This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
 These allow embedding the wrapped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols.
-In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.<a href="#section-1-8" class="pilcrow">¶</a></p>
+In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.
+Finally, this specification extends EAT to allow carrying CMWs in EAT submods.<a href="#section-1-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1472,7 +1472,7 @@ document:<a href="#section-3-1" class="pilcrow">¶</a></p>
 </li>
       </ol>
 <p id="section-3-3">A further CMW "collection" type that holds together multiple CMW items is defined in <a href="#cmw-coll" class="auto internal xref">Section 3.3</a>.<a href="#section-3-3" class="pilcrow">¶</a></p>
-<p id="section-3-4">A CMW "tunnel" type is also defined in <a href="#cmw-tunnel" class="auto internal xref">Section 3.3.3</a> to allow transporting CBOR CMWs in JSON collections and vice-versa.<a href="#section-3-4" class="pilcrow">¶</a></p>
+<p id="section-3-4">A CMW "tunnel" type is also defined in <a href="#cmw-tunnel" class="auto internal xref">Section 3.3.2</a> to allow transporting CBOR CMWs in JSON collections and vice-versa.<a href="#section-3-4" class="pilcrow">¶</a></p>
 <p id="section-3-5">The collected CDDL is in <a href="#collected-cddl" class="auto internal xref">Appendix A</a>.<a href="#section-3-5" class="pilcrow">¶</a></p>
 <p id="section-3-6">This document only defines an encapsulation, not a security format.
 It is the responsibility of the Attester to ensure that the CMW contents have the necessary security protection.
@@ -1616,7 +1616,7 @@ To allow aggregation of multiple, potentially non-homogeneous evidence formats c
 <p id="section-3.3-2">Although originally designed to support layered Attester and composite device use cases, the CMW collection can be adapted for other scenarios that require the aggregation of RATS conceptual messages.
 For instance, collections may be used to group Endorsements, Reference Values, Attestation Results, and more.
 A single CMW collection can contain a mix of different message types, and it can also be used to carry messages related to multiple devices simultaneously.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
-<p id="section-3.3-3">The CMW collection (<a href="#fig-cddl-collection" class="auto internal xref">Figure 3</a>) is defined as a CBOR map or JSON object with CMW values, either native or "tunnelled" (<a href="#cmw-tunnel" class="auto internal xref">Section 3.3.3</a>).
+<p id="section-3.3-3">The CMW collection (<a href="#fig-cddl-collection" class="auto internal xref">Figure 3</a>) is defined as a CBOR map or JSON object with CMW values, either native or "tunnelled" (<a href="#cmw-tunnel" class="auto internal xref">Section 3.3.2</a>).
 The position of a <code>cmw</code> entry in the <code>cmw-collection</code> is not significant.
 Labels can be strings (or integers in the CBOR serialization) that serve as a mnemonic for different conceptual messages in the collection.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
 <p id="section-3.3-4">The <code>"__cmwc_t"</code> key is reserved for associating an optional type to the overall collection and <span class="bcp14">MUST NOT</span> be used for a label.
@@ -1648,45 +1648,28 @@ A secure channel (e.g., via TLS) or object-level security (e.g., using JWT) may 
 <p id="section-3.3-8">When a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically
 bound to prevent an attacker from replacing Evidence from a compromised device with Evidence from a non-compromised device. The protection of authenticity and integrity
 <span class="bcp14">MUST</span> be provided by the attestation technology. For additional security considerations related to collections, refer to <a href="#seccons-coll" class="auto internal xref">Section 9.2</a>.<a href="#section-3.3-8" class="pilcrow">¶</a></p>
-<div id="relation-to-eat-submods">
-<section id="section-3.3.1">
-          <h4 id="name-relation-to-eat-submods">
-<a href="#section-3.3.1" class="section-number selfRef">3.3.1. </a><a href="#name-relation-to-eat-submods" class="section-name selfRef">Relation to EAT <code>submods</code></a>
-          </h4>
-<p id="section-3.3.1-1">EAT submods (<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-31#section-4.2.18" class="relref">Section 4.2.18</a> of [<a href="#I-D.ietf-rats-eat" class="cite xref">I-D.ietf-rats-eat</a>]</span>) provide a facility for aggregating attestation that has built-in security and will be suitable for some of the same attestation Evidence use cases covered by CMW collections.
-However, compared to CMW collections, EAT submods are limited in two ways:<a href="#section-3.3.1-1" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-3.3.1-2">
-<li id="section-3.3.1-2.1">
-              <p id="section-3.3.1-2.1.1">EAT <span>[<a href="#I-D.ietf-rats-eat" class="cite xref">I-D.ietf-rats-eat</a>]</span> allows carrying non-EAT-formatted types by augmenting the $EAT-CBOR-Tagged-Token socket or the $JSON-Selector socket. However, these need to be specified in subsequent standard documents updating the EAT specification,<a href="#section-3.3.1-2.1.1" class="pilcrow">¶</a></p>
-</li>
-            <li id="section-3.3.1-2.2">
-              <p id="section-3.3.1-2.2.1">Their top-down structure does not align well with the bottom-up approach layered attesters use to build the chain of trust, making them not ideal for modelling layered attestation.<a href="#section-3.3.1-2.2.1" class="pilcrow">¶</a></p>
-</li>
-          </ol>
-</section>
-</div>
 <div id="cmw-collections-role-in-composite-attester-topology">
-<section id="section-3.3.2">
+<section id="section-3.3.1">
           <h4 id="name-cmw-collections-role-in-com">
-<a href="#section-3.3.2" class="section-number selfRef">3.3.2. </a><a href="#name-cmw-collections-role-in-com" class="section-name selfRef">CMW Collections' role in composite Attester topology</a>
+<a href="#section-3.3.1" class="section-number selfRef">3.3.1. </a><a href="#name-cmw-collections-role-in-com" class="section-name selfRef">CMW Collections' role in composite Attester topology</a>
           </h4>
-<p id="section-3.3.2-1">A CMW Collection's tree structure is not required to be a spanning tree of the system's composite Attester topology.
+<p id="section-3.3.1-1">A CMW Collection's tree structure is not required to be a spanning tree of the system's composite Attester topology.
 If the labels carry semantic content for a Verifier (e.g. to improve Verifier performance or aid human comprehension), the collection <span class="bcp14">SHOULD</span> be integrity protected.
-For example, the collection can be integrity protected by including it in a signed token such as a CWT or JWT.<a href="#section-3.3.2-1" class="pilcrow">¶</a></p>
+For example, the collection can be integrity protected by including it in a signed token such as a CWT or JWT.<a href="#section-3.3.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="cmw-tunnel">
-<section id="section-3.3.3">
+<section id="section-3.3.2">
           <h4 id="name-cmw-tunnel">
-<a href="#section-3.3.3" class="section-number selfRef">3.3.3. </a><a href="#name-cmw-tunnel" class="section-name selfRef">CMW Tunnel</a>
+<a href="#section-3.3.2" class="section-number selfRef">3.3.2. </a><a href="#name-cmw-tunnel" class="section-name selfRef">CMW Tunnel</a>
           </h4>
-<p id="section-3.3.3-1">The CMW tunnel type (<a href="#fig-cddl-tunnel" class="auto internal xref">Figure 4</a>) allows for moving a CMW in one serialization format, either JSON or CBOR, into a collection that uses the opposite serialization format.<a href="#section-3.3.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.3.3-2">Both tunnel types are arrays with two elements.
+<p id="section-3.3.2-1">The CMW tunnel type (<a href="#fig-cddl-tunnel" class="auto internal xref">Figure 4</a>) allows for moving a CMW in one serialization format, either JSON or CBOR, into a collection that uses the opposite serialization format.<a href="#section-3.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.3.2-2">Both tunnel types are arrays with two elements.
 The first element, a fixed text string starting with a <code>#</code>, acts as a sentinel value.
-The <code>#</code>, which is not an acceptable start symbol for the <code>Content-Type</code> production (<a href="#collected-cddl" class="auto internal xref">Appendix A</a>), makes it possible to disambiguate a CMW tunnel from a CMW record.<a href="#section-3.3.3-2" class="pilcrow">¶</a></p>
+The <code>#</code>, which is not an acceptable start symbol for the <code>Content-Type</code> production (<a href="#collected-cddl" class="auto internal xref">Appendix A</a>), makes it possible to disambiguate a CMW tunnel from a CMW record.<a href="#section-3.3.2-2" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-of-the-cmw-t"></span><div id="fig-cddl-tunnel">
 <figure id="figure-4">
-            <div class="alignLeft art-cddl art-text artwork" id="section-3.3.3-3.1">
+            <div class="alignLeft art-cddl art-text artwork" id="section-3.3.2-3.1">
 <pre>
 c2j-tunnel = [ "#cmw-c2j-tunnel", base64url-string ]
 j2c-tunnel = [ "#cmw-j2c-tunnel", bytes ]
@@ -1696,25 +1679,25 @@ j2c-tunnel = [ "#cmw-j2c-tunnel", bytes ]
 <a href="#name-cddl-definition-of-the-cmw-t" class="selfRef">CDDL definition of the CMW tunnel format</a>
             </figcaption></figure>
 </div>
-<p id="section-3.3.3-4">The conversion algorithms are described in the following subsections.<a href="#section-3.3.3-4" class="pilcrow">¶</a></p>
+<p id="section-3.3.2-4">The conversion algorithms are described in the following subsections.<a href="#section-3.3.2-4" class="pilcrow">¶</a></p>
 <div id="cbor-to-json">
-<section id="section-3.3.3.1">
+<section id="section-3.3.2.1">
             <h5 id="name-cbor-to-json">
-<a href="#section-3.3.3.1" class="section-number selfRef">3.3.3.1. </a><a href="#name-cbor-to-json" class="section-name selfRef">CBOR-to-JSON</a>
+<a href="#section-3.3.2.1" class="section-number selfRef">3.3.2.1. </a><a href="#name-cbor-to-json" class="section-name selfRef">CBOR-to-JSON</a>
             </h5>
-<p id="section-3.3.3.1-1">The CBOR byte string of the serialised CBOR CMW is encoded as Base64 using the URL and filename safe alphabet (<span><a href="https://rfc-editor.org/rfc/rfc4648#section-5" class="relref">Section 5</a> of [<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>) without padding.
+<p id="section-3.3.2.1-1">The CBOR byte string of the serialised CBOR CMW is encoded as Base64 using the URL and filename safe alphabet (<span><a href="https://rfc-editor.org/rfc/rfc4648#section-5" class="relref">Section 5</a> of [<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>) without padding.
 The obtained string is added as the second element of the <code>c2j-tunnel</code> array.
-The <code>c2j-tunnel</code> array is serialized as JSON.<a href="#section-3.3.3.1-1" class="pilcrow">¶</a></p>
+The <code>c2j-tunnel</code> array is serialized as JSON.<a href="#section-3.3.2.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="json-to-cbor">
-<section id="section-3.3.3.2">
+<section id="section-3.3.2.2">
             <h5 id="name-json-to-cbor">
-<a href="#section-3.3.3.2" class="section-number selfRef">3.3.3.2. </a><a href="#name-json-to-cbor" class="section-name selfRef">JSON-to-CBOR</a>
+<a href="#section-3.3.2.2" class="section-number selfRef">3.3.2.2. </a><a href="#name-json-to-cbor" class="section-name selfRef">JSON-to-CBOR</a>
             </h5>
-<p id="section-3.3.3.2-1">The UTF-8 string of the serialized JSON CMW is encoded as a CBOR byte string (Major type 2).
+<p id="section-3.3.2.2-1">The UTF-8 string of the serialized JSON CMW is encoded as a CBOR byte string (Major type 2).
 The byte string is added as the second element of the <code>j2c-tunnel</code> array.
-The <code>j2c-tunnel</code> array is serialized as CBOR.<a href="#section-3.3.3.2-1" class="pilcrow">¶</a></p>
+The <code>j2c-tunnel</code> array is serialized as CBOR.<a href="#section-3.3.2.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1867,7 +1850,7 @@ In particular, the tunnel and collection formats cannot be encoded using DICE CM
 <div id="submods">
 <section id="section-6">
       <h2 id="name-transporting-cmw-in-eat-sub">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-transporting-cmw-in-eat-sub" class="section-name selfRef">Transporting CMW in EAT <code>submods</code></a>
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-transporting-cmw-in-eat-sub" class="section-name selfRef">Transporting CMW in EAT submods</a>
       </h2>
 <p id="section-6-1"><span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-31#section-4.2.18" class="relref">Section 4.2.18</a> of [<a href="#I-D.ietf-rats-eat" class="cite xref">I-D.ietf-rats-eat</a>]</span> allows carrying non-EAT-formatted types in EAT submods by augmenting the <code>$EAT-CBOR-Tagged-Token</code> socket or the <code>$JSON-Selector</code> socket.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6-2">The following CDDL adds <code>cbor-CMW</code> and <code>json-CMW</code> to EAT using such extension points:<a href="#section-6-2" class="pilcrow">¶</a></p>
