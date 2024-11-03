@@ -476,7 +476,6 @@ Where:
 * `cbor-CMW` and `json-CMW` are defined in {{collected-cddl}}, and
 * `CPA765` is the CBOR tag for CMW ({{iana-cbor-tag}}).
 
-[^rfced] This document uses the CPA (code point allocation) convention described in {{?I-D.bormann-cbor-draft-numbers}}. For each usage of the term "CPA", please remove the prefix "CPA" from the indicated value and replace the residue with the value assigned by IANA; perform an analogous substitution for all other occurrences of the prefix "CPA" in the document. Finally, please remove this note.
 
 # Examples
 
@@ -655,7 +654,9 @@ Instead, it should be attestation-oriented key material from the device or the a
 
 # IANA Considerations
 
-[^rfced] replace "{{&SELF}}" with the RFC number assigned to this document.
+[^rfced] Please replace "{{&SELF}}" with the RFC number assigned to this document.
+
+[^rfced] This document uses the CPA (code point allocation) convention described in {{?I-D.bormann-cbor-draft-numbers}}. For each usage of the term "CPA", please remove the prefix "CPA" from the indicated value and replace the residue with the value assigned by IANA; perform an analogous substitution for all other occurrences of the prefix "CPA" in the document. Finally, please remove this note.
 
 ## CWT `cmw` Claim Registration {#iana-cwt}
 
@@ -663,12 +664,11 @@ IANA is requested to add a new `cmw` claim to the "CBOR Web Token (CWT) Claims" 
 
 * Claim Name: cmw
 * Claim Description: A RATS Conceptual Message Wrapper
-* Claim Key: TBD
+* JWT Claim Name: cmw
+* Claim Key: CPA299
 * Claim Value Type(s): CBOR Map, CBOR Array, or CBOR Tag
 * Change Controller: IETF
 * Specification Document(s): {{type-n-val}}, {{cmw-coll}} and {{cbor-tag}} of {{&SELF}}
-
-The suggested value for the Claim Key is 299.
 
 ## JWT `cmw` Claim Registration {#iana-jwt}
 
@@ -692,6 +692,8 @@ IANA is requested to add the following tag to the "CBOR Tags" {{!IANA.cbor-tags}
 This specification defines a new "RATS Conceptual Message Wrapper (CMW) Indicators" registry, with the policy "Expert Review" ({{Section 4.5 of -ianacons}}).
 
 The objective is to have CMW Indicators values registered for all RATS Conceptual Messages ({{Section 8 of -rats-arch}}).
+
+This registry is to be added to the Remote Attestation Procedures (RATS) registry group at {{!IANA.rats}}.
 
 ### Instructions for the Designated Expert {#de-instructions}
 
@@ -847,13 +849,19 @@ IANA is requested to register the following Content-Format numbers in the "CoAP 
 | application/cmw+json | - | TBD2 | {{type-n-val}} and {{cmw-coll}} of {{&SELF}} |
 {: align="left" title="New CoAP Content Formats"}
 
-If possible, TBD1 and TBD2 should be assigned in the 256..999 range.
+If possible, TBD1 and TBD2 should be assigned in the 256..9999 range.
 
 ## New SMI Numbers Registrations
 
-IANA is requested to assign an object identifier (OID) for the CMW extension defined in {{x509}} in the "Certificate Extension" sub-registry of the "SMI Numbers" {{!IANA.smi-numbers}} registry.
+IANA is requested to assign an object identifier (OID) for the CMW extension defined in {{x509}} in the "SMI Security for PKIX Certificate Extension" sub-registry of the "SMI Numbers" {{!IANA.smi-numbers}} registry:
 
-IANA is requested to assign an object identifier (OID) for the ASN.1 Module defined in {{asn1-x509}} in the "Module Identifier" sub-registry of the "SMI Numbers" {{!IANA.smi-numbers}} registry.
+| Decimal | Description | References |
+| TBD | id-pe-cmw | {{x509}} of {{&SELF}} |
+
+IANA is requested to assign an object identifier (OID) for the ASN.1 Module defined in {{asn1-x509}} in the "SMI Security for PKIX Module Identifier" sub-registry of the "SMI Numbers" {{!IANA.smi-numbers}} registry:
+
+| Decimal | Description | References |
+| TBD | id-mod-cmw-collection-extn | {{asn1-x509}} of {{&SELF}} |
 
 --- back
 
