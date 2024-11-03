@@ -95,7 +95,6 @@ Additionally, the document describes a collection type that enables the aggregat
 This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
 These allow embedding the wrapped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols.
 In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.
-Finally, this specification extends EAT to allow carrying CMWs in EAT submods.
 
 --- middle
 
@@ -147,7 +146,6 @@ objects.
 This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
 These allow embedding the wrapped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols.
 In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.
-Finally, this specification extends EAT to allow carrying CMWs in EAT submods.
 
 # Conventions and Definitions
 
@@ -459,25 +457,6 @@ Section 6.1.8 of {{DICE-arch}} specifies the ConceptualMessageWrapper (CMW) form
 The CMW format outlined in {{DICE-arch}} permits only a subset of the CMW grammar defined in this document.
 In particular, the tunnel and collection formats cannot be encoded using DICE CMWs.
 
-# Transporting CMW in EAT submods {#submods}
-
-{{Section 4.2.18 of -rats-eat}} allows carrying non-EAT-formatted types in EAT submods by augmenting the `$EAT-CBOR-Tagged-Token` socket or the `$JSON-Selector` socket.
-
-The following CDDL adds `cbor-CMW` and `json-CMW` to EAT using such extension points:
-
-~~~ cddl
-$EAT-CBOR-Tagged-Token /= #6.CPA765(cbor-CMW)
-
-$JSON-Selector /= [ type: "CMW", nested-token: json-CMW ]
-~~~
-
-Where:
-
-* `cbor-CMW` and `json-CMW` are defined in {{collected-cddl}}, and
-* `CPA765` is the CBOR tag for CMW ({{iana-cbor-tag}}).
-
-[^rfced] This document uses the CPA (code point allocation) convention described in {{?I-D.bormann-cbor-draft-numbers}}. For each usage of the term "CPA", please remove the prefix "CPA" from the indicated value and replace the residue with the value assigned by IANA; perform an analogous substitution for all other occurrences of the prefix "CPA" in the document. Finally, please remove this note.
-
 # Examples
 
 The (equivalent) examples in {{ex-ja}}, {{ex-ca}}, and {{ex-ct}} assume that
@@ -686,6 +665,8 @@ IANA is requested to add the following tag to the "CBOR Tags" {{!IANA.cbor-tags}
 | CBOR Tag | Data Item | Semantics | Reference |
 |----------|-----------|-----------|-----------|
 | CPA765 | CBOR map, CBOR array, CBOR tag | RATS Conceptual Message Wrapper | {{type-n-val}}, {{cbor-tag}} and {{cmw-coll}} of {{&SELF}} |
+
+[^rfced] This document uses the CPA (code point allocation) convention described in {{?I-D.bormann-cbor-draft-numbers}}. For each usage of the term "CPA", please remove the prefix "CPA" from the indicated value and replace the residue with the value assigned by IANA; perform an analogous substitution for all other occurrences of the prefix "CPA" in the document. Finally, please remove this note.
 
 ## RATS Conceptual Message Wrapper (CMW) Indicators Registry {#iana-ind-ext}
 
