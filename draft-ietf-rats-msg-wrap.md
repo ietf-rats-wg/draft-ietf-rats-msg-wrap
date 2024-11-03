@@ -164,15 +164,15 @@ This document reuses the terms defined in {{Section 2 of -senml-cf}}
 
 # Conceptual Message Wrapper Encodings
 
-Two types of RATS Conceptual Message Wrapper (CMW) are specified in this
-document:
+Multiple RATS Conceptual Message Wrapper (CMW) encodings are specified in this document. Organised by the semantic role
+of the message within a composite attestation, these are:
 
-1. A CMW using a CBOR or JSON record ({{type-n-val}});
-1. A CMW based on CBOR tags ({{cbor-tag}}).
-
-A further CMW "collection" type that holds together multiple CMW items is defined in {{cmw-coll}}.
-
-A CMW "tunnel" type is also defined in {{cmw-tunnel}} to allow transporting CBOR CMWs in JSON collections and vice-versa.
+* For CMWs that correspond to an individual conceptual message:
+  * CBOR or JSON records ({{type-n-val}})
+  * CBOR tags ({{cbor-tag}})
+  * CBOR-to-JSON and JSON-to-CBOR tunnels ({{cmw-tunnel}}) to allow transporting CBOR CMWs in JSON collections and vice-versa.
+* For CMWs that correspond to a collection of conceptual messages:
+  * CBOR map or JSON object ({{cmw-coll}})
 
 The collected CDDL is in {{collected-cddl}}.
 
