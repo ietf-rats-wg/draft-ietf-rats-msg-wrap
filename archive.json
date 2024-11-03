@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-31T00:52:17.995741+00:00",
+  "timestamp": "2024-11-03T00:55:24.570573+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -1868,15 +1868,15 @@
       "id": "I_kwDOIGCt2M6cS5hy",
       "title": "CBOR Tag CDDL is incorrect",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/125",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "As noted by @carl-wallace in [this email](https://mailarchive.ietf.org/arch/msg/rats/wfv-J3RGEYvSgzeVJLwiPBlB7K0/), the CDDL description of the CBOR Tag form is incorrect as it'd force non-CBOR types to go through a double, unneeded, `bstr`-wrapping.\r\n\r\nThe CDDL is not even consistent with the surrounding prose.",
       "createdAt": "2024-10-29T19:55:37Z",
-      "updatedAt": "2024-10-29T19:55:37Z",
-      "closedAt": null,
+      "updatedAt": "2024-11-02T16:55:03Z",
+      "closedAt": "2024-11-02T16:55:03Z",
       "comments": []
     }
   ],
@@ -8419,52 +8419,90 @@
     {
       "number": 122,
       "id": "PR_kwDOIGCt2M5_OKDP",
-      "title": "Update draft-ietf-rats-msg-wrap.md",
+      "title": "Collections: editorial massaging",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/122",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "hannestschofenig",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-10-20T11:22:39Z",
-      "updatedAt": "2024-10-20T11:22:39Z",
+      "updatedAt": "2024-11-02T13:53:20Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "39e6c7720a94d78331684dff33a47b334169ccbe",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "hannestschofenig-patch-1",
-      "headRefOid": "5ae4e258795fc30c3fb328bbe07225c958dd1bb8",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "bbc9472caa311c813cdaa26fdf5f9ef887a64ce6",
+      "closedAt": "2024-11-02T13:53:17Z",
+      "mergedAt": "2024-11-02T13:53:17Z",
+      "mergedBy": "hannestschofenig",
+      "mergeCommit": {
+        "oid": "8b24bd6be9545c62ae635b18e7cb9221cc3b0314"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6PjvRa",
+          "commit": {
+            "abbreviatedOid": "5ae4e25"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-31T16:39:10Z",
+          "updatedAt": "2024-10-31T16:39:11Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "The problem is not with \"compromised evidence\", but rather with \"evidence from a compromised device\"\r\n\r\n```suggestion\r\nbound to prevent an attacker from replacing Evidence from a compromised device with Evidence from a non-compromised device. The protection of authenticity and integrity\r\n```",
+              "createdAt": "2024-10-31T16:39:11Z",
+              "updatedAt": "2024-10-31T16:39:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6PjvkZ",
+          "commit": {
+            "abbreviatedOid": "bbc9472"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-10-31T16:39:39Z",
+          "updatedAt": "2024-10-31T16:39:39Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 124,
       "id": "PR_kwDOIGCt2M6AJhFK",
       "title": "remove \"relation with EAT submods\" section",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/124",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This section is not needed anymore.",
       "createdAt": "2024-10-28T19:26:50Z",
-      "updatedAt": "2024-10-29T19:18:51Z",
+      "updatedAt": "2024-11-02T16:55:26Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "39e6c7720a94d78331684dff33a47b334169ccbe",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "submods-cons",
       "headRefOid": "6ee030885456abd58bab731516268ba7d930d969",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-11-02T16:55:23Z",
+      "mergedAt": "2024-11-02T16:55:22Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "c3c6c6464b891d64d9faf13b819a1b1d2b15bdf4"
+      },
       "comments": [],
       "reviews": [
         {
@@ -8479,6 +8517,19 @@
           "createdAt": "2024-10-28T19:28:46Z",
           "updatedAt": "2024-10-28T19:28:46Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6PuNid",
+          "commit": {
+            "abbreviatedOid": "6ee0308"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-02T14:00:18Z",
+          "updatedAt": "2024-11-02T14:00:18Z",
+          "comments": []
         }
       ]
     },
@@ -8487,26 +8538,42 @@
       "id": "PR_kwDOIGCt2M6ASpVJ",
       "title": "fix CBOR Tag CDDL",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/126",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fix #125",
       "createdAt": "2024-10-29T19:56:58Z",
-      "updatedAt": "2024-10-29T19:57:26Z",
+      "updatedAt": "2024-11-02T16:55:06Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "39e6c7720a94d78331684dff33a47b334169ccbe",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "doublewrap",
       "headRefOid": "345e5c08f284ca662debc212e9b2036d8710134c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-11-02T16:55:02Z",
+      "mergedAt": "2024-11-02T16:55:02Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "cd4d282b62e3bda982cce74d1caf7c48992c10cc"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6PuNi6",
+          "commit": {
+            "abbreviatedOid": "345e5c0"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-02T14:00:33Z",
+          "updatedAt": "2024-11-02T14:00:33Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
