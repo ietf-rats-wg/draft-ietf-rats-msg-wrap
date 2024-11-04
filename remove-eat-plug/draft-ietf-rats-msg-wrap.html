@@ -1091,7 +1091,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 7 May 2025</td>
+<td class="center">Expires 8 May 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1104,12 +1104,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-rats-msg-wrap-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-11-03" class="published">3 November 2024</time>
+<time datetime="2024-11-04" class="published">4 November 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-05-07">7 May 2025</time></dd>
+<dd class="expires"><time datetime="2025-05-08">8 May 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1170,7 +1170,7 @@ In addition, a Media Type and a CoAP Content-Format are defined for transporting
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 7 May 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 8 May 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2178,7 +2178,8 @@ Instead, it should be attestation-oriented key material from the device or the a
       <h2 id="name-iana-considerations">
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-9-1"><span class="cref" id="rfced">RFC Editor:</span> replace "RFCthis" with the RFC number assigned to this document.<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-9-1"><span class="cref" id="rfced">RFC Editor:</span> Please replace "RFCthis" with the RFC number assigned to this document.<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-9-2"><span class="cref" id="rfced_1">RFC Editor:</span> This document uses the CPA (code point allocation) convention described in <span>[<a href="#I-D.bormann-cbor-draft-numbers" class="cite xref">I-D.bormann-cbor-draft-numbers</a>]</span>. For each usage of the term "CPA", please remove the prefix "CPA" from the indicated value and replace the residue with the value assigned by IANA; perform an analogous substitution for all other occurrences of the prefix "CPA" in the document. Finally, please remove this note.<a href="#section-9-2" class="pilcrow">¶</a></p>
 <div id="iana-cwt">
 <section id="section-9.1">
         <h3 id="name-cwt-cmw-claim-registration">
@@ -2193,19 +2194,21 @@ Instead, it should be attestation-oriented key material from the device or the a
             <p id="section-9.1-2.2.1">Claim Description: A RATS Conceptual Message Wrapper<a href="#section-9.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-9.1-2.3">
-            <p id="section-9.1-2.3.1">Claim Key: TBD<a href="#section-9.1-2.3.1" class="pilcrow">¶</a></p>
+            <p id="section-9.1-2.3.1">JWT Claim Name: cmw<a href="#section-9.1-2.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-9.1-2.4">
-            <p id="section-9.1-2.4.1">Claim Value Type(s): CBOR Map, CBOR Array, or CBOR Tag<a href="#section-9.1-2.4.1" class="pilcrow">¶</a></p>
+            <p id="section-9.1-2.4.1">Claim Key: CPA299<a href="#section-9.1-2.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-9.1-2.5">
-            <p id="section-9.1-2.5.1">Change Controller: IETF<a href="#section-9.1-2.5.1" class="pilcrow">¶</a></p>
+            <p id="section-9.1-2.5.1">Claim Value Type(s): CBOR Map, CBOR Array, or CBOR Tag<a href="#section-9.1-2.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-9.1-2.6">
-            <p id="section-9.1-2.6.1">Specification Document(s): <a href="#type-n-val" class="auto internal xref">Section 3.1</a>, <a href="#cmw-coll" class="auto internal xref">Section 3.3</a> and <a href="#cbor-tag" class="auto internal xref">Section 3.2</a> of RFCthis<a href="#section-9.1-2.6.1" class="pilcrow">¶</a></p>
+            <p id="section-9.1-2.6.1">Change Controller: IETF<a href="#section-9.1-2.6.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-9.1-2.7">
+            <p id="section-9.1-2.7.1">Specification Document(s): <a href="#type-n-val" class="auto internal xref">Section 3.1</a>, <a href="#cmw-coll" class="auto internal xref">Section 3.3</a> and <a href="#cbor-tag" class="auto internal xref">Section 3.2</a> of RFCthis<a href="#section-9.1-2.7.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-9.1-3">The suggested value for the Claim Key is 299.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-jwt">
@@ -2256,7 +2259,7 @@ Instead, it should be attestation-oriented key material from the device or the a
             </tr>
           </tbody>
         </table>
-<p id="section-9.3-3"><span class="cref" id="rfced_1">RFC Editor:</span> This document uses the CPA (code point allocation) convention described in <span>[<a href="#I-D.bormann-cbor-draft-numbers" class="cite xref">I-D.bormann-cbor-draft-numbers</a>]</span>. For each usage of the term "CPA", please remove the prefix "CPA" from the indicated value and replace the residue with the value assigned by IANA; perform an analogous substitution for all other occurrences of the prefix "CPA" in the document. Finally, please remove this note.<a href="#section-9.3-3" class="pilcrow">¶</a></p>
+<p id="section-9.3-3"><span class="cref" id="rfced_2">RFC Editor:</span> This document uses the CPA (code point allocation) convention described in <span>[<a href="#I-D.bormann-cbor-draft-numbers" class="cite xref">I-D.bormann-cbor-draft-numbers</a>]</span>. For each usage of the term "CPA", please remove the prefix "CPA" from the indicated value and replace the residue with the value assigned by IANA; perform an analogous substitution for all other occurrences of the prefix "CPA" in the document. Finally, please remove this note.<a href="#section-9.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-ind-ext">
@@ -2266,6 +2269,7 @@ Instead, it should be attestation-oriented key material from the device or the a
         </h3>
 <p id="section-9.4-1">This specification defines a new "RATS Conceptual Message Wrapper (CMW) Indicators" registry, with the policy "Expert Review" (<span><a href="https://rfc-editor.org/rfc/rfc8126#section-4.5" class="relref">Section 4.5</a> of [<a href="#BCP26" class="cite xref">BCP26</a>]</span>).<a href="#section-9.4-1" class="pilcrow">¶</a></p>
 <p id="section-9.4-2">The objective is to have CMW Indicators values registered for all RATS Conceptual Messages (<span><a href="https://rfc-editor.org/rfc/rfc9334#section-8" class="relref">Section 8</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>).<a href="#section-9.4-2" class="pilcrow">¶</a></p>
+<p id="section-9.4-3">This registry is to be added to the Remote Attestation Procedures (RATS) registry group at <span>[<a href="#IANA.rats" class="cite xref">IANA.rats</a>]</span>.<a href="#section-9.4-3" class="pilcrow">¶</a></p>
 <div id="de-instructions">
 <section id="section-9.4.1">
           <h4 id="name-instructions-for-the-design">
@@ -2604,7 +2608,7 @@ Instead, it should be attestation-oriented key material from the device or the a
             </tr>
           </tbody>
         </table>
-<p id="section-9.6-3">If possible, TBD1 and TBD2 should be assigned in the 256..999 range.<a href="#section-9.6-3" class="pilcrow">¶</a></p>
+<p id="section-9.6-3">If possible, TBD1 and TBD2 should be assigned in the 256..9999 range.<a href="#section-9.6-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="new-smi-numbers-registrations">
@@ -2612,8 +2616,44 @@ Instead, it should be attestation-oriented key material from the device or the a
         <h3 id="name-new-smi-numbers-registratio">
 <a href="#section-9.7" class="section-number selfRef">9.7. </a><a href="#name-new-smi-numbers-registratio" class="section-name selfRef">New SMI Numbers Registrations</a>
         </h3>
-<p id="section-9.7-1">IANA is requested to assign an object identifier (OID) for the CMW extension defined in <a href="#x509" class="auto internal xref">Section 5</a> in the "Certificate Extension" sub-registry of the "SMI Numbers" <span>[<a href="#IANA.smi-numbers" class="cite xref">IANA.smi-numbers</a>]</span> registry.<a href="#section-9.7-1" class="pilcrow">¶</a></p>
-<p id="section-9.7-2">IANA is requested to assign an object identifier (OID) for the ASN.1 Module defined in <a href="#asn1-x509" class="auto internal xref">Section 5.1</a> in the "Module Identifier" sub-registry of the "SMI Numbers" <span>[<a href="#IANA.smi-numbers" class="cite xref">IANA.smi-numbers</a>]</span> registry.<a href="#section-9.7-2" class="pilcrow">¶</a></p>
+<p id="section-9.7-1">IANA is requested to assign an object identifier (OID) for the CMW extension defined in <a href="#x509" class="auto internal xref">Section 5</a> in the "SMI Security for PKIX Certificate Extension" sub-registry of the "SMI Numbers" <span>[<a href="#IANA.smi-numbers" class="cite xref">IANA.smi-numbers</a>]</span> registry:<a href="#section-9.7-1" class="pilcrow">¶</a></p>
+<table class="center" id="table-5">
+          <caption><a href="#table-5" class="selfRef">Table 5</a></caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Decimal</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">References</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">TBD</td>
+              <td class="text-left" rowspan="1" colspan="1">id-pe-cmw</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <a href="#x509" class="auto internal xref">Section 5</a> of RFCthis</td>
+            </tr>
+          </tbody>
+        </table>
+<p id="section-9.7-3">IANA is requested to assign an object identifier (OID) for the ASN.1 Module defined in <a href="#asn1-x509" class="auto internal xref">Section 5.1</a> in the "SMI Security for PKIX Module Identifier" sub-registry of the "SMI Numbers" <span>[<a href="#IANA.smi-numbers" class="cite xref">IANA.smi-numbers</a>]</span> registry:<a href="#section-9.7-3" class="pilcrow">¶</a></p>
+<table class="center" id="table-6">
+          <caption><a href="#table-6" class="selfRef">Table 6</a></caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Decimal</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">References</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">TBD</td>
+              <td class="text-left" rowspan="1" colspan="1">id-mod-cmw-collection-extn</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <a href="#asn1-x509" class="auto internal xref">Section 5.1</a> of RFCthis</td>
+            </tr>
+          </tbody>
+        </table>
 </section>
 </div>
 </section>
@@ -2652,6 +2692,10 @@ Instead, it should be attestation-oriented key material from the device or the a
 <dt id="IANA.media-types">[IANA.media-types]</dt>
         <dd>
 <span class="refAuthor">IANA</span>, <span class="refTitle">"Media Types"</span>, <span>&lt;<a href="https://www.iana.org/assignments/media-types">https://www.iana.org/assignments/media-types</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="IANA.rats">[IANA.rats]</dt>
+        <dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Remote Attestation Procedures (RATS)"</span>, <span>&lt;<a href="https://www.iana.org/assignments/rats">https://www.iana.org/assignments/rats</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IANA.smi-numbers">[IANA.smi-numbers]</dt>
         <dd>
@@ -2756,11 +2800,11 @@ Instead, it should be attestation-oriented key material from the device or the a
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-eat-media-type">[I-D.ietf-rats-eat-media-type]</dt>
         <dd>
-<span class="refAuthor">Lundblade, L.</span>, <span class="refAuthor">Birkholz, H.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"EAT Media Types"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-eat-media-type-11</span>, <time datetime="2024-10-10" class="refDate">10 October 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-media-type-11">https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-media-type-11</a>&gt;</span>. </dd>
+<span class="refAuthor">Lundblade, L.</span>, <span class="refAuthor">Birkholz, H.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"EAT Media Types"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-eat-media-type-12</span>, <time datetime="2024-11-03" class="refDate">3 November 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-media-type-12">https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-media-type-12</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-uccs">[I-D.ietf-rats-uccs]</dt>
         <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">O'Donoghue, J.</span>, <span class="refAuthor">Cam-Winget, N.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"A CBOR Tag for Unprotected CWT Claims Sets"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-uccs-11</span>, <time datetime="2024-10-21" class="refDate">21 October 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-uccs-11">https://datatracker.ietf.org/doc/html/draft-ietf-rats-uccs-11</a>&gt;</span>. </dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">O'Donoghue, J.</span>, <span class="refAuthor">Cam-Winget, N.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"A CBOR Tag for Unprotected CWT Claims Sets"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-uccs-12</span>, <time datetime="2024-11-03" class="refDate">3 November 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-uccs-12">https://datatracker.ietf.org/doc/html/draft-ietf-rats-uccs-12</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7942">[RFC7942]</dt>
         <dd>
@@ -3015,7 +3059,7 @@ When using CMW collection, the preconditions apply for each entry in the collect
       </h2>
 <p id="appendix-C-1">The list of currently open issues for this documents can be found at
 <span><a href="https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues">https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues</a></span>.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
-<p id="appendix-C-2"><span class="cref" id="rfced_2">RFC Editor:</span> please remove before publication.<a href="#appendix-C-2" class="pilcrow">¶</a></p>
+<p id="appendix-C-2"><span class="cref" id="rfced_3">RFC Editor:</span> please remove before publication.<a href="#appendix-C-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="acknowledgments">

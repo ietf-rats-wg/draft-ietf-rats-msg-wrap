@@ -5,12 +5,12 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 7 May 2025                                                Intel
+Expires: 8 May 2025                                                Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
-                                                         3 November 2024
+                                                         4 November 2024
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -58,7 +58,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 May 2025.
+   This Internet-Draft will expire on 8 May 2025.
 
 Copyright Notice
 
@@ -844,8 +844,16 @@ Table of Contents
 9.  IANA Considerations
 
 
-   // RFC Editor: replace "RFCthis" with the RFC number assigned to this
-   document.
+   // RFC Editor: Please replace "RFCthis" with the RFC number assigned
+   to this document.
+
+
+   // RFC Editor: This document uses the CPA (code point allocation)
+   convention described in [I-D.bormann-cbor-draft-numbers].  For each
+   usage of the term "CPA", please remove the prefix "CPA" from the
+   indicated value and replace the residue with the value assigned by
+   IANA; perform an analogous substitution for all other occurrences of
+   the prefix "CPA" in the document.  Finally, please remove this note.
 
 9.1.  CWT cmw Claim Registration
 
@@ -856,7 +864,9 @@ Table of Contents
 
    *  Claim Description: A RATS Conceptual Message Wrapper
 
-   *  Claim Key: TBD
+   *  JWT Claim Name: cmw
+
+   *  Claim Key: CPA299
 
    *  Claim Value Type(s): CBOR Map, CBOR Array, or CBOR Tag
 
@@ -864,8 +874,6 @@ Table of Contents
 
    *  Specification Document(s): Section 3.1, Section 3.3 and
       Section 3.2 of RFCthis
-
-   The suggested value for the Claim Key is 299.
 
 9.2.  JWT cmw Claim Registration
 
@@ -913,6 +921,9 @@ Table of Contents
 
    The objective is to have CMW Indicators values registered for all
    RATS Conceptual Messages (Section 8 of [RFC9334]).
+
+   This registry is to be added to the Remote Attestation Procedures
+   (RATS) registry group at [IANA.rats].
 
 9.4.1.  Instructions for the Designated Expert
 
@@ -1059,17 +1070,35 @@ Table of Contents
 
                      Table 4: New CoAP Content Formats
 
-   If possible, TBD1 and TBD2 should be assigned in the 256..999 range.
+   If possible, TBD1 and TBD2 should be assigned in the 256..9999 range.
 
 9.7.  New SMI Numbers Registrations
 
    IANA is requested to assign an object identifier (OID) for the CMW
-   extension defined in Section 5 in the "Certificate Extension" sub-
-   registry of the "SMI Numbers" [IANA.smi-numbers] registry.
+   extension defined in Section 5 in the "SMI Security for PKIX
+   Certificate Extension" sub-registry of the "SMI Numbers"
+   [IANA.smi-numbers] registry:
+
+             +=========+=============+======================+
+             | Decimal | Description | References           |
+             +=========+=============+======================+
+             | TBD     | id-pe-cmw   | Section 5 of RFCthis |
+             +---------+-------------+----------------------+
+
+                                 Table 5
 
    IANA is requested to assign an object identifier (OID) for the ASN.1
-   Module defined in Section 5.1 in the "Module Identifier" sub-registry
-   of the "SMI Numbers" [IANA.smi-numbers] registry.
+   Module defined in Section 5.1 in the "SMI Security for PKIX Module
+   Identifier" sub-registry of the "SMI Numbers" [IANA.smi-numbers]
+   registry:
+
+     +=========+============================+========================+
+     | Decimal | Description                | References             |
+     +=========+============================+========================+
+     | TBD     | id-mod-cmw-collection-extn | Section 5.1 of RFCthis |
+     +---------+----------------------------+------------------------+
+
+                                  Table 6
 
 10.  References
 
@@ -1098,6 +1127,10 @@ Table of Contents
    [IANA.media-types]
               IANA, "Media Types",
               <https://www.iana.org/assignments/media-types>.
+
+   [IANA.rats]
+              IANA, "Remote Attestation Procedures (RATS)",
+              <https://www.iana.org/assignments/rats>.
 
    [IANA.smi-numbers]
               IANA, "Structure of Management Information (SMI) Numbers
@@ -1236,16 +1269,16 @@ Table of Contents
    [I-D.ietf-rats-eat-media-type]
               Lundblade, L., Birkholz, H., and T. Fossati, "EAT Media
               Types", Work in Progress, Internet-Draft, draft-ietf-rats-
-              eat-media-type-11, 10 October 2024,
+              eat-media-type-12, 3 November 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              eat-media-type-11>.
+              eat-media-type-12>.
 
    [I-D.ietf-rats-uccs]
               Birkholz, H., O'Donoghue, J., Cam-Winget, N., and C.
               Bormann, "A CBOR Tag for Unprotected CWT Claims Sets",
-              Work in Progress, Internet-Draft, draft-ietf-rats-uccs-11,
-              21 October 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-rats-uccs-11>.
+              Work in Progress, Internet-Draft, draft-ietf-rats-uccs-12,
+              3 November 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-uccs-12>.
 
    [RFC7942]  Sheffer, Y. and A. Farrel, "Improving Awareness of Running
               Code: The Implementation Status Section", BCP 205,
