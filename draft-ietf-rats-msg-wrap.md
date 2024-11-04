@@ -667,8 +667,6 @@ IANA is requested to add the following tag to the "CBOR Tags" {{!IANA.cbor-tags}
 |----------|-----------|-----------|-----------|
 | CPA765 | CBOR map, CBOR array, CBOR tag | RATS Conceptual Message Wrapper | {{type-n-val}}, {{cbor-tag}} and {{cmw-coll}} of {{&SELF}} |
 
-[^rfced] This document uses the CPA (code point allocation) convention described in {{?I-D.bormann-cbor-draft-numbers}}. For each usage of the term "CPA", please remove the prefix "CPA" from the indicated value and replace the residue with the value assigned by IANA; perform an analogous substitution for all other occurrences of the prefix "CPA" in the document. Finally, please remove this note.
-
 ## RATS Conceptual Message Wrapper (CMW) Indicators Registry {#iana-ind-ext}
 
 This specification defines a new "RATS Conceptual Message Wrapper (CMW) Indicators" registry, with the policy "Expert Review" ({{Section 4.5 of -ianacons}}).
