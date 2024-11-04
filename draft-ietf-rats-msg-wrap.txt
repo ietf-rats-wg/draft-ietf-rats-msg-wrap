@@ -905,14 +905,6 @@ Table of Contents
 
                                   Table 1
 
-
-   // RFC Editor: This document uses the CPA (code point allocation)
-   convention described in [I-D.bormann-cbor-draft-numbers].  For each
-   usage of the term "CPA", please remove the prefix "CPA" from the
-   indicated value and replace the residue with the value assigned by
-   IANA; perform an analogous substitution for all other occurrences of
-   the prefix "CPA" in the document.  Finally, please remove this note.
-
 9.4.  RATS Conceptual Message Wrapper (CMW) Indicators Registry
 
    This specification defines a new "RATS Conceptual Message Wrapper
