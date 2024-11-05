@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-03T00:55:24.570573+00:00",
+  "timestamp": "2024-11-05T00:50:22.096057+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -1877,6 +1877,22 @@
       "createdAt": "2024-10-29T19:55:37Z",
       "updatedAt": "2024-11-02T16:55:03Z",
       "closedAt": "2024-11-02T16:55:03Z",
+      "comments": []
+    },
+    {
+      "number": 129,
+      "id": "I_kwDOIGCt2M6c1fbn",
+      "title": "IANA review",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/129",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "* [x] Section 10.1: how should we fill in the registry\u2019s \u201cJWT Claim Name\u201d field? See https://www.iana.org/assignments/cwt\r\n\r\n\"cmw\"\r\n\r\n* [x] Should Section 10.4\u2019s new registry be added to the Remote Attestation Procedures (RATS) registry group at https://www.iana.org/assignments/rats?\r\n\r\nyes\r\n\r\n* [x] If possible, please name a desired range for the new CoAP Content-Format assignments. See https://www.iana.org/assignments/core-parameters.\r\n\r\n256-9999\r\n\r\n* [x] In Section 10.7, please provide the relevant registry name(s) from https://www.iana.org/assignments/smi-numbers and provide the information that should appear in each field in the registry.\r\n\r\n\"SMI Security for PKIX Certificate Extension\"\r\n",
+      "createdAt": "2024-11-03T15:11:46Z",
+      "updatedAt": "2024-11-03T16:01:47Z",
+      "closedAt": null,
       "comments": []
     }
   ],
@@ -8571,6 +8587,180 @@
           "body": "",
           "createdAt": "2024-11-02T14:00:33Z",
           "updatedAt": "2024-11-02T14:00:33Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 127,
+      "id": "PR_kwDOIGCt2M6AuLcr",
+      "title": "remove EAT submods plug ins",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/127",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on the [discussion thread](https://mailarchive.ietf.org/arch/msg/rats/rluJsmcttd5i9YWC8LmQwD9yL4A/) on the RATS ML, it looks like it's safer to remove the EAT plug-in at this point and let a future document deal with those.",
+      "createdAt": "2024-11-03T10:41:44Z",
+      "updatedAt": "2024-11-04T10:14:08Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "f4d4345490989f073017385b90ea73f715122e7e",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "remove-eat-plug",
+      "headRefOid": "ba391c630015fcdc686fa2d40597e73a923b3acd",
+      "closedAt": "2024-11-04T10:14:05Z",
+      "mergedAt": "2024-11-04T10:14:05Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "75a6855140918bf9e753eb88c011b90ba1800532"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6Pzfqi",
+          "commit": {
+            "abbreviatedOid": "ba391c6"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-11-04T10:04:30Z",
+          "updatedAt": "2024-11-04T10:04:30Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 128,
+      "id": "PR_kwDOIGCt2M6AuOM4",
+      "title": "Reorganize the list of encodings",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/128",
+      "state": "OPEN",
+      "author": "ionut-arm",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-11-03T11:19:19Z",
+      "updatedAt": "2024-11-03T20:02:34Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "c3c6c6464b891d64d9faf13b819a1b1d2b15bdf4",
+      "headRepository": "ionut-arm/draft-ietf-rats-msg-wrap",
+      "headRefName": "encoding-list",
+      "headRefOid": "1bdb417175512cdada4275a8001cc9539af8431c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6PwzCp",
+          "commit": {
+            "abbreviatedOid": "1bdb417"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-03T20:02:34Z",
+          "updatedAt": "2024-11-03T20:02:34Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 130,
+      "id": "PR_kwDOIGCt2M6Auldw",
+      "title": "address IANA review",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/130",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-11-03T16:02:39Z",
+      "updatedAt": "2024-11-04T09:28:33Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "c3c6c6464b891d64d9faf13b819a1b1d2b15bdf4",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "iana-review",
+      "headRefOid": "68bc686879ceba2956ec1d6b916827ca4e38cdbb",
+      "closedAt": "2024-11-04T09:28:33Z",
+      "mergedAt": "2024-11-04T09:28:33Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "f4d4345490989f073017385b90ea73f715122e7e"
+      },
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fix #129",
+          "createdAt": "2024-11-03T16:21:07Z",
+          "updatedAt": "2024-11-03T16:21:07Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6Pwy8j",
+          "commit": {
+            "abbreviatedOid": "68bc686"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-03T19:59:54Z",
+          "updatedAt": "2024-11-03T19:59:54Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 131,
+      "id": "PR_kwDOIGCt2M6Ax3oS",
+      "title": "remove duplicate instructions for the RFC editor",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/131",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-11-04T10:24:03Z",
+      "updatedAt": "2024-11-04T12:25:46Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "75a6855140918bf9e753eb88c011b90ba1800532",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "dup",
+      "headRefOid": "06c24aff09a2d0cbdb04b8366b5d911a255af637",
+      "closedAt": "2024-11-04T12:25:46Z",
+      "mergedAt": "2024-11-04T12:25:46Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "7ee45c7a9662233b193bc91c8e06d3eba28272ed"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6P0jvU",
+          "commit": {
+            "abbreviatedOid": "06c24af"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-11-04T12:19:40Z",
+          "updatedAt": "2024-11-04T12:19:40Z",
           "comments": []
         }
       ]
