@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-07T00:50:40.300311+00:00",
+  "timestamp": "2024-11-10T00:53:53.685865+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -1892,6 +1892,46 @@
       "body": "* [x] Section 10.1: how should we fill in the registry\u2019s \u201cJWT Claim Name\u201d field? See https://www.iana.org/assignments/cwt\r\n\r\n\"cmw\"\r\n\r\n* [x] Should Section 10.4\u2019s new registry be added to the Remote Attestation Procedures (RATS) registry group at https://www.iana.org/assignments/rats?\r\n\r\nyes\r\n\r\n* [x] If possible, please name a desired range for the new CoAP Content-Format assignments. See https://www.iana.org/assignments/core-parameters.\r\n\r\n256-9999\r\n\r\n* [x] In Section 10.7, please provide the relevant registry name(s) from https://www.iana.org/assignments/smi-numbers and provide the information that should appear in each field in the registry.\r\n\r\n\"SMI Security for PKIX Certificate Extension\"\r\n",
       "createdAt": "2024-11-03T15:11:46Z",
       "updatedAt": "2024-11-03T16:01:47Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 132,
+      "id": "I_kwDOIGCt2M6deMNP",
+      "title": "CoAP content format with JSON",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/132",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "6.1 says it is OK to use the CoAP content format with json-record. 3.1 says it is not.\r\n\r\nSo far, I don't have a strong opinion for which way it should go.",
+      "createdAt": "2024-11-07T19:13:43Z",
+      "updatedAt": "2024-11-07T19:44:09Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Good catch!",
+          "createdAt": "2024-11-07T19:44:08Z",
+          "updatedAt": "2024-11-07T19:44:08Z"
+        }
+      ]
+    },
+    {
+      "number": 133,
+      "id": "I_kwDOIGCt2M6dedjG",
+      "title": "Consistent use of term \"tag\"",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/133",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "3.2 mentions \"prepending a tag\". I think this should be \"tag number\" since a \"tag\" is the number plus content.\r\n\r\nThe first sentence in 3.2 is hard for me to interpret too.\r\n\r\nThe term \"CMW CBOR Tag\" may have double meaning, one in 3.2 and the other in 9.3.\r\n\r\nI don't know what a '\"native\" CBOR type' is.\r\n",
+      "createdAt": "2024-11-07T19:44:48Z",
+      "updatedAt": "2024-11-07T19:44:48Z",
       "closedAt": null,
       "comments": []
     }
