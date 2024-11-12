@@ -824,11 +824,13 @@ IANA is requested to assign an object identifier (OID) for the CMW extension def
 
 | Decimal | Description | References |
 | TBD | id-pe-cmw | {{x509}} of {{&SELF}} |
+{: align="left" title="New CMW Extension OID"}
 
 IANA is requested to assign an object identifier (OID) for the ASN.1 Module defined in {{asn1-x509}} in the "SMI Security for PKIX Module Identifier" sub-registry of the "SMI Numbers" {{!IANA.smi-numbers}} registry:
 
 | Decimal | Description | References |
 | TBD | id-mod-cmw-collection-extn | {{asn1-x509}} of {{&SELF}} |
+{: align="left" title="New ASN.1 Module OID"}
 
 --- back
 
