@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-12T00:49:57.502775+00:00",
+  "timestamp": "2024-11-14T00:51:03.536350+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -1934,6 +1934,37 @@
       "updatedAt": "2024-11-07T19:44:48Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 135,
+      "id": "I_kwDOIGCt2M6eMsDb",
+      "title": "RFC 9277 has exceptions for bstr wrapping of TN() (I think)",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/135",
+      "state": "CLOSED",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "If I understand it, if the content of the TN tag is not a byte string, but rather tag 55799, 55800, or 55801, then byte string wrapping is side stepped.\r\n\r\nThat means the CDDL in the CMW document that forces the tag content to a byte string is wrong.\r\n\r\nSo 1668546930(55799(sensml-stuff-in-CBOR)) for sensml content.\r\n\r\nI still kind of wonder about making the section on tags very small and simple so as to not draw attention to them as we prefer content/media types.\r\n\r\n",
+      "createdAt": "2024-11-13T04:34:46Z",
+      "updatedAt": "2024-11-13T10:16:48Z",
+      "closedAt": "2024-11-13T10:16:48Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> If I understand it, if the content of the TN tag is not a byte string, but rather tag 55799, 55800, or 55801, then byte string wrapping is side stepped.\r\n\r\nI think it's the other way around:\r\n\r\n> _\"Exceptionally, when used immediately as tag content of one of the tags 55799, 55800, or 55801, the tag content is as follows [...]\"_\r\n\r\ntalks about the case where a TN-derived tag is the tag content of one of 55799-55801, e.g., 55800(1330664270(h'424F52')).\r\n\r\nThis is not how we plan to use TN.  (Actually, this is another solid good argument for avoiding any non-TN tag as the outer type indicator.)\r\n\r\n\r\n\r\n\r\n\r\n",
+          "createdAt": "2024-11-13T08:41:59Z",
+          "updatedAt": "2024-11-13T08:41:59Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "Yes, you are right.\r\n",
+          "createdAt": "2024-11-13T10:16:48Z",
+          "updatedAt": "2024-11-13T10:16:48Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -8804,6 +8835,68 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 134,
+      "id": "PR_kwDOIGCt2M6BoF0j",
+      "title": "CBOR tag numbers must be TN-derived",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/134",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-11-12T12:22:06Z",
+      "updatedAt": "2024-11-13T08:51:48Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "7ee45c7a9662233b193bc91c8e06d3eba28272ed",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "tn-only",
+      "headRefOid": "c38cc4395249d2836966527aacac8f63d0d4f16a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We didn't discuss the rationale for why it makes sense for a Content-ID that is from the \"standards\" range is mapped to a CBOR tag from the FCFS range. This seems wrong. An equivalent (\"alias\"?) value from one registry should have the same semantics in terms of standard/FCFS/experiential when mapped to another registry (for the same content but with different formatting). \r\n\r\nA mapping semantic that doesn't violate typing expectations would preserve the standards/FCFS/experimental designation across the various forms. ",
+          "createdAt": "2024-11-12T18:03:40Z",
+          "updatedAt": "2024-11-12T18:03:40Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> We didn't discuss the rationale for why it makes sense for a Content-ID that is from the \"standards\" range is mapped to a CBOR tag from the FCFS range.\r\n\r\nI don't understand why this is relavant.  Although, technically within the FCFS range, the TN space [1668546817, 1668612095] is a carve-out that can't be assigned anymore.  I think IANA missed (or wasn't properly instructed) to update the registry header to reflect that.\r\n\r\nIt should say:\r\n\r\nRange | Registration Procedures\r\n-- | --\r\n0-23 | Standards Action\r\n24-32767 | Specification Required\r\n32768-1668546816 | First Come First Served\r\n1668546817, 1668612095 | Reserved (TN-derived)\r\n1668612096-18446744073709551615 | First Come First Served\r\n\r\n",
+          "createdAt": "2024-11-12T20:08:09Z",
+          "updatedAt": "2024-11-12T20:08:09Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Does it make sense to include the IANA correction in this draft?\r\n\r\nAlso, the Content Format (ct < 65025) covers the range of registration procedures from Expert Review to Experimental (though not the full range of experimental).  This means the TN-derived values will have differential vetting applied.\r\n\r\nIf a spec documents the TN derived value, it shouldn't (I don't think?) apply semantics that differ from the original vetting that was applied to the C-F registry.  In other words, a spec could be written that standardizes around a value that was vetted for experimental use. Are those desirable/undesirable semantics? It seems unintentional (if not undesirable).",
+          "createdAt": "2024-11-12T20:27:41Z",
+          "updatedAt": "2024-11-12T20:54:39Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "NONE",
+          "body": "What 9277 Section 4.3 says is this:\r\n\r\n> 4.3. CBOR Tags for CoAP Content-Format Numbers\r\n> IANA allocated the tag numbers 1668546817 (0x63740101) to 1668612095 (0x6374ffff) as follows:\r\n\r\nClearly, these are *allocated* (assigned), not reserved.\r\nTrue, you can\u2019t *use* the allocation for a specific tag number before there is an assignment for the corresponding ct number, but that doesn\u2019t make the tag numbers in any way less allocated (assigned).\r\n\r\nI have no idea how these two assignment ranges (tag numbers 1668546817 (0x63740101) to 1668612095 (0x6374ffff), and content-format numbers 0..65024) are getting confused; they are linked by a formula, not by one registration policy somehow seeping over into the other space.\r\n\r\n",
+          "createdAt": "2024-11-13T07:52:26Z",
+          "updatedAt": "2024-11-13T07:52:26Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> What 9277 Section 4.3 says is this:\r\n> \r\n> > 4.3. CBOR Tags for CoAP Content-Format Numbers\r\n> > IANA allocated the tag numbers 1668546817 (0x63740101) to 1668612095 (0x6374ffff) as follows:\r\n> \r\n> Clearly, these are _allocated_ (assigned), not reserved. True, you can\u2019t _use_ the allocation for a specific tag number before there is an assignment for the corresponding ct number, but that doesn\u2019t make the tag numbers in any way less allocated (assigned).\r\n\r\nThank you for the clarification. I have some reservations (pun intended) about the use of terms\u2014the semantics of allocation versus assignment\u2014but I will refrain from going down that specific rabbit hole \ud83d\ude05\r\n\r\n> I have no idea how these two assignment ranges (tag numbers 1668546817 (0x63740101) to 1668612095 (0x6374ffff), and content-format numbers 0..65024) are getting confused; they are linked by a formula, not by one registration policy somehow seeping over into the other space.\r\n\r\n\ud83d\udc4d ",
+          "createdAt": "2024-11-13T08:18:20Z",
+          "updatedAt": "2024-11-13T08:18:20Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
