@@ -1,4 +1,4 @@
 Claims-Set = {
-  "cmw" => json-CMW
+  "cmw" => json-cmw
   * (int / text) => any
 }

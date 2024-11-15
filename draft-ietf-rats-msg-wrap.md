@@ -162,20 +162,28 @@ defined in {{-rats-arch}}.
 This document reuses the terms defined in {{Section 2 of -senml-cf}}
 (e.g., "Content-Type").
 
-# Conceptual Message Wrapper Encodings
+# Conceptual Message Wrappers
 
 A RATS Conceptual Message Wrapper (CMW) has a tree structure of leaves that contain payload messages associated with their content type.
 The two leaf node types are:
 
-1. A CMW using a CBOR or JSON record ({{type-n-val}});
-1. A CMW based on CBOR tags ({{cbor-tag}}).
+* A CMW using a CBOR or JSON record ({{type-n-val}});
+* A CMW based on CBOR tags ({{cbor-tag}}).
 
 Intermediate tree nodes are either:
 
-1. A CMW "collection" type that holds together multiple CMW items ({{cmw-coll}});
-1. A CMW "tunnel" type that allows transporting CBOR CMWs in JSON collections and vice-versa ({{cmw-tunnel}}).
+* A CMW "collection" type that holds together multiple CMW items ({{cmw-coll}});
+* A CMW "tunnel" type that allows transporting CBOR CMWs in JSON collections and vice-versa ({{cmw-tunnel}}).
 
-The collected CDDL is in {{collected-cddl}}.
+The following snippet outlines the productions associated with the top-level types.
+
+~~~ cddl
+{::include cddl/cmw-start.cddl}
+~~~
+
+The complete CDDL can be found in {{collected-cddl}}.
+
+{{webtokens}} and {{x509}} describe the transport of CMWs using CBOR and JSON Web Tokens and PKIX messages, respectively.
 
 This document only defines an encapsulation, not a security format.
 It is the responsibility of the Attester to ensure that the CMW contents have the necessary security protection.
@@ -186,7 +194,6 @@ Security considerations are discussed in {{seccons}}.
 The format of the CMW record is shown in {{fig-cddl-record}}.
 The JSON {{-json}} and CBOR {{-cbor}} representations are provided separately.
 Both the `json-record` and `cbor-record` have the same fields except for slight differences in the types discussed below.
-
 
 ~~~ cddl
 {::include cddl/cmw-record.cddl}
@@ -223,7 +230,6 @@ field contains multiple conceptual messages with different types (e.g.,
 both Reference Values and Endorsements within the same `application/signed-corim+cbor`), or if the same profile identifier is
 shared by different conceptual messages.
 Future specifications may add new values to the `ind` field; see {{iana-ind-ext}}.
-
 
 ## CMW CBOR Tags {#cbor-tag}
 
@@ -276,7 +282,6 @@ Since the collection type is recursive, implementations may limit the allowed de
 ~~~
 {: #fig-cddl-collection artwork-align="left"
    title="CDDL definition of the CMW collection format"}
-
 
 CMW itself provides no facilities for authenticity, integrity protection, or confidentiality.
 It is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly.
@@ -347,7 +352,7 @@ func CMWTypeDemux(b []byte) (CMW, error) {
 }
 ~~~
 
-# Transporting CMW in COSE and JOSE Web Tokens
+# Transporting CMW in COSE and JOSE Web Tokens {#webtokens}
 
 To facilitate the embedding of CMWs and CMW collections in CBOR-based protocols and web APIs, this document defines two `"cmw"` claims for use with JSON Web Tokens (JWT) and CBOR Web Tokens (CWT).
 
@@ -540,6 +545,12 @@ The following example shows the use of the `"cmw"` JWT claim to transport a CMW 
 
 ~~~
 {::include cddl/eat-example-1.json}
+~~~
+
+# Collected CDDL {#collected-cddl}
+
+~~~ cddl
+{::include cddl/collected-cddl-autogen.cddl}
 ~~~
 
 # Implementation Status
@@ -815,12 +826,6 @@ IANA is requested to assign an object identifier (OID) for the ASN.1 Module defi
 {: align="left" title="New ASN.1 Module OID"}
 
 --- back
-
-## Collected CDDL {#collected-cddl}
-
-~~~ cddl
-{::include cddl/collected-cddl-autogen.cddl}
-~~~
 
 # Registering and Using CMWs
 
