@@ -1132,17 +1132,6 @@ Table of Contents
               (CRL) Profile", RFC 5280, DOI 10.17487/RFC5280, May 2008,
               <https://www.rfc-editor.org/rfc/rfc5280>.
 
-   [RFC5912]  Hoffman, P. and J. Schaad, "New ASN.1 Modules for the
-              Public Key Infrastructure Using X.509 (PKIX)", RFC 5912,
-              DOI 10.17487/RFC5912, June 2010,
-              <https://www.rfc-editor.org/rfc/rfc5912>.
-
-   [RFC6268]  Schaad, J. and S. Turner, "Additional New ASN.1 Modules
-              for the Cryptographic Message Syntax (CMS) and the Public
-              Key Infrastructure Using X.509 (PKIX)", RFC 6268,
-              DOI 10.17487/RFC6268, July 2011,
-              <https://www.rfc-editor.org/rfc/rfc6268>.
-
    [RFC6838]  Freed, N., Klensin, J., and T. Hansen, "Media Type
               Specifications and Registration Procedures", BCP 13,
               RFC 6838, DOI 10.17487/RFC6838, January 2013,
@@ -1259,6 +1248,17 @@ Table of Contents
               Work in Progress, Internet-Draft, draft-ietf-rats-uccs-12,
               3 November 2024, <https://datatracker.ietf.org/doc/html/
               draft-ietf-rats-uccs-12>.
+
+   [RFC5912]  Hoffman, P. and J. Schaad, "New ASN.1 Modules for the
+              Public Key Infrastructure Using X.509 (PKIX)", RFC 5912,
+              DOI 10.17487/RFC5912, June 2010,
+              <https://www.rfc-editor.org/rfc/rfc5912>.
+
+   [RFC6268]  Schaad, J. and S. Turner, "Additional New ASN.1 Modules
+              for the Cryptographic Message Syntax (CMS) and the Public
+              Key Infrastructure Using X.509 (PKIX)", RFC 6268,
+              DOI 10.17487/RFC6268, July 2011,
+              <https://www.rfc-editor.org/rfc/rfc6268>.
 
    [RFC7942]  Sheffer, Y. and A. Farrel, "Improving Awareness of Running
               Code: The Implementation Status Section", BCP 205,
