@@ -10,6 +10,8 @@ Expires: 19 May 2025                                               Intel
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
+                                                                D. Glaze
+                                                              Google LLC
                                                         15 November 2024
 
 
@@ -1412,8 +1414,8 @@ Appendix C.  Open Issues
 Acknowledgments
 
    The authors would like to thank Brian Campbell, Carl Wallace, Carsten
-   Bormann, Dionna Glaze, Ionuț Mihalcea, Michael B.  Jones, Mohit
-   Sethi, Russ Housley, and Tom Jones for their reviews and suggestions.
+   Bormann, Ionuț Mihalcea, Michael B.  Jones, Mohit Sethi, Russ
+   Housley, and Tom Jones for their reviews and suggestions.
 
    The definition of a CMW collection has been modelled on a proposal
    originally made by Simon Frost for an EAT-based Evidence collection
@@ -1451,3 +1453,8 @@ Authors' Addresses
    Hannes Tschofenig
    University of Applied Sciences Bonn-Rhein-Sieg
    Email: Hannes.Tschofenig@gmx.net
+
+
+   Dionna Glaze
+   Google LLC
+   Email: dionnaglaze@google.com
