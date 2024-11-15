@@ -282,20 +282,20 @@ Table of Contents
 
 3.2.  CMW CBOR Tags
 
-   CBOR Tags used as CMW are derived from CoAP Content-Format numbers.
-   If a CoAP content format exists for a RATS conceptual message, the
-   TN() transform defined in Appendix B of [RFC9277] is used to derive a
-   corresponding CBOR tag in range [1668546817, 1668612095].
+   CMW of type CBOR Tag derive their tag numbers from a corresponding
+   CoAP Content-Format ID using the TN() transform defined in Appendix B
+   of [RFC9277].  Such CBOR tag numbers are in range [1668546817,
+   1668612095].
 
    The RATS conceptual message is first serialized according to the
-   Content-Format number associated with the CBOR tag and then encoded
-   as a CBOR byte string, to which the tag is prepended.
+   Content-Format ID and then encoded as a CBOR byte string, to which
+   the TN-derived tag number is prepended.
 
    The CMW CBOR Tag is defined in Figure 2 using two different macros.
-   One for "native" CBOR types, the other for all other types.  Both
+   One for CBOR-encoded types, the other for all other types.  Both
    macros take the CBOR tag number tn as a parameter.  The cbor-tagged-
-   cbor macro also takes the CDDL definition of the associated
-   conceptual message fmt as a second parameter.
+   cbor macro takes the CDDL definition of the associated conceptual
+   message fmt as a second parameter.
 
    cbor-tagged-cbor<tn, fmt> = #6.<tn>(bytes .cbor fmt)
 
