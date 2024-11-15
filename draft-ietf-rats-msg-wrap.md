@@ -27,11 +27,13 @@ author:
  - name: Thomas Fossati
    organization: Linaro
    email: thomas.fossati@linaro.org
- -
-   name: Hannes Tschofenig
+ - name: Hannes Tschofenig
    org: University of Applied Sciences Bonn-Rhein-Sieg
    abbrev: H-BRS
    email: Hannes.Tschofenig@gmx.net
+ - name: Dionna Glaze
+   organization: Google LLC
+   email: dionnaglaze@google.com
 
 contributor:
  - name: Laurence Lundblade
@@ -893,7 +895,6 @@ The authors would like to thank
 Brian Campbell,
 Carl Wallace,
 Carsten Bormann,
-Dionna Glaze,
 {{{Ionuț Mihalcea}}},
 Michael B. Jones,
 Mohit Sethi,
