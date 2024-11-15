@@ -162,7 +162,7 @@ This document reuses the terms defined in {{Section 2 of -senml-cf}}
 
 # Conceptual Message Wrapper Encodings
 
-Two types of RATS Conceptual Message Wrapper (CMW) are specified in this
+Two basic types of RATS Conceptual Message Wrapper (CMW) are specified in this
 document:
 
 1. A CMW using a CBOR or JSON record ({{type-n-val}});
