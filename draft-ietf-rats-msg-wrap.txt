@@ -5,12 +5,12 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 8 May 2025                                                Intel
+Expires: 19 May 2025                                               Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
-                                                         4 November 2024
+                                                        15 November 2024
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -58,7 +58,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 May 2025.
+   This Internet-Draft will expire on 19 May 2025.
 
 Copyright Notice
 
@@ -81,7 +81,6 @@ Table of Contents
    3.  Conceptual Message Wrapper Encodings
      3.1.  CMW Record
      3.2.  CMW CBOR Tags
-       3.2.1.  Use of Pre-existing CBOR Tags
      3.3.  CMW Collections
        3.3.1.  CMW Collections' role in composite Attester topology
        3.3.2.  CMW Tunnel
@@ -281,11 +280,10 @@ Table of Contents
 
 3.2.  CMW CBOR Tags
 
-   CBOR Tags used as CMW may be derived from CoAP Content-Format
-   numbers.  If a CoAP content format exists for a RATS conceptual
-   message, the TN() transform defined in Appendix B of [RFC9277] can be
-   used to derive a corresponding CBOR tag in range [1668546817,
-   1668612095].
+   CBOR Tags used as CMW are derived from CoAP Content-Format numbers.
+   If a CoAP content format exists for a RATS conceptual message, the
+   TN() transform defined in Appendix B of [RFC9277] is used to derive a
+   corresponding CBOR tag in range [1668546817, 1668612095].
 
    The RATS conceptual message is first serialized according to the
    Content-Format number associated with the CBOR tag and then encoded
@@ -313,18 +311,6 @@ Table of Contents
    my-evidence = {
      &(eat_nonce: 10) => bstr .size (8..64)
    }
-
-3.2.1.  Use of Pre-existing CBOR Tags
-
-   If a CBOR tag has been registered in association with a certain RATS
-   conceptual message independently of a CoAP content format (i.e., it
-   is not obtained by applying the TN() transform), it can be readily
-   used as an encapsulation without the extra processing described in
-   Section 3.2.
-
-   A consumer can always distinguish tags that have been derived via
-   TN(), which all fall in the [1668546817, 1668612095] range, from tags
-   that are not, and therefore apply the right decapsulation on receive.
 
 3.3.  CMW Collections
 
@@ -1071,26 +1057,26 @@ Table of Contents
    Certificate Extension" sub-registry of the "SMI Numbers"
    [IANA.smi-numbers] registry:
 
-             +=========+=============+======================+
-             | Decimal | Description | References           |
-             +=========+=============+======================+
-             | TBD     | id-pe-cmw   | Section 5 of RFCthis |
-             +---------+-------------+----------------------+
+   +=========+=============+======================+
+   | Decimal | Description | References           |
+   +=========+=============+======================+
+   | TBD     | id-pe-cmw   | Section 5 of RFCthis |
+   +---------+-------------+----------------------+
 
-                                 Table 5
+            Table 5: New CMW Extension OID
 
    IANA is requested to assign an object identifier (OID) for the ASN.1
    Module defined in Section 5.1 in the "SMI Security for PKIX Module
    Identifier" sub-registry of the "SMI Numbers" [IANA.smi-numbers]
    registry:
 
-     +=========+============================+========================+
-     | Decimal | Description                | References             |
-     +=========+============================+========================+
-     | TBD     | id-mod-cmw-collection-extn | Section 5.1 of RFCthis |
-     +---------+----------------------------+------------------------+
+   +=========+============================+========================+
+   | Decimal | Description                | References             |
+   +=========+============================+========================+
+   | TBD     | id-mod-cmw-collection-extn | Section 5.1 of RFCthis |
+   +---------+----------------------------+------------------------+
 
-                                  Table 6
+                     Table 6: New ASN.1 Module OID
 
 10.  References
 
@@ -1397,13 +1383,13 @@ Appendix B.  Registering and Using CMWs
            |  |  `-------+--------'  |  |
            |  |          |           |  |
            |  |          v           |  |
-           |  |   .--------------.   |  |  .--------.
-           |  |  | Automatically  |  |  | | Existing |
-           |  |  | derive CBOR    |  |  | | CBOR     |
-           |  |  | tag [RFC9277]  |  |  | | tag      |
-           |  |   `------+-------'   |  |  `---+----'
-           |  |          |           |  |      |
-           |  |          |.----------(--(-----'
+           |  |   .--------------.   |  |
+           |  |  | Automatically  |  |  |
+           |  |  | derive CBOR    |  |  |
+           |  |  | tag [RFC9277]  |  |  |
+           |  |   `------+-------'   |  |
+           |  |          |           |  |
+           |  |          |           |  |
            |  |          |           |  |
            |  |          v           |  |
            |  |   .----------------. |  |

@@ -1091,7 +1091,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 8 May 2025</td>
+<td class="center">Expires 19 May 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1104,12 +1104,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-rats-msg-wrap-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-11-04" class="published">4 November 2024</time>
+<time datetime="2024-11-15" class="published">15 November 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-05-08">8 May 2025</time></dd>
+<dd class="expires"><time datetime="2025-05-19">19 May 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1170,7 +1170,7 @@ In addition, a Media Type and a CoAP Content-Format are defined for transporting
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 8 May 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 19 May 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1213,11 +1213,6 @@ In addition, a Media Type and a CoAP Content-Format are defined for transporting
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
                 <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-cmw-cbor-tags" class="internal xref">CMW CBOR Tags</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.1">
-                    <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="auto internal xref">3.2.1</a>.  <a href="#name-use-of-pre-existing-cbor-ta" class="internal xref">Use of Pre-existing CBOR Tags</a></p>
-</li>
-                </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
                 <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-cmw-collections" class="internal xref">CMW Collections</a></p>
@@ -1545,9 +1540,9 @@ Future specifications may add new values to the <code>ind</code> field; see <a h
         <h3 id="name-cmw-cbor-tags">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-cmw-cbor-tags" class="section-name selfRef">CMW CBOR Tags</a>
         </h3>
-<p id="section-3.2-1">CBOR Tags used as CMW may be derived from CoAP Content-Format numbers.
+<p id="section-3.2-1">CBOR Tags used as CMW are derived from CoAP Content-Format numbers.
 If a CoAP content format exists for a RATS conceptual message, the
-<code>TN()</code> transform defined in <span><a href="https://rfc-editor.org/rfc/rfc9277#appendix-B" class="relref">Appendix B</a> of [<a href="#RFC9277" class="cite xref">RFC9277</a>]</span> can be used to
+<code>TN()</code> transform defined in <span><a href="https://rfc-editor.org/rfc/rfc9277#appendix-B" class="relref">Appendix B</a> of [<a href="#RFC9277" class="cite xref">RFC9277</a>]</span> is used to
 derive a corresponding CBOR tag in range [1668546817, 1668612095].<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">The RATS conceptual message is first serialized according to the
 Content-Format number associated with the CBOR tag and then encoded as a
@@ -1579,22 +1574,6 @@ my-evidence = {
   &amp;(eat_nonce: 10) =&gt; bstr .size (8..64)
 }
 </pre><a href="#section-3.2-6" class="pilcrow">¶</a>
-</div>
-<div id="use-of-pre-existing-cbor-tags">
-<section id="section-3.2.1">
-          <h4 id="name-use-of-pre-existing-cbor-ta">
-<a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-use-of-pre-existing-cbor-ta" class="section-name selfRef">Use of Pre-existing CBOR Tags</a>
-          </h4>
-<p id="section-3.2.1-1">If a CBOR tag has been registered in association with a certain RATS
-conceptual message independently of a CoAP content format (i.e., it is
-not obtained by applying the <code>TN()</code> transform), it can be readily used
-as an encapsulation without the extra processing described in
-<a href="#cbor-tag" class="auto internal xref">Section 3.2</a>.<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.2.1-2">A consumer can always distinguish tags that have been derived via
-<code>TN()</code>, which all fall in the [1668546817, 1668612095] range, from
-tags that are not, and therefore apply the right decapsulation on
-receive.<a href="#section-3.2.1-2" class="pilcrow">¶</a></p>
-</section>
 </div>
 </section>
 </div>
@@ -2616,8 +2595,11 @@ Instead, it should be attestation-oriented key material from the device or the a
 <a href="#section-9.7" class="section-number selfRef">9.7. </a><a href="#name-new-smi-numbers-registratio" class="section-name selfRef">New SMI Numbers Registrations</a>
         </h3>
 <p id="section-9.7-1">IANA is requested to assign an object identifier (OID) for the CMW extension defined in <a href="#x509" class="auto internal xref">Section 5</a> in the "SMI Security for PKIX Certificate Extension" sub-registry of the "SMI Numbers" <span>[<a href="#IANA.smi-numbers" class="cite xref">IANA.smi-numbers</a>]</span> registry:<a href="#section-9.7-1" class="pilcrow">¶</a></p>
-<table class="center" id="table-5">
-          <caption><a href="#table-5" class="selfRef">Table 5</a></caption>
+<span id="name-new-cmw-extension-oid"></span><table class="left" id="table-5">
+          <caption>
+<a href="#table-5" class="selfRef">Table 5</a>:
+<a href="#name-new-cmw-extension-oid" class="selfRef">New CMW Extension OID</a>
+          </caption>
 <thead>
             <tr>
               <th class="text-left" rowspan="1" colspan="1">Decimal</th>
@@ -2635,8 +2617,11 @@ Instead, it should be attestation-oriented key material from the device or the a
           </tbody>
         </table>
 <p id="section-9.7-3">IANA is requested to assign an object identifier (OID) for the ASN.1 Module defined in <a href="#asn1-x509" class="auto internal xref">Section 5.1</a> in the "SMI Security for PKIX Module Identifier" sub-registry of the "SMI Numbers" <span>[<a href="#IANA.smi-numbers" class="cite xref">IANA.smi-numbers</a>]</span> registry:<a href="#section-9.7-3" class="pilcrow">¶</a></p>
-<table class="center" id="table-6">
-          <caption><a href="#table-6" class="selfRef">Table 6</a></caption>
+<span id="name-new-asn1-module-oid"></span><table class="left" id="table-6">
+          <caption>
+<a href="#table-6" class="selfRef">Table 6</a>:
+<a href="#name-new-asn1-module-oid" class="selfRef">New ASN.1 Module OID</a>
+          </caption>
 <thead>
             <tr>
               <th class="text-left" rowspan="1" colspan="1">Decimal</th>
@@ -2933,7 +2918,7 @@ When using CMW collection, the preconditions apply for each entry in the collect
 <figure id="figure-5">
         <div id="appendix-B-2.1">
           <div class="alignLeft art-svg artwork" id="appendix-B-2.1.1">
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="496" width="400" viewBox="0 0 400 496" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="496" width="344" viewBox="0 0 344 496" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
               <path d="M 40,48 L 40,80" fill="none" stroke="black"></path>
               <path d="M 56,176 L 56,424" fill="none" stroke="black"></path>
               <path d="M 80,96 L 80,152" fill="none" stroke="black"></path>
@@ -2949,14 +2934,9 @@ When using CMW collection, the preconditions apply for each entry in the collect
               <path d="M 240,256 L 240,288" fill="none" stroke="black"></path>
               <path d="M 248,144 L 248,176" fill="none" stroke="black"></path>
               <path d="M 264,96 L 264,152" fill="none" stroke="black"></path>
-              <path d="M 264,168 L 264,328" fill="none" stroke="black"></path>
-              <path d="M 264,344 L 264,424" fill="none" stroke="black"></path>
-              <path d="M 288,176 L 288,328" fill="none" stroke="black"></path>
-              <path d="M 288,344 L 288,424" fill="none" stroke="black"></path>
+              <path d="M 264,168 L 264,424" fill="none" stroke="black"></path>
+              <path d="M 288,176 L 288,424" fill="none" stroke="black"></path>
               <path d="M 296,48 L 296,80" fill="none" stroke="black"></path>
-              <path d="M 304,256 L 304,288" fill="none" stroke="black"></path>
-              <path d="M 344,304 L 344,320" fill="none" stroke="black"></path>
-              <path d="M 392,256 L 392,288" fill="none" stroke="black"></path>
               <path d="M 56,32 L 168,32" fill="none" stroke="black"></path>
               <path d="M 216,32 L 280,32" fill="none" stroke="black"></path>
               <path d="M 56,96 L 168,96" fill="none" stroke="black"></path>
@@ -2966,10 +2946,7 @@ When using CMW collection, the preconditions apply for each entry in the collect
               <path d="M 240,160 L 272,160" fill="none" stroke="black"></path>
               <path d="M 112,192 L 232,192" fill="none" stroke="black"></path>
               <path d="M 120,240 L 224,240" fill="none" stroke="black"></path>
-              <path d="M 320,240 L 376,240" fill="none" stroke="black"></path>
               <path d="M 120,304 L 224,304" fill="none" stroke="black"></path>
-              <path d="M 320,304 L 376,304" fill="none" stroke="black"></path>
-              <path d="M 184,336 L 328,336" fill="none" stroke="black"></path>
               <path d="M 112,384 L 248,384" fill="none" stroke="black"></path>
               <path d="M 96,416 L 232,416" fill="none" stroke="black"></path>
               <path d="M 24,432 L 336,432" fill="none" stroke="black"></path>
@@ -2996,18 +2973,10 @@ When using CMW collection, the preconditions apply for each entry in the collect
               <path d="M 232,192 C 240.83064,192 248,184.83064 248,176" fill="none" stroke="black"></path>
               <path d="M 120,240 C 111.16936,240 104,247.16936 104,256" fill="none" stroke="black"></path>
               <path d="M 224,240 C 232.83064,240 240,247.16936 240,256" fill="none" stroke="black"></path>
-              <path d="M 320,240 C 311.16936,240 304,247.16936 304,256" fill="none" stroke="black"></path>
-              <path d="M 376,240 C 384.83064,240 392,247.16936 392,256" fill="none" stroke="black"></path>
               <path d="M 120,304 C 111.16936,304 104,296.83064 104,288" fill="none" stroke="black"></path>
               <path d="M 224,304 C 232.83064,304 240,296.83064 240,288" fill="none" stroke="black"></path>
-              <path d="M 320,304 C 311.16936,304 304,296.83064 304,288" fill="none" stroke="black"></path>
-              <path d="M 376,304 C 384.83064,304 392,296.83064 392,288" fill="none" stroke="black"></path>
-              <path d="M 184,336 C 175.16936,336 168,343.16936 168,352" fill="none" stroke="black"></path>
-              <path d="M 328,336 C 336.83064,336 344,328.83064 344,320" fill="none" stroke="black"></path>
               <polygon class="arrowhead" points="296,424 284,418.4 284,429.6" fill="black" transform="rotate(90,288,424)"></polygon>
-              <path class="jump" d="M 288,344 C 282,344 282,328 288,328" fill="none" stroke="black"></path>
               <polygon class="arrowhead" points="272,424 260,418.4 260,429.6" fill="black" transform="rotate(90,264,424)"></polygon>
-              <path class="jump" d="M 264,344 C 258,344 258,328 264,328" fill="none" stroke="black"></path>
               <path class="jump" d="M 264,168 C 258,168 258,152 264,152" fill="none" stroke="black"></path>
               <polygon class="arrowhead" points="176,376 164,370.4 164,381.6" fill="black" transform="rotate(90,168,376)"></polygon>
               <polygon class="arrowhead" points="176,232 164,226.4 164,237.6" fill="black" transform="rotate(90,168,232)"></polygon>
@@ -3030,13 +2999,10 @@ When using CMW collection, the preconditions apply for each entry in the collect
                 <text x="188" y="164">CoAP</text>
                 <text x="172" y="180">Content-Format</text>
                 <text x="168" y="260">Automatically</text>
-                <text x="348" y="260">Existing</text>
                 <text x="140" y="276">derive</text>
                 <text x="188" y="276">CBOR</text>
-                <text x="332" y="276">CBOR</text>
                 <text x="128" y="292">tag</text>
                 <text x="184" y="292">[RFC9277]</text>
-                <text x="328" y="292">tag</text>
                 <text x="140" y="404">CBOR</text>
                 <text x="176" y="404">tag</text>
                 <text x="208" y="404">CMW</text>
