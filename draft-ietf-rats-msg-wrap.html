@@ -1832,12 +1832,11 @@ In particular, the tunnel and collection formats cannot be encoded using DICE CM
       </h2>
 <p id="section-6-1">The (equivalent) examples in <a href="#ex-ja" class="auto internal xref">Section 6.1</a>, <a href="#ex-ca" class="auto internal xref">Section 6.2</a>, and <a href="#ex-ct" class="auto internal xref">Section 6.3</a> assume that
 the Media-Type-Name <code>application/vnd.example.rats-conceptual-msg</code> has been
-registered alongside a corresponding CoAP Content-Format number <code>30001</code>.  The
-CBOR tag <code>1668576818</code> is derived applying the <code>TN()</code> transform as described in
+registered alongside a corresponding CoAP Content-Format ID <code>30001</code>.  The
+CBOR tag <code>1668576935</code> is derived applying the <code>TN()</code> transform as described in
 <a href="#cbor-tag" class="auto internal xref">Section 3.2</a>.<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2">The example in <a href="#ex-ca-ind" class="auto internal xref">Section 6.4</a> is a signed CoRIM (Concise Reference Integrity Manifest) <span>[<a href="#I-D.ietf-rats-corim" class="cite xref">I-D.ietf-rats-corim</a>]</span> payload with an explicit CM
-indicator <code>0b0000_0011</code> (3), meaning that the wrapped message contains both
-Reference Values and Endorsements.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<p id="section-6-2">All the examples focus on the wrapping aspects.
+The wrapped messages are not instances of real Conceptual Messages.<a href="#section-6-2" class="pilcrow">¶</a></p>
 <div id="ex-ja">
 <section id="section-6.1">
         <h3 id="name-json-record">
@@ -1847,7 +1846,7 @@ Reference Values and Endorsements.<a href="#section-6-2" class="pilcrow">¶</a><
 <pre>
 [
   "application/vnd.example.rats-conceptual-msg",
-  "q82rzQ"
+  "I0faVQ"
 ]
 </pre><a href="#section-6.1-1" class="pilcrow">¶</a>
 </div>
@@ -1899,13 +1898,13 @@ number has not been registrered.<a href="#section-6.2-4" class="pilcrow">¶</a><
         </h3>
 <div class="lang-cbor-diag sourcecode" id="section-6.3-1">
 <pre>
-1668576818(h'2347da55')
+1668576935(h'2347da55')
 </pre><a href="#section-6.3-1" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-2">with the following wire representation:<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.3-3">
 <pre>
-da 63747632    # tag(1668576818)
+da 637476a7    # tag(1668576935)
    44          # bytes(4)
       2347da55 # "#G\xDAU"
 </pre><a href="#section-6.3-3" class="pilcrow">¶</a>
@@ -1917,26 +1916,28 @@ da 63747632    # tag(1668576818)
         <h3 id="name-cbor-record-with-explicit-c">
 <a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-cbor-record-with-explicit-c" class="section-name selfRef">CBOR Record with explicit CM indicator</a>
         </h3>
-<div class="lang-cbor-diag sourcecode" id="section-6.4-1">
+<p id="section-6.4-1">This is an example of a signed CoRIM (Concise Reference Integrity Manifest) <span>[<a href="#I-D.ietf-rats-corim" class="cite xref">I-D.ietf-rats-corim</a>]</span> with an explicit <code>ind</code> value of <code>0b0000_0011</code> (3), indicating that the wrapped message contains both Reference Values and Endorsements.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
+<div class="lang-cbor-diag sourcecode" id="section-6.4-2">
 <pre>
 [
   "application/signed-corim+cbor",
-  h'd28443a10126a1',
+  h'd901f6d28440a044d901f5a040',
   3
 ]
-</pre><a href="#section-6.4-1" class="pilcrow">¶</a>
+</pre><a href="#section-6.4-2" class="pilcrow">¶</a>
 </div>
-<p id="section-6.4-2">with the following wire representation:<a href="#section-6.4-2" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.4-3">
+<p id="section-6.4-3">with the following wire representation:<a href="#section-6.4-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.4-4">
 <pre>
-83                                    # array(3)
-   78 1d                              # text(29)
-      6170706c69636174696f6e2f7369676e65642d636f72696d2b63626f72
-                                      # "application/signed-corim+cbor"
-   47                                 # bytes(7)
-      d28443a10126a1                  # "҄C\xA1\u0001&amp;\xA1"
-   03                                 # unsigned(3)
-</pre><a href="#section-6.4-3" class="pilcrow">¶</a>
+83                                      # array(3)
+   78 1d                                # text(29)
+      6170706c69636174696f6e2f7369676e65642d636f72696d2b63626f72 # "app
+lication/signed-corim+cbor"
+   4d                                   # bytes(13)
+      d901f6d28440a044d901f5a040        # "\xD9\u0001\xF6҄@\xA0D\xD9\u00
+01\xF5\xA0@"
+   03                                   # unsigned(3)
+</pre><a href="#section-6.4-4" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -1946,67 +1947,24 @@ da 63747632    # tag(1668576818)
 <a href="#section-6.5" class="section-number selfRef">6.5. </a><a href="#name-cbor-collection" class="section-name selfRef">CBOR Collection</a>
         </h3>
 <p id="section-6.5-1">The following example is a CBOR collection that assembles conceptual messages from three attesters: Evidence for attesters A and B and Attestation Results for attester C.
+Since attester C returns Attestation Results as CMW in JSON record format, the JSON record needs to be tunnelled.
 It is given an explicit collection type using the URI form.<a href="#section-6.5-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.5-2">
 <pre>
 {
-  "attester A": [
-    30001,
-    h'2347da55',
-    4
-  ],
-  "attester B": 1668576818(h'2347da55'),
-  "attester C": [
-    "application/eat+jwt",
-    h'4c693475',
-    8
-  ]
-}
-</pre><a href="#section-6.5-2" class="pilcrow">¶</a>
-</div>
-<p id="section-6.5-3">with the following wire representation:<a href="#section-6.5-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.5-4">
-<pre>
-a3                                      # map(3)
-   6a                                   # text(10)
-      61747465737465722041              # "attester A"
-   83                                   # array(3)
-      19 7531                           # unsigned(30001)
-      44                                # bytes(4)
-         2347da55                       # "#G\xDAU"
-      04                                # unsigned(4)
-   6a                                   # text(10)
-      61747465737465722042              # "attester B"
-   da 63747632                          # tag(1668576818)
-      44                                # bytes(4)
-         2347da55                       # "#G\xDAU"
-   6a                                   # text(10)
-      61747465737465722043              # "attester C"
-   83                                   # array(3)
-      73                                # text(19)
-         6170706c69636174696f6e2f6561742b6a7774 # "application/eat+jwt"
-      44                                # bytes(4)
-         4c693475                       # "Li4u"
-      08                                # unsigned(8)
-</pre><a href="#section-6.5-4" class="pilcrow">¶</a>
-</div>
-<p id="section-6.5-5">The following example shows the use of a tunnelled type to move a JSON record to a CBOR collection:<a href="#section-6.5-5" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.5-6">
-<pre>
-{
   "__cmwc_t": "tag:example.com,2024:composite-attester",
-  0: [
+  / attester A / 0: [
     30001,
     h'2347da55',
     4
   ],
-  1: 1668576818(h'2347da55'),
-  2: [
+  / attester B / 1: 1668576935(h'2347da55'),
+  / attester C / 2: [
     "#cmw-j2c-tunnel",
     '[ "application/eat+jwt", "Li4u", 8 ]'
   ]
 }
-</pre><a href="#section-6.5-6" class="pilcrow">¶</a>
+</pre><a href="#section-6.5-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -2015,27 +1973,12 @@ a3                                      # map(3)
         <h3 id="name-json-collection">
 <a href="#section-6.6" class="section-number selfRef">6.6. </a><a href="#name-json-collection" class="section-name selfRef">JSON Collection</a>
         </h3>
-<p id="section-6.6-1">The following example is a JSON collection that assembles Evidence from two attesters.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
+<p id="section-6.6-1">The following example is a JSON collection that assembles Evidence from two attesters.
+Since attester B outputs Evidence as CMW in CMW record format, the CBOR record needs to be tunnelled.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.6-2">
 <pre>
 {
-  "attester A": [
-    "application/eat-ucs+json",
-    "e30K",
-    4
-  ],
-  "attester B": [
-    "application/eat-ucs+cbor",
-    "oA",
-    4
-  ]
-}
-</pre><a href="#section-6.6-2" class="pilcrow">¶</a>
-</div>
-<p id="section-6.6-3">The following example shows the use of a tunnelled type to move a CBOR record to a JSON collection:<a href="#section-6.6-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.6-4">
-<pre>
-{
+  "__cmwc_t": "tag:example.com,2024:another-composite-attester",
   "attester A": [
     "application/eat-ucs+json",
     "e30K",
@@ -2046,7 +1989,7 @@ a3                                      # map(3)
     "g3gYYXBwbGljYXRpb24vZWF0LXVjcytjYm9yQaAE"
   ]
 }
-</pre><a href="#section-6.6-4" class="pilcrow">¶</a>
+</pre><a href="#section-6.6-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -2055,11 +1998,12 @@ a3                                      # map(3)
         <h3 id="name-use-in-jwt">
 <a href="#section-6.7" class="section-number selfRef">6.7. </a><a href="#name-use-in-jwt" class="section-name selfRef">Use in JWT</a>
         </h3>
-<p id="section-6.7-1">The following example shows the use of the <code>"cmw"</code> JWT claim to transport a CMW collection in a JWT <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>:<a href="#section-6.7-1" class="pilcrow">¶</a></p>
+<p id="section-6.7-1">The following example shows the use of the <code>"cmw"</code> JWT claim to transport a CMW collection in a JWT Claims Set <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>:<a href="#section-6.7-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.7-2">
 <pre>
 {
   "cmw": {
+    "__cmwc_t": "tag:example.com,2024:another-composite-attester",
     "attester A": [
       "application/eat-ucs+json",
       "e30K",

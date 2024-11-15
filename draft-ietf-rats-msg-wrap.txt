@@ -563,20 +563,17 @@ Table of Contents
    The (equivalent) examples in Section 6.1, Section 6.2, and
    Section 6.3 assume that the Media-Type-Name application/
    vnd.example.rats-conceptual-msg has been registered alongside a
-   corresponding CoAP Content-Format number 30001.  The CBOR tag
-   1668576818 is derived applying the TN() transform as described in
-   Section 3.2.
+   corresponding CoAP Content-Format ID 30001.  The CBOR tag 1668576935
+   is derived applying the TN() transform as described in Section 3.2.
 
-   The example in Section 6.4 is a signed CoRIM (Concise Reference
-   Integrity Manifest) [I-D.ietf-rats-corim] payload with an explicit CM
-   indicator 0b0000_0011 (3), meaning that the wrapped message contains
-   both Reference Values and Endorsements.
+   All the examples focus on the wrapping aspects.  The wrapped messages
+   are not instances of real Conceptual Messages.
 
 6.1.  JSON Record
 
    [
      "application/vnd.example.rats-conceptual-msg",
-     "q82rzQ"
+     "I0faVQ"
    ]
 
    Note that a CoAP Content-Format number can also be used with the JSON
@@ -609,89 +606,56 @@ Table of Contents
 
 6.3.  CBOR Tag
 
-   1668576818(h'2347da55')
+   1668576935(h'2347da55')
 
    with the following wire representation:
 
-   da 63747632    # tag(1668576818)
+   da 637476a7    # tag(1668576935)
       44          # bytes(4)
          2347da55 # "#G\xDAU"
 
 6.4.  CBOR Record with explicit CM indicator
 
+   This is an example of a signed CoRIM (Concise Reference Integrity
+   Manifest) [I-D.ietf-rats-corim] with an explicit ind value of
+   0b0000_0011 (3), indicating that the wrapped message contains both
+   Reference Values and Endorsements.
+
    [
      "application/signed-corim+cbor",
-     h'd28443a10126a1',
+     h'd901f6d28440a044d901f5a040',
      3
    ]
 
    with the following wire representation:
 
- 83                                    # array(3)
-    78 1d                              # text(29)
-       6170706c69636174696f6e2f7369676e65642d636f72696d2b63626f72
-                                       # "application/signed-corim+cbor"
-    47                                 # bytes(7)
-       d28443a10126a1                  # "҄C\xA1\u0001&\xA1"
-    03                                 # unsigned(3)
+83                                      # array(3)
+   78 1d                                # text(29)
+      6170706c69636174696f6e2f7369676e65642d636f72696d2b63626f72 # "app
+lication/signed-corim+cbor"
+   4d                                   # bytes(13)
+      d901f6d28440a044d901f5a040        # "\xD9\u0001\xF6҄@\xA0D\xD9\u00
+01\xF5\xA0@"
+   03                                   # unsigned(3)
 
 6.5.  CBOR Collection
 
    The following example is a CBOR collection that assembles conceptual
    messages from three attesters: Evidence for attesters A and B and
-   Attestation Results for attester C.  It is given an explicit
-   collection type using the URI form.
-
-   {
-     "attester A": [
-       30001,
-       h'2347da55',
-       4
-     ],
-     "attester B": 1668576818(h'2347da55'),
-     "attester C": [
-       "application/eat+jwt",
-       h'4c693475',
-       8
-     ]
-   }
-
-   with the following wire representation:
-
- a3                                      # map(3)
-    6a                                   # text(10)
-       61747465737465722041              # "attester A"
-    83                                   # array(3)
-       19 7531                           # unsigned(30001)
-       44                                # bytes(4)
-          2347da55                       # "#G\xDAU"
-       04                                # unsigned(4)
-    6a                                   # text(10)
-       61747465737465722042              # "attester B"
-    da 63747632                          # tag(1668576818)
-       44                                # bytes(4)
-          2347da55                       # "#G\xDAU"
-    6a                                   # text(10)
-       61747465737465722043              # "attester C"
-    83                                   # array(3)
-       73                                # text(19)
-          6170706c69636174696f6e2f6561742b6a7774 # "application/eat+jwt"
-       44                                # bytes(4)
-          4c693475                       # "Li4u"
-       08                                # unsigned(8)
-
-   The following example shows the use of a tunnelled type to move a
-   JSON record to a CBOR collection:
+   Attestation Results for attester C.  Since attester C returns
+   Attestation Results as CMW in JSON record format, the JSON record
+   needs to be tunnelled.  It is given an explicit collection type using
+   the URI form.
 
    {
      "__cmwc_t": "tag:example.com,2024:composite-attester",
-     0: [
+     / attester A / 0: [
        30001,
        h'2347da55',
        4
      ],
-     1: 1668576818(h'2347da55'),
-     2: [
+     / attester B / 1: 1668576935(h'2347da55'),
+     / attester C / 2: [
        "#cmw-j2c-tunnel",
        '[ "application/eat+jwt", "Li4u", 8 ]'
      ]
@@ -700,25 +664,11 @@ Table of Contents
 6.6.  JSON Collection
 
    The following example is a JSON collection that assembles Evidence
-   from two attesters.
+   from two attesters.  Since attester B outputs Evidence as CMW in CMW
+   record format, the CBOR record needs to be tunnelled.
 
    {
-     "attester A": [
-       "application/eat-ucs+json",
-       "e30K",
-       4
-     ],
-     "attester B": [
-       "application/eat-ucs+cbor",
-       "oA",
-       4
-     ]
-   }
-
-   The following example shows the use of a tunnelled type to move a
-   CBOR record to a JSON collection:
-
-   {
+     "__cmwc_t": "tag:example.com,2024:another-composite-attester",
      "attester A": [
        "application/eat-ucs+json",
        "e30K",
@@ -733,10 +683,11 @@ Table of Contents
 6.7.  Use in JWT
 
    The following example shows the use of the "cmw" JWT claim to
-   transport a CMW collection in a JWT [RFC7519]:
+   transport a CMW collection in a JWT Claims Set [RFC7519]:
 
    {
      "cmw": {
+       "__cmwc_t": "tag:example.com,2024:another-composite-attester",
        "attester A": [
          "application/eat-ucs+json",
          "e30K",
