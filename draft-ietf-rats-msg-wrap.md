@@ -906,7 +906,6 @@ The authors would like to thank
 Brian Campbell,
 Carl Wallace,
 Carsten Bormann,
-Dionna Glaze,
 {{{Ionuț Mihalcea}}},
 Michael B. Jones,
 Mohit Sethi,
