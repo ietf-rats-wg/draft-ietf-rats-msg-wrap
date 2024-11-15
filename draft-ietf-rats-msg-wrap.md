@@ -224,7 +224,7 @@ Future specifications may add new values to the `ind` field; see {{iana-ind-ext}
 
 ## CMW CBOR Tags {#cbor-tag}
 
-CMW of the CBOR Tag type derive their tag numbers from a corresponding CoAP Content-Format ID using the `TN()` transform defined in {{Appendix B of RFC9277}}.
+CMW of type CBOR Tag derive their tag numbers from a corresponding CoAP Content-Format ID using the `TN()` transform defined in {{Appendix B of RFC9277}}.
 Such CBOR tag numbers are in range \[1668546817, 1668612095\].
 
 The RATS conceptual message is first serialized according to the Content-Format ID and then encoded as a CBOR byte string, to which the TN-derived tag number is prepended.
