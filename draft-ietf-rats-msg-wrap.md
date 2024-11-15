@@ -450,13 +450,12 @@ In particular, the tunnel and collection formats cannot be encoded using DICE CM
 
 The (equivalent) examples in {{ex-ja}}, {{ex-ca}}, and {{ex-ct}} assume that
 the Media-Type-Name `application/vnd.example.rats-conceptual-msg` has been
-registered alongside a corresponding CoAP Content-Format number `30001`.  The
-CBOR tag `1668576818` is derived applying the `TN()` transform as described in
+registered alongside a corresponding CoAP Content-Format ID `30001`.  The
+CBOR tag `1668576935` is derived applying the `TN()` transform as described in
 {{cbor-tag}}.
 
-The example in {{ex-ca-ind}} is a signed CoRIM (Concise Reference Integrity Manifest) {{-rats-corim}} payload with an explicit CM
-indicator `0b0000_0011` (3), meaning that the wrapped message contains both
-Reference Values and Endorsements.
+All the examples focus on the wrapping aspects.
+The wrapped messages are not instances of real Conceptual Messages.
 
 ## JSON Record {#ex-ja}
 
@@ -503,38 +502,31 @@ with the following wire representation:
 
 ## CBOR Record with explicit CM indicator {#ex-ca-ind}
 
+This is an example of a signed CoRIM (Concise Reference Integrity Manifest) {{-rats-corim}} with an explicit `ind` value of `0b0000_0011` (3), indicating that the wrapped message contains both Reference Values and Endorsements.
+
 ~~~ cbor-diag
 {::include cddl/cmw-example-3.diag}
 ~~~
 
 with the following wire representation:
 
+<!-- fold -w71 cddl/cmw-example-3.pretty -->
 ~~~
-83                                    # array(3)
-   78 1d                              # text(29)
-      6170706c69636174696f6e2f7369676e65642d636f72696d2b63626f72
-                                      # "application/signed-corim+cbor"
-   47                                 # bytes(7)
-      d28443a10126a1                  # "҄C\xA1\u0001&\xA1"
-   03                                 # unsigned(3)
+83                                      # array(3)
+   78 1d                                # text(29)
+      6170706c69636174696f6e2f7369676e65642d636f72696d2b63626f72 # "app
+lication/signed-corim+cbor"
+   4d                                   # bytes(13)
+      d901f6d28440a044d901f5a040        # "\xD9\u0001\xF6҄@\xA0D\xD9\u00
+01\xF5\xA0@"
+   03                                   # unsigned(3)
 ~~~
 
 ## CBOR Collection
 
 The following example is a CBOR collection that assembles conceptual messages from three attesters: Evidence for attesters A and B and Attestation Results for attester C.
+Since attester C returns Attestation Results as CMW in JSON record format, the JSON record needs to be tunnelled.
 It is given an explicit collection type using the URI form.
-
-~~~
-{::include cddl/collection-example-1.diag}
-~~~
-
-with the following wire representation:
-
-~~~
-{::include cddl/collection-example-1.pretty}
-~~~
-
-The following example shows the use of a tunnelled type to move a JSON record to a CBOR collection:
 
 ~~~
 {::include cddl/collection-example-2.diag}
@@ -543,12 +535,7 @@ The following example shows the use of a tunnelled type to move a JSON record to
 ## JSON Collection
 
 The following example is a JSON collection that assembles Evidence from two attesters.
-
-~~~
-{::include cddl/collection-example-1.json}
-~~~
-
-The following example shows the use of a tunnelled type to move a CBOR record to a JSON collection:
+Since attester B outputs Evidence as CMW in CMW record format, the CBOR record needs to be tunnelled.
 
 ~~~
 {::include cddl/collection-example-2.json}
@@ -556,7 +543,7 @@ The following example shows the use of a tunnelled type to move a CBOR record to
 
 ## Use in JWT
 
-The following example shows the use of the `"cmw"` JWT claim to transport a CMW collection in a JWT {{-jwt}}:
+The following example shows the use of the `"cmw"` JWT claim to transport a CMW collection in a JWT Claims Set {{-jwt}}:
 
 ~~~
 {::include cddl/eat-example-1.json}

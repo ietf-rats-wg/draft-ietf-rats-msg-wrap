@@ -1,12 +1,12 @@
 {
   "__cmwc_t": "tag:example.com,2024:composite-attester",
-  0: [
+  / attester A / 0: [
     30001,
     h'2347da55',
     4
   ],
-  1: 1668576818(h'2347da55'),
-  2: [
+  / attester B / 1: 1668576935(h'2347da55'),
+  / attester C / 2: [
     "#cmw-j2c-tunnel",
     '[ "application/eat+jwt", "Li4u", 8 ]'
   ]
