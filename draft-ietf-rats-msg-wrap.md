@@ -162,8 +162,8 @@ This document reuses the terms defined in {{Section 2 of -senml-cf}}
 
 # Conceptual Message Wrapper Encodings
 
-Two basic types of RATS Conceptual Message Wrapper (CMW) are specified in this
-document:
+A RATS Conceptual Message Wrapper (CMW) has a tree structure of leaves that contain payload messages associated with their content type.
+The two leaf node types are
 
 1. A CMW using a CBOR or JSON record ({{type-n-val}});
 1. A CMW based on CBOR tags ({{cbor-tag}}).
