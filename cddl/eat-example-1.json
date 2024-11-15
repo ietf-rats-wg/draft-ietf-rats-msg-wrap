@@ -1,5 +1,6 @@
 {
   "cmw": {
+    "__cmwc_t": "tag:example.com,2024:another-composite-attester",
     "attester A": [
       "application/eat-ucs+json",
       "e30K",

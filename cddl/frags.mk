@@ -6,7 +6,7 @@ CMW_FRAGS += cmw-tunnel.cddl
 CMW_FRAGS += common-types.cddl
 CMW_FRAGS += rfc9193.cddl
 # CBOR tags used in examples
-CMW_FRAGS += cmw-example-tag-1668576818-def.cddl
+CMW_FRAGS += cmw-example-tag-1668576935-def.cddl
 CMW_FRAGS += cmw-example-tag-1668576819-def.cddl
 
 CMW_CBOR_EXAMPLES := cmw-example-1.diag
