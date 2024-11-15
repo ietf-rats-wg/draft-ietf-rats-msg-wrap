@@ -163,14 +163,15 @@ This document reuses the terms defined in {{Section 2 of -senml-cf}}
 # Conceptual Message Wrapper Encodings
 
 A RATS Conceptual Message Wrapper (CMW) has a tree structure of leaves that contain payload messages associated with their content type.
-The two leaf node types are
+The two leaf node types are:
 
 1. A CMW using a CBOR or JSON record ({{type-n-val}});
 1. A CMW based on CBOR tags ({{cbor-tag}}).
 
-A further CMW "collection" type that holds together multiple CMW items is defined in {{cmw-coll}}.
+Intermediate tree nodes are either:
 
-A CMW "tunnel" type is also defined in {{cmw-tunnel}} to allow transporting CBOR CMWs in JSON collections and vice-versa.
+1. A CMW "collection" type that holds together multiple CMW items ({{cmw-coll}});
+1. A CMW "tunnel" type that allows transporting CBOR CMWs in JSON collections and vice-versa ({{cmw-tunnel}}).
 
 The collected CDDL is in {{collected-cddl}}.
 
