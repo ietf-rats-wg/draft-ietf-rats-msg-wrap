@@ -462,10 +462,6 @@ Reference Values and Endorsements.
 {::include cddl/cmw-example-1.json}
 ~~~
 
-Note that a CoAP Content-Format number can also be used with the JSON record
-form.  That may be the case when it is known that the receiver can handle CoAP
-Content-Formats and it is crucial to save bytes.
-
 ## CBOR Record {#ex-ca}
 
 ~~~ cbor-diag
