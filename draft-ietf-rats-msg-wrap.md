@@ -224,9 +224,9 @@ Future specifications may add new values to the `ind` field; see {{iana-ind-ext}
 
 ## CMW CBOR Tags {#cbor-tag}
 
-CBOR Tags used as CMW may be derived from CoAP Content-Format numbers.
+CBOR Tags used as CMW are derived from CoAP Content-Format numbers.
 If a CoAP content format exists for a RATS conceptual message, the
-`TN()` transform defined in {{Appendix B of RFC9277}} can be used to
+`TN()` transform defined in {{Appendix B of RFC9277}} is used to
 derive a corresponding CBOR tag in range \[1668546817, 1668612095\].
 
 The RATS conceptual message is first serialized according to the
@@ -250,19 +250,6 @@ For example, to associate conceptual messages of type `my-evidence` with CBOR Ta
 ~~~ cddl
 {::include cddl/cmw-example-tag-1668576819-def.cddl}
 ~~~
-
-### Use of Pre-existing CBOR Tags
-
-If a CBOR tag has been registered in association with a certain RATS
-conceptual message independently of a CoAP content format (i.e., it is
-not obtained by applying the `TN()` transform), it can be readily used
-as an encapsulation without the extra processing described in
-{{cbor-tag}}.
-
-A consumer can always distinguish tags that have been derived via
-`TN()`, which all fall in the \[1668546817, 1668612095\] range, from
-tags that are not, and therefore apply the right decapsulation on
-receive.
 
 ## CMW Collections {#cmw-coll}
 
@@ -837,11 +824,13 @@ IANA is requested to assign an object identifier (OID) for the CMW extension def
 
 | Decimal | Description | References |
 | TBD | id-pe-cmw | {{x509}} of {{&SELF}} |
+{: align="left" title="New CMW Extension OID"}
 
 IANA is requested to assign an object identifier (OID) for the ASN.1 Module defined in {{asn1-x509}} in the "SMI Security for PKIX Module Identifier" sub-registry of the "SMI Numbers" {{!IANA.smi-numbers}} registry:
 
 | Decimal | Description | References |
 | TBD | id-mod-cmw-collection-extn | {{asn1-x509}} of {{&SELF}} |
+{: align="left" title="New ASN.1 Module OID"}
 
 --- back
 
@@ -871,13 +860,13 @@ When using CMW collection, the preconditions apply for each entry in the collect
         |  |  `-------+--------'  |  |
         |  |          |           |  |
         |  |          v           |  |
-        |  |   .--------------.   |  |  .--------.
-        |  |  | Automatically  |  |  | | Existing |
-        |  |  | derive CBOR    |  |  | | CBOR     |
-        |  |  | tag [RFC9277]  |  |  | | tag      |
-        |  |   `------+-------'   |  |  `---+----'
-        |  |          |           |  |      |
-        |  |          |.----------(--(-----'
+        |  |   .--------------.   |  |
+        |  |  | Automatically  |  |  |
+        |  |  | derive CBOR    |  |  |
+        |  |  | tag [RFC9277]  |  |  |
+        |  |   `------+-------'   |  |
+        |  |          |           |  |
+        |  |          |           |  |
         |  |          |           |  |
         |  |          v           |  |
         |  |   .----------------. |  |
