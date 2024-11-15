@@ -1451,7 +1451,7 @@ defined in <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.<a hr
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-conceptual-message-wrapper-" class="section-name selfRef">Conceptual Message Wrapper Encodings</a>
       </h2>
 <p id="section-3-1">A RATS Conceptual Message Wrapper (CMW) has a tree structure of leaves that contain payload messages associated with their content type.
-The two leaf node types are<a href="#section-3-1" class="pilcrow">¶</a></p>
+The two leaf node types are:<a href="#section-3-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-3-2">
 <li id="section-3-2.1">
           <p id="section-3-2.1.1">A CMW using a CBOR or JSON record (<a href="#type-n-val" class="auto internal xref">Section 3.1</a>);<a href="#section-3-2.1.1" class="pilcrow">¶</a></p>
@@ -1460,8 +1460,15 @@ The two leaf node types are<a href="#section-3-1" class="pilcrow">¶</a></p>
           <p id="section-3-2.2.1">A CMW based on CBOR tags (<a href="#cbor-tag" class="auto internal xref">Section 3.2</a>).<a href="#section-3-2.2.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
-<p id="section-3-3">A further CMW "collection" type that holds together multiple CMW items is defined in <a href="#cmw-coll" class="auto internal xref">Section 3.3</a>.<a href="#section-3-3" class="pilcrow">¶</a></p>
-<p id="section-3-4">A CMW "tunnel" type is also defined in <a href="#cmw-tunnel" class="auto internal xref">Section 3.3.2</a> to allow transporting CBOR CMWs in JSON collections and vice-versa.<a href="#section-3-4" class="pilcrow">¶</a></p>
+<p id="section-3-3">Intermediate tree nodes are either:<a href="#section-3-3" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-3-4">
+<li id="section-3-4.1">
+          <p id="section-3-4.1.1">A CMW "collection" type that holds together multiple CMW items (<a href="#cmw-coll" class="auto internal xref">Section 3.3</a>);<a href="#section-3-4.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-3-4.2">
+          <p id="section-3-4.2.1">A CMW "tunnel" type that allows transporting CBOR CMWs in JSON collections and vice-versa (<a href="#cmw-tunnel" class="auto internal xref">Section 3.3.2</a>).<a href="#section-3-4.2.1" class="pilcrow">¶</a></p>
+</li>
+      </ol>
 <p id="section-3-5">The collected CDDL is in <a href="#collected-cddl" class="auto internal xref">Appendix A</a>.<a href="#section-3-5" class="pilcrow">¶</a></p>
 <p id="section-3-6">This document only defines an encapsulation, not a security format.
 It is the responsibility of the Attester to ensure that the CMW contents have the necessary security protection.
