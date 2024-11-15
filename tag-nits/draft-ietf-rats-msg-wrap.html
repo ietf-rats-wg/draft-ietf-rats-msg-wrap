@@ -1540,7 +1540,7 @@ Future specifications may add new values to the <code>ind</code> field; see <a h
         <h3 id="name-cmw-cbor-tags">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-cmw-cbor-tags" class="section-name selfRef">CMW CBOR Tags</a>
         </h3>
-<p id="section-3.2-1">CMW of the CBOR Tag type derive their tag numbers from a corresponding CoAP Content-Format ID using the <code>TN()</code> transform defined in <span><a href="https://rfc-editor.org/rfc/rfc9277#appendix-B" class="relref">Appendix B</a> of [<a href="#RFC9277" class="cite xref">RFC9277</a>]</span>.
+<p id="section-3.2-1">CMW of type CBOR Tag derive their tag numbers from a corresponding CoAP Content-Format ID using the <code>TN()</code> transform defined in <span><a href="https://rfc-editor.org/rfc/rfc9277#appendix-B" class="relref">Appendix B</a> of [<a href="#RFC9277" class="cite xref">RFC9277</a>]</span>.
 Such CBOR tag numbers are in range [1668546817, 1668612095].<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">The RATS conceptual message is first serialized according to the Content-Format ID and then encoded as a CBOR byte string, to which the TN-derived tag number is prepended.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.2-3">The CMW CBOR Tag is defined in <a href="#fig-cddl-cbor-tag" class="auto internal xref">Figure 2</a> using two different macros.
