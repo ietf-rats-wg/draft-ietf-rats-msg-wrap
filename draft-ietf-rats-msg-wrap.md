@@ -44,8 +44,6 @@ contributor:
 normative:
   RFC4648: base64
   RFC5280: pkix
-  RFC5912:
-  RFC6268:
   RFC6838: media-types
   RFC7252: coap
   RFC7519: jwt
@@ -66,6 +64,8 @@ normative:
   X.680: CCITT.X680.1994
 
 informative:
+  RFC5912: pkix-mods
+  RFC6268: more-pkix-mods
   RFC7942: impl-status
   RFC9193: senml-cf
   STD96:
@@ -400,7 +400,7 @@ The DER-encoded CMW is the value of the OCTET STRING for the extnValue field of 
 
 ## ASN.1 Module {#asn1-x509}
 
-This section provides an ASN.1 module {{X.680}} for the CMW extension, following the conventions established in {{RFC5912}} and {{RFC6268}}.
+This section provides an ASN.1 module {{X.680}} for the CMW extension, following the conventions established in {{-pkix-mods}} and {{-more-pkix-mods}}.
 
 ~~~asn.1
 CMWExtn
