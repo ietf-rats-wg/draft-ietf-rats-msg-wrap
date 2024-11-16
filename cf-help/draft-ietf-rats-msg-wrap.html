@@ -1337,15 +1337,13 @@ In addition, a Media Type and a CoAP Content-Format are defined for transporting
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.5.2.2">
                     <p id="section-toc.1-1.10.2.5.2.2.1"><a href="#section-10.5.2" class="auto internal xref">10.5.2</a>.  <a href="#name-application-cmwjson" class="internal xref"><code>application/cmw+json</code></a></p>
 </li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.5.2.3">
+                    <p id="section-toc.1-1.10.2.5.2.3.1"><a href="#section-10.5.3" class="auto internal xref">10.5.3</a>.  <a href="#name-registering-new-coap-conten" class="internal xref">Registering new CoAP Content-Formats for Parameterized CMW Media Types</a></p>
+</li>
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.6">
-                <p id="section-toc.1-1.10.2.6.1"><a href="#section-10.6" class="auto internal xref">10.6</a>.  <a href="#name-coap-content-formats" class="internal xref">CoAP Content Formats</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.6.2.1">
-                    <p id="section-toc.1-1.10.2.6.2.1.1"><a href="#section-10.6.1" class="auto internal xref">10.6.1</a>.  <a href="#name-registering-new-coap-conten" class="internal xref">Registering new CoAP Content Formats from Parameterized CMW Media Types</a></p>
-</li>
-                </ul>
+                <p id="section-toc.1-1.10.2.6.1"><a href="#section-10.6" class="auto internal xref">10.6</a>.  <a href="#name-coap-content-formats" class="internal xref">CoAP Content-Formats</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.7">
                 <p id="section-toc.1-1.10.2.7.1"><a href="#section-10.7" class="auto internal xref">10.7</a>.  <a href="#name-new-smi-numbers-registratio" class="internal xref">New SMI Numbers Registrations</a></p>
@@ -2611,14 +2609,31 @@ dotted-decimal notation.  The parameter value is case-insensitive.  It <span cla
 </dl>
 </section>
 </div>
+<div id="registering-new-coap-content-formats-for-parameterized-cmw-media-types">
+<section id="section-10.5.3">
+          <h4 id="name-registering-new-coap-conten">
+<a href="#section-10.5.3" class="section-number selfRef">10.5.3. </a><a href="#name-registering-new-coap-conten" class="section-name selfRef">Registering new CoAP Content-Formats for Parameterized CMW Media Types</a>
+          </h4>
+<p id="section-10.5.3-1">New CoAP Content-Formats can be created based on parameterized instances of the <code>application/cmw+json</code> and <code>application/cmw+cbor</code> media types.<a href="#section-10.5.3-1" class="pilcrow">¶</a></p>
+<p id="section-10.5.3-2">When assigning a new CoAP Content-Format ID for a CMW media type that utilizes the <code>cmwc_t</code> parameter, the registrar must check (directly or through the Designated Expert) that:<a href="#section-10.5.3-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-10.5.3-3.1">
+              <p id="section-10.5.3-3.1.1">The corresponding CMW type is a collection (<a href="#cmw-coll" class="auto internal xref">Section 3.3</a>), and<a href="#section-10.5.3-3.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.5.3-3.2">
+              <p id="section-10.5.3-3.2.1">The <code>cmwc_t</code> value is either an OID or a URI.<a href="#section-10.5.3-3.2.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
 </section>
 </div>
 <div id="coap-content-formats">
 <section id="section-10.6">
         <h3 id="name-coap-content-formats">
-<a href="#section-10.6" class="section-number selfRef">10.6. </a><a href="#name-coap-content-formats" class="section-name selfRef">CoAP Content Formats</a>
+<a href="#section-10.6" class="section-number selfRef">10.6. </a><a href="#name-coap-content-formats" class="section-name selfRef">CoAP Content-Formats</a>
         </h3>
-<p id="section-10.6-1">IANA is requested to register the following Content-Format numbers in the "CoAP Content-Formats" registry, within the "Constrained RESTful Environments (CoRE) Parameters" registry group <span>[<a href="#IANA.core-parameters" class="cite xref">IANA.core-parameters</a>]</span>:<a href="#section-10.6-1" class="pilcrow">¶</a></p>
+<p id="section-10.6-1">IANA is requested to register the following Content-Format IDs in the "CoAP Content-Formats" registry, within the "Constrained RESTful Environments (CoRE) Parameters" registry group <span>[<a href="#IANA.core-parameters" class="cite xref">IANA.core-parameters</a>]</span>:<a href="#section-10.6-1" class="pilcrow">¶</a></p>
 <span id="name-new-coap-content-formats"></span><table class="left" id="table-4">
           <caption>
 <a href="#table-4" class="selfRef">Table 4</a>:
@@ -2650,22 +2665,6 @@ dotted-decimal notation.  The parameter value is case-insensitive.  It <span cla
           </tbody>
         </table>
 <p id="section-10.6-3">If possible, TBD1 and TBD2 should be assigned in the 256..9999 range.<a href="#section-10.6-3" class="pilcrow">¶</a></p>
-<div id="registering-new-coap-content-formats-from-parameterized-cmw-media-types">
-<section id="section-10.6.1">
-          <h4 id="name-registering-new-coap-conten">
-<a href="#section-10.6.1" class="section-number selfRef">10.6.1. </a><a href="#name-registering-new-coap-conten" class="section-name selfRef">Registering new CoAP Content Formats from Parameterized CMW Media Types</a>
-          </h4>
-<p id="section-10.6.1-1">When assigning a new CoAP Content-Format ID for a CMW Media Type that uses the <code>cmwc_t</code> parameter, the registrar must check that:<a href="#section-10.6.1-1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-10.6.1-2.1">
-              <p id="section-10.6.1-2.1.1">The corresponding CMW type is a collection (<a href="#cmw-coll" class="auto internal xref">Section 3.3</a>), and<a href="#section-10.6.1-2.1.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-10.6.1-2.2">
-              <p id="section-10.6.1-2.2.1">The <code>cmwc_t</code> value is either an OID or a URI.<a href="#section-10.6.1-2.2.1" class="pilcrow">¶</a></p>
-</li>
-          </ul>
-</section>
-</div>
 </section>
 </div>
 <div id="new-smi-numbers-registrations">

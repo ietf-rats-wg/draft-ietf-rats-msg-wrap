@@ -117,9 +117,9 @@ Table of Contents
      10.5.  Media Types
        10.5.1.  application/cmw+cbor
        10.5.2.  application/cmw+json
-     10.6.  CoAP Content Formats
-       10.6.1.  Registering new CoAP Content Formats from
-               Parameterized CMW Media Types
+       10.5.3.  Registering new CoAP Content-Formats for Parameterized
+               CMW Media Types
+     10.6.  CoAP Content-Formats
      10.7.  New SMI Numbers Registrations
    11. References
      11.1.  Normative References
@@ -1083,10 +1083,25 @@ lication/signed-corim+cbor"
    Author/Change controller:  IETF
    Provisional registration:  no
 
-10.6.  CoAP Content Formats
+10.5.3.  Registering new CoAP Content-Formats for Parameterized CMW
+         Media Types
 
-   IANA is requested to register the following Content-Format numbers in
-   the "CoAP Content-Formats" registry, within the "Constrained RESTful
+   New CoAP Content-Formats can be created based on parameterized
+   instances of the application/cmw+json and application/cmw+cbor media
+   types.
+
+   When assigning a new CoAP Content-Format ID for a CMW media type that
+   utilizes the cmwc_t parameter, the registrar must check (directly or
+   through the Designated Expert) that:
+
+   *  The corresponding CMW type is a collection (Section 3.3), and
+
+   *  The cmwc_t value is either an OID or a URI.
+
+10.6.  CoAP Content-Formats
+
+   IANA is requested to register the following Content-Format IDs in the
+   "CoAP Content-Formats" registry, within the "Constrained RESTful
    Environments (CoRE) Parameters" registry group
    [IANA.core-parameters]:
 
@@ -1104,16 +1119,6 @@ lication/signed-corim+cbor"
                      Table 4: New CoAP Content Formats
 
    If possible, TBD1 and TBD2 should be assigned in the 256..9999 range.
-
-10.6.1.  Registering new CoAP Content Formats from Parameterized CMW
-         Media Types
-
-   When assigning a new CoAP Content-Format ID for a CMW Media Type that
-   uses the cmwc_t parameter, the registrar must check that:
-
-   *  The corresponding CMW type is a collection (Section 3.3), and
-
-   *  The cmwc_t value is either an OID or a URI.
 
 10.7.  New SMI Numbers Registrations
 
