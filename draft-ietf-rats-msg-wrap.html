@@ -2251,7 +2251,7 @@ Instead, it should be attestation-oriented key material from the device or the a
         <h3 id="name-jwt-cmw-claim-registration">
 <a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-jwt-cmw-claim-registration" class="section-name selfRef">JWT <code>cmw</code> Claim Registration</a>
         </h3>
-<p id="section-10.2-1">IANA is requested to add a new <code>cmw</code> claim to the "JSON Web Token Claims" sub-registry of the "JSON Web Token (JWT)" registry <span>[<a href="#IANA.jwt" class="cite xref">IANA.jwt</a>]</span> as follows:<a href="#section-10.2-1" class="pilcrow">¶</a></p>
+<p id="section-10.2-1">IANA is requested to add a new <code>cmw</code> claim to the "JSON Web Token Claims" registry of the "JSON Web Token (JWT)" registry group <span>[<a href="#IANA.jwt" class="cite xref">IANA.jwt</a>]</span> as follows:<a href="#section-10.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-10.2-2.1">
             <p id="section-10.2-2.1.1">Claim Name: cmw<a href="#section-10.2-2.1.1" class="pilcrow">¶</a></p>
@@ -2459,7 +2459,8 @@ Instead, it should be attestation-oriented key material from the device or the a
             <dd class="break"></dd>
 <dt id="section-10.5.1-1.7">Optional parameters:</dt>
             <dd style="margin-left: 1.5em" id="section-10.5.1-1.8">
-              <p id="section-10.5.1-1.8.1"><code>cmwc_t</code> (CMW collection type in string format.  The parameter value is case-insensitive.  It <span class="bcp14">MUST NOT</span> be used for CMW that are not collections.)<a href="#section-10.5.1-1.8.1" class="pilcrow">¶</a></p>
+              <p id="section-10.5.1-1.8.1"><code>cmwc_t</code> (CMW collection type in string format.  OIDs must use the
+dotted-decimal notation.  The parameter value is case-insensitive.  It <span class="bcp14">MUST NOT</span> be used for CMW that are not collections.)<a href="#section-10.5.1-1.8.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
 <dt id="section-10.5.1-1.9">Encoding considerations:</dt>
@@ -2543,7 +2544,8 @@ Instead, it should be attestation-oriented key material from the device or the a
             <dd class="break"></dd>
 <dt id="section-10.5.2-1.7">Optional parameters:</dt>
             <dd style="margin-left: 1.5em" id="section-10.5.2-1.8">
-              <p id="section-10.5.2-1.8.1"><code>cmwc_t</code> (CMW collection type in string format.  The parameter value is case-insensitive.  It <span class="bcp14">MUST NOT</span> be used for CMW that are not collections.)<a href="#section-10.5.2-1.8.1" class="pilcrow">¶</a></p>
+              <p id="section-10.5.2-1.8.1"><code>cmwc_t</code> (CMW collection type in string format.  OIDs must use the
+dotted-decimal notation.  The parameter value is case-insensitive.  It <span class="bcp14">MUST NOT</span> be used for CMW that are not collections.)<a href="#section-10.5.2-1.8.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
 <dt id="section-10.5.2-1.9">Encoding considerations:</dt>
@@ -2611,7 +2613,7 @@ Instead, it should be attestation-oriented key material from the device or the a
         <h3 id="name-coap-content-formats">
 <a href="#section-10.6" class="section-number selfRef">10.6. </a><a href="#name-coap-content-formats" class="section-name selfRef">CoAP Content Formats</a>
         </h3>
-<p id="section-10.6-1">IANA is requested to register the following Content-Format numbers in the "CoAP Content-Formats" sub-registry, within the "Constrained RESTful Environments (CoRE) Parameters" Registry <span>[<a href="#IANA.core-parameters" class="cite xref">IANA.core-parameters</a>]</span>:<a href="#section-10.6-1" class="pilcrow">¶</a></p>
+<p id="section-10.6-1">IANA is requested to register the following Content-Format numbers in the "CoAP Content-Formats" registry, within the "Constrained RESTful Environments (CoRE) Parameters" registry group <span>[<a href="#IANA.core-parameters" class="cite xref">IANA.core-parameters</a>]</span>:<a href="#section-10.6-1" class="pilcrow">¶</a></p>
 <span id="name-new-coap-content-formats"></span><table class="left" id="table-4">
           <caption>
 <a href="#table-4" class="selfRef">Table 4</a>:
@@ -2650,7 +2652,7 @@ Instead, it should be attestation-oriented key material from the device or the a
         <h3 id="name-new-smi-numbers-registratio">
 <a href="#section-10.7" class="section-number selfRef">10.7. </a><a href="#name-new-smi-numbers-registratio" class="section-name selfRef">New SMI Numbers Registrations</a>
         </h3>
-<p id="section-10.7-1">IANA is requested to assign an object identifier (OID) for the CMW extension defined in <a href="#x509" class="auto internal xref">Section 5</a> in the "SMI Security for PKIX Certificate Extension" sub-registry of the "SMI Numbers" <span>[<a href="#IANA.smi-numbers" class="cite xref">IANA.smi-numbers</a>]</span> registry:<a href="#section-10.7-1" class="pilcrow">¶</a></p>
+<p id="section-10.7-1">IANA is requested to assign an object identifier (OID) for the CMW extension defined in <a href="#x509" class="auto internal xref">Section 5</a> in the "SMI Security for PKIX Certificate Extension" registry of the "SMI Numbers" <span>[<a href="#IANA.smi-numbers" class="cite xref">IANA.smi-numbers</a>]</span> registry group:<a href="#section-10.7-1" class="pilcrow">¶</a></p>
 <span id="name-new-cmw-extension-oid"></span><table class="left" id="table-5">
           <caption>
 <a href="#table-5" class="selfRef">Table 5</a>:
@@ -2672,7 +2674,7 @@ Instead, it should be attestation-oriented key material from the device or the a
             </tr>
           </tbody>
         </table>
-<p id="section-10.7-3">IANA is requested to assign an object identifier (OID) for the ASN.1 Module defined in <a href="#asn1-x509" class="auto internal xref">Section 5.1</a> in the "SMI Security for PKIX Module Identifier" sub-registry of the "SMI Numbers" <span>[<a href="#IANA.smi-numbers" class="cite xref">IANA.smi-numbers</a>]</span> registry:<a href="#section-10.7-3" class="pilcrow">¶</a></p>
+<p id="section-10.7-3">IANA is requested to assign an object identifier (OID) for the ASN.1 Module defined in <a href="#asn1-x509" class="auto internal xref">Section 5.1</a> in the "SMI Security for PKIX Module Identifier" registry of the "SMI Numbers" <span>[<a href="#IANA.smi-numbers" class="cite xref">IANA.smi-numbers</a>]</span> registry group:<a href="#section-10.7-3" class="pilcrow">¶</a></p>
 <span id="name-new-asn1-module-oid"></span><table class="left" id="table-6">
           <caption>
 <a href="#table-6" class="selfRef">Table 6</a>:
