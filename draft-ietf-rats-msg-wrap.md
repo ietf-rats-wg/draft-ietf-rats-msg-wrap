@@ -632,7 +632,7 @@ IANA is requested to add a new `cmw` claim to the "CBOR Web Token (CWT) Claims" 
 
 ## JWT `cmw` Claim Registration {#iana-jwt}
 
-IANA is requested to add a new `cmw` claim to the "JSON Web Token Claims" sub-registry of the "JSON Web Token (JWT)" registry {{IANA.jwt}} as follows:
+IANA is requested to add a new `cmw` claim to the "JSON Web Token Claims" registry of the "JSON Web Token (JWT)" registry group {{IANA.jwt}} as follows:
 
 * Claim Name: cmw
 * Claim Description: A RATS Conceptual Message Wrapper
@@ -717,7 +717,8 @@ Required parameters:
 : n/a
 
 Optional parameters:
-: `cmwc_t` (CMW collection type in string format.  The parameter value is case-insensitive.  It MUST NOT be used for CMW that are not collections.)
+: `cmwc_t` (CMW collection type in string format.  OIDs must use the
+  dotted-decimal notation.  The parameter value is case-insensitive.  It MUST NOT be used for CMW that are not collections.)
 
 Encoding considerations:
 : binary (CBOR)
@@ -765,7 +766,8 @@ Required parameters:
 : n/a
 
 Optional parameters:
-: `cmwc_t` (CMW collection type in string format.  The parameter value is case-insensitive.  It MUST NOT be used for CMW that are not collections.)
+: `cmwc_t` (CMW collection type in string format.  OIDs must use the
+  dotted-decimal notation.  The parameter value is case-insensitive.  It MUST NOT be used for CMW that are not collections.)
 
 Encoding considerations:
 : binary (JSON is UTF-8-encoded text)
@@ -802,7 +804,7 @@ Provisional registration:
 
 ## CoAP Content Formats
 
-IANA is requested to register the following Content-Format numbers in the "CoAP Content-Formats" sub-registry, within the "Constrained RESTful Environments (CoRE) Parameters" Registry {{!IANA.core-parameters}}:
+IANA is requested to register the following Content-Format numbers in the "CoAP Content-Formats" registry, within the "Constrained RESTful Environments (CoRE) Parameters" registry group {{!IANA.core-parameters}}:
 
 | Content-Type | Content Coding | ID | Reference |
 | application/cmw+cbor | - | TBD1 | {{type-n-val}}, {{cbor-tag}} and {{cmw-coll}} of {{&SELF}} |
@@ -813,13 +815,13 @@ If possible, TBD1 and TBD2 should be assigned in the 256..9999 range.
 
 ## New SMI Numbers Registrations
 
-IANA is requested to assign an object identifier (OID) for the CMW extension defined in {{x509}} in the "SMI Security for PKIX Certificate Extension" sub-registry of the "SMI Numbers" {{!IANA.smi-numbers}} registry:
+IANA is requested to assign an object identifier (OID) for the CMW extension defined in {{x509}} in the "SMI Security for PKIX Certificate Extension" registry of the "SMI Numbers" {{!IANA.smi-numbers}} registry group:
 
 | Decimal | Description | References |
 | TBD | id-pe-cmw | {{x509}} of {{&SELF}} |
 {: align="left" title="New CMW Extension OID"}
 
-IANA is requested to assign an object identifier (OID) for the ASN.1 Module defined in {{asn1-x509}} in the "SMI Security for PKIX Module Identifier" sub-registry of the "SMI Numbers" {{!IANA.smi-numbers}} registry:
+IANA is requested to assign an object identifier (OID) for the ASN.1 Module defined in {{asn1-x509}} in the "SMI Security for PKIX Module Identifier" registry of the "SMI Numbers" {{!IANA.smi-numbers}} registry group:
 
 | Decimal | Description | References |
 | TBD | id-mod-cmw-collection-extn | {{asn1-x509}} of {{&SELF}} |
