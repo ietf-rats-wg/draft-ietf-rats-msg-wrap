@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-14T00:51:03.536350+00:00",
+  "timestamp": "2024-11-17T00:57:04.224401+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -1355,22 +1355,29 @@
       "id": "I_kwDOIGCt2M6CEcS-",
       "title": "Trust contexts to consider",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/81",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "MikeCamel",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "1. do I trust this party to create a measurement (this isn't that important, I suspect, as we should always verify!)\r\n2. do I trust this party to verify the measurement?\r\n3. do I trust this party to attest to another party (or possibly the linkage to another party)?\r\n4. do I trust this party to create a topology of trust relationships?\r\n\r\nThese are clearly different trust contexts, but people don't understand very well that contexts must be separated, so we should call this out and ensure that the semantics we're creating support them from the very initial version and any implementation (or people will combine them, and implementations will allow combinations to support previous versions, which is a Bad Thing[tm]).",
       "createdAt": "2024-03-12T16:56:44Z",
-      "updatedAt": "2024-06-12T13:49:10Z",
-      "closedAt": null,
+      "updatedAt": "2024-11-15T09:01:20Z",
+      "closedAt": "2024-11-15T09:01:20Z",
       "comments": [
         {
           "author": "thomas-fossati",
           "authorAssociation": "COLLABORATOR",
-          "body": "Thanks @MikeCamel.\r\n\r\nUsing RATS terminology, I interpret 1. as \"trusting evidence\" based on endorsements, such as those from the supply chain.  Adn I interpret 2. as \"trusting attestation results,\" meaning trusting the verifier, usually by knowing and trusting its signing key.\r\n\r\nRe: 3. and 4.  I interpret 3. as \"verifying that the expected transitive trust relationships are in place\", and 4. as a generalisation of 3, where instead of a linear chain, the trust relationships are modelled as a graph.\r\n\r\nI think 1 and 2 are particularly within CMW's scope, whilst 3 and 4 seem very relevant.  Especially when CMWs are used to describe [layered attesters](https://www.rfc-editor.org/rfc/rfc9334.html#section-3.2) (case 3) or [composite devices](https://www.rfc-editor.org/rfc/rfc9334.html#section-3.3) (case 4).\r\n\r\n\r\n",
+          "body": "Thanks @MikeCamel.\r\n\r\nUsing RATS terminology, I interpret 1. as \"trusting evidence\" based on endorsements, such as those from the supply chain.  Adn I interpret 2. as \"trusting attestation results,\" meaning trusting the verifier, usually by knowing and trusting its signing key.\r\n\r\nRe: 3. and 4.  I interpret 3. as \"verifying that the expected transitive trust relationships are in place\", and 4. as a generalisation of 3, where instead of a linear chain, the trust relationships are modelled as a graph.\r\n\r\n1 and 2 are not within CMW's scope, whilst 3 and 4 seem very relevant.  Especially when CMWs are used to describe [layered attesters](https://www.rfc-editor.org/rfc/rfc9334.html#section-3.2) (case 3) or [composite devices](https://www.rfc-editor.org/rfc/rfc9334.html#section-3.3) (case 4).\r\n\r\n\r\n",
           "createdAt": "2024-06-12T13:49:09Z",
-          "updatedAt": "2024-06-12T13:49:09Z"
+          "updatedAt": "2024-11-15T08:56:59Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "In #113 and #117, we have extended the \"security considerations\" and \"CMW collections\" sections to discuss the trust implications when using CMW collections to model layered attesters and composite devices.\r\n",
+          "createdAt": "2024-11-15T09:01:20Z",
+          "updatedAt": "2024-11-15T09:01:20Z"
         }
       ]
     },
@@ -1821,15 +1828,17 @@
       "id": "I_kwDOIGCt2M6W5YGV",
       "title": "Are examples realistic?",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/116",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "laurencelundblade",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "thomas-fossati"
+      ],
       "labels": [],
       "body": "In the following, I don't think the example tokens are either real b64-encoded tokens or CBOR-encoded tokens. They probably should be to help people understand. For example, I don't know what 4c693475 is.\r\n\r\nIt would be a lot of work, but you could import EAT CDDL and use the .b64 and .cbor control operators to validate into them with the cddl tool. I did that with EAT and was able to make some useful corrections to my examples.\r\n\r\n```\r\n{\r\n  \"attester A\": [\r\n    30001,\r\n    h'2347da55',\r\n    4\r\n  ],\r\n  \"attester B\": 1668576818(h'2347da55'),\r\n  \"attester C\": [\r\n    \"application/eat+jwt\",\r\n    h'4c693475',\r\n    8\r\n  ]\r\n}\r\n```",
       "createdAt": "2024-09-17T16:47:09Z",
-      "updatedAt": "2024-09-30T03:21:17Z",
-      "closedAt": null,
+      "updatedAt": "2024-11-15T17:10:22Z",
+      "closedAt": "2024-11-15T17:10:22Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -1852,16 +1861,52 @@
       "id": "I_kwDOIGCt2M6bsz8X",
       "title": "Expected use of cmw and CF in IANA section could be more clear",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/123",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "nedmsmith",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Section 10.3 defines the CBOR tag `CPA765` and section 6. defines the expected content as `CMW`. \r\n\r\nSection 10.6 requests TBD1 and TBD2 from CF registry. Section 3.2 defines $cbor-tag socket and uses example `tn` and `$fmt` inputs to the macro. But it doesn't describe if the macro should be used for the TBD1 input.  There is an example that defines $cbor-tag as `cbor-tag<1668576818, any>`. But it isn't clear if 1668576818 is the intended TN result from TBD1 or if the intended $fmt is `any`.  In other words, is the following macro definition intended?\r\n```\r\n; 1668576818 = tn(TBD1)\r\n$cbor-tag /= cbor-tag<1668576818, any>\r\n; or possibly\r\n$cbor-tag /= cbor-tag<1668576818, cmw>\r\n```\r\nThe various media-type / content-format names use `cmw` (e.g., `cmw+cbor`, `cmw+json`), but there isn't text that explicitly associates the I-D use of \"CMW\" with the cddl `cmw`.  The top level `cmw` isn't discussed in the normative part of the I-D. For example, it would be helpful if the following cddl was described in section 3.\r\n```\r\ncmw = json-CMW / cbor-CMW\r\n\r\njson-CMW = json-record / json-collection\r\ncbor-CMW = cbor-record / cbor-collection / $cbor-tag\r\n```\r\nwith text that equates CMW with `cmw`. \r\n",
       "createdAt": "2024-10-24T17:42:40Z",
-      "updatedAt": "2024-10-24T17:42:40Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-11-16T05:37:59Z",
+      "closedAt": "2024-11-16T05:37:59Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Since in -10 we have removed the plug-in for EAT submods, this issue seems OBE.\r\n\r\n@nedmsmith could you confirm?  (If so, please close this.)",
+          "createdAt": "2024-11-15T14:02:26Z",
+          "updatedAt": "2024-11-15T14:02:26Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Since in -10 we have removed the plug-in for EAT submods, this issue seems OBE.\r\n\r\nNo. The issue is `cmw` isn't defined normatively. \r\nSection 3 refers to appendix A, which contains `cmw`, but appendices are not normative.\r\n\r\nSection 3 also incorrectly positions that there are 2 CMW types defined in the draft, but there are 3 since it defines an ASN.1 form. There is a top level definition of CMW for the ASN.1 form\r\n```\r\nCMW ::= CHOICE {\r\n    json UTF8String,\r\n    cbor OCTET STRING\r\n}\r\n```\r\nBut not the CDDL form.\r\n\r\nThe document readability is diminished by lax use of \"CMW\" as both an acronym for \"Conceptual Message Wrapper\", a normative ASN.1 expression and a normative CBOR/JSON expression (at least in part) in `json-CMW` and `cbor-CMW`. None of the other CDDL uses upper case, so it is a strange break in convention.\r\n\r\n",
+          "createdAt": "2024-11-15T16:53:05Z",
+          "updatedAt": "2024-11-15T16:53:05Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > Since in -10 we have removed the plug-in for EAT submods, this issue seems OBE.\r\n> \r\n> No. The issue is `cmw` isn't defined normatively. Section 3 refers to appendix A, which contains `cmw`\r\n\r\nWe could add the top level rules into Section 3:\r\n\r\n```\r\nstart = cmw\r\n\r\ncmw = json-CMW / cbor-CMW\r\n\r\njson-CMW = json-record / json-collection\r\ncbor-CMW = cbor-record / cbor-collection / $cbor-tag\r\n```\r\n\r\nAlternatively, we could move the CDDL to a normal section in the `--- middle` of the document.\r\n\r\n> [...] appendices are not normative.\r\n\r\nI am not sure that's the case.  This is @henkbirkholz's mantra ;-) but I have at least one example of a normative appendix in mind.\r\n\r\n> Section 3 also incorrectly positions that there are 2 CMW types defined in the draft, but there are 3 since it defines an ASN.1 form. There is a top level definition of CMW for the ASN.1 form\r\n> \r\n> ```\r\n> CMW ::= CHOICE {\r\n>     json UTF8String,\r\n>     cbor OCTET STRING\r\n> }\r\n> ```\r\n\r\nI wonder whether this can be considered a distinct definition though.  I see it just as an ASN.1 stash for something that's defined elsewhere.\r\n\r\n> The document readability is diminished by lax use of \"CMW\" as both an acronym for \"Conceptual Message Wrapper\", a normative ASN.1 expression and a normative CBOR/JSON expression (at least in part) in `json-CMW` and `cbor-CMW`. None of the other CDDL uses upper case, so it is a strange break in convention.\r\n\r\nI am not adverse to change.  I only lack a bit of fantasy and motivation in this specific case :-) Do you have a suggestion?\r\n",
+          "createdAt": "2024-11-15T17:28:51Z",
+          "updatedAt": "2024-11-15T17:28:51Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": ">We could add the top level rules into Section 3:\r\n\r\nThis is my preference. Section 3 should be re-titled to \"Conceptual Message Wrapper\" since this section is both about the type and the encoding.\r\n\r\nA new section 3.1 should be created that describes the top-level construction of \"cmw\".  The document flows better if it describes the thing from top to bottom rather than the other way around. Mathematicians might prefer the other way around, but everybody else prefers top down (IMHO).\r\n\r\nThe new section 3.1 could point out that the ASN.1/der encoding is another form of `cmw` as in:\r\n```\r\ncmw = json-CMW / cbor-CMW / CMW\r\n```\r\nBut the CDDL bridge to ASN.1 isn't there yet. But the wording should make it clear that the above CDDL example is what is intended.\r\n\r\n>I am not sure that's the case.\r\n\r\nIf in doubt put it in the main body of the spec.\r\n\r\n>I wonder whether this can be considered a distinct definition though. I see it just as an ASN.1 stash for something that's defined elsewhere.\r\n\r\nThe stash is just a reference back to the json-CMW or cbor-CMW, but the top level definition implies all of the above forms are defined. The CDDL could have used an extensible type form to make it clear there could be others defined down the road (as these are the \"basic\" definitions).\r\n```\r\ncmw-type /= cbor-CMW\r\ncmw-type /= json-CMW\r\ncmw-type /= der-CMW ; where der-CMW is defined by the ASN.1 definition of `CMW`\r\n```\r\n>Do you have a suggestion?\r\n\r\nWhat about:\r\n```\r\ncmw = json-cmw / cbor-cmw\r\njson-cmw = json-record / json-collection\r\ncbor-cmw = cbor-record / cbor-collection / $cbor-tag\r\n```\r\nor\r\n```\r\ncmw = cmw-type\r\ncmw-type /= json-cmw\r\ncmw-type /= cbor-cmw\r\n```",
+          "createdAt": "2024-11-15T17:58:56Z",
+          "updatedAt": "2024-11-15T17:58:56Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > We could add the top level rules into Section 3:\r\n> \r\n> This is my preference. Section 3 should be re-titled to \"Conceptual Message Wrapper\" since this section is both about the type and the encoding.\r\n> \r\n> A new section 3.1 should be created that describes the top-level construction of \"cmw\". The document flows better if it describes the thing from top to bottom rather than the other way around.\r\n\r\nNoted.\r\n\r\n> Mathematicians might prefer the other way around, but everybody else prefers top down (IMHO).\r\n\r\nThat must be it then :-)\r\n\r\n> The new section 3.1 could point out that the ASN.1/der encoding is another form of `cmw` as in:\r\n> \r\n> ```\r\n> cmw = json-CMW / cbor-CMW / CMW\r\n> ```\r\n> \r\n> But the CDDL bridge to ASN.1 isn't there yet. But the wording should make it clear that the above CDDL example is what is intended.\r\n\r\nYes, that needs to be stated in natural language.\r\n\r\n> > I am not sure that's the case.\r\n> \r\n> If in doubt put it in the main body of the spec.\r\n\r\nTBH, I don't know where this thing about default non-normative appendixes in RFCs comes from.\r\nHenk is the first IETF person I know who's so adamant about that :-)\r\n \r\n> > I wonder whether this can be considered a distinct definition though. I see it just as an ASN.1 stash for something that's defined elsewhere.\r\n> \r\n> The stash is just a reference back to the json-CMW or cbor-CMW, but the top level definition implies all of the above forms are defined. The CDDL could have used an extensible type form to make it clear there could be others defined down the road (as these are the \"basic\" definitions).\r\n> ```\r\n> cmw-type /= cbor-CMW\r\n> cmw-type /= json-CMW\r\n> cmw-type /= der-CMW ; where der-CMW is defined by the ASN.1 definition of `CMW`\r\n> ```\r\n\r\nCDDL is CBOR/JSON only, it can't plug into another language.  Well, it can pull in ABNF, but not ASN.1 or other spec languages I am afraid.\r\n\r\n\r\n>  > Do you have a suggestion?\r\n> \r\n> What about:\r\n> \r\n> ```\r\n> cmw = json-cmw / cbor-cmw\r\n> json-cmw = json-record / json-collection\r\n> cbor-cmw = cbor-record / cbor-collection / $cbor-tag\r\n> ```\r\n\r\nWFM!",
+          "createdAt": "2024-11-15T18:11:33Z",
+          "updatedAt": "2024-11-15T18:11:33Z"
+        }
+      ]
     },
     {
       "number": 125,
@@ -1884,31 +1929,41 @@
       "id": "I_kwDOIGCt2M6c1fbn",
       "title": "IANA review",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/129",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "* [x] Section 10.1: how should we fill in the registry\u2019s \u201cJWT Claim Name\u201d field? See https://www.iana.org/assignments/cwt\r\n\r\n\"cmw\"\r\n\r\n* [x] Should Section 10.4\u2019s new registry be added to the Remote Attestation Procedures (RATS) registry group at https://www.iana.org/assignments/rats?\r\n\r\nyes\r\n\r\n* [x] If possible, please name a desired range for the new CoAP Content-Format assignments. See https://www.iana.org/assignments/core-parameters.\r\n\r\n256-9999\r\n\r\n* [x] In Section 10.7, please provide the relevant registry name(s) from https://www.iana.org/assignments/smi-numbers and provide the information that should appear in each field in the registry.\r\n\r\n\"SMI Security for PKIX Certificate Extension\"\r\n",
       "createdAt": "2024-11-03T15:11:46Z",
-      "updatedAt": "2024-11-03T16:01:47Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-11-15T08:55:23Z",
+      "closedAt": "2024-11-15T08:55:22Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Addressed in #130 ",
+          "createdAt": "2024-11-15T08:55:22Z",
+          "updatedAt": "2024-11-15T08:55:22Z"
+        }
+      ]
     },
     {
       "number": 132,
       "id": "I_kwDOIGCt2M6deMNP",
       "title": "CoAP content format with JSON",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/132",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "laurencelundblade",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "thomas-fossati"
+      ],
       "labels": [],
       "body": "6.1 says it is OK to use the CoAP content format with json-record. 3.1 says it is not.\r\n\r\nSo far, I don't have a strong opinion for which way it should go.",
       "createdAt": "2024-11-07T19:13:43Z",
-      "updatedAt": "2024-11-07T19:44:09Z",
-      "closedAt": null,
+      "updatedAt": "2024-11-15T17:16:14Z",
+      "closedAt": "2024-11-15T17:16:14Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -1924,16 +1979,26 @@
       "id": "I_kwDOIGCt2M6dedjG",
       "title": "Consistent use of term \"tag\"",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/133",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "laurencelundblade",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "thomas-fossati"
+      ],
       "labels": [],
-      "body": "3.2 mentions \"prepending a tag\". I think this should be \"tag number\" since a \"tag\" is the number plus content.\r\n\r\nThe first sentence in 3.2 is hard for me to interpret too.\r\n\r\nThe term \"CMW CBOR Tag\" may have double meaning, one in 3.2 and the other in 9.3.\r\n\r\nI don't know what a '\"native\" CBOR type' is.\r\n",
+      "body": "* [x] 3.2 mentions \"prepending a tag\". I think this should be \"tag number\" since a \"tag\" is the number plus content.\r\n\r\n* [x] The first sentence in 3.2 is hard for me to interpret too.\r\n\r\n* [ ] The term \"CMW CBOR Tag\" may have double meaning, one in 3.2 and the other in 9.3.\r\n\r\n* [x] I don't know what a '\"native\" CBOR type' is.\r\n",
       "createdAt": "2024-11-07T19:44:48Z",
-      "updatedAt": "2024-11-07T19:44:48Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-11-15T18:30:01Z",
+      "closedAt": "2024-11-15T18:30:01Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> The term \"CMW CBOR Tag\" may have double meaning, one in 3.2 and the other in 9.3.\r\n\r\nThe context should be sufficient to eliminate the potential ambiguity.",
+          "createdAt": "2024-11-15T10:13:22Z",
+          "updatedAt": "2024-11-15T10:13:22Z"
+        }
+      ]
     },
     {
       "number": 135,
@@ -1965,6 +2030,40 @@
           "updatedAt": "2024-11-13T10:16:48Z"
         }
       ]
+    },
+    {
+      "number": 137,
+      "id": "I_kwDOIGCt2M6eoOo2",
+      "title": "downrefs",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/137",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "thomas-fossati"
+      ],
+      "labels": [],
+      "body": "`idnits` reports two downrefs:\r\n\r\n```\r\n  ** Downref: Normative reference to an Informational RFC: RFC 5912\r\n  ** Downref: Normative reference to an Informational RFC: RFC 6268\r\n```",
+      "createdAt": "2024-11-15T09:19:22Z",
+      "updatedAt": "2024-11-15T16:58:07Z",
+      "closedAt": "2024-11-15T16:58:07Z",
+      "comments": []
+    },
+    {
+      "number": 144,
+      "id": "I_kwDOIGCt2M6eyGJl",
+      "title": "IANA terminology",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/144",
+      "state": "CLOSED",
+      "author": "cabo",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Analog of https://github.com/thomas-fossati/draft-cf-reg-update/issues/1",
+      "createdAt": "2024-11-16T07:08:10Z",
+      "updatedAt": "2024-11-16T19:22:37Z",
+      "closedAt": "2024-11-16T19:22:37Z",
+      "comments": []
     }
   ],
   "pulls": [
@@ -8709,25 +8808,33 @@
       "id": "PR_kwDOIGCt2M6AuOM4",
       "title": "Reorganize the list of encodings",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/128",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "ionut-arm",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-11-03T11:19:19Z",
-      "updatedAt": "2024-11-03T20:02:34Z",
+      "updatedAt": "2024-11-15T10:58:45Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "c3c6c6464b891d64d9faf13b819a1b1d2b15bdf4",
       "headRepository": "ionut-arm/draft-ietf-rats-msg-wrap",
       "headRefName": "encoding-list",
       "headRefOid": "1bdb417175512cdada4275a8001cc9539af8431c",
-      "closedAt": null,
+      "closedAt": "2024-11-15T10:58:45Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "ionut-arm",
+          "authorAssociation": "NONE",
+          "body": "Closing this in favour of the less-invasive #141 ",
+          "createdAt": "2024-11-15T10:58:45Z",
+          "updatedAt": "2024-11-15T10:58:45Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOIGCt2M6PwzCp",
@@ -8741,6 +8848,26 @@
           "createdAt": "2024-11-03T20:02:34Z",
           "updatedAt": "2024-11-03T20:02:34Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6RVQEn",
+          "commit": {
+            "abbreviatedOid": "1bdb417"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-15T10:42:51Z",
+          "updatedAt": "2024-11-15T10:42:51Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "tunnels can wrap collections.",
+              "createdAt": "2024-11-15T10:42:51Z",
+              "updatedAt": "2024-11-15T10:52:09Z"
+            }
+          ]
         }
       ]
     },
@@ -8841,24 +8968,26 @@
       "id": "PR_kwDOIGCt2M6BoF0j",
       "title": "CBOR tag numbers must be TN-derived",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/134",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-11-12T12:22:06Z",
-      "updatedAt": "2024-11-13T08:51:48Z",
+      "updatedAt": "2024-11-15T08:54:44Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "7ee45c7a9662233b193bc91c8e06d3eba28272ed",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "tn-only",
       "headRefOid": "c38cc4395249d2836966527aacac8f63d0d4f16a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-11-15T08:54:40Z",
+      "mergedAt": "2024-11-15T08:54:40Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "42cbe35fe06ce68e995039e8b1a3e7831f98ac20"
+      },
       "comments": [
         {
           "author": "nedmsmith",
@@ -8894,8 +9023,753 @@
           "body": "> What 9277 Section 4.3 says is this:\r\n> \r\n> > 4.3. CBOR Tags for CoAP Content-Format Numbers\r\n> > IANA allocated the tag numbers 1668546817 (0x63740101) to 1668612095 (0x6374ffff) as follows:\r\n> \r\n> Clearly, these are _allocated_ (assigned), not reserved. True, you can\u2019t _use_ the allocation for a specific tag number before there is an assignment for the corresponding ct number, but that doesn\u2019t make the tag numbers in any way less allocated (assigned).\r\n\r\nThank you for the clarification. I have some reservations (pun intended) about the use of terms\u2014the semantics of allocation versus assignment\u2014but I will refrain from going down that specific rabbit hole \ud83d\ude05\r\n\r\n> I have no idea how these two assignment ranges (tag numbers 1668546817 (0x63740101) to 1668612095 (0x6374ffff), and content-format numbers 0..65024) are getting confused; they are linked by a formula, not by one registration policy somehow seeping over into the other space.\r\n\r\n\ud83d\udc4d ",
           "createdAt": "2024-11-13T08:18:20Z",
           "updatedAt": "2024-11-13T08:18:20Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> they are linked by a formula, not by one registration policy somehow seeping over into the other space.\r\n\r\nI'm looking at it from the perspective of how it could be abused. Maybe others are looking at it from the perspective of how it is supposed to be used. Many of IANA registries have differential vetting requirements. If someone gets an assignment from the CF.Id using weaker vetting (say experimental), generates a TN tag then uses the tag in a standard somewhere else. The new standard essentially becomes the new vetting entity. Users of the TN tag likely would not be aware of the vetting differential, but if it did, the only way to know which vetting was applied is by reversing the TN algorithm, find the ct value, and review the CF registry. It seems unlikely parsers would do this just to check for vetting process differentials. Since the CBOR tags registry has already allocated TN tags, there's no risk that the CBOR tags registrar will assign the tag to something else. So, it's safe for new standard to use it. At the end of the day, IANA isn't providing vetting for a class of CBOR tags (neither by the CF or the CBOR tags registrars). They are only ensuring uniqueness. The real vetting is applied by the organization that is using the TN tag. If the goal is to centralize vetting to the CF registrar, this seems to only work if: (1) there is no differential in CF vetting rules. Or (2), if the ct values is somehow encoded with the TN CBOR tag: `CBOR_Tag = { ct, tn-cbor-tag }` and parsers check that the ct vetting is appropriate for the intended use. Or (3), the TN assigned values are partitioned according to the CF vetting that was applied. Then a range check of TN number removes the need for including ct in the CBOR_Tag. However, a different TN function would be needed. Or (4), as noted above, the TN tag is reversed to find the ct value.\r\n\r\nIf we conclude that none of this matters, then we are saying the vetting procedures aren't actually adding value. IANA's value is simply to guarantee unique names / numbers are assigned. \r\nRFC5226 says: \"an assigned value is being used for a different purpose than originally registered. IANA will not condone such misuse;\", but this presumes misuse is detectable.",
+          "createdAt": "2024-11-14T18:38:41Z",
+          "updatedAt": "2024-11-14T18:57:43Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > they are linked by a formula, not by one registration policy somehow seeping over into the other space.\r\n> \r\n> I'm looking at it from the perspective of how it could be abused. Maybe others are looking at it from the perspective of how it is supposed to be used. Many of IANA registries have differential vetting requirements. If someone gets an assignment from the CF.Id using weaker vetting (say experimental), generates a TN tag then uses the tag in a standard somewhere else. The new standard essentially becomes the new vetting entity. Users of the TN tag likely would not be aware of the vetting differential (maybe it doesn't matter either?), but if it did, the only way to know which vetting was applied is by reversing the TN algorithm, find the ct value, and review the CF registry. It seems unlikely parsers would do this just to check for vetting process differentials. Since the CBOR tags registry has already allocated TN tags, there's no risk that the CBOR tags registrar will assign the tag to something else. So, it's safe for new standard to use it. At the end of the day, IANA isn't providing vetting for a class of CBOR tags (neither the CF or the CBOR tags registrars). They are only ensuring uniqueness. The real vetting is applied by the organization that is using the TN tag. If the goal is to centralize vetting to the CF registrar, this seems to only work if: (1) there is no differential in CF vetting rules. Or (2), if the ct values is somehow encoded with the TN CBOR tag: `CBOR_Tag = { ct, tn-cbor-tag }` and parsers check that the ct vetting is appropriate for the intended use. Or (3), the TN assigned values are partitioned according to the CF vetting that was applied. Then a range check of TN number removes the need for including ct in the CBOR_Tag. However, a different TN function would be needed.\r\n> \r\n> If we conclude that none of this matters, then we are saying the vetting procedures aren't actually adding value. IANA's value is simply to guarantee unique names / numbers are assigned.\r\n\r\nThere are loopholes in the C-F registration process that allow accidental abuse.  We discovered it first-hand :-)\r\n\r\nThat's simply a bug that must be fixed, and [we are going to fix it](https://thomas-fossati.github.io/draft-cf-reg-update/draft-fossati-core-cf-reg-update.html).\r\n\r\nOnce the registration procedure is tightened, as it should be, we'll have a single entry point at which all the vetting is applied consistently and correctly. This is sensibly better than having multiple separate vetting places.\r\n\r\n",
+          "createdAt": "2024-11-14T19:12:59Z",
+          "updatedAt": "2024-11-15T08:54:22Z"
         }
       ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6RM_OY",
+          "commit": {
+            "abbreviatedOid": "c38cc43"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "I am okay with TN tags \"used as CMW\" (\ud83d\ude44) only in this context.",
+          "createdAt": "2024-11-14T13:34:40Z",
+          "updatedAt": "2024-11-14T13:35:49Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6RQzBv",
+          "commit": {
+            "abbreviatedOid": "c38cc43"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-14T20:08:21Z",
+          "updatedAt": "2024-11-14T20:08:21Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 136,
+      "id": "PR_kwDOIGCt2M6CBO0J",
+      "title": "Add Dionna to the editors' list",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/136",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-11-15T08:51:23Z",
+      "updatedAt": "2024-11-15T16:50:41Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "7ee45c7a9662233b193bc91c8e06d3eba28272ed",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "add-dionna",
+      "headRefOid": "cf0f56398b62f11f1bdb8604ce860b53697b2019",
+      "closedAt": "2024-11-15T16:50:38Z",
+      "mergedAt": "2024-11-15T16:50:37Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "53befb2df4261bba5f9299cb1225930e7fc53bee"
+      },
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze ",
+          "createdAt": "2024-11-15T08:51:45Z",
+          "updatedAt": "2024-11-15T08:51:45Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "LGTM",
+          "createdAt": "2024-11-15T16:02:49Z",
+          "updatedAt": "2024-11-15T16:02:49Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6RYQTN",
+          "commit": {
+            "abbreviatedOid": "cf0f563"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "of course! Thanks",
+          "createdAt": "2024-11-15T16:07:59Z",
+          "updatedAt": "2024-11-15T16:07:59Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6RYcy3",
+          "commit": {
+            "abbreviatedOid": "cf0f563"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-15T16:29:02Z",
+          "updatedAt": "2024-11-15T16:29:02Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 138,
+      "id": "PR_kwDOIGCt2M6CBeU-",
+      "title": "fix: PKIX modules downrefs",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/138",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #137",
+      "createdAt": "2024-11-15T09:27:20Z",
+      "updatedAt": "2024-11-15T16:58:10Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "42cbe35fe06ce68e995039e8b1a3e7831f98ac20",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "fix-downrefs",
+      "headRefOid": "3ea3afa2144bd046700c94f13d9809af3913e91e",
+      "closedAt": "2024-11-15T16:58:06Z",
+      "mergedAt": "2024-11-15T16:58:06Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "1f16abb89944ad828fb37b819043264136b71aff"
+      },
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze ",
+          "createdAt": "2024-11-15T16:51:21Z",
+          "updatedAt": "2024-11-15T16:51:21Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6RYq1x",
+          "commit": {
+            "abbreviatedOid": "3ea3afa"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-15T16:54:25Z",
+          "updatedAt": "2024-11-15T16:54:25Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6RYrlW",
+          "commit": {
+            "abbreviatedOid": "3ea3afa"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-15T16:56:07Z",
+          "updatedAt": "2024-11-15T16:56:07Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 139,
+      "id": "PR_kwDOIGCt2M6CBzVl",
+      "title": "fix: consistent use of the term \"tag\"",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/139",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #133 ",
+      "createdAt": "2024-11-15T10:14:25Z",
+      "updatedAt": "2024-11-15T18:30:04Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "42cbe35fe06ce68e995039e8b1a3e7831f98ac20",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "tag-nits",
+      "headRefOid": "1cf615fd12573dac3f03bef5203ff90ba73318d8",
+      "closedAt": "2024-11-15T18:30:00Z",
+      "mergedAt": "2024-11-15T18:30:00Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "e259ac77ca5897ca8b7a451923e8273eb277bfbe"
+      },
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze ",
+          "createdAt": "2024-11-15T16:51:35Z",
+          "updatedAt": "2024-11-15T16:51:35Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6RVC0q",
+          "commit": {
+            "abbreviatedOid": "63a2ee1"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-15T10:15:05Z",
+          "updatedAt": "2024-11-15T10:15:06Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\nCMW of type CBOR Tag derive their tag numbers from a corresponding CoAP Content-Format ID using the `TN()` transform defined in {{Appendix B of RFC9277}}.\r\n```",
+              "createdAt": "2024-11-15T10:15:05Z",
+              "updatedAt": "2024-11-15T10:15:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6RYvEw",
+          "commit": {
+            "abbreviatedOid": "1cf615f"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-15T17:02:28Z",
+          "updatedAt": "2024-11-15T17:02:28Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6RZC5d",
+          "commit": {
+            "abbreviatedOid": "1cf615f"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-15T17:38:03Z",
+          "updatedAt": "2024-11-15T17:38:03Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 140,
+      "id": "PR_kwDOIGCt2M6CB6Km",
+      "title": "fix: remove contraddictory prose from the examples",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/140",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #132 ",
+      "createdAt": "2024-11-15T10:31:02Z",
+      "updatedAt": "2024-11-15T17:16:15Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "42cbe35fe06ce68e995039e8b1a3e7831f98ac20",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "json-cf",
+      "headRefOid": "e27bfc05f1c49d16876b54cf8087526470df107c",
+      "closedAt": "2024-11-15T17:16:13Z",
+      "mergedAt": "2024-11-15T17:16:13Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "2f05921a5a40703b97658010044ef37b54f834b0"
+      },
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze ",
+          "createdAt": "2024-11-15T16:51:47Z",
+          "updatedAt": "2024-11-15T16:51:47Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6RYt_4",
+          "commit": {
+            "abbreviatedOid": "e27bfc0"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-15T17:00:39Z",
+          "updatedAt": "2024-11-15T17:00:39Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6RYu_4",
+          "commit": {
+            "abbreviatedOid": "e27bfc0"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-15T17:02:17Z",
+          "updatedAt": "2024-11-15T17:02:17Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 141,
+      "id": "PR_kwDOIGCt2M6CCESd",
+      "title": "fix: attempt at clarifying ambiguity re: what types are defined",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/141",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This is an alternative to #128",
+      "createdAt": "2024-11-15T10:55:50Z",
+      "updatedAt": "2024-11-15T19:44:08Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "42cbe35fe06ce68e995039e8b1a3e7831f98ac20",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "ionut-alt",
+      "headRefOid": "665664907a38f5fedcecf5eb408d4730c8ad5566",
+      "closedAt": "2024-11-15T19:44:04Z",
+      "mergedAt": "2024-11-15T19:44:04Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "f86ca9f9555ad035813d32f0f3261fac57ffac2b"
+      },
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @ionut-arm",
+          "createdAt": "2024-11-15T10:56:25Z",
+          "updatedAt": "2024-11-15T10:56:25Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze ",
+          "createdAt": "2024-11-15T16:52:01Z",
+          "updatedAt": "2024-11-15T16:52:01Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6RYq59",
+          "commit": {
+            "abbreviatedOid": "9ecffc9"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-15T16:54:35Z",
+          "updatedAt": "2024-11-15T16:54:35Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6RYuSw",
+          "commit": {
+            "abbreviatedOid": "9ecffc9"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-15T17:01:07Z",
+          "updatedAt": "2024-11-15T17:01:07Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "What does \u201cbasic\u201d add? Is there an \u201cadvanced\u201d? What would the difference be?",
+              "createdAt": "2024-11-15T17:01:07Z",
+              "updatedAt": "2024-11-15T17:01:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6RY4qB",
+          "commit": {
+            "abbreviatedOid": "9ecffc9"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-15T17:15:22Z",
+          "updatedAt": "2024-11-15T17:15:22Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "I think of basic in terms of growing complexity.\r\n\r\nThe resulting flow is:\r\n\r\n> _Two _basic_ types are specified ... a further CMW \"collection\" type that holds together multiple CMW items ... and a CMW \"tunnel\" type is also defined [...] to allow transporting CBOR CMWs in JSON collections and vice-versa._",
+              "createdAt": "2024-11-15T17:15:22Z",
+              "updatedAt": "2024-11-15T17:15:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6RZAwz",
+          "commit": {
+            "abbreviatedOid": "9ecffc9"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-15T17:32:48Z",
+          "updatedAt": "2024-11-15T17:32:57Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "The text following this sentence enumerates two of the three encodings (CBOR, JSON, ASN.1/DER) for the first \"CMW\" type.\r\n\r\nThe sentence following describes the \"CMW Collection\" type and a third CMW tunnel type. \r\n\r\nIt would be easier to read if the content related to types was grouped together and the content related to encoding was complete and grouped together.",
+              "createdAt": "2024-11-15T17:32:48Z",
+              "updatedAt": "2024-11-15T17:33:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6RZEZ1",
+          "commit": {
+            "abbreviatedOid": "9ecffc9"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-15T17:41:40Z",
+          "updatedAt": "2024-11-15T17:41:41Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Reading Ned's comment I finally understand what this means. I would say that since CMW is a tree structure, the leaf types are what you're describing as \"basic types\". When I see \"basic\" in text, I just feel like the author is taunting me with what they find easy to understand in a sea of complexity.",
+              "createdAt": "2024-11-15T17:41:41Z",
+              "updatedAt": "2024-11-15T17:41:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6RZOrB",
+          "commit": {
+            "abbreviatedOid": "9ecffc9"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-15T18:02:41Z",
+          "updatedAt": "2024-11-15T18:02:41Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Please suggest wording that works for someone coming here with a fresh pair of eyes.\r\nI have read it so many times that I can no longer be that person, unfortunately.",
+              "createdAt": "2024-11-15T18:02:41Z",
+              "updatedAt": "2024-11-15T18:02:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6RZRYN",
+          "commit": {
+            "abbreviatedOid": "9ecffc9"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2024-11-15T18:09:08Z",
+          "updatedAt": "2024-11-15T18:12:46Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nA RATS Conceptual Message Wrapper (CMW) has a tree structure of leaves that contain payload messages associated with their content type.\r\nThe two leaf node types are\r\n```\r\n\r\nBelow the enumeration, I'd say \"Intermediate tree nodes are either a \"collection\" type or a \"tunnel\" type:\" and put the descriptive sentences in their own enumeration as well.",
+              "createdAt": "2024-11-15T18:09:08Z",
+              "updatedAt": "2024-11-15T18:12:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6RZaL5",
+          "commit": {
+            "abbreviatedOid": "9ecffc9"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-15T18:28:47Z",
+          "updatedAt": "2024-11-15T18:28:48Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "OK, thanks.  Done in 092be4e and 6656649",
+              "createdAt": "2024-11-15T18:28:48Z",
+              "updatedAt": "2024-11-15T18:28:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6RZqrH",
+          "commit": {
+            "abbreviatedOid": "6656649"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-15T19:11:42Z",
+          "updatedAt": "2024-11-15T19:11:42Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 142,
+      "id": "PR_kwDOIGCt2M6CDNOI",
+      "title": "fix: examples",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/142",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #116 ",
+      "createdAt": "2024-11-15T13:53:38Z",
+      "updatedAt": "2024-11-15T17:10:26Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "42cbe35fe06ce68e995039e8b1a3e7831f98ac20",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "examples",
+      "headRefOid": "012f5f14bfd408107005d6aa718d6893cb6e32b0",
+      "closedAt": "2024-11-15T17:10:21Z",
+      "mergedAt": "2024-11-15T17:10:21Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "a3c279db1c082c2fdc71c68d0725d99dca5f95b0"
+      },
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze ",
+          "createdAt": "2024-11-15T16:52:13Z",
+          "updatedAt": "2024-11-15T16:52:13Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6RYrzN",
+          "commit": {
+            "abbreviatedOid": "012f5f1"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-15T16:56:35Z",
+          "updatedAt": "2024-11-15T16:56:35Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6RYtIc",
+          "commit": {
+            "abbreviatedOid": "012f5f1"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "I assume the TN tags and signature bits are correct. I didn't double check them.",
+          "createdAt": "2024-11-15T16:59:07Z",
+          "updatedAt": "2024-11-15T16:59:07Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 143,
+      "id": "PR_kwDOIGCt2M6CF7lN",
+      "title": "fix: CMW description",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/143",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #123 ",
+      "createdAt": "2024-11-15T21:15:31Z",
+      "updatedAt": "2024-11-16T05:38:02Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "f86ca9f9555ad035813d32f0f3261fac57ffac2b",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "encodings",
+      "headRefOid": "e3b113294d74b33f08e299175472bd0f0e4685df",
+      "closedAt": "2024-11-16T05:37:58Z",
+      "mergedAt": "2024-11-16T05:37:58Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "d3e052f26f19deb167de0159b1690f0869edffe7"
+      },
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze ",
+          "createdAt": "2024-11-15T21:15:47Z",
+          "updatedAt": "2024-11-15T21:15:47Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6Rbulr",
+          "commit": {
+            "abbreviatedOid": "e3b1132"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-15T23:55:11Z",
+          "updatedAt": "2024-11-15T23:55:11Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6Rc7-O",
+          "commit": {
+            "abbreviatedOid": "e3b1132"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-16T03:21:14Z",
+          "updatedAt": "2024-11-16T03:21:14Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 145,
+      "id": "PR_kwDOIGCt2M6CIpu_",
+      "title": "fix: use IANA preferred terminology",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/145",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #144 ",
+      "createdAt": "2024-11-16T17:27:53Z",
+      "updatedAt": "2024-11-16T19:22:39Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "d3e052f26f19deb167de0159b1690f0869edffe7",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "iana-fixes",
+      "headRefOid": "c337f67de52c7efd99b3af5da34431fb8624201e",
+      "closedAt": "2024-11-16T19:22:36Z",
+      "mergedAt": "2024-11-16T19:22:36Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "941d98e6bdd6147d202348f7f224fe93fd968f2c"
+      },
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze \r\ncc @cabo\r\n",
+          "createdAt": "2024-11-16T17:28:16Z",
+          "updatedAt": "2024-11-16T17:28:16Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6Re3Nt",
+          "commit": {
+            "abbreviatedOid": "c337f67"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-16T18:42:24Z",
+          "updatedAt": "2024-11-16T18:42:24Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6Re4tU",
+          "commit": {
+            "abbreviatedOid": "c337f67"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-16T19:21:51Z",
+          "updatedAt": "2024-11-16T19:21:51Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 146,
+      "id": "PR_kwDOIGCt2M6CIw9Y",
+      "title": "what to check when assigning new CoAP C-Fs based on `application/cmw`",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/146",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Response attempt at @cabo's question: _\"How do application/cmw+cbor with cmwc_t parameters get Content format numbers?\"_\r\n",
+      "createdAt": "2024-11-16T19:04:32Z",
+      "updatedAt": "2024-11-16T19:24:56Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "941d98e6bdd6147d202348f7f224fe93fd968f2c",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "cf-help",
+      "headRefOid": "21de6aed790b368a343db42b51de9f743a56d7f1",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
       "reviews": []
     }
   ]
