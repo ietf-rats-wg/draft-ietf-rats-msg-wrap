@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-17T00:57:04.224401+00:00",
+  "timestamp": "2024-11-19T00:53:52.885460+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -9758,7 +9758,7 @@
       "labels": [],
       "body": "Response attempt at @cabo's question: _\"How do application/cmw+cbor with cmwc_t parameters get Content format numbers?\"_\r\n",
       "createdAt": "2024-11-16T19:04:32Z",
-      "updatedAt": "2024-11-16T19:24:56Z",
+      "updatedAt": "2024-11-18T21:19:43Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "941d98e6bdd6147d202348f7f224fe93fd968f2c",
@@ -9769,7 +9769,43 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "The intermediate node types for composite CMWs are not tagged. If we want to allow reflection on the CoAP content-format ID that is assigned, then we should add that specifically to the intermediate node type, and that only compound CMWs are allowed to be tagged this way.\r\n\r\n> When assigning a new CoAP Content-Format ID for a CMW media type that utilizes the `cmwc_t` parameter, the registrar must check (directly or through the Designated Expert) that:\r\n\r\nAre you asking for specifically a CoAP Content-Format `application/cmw+cbor;cmwc_t=<x>` (or contains other permutations of parameter assignments) follow this? Does the contained compound cmw not require representation of the __cmwc_t key at that point? Also `application/cmw+cbor` without a parameter may still contain the key, yes?\r\n\r\nSide note: is the `cmw` claim expected to be used instead of the `measurements` claim containing a CMW?",
+          "createdAt": "2024-11-17T21:58:59Z",
+          "updatedAt": "2024-11-17T21:58:59Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> The intermediate node types for composite CMWs are not tagged. If we want to allow reflection on the CoAP content-format ID that is assigned, then we should add that specifically to the intermediate node type, and that only compound CMWs are allowed to be tagged this way.\r\n\r\nCan you illustrate this with an example?\r\n\r\n> > When assigning a new CoAP Content-Format ID for a CMW media type that utilizes the `cmwc_t` parameter, the registrar must check (directly or through the Designated Expert) that:\r\n> \r\n> Are you asking for specifically a CoAP Content-Format `application/cmw+cbor;cmwc_t=<x>` [...] follow this?\r\n\r\nYes, the scope of this is purely collections which are explicitly typed.\r\n\r\n> (or contains other permutations of parameter assignments)\r\n\r\nThere are no other possible permutations because `application/cmw+cbor` and `application/cmw+json` only allow one parameter.\r\n\r\n> Does the contained compound cmw not require representation of the __cmwc_t key at that point?\r\n\r\nYes - although that's irrelevant from the C-F registrar's point of view.\r\n\r\n> Also `application/cmw+cbor` without a parameter may still contain the key, yes?\r\n\r\nYes - ditto.\r\n\r\n> Side note: is the `cmw` claim expected to be used instead of the `measurements` claim containing a CMW?\r\n\r\nYes.\r\n",
+          "createdAt": "2024-11-18T07:56:31Z",
+          "updatedAt": "2024-11-18T07:56:31Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> > The intermediate node types for composite CMWs are not tagged. If we want to allow reflection on the CoAP content-format ID that is assigned, then we should add that specifically to the intermediate node type, and that only compound CMWs are allowed to be tagged this way.\r\n> \r\n> Can you illustrate this with an example?\r\n> \r\n\r\nIt may be easier to bring back the application/cmw-collection+cbor Content-Type to account for this flip-flopping.\r\n\r\nWe have to separate the top level CMW from any intermediate CMW to ensure that we don't have boundless recursion of CoAP format ID tags for application/cmw+cbor. Let `tbd` be the assigned CoAP format ID for application/cmw+cbor without a parameter.\r\n```\r\nstart = cmw / cbor-tagged-cbor<tbd, cmw>\r\n```\r\n\r\nNext we say that a leaf node may not use a CoAP format ID for a CMW itself. That's reserved for an intermediate node.\r\n```\r\nThe two leaf node types are:\r\n\r\n* A CMW using a CBOR or JSON record ([Section 3.1](https://ietf-rats-wg.github.io/draft-ietf-rats-msg-wrap/draft-ietf-rats-msg-wrap.html#type-n-val));\r\n\r\n* A CMW based on CBOR tags ([Section 3.2](https://ietf-rats-wg.github.io/draft-ietf-rats-msg-wrap/draft-ietf-rats-msg-wrap.html#cbor-tag)) for non-CMW CoAP format ID.\r\n```\r\n\r\nWe can allow for a CoAP format ID tag to name a collection that is either all in json (to not have to tunnel all leaves), or to make the cmwc_t more concise.\r\n```\r\ncbor-collection = #6.166854????(cddl-for-text-encoding-of-json-collection) / cbor-tagged-cbor<166854????, cbor-cmw-collection-map> / cbor-cmw-collection-map\r\ncbor-cmw-collection-map = {\r\n  ? \"__cmwc_t\": ~uri / oid\r\n  + &(label: (int / text)) => cbor-cmw / j2c-tunnel\r\n}\r\n```\r\n\r\nI don't know how to say that the wrapped type is a `tstr` that parses as JSON matching `json-collection`, since there's no `.json` directive the way there's a `.cbor` directive. Caaaaarl!",
+          "createdAt": "2024-11-18T16:46:01Z",
+          "updatedAt": "2024-11-18T16:46:01Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> [...] to ensure that we don't have *boundless recursion* of CoAP format ID tags for application/cmw+cbor\r\n\r\nIs this a problem in practice?",
+          "createdAt": "2024-11-18T20:47:08Z",
+          "updatedAt": "2024-11-18T20:47:35Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> > [...] to ensure that we don't have _boundless recursion_ of CoAP format ID tags for application/cmw+cbor\r\n> \r\n> Is this a problem in practice?\r\n\r\nNever underestimate the failure modes of system integrations. If we want to recognize the tree structure under the tagged collection type, it should be clear that you only have to go through one tag to get to the map.",
+          "createdAt": "2024-11-18T21:19:42Z",
+          "updatedAt": "2024-11-18T21:19:42Z"
+        }
+      ],
       "reviews": []
     }
   ]
