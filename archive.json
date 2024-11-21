@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-19T00:53:52.885460+00:00",
+  "timestamp": "2024-11-21T00:53:29.772493+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -9758,7 +9758,7 @@
       "labels": [],
       "body": "Response attempt at @cabo's question: _\"How do application/cmw+cbor with cmwc_t parameters get Content format numbers?\"_\r\n",
       "createdAt": "2024-11-16T19:04:32Z",
-      "updatedAt": "2024-11-18T21:19:43Z",
+      "updatedAt": "2024-11-20T09:16:44Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "941d98e6bdd6147d202348f7f224fe93fd968f2c",
@@ -9804,9 +9804,77 @@
           "body": "> > [...] to ensure that we don't have _boundless recursion_ of CoAP format ID tags for application/cmw+cbor\r\n> \r\n> Is this a problem in practice?\r\n\r\nNever underestimate the failure modes of system integrations. If we want to recognize the tree structure under the tagged collection type, it should be clear that you only have to go through one tag to get to the map.",
           "createdAt": "2024-11-18T21:19:42Z",
           "updatedAt": "2024-11-18T21:19:42Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "OK, so here's an example JSON collection with a plain-old CMW leaf, a tunnelled CMW CBOR collection and a JSON sub-collection:\r\n\r\n```\r\ncollection\r\n \u2502\u00a0media type: application/cmw+json; cmwc_t=\"tag:ietf.org,2024:X\"\r\n \u2502\u00a0value: N/A\r\n \u2502\u00a0collection type: tag:ietf.org,2024:X\r\n \u2502\u00a0collection key: N/A\r\n \u2502\r\n \u251c\u2500\u2500 leaf node\r\n \u2502   \u2502 media type: application/eat-ucs+cbor\r\n \u2502\u00a0  \u2502 value: b64u(0xa10a...)\r\n \u2502\u00a0  \u2502 collection type: N/A\r\n \u2502\u00a0  \u2502 collection key: \"bretwaldadom\"\r\n \u2502\r\n \u251c\u2500\u2500 collection\r\n \u2502   \u2502 media type: application/cmw+json; cmwc_t=\"tag:ietf.org,2024:Y\"\r\n \u2502   \u2502 value: N/A\r\n \u2502   \u2502 collection type: tag:ietf.org,2024:Y\r\n \u2502   \u2502 collection key: \"murmurless\"\r\n \u2502\u00a0  \u2502\r\n \u2502\u00a0\u00a0 \u2514\u2500\u2500 leaf node\r\n \u2502\u00a0      \u2502 media type: application/eat-ucs+json\r\n \u2502\u00a0      \u2502 value: b64u({\"eat_nonce\": ...})\r\n \u2502\u00a0      \u2502 collection type: N/A\r\n \u2502\u00a0      \u2502 collection key: \"polyscopic\"\r\n \u2502\r\n \u2514\u2500\u2500 tunnel node\r\n     \u2502\u00a0type: #c2j-tunnel\r\n     \u2502\u00a0value: b64u(0xa1008219...)\r\n     \u2502\u00a0collection type: N/A\r\n     \u2502\u00a0collection key: \"photelectrograph\"\r\n```\r\n\r\nIt's not impossible that a real composite device would produce something similar to this.\r\n\r\nCould you tell me where you think the type system breaks?  (Feel free to tweak it to illustrate your case.)\r\n\r\n(I could create a very similar CBOR collection if needed.)\r\n\r\n",
+          "createdAt": "2024-11-19T10:44:44Z",
+          "updatedAt": "2024-11-19T14:15:25Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6R6LW4",
+          "commit": {
+            "abbreviatedOid": "21de6ae"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-20T09:04:58Z",
+          "updatedAt": "2024-11-20T09:04:59Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "We may also consider requiring that content coding is \"identity\".  This would make it safer - avoiding e.g., decompression-related attacks.",
+              "createdAt": "2024-11-20T09:04:59Z",
+              "updatedAt": "2024-11-20T09:04:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6R6M3a",
+          "commit": {
+            "abbreviatedOid": "21de6ae"
+          },
+          "author": "cabo",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-20T09:07:19Z",
+          "updatedAt": "2024-11-20T09:07:19Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "Requiring for what?  C-f registrations with content codings need to be possible.",
+              "createdAt": "2024-11-20T09:07:19Z",
+              "updatedAt": "2024-11-20T09:07:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6R6VUy",
+          "commit": {
+            "abbreviatedOid": "21de6ae"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-20T09:16:43Z",
+          "updatedAt": "2024-11-20T09:16:44Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "> C-f registrations with content codings need to be possible.\r\n\r\nSure, in general.  But we may decide that RATS-related payloads have this restriction.",
+              "createdAt": "2024-11-20T09:16:43Z",
+              "updatedAt": "2024-11-20T09:16:44Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
