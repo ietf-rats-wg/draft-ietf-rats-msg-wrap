@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-21T00:53:29.772493+00:00",
+  "timestamp": "2024-11-24T00:57:41.032644+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2064,6 +2064,62 @@
       "updatedAt": "2024-11-16T19:22:37Z",
       "closedAt": "2024-11-16T19:22:37Z",
       "comments": []
+    },
+    {
+      "number": 147,
+      "id": "I_kwDOIGCt2M6f7D0O",
+      "title": "collection MUST have at least one item",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/147",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "It is not explicitly written down, but since there is no reason to allow an empty collection, let's state it as a requirement.",
+      "createdAt": "2024-11-22T12:30:18Z",
+      "updatedAt": "2024-11-22T12:30:18Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 148,
+      "id": "I_kwDOIGCt2M6f_Sb4",
+      "title": "Consistent use of term \"tag\" (re open)",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/148",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "This is to reopen #133 \r\n\r\nThe double meaning of CMW CBOR Tag wasn't fixed (3.2 vs 10.3)\r\n\r\nPlease find an alternate to \"CMW CBOR Tag\". It sounds too much like what is in 10.3 and is out of line with common use.\r\n\r\nThe grammar of the first sentence isn't right.\r\n\r\nNote that I was not asked to sign off on the issue even though I was the one that opened it.",
+      "createdAt": "2024-11-22T18:35:56Z",
+      "updatedAt": "2024-11-22T18:35:56Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 149,
+      "id": "I_kwDOIGCt2M6f_VhQ",
+      "title": "Deemphasize tag use",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/149",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "There's general agreement that tags are only in CMW because some early implementations use them. If we were writing the document today we would leave out section 3.2 and focus solely on content format and media type.\r\n\r\nPlease remove mention of tags in the abstract and introduction.\r\n\r\nPlease note that section 3.2 is not recommended practice.\r\n\r\n\r\n",
+      "createdAt": "2024-11-22T18:43:09Z",
+      "updatedAt": "2024-11-22T18:59:19Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I disagree that there is general agreement. Given the choice implementers still prefer using a CBOR tag over the alternatives. The CMW draft doesn't explain why use of CBOR tags breaks something or why they are undesirable. The draft should take the position of highlighting the tradeoffs from using one vs. the other. All of them are legitimate forms of tagging content per IANA.",
+          "createdAt": "2024-11-22T18:59:17Z",
+          "updatedAt": "2024-11-22T18:59:17Z"
+        }
+      ]
     }
   ],
   "pulls": [
