@@ -361,6 +361,8 @@ Table of Contents
    serve as a mnemonic for different conceptual messages in the
    collection.
 
+   A collection MUST have at least one CMW entry.
+
    The "__cmwc_t" key is reserved for associating an optional type to
    the overall collection and MUST NOT be used for a label.  The
    collection type is either a Uniform Resource Identifier (URI) or an

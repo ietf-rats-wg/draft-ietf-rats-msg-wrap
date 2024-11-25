@@ -1575,13 +1575,14 @@ A single CMW collection can contain a mix of different message types, and it can
 <p id="section-3.3-3">The CMW collection (<a href="#fig-cddl-collection" class="auto internal xref">Figure 3</a>) is defined as a CBOR map or JSON object with CMW values, either native or "tunnelled" (<a href="#cmw-tunnel" class="auto internal xref">Section 3.3.2</a>).
 The position of a <code>cmw</code> entry in the <code>cmw-collection</code> is not significant.
 Labels can be strings (or integers in the CBOR serialization) that serve as a mnemonic for different conceptual messages in the collection.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
-<p id="section-3.3-4">The <code>"__cmwc_t"</code> key is reserved for associating an optional type to the overall collection and <span class="bcp14">MUST NOT</span> be used for a label.
+<p id="section-3.3-4">A collection <span class="bcp14">MUST</span> have at least one CMW entry.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
+<p id="section-3.3-5">The <code>"__cmwc_t"</code> key is reserved for associating an optional type to the overall collection and <span class="bcp14">MUST NOT</span> be used for a label.
 The collection type is either a Uniform Resource Identifier (URI) or an object identifier (OID).
-The OID is always absolute and never relative.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
-<p id="section-3.3-5">Since the collection type is recursive, implementations may limit the allowed depth of nesting.<a href="#section-3.3-5" class="pilcrow">¶</a></p>
+The OID is always absolute and never relative.<a href="#section-3.3-5" class="pilcrow">¶</a></p>
+<p id="section-3.3-6">Since the collection type is recursive, implementations may limit the allowed depth of nesting.<a href="#section-3.3-6" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-of-the-cmw-"></span><div id="fig-cddl-collection">
 <figure id="figure-3">
-          <div class="alignLeft art-cddl art-text artwork" id="section-3.3-6.1">
+          <div class="alignLeft art-cddl art-text artwork" id="section-3.3-7.1">
 <pre>
 json-collection = {
   ? "__cmwc_t": ~uri / oid
@@ -1598,12 +1599,12 @@ cbor-collection = {
 <a href="#name-cddl-definition-of-the-cmw-" class="selfRef">CDDL definition of the CMW collection format</a>
           </figcaption></figure>
 </div>
-<p id="section-3.3-7">CMW itself provides no facilities for authenticity, integrity protection, or confidentiality.
+<p id="section-3.3-8">CMW itself provides no facilities for authenticity, integrity protection, or confidentiality.
 It is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly.
-A secure channel (e.g., via TLS) or object-level security (e.g., using JWT) may suffice in some scenarios, but not in all.<a href="#section-3.3-7" class="pilcrow">¶</a></p>
-<p id="section-3.3-8">When a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically
+A secure channel (e.g., via TLS) or object-level security (e.g., using JWT) may suffice in some scenarios, but not in all.<a href="#section-3.3-8" class="pilcrow">¶</a></p>
+<p id="section-3.3-9">When a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically
 bound to prevent an attacker from replacing Evidence from a compromised device with Evidence from a non-compromised device. The protection of authenticity and integrity
-<span class="bcp14">MUST</span> be provided by the attestation technology. For additional security considerations related to collections, refer to <a href="#seccons-coll" class="auto internal xref">Section 9.2</a>.<a href="#section-3.3-8" class="pilcrow">¶</a></p>
+<span class="bcp14">MUST</span> be provided by the attestation technology. For additional security considerations related to collections, refer to <a href="#seccons-coll" class="auto internal xref">Section 9.2</a>.<a href="#section-3.3-9" class="pilcrow">¶</a></p>
 <div id="cmw-collections-role-in-composite-attester-topology">
 <section id="section-3.3.1">
           <h4 id="name-cmw-collections-role-in-com">
