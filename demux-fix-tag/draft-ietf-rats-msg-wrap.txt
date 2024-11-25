@@ -5,11 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 22 April 2025                                             Intel
+Expires: 29 May 2025                                               Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
-                                                         19 October 2024
+                                                                   H-BRS
+                                                                D. Glaze
+                                                              Google LLC
+                                                        25 November 2024
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -57,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 April 2025.
+   This Internet-Draft will expire on 29 May 2025.
 
 Copyright Notice
 
@@ -77,14 +80,12 @@ Table of Contents
 
    1.  Introduction
    2.  Conventions and Definitions
-   3.  Conceptual Message Wrapper Encodings
+   3.  Conceptual Message Wrappers
      3.1.  CMW Record
      3.2.  CMW CBOR Tags
-       3.2.1.  Use of Pre-existing CBOR Tags
      3.3.  CMW Collections
-       3.3.1.  Relation to EAT submods
-       3.3.2.  CMW Collections' role in composite Attester topology
-       3.3.3.  CMW Tunnel
+       3.3.1.  CMW Collections' role in composite Attester topology
+       3.3.2.  CMW Tunnel
      3.4.  Decapsulation Algorithm
    4.  Transporting CMW in COSE and JOSE Web Tokens
      4.1.  Encoding Requirements
@@ -99,30 +100,30 @@ Table of Contents
      6.5.  CBOR Collection
      6.6.  JSON Collection
      6.7.  Use in JWT
-   7.  Implementation Status
-     7.1.  Project Veraison
-   8.  Security Considerations
-     8.1.  Records and CBOR Tags
-     8.2.  Collections
-   9.  IANA Considerations
-     9.1.  CWT cmw Claim Registration
-     9.2.  JWT cmw Claim Registration
-     9.3.  CBOR Tag Registration
-     9.4.  RATS Conceptual Message Wrapper (CMW) Indicators Registry
-       9.4.1.  Instructions for the Designated Expert
-       9.4.2.  Structure of Entries
-       9.4.3.  Provisional Registration
-     9.5.  Media Types
-       9.5.1.  application/cmw+cbor
-       9.5.2.  application/cmw+json
-     9.6.  CoAP Content Formats
-     9.7.  New SMI Numbers Registrations
-   10. References
-     10.1.  Normative References
-     10.2.  Informative References
-   Appendix A.  Collected CDDL
-   Appendix B.  Registering and Using CMWs
-   Appendix C.  Open Issues
+   7.  Collected CDDL
+   8.  Implementation Status
+     8.1.  Project Veraison
+   9.  Security Considerations
+     9.1.  Records and CBOR Tags
+     9.2.  Collections
+   10. IANA Considerations
+     10.1.  CWT cmw Claim Registration
+     10.2.  JWT cmw Claim Registration
+     10.3.  CBOR Tag Registration
+     10.4.  RATS Conceptual Message Wrapper (CMW) Indicators Registry
+       10.4.1.  Instructions for the Designated Expert
+       10.4.2.  Structure of Entries
+       10.4.3.  Provisional Registration
+     10.5.  Media Types
+       10.5.1.  application/cmw+cbor
+       10.5.2.  application/cmw+json
+     10.6.  CoAP Content Formats
+     10.7.  New SMI Numbers Registrations
+   11. References
+     11.1.  Normative References
+     11.2.  Informative References
+   Appendix A.  Registering and Using CMWs
+   Appendix B.  Open Issues
    Acknowledgments
    Contributors
    Authors' Addresses
@@ -204,27 +205,43 @@ Table of Contents
    This document reuses the terms defined in Section 2 of [RFC9193]
    (e.g., "Content-Type").
 
-3.  Conceptual Message Wrapper Encodings
+3.  Conceptual Message Wrappers
 
-   Two types of RATS Conceptual Message Wrapper (CMW) are specified in
-   this document:
+   A RATS Conceptual Message Wrapper (CMW) has a tree structure of
+   leaves that contain payload messages associated with their content
+   type.  The two leaf node types are:
 
-   1.  A CMW using a CBOR or JSON record (Section 3.1);
+   *  A CMW using a CBOR or JSON record (Section 3.1);
 
-   2.  A CMW based on CBOR tags (Section 3.2).
+   *  A CMW based on CBOR tags (Section 3.2).
 
-   A further CMW "collection" type that holds together multiple CMW
-   items is defined in Section 3.3.
+   Intermediate tree nodes are either:
 
-   A CMW "tunnel" type is also defined in Section 3.3.3 to allow
-   transporting CBOR CMWs in JSON collections and vice-versa.
+   *  A CMW "collection" type that holds together multiple CMW items
+      (Section 3.3);
 
-   The collected CDDL is in Appendix A.
+   *  A CMW "tunnel" type that allows transporting CBOR CMWs in JSON
+      collections and vice-versa (Section 3.3.2).
+
+   The following snippet outlines the productions associated with the
+   top-level types.
+
+   start = cmw
+
+   cmw = json-cmw / cbor-cmw
+
+   json-cmw = json-record / json-collection
+   cbor-cmw = cbor-record / cbor-collection / $cbor-tag
+
+   The complete CDDL can be found in Section 7.
+
+   Section 4 and Section 5 describe the transport of CMWs using CBOR and
+   JSON Web Tokens and PKIX messages, respectively.
 
    This document only defines an encapsulation, not a security format.
    It is the responsibility of the Attester to ensure that the CMW
    contents have the necessary security protection.  Security
-   considerations are discussed in Section 8.
+   considerations are discussed in Section 9.
 
 3.1.  CMW Record
 
@@ -277,53 +294,41 @@ Table of Contents
       Values and Endorsements within the same application/signed-
       corim+cbor), or if the same profile identifier is shared by
       different conceptual messages.  Future specifications may add new
-      values to the ind field; see Section 9.4.
+      values to the ind field; see Section 10.4.
 
 3.2.  CMW CBOR Tags
 
-   CBOR Tags used as CMW may be derived from CoAP Content-Format
-   numbers.  If a CoAP content format exists for a RATS conceptual
-   message, the TN() transform defined in Appendix B of [RFC9277] can be
-   used to derive a corresponding CBOR tag in range [1668546817,
+   CMW of type CBOR Tag derive their tag numbers from a corresponding
+   CoAP Content-Format ID using the TN() transform defined in Appendix B
+   of [RFC9277].  Such CBOR tag numbers are in range [1668546817,
    1668612095].
 
    The RATS conceptual message is first serialized according to the
-   Content-Format number associated with the CBOR tag and then encoded
-   as a CBOR byte string, to which the tag is prepended.
+   Content-Format ID and then encoded as a CBOR byte string, to which
+   the TN-derived tag number is prepended.
 
-   The CMW CBOR Tag is defined in Figure 2 as a macro with two
-   parameters:
+   The CMW CBOR Tag is defined in Figure 2 using two different macros.
+   One for CBOR-encoded types, the other for all other types.  Both
+   macros take the CBOR tag number tn as a parameter.  The cbor-tagged-
+   cbor macro takes the CDDL definition of the associated conceptual
+   message fmt as a second parameter.
 
-   *  tn, the CBOR tag number
+   cbor-tagged-cbor<tn, fmt> = #6.<tn>(bytes .cbor fmt)
 
-   *  $fmt, the definition of the associated conceptual message
+   cbor-tagged-data<tn> = #6.<tn>(bytes)
 
-   cbor-tag<tn, $fmt> = #6.<tn>(bytes .cbor $fmt)
-
-           Figure 2: CDDL definition of the CBOR Tag format macro
+          Figure 2: CDDL definition of the CBOR Tag format macros
 
    To add a new CMW, the $cbor-tag type socket is extended with a new
    instance of the CMW CBOR Tag macro.  For example, to associate
    conceptual messages of type my-evidence with CBOR Tag 1668576819, one
    would extend $cbor-tag as follows:
 
-   $cbor-tag /= cbor-tag<1668576819, my-evidence>
+   $cbor-tag /= cbor-tagged-cbor<1668576819, my-evidence>
 
    my-evidence = {
      &(eat_nonce: 10) => bstr .size (8..64)
    }
-
-3.2.1.  Use of Pre-existing CBOR Tags
-
-   If a CBOR tag has been registered in association with a certain RATS
-   conceptual message independently of a CoAP content format (i.e., it
-   is not obtained by applying the TN() transform), it can be readily
-   used as an encapsulation without the extra processing described in
-   Section 3.2.
-
-   A consumer can always distinguish tags that have been derived via
-   TN(), which all fall in the [1668546817, 1668612095] range, from tags
-   that are not, and therefore apply the right decapsulation on receive.
 
 3.3.  CMW Collections
 
@@ -350,7 +355,7 @@ Table of Contents
    simultaneously.
 
    The CMW collection (Figure 3) is defined as a CBOR map or JSON object
-   with CMW values, either native or "tunnelled" (Section 3.3.3).  The
+   with CMW values, either native or "tunnelled" (Section 3.3.2).  The
    position of a cmw entry in the cmw-collection is not significant.
    Labels can be strings (or integers in the CBOR serialization) that
    serve as a mnemonic for different conceptual messages in the
@@ -367,12 +372,12 @@ Table of Contents
 
    json-collection = {
      ? "__cmwc_t": ~uri / oid
-     + &(label: text) => json-CMW / c2j-tunnel
+     + &(label: text) => json-cmw / c2j-tunnel
    }
 
    cbor-collection = {
      ? "__cmwc_t": ~uri / oid
-     + &(label: (int / text)) => cbor-CMW / j2c-tunnel
+     + &(label: (int / text)) => cbor-cmw / j2c-tunnel
    }
 
            Figure 3: CDDL definition of the CMW collection format
@@ -384,33 +389,15 @@ Table of Contents
    via TLS) or object-level security (e.g., using JWT) may suffice in
    some scenarios, but not in all.
 
-   When a CMW is used to carry the Evidence for composite or layered
-   attestation for a single device, the security properties needed are
-   that of attestation.  In particular, all the members in a CMW must be
-   bound together so that an attacker can not replace one Evidence
-   message showing compromise with that from a non-compromised device.
-   The authenticity and integrity protection MUST be attestation-
-   oriented.  For further security considerations about collections, see
-   Section 8.2.
+   When a CMW is used to carry Evidence for composite or layered
+   attestation of a single device, all components within the CMW must be
+   cryptographically bound to prevent an attacker from replacing
+   Evidence from a compromised device with Evidence from a non-
+   compromised device.  The protection of authenticity and integrity
+   MUST be provided by the attestation technology.  For additional
+   security considerations related to collections, refer to Section 9.2.
 
-3.3.1.  Relation to EAT submods
-
-   EAT submods (Section 4.2.18 of [I-D.ietf-rats-eat]) provide a
-   facility for aggregating attestation that has built-in security and
-   will be suitable for some of the same attestation Evidence use cases
-   covered by CMW collections.  However, compared to CMW collections,
-   EAT submods are limited in two ways:
-
-   1.  EAT [I-D.ietf-rats-eat] allows carrying non-EAT-formatted types
-       by augmenting the $EAT-CBOR-Tagged-Token socket or the $JSON-
-       Selector socket.  However, these need to be specified in
-       subsequent standard documents updating the EAT specification,
-
-   2.  Their top-down structure does not align well with the bottom-up
-       approach layered attesters use to build the chain of trust,
-       making them not ideal for modelling layered attestation.
-
-3.3.2.  CMW Collections' role in composite Attester topology
+3.3.1.  CMW Collections' role in composite Attester topology
 
    A CMW Collection's tree structure is not required to be a spanning
    tree of the system's composite Attester topology.  If the labels
@@ -419,7 +406,7 @@ Table of Contents
    integrity protected.  For example, the collection can be integrity
    protected by including it in a signed token such as a CWT or JWT.
 
-3.3.3.  CMW Tunnel
+3.3.2.  CMW Tunnel
 
    The CMW tunnel type (Figure 4) allows for moving a CMW in one
    serialization format, either JSON or CBOR, into a collection that
@@ -428,7 +415,7 @@ Table of Contents
    Both tunnel types are arrays with two elements.  The first element, a
    fixed text string starting with a #, acts as a sentinel value.  The
    #, which is not an acceptable start symbol for the Content-Type
-   production (Appendix A), makes it possible to disambiguate a CMW
+   production (Section 7), makes it possible to disambiguate a CMW
    tunnel from a CMW record.
 
    c2j-tunnel = [ "#cmw-c2j-tunnel", base64url-string ]
@@ -438,14 +425,14 @@ Table of Contents
 
    The conversion algorithms are described in the following subsections.
 
-3.3.3.1.  CBOR-to-JSON
+3.3.2.1.  CBOR-to-JSON
 
    The CBOR byte string of the serialised CBOR CMW is encoded as Base64
    using the URL and filename safe alphabet (Section 5 of [RFC4648])
    without padding.  The obtained string is added as the second element
    of the c2j-tunnel array.  The c2j-tunnel array is serialized as JSON.
 
-3.3.3.2.  JSON-to-CBOR
+3.3.2.2.  JSON-to-CBOR
 
    The UTF-8 string of the serialized JSON CMW is encoded as a CBOR byte
    string (Major type 2).  The byte string is added as the second
@@ -466,7 +453,7 @@ Table of Contents
 
      if b[0] == 0x82 || b[0] == 0x83 {
        return CBORRecord
-     } else if b[0] >= 0xc0 && b[0] <= 0xdb {
+     } else if b[0] == 0xda {
        return CBORTag
      } else if b[0] == 0x5b {
        return JSONRecord
@@ -485,8 +472,8 @@ Table of Contents
    protocols and web APIs, this document defines two "cmw" claims for
    use with JSON Web Tokens (JWT) and CBOR Web Tokens (CWT).
 
-   The definitions for these claims can be found in Section 9.2 and
-   Section 9.1, respectively.
+   The definitions for these claims can be found in Section 10.2 and
+   Section 10.1, respectively.
 
 4.1.  Encoding Requirements
 
@@ -501,7 +488,9 @@ Table of Contents
 
    CMW may need to be transported in PKIX messages, such as Certificate
    Signing Requests (CSRs) or in X.509 Certificates and Certificate
-   Revocation Lists (CRLs).  The use of CMW in CSRs is documented in
+   Revocation Lists (CRLs).
+
+   The use of CMW in CSRs is documented in
    [I-D.ietf-lamps-csr-attestation], while its application in X.509
    Certificates and CRLs is detailed in Section 6.1 of [DICE-arch].
 
@@ -590,25 +579,18 @@ Table of Contents
    The (equivalent) examples in Section 6.1, Section 6.2, and
    Section 6.3 assume that the Media-Type-Name application/
    vnd.example.rats-conceptual-msg has been registered alongside a
-   corresponding CoAP Content-Format number 30001.  The CBOR tag
-   1668576818 is derived applying the TN() transform as described in
-   Section 3.2.
+   corresponding CoAP Content-Format ID 30001.  The CBOR tag 1668576935
+   is derived applying the TN() transform as described in Section 3.2.
 
-   The example in Section 6.4 is a signed CoRIM (Concise Reference
-   Integrity Manifest) [I-D.ietf-rats-corim] payload with an explicit CM
-   indicator 0b0000_0011 (3), meaning that the wrapped message contains
-   both Reference Values and Endorsements.
+   All the examples focus on the wrapping aspects.  The wrapped messages
+   are not instances of real Conceptual Messages.
 
 6.1.  JSON Record
 
    [
      "application/vnd.example.rats-conceptual-msg",
-     "q82rzQ"
+     "I0faVQ"
    ]
-
-   Note that a CoAP Content-Format number can also be used with the JSON
-   record form.  That may be the case when it is known that the receiver
-   can handle CoAP Content-Formats and it is crucial to save bytes.
 
 6.2.  CBOR Record
 
@@ -636,89 +618,56 @@ Table of Contents
 
 6.3.  CBOR Tag
 
-   1668576818(h'2347da55')
+   1668576935(h'2347da55')
 
    with the following wire representation:
 
-   da 63747632    # tag(1668576818)
+   da 637476a7    # tag(1668576935)
       44          # bytes(4)
          2347da55 # "#G\xDAU"
 
 6.4.  CBOR Record with explicit CM indicator
 
+   This is an example of a signed CoRIM (Concise Reference Integrity
+   Manifest) [I-D.ietf-rats-corim] with an explicit ind value of
+   0b0000_0011 (3), indicating that the wrapped message contains both
+   Reference Values and Endorsements.
+
    [
      "application/signed-corim+cbor",
-     h'd28443a10126a1',
+     h'd901f6d28440a044d901f5a040',
      3
    ]
 
    with the following wire representation:
 
- 83                                    # array(3)
-    78 1d                              # text(29)
-       6170706c69636174696f6e2f7369676e65642d636f72696d2b63626f72
-                                       # "application/signed-corim+cbor"
-    47                                 # bytes(7)
-       d28443a10126a1                  # "҄C\xA1\u0001&\xA1"
-    03                                 # unsigned(3)
+83                                      # array(3)
+   78 1d                                # text(29)
+      6170706c69636174696f6e2f7369676e65642d636f72696d2b63626f72 # "app
+lication/signed-corim+cbor"
+   4d                                   # bytes(13)
+      d901f6d28440a044d901f5a040        # "\xD9\u0001\xF6҄@\xA0D\xD9\u00
+01\xF5\xA0@"
+   03                                   # unsigned(3)
 
 6.5.  CBOR Collection
 
    The following example is a CBOR collection that assembles conceptual
    messages from three attesters: Evidence for attesters A and B and
-   Attestation Results for attester C.  It is given an explicit
-   collection type using the URI form.
-
-   {
-     "attester A": [
-       30001,
-       h'2347da55',
-       4
-     ],
-     "attester B": 1668576818(h'2347da55'),
-     "attester C": [
-       "application/eat+jwt",
-       h'4c693475',
-       8
-     ]
-   }
-
-   with the following wire representation:
-
- a3                                      # map(3)
-    6a                                   # text(10)
-       61747465737465722041              # "attester A"
-    83                                   # array(3)
-       19 7531                           # unsigned(30001)
-       44                                # bytes(4)
-          2347da55                       # "#G\xDAU"
-       04                                # unsigned(4)
-    6a                                   # text(10)
-       61747465737465722042              # "attester B"
-    da 63747632                          # tag(1668576818)
-       44                                # bytes(4)
-          2347da55                       # "#G\xDAU"
-    6a                                   # text(10)
-       61747465737465722043              # "attester C"
-    83                                   # array(3)
-       73                                # text(19)
-          6170706c69636174696f6e2f6561742b6a7774 # "application/eat+jwt"
-       44                                # bytes(4)
-          4c693475                       # "Li4u"
-       08                                # unsigned(8)
-
-   The following example shows the use of a tunnelled type to move a
-   JSON record to a CBOR collection:
+   Attestation Results for attester C.  Since attester C returns
+   Attestation Results as CMW in JSON record format, the JSON record
+   needs to be tunnelled.  It is given an explicit collection type using
+   the URI form.
 
    {
      "__cmwc_t": "tag:example.com,2024:composite-attester",
-     0: [
+     / attester A / 0: [
        30001,
        h'2347da55',
        4
      ],
-     1: 1668576818(h'2347da55'),
-     2: [
+     / attester B / 1: 1668576935(h'2347da55'),
+     / attester C / 2: [
        "#cmw-j2c-tunnel",
        '[ "application/eat+jwt", "Li4u", 8 ]'
      ]
@@ -727,25 +676,11 @@ Table of Contents
 6.6.  JSON Collection
 
    The following example is a JSON collection that assembles Evidence
-   from two attesters.
+   from two attesters.  Since attester B outputs Evidence as CMW in CMW
+   record format, the CBOR record needs to be tunnelled.
 
    {
-     "attester A": [
-       "application/eat-ucs+json",
-       "e30K",
-       4
-     ],
-     "attester B": [
-       "application/eat-ucs+cbor",
-       "oA",
-       4
-     ]
-   }
-
-   The following example shows the use of a tunnelled type to move a
-   CBOR record to a JSON collection:
-
-   {
+     "__cmwc_t": "tag:example.com,2024:another-composite-attester",
      "attester A": [
        "application/eat-ucs+json",
        "e30K",
@@ -760,10 +695,11 @@ Table of Contents
 6.7.  Use in JWT
 
    The following example shows the use of the "cmw" JWT claim to
-   transport a CMW collection in a JWT [RFC7519]:
+   transport a CMW collection in a JWT Claims Set [RFC7519]:
 
    {
      "cmw": {
+       "__cmwc_t": "tag:example.com,2024:another-composite-attester",
        "attester A": [
          "application/eat-ucs+json",
          "e30K",
@@ -778,503 +714,14 @@ Table of Contents
      "exp": 1300819380
    }
 
-7.  Implementation Status
-
-   This section records the status of known implementations of the
-   protocol defined by this specification at the time of posting of this
-   Internet-Draft, and is based on a proposal described in [RFC7942].
-   The description of implementations in this section is intended to
-   assist the IETF in its decision processes in progressing drafts to
-   RFCs.  Please note that the listing of any individual implementation
-   here does not imply endorsement by the IETF.  Furthermore, no effort
-   has been spent to verify the information presented here that was
-   supplied by IETF contributors.  This is not intended as, and must not
-   be construed to be, a catalog of available implementations or their
-   features.  Readers are advised to note that other implementations may
-   exist.
-
-   According to [RFC7942], "this will allow reviewers and working groups
-   to assign due consideration to documents that have the benefit of
-   running code, which may serve as evidence of valuable experimentation
-   and feedback that have made the implemented protocols more mature.
-   It is up to the individual working groups to use this information as
-   they see fit".
-
-7.1.  Project Veraison
-
-   The organization responsible for this implementation is Project
-   Veraison, a Linux Foundation project hosted at the Confidential
-   Computing Consortium.
-
-   The software, hosted at https://github.com/veraison/cmw, provides a
-   Golang package that allows encoding and decoding of CMW payloads.
-   The implementation covers all the features presented in this draft.
-   The maturity level is alpha.  The license is Apache 2.0.  The
-   developers can be contacted on the Zulip channel:
-   https://veraison.zulipchat.com/#narrow/stream/383526-CMW/.
-
-8.  Security Considerations
-
-8.1.  Records and CBOR Tags
-
-   RATS conceptual messages are typically secured using cryptography.
-   If the messages are already protected, then there are no additional
-   security requirements imposed by the introduction of this
-   encapsulation.  If an adversary tries to modify the payload
-   encapsulation, it will result in incorrect processing of the
-   encapsulated message and lead to an error.  If the messages are not
-   protected, additional security must be added at a different layer.
-   As an example, a cbor-record containing an UCCS (Unprotected CWT
-   Claims Sets) [I-D.ietf-rats-uccs] can be signed using COSE Sign1
-   [STD96].
-
-8.2.  Collections
-
-   If the collection is not protected from tampering by external
-   security measures (such as object security primitives) or internal
-   mechanisms (such as intra-item binding), an attacker could easily
-   manipulate the collection's contents.  It is the responsibility of
-   the Attester who creates the CMW collection to ensure that the
-   contents of the collection are integrity-protected.  The designer of
-   the attestation technology is typically in charge of ensuring that
-   the security properties are met, not the user of the conceptual
-   message wrapper.  In particular, when a CMW is used to carry multiple
-   Evidence messages for a composite device or layered attestation,
-   there should be strong binding between the Evidence messages within
-   the collection.  This binding is needed to prevent attacks where
-   Evidence from a subverted part of the device is replaced by Evidence
-   from a separate non-subverted device.  The binding of Evidence
-   messages should be some form of attestation.  For example, key
-   material used to sign/bind an entire CMW collection should be an
-   attestation key, handled as described in Section 12.1 of [RFC9334].
-   The binding does not necessarily have to be a signature over the CMW
-   collection, it might also be achieved through identifiers, cross-
-   linking, signing or hashing between the members of the collection.
-   Client-authenticated TLS may be used to bind a CMW collection of
-   Evidence messages.  However, the client key used with TLS should not
-   be that of the end-user or owner of the device.  Instead, it should
-   be attestation-oriented key material from the device or the attester
-   manufacturer.
-
-9.  IANA Considerations
-
-
-   // RFC Editor: replace "RFCthis" with the RFC number assigned to this
-   document.
-
-9.1.  CWT cmw Claim Registration
-
-   IANA is requested to add a new cmw claim to the "CBOR Web Token (CWT)
-   Claims" registry [IANA.cwt] as follows:
-
-   *  Claim Name: cmw
-
-   *  Claim Description: A RATS Conceptual Message Wrapper
-
-   *  Claim Key: TBD
-
-   *  Claim Value Type(s): CBOR Map, CBOR Array, or CBOR Tag
-
-   *  Change Controller: IETF
-
-   *  Specification Document(s): Section 3.1, Section 3.3 and
-      Section 3.2 of RFCthis
-
-   The suggested value for the Claim Key is 299.
-
-9.2.  JWT cmw Claim Registration
-
-   IANA is requested to add a new cmw claim to the "JSON Web Token
-   Claims" sub-registry of the "JSON Web Token (JWT)" registry
-   [IANA.jwt] as follows:
-
-   *  Claim Name: cmw
-
-   *  Claim Description: A RATS Conceptual Message Wrapper
-
-   *  Change Controller: IETF
-
-   *  Specification Document(s): Section 3.1 and Section 3.3 of RFCthis
-
-9.3.  CBOR Tag Registration
-
-   IANA is requested to add the following tag to the "CBOR Tags"
-   [IANA.cbor-tags] registry.
-
-   +======+=================+=================+========================+
-   | CBOR | Data Item       | Semantics       | Reference              |
-   | Tag  |                 |                 |                        |
-   +======+=================+=================+========================+
-   | TBD  | CBOR map,       | RATS Conceptual | Section 3.1,           |
-   |      | CBOR array,     | Message Wrapper | Section 3.2 and        |
-   |      | CBOR tag        |                 | Section 3.3 of RFCthis |
-   +------+-----------------+-----------------+------------------------+
-
-                                  Table 1
-
-9.4.  RATS Conceptual Message Wrapper (CMW) Indicators Registry
-
-   This specification defines a new "RATS Conceptual Message Wrapper
-   (CMW) Indicators" registry, with the policy "Expert Review"
-   (Section 4.5 of [BCP26]).
-
-   The objective is to have CMW Indicators values registered for all
-   RATS Conceptual Messages (Section 8 of [RFC9334]).
-
-9.4.1.  Instructions for the Designated Expert
-
-   The expert is instructed to add the values incrementally.
-
-   Acceptable values are those corresponding to RATS Conceptual Messages
-   defined by the RATS architecture [RFC9334] and any of its updates.
-
-9.4.2.  Structure of Entries
-
-   Each entry in the registry must include:
-
-   Indicator value:
-      A number corresponding to the bit position in the ind bitmap
-      (Section 3.1).
-
-   Conceptual Message name:
-      A text string describing the RATS conceptual message this
-      indicator corresponds to.
-
-   Reference:
-      A reference to a document, if available, or the registrant.
-
-   The initial registrations for the registry are detailed in Table 2.
-
-         +=================+=========================+===========+
-         | Indicator value | Conceptual Message name | Reference |
-         +=================+=========================+===========+
-         | 0               | Reference Values        | RFCthis   |
-         +-----------------+-------------------------+-----------+
-         | 1               | Endorsements            | RFCthis   |
-         +-----------------+-------------------------+-----------+
-         | 2               | Evidence                | RFCthis   |
-         +-----------------+-------------------------+-----------+
-         | 3               | Attestation Results     | RFCthis   |
-         +-----------------+-------------------------+-----------+
-         | 4-31            | Unassigned              | RFCthis   |
-         +-----------------+-------------------------+-----------+
-
-             Table 2: CMW Indicators Registry Initial Contents
-
-9.4.3.  Provisional Registration
-
-   Before the creation of the registry by IANA, new codepoints can be
-   added to the provisional CMW Indicators registry (https://github.com/
-   ietf-rats-wg/draft-ietf-rats-msg-wrap/blob/main/provisional/cmw-
-   indicators-registry.md) by following the documented procedure.
-
-   Table 2 will be regularly updated to match the contents of the
-   provisional registry.
-
-   The provisional registry will be discontinued once IANA establishes
-   the permanent registry, which is expected to coincide with the
-   publication of the current document.
-
-9.5.  Media Types
-
-   IANA is requested to add the following media types to the "Media
-   Types" registry [IANA.media-types].
-
-     +==========+======================+============================+
-     | Name     | Template             | Reference                  |
-     +==========+======================+============================+
-     | cmw+cbor | application/cmw+cbor | Section 3.1, Section 3.2   |
-     |          |                      | and Section 3.3 of RFCthis |
-     +----------+----------------------+----------------------------+
-     | cmw+json | application/cmw+json | Section 3.1 and            |
-     |          |                      | Section 3.3 of RFCthis     |
-     +----------+----------------------+----------------------------+
-
-                         Table 3: CMW Media Types
-
-9.5.1.  application/cmw+cbor
-
-   Type name:  application
-   Subtype name:  cmw+cbor
-   Required parameters:  n/a
-   Optional parameters:  cmwc_t (CMW collection type in string format.
-      The parameter value is case-insensitive.  It MUST NOT be used for
-      CMW that are not collections.)
-   Encoding considerations:  binary (CBOR)
-   Security considerations:  Section 8 of RFCthis
-   Interoperability considerations:  n/a
-   Published specification:  RFCthis
-   Applications that use this media type:  Attesters, Verifiers,
-      Endorsers and Reference-Value providers, Relying Parties that need
-      to transfer CMW payloads over HTTP(S), CoAP(S), and other
-      transports.
-   Fragment identifier considerations:  The syntax and semantics of
-      fragment identifiers are as specified for "application/cbor".  (No
-      fragment identification syntax is currently defined for
-      "application/cbor".)
-   Person & email address to contact for further information:  RATS WG
-      mailing list (rats@ietf.org)
-   Intended usage:  COMMON
-   Restrictions on usage:  none
-   Author/Change controller:  IETF
-   Provisional registration:  no
-
-9.5.2.  application/cmw+json
-
-   Type name:  application
-   Subtype name:  cmw+json
-   Required parameters:  n/a
-   Optional parameters:  cmwc_t (CMW collection type in string format.
-      The parameter value is case-insensitive.  It MUST NOT be used for
-      CMW that are not collections.)
-   Encoding considerations:  binary (JSON is UTF-8-encoded text)
-   Security considerations:  Section 8 of RFCthis
-   Interoperability considerations:  n/a
-   Published specification:  RFCthis
-   Applications that use this media type:  Attesters, Verifiers,
-      Endorsers and Reference-Value providers, Relying Parties that need
-      to transfer CMW payloads over HTTP(S), CoAP(S), and other
-      transports.
-   Fragment identifier considerations:  The syntax and semantics of
-      fragment identifiers are as specified for "application/json".  (No
-      fragment identification syntax is currently defined for
-      "application/json".)
-   Person & email address to contact for further information:  RATS WG
-      mailing list (rats@ietf.org)
-   Intended usage:  COMMON
-   Restrictions on usage:  none
-   Author/Change controller:  IETF
-   Provisional registration:  no
-
-9.6.  CoAP Content Formats
-
-   IANA is requested to register the following Content-Format numbers in
-   the "CoAP Content-Formats" sub-registry, within the "Constrained
-   RESTful Environments (CoRE) Parameters" Registry
-   [IANA.core-parameters]:
-
-   +==============+================+======+============================+
-   | Content-Type | Content        | ID   | Reference                  |
-   |              | Coding         |      |                            |
-   +==============+================+======+============================+
-   | application/ | -              | TBD1 | Section 3.1, Section 3.2   |
-   | cmw+cbor     |                |      | and Section 3.3 of RFCthis |
-   +--------------+----------------+------+----------------------------+
-   | application/ | -              | TBD2 | Section 3.1 and            |
-   | cmw+json     |                |      | Section 3.3 of RFCthis     |
-   +--------------+----------------+------+----------------------------+
-
-                     Table 4: New CoAP Content Formats
-
-   If possible, TBD1 and TBD2 should be assigned in the 256..999 range.
-
-9.7.  New SMI Numbers Registrations
-
-   IANA is requested to assign an object identifier (OID) for the CMW
-   extension defined in Section 5 in the "Certificate Extension" sub-
-   registry of the "SMI Numbers" [IANA.smi-numbers] registry.
-
-   IANA is requested to assign an object identifier (OID) for the ASN.1
-   Module defined in Section 5.1 in the "Module Identifier" sub-registry
-   of the "SMI Numbers" [IANA.smi-numbers] registry.
-
-10.  References
-
-10.1.  Normative References
-
-   [BCP26]    Cotton, M., Leiba, B., and T. Narten, "Guidelines for
-              Writing an IANA Considerations Section in RFCs", BCP 26,
-              RFC 8126, DOI 10.17487/RFC8126, June 2017,
-              <https://www.rfc-editor.org/rfc/rfc8126>.
-
-   [IANA.cbor-tags]
-              IANA, "Concise Binary Object Representation (CBOR) Tags",
-              <https://www.iana.org/assignments/cbor-tags>.
-
-   [IANA.core-parameters]
-              IANA, "Constrained RESTful Environments (CoRE)
-              Parameters",
-              <https://www.iana.org/assignments/core-parameters>.
-
-   [IANA.cwt] IANA, "CBOR Web Token (CWT) Claims",
-              <https://www.iana.org/assignments/cwt>.
-
-   [IANA.jwt] IANA, "JSON Web Token (JWT)",
-              <https://www.iana.org/assignments/jwt>.
-
-   [IANA.media-types]
-              IANA, "Media Types",
-              <https://www.iana.org/assignments/media-types>.
-
-   [IANA.smi-numbers]
-              IANA, "Structure of Management Information (SMI) Numbers
-              (MIB Module Registrations)",
-              <https://www.iana.org/assignments/smi-numbers>.
-
-   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119,
-              DOI 10.17487/RFC2119, March 1997,
-              <https://www.rfc-editor.org/rfc/rfc2119>.
-
-   [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
-              Encodings", RFC 4648, DOI 10.17487/RFC4648, October 2006,
-              <https://www.rfc-editor.org/rfc/rfc4648>.
-
-   [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
-              Housley, R., and W. Polk, "Internet X.509 Public Key
-              Infrastructure Certificate and Certificate Revocation List
-              (CRL) Profile", RFC 5280, DOI 10.17487/RFC5280, May 2008,
-              <https://www.rfc-editor.org/rfc/rfc5280>.
-
-   [RFC5912]  Hoffman, P. and J. Schaad, "New ASN.1 Modules for the
-              Public Key Infrastructure Using X.509 (PKIX)", RFC 5912,
-              DOI 10.17487/RFC5912, June 2010,
-              <https://www.rfc-editor.org/rfc/rfc5912>.
-
-   [RFC6268]  Schaad, J. and S. Turner, "Additional New ASN.1 Modules
-              for the Cryptographic Message Syntax (CMS) and the Public
-              Key Infrastructure Using X.509 (PKIX)", RFC 6268,
-              DOI 10.17487/RFC6268, July 2011,
-              <https://www.rfc-editor.org/rfc/rfc6268>.
-
-   [RFC6838]  Freed, N., Klensin, J., and T. Hansen, "Media Type
-              Specifications and Registration Procedures", BCP 13,
-              RFC 6838, DOI 10.17487/RFC6838, January 2013,
-              <https://www.rfc-editor.org/rfc/rfc6838>.
-
-   [RFC7252]  Shelby, Z., Hartke, K., and C. Bormann, "The Constrained
-              Application Protocol (CoAP)", RFC 7252,
-              DOI 10.17487/RFC7252, June 2014,
-              <https://www.rfc-editor.org/rfc/rfc7252>.
-
-   [RFC7519]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
-              (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
-              <https://www.rfc-editor.org/rfc/rfc7519>.
-
-   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
-              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
-              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
-
-   [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
-              Definition Language (CDDL): A Notational Convention to
-              Express Concise Binary Object Representation (CBOR) and
-              JSON Data Structures", RFC 8610, DOI 10.17487/RFC8610,
-              June 2019, <https://www.rfc-editor.org/rfc/rfc8610>.
-
-   [RFC9165]  Bormann, C., "Additional Control Operators for the Concise
-              Data Definition Language (CDDL)", RFC 9165,
-              DOI 10.17487/RFC9165, December 2021,
-              <https://www.rfc-editor.org/rfc/rfc9165>.
-
-   [RFC9277]  Richardson, M. and C. Bormann, "On Stable Storage for
-              Items in Concise Binary Object Representation (CBOR)",
-              RFC 9277, DOI 10.17487/RFC9277, August 2022,
-              <https://www.rfc-editor.org/rfc/rfc9277>.
-
-   [STD90]    Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
-              Interchange Format", STD 90, RFC 8259,
-              DOI 10.17487/RFC8259, December 2017,
-              <https://www.rfc-editor.org/rfc/rfc8259>.
-
-   [STD94]    Bormann, C. and P. Hoffman, "Concise Binary Object
-              Representation (CBOR)", STD 94, RFC 8949,
-              DOI 10.17487/RFC8949, December 2020,
-              <https://www.rfc-editor.org/rfc/rfc8949>.
-
-   [X.680]    International Telephone and Telegraph Consultative
-              Committee, "Specification of Abstract Syntax Notation One
-              (ASN.1): Specification of Basic Notation",
-              CCITT Recommendation X.680, July 1994.
-
-10.2.  Informative References
-
-   [DICE-arch]
-              Trusted Computing Group, "DICE Attestation Architecture",
-              January 2024, <https://trustedcomputinggroup.org/wp-
-              content/uploads/DICE-Attestation-Architecture-Version-1.1-
-              Revision-18_pub.pdf>.
-
-   [I-D.fossati-tls-attestation]
-              Tschofenig, H., Sheffer, Y., Howard, P., Mihalcea, I.,
-              Deshpande, Y., Niemi, A., and T. Fossati, "Using
-              Attestation in Transport Layer Security (TLS) and Datagram
-              Transport Layer Security (DTLS)", Work in Progress,
-              Internet-Draft, draft-fossati-tls-attestation-07, 8 July
-              2024, <https://datatracker.ietf.org/doc/html/draft-
-              fossati-tls-attestation-07>.
-
-   [I-D.ietf-lamps-csr-attestation]
-              Ounsworth, M., Tschofenig, H., Birkholz, H., Wiseman, M.,
-              and N. Smith, "Use of Remote Attestation with
-              Certification Signing Requests", Work in Progress,
-              Internet-Draft, draft-ietf-lamps-csr-attestation-12, 12
-              October 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-lamps-csr-attestation-12>.
-
-   [I-D.ietf-rats-ar4si]
-              Voit, E., Birkholz, H., Hardjono, T., Fossati, T., and V.
-              Scarlata, "Attestation Results for Secure Interactions",
-              Work in Progress, Internet-Draft, draft-ietf-rats-ar4si-
-              07, 2 September 2024,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              ar4si-07>.
-
-   [I-D.ietf-rats-corim]
-              Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
-              W. Pan, "Concise Reference Integrity Manifest", Work in
-              Progress, Internet-Draft, draft-ietf-rats-corim-06, 18
-              October 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-rats-corim-06>.
-
-   [I-D.ietf-rats-eat]
-              Lundblade, L., Mandyam, G., O'Donoghue, J., and C.
-              Wallace, "The Entity Attestation Token (EAT)", Work in
-              Progress, Internet-Draft, draft-ietf-rats-eat-31, 6
-              September 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-rats-eat-31>.
-
-   [I-D.ietf-rats-eat-media-type]
-              Lundblade, L., Birkholz, H., and T. Fossati, "EAT Media
-              Types", Work in Progress, Internet-Draft, draft-ietf-rats-
-              eat-media-type-11, 10 October 2024,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              eat-media-type-11>.
-
-   [I-D.ietf-rats-uccs]
-              Birkholz, H., O'Donoghue, J., Cam-Winget, N., and C.
-              Bormann, "A CBOR Tag for Unprotected CWT Claims Sets",
-              Work in Progress, Internet-Draft, draft-ietf-rats-uccs-10,
-              4 July 2024, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-rats-uccs-10>.
-
-   [RFC7942]  Sheffer, Y. and A. Farrel, "Improving Awareness of Running
-              Code: The Implementation Status Section", BCP 205,
-              RFC 7942, DOI 10.17487/RFC7942, July 2016,
-              <https://www.rfc-editor.org/rfc/rfc7942>.
-
-   [RFC9193]  Keränen, A. and C. Bormann, "Sensor Measurement Lists
-              (SenML) Fields for Indicating Data Value Content-Format",
-              RFC 9193, DOI 10.17487/RFC9193, June 2022,
-              <https://www.rfc-editor.org/rfc/rfc9193>.
-
-   [RFC9334]  Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
-              W. Pan, "Remote ATtestation procedureS (RATS)
-              Architecture", RFC 9334, DOI 10.17487/RFC9334, January
-              2023, <https://www.rfc-editor.org/rfc/rfc9334>.
-
-   [STD96]    Schaad, J., "CBOR Object Signing and Encryption (COSE):
-              Structures and Process", STD 96, RFC 9052,
-              DOI 10.17487/RFC9052, August 2022,
-              <https://www.rfc-editor.org/rfc/rfc9052>.
-
-Appendix A.  Collected CDDL
+7.  Collected CDDL
 
    start = cmw
 
-   cmw = json-CMW / cbor-CMW
+   cmw = json-cmw / cbor-cmw
 
-   json-CMW = json-record / json-collection
-   cbor-CMW = cbor-record / cbor-collection / $cbor-tag
+   json-cmw = json-record / json-collection
+   cbor-cmw = cbor-record / cbor-collection / $cbor-tag
 
    json-record = [
      type: media-type
@@ -1288,16 +735,18 @@ Appendix A.  Collected CDDL
      ? ind: uint .bits cm-type
    ]
 
-   cbor-tag<tn, $fmt> = #6.<tn>(bytes .cbor $fmt)
+   cbor-tagged-cbor<tn, fmt> = #6.<tn>(bytes .cbor fmt)
+
+   cbor-tagged-data<tn> = #6.<tn>(bytes)
 
    json-collection = {
      ? "__cmwc_t": ~uri / oid
-     + &(label: text) => json-CMW / c2j-tunnel
+     + &(label: text) => json-cmw / c2j-tunnel
    }
 
    cbor-collection = {
      ? "__cmwc_t": ~uri / oid
-     + &(label: (int / text)) => cbor-CMW / j2c-tunnel
+     + &(label: (int / text)) => cbor-cmw / j2c-tunnel
    }
 
    c2j-tunnel = [ "#cmw-c2j-tunnel", base64url-string ]
@@ -1351,7 +800,538 @@ Appendix A.  Collected CDDL
    VCHAR     =  %x21-7E           ; printable ASCII (no SP)
    '
 
-Appendix B.  Registering and Using CMWs
+8.  Implementation Status
+
+   This section records the status of known implementations of the
+   protocol defined by this specification at the time of posting of this
+   Internet-Draft, and is based on a proposal described in [RFC7942].
+   The description of implementations in this section is intended to
+   assist the IETF in its decision processes in progressing drafts to
+   RFCs.  Please note that the listing of any individual implementation
+   here does not imply endorsement by the IETF.  Furthermore, no effort
+   has been spent to verify the information presented here that was
+   supplied by IETF contributors.  This is not intended as, and must not
+   be construed to be, a catalog of available implementations or their
+   features.  Readers are advised to note that other implementations may
+   exist.
+
+   According to [RFC7942], "this will allow reviewers and working groups
+   to assign due consideration to documents that have the benefit of
+   running code, which may serve as evidence of valuable experimentation
+   and feedback that have made the implemented protocols more mature.
+   It is up to the individual working groups to use this information as
+   they see fit".
+
+8.1.  Project Veraison
+
+   The organization responsible for this implementation is Project
+   Veraison, a Linux Foundation project hosted at the Confidential
+   Computing Consortium.
+
+   The software, hosted at https://github.com/veraison/cmw, provides a
+   Golang package that allows encoding and decoding of CMW payloads.
+   The implementation covers all the features presented in this draft.
+   The maturity level is alpha.  The license is Apache 2.0.  The
+   developers can be contacted on the Zulip channel:
+   https://veraison.zulipchat.com/#narrow/stream/383526-CMW/.
+
+9.  Security Considerations
+
+9.1.  Records and CBOR Tags
+
+   RATS conceptual messages are typically secured using cryptography.
+   If the messages are already protected, then there are no additional
+   security requirements imposed by the introduction of this
+   encapsulation.  If an adversary tries to modify the payload
+   encapsulation, it will result in incorrect processing of the
+   encapsulated message and lead to an error.  If the messages are not
+   protected, additional security must be added at a different layer.
+   As an example, a cbor-record containing an UCCS (Unprotected CWT
+   Claims Sets) [I-D.ietf-rats-uccs] can be signed using COSE Sign1
+   [STD96].
+
+9.2.  Collections
+
+   If the collection is not protected from tampering by external
+   security measures (such as object security primitives) or internal
+   mechanisms (such as intra-item binding), an attacker could easily
+   manipulate the collection's contents.  It is the responsibility of
+   the Attester who creates the CMW collection to ensure that the
+   contents of the collection are integrity-protected.  The designer of
+   the attestation technology is typically in charge of ensuring that
+   the security properties are met, not the user of the conceptual
+   message wrapper.  In particular, when a CMW is used to carry multiple
+   Evidence messages for a composite device or layered attestation,
+   there should be strong binding between the Evidence messages within
+   the collection.  This binding is needed to prevent attacks where
+   Evidence from a subverted part of the device is replaced by Evidence
+   from a separate non-subverted device.  The binding of Evidence
+   messages should be some form of attestation.  For example, key
+   material used to sign/bind an entire CMW collection should be an
+   attestation key, handled as described in Section 12.1 of [RFC9334].
+   The binding does not necessarily have to be a signature over the CMW
+   collection, it might also be achieved through identifiers, cross-
+   linking, signing or hashing between the members of the collection.
+   Client-authenticated TLS may be used to bind a CMW collection of
+   Evidence messages.  However, the client key used with TLS should not
+   be that of the end-user or owner of the device.  Instead, it should
+   be attestation-oriented key material from the device or the attester
+   manufacturer.
+
+10.  IANA Considerations
+
+
+   // RFC Editor: Please replace "RFCthis" with the RFC number assigned
+   to this document.
+
+
+   // RFC Editor: This document uses the CPA (code point allocation)
+   convention described in [I-D.bormann-cbor-draft-numbers].  For each
+   usage of the term "CPA", please remove the prefix "CPA" from the
+   indicated value and replace the residue with the value assigned by
+   IANA; perform an analogous substitution for all other occurrences of
+   the prefix "CPA" in the document.  Finally, please remove this note.
+
+10.1.  CWT cmw Claim Registration
+
+   IANA is requested to add a new cmw claim to the "CBOR Web Token (CWT)
+   Claims" registry [IANA.cwt] as follows:
+
+   *  Claim Name: cmw
+
+   *  Claim Description: A RATS Conceptual Message Wrapper
+
+   *  JWT Claim Name: cmw
+
+   *  Claim Key: CPA299
+
+   *  Claim Value Type(s): CBOR Map, CBOR Array, or CBOR Tag
+
+   *  Change Controller: IETF
+
+   *  Specification Document(s): Section 3.1, Section 3.3 and
+      Section 3.2 of RFCthis
+
+10.2.  JWT cmw Claim Registration
+
+   IANA is requested to add a new cmw claim to the "JSON Web Token
+   Claims" registry of the "JSON Web Token (JWT)" registry group
+   [IANA.jwt] as follows:
+
+   *  Claim Name: cmw
+
+   *  Claim Description: A RATS Conceptual Message Wrapper
+
+   *  Change Controller: IETF
+
+   *  Specification Document(s): Section 3.1 and Section 3.3 of RFCthis
+
+10.3.  CBOR Tag Registration
+
+   IANA is requested to add the following tag to the "CBOR Tags"
+   [IANA.cbor-tags] registry.
+
+    +========+=============+=================+========================+
+    | CBOR   | Data Item   | Semantics       | Reference              |
+    | Tag    |             |                 |                        |
+    +========+=============+=================+========================+
+    | CPA765 | CBOR map,   | RATS Conceptual | Section 3.1,           |
+    |        | CBOR array, | Message Wrapper | Section 3.2 and        |
+    |        | CBOR tag    |                 | Section 3.3 of RFCthis |
+    +--------+-------------+-----------------+------------------------+
+
+                                  Table 1
+
+10.4.  RATS Conceptual Message Wrapper (CMW) Indicators Registry
+
+   This specification defines a new "RATS Conceptual Message Wrapper
+   (CMW) Indicators" registry, with the policy "Expert Review"
+   (Section 4.5 of [BCP26]).
+
+   The objective is to have CMW Indicators values registered for all
+   RATS Conceptual Messages (Section 8 of [RFC9334]).
+
+   This registry is to be added to the Remote Attestation Procedures
+   (RATS) registry group at [IANA.rats].
+
+10.4.1.  Instructions for the Designated Expert
+
+   The expert is instructed to add the values incrementally.
+
+   Acceptable values are those corresponding to RATS Conceptual Messages
+   defined by the RATS architecture [RFC9334] and any of its updates.
+
+10.4.2.  Structure of Entries
+
+   Each entry in the registry must include:
+
+   Indicator value:
+      A number corresponding to the bit position in the ind bitmap
+      (Section 3.1).
+
+   Conceptual Message name:
+      A text string describing the RATS conceptual message this
+      indicator corresponds to.
+
+   Reference:
+      A reference to a document, if available, or the registrant.
+
+   The initial registrations for the registry are detailed in Table 2.
+
+         +=================+=========================+===========+
+         | Indicator value | Conceptual Message name | Reference |
+         +=================+=========================+===========+
+         | 0               | Reference Values        | RFCthis   |
+         +-----------------+-------------------------+-----------+
+         | 1               | Endorsements            | RFCthis   |
+         +-----------------+-------------------------+-----------+
+         | 2               | Evidence                | RFCthis   |
+         +-----------------+-------------------------+-----------+
+         | 3               | Attestation Results     | RFCthis   |
+         +-----------------+-------------------------+-----------+
+         | 4-31            | Unassigned              | RFCthis   |
+         +-----------------+-------------------------+-----------+
+
+             Table 2: CMW Indicators Registry Initial Contents
+
+10.4.3.  Provisional Registration
+
+   Before the creation of the registry by IANA, new codepoints can be
+   added to the provisional CMW Indicators registry (https://github.com/
+   ietf-rats-wg/draft-ietf-rats-msg-wrap/blob/main/provisional/cmw-
+   indicators-registry.md) by following the documented procedure.
+
+   Table 2 will be regularly updated to match the contents of the
+   provisional registry.
+
+   The provisional registry will be discontinued once IANA establishes
+   the permanent registry, which is expected to coincide with the
+   publication of the current document.
+
+10.5.  Media Types
+
+   IANA is requested to add the following media types to the "Media
+   Types" registry [IANA.media-types].
+
+     +==========+======================+============================+
+     | Name     | Template             | Reference                  |
+     +==========+======================+============================+
+     | cmw+cbor | application/cmw+cbor | Section 3.1, Section 3.2   |
+     |          |                      | and Section 3.3 of RFCthis |
+     +----------+----------------------+----------------------------+
+     | cmw+json | application/cmw+json | Section 3.1 and            |
+     |          |                      | Section 3.3 of RFCthis     |
+     +----------+----------------------+----------------------------+
+
+                         Table 3: CMW Media Types
+
+10.5.1.  application/cmw+cbor
+
+   Type name:  application
+   Subtype name:  cmw+cbor
+   Required parameters:  n/a
+   Optional parameters:  cmwc_t (CMW collection type in string format.
+      OIDs must use the dotted-decimal notation.  The parameter value is
+      case-insensitive.  It MUST NOT be used for CMW that are not
+      collections.)
+   Encoding considerations:  binary (CBOR)
+   Security considerations:  Section 9 of RFCthis
+   Interoperability considerations:  n/a
+   Published specification:  RFCthis
+   Applications that use this media type:  Attesters, Verifiers,
+      Endorsers and Reference-Value providers, Relying Parties that need
+      to transfer CMW payloads over HTTP(S), CoAP(S), and other
+      transports.
+   Fragment identifier considerations:  The syntax and semantics of
+      fragment identifiers are as specified for "application/cbor".  (No
+      fragment identification syntax is currently defined for
+      "application/cbor".)
+   Person & email address to contact for further information:  RATS WG
+      mailing list (rats@ietf.org)
+   Intended usage:  COMMON
+   Restrictions on usage:  none
+   Author/Change controller:  IETF
+   Provisional registration:  no
+
+10.5.2.  application/cmw+json
+
+   Type name:  application
+   Subtype name:  cmw+json
+   Required parameters:  n/a
+   Optional parameters:  cmwc_t (CMW collection type in string format.
+      OIDs must use the dotted-decimal notation.  The parameter value is
+      case-insensitive.  It MUST NOT be used for CMW that are not
+      collections.)
+   Encoding considerations:  binary (JSON is UTF-8-encoded text)
+   Security considerations:  Section 9 of RFCthis
+   Interoperability considerations:  n/a
+   Published specification:  RFCthis
+   Applications that use this media type:  Attesters, Verifiers,
+      Endorsers and Reference-Value providers, Relying Parties that need
+      to transfer CMW payloads over HTTP(S), CoAP(S), and other
+      transports.
+   Fragment identifier considerations:  The syntax and semantics of
+      fragment identifiers are as specified for "application/json".  (No
+      fragment identification syntax is currently defined for
+      "application/json".)
+   Person & email address to contact for further information:  RATS WG
+      mailing list (rats@ietf.org)
+   Intended usage:  COMMON
+   Restrictions on usage:  none
+   Author/Change controller:  IETF
+   Provisional registration:  no
+
+10.6.  CoAP Content Formats
+
+   IANA is requested to register the following Content-Format numbers in
+   the "CoAP Content-Formats" registry, within the "Constrained RESTful
+   Environments (CoRE) Parameters" registry group
+   [IANA.core-parameters]:
+
+   +==============+================+======+============================+
+   | Content-Type | Content        | ID   | Reference                  |
+   |              | Coding         |      |                            |
+   +==============+================+======+============================+
+   | application/ | -              | TBD1 | Section 3.1, Section 3.2   |
+   | cmw+cbor     |                |      | and Section 3.3 of RFCthis |
+   +--------------+----------------+------+----------------------------+
+   | application/ | -              | TBD2 | Section 3.1 and            |
+   | cmw+json     |                |      | Section 3.3 of RFCthis     |
+   +--------------+----------------+------+----------------------------+
+
+                     Table 4: New CoAP Content Formats
+
+   If possible, TBD1 and TBD2 should be assigned in the 256..9999 range.
+
+10.7.  New SMI Numbers Registrations
+
+   IANA is requested to assign an object identifier (OID) for the CMW
+   extension defined in Section 5 in the "SMI Security for PKIX
+   Certificate Extension" registry of the "SMI Numbers"
+   [IANA.smi-numbers] registry group:
+
+   +=========+=============+======================+
+   | Decimal | Description | References           |
+   +=========+=============+======================+
+   | TBD     | id-pe-cmw   | Section 5 of RFCthis |
+   +---------+-------------+----------------------+
+
+            Table 5: New CMW Extension OID
+
+   IANA is requested to assign an object identifier (OID) for the ASN.1
+   Module defined in Section 5.1 in the "SMI Security for PKIX Module
+   Identifier" registry of the "SMI Numbers" [IANA.smi-numbers] registry
+   group:
+
+   +=========+============================+========================+
+   | Decimal | Description                | References             |
+   +=========+============================+========================+
+   | TBD     | id-mod-cmw-collection-extn | Section 5.1 of RFCthis |
+   +---------+----------------------------+------------------------+
+
+                     Table 6: New ASN.1 Module OID
+
+11.  References
+
+11.1.  Normative References
+
+   [BCP26]    Cotton, M., Leiba, B., and T. Narten, "Guidelines for
+              Writing an IANA Considerations Section in RFCs", BCP 26,
+              RFC 8126, DOI 10.17487/RFC8126, June 2017,
+              <https://www.rfc-editor.org/rfc/rfc8126>.
+
+   [IANA.cbor-tags]
+              IANA, "Concise Binary Object Representation (CBOR) Tags",
+              <https://www.iana.org/assignments/cbor-tags>.
+
+   [IANA.core-parameters]
+              IANA, "Constrained RESTful Environments (CoRE)
+              Parameters",
+              <https://www.iana.org/assignments/core-parameters>.
+
+   [IANA.cwt] IANA, "CBOR Web Token (CWT) Claims",
+              <https://www.iana.org/assignments/cwt>.
+
+   [IANA.jwt] IANA, "JSON Web Token (JWT)",
+              <https://www.iana.org/assignments/jwt>.
+
+   [IANA.media-types]
+              IANA, "Media Types",
+              <https://www.iana.org/assignments/media-types>.
+
+   [IANA.rats]
+              IANA, "Remote Attestation Procedures (RATS)",
+              <https://www.iana.org/assignments/rats>.
+
+   [IANA.smi-numbers]
+              IANA, "Structure of Management Information (SMI) Numbers
+              (MIB Module Registrations)",
+              <https://www.iana.org/assignments/smi-numbers>.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
+              Encodings", RFC 4648, DOI 10.17487/RFC4648, October 2006,
+              <https://www.rfc-editor.org/rfc/rfc4648>.
+
+   [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
+              Housley, R., and W. Polk, "Internet X.509 Public Key
+              Infrastructure Certificate and Certificate Revocation List
+              (CRL) Profile", RFC 5280, DOI 10.17487/RFC5280, May 2008,
+              <https://www.rfc-editor.org/rfc/rfc5280>.
+
+   [RFC6838]  Freed, N., Klensin, J., and T. Hansen, "Media Type
+              Specifications and Registration Procedures", BCP 13,
+              RFC 6838, DOI 10.17487/RFC6838, January 2013,
+              <https://www.rfc-editor.org/rfc/rfc6838>.
+
+   [RFC7252]  Shelby, Z., Hartke, K., and C. Bormann, "The Constrained
+              Application Protocol (CoAP)", RFC 7252,
+              DOI 10.17487/RFC7252, June 2014,
+              <https://www.rfc-editor.org/rfc/rfc7252>.
+
+   [RFC7519]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
+              (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
+              <https://www.rfc-editor.org/rfc/rfc7519>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
+              Definition Language (CDDL): A Notational Convention to
+              Express Concise Binary Object Representation (CBOR) and
+              JSON Data Structures", RFC 8610, DOI 10.17487/RFC8610,
+              June 2019, <https://www.rfc-editor.org/rfc/rfc8610>.
+
+   [RFC9165]  Bormann, C., "Additional Control Operators for the Concise
+              Data Definition Language (CDDL)", RFC 9165,
+              DOI 10.17487/RFC9165, December 2021,
+              <https://www.rfc-editor.org/rfc/rfc9165>.
+
+   [RFC9277]  Richardson, M. and C. Bormann, "On Stable Storage for
+              Items in Concise Binary Object Representation (CBOR)",
+              RFC 9277, DOI 10.17487/RFC9277, August 2022,
+              <https://www.rfc-editor.org/rfc/rfc9277>.
+
+   [STD90]    Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
+              Interchange Format", STD 90, RFC 8259,
+              DOI 10.17487/RFC8259, December 2017,
+              <https://www.rfc-editor.org/rfc/rfc8259>.
+
+   [STD94]    Bormann, C. and P. Hoffman, "Concise Binary Object
+              Representation (CBOR)", STD 94, RFC 8949,
+              DOI 10.17487/RFC8949, December 2020,
+              <https://www.rfc-editor.org/rfc/rfc8949>.
+
+   [X.680]    International Telephone and Telegraph Consultative
+              Committee, "Specification of Abstract Syntax Notation One
+              (ASN.1): Specification of Basic Notation",
+              CCITT Recommendation X.680, July 1994.
+
+11.2.  Informative References
+
+   [DICE-arch]
+              Trusted Computing Group, "DICE Attestation Architecture",
+              January 2024, <https://trustedcomputinggroup.org/wp-
+              content/uploads/DICE-Attestation-Architecture-Version-1.1-
+              Revision-18_pub.pdf>.
+
+   [I-D.bormann-cbor-draft-numbers]
+              Bormann, C., "Managing CBOR codepoints in Internet-
+              Drafts", Work in Progress, Internet-Draft, draft-bormann-
+              cbor-draft-numbers-04, 29 August 2024,
+              <https://datatracker.ietf.org/doc/html/draft-bormann-cbor-
+              draft-numbers-04>.
+
+   [I-D.fossati-tls-attestation]
+              Tschofenig, H., Sheffer, Y., Howard, P., Mihalcea, I.,
+              Deshpande, Y., Niemi, A., and T. Fossati, "Using
+              Attestation in Transport Layer Security (TLS) and Datagram
+              Transport Layer Security (DTLS)", Work in Progress,
+              Internet-Draft, draft-fossati-tls-attestation-08, 21
+              October 2024, <https://datatracker.ietf.org/doc/html/
+              draft-fossati-tls-attestation-08>.
+
+   [I-D.ietf-lamps-csr-attestation]
+              Ounsworth, M., Tschofenig, H., Birkholz, H., Wiseman, M.,
+              and N. Smith, "Use of Remote Attestation with
+              Certification Signing Requests", Work in Progress,
+              Internet-Draft, draft-ietf-lamps-csr-attestation-14, 21
+              October 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-lamps-csr-attestation-14>.
+
+   [I-D.ietf-rats-ar4si]
+              Voit, E., Birkholz, H., Hardjono, T., Fossati, T., and V.
+              Scarlata, "Attestation Results for Secure Interactions",
+              Work in Progress, Internet-Draft, draft-ietf-rats-ar4si-
+              07, 2 September 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
+              ar4si-07>.
+
+   [I-D.ietf-rats-corim]
+              Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
+              W. Pan, "Concise Reference Integrity Manifest", Work in
+              Progress, Internet-Draft, draft-ietf-rats-corim-06, 18
+              October 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-corim-06>.
+
+   [I-D.ietf-rats-eat]
+              Lundblade, L., Mandyam, G., O'Donoghue, J., and C.
+              Wallace, "The Entity Attestation Token (EAT)", Work in
+              Progress, Internet-Draft, draft-ietf-rats-eat-31, 6
+              September 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-eat-31>.
+
+   [I-D.ietf-rats-eat-media-type]
+              Lundblade, L., Birkholz, H., and T. Fossati, "EAT Media
+              Types", Work in Progress, Internet-Draft, draft-ietf-rats-
+              eat-media-type-12, 3 November 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
+              eat-media-type-12>.
+
+   [I-D.ietf-rats-uccs]
+              Birkholz, H., O'Donoghue, J., Cam-Winget, N., and C.
+              Bormann, "A CBOR Tag for Unprotected CWT Claims Sets",
+              Work in Progress, Internet-Draft, draft-ietf-rats-uccs-12,
+              3 November 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-uccs-12>.
+
+   [RFC5912]  Hoffman, P. and J. Schaad, "New ASN.1 Modules for the
+              Public Key Infrastructure Using X.509 (PKIX)", RFC 5912,
+              DOI 10.17487/RFC5912, June 2010,
+              <https://www.rfc-editor.org/rfc/rfc5912>.
+
+   [RFC6268]  Schaad, J. and S. Turner, "Additional New ASN.1 Modules
+              for the Cryptographic Message Syntax (CMS) and the Public
+              Key Infrastructure Using X.509 (PKIX)", RFC 6268,
+              DOI 10.17487/RFC6268, July 2011,
+              <https://www.rfc-editor.org/rfc/rfc6268>.
+
+   [RFC7942]  Sheffer, Y. and A. Farrel, "Improving Awareness of Running
+              Code: The Implementation Status Section", BCP 205,
+              RFC 7942, DOI 10.17487/RFC7942, July 2016,
+              <https://www.rfc-editor.org/rfc/rfc7942>.
+
+   [RFC9193]  Keränen, A. and C. Bormann, "Sensor Measurement Lists
+              (SenML) Fields for Indicating Data Value Content-Format",
+              RFC 9193, DOI 10.17487/RFC9193, June 2022,
+              <https://www.rfc-editor.org/rfc/rfc9193>.
+
+   [RFC9334]  Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
+              W. Pan, "Remote ATtestation procedureS (RATS)
+              Architecture", RFC 9334, DOI 10.17487/RFC9334, January
+              2023, <https://www.rfc-editor.org/rfc/rfc9334>.
+
+   [STD96]    Schaad, J., "CBOR Object Signing and Encryption (COSE):
+              Structures and Process", STD 96, RFC 9052,
+              DOI 10.17487/RFC9052, August 2022,
+              <https://www.rfc-editor.org/rfc/rfc9052>.
+
+Appendix A.  Registering and Using CMWs
 
    Figure 5 describes the registration preconditions for using CMWs in
    either CMW record or CBOR tag forms.  When using CMW collection, the
@@ -1370,13 +1350,13 @@ Appendix B.  Registering and Using CMWs
            |  |  `-------+--------'  |  |
            |  |          |           |  |
            |  |          v           |  |
-           |  |   .--------------.   |  |  .--------.
-           |  |  | Automatically  |  |  | | Existing |
-           |  |  | derive CBOR    |  |  | | CBOR     |
-           |  |  | tag [RFC9277]  |  |  | | tag      |
-           |  |   `------+-------'   |  |  `---+----'
-           |  |          |           |  |      |
-           |  |          |.----------(--(-----'
+           |  |   .--------------.   |  |
+           |  |  | Automatically  |  |  |
+           |  |  | derive CBOR    |  |  |
+           |  |  | tag [RFC9277]  |  |  |
+           |  |   `------+-------'   |  |
+           |  |          |           |  |
+           |  |          |           |  |
            |  |          |           |  |
            |  |          v           |  |
            |  |   .----------------. |  |
@@ -1388,20 +1368,19 @@ Appendix B.  Registering and Using CMWs
 
                        Figure 5: How To Create a CMW
 
-Appendix C.  Open Issues
+Appendix B.  Open Issues
 
    The list of currently open issues for this documents can be found at
    https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues.
 
 
-   // Note to RFC Editor: please remove before publication.
+   // RFC Editor: please remove before publication.
 
 Acknowledgments
 
    The authors would like to thank Brian Campbell, Carl Wallace, Carsten
-   Bormann, Dionna Glaze, Ionuț Mihalcea Laurence Lundblade, Michael B.
-   Jones, Mohit Sethi, Russ Housley, and Tom Jones for their reviews and
-   suggestions.
+   Bormann, Ionuț Mihalcea, Michael B.  Jones, Mohit Sethi, Russ
+   Housley, and Tom Jones for their reviews and suggestions.
 
    The definition of a CMW collection has been modelled on a proposal
    originally made by Simon Frost for an EAT-based Evidence collection
@@ -1416,14 +1395,14 @@ Contributors
    Email: lgl@securitytheory.com
 
 
-   Laurence contributed significant improvements around the security
+   Laurence made significant contributions to enhancing the security
    requirements and considerations for CMW collections.
 
 Authors' Addresses
 
    Henk Birkholz
    Fraunhofer SIT
-   Email: henk.birkholz@sit.fraunhofer.de
+   Email: henk.birkholz@ietf.contact
 
 
    Ned Smith
@@ -1437,4 +1416,10 @@ Authors' Addresses
 
 
    Hannes Tschofenig
-   Email: hannes.tschofenig@gmx.net
+   University of Applied Sciences Bonn-Rhein-Sieg
+   Email: Hannes.Tschofenig@gmx.net
+
+
+   Dionna Glaze
+   Google LLC
+   Email: dionnaglaze@google.com
