@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 20 May 2025                                               Intel
+Expires: 29 May 2025                                               Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                        16 November 2024
+                                                        25 November 2024
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 May 2025.
+   This Internet-Draft will expire on 29 May 2025.
 
 Copyright Notice
 
@@ -453,7 +453,7 @@ Table of Contents
 
      if b[0] == 0x82 || b[0] == 0x83 {
        return CBORRecord
-     } else if b[0] >= 0xc0 && b[0] <= 0xdb {
+     } else if b[0] == 0xda {
        return CBORTag
      } else if b[0] == 0x5b {
        return JSONRecord
