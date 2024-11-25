@@ -804,9 +804,18 @@ Author/Change controller:
 Provisional registration:
 : no
 
-## CoAP Content Formats
+### Registering new CoAP Content-Formats for Parameterized CMW Media Types
 
-IANA is requested to register the following Content-Format numbers in the "CoAP Content-Formats" registry, within the "Constrained RESTful Environments (CoRE) Parameters" registry group {{!IANA.core-parameters}}:
+New CoAP Content-Formats can be created based on parameterized instances of the `application/cmw+json` and `application/cmw+cbor` media types.
+
+When assigning a new CoAP Content-Format ID for a CMW media type that utilizes the `cmwc_t` parameter, the registrar must check (directly or through the Designated Expert) that:
+
+* The corresponding CMW type is a collection ({{cmw-coll}}), and
+* The `cmwc_t` value is either an OID or a URI.
+
+## CoAP Content-Formats
+
+IANA is requested to register the following Content-Format IDs in the "CoAP Content-Formats" registry, within the "Constrained RESTful Environments (CoRE) Parameters" registry group {{!IANA.core-parameters}}:
 
 | Content-Type | Content Coding | ID | Reference |
 | application/cmw+cbor | - | TBD1 | {{type-n-val}}, {{cbor-tag}} and {{cmw-coll}} of {{&SELF}} |
