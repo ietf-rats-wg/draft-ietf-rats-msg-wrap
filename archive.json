@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-24T00:57:41.032644+00:00",
+  "timestamp": "2024-11-26T00:54:29.787226+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2070,15 +2070,15 @@
       "id": "I_kwDOIGCt2M6f7D0O",
       "title": "collection MUST have at least one item",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/147",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "It is not explicitly written down, but since there is no reason to allow an empty collection, let's state it as a requirement.",
       "createdAt": "2024-11-22T12:30:18Z",
-      "updatedAt": "2024-11-22T12:30:18Z",
-      "closedAt": null,
+      "updatedAt": "2024-11-25T15:43:21Z",
+      "closedAt": "2024-11-25T15:43:21Z",
       "comments": []
     },
     {
@@ -2120,6 +2120,38 @@
           "updatedAt": "2024-11-22T18:59:17Z"
         }
       ]
+    },
+    {
+      "number": 150,
+      "id": "I_kwDOIGCt2M6gWTEi",
+      "title": "demux tag range is wrong",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/150",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Since we only allow TN-derived, it should be:\r\n\r\n```golang\r\n } else if b[0] == 0xda {\r\n    return CBORTag\r\n```",
+      "createdAt": "2024-11-25T10:41:21Z",
+      "updatedAt": "2024-11-25T15:42:45Z",
+      "closedAt": "2024-11-25T15:42:45Z",
+      "comments": []
+    },
+    {
+      "number": 153,
+      "id": "I_kwDOIGCt2M6gct_z",
+      "title": "How to use cmw for alternative CMs",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/153",
+      "state": "OPEN",
+      "author": "nedmsmith",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "What is the right way to use cmw to wrap an already defined conceptual message such as SGX or TPM?\r\n\r\nThe goals of cmw suggest this use case can be supported.\r\n\"This document defines the RATS conceptual message wrapper (CMW) format, a type of encapsulation format that can be used for any RATS messages, such as Evidence, Attestation Results, Endorsements, and Reference Values.\"\r\n\r\nGiven the legacy CM has a media-type / CF and it's native encoding is binary. Is it expected that the cbor-record form should be used (even though the binary encoding isn't cbor)? The I-D text \"When using CBOR, the value field MUST be encoded as a CBOR byte string.\" is rather terse in that it doesn't describe that the contents, though not originally cbor, is converted to a cbor `bytes`. The implications of this conversion are not stated. For example, does it mean word endieness must be taken into account etc...?\r\n\r\nThe media-type / CF in `type` may be sufficient to tell the parser what `bytes` contains.  So, the only part that is cbor is the `cbor-record` array. What follows in `bytes` is a cbor-ized representation of what is described by the media-type/CF.  Normally, the media-type/CF would describe the content in its native form, whereas in CMW I-D it is a cbor-ized native form. The draft should include words to this effect IMO.\r\n\r\nNote: When using the TN form, the cm-type information isn't included in the TN tag unless the cm-type is intrinsic to the media-type or there is a profile or other token that includes it. cm-type is optional because it only applies to cases where the media-type is ambiguous wrt cm-type. If cm-type were required to be specified as part of the media-type definition. Would there be use cases for when it needs to be included in the cbor-record/json-record form? For the use case above, the media-type definition (if one existed already) could be updated to include an optional \"cm-type\" token. If it didn't exist, it isn't extra work to include a cm-type token. E.g., \"application/my-cm; cm-type=1\". \r\n\r\nNote: If the CM is something like corim, which might contain both RVs and Endorsements, the cm-type should indicate both 0 and 1. It isn't clear how to do this with the current def. If it was a bit field (1,2,4,8,....) then 3 would mean two of the bits are true at the same time. The I-D should describe how this use case is handled.\r\n\r\n",
+      "createdAt": "2024-11-25T18:54:47Z",
+      "updatedAt": "2024-11-25T20:33:25Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -9929,6 +9961,152 @@
               "updatedAt": "2024-11-20T09:16:44Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 151,
+      "id": "PR_kwDOIGCt2M6DC3-9",
+      "title": "fix: (TN) tags treatment in demux",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/151",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #150 ",
+      "createdAt": "2024-11-25T14:19:35Z",
+      "updatedAt": "2024-11-25T15:43:36Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "941d98e6bdd6147d202348f7f224fe93fd968f2c",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "demux-fix-tag",
+      "headRefOid": "533ce8bf6b27a1fa73abfd178aafe09d4b2142d2",
+      "closedAt": "2024-11-25T15:42:44Z",
+      "mergedAt": "2024-11-25T15:42:44Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "dd9283d54232603a45bf7e936d7f5e01f8885fbf"
+      },
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze ",
+          "createdAt": "2024-11-25T14:19:53Z",
+          "updatedAt": "2024-11-25T14:19:53Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> this changes addresses #150\r\n\r\nis this a question or a restatement of the original comment? ;-) ",
+          "createdAt": "2024-11-25T14:55:00Z",
+          "updatedAt": "2024-11-25T14:55:00Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6SjEaC",
+          "commit": {
+            "abbreviatedOid": "533ce8b"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "this changes addresses #150 ",
+          "createdAt": "2024-11-25T14:51:02Z",
+          "updatedAt": "2024-11-25T14:51:02Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6SjjGr",
+          "commit": {
+            "abbreviatedOid": "533ce8b"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-25T15:33:41Z",
+          "updatedAt": "2024-11-25T15:33:41Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 152,
+      "id": "PR_kwDOIGCt2M6DC550",
+      "title": "collection must have at least one entry",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/152",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #147 ",
+      "createdAt": "2024-11-25T14:23:02Z",
+      "updatedAt": "2024-11-25T15:43:24Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "941d98e6bdd6147d202348f7f224fe93fd968f2c",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "must-1-elem",
+      "headRefOid": "7a3c4a40bf9425cfd042a504756fd455522aa764",
+      "closedAt": "2024-11-25T15:43:20Z",
+      "mergedAt": "2024-11-25T15:43:20Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "18e88daeb38a42067c95229b336a40239c875ea4"
+      },
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze ",
+          "createdAt": "2024-11-25T14:23:18Z",
+          "updatedAt": "2024-11-25T14:23:18Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6SjCs_",
+          "commit": {
+            "abbreviatedOid": "7a3c4a4"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-25T14:48:29Z",
+          "updatedAt": "2024-11-25T14:48:29Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6SjE5Q",
+          "commit": {
+            "abbreviatedOid": "7a3c4a4"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "yes, please",
+          "createdAt": "2024-11-25T14:51:45Z",
+          "updatedAt": "2024-11-25T14:51:45Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6SjgXj",
+          "commit": {
+            "abbreviatedOid": "7a3c4a4"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-25T15:29:36Z",
+          "updatedAt": "2024-11-25T15:29:36Z",
+          "comments": []
         }
       ]
     }
