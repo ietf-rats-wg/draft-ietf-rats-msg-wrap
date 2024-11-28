@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-26T00:54:29.787226+00:00",
+  "timestamp": "2024-11-28T00:55:06.598983+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2093,9 +2093,17 @@
       "labels": [],
       "body": "This is to reopen #133 \r\n\r\nThe double meaning of CMW CBOR Tag wasn't fixed (3.2 vs 10.3)\r\n\r\nPlease find an alternate to \"CMW CBOR Tag\". It sounds too much like what is in 10.3 and is out of line with common use.\r\n\r\nThe grammar of the first sentence isn't right.\r\n\r\nNote that I was not asked to sign off on the issue even though I was the one that opened it.",
       "createdAt": "2024-11-22T18:35:56Z",
-      "updatedAt": "2024-11-22T18:35:56Z",
+      "updatedAt": "2024-11-26T22:03:17Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> The double meaning of CMW CBOR Tag wasn't fixed (3.2 vs 10.3)\r\n> \r\n> Please find an alternate to \"CMW CBOR Tag\". It sounds too much like what is in 10.3 and is out of line with common use.\r\n\r\nWould \"CMW Tag\" work?  If not, can you suggest an alternative?\r\n\r\n> The grammar of the first sentence isn't right.\r\n\r\nThe context is a bit vague :-)\r\n",
+          "createdAt": "2024-11-26T22:03:15Z",
+          "updatedAt": "2024-11-26T22:03:15Z"
+        }
+      ]
     },
     {
       "number": 149,
@@ -2149,7 +2157,31 @@
       "labels": [],
       "body": "What is the right way to use cmw to wrap an already defined conceptual message such as SGX or TPM?\r\n\r\nThe goals of cmw suggest this use case can be supported.\r\n\"This document defines the RATS conceptual message wrapper (CMW) format, a type of encapsulation format that can be used for any RATS messages, such as Evidence, Attestation Results, Endorsements, and Reference Values.\"\r\n\r\nGiven the legacy CM has a media-type / CF and it's native encoding is binary. Is it expected that the cbor-record form should be used (even though the binary encoding isn't cbor)? The I-D text \"When using CBOR, the value field MUST be encoded as a CBOR byte string.\" is rather terse in that it doesn't describe that the contents, though not originally cbor, is converted to a cbor `bytes`. The implications of this conversion are not stated. For example, does it mean word endieness must be taken into account etc...?\r\n\r\nThe media-type / CF in `type` may be sufficient to tell the parser what `bytes` contains.  So, the only part that is cbor is the `cbor-record` array. What follows in `bytes` is a cbor-ized representation of what is described by the media-type/CF.  Normally, the media-type/CF would describe the content in its native form, whereas in CMW I-D it is a cbor-ized native form. The draft should include words to this effect IMO.\r\n\r\nNote: When using the TN form, the cm-type information isn't included in the TN tag unless the cm-type is intrinsic to the media-type or there is a profile or other token that includes it. cm-type is optional because it only applies to cases where the media-type is ambiguous wrt cm-type. If cm-type were required to be specified as part of the media-type definition. Would there be use cases for when it needs to be included in the cbor-record/json-record form? For the use case above, the media-type definition (if one existed already) could be updated to include an optional \"cm-type\" token. If it didn't exist, it isn't extra work to include a cm-type token. E.g., \"application/my-cm; cm-type=1\". \r\n\r\nNote: If the CM is something like corim, which might contain both RVs and Endorsements, the cm-type should indicate both 0 and 1. It isn't clear how to do this with the current def. If it was a bit field (1,2,4,8,....) then 3 would mean two of the bits are true at the same time. The I-D should describe how this use case is handled.\r\n\r\n",
       "createdAt": "2024-11-25T18:54:47Z",
-      "updatedAt": "2024-11-25T20:33:25Z",
+      "updatedAt": "2024-11-26T18:53:01Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > Given the legacy CM has a media-type / CF and it's native encoding is binary. Is it expected that the cbor-record form should be used (even though the binary encoding isn't cbor)?\r\n> \r\n> No, JSON is an equivalently valid option.\r\n\r\nSome guidance as to why someone might choose one form over the other might be helpful. Otherwise, why not just always choose one (and never choose the other)? For example, if the cbor form is always chosen but a conveyance protocol only handles text, then the cbor form can be base64 encoded just before putting it in the protocol's payload structure. It might not be reasonable to expect a designer of a component buried deep in a system to know which conveyance protocol will ultimately be chosen. It seems unnecessary for that designer to encode it both ways, for example. \r\n\r\n> > The I-D text \"When using CBOR, the value field MUST be encoded as a CBOR byte string.\" is rather terse in that it doesn't describe that the contents, though not originally cbor, is converted to a cbor `bytes`. The implications of this conversion are not stated. For example, does it mean word endieness must be taken into account etc...?\r\n> \r\n> Endianness and any other serialization details are captured by the media type/CF.  This goes in the CMW's `type`.\r\n\r\nSaid another way, is it the expectation of CMW that the native format MUST be in a serialized form?\r\n\r\n> \r\n> The CMW's `value` is whatever the `type` says, wrapped in `bstr` when the CMW is CBOR-encoded, wrapped in `b64u` when the CMW is JSON-encoded.\r\n> \r\n> > The media-type / CF in `type` may be sufficient to tell the parser what `bytes` contains.\r\n> \r\n> Well, it _must_ be sufficient, there has to be no syntactic ambiguity.\r\n> \r\n> > So, the only part that is cbor is the `cbor-record` array. What follows in `bytes` is a cbor-ized representation of what is described by the media-type/CF.\r\n> \r\n> If by \"cbor-ized representation\" you mean bstr-wrapping, then yes.\r\n\r\nYes\r\n\r\n> Pulling out one of the examples from \u00a76.2 - with some extra decoration:\r\n> \r\n> ```\r\n> 82             # array(2)           + CMW array \"header\"\r\n>    19 7531     # unsigned(30001)    + CBOR-encoded C-F type\r\n>    44          # bytes(4)           + CBOR bstr wrapping of...\r\n>       2347da55 # \"#G\\xDAU\"          - ...the real thing in its \"native\" form\r\n> ```\r\n> \r\n> \r\n> So you can think of `h'8219753144'` as the CBOR wrapper (including complete typing info) of the \"real thing\" , i.e., `h'2347da55'` in its native form.\r\n\r\nI found the extra decoration helpful. Maybe a sentence or two can be added to highlight that `h'2347da55'` is in its native form?\r\n\r\n> > Normally, the media-type/CF would describe the content in its native form, whereas in CMW I-D it is a cbor-ized native form. The draft should include words to this effect IMO.\r\n> \r\n> hmm, I am not sure I get the subtlety you are trying to suggest.\r\n\r\nMaybe the extra decoration suggested above would be sufficient.\r\n\r\n> In \u00a73.1 we say:\r\n> \r\n> > \"_When using JSON, the value field MUST be encoded as Base64 using the URL and filename safe alphabet without padding._\"\r\n> \r\n> I.e., we require the \"native form\" to be b64u-encoded.\r\n\r\nThis wording is more clear IMHO.\r\n\r\n> \r\n> > \"_When using CBOR, the value field MUST be encoded as a CBOR byte string._\"\r\n> \r\n> I.e., we require the \"native form\" to be bstr-encoded.\r\n\r\nditto\r\n\r\n> \r\n> Those two clearly establish the boundary between JSON-/CBOR-wrapping and the real thing.\r\n\r\n> > Note: When using the TN form, the cm-type information isn't included in the TN tag unless the cm-type is intrinsic to the media-type or there is a profile or other token that includes it. cm-type is optional because it only applies to cases where the media-type is ambiguous wrt cm-type.\r\n> \r\n> Yes.\r\n\r\nDoes it make sense to add wording to this effect then? Something like: \"When using the TN form the media-type registration SHOULD define a `cm-type` parameter that identifies the CM type.\"\r\n\r\nThe I-D might define the details of the parameter. As in:\r\n\"cm-type=_numeric_\" where 1 refers to reference values, 2 refers to endorsements, 4 refers to evidence, and 8 refers to attestation results. Combinations of conceptual messages can be represented by addition. E.g., 1 + 2 = 3 meaning both reference values and endorsements are represented.\" \r\n\r\n> > If cm-type were required to be specified as part of the media-type definition. Would there be use cases for when it needs to be included in the cbor-record/json-record form? For the use case above, the media-type definition (if one existed already) could be updated to include an optional \"cm-type\" token. If it didn't exist, it isn't extra work to include a cm-type token. E.g., \"application/my-cm; cm-type=1\".\r\n> \r\n> Agree.\r\n> \r\n> > Note: If the CM is something like corim, which might contain both RVs and Endorsements, the cm-type should indicate both 0 and 1. It isn't clear how to do this with the current def. If it was a bit field (1,2,4,8,....) then 3 would mean two of the bits are true at the same time. The I-D should describe how this use case is handled.\r\n> \r\n> The definition of `ind` in \u00a73.1 looks pretty solid to me:\r\n> \r\n> > _\"An optional bitmap that indicates which conceptual message types are carried in the value field. Any combination (i.e., any value between 1 and 15, included) is allowed.\"_\r\n> \r\n> What do you think is missing?  We also provide an example in \u00a76.4 (\"CBOR Record with explicit CM indicator\") where `ind` 0b0000_0011 (3) is used to exemplify a CM with Ref-Vals + Endorsements.\r\n\r\nI was misreading the CDDL to mean enumeration. My bad.\r\n\r\n",
+          "createdAt": "2024-11-26T11:28:13Z",
+          "updatedAt": "2024-11-26T18:53:01Z"
+        }
+      ]
+    },
+    {
+      "number": 154,
+      "id": "I_kwDOIGCt2M6g65v3",
+      "title": "Proposal to replace id-pe-cmw with ASN.1-based CMW Record",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/154",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Section 5 of CMW defines an OID to put CMW's into X.509 (which generalizes to any ASN.1 messages).\r\n\r\nThe problem with this is that to put an ASN.1 format token in an ASN.1 format message, you must have a JSON or CBOR layer.\r\n\r\nFor example, to put an ASN.1 format attestation token like those that are being worked on by Mike O, in an X.509 cert, you'd have to have a small CBOR or JSON layer for the CMW Record.\r\n\r\nRight now, a CMW Record is only JSON and CBOR. It seems super useful to define a CMW record in ASN.1 format. See discussion on the RATS list.\r\n\r\nInserting a small CBOR or JSON layer may not be completely unworkable, but:\r\n- There are very particular ASN.1-only environments that are important in the rats ecosystem\r\n- We will probably define an ASN.1 CMW record (or \"receptacle\") because it is super general and useful; this would make section 5 a bit redundant.\r\n- The special case syntax design in section 5 is a bit similar to the special case design of EAT submods that we've come to realize is too complex",
+      "createdAt": "2024-11-27T20:47:42Z",
+      "updatedAt": "2024-11-27T20:47:42Z",
       "closedAt": null,
       "comments": []
     }
