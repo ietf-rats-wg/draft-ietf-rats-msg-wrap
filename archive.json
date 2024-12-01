@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-28T00:55:06.598983+00:00",
+  "timestamp": "2024-12-01T01:04:35.388289+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2093,7 +2093,7 @@
       "labels": [],
       "body": "This is to reopen #133 \r\n\r\nThe double meaning of CMW CBOR Tag wasn't fixed (3.2 vs 10.3)\r\n\r\nPlease find an alternate to \"CMW CBOR Tag\". It sounds too much like what is in 10.3 and is out of line with common use.\r\n\r\nThe grammar of the first sentence isn't right.\r\n\r\nNote that I was not asked to sign off on the issue even though I was the one that opened it.",
       "createdAt": "2024-11-22T18:35:56Z",
-      "updatedAt": "2024-11-26T22:03:17Z",
+      "updatedAt": "2024-11-28T17:23:54Z",
       "closedAt": null,
       "comments": [
         {
@@ -2102,6 +2102,13 @@
           "body": "> The double meaning of CMW CBOR Tag wasn't fixed (3.2 vs 10.3)\r\n> \r\n> Please find an alternate to \"CMW CBOR Tag\". It sounds too much like what is in 10.3 and is out of line with common use.\r\n\r\nWould \"CMW Tag\" work?  If not, can you suggest an alternative?\r\n\r\n> The grammar of the first sentence isn't right.\r\n\r\nThe context is a bit vague :-)\r\n",
           "createdAt": "2024-11-26T22:03:15Z",
           "updatedAt": "2024-11-26T22:03:15Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Would \"CMW Tag\" work? If not, can you suggest an alternative?\r\n\r\nMaybe \"CMW TN\", given it's TN()-derived?\r\n\r\n",
+          "createdAt": "2024-11-28T17:23:53Z",
+          "updatedAt": "2024-11-28T17:23:53Z"
         }
       ]
     },
