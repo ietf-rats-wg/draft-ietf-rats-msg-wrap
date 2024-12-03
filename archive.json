@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-01T01:04:35.388289+00:00",
+  "timestamp": "2024-12-03T00:56:29.502212+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2189,6 +2189,22 @@
       "body": "Section 5 of CMW defines an OID to put CMW's into X.509 (which generalizes to any ASN.1 messages).\r\n\r\nThe problem with this is that to put an ASN.1 format token in an ASN.1 format message, you must have a JSON or CBOR layer.\r\n\r\nFor example, to put an ASN.1 format attestation token like those that are being worked on by Mike O, in an X.509 cert, you'd have to have a small CBOR or JSON layer for the CMW Record.\r\n\r\nRight now, a CMW Record is only JSON and CBOR. It seems super useful to define a CMW record in ASN.1 format. See discussion on the RATS list.\r\n\r\nInserting a small CBOR or JSON layer may not be completely unworkable, but:\r\n- There are very particular ASN.1-only environments that are important in the rats ecosystem\r\n- We will probably define an ASN.1 CMW record (or \"receptacle\") because it is super general and useful; this would make section 5 a bit redundant.\r\n- The special case syntax design in section 5 is a bit similar to the special case design of EAT submods that we've come to realize is too complex",
       "createdAt": "2024-11-27T20:47:42Z",
       "updatedAt": "2024-11-27T20:47:42Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 155,
+      "id": "I_kwDOIGCt2M6hoEji",
+      "title": "Explicit CBOR tag socket CDDL def",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/155",
+      "state": "OPEN",
+      "author": "ionut-arm",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The CDDL defines the following for use of CBOR tags:\r\n\r\n```cddl\r\ncbor-cmw = cbor-record / cbor-collection / $cbor-tag\r\n\r\n[...]\r\n\r\ncbor-tagged-cbor<tn, fmt> = #6.<tn>(bytes .cbor fmt)\r\n\r\ncbor-tagged-data<tn> = #6.<tn>(bytes)\r\n```\r\n\r\nCould there be a more explicit link established between them?",
+      "createdAt": "2024-12-02T11:35:33Z",
+      "updatedAt": "2024-12-02T11:35:33Z",
       "closedAt": null,
       "comments": []
     }
