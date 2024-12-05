@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-03T00:56:29.502212+00:00",
+  "timestamp": "2024-12-05T00:56:35.621329+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2205,6 +2205,22 @@
       "body": "The CDDL defines the following for use of CBOR tags:\r\n\r\n```cddl\r\ncbor-cmw = cbor-record / cbor-collection / $cbor-tag\r\n\r\n[...]\r\n\r\ncbor-tagged-cbor<tn, fmt> = #6.<tn>(bytes .cbor fmt)\r\n\r\ncbor-tagged-data<tn> = #6.<tn>(bytes)\r\n```\r\n\r\nCould there be a more explicit link established between them?",
       "createdAt": "2024-12-02T11:35:33Z",
       "updatedAt": "2024-12-02T11:35:33Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 156,
+      "id": "I_kwDOIGCt2M6h7HrI",
+      "title": "Consider supporting COSE/JOSE security",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/156",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The amount of text added to CWT that says how COSE is supported is pretty small. The text that adds COSE to CoSWID is larger, but I don't think all the stuff CoSWID did is necessary.\r\n\r\nIt seems very clear that COSE and JOSE are the way to do attestation security, the same as EAT does. There's probably no controversy over it or much debate.\r\n\r\nSince CMW is very clearly an evidence format, it seems kind of important to have security.\r\n\r\nNote also recent discussion on TLS and composite attestation on the rats mailing list. It seems like COSE/JOSE-secured evidence is useful and sometimes preferable for composite attestation evidence compared to TLS.\r\n\r\nIt seems useful for the rats community to know exactly what security should be used to promote interoperability. It's probably not helpful for 1,000 flowers to bloom (lots of attestation security mechanism).",
+      "createdAt": "2024-12-04T05:51:32Z",
+      "updatedAt": "2024-12-04T05:51:32Z",
       "closedAt": null,
       "comments": []
     }
