@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 19 May 2025                                               Intel
+Expires: 20 June 2025                                              Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                        15 November 2024
+                                                        17 December 2024
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 May 2025.
+   This Internet-Draft will expire on 20 June 2025.
 
 Copyright Notice
 
@@ -159,6 +159,15 @@ Table of Contents
    to parse attestation-related conceptual messages, such as different
    Evidence formats, but can instead utilize the CMW format to be
    agnostic to the attestation technology.
+
+   A further goal is to ensure the scalability of implementations.  This
+   means that adding new message handlers should not change the core of
+   the processor, and that a CMW stack can be designed to offer a plug-
+   in interface for both encoding and decoding.  To achieve this, the
+   format must provide consistent message encapsulation and strong,
+   explicit typing.  These features allow for selecting the appropriate
+   message handler based on its type identifier.  An opaque message can
+   then be passed between the core and the handler.
 
    This document defines two encapsulation formats for RATS conceptual
    messages that aim to achieve the goals stated above.
@@ -361,6 +370,8 @@ Table of Contents
    serve as a mnemonic for different conceptual messages in the
    collection.
 
+   A collection MUST have at least one CMW entry.
+
    The "__cmwc_t" key is reserved for associating an optional type to
    the overall collection and MUST NOT be used for a label.  The
    collection type is either a Uniform Resource Identifier (URI) or an
@@ -453,7 +464,7 @@ Table of Contents
 
      if b[0] == 0x82 || b[0] == 0x83 {
        return CBORRecord
-     } else if b[0] >= 0xc0 && b[0] <= 0xdb {
+     } else if b[0] == 0xda {
        return CBORTag
      } else if b[0] == 0x5b {
        return JSONRecord
@@ -915,7 +926,7 @@ lication/signed-corim+cbor"
 10.2.  JWT cmw Claim Registration
 
    IANA is requested to add a new cmw claim to the "JSON Web Token
-   Claims" sub-registry of the "JSON Web Token (JWT)" registry
+   Claims" registry of the "JSON Web Token (JWT)" registry group
    [IANA.jwt] as follows:
 
    *  Claim Name: cmw
@@ -1031,8 +1042,9 @@ lication/signed-corim+cbor"
    Subtype name:  cmw+cbor
    Required parameters:  n/a
    Optional parameters:  cmwc_t (CMW collection type in string format.
-      The parameter value is case-insensitive.  It MUST NOT be used for
-      CMW that are not collections.)
+      OIDs must use the dotted-decimal notation.  The parameter value is
+      case-insensitive.  It MUST NOT be used for CMW that are not
+      collections.)
    Encoding considerations:  binary (CBOR)
    Security considerations:  Section 9 of RFCthis
    Interoperability considerations:  n/a
@@ -1058,8 +1070,9 @@ lication/signed-corim+cbor"
    Subtype name:  cmw+json
    Required parameters:  n/a
    Optional parameters:  cmwc_t (CMW collection type in string format.
-      The parameter value is case-insensitive.  It MUST NOT be used for
-      CMW that are not collections.)
+      OIDs must use the dotted-decimal notation.  The parameter value is
+      case-insensitive.  It MUST NOT be used for CMW that are not
+      collections.)
    Encoding considerations:  binary (JSON is UTF-8-encoded text)
    Security considerations:  Section 9 of RFCthis
    Interoperability considerations:  n/a
@@ -1082,8 +1095,8 @@ lication/signed-corim+cbor"
 10.6.  CoAP Content Formats
 
    IANA is requested to register the following Content-Format numbers in
-   the "CoAP Content-Formats" sub-registry, within the "Constrained
-   RESTful Environments (CoRE) Parameters" Registry
+   the "CoAP Content-Formats" registry, within the "Constrained RESTful
+   Environments (CoRE) Parameters" registry group
    [IANA.core-parameters]:
 
    +==============+================+======+============================+
@@ -1105,8 +1118,8 @@ lication/signed-corim+cbor"
 
    IANA is requested to assign an object identifier (OID) for the CMW
    extension defined in Section 5 in the "SMI Security for PKIX
-   Certificate Extension" sub-registry of the "SMI Numbers"
-   [IANA.smi-numbers] registry:
+   Certificate Extension" registry of the "SMI Numbers"
+   [IANA.smi-numbers] registry group:
 
    +=========+=============+======================+
    | Decimal | Description | References           |
@@ -1118,8 +1131,8 @@ lication/signed-corim+cbor"
 
    IANA is requested to assign an object identifier (OID) for the ASN.1
    Module defined in Section 5.1 in the "SMI Security for PKIX Module
-   Identifier" sub-registry of the "SMI Numbers" [IANA.smi-numbers]
-   registry:
+   Identifier" registry of the "SMI Numbers" [IANA.smi-numbers] registry
+   group:
 
    +=========+============================+========================+
    | Decimal | Description                | References             |
