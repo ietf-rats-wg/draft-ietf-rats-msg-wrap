@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-17T00:56:19.117760+00:00",
+  "timestamp": "2024-12-19T00:54:34.714441+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -10177,6 +10177,54 @@
           "body": "",
           "createdAt": "2024-11-25T15:29:36Z",
           "updatedAt": "2024-11-25T15:29:36Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 157,
+      "id": "PR_kwDOIGCt2M6FgAcp",
+      "title": "add implementation scalability as an explicit goal",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/157",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Capturing a suggestion made by @laurencelundblade",
+      "createdAt": "2024-12-17T14:13:06Z",
+      "updatedAt": "2024-12-17T15:36:05Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "18e88daeb38a42067c95229b336a40239c875ea4",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "design-principles",
+      "headRefOid": "e1e0166ed76599d58bdda53c6c8b41154604a9d8",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze ",
+          "createdAt": "2024-12-17T14:13:23Z",
+          "updatedAt": "2024-12-17T14:13:23Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6Vj8Kr",
+          "commit": {
+            "abbreviatedOid": "e1e0166"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-12-17T15:36:05Z",
+          "updatedAt": "2024-12-17T15:36:05Z",
           "comments": []
         }
       ]
