@@ -216,7 +216,7 @@ $ echo -n g3gYYXBwbGljYXRpb24vZWF0LXVjcytjYm9yQaAE | base64 -d | cbor2diag.rb
 
 ---
 
-## Carrying the collecion in an X.509 extension
+## Carrying the collection in an X.509 extension
 
 ```
 -- CMW Extension OID
