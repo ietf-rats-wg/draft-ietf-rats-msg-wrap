@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-07T00:52:15.082174+00:00",
+  "timestamp": "2025-01-09T00:51:51.011640+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -10225,6 +10225,48 @@
           "body": "",
           "createdAt": "2024-12-17T15:36:05Z",
           "updatedAt": "2024-12-17T15:36:05Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 158,
+      "id": "PR_kwDOIGCt2M6G7OGS",
+      "title": "fix typo",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/158",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-01-07T11:22:02Z",
+      "updatedAt": "2025-01-07T12:21:27Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "18e88daeb38a42067c95229b336a40239c875ea4",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "ccc-slides-typo-fix",
+      "headRefOid": "8118347d1187d084bf043850985ae22e8f342a62",
+      "closedAt": "2025-01-07T12:21:26Z",
+      "mergedAt": "2025-01-07T12:21:26Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "16bcbd16e87a1fa053f4cb2128e8f98960338949"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6XCzDy",
+          "commit": {
+            "abbreviatedOid": "8118347"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "Thank you for your attention to detail",
+          "createdAt": "2025-01-07T11:25:42Z",
+          "updatedAt": "2025-01-07T11:25:42Z",
           "comments": []
         }
       ]
