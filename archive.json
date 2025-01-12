@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-09T00:51:51.011640+00:00",
+  "timestamp": "2025-01-12T00:56:57.415010+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2221,6 +2221,22 @@
       "body": "The amount of text added to CWT that says how COSE is supported is pretty small. The text that adds COSE to CoSWID is larger, but I don't think all the stuff CoSWID did is necessary.\r\n\r\nIt seems very clear that COSE and JOSE are the way to do attestation security, the same as EAT does. There's probably no controversy over it or much debate.\r\n\r\nSince CMW is very clearly an evidence format, it seems kind of important to have security.\r\n\r\nNote also recent discussion on TLS and composite attestation on the rats mailing list. It seems like COSE/JOSE-secured evidence is useful and sometimes preferable for composite attestation evidence compared to TLS.\r\n\r\nIt seems useful for the rats community to know exactly what security should be used to promote interoperability. It's probably not helpful for 1,000 flowers to bloom (lots of attestation security mechanism).",
       "createdAt": "2024-12-04T05:51:32Z",
       "updatedAt": "2024-12-04T05:51:32Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 159,
+      "id": "I_kwDOIGCt2M6ljuit",
+      "title": "`__cmwc_t` URIs should be absolute too?",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/159",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Allowed types for `__cmwc_t` values are:\r\n* absolute (i.e., non-relative) OIDs\r\n* URIs \r\n\r\nNote that a (URI) relative reference can be any string (more or less), including the empty one.\r\n\r\nBesides, a relative OID in dot-decimal notation (e.g., `.2.3.4`) parses OK as a relative reference, making the restriction we put on OID a bit moot.\r\n\r\nThirdly, it is completely undetermined what URI would be the base to resolve a relative form.\r\n\r\nFor these reasons, I advise we make URIs absolute too.\r\n\r\n\r\n\r\n\r\n",
+      "createdAt": "2025-01-09T11:49:29Z",
+      "updatedAt": "2025-01-09T11:49:29Z",
       "closedAt": null,
       "comments": []
     }
