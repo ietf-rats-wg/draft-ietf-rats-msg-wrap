@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-19T00:54:21.574738+00:00",
+  "timestamp": "2025-01-21T00:50:12.483552+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2236,7 +2236,31 @@
       "labels": [],
       "body": "Allowed types for `__cmwc_t` values are:\r\n* absolute (i.e., non-relative) OIDs\r\n* URIs \r\n\r\nNote that a (URI) relative reference can be any string (more or less), including the empty one.\r\n\r\nBesides, a relative OID in dot-decimal notation (e.g., `.2.3.4`) parses OK as a relative reference, making the restriction we put on OID a bit moot.\r\n\r\nThirdly, it is completely undetermined what URI would be the base to resolve a relative form.\r\n\r\nFor these reasons, I advise we make URIs absolute too.\r\n\r\n\r\n\r\n\r\n",
       "createdAt": "2025-01-09T11:49:29Z",
-      "updatedAt": "2025-01-09T11:49:29Z",
+      "updatedAt": "2025-01-20T18:07:38Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Agreed.",
+          "createdAt": "2025-01-20T18:07:36Z",
+          "updatedAt": "2025-01-20T18:07:36Z"
+        }
+      ]
+    },
+    {
+      "number": 160,
+      "id": "I_kwDOIGCt2M6m6Q6s",
+      "title": "missing escape in `.abnf`'d `quoted-pair`",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/160",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Today, I was made aware that one cannot blindly import ABNF via `.abnf/.cat` in their CDDL files (as we do with RFC9193's `Content-Type`).\nOne should also pay attention to interactions between nested parsers.\n\nThe relevant paragraph of RFC 9682 (which Carsten pointed me to) is the following:\n\n> Note that this approach also works well with the use of byte strings\n> in Section 3 of [RFC9165].  _It does require some care when copying-\n> and-pasting into CDDL models from ABNF that contains single quotes\n> (which may also hide as apostrophes in comments); these need to be\n> escaped or possibly replaced by %x27._\n>\n> **Note 1**: Section 3 of [RFC9165] is `.abnf`\n> **Note 2**: The prose above should warn to do the same thing for backslash (%5C).\n\n\nTherefore, our\n```abnf\nquoted-pair    = \"\\\" ( SP / VCHAR )\n```\nneeds to be escaped, as in:\n```abnf\nquoted-pair    = \"\\\\\" ( SP / VCHAR )\n```",
+      "createdAt": "2025-01-20T21:25:05Z",
+      "updatedAt": "2025-01-20T21:25:39Z",
       "closedAt": null,
       "comments": []
     }
