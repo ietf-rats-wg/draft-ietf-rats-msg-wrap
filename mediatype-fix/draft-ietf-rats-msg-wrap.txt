@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 20 June 2025                                              Intel
+Expires: 25 July 2025                                              Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                        17 December 2024
+                                                         21 January 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -60,11 +60,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 June 2025.
+   This Internet-Draft will expire on 25 July 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -159,15 +159,6 @@ Table of Contents
    to parse attestation-related conceptual messages, such as different
    Evidence formats, but can instead utilize the CMW format to be
    agnostic to the attestation technology.
-
-   A further goal is to ensure the scalability of implementations.  This
-   means that adding new message handlers should not change the core of
-   the processor, and that a CMW stack can be designed to offer a plug-
-   in interface for both encoding and decoding.  To achieve this, the
-   format must provide consistent message encapsulation and strong,
-   explicit typing.  These features allow for selecting the appropriate
-   message handler based on its type identifier.  An opaque message can
-   then be passed between the core and the handler.
 
    This document defines two encapsulation formats for RATS conceptual
    messages that aim to achieve the goals stated above.
@@ -788,7 +779,7 @@ lication/signed-corim+cbor"
                   / DIGIT / ALPHA
    quoted-string  = %x22 *( qdtext / quoted-pair ) %x22
    qdtext         = SP / %x21 / %x23-5B / %x5D-7E
-   quoted-pair    = "\" ( SP / VCHAR )
+   quoted-pair    = "\\" ( SP / VCHAR )
 
    Media-Type-Name = type-name "/" subtype-name
 
