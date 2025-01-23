@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-21T00:50:12.483552+00:00",
+  "timestamp": "2025-01-23T00:50:42.623032+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2093,7 +2093,7 @@
       "labels": [],
       "body": "This is to reopen #133 \r\n\r\nThe double meaning of CMW CBOR Tag wasn't fixed (3.2 vs 10.3)\r\n\r\nPlease find an alternate to \"CMW CBOR Tag\". It sounds too much like what is in 10.3 and is out of line with common use.\r\n\r\nThe grammar of the first sentence isn't right.\r\n\r\nNote that I was not asked to sign off on the issue even though I was the one that opened it.",
       "createdAt": "2024-11-22T18:35:56Z",
-      "updatedAt": "2024-11-28T17:23:54Z",
+      "updatedAt": "2025-01-22T13:20:44Z",
       "closedAt": null,
       "comments": [
         {
@@ -2109,6 +2109,13 @@
           "body": "> Would \"CMW Tag\" work? If not, can you suggest an alternative?\r\n\r\nMaybe \"CMW TN\", given it's TN()-derived?\r\n\r\n",
           "createdAt": "2024-11-28T17:23:53Z",
           "updatedAt": "2024-11-28T17:23:53Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@laurencelundblade, see \ud83d\udc46.  Would that work for you?  Do you have a better proposal?",
+          "createdAt": "2025-01-22T13:20:42Z",
+          "updatedAt": "2025-01-22T13:20:42Z"
         }
       ]
     },
@@ -2188,9 +2195,17 @@
       "labels": [],
       "body": "Section 5 of CMW defines an OID to put CMW's into X.509 (which generalizes to any ASN.1 messages).\r\n\r\nThe problem with this is that to put an ASN.1 format token in an ASN.1 format message, you must have a JSON or CBOR layer.\r\n\r\nFor example, to put an ASN.1 format attestation token like those that are being worked on by Mike O, in an X.509 cert, you'd have to have a small CBOR or JSON layer for the CMW Record.\r\n\r\nRight now, a CMW Record is only JSON and CBOR. It seems super useful to define a CMW record in ASN.1 format. See discussion on the RATS list.\r\n\r\nInserting a small CBOR or JSON layer may not be completely unworkable, but:\r\n- There are very particular ASN.1-only environments that are important in the rats ecosystem\r\n- We will probably define an ASN.1 CMW record (or \"receptacle\") because it is super general and useful; this would make section 5 a bit redundant.\r\n- The special case syntax design in section 5 is a bit similar to the special case design of EAT submods that we've come to realize is too complex",
       "createdAt": "2024-11-27T20:47:42Z",
-      "updatedAt": "2024-11-27T20:47:42Z",
+      "updatedAt": "2025-01-22T13:14:29Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The addition of a CMW in ASN.1 form is not in mutual exclusion with `id-pe-cmw`.\n\nI proposed an ASN.1 CMW - see [wiki](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/wiki/CMW-in-ASN.1) - which hasn't got much traction AFAICT.\n\nNote also that such CMW could be easily specified in a subsequent document.\nMy suggestion is we leave the status quo (i.e., JSON/CBOR CMW and `id-pe-cmw` for X.509 plug-in), and if people do care about ASN.1, we will draft a new document with the wiki proposal as its starting point.\n",
+          "createdAt": "2025-01-22T13:14:27Z",
+          "updatedAt": "2025-01-22T13:14:27Z"
+        }
+      ]
     },
     {
       "number": 155,
@@ -2220,9 +2235,31 @@
       "labels": [],
       "body": "The amount of text added to CWT that says how COSE is supported is pretty small. The text that adds COSE to CoSWID is larger, but I don't think all the stuff CoSWID did is necessary.\r\n\r\nIt seems very clear that COSE and JOSE are the way to do attestation security, the same as EAT does. There's probably no controversy over it or much debate.\r\n\r\nSince CMW is very clearly an evidence format, it seems kind of important to have security.\r\n\r\nNote also recent discussion on TLS and composite attestation on the rats mailing list. It seems like COSE/JOSE-secured evidence is useful and sometimes preferable for composite attestation evidence compared to TLS.\r\n\r\nIt seems useful for the rats community to know exactly what security should be used to promote interoperability. It's probably not helpful for 1,000 flowers to bloom (lots of attestation security mechanism).",
       "createdAt": "2024-12-04T05:51:32Z",
-      "updatedAt": "2024-12-04T05:51:32Z",
+      "updatedAt": "2025-01-22T12:40:31Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "+1 I want to add normative text about COSE/JOSE use. I'm also interested in each cmwc_t imposing its own requirements on protected and unprotected headers. As a baseline I'd require the following protected headers\n\nFor COSE, require COSE_Sign1 and headers\n```\n  &(alg: 1) => int\n  &(content-type: 3) => \"application/cmw+cbor\"\n  &(kid: 4) => bstr\n```\n\nFor JOSE, require JWS compact serialization and headers\n```\n  \"alg\" => text\n  \"cty\" => \"application/cmw+json\"\n  \"kid\" => text\n```\n* \"alg\"'s text is specified by https://www.rfc-editor.org/rfc/rfc7515.html#section-4.1.1\n* \"kid\"'s text is specified by https://www.rfc-editor.org/rfc/rfc7515.html#section-4.1.4\n\nWe can call these application/cmw+cose and application/cmw+jose, both with a cmwc_t parameter. I'm not particularly confident about the `+jose` versus `+jws` versus `-jws+json` naming though. My preference is just `+jose` even if it's not intended for JWE.",
+          "createdAt": "2025-01-21T18:08:50Z",
+          "updatedAt": "2025-01-21T18:08:50Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Since CMW is very clearly an evidence format\n\nBut not exclusively and Evidence format...",
+          "createdAt": "2025-01-21T20:18:16Z",
+          "updatedAt": "2025-01-21T20:18:16Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> +1 I want to add normative text about COSE/JOSE use.\n\nWFM too\n\n> I'm also interested in each cmwc_t imposing its own requirements on protected and unprotected headers.\n\nYou mean something like:\n\n_\"Specific cmwc_t values MAY impose further requirements on the composition of COSE headers.\"_\n\n?\n\n> As a baseline I'd require the following protected headers\n> \n> For COSE, require COSE_Sign1 and headers\n> \n> ```\n>   &(alg: 1) => int\n>   &(content-type: 3) => \"application/cmw+cbor\"\n\nOK\n\n> ```\n>   &(kid: 4) => bstr\n> ```\n\nNot sure about this.  See also the discussion at https://github.com/ietf-rats-wg/draft-ietf-rats-corim/issues/363\n\n> For JOSE, require JWS compact serialization and headers\n> \n> ```\n>   \"alg\" => text\n>   \"cty\" => \"application/cmw+json\"\n>   \"kid\" => text\n> ```\n\nditto (kid)\n\n> We can call these application/cmw+cose and application/cmw+jose, both with a cmwc_t parameter. I'm not particularly confident about the `+jose` versus `+jws` versus `-jws+json` naming though. My preference is just `+jose` even if it's not intended for JWE.\n\nCurrently, `+jose` is not a registered [SSS](https://www.iana.org/assignments/media-type-structured-suffix/media-type-structured-suffix.xhtml).\nWe could request it via the CMW document, like we did for +cwt in the [EAT media-types I-D](https://www.ietf.org/archive/id/draft-ietf-rats-eat-media-type-12.html#section-6.1)\n\n\n",
+          "createdAt": "2025-01-22T12:40:30Z",
+          "updatedAt": "2025-01-22T12:40:30Z"
+        }
+      ]
     },
     {
       "number": 159,
@@ -2232,11 +2269,13 @@
       "state": "OPEN",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "thomas-fossati"
+      ],
       "labels": [],
       "body": "Allowed types for `__cmwc_t` values are:\r\n* absolute (i.e., non-relative) OIDs\r\n* URIs \r\n\r\nNote that a (URI) relative reference can be any string (more or less), including the empty one.\r\n\r\nBesides, a relative OID in dot-decimal notation (e.g., `.2.3.4`) parses OK as a relative reference, making the restriction we put on OID a bit moot.\r\n\r\nThirdly, it is completely undetermined what URI would be the base to resolve a relative form.\r\n\r\nFor these reasons, I advise we make URIs absolute too.\r\n\r\n\r\n\r\n\r\n",
       "createdAt": "2025-01-09T11:49:29Z",
-      "updatedAt": "2025-01-20T18:07:38Z",
+      "updatedAt": "2025-01-22T13:06:31Z",
       "closedAt": null,
       "comments": [
         {
@@ -2256,11 +2295,13 @@
       "state": "OPEN",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "thomas-fossati"
+      ],
       "labels": [],
       "body": "Today, I was made aware that one cannot blindly import ABNF via `.abnf/.cat` in their CDDL files (as we do with RFC9193's `Content-Type`).\nOne should also pay attention to interactions between nested parsers.\n\nThe relevant paragraph of RFC 9682 (which Carsten pointed me to) is the following:\n\n> Note that this approach also works well with the use of byte strings\n> in Section 3 of [RFC9165].  _It does require some care when copying-\n> and-pasting into CDDL models from ABNF that contains single quotes\n> (which may also hide as apostrophes in comments); these need to be\n> escaped or possibly replaced by %x27._\n>\n> **Note 1**: Section 3 of [RFC9165] is `.abnf`\n> **Note 2**: The prose above should warn to do the same thing for backslash (%5C).\n\n\nTherefore, our\n```abnf\nquoted-pair    = \"\\\" ( SP / VCHAR )\n```\nneeds to be escaped, as in:\n```abnf\nquoted-pair    = \"\\\\\" ( SP / VCHAR )\n```",
       "createdAt": "2025-01-20T21:25:05Z",
-      "updatedAt": "2025-01-20T21:25:39Z",
+      "updatedAt": "2025-01-22T13:06:25Z",
       "closedAt": null,
       "comments": []
     }
@@ -10310,6 +10351,128 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 161,
+      "id": "PR_kwDOIGCt2M6IiQXg",
+      "title": "fix: add missing escape in .abnf'd quoted-pair",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/161",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #160",
+      "createdAt": "2025-01-21T19:19:32Z",
+      "updatedAt": "2025-01-22T08:33:16Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "16bcbd16e87a1fa053f4cb2128e8f98960338949",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "mediatype-fix",
+      "headRefOid": "3413371f44887f8f5cefb6a55fc6ddf89425b7b5",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze ",
+          "createdAt": "2025-01-21T19:19:54Z",
+          "updatedAt": "2025-01-21T19:19:54Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6Y68-s",
+          "commit": {
+            "abbreviatedOid": "3413371"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-21T20:05:36Z",
+          "updatedAt": "2025-01-21T20:05:36Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Do you not mean \u201c\\\u201d\u201d?",
+              "createdAt": "2025-01-21T20:05:36Z",
+              "updatedAt": "2025-01-21T20:05:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6Y7Ds4",
+          "commit": {
+            "abbreviatedOid": "3413371"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-01-21T20:21:58Z",
+          "updatedAt": "2025-01-21T20:21:58Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6Y-eUI",
+          "commit": {
+            "abbreviatedOid": "3413371"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-22T08:33:16Z",
+          "updatedAt": "2025-01-22T08:33:16Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "no, I don't",
+              "createdAt": "2025-01-22T08:33:16Z",
+              "updatedAt": "2025-01-22T08:33:16Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 162,
+      "id": "PR_kwDOIGCt2M6IoFA3",
+      "title": "`__cmwc_t` URIs are absolute",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/162",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #159",
+      "createdAt": "2025-01-22T13:05:53Z",
+      "updatedAt": "2025-01-22T13:06:03Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "16bcbd16e87a1fa053f4cb2128e8f98960338949",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "abs-uri-ty",
+      "headRefOid": "6287445db42b41f920800715696344cbd2b8f2b1",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze ",
+          "createdAt": "2025-01-22T13:06:02Z",
+          "updatedAt": "2025-01-22T13:06:02Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
