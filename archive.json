@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-23T00:50:42.623032+00:00",
+  "timestamp": "2025-01-26T00:52:00.338812+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2302,6 +2302,22 @@
       "body": "Today, I was made aware that one cannot blindly import ABNF via `.abnf/.cat` in their CDDL files (as we do with RFC9193's `Content-Type`).\nOne should also pay attention to interactions between nested parsers.\n\nThe relevant paragraph of RFC 9682 (which Carsten pointed me to) is the following:\n\n> Note that this approach also works well with the use of byte strings\n> in Section 3 of [RFC9165].  _It does require some care when copying-\n> and-pasting into CDDL models from ABNF that contains single quotes\n> (which may also hide as apostrophes in comments); these need to be\n> escaped or possibly replaced by %x27._\n>\n> **Note 1**: Section 3 of [RFC9165] is `.abnf`\n> **Note 2**: The prose above should warn to do the same thing for backslash (%5C).\n\n\nTherefore, our\n```abnf\nquoted-pair    = \"\\\" ( SP / VCHAR )\n```\nneeds to be escaped, as in:\n```abnf\nquoted-pair    = \"\\\\\" ( SP / VCHAR )\n```",
       "createdAt": "2025-01-20T21:25:05Z",
       "updatedAt": "2025-01-22T13:06:25Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 163,
+      "id": "I_kwDOIGCt2M6ncCkb",
+      "title": "dropping tunnels",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/163",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This is the synopsis of a very long side discussion with @laurencelundblade.\n\nTL;DR: tunnels are not needed.\n\nTo support the case where the sub-attester and lead-attester implement incompatible encodings, it is sufficient for the sub to convey the full media-type information to the lead so that the latter can assemble the wrapping CMW using the lead-supported encoding before adding it to the collection.\n\nFor example, with a JSON lead and a CBOR sub that produces evidence as UCCS EAT (e.g., `{10:h'ffff'}`), instead of the tunnel:\n```json\n{\n  \"sub\": [ \"#cmw-c2j-tunnel\", \"gngYYXBwbGljYXRpb24vZWF0LXVjcytjYm9yoQpC//8\" ],\n\n  \"moresubs\": \"...\"\n}\n```\n(where the tunnel value is the b64u of the CBOR encoding of  `[ \"application/eat-ucs+cbor\", {10:h'ffff'} ]`), a more straightforward:\n```json\n{\n  \"sub\": [ \"application/eat-ucs+cbor\", \"oQpC//8\" ],\n\n  \"moresubs\": \"...\"\n}\n```\ncan be obtained.\n\nLaurence's key observation is that the API between lead and sub must _in any case_ convey some sort of typing information (at least the serialisation format JSON or CBOR, to know which one of `c2j` or `j2c` to use, or not use), e.g.:\n```golang\nfunc CollectCMWEvidence(sub Attester) (serialisation CMWSerialisation, cmw []byte) {}\n```\nwhich is very similar to the \"Type & Blob\" API that would allow us to drop tunnels altogether:\n```golang\nfunc GetTypedEvidence(sub Attester) (mediaType string, blob []byte) {}\n```\n\n\n\n",
+      "createdAt": "2025-01-24T10:54:53Z",
+      "updatedAt": "2025-01-24T10:54:53Z",
       "closedAt": null,
       "comments": []
     }
@@ -10364,7 +10380,7 @@
       "labels": [],
       "body": "Fix #160",
       "createdAt": "2025-01-21T19:19:32Z",
-      "updatedAt": "2025-01-22T08:33:16Z",
+      "updatedAt": "2025-01-24T04:06:09Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "16bcbd16e87a1fa053f4cb2128e8f98960338949",
@@ -10437,6 +10453,19 @@
               "updatedAt": "2025-01-22T08:33:16Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6ZR35R",
+          "commit": {
+            "abbreviatedOid": "3413371"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-24T04:06:09Z",
+          "updatedAt": "2025-01-24T04:06:09Z",
+          "comments": []
         }
       ]
     },
