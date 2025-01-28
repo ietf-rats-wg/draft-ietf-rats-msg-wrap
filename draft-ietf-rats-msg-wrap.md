@@ -46,6 +46,7 @@ normative:
   RFC5280: pkix
   RFC6838: media-types
   RFC7252: coap
+  RFC7515: jws
   RFC7519: jwt
   STD90:
     -: json
@@ -354,6 +355,47 @@ func CMWTypeDemux(b []byte) (CMW, error) {
 }
 ~~~
 
+# Sign CBOR CMW using COSE Sign1 {#signed-cbor-cmw}
+
+A CBOR CMW can be signed using COSE {{-cose}}.
+A `signed-cbor-cmw` is a `COSE_Sign1` with the following layout:
+
+~~~ cddl
+{::include cddl/signed-cbor-cmw.cddl}
+~~~
+
+The payload MUST be the CBOR-encoded Tag, Record or Collection CMW.
+
+~~~ cddl
+{::include cddl/signed-cbor-cmw-headers.cddl}
+~~~
+
+The protected header MUST include the signature algorithm identifier.
+The protected header MUST include the content type `application/cmw+cbor`.
+Other header parameters MAY be added to the header buckets, for example a `kid` that identifies the signing key.
+
+# Sign JSON CMW using JWS {#signed-json-cmw}
+
+A JSON CMW can be signed using JSON Web Signature (JWS) {{-jws}}.
+A `signed-json-cmw` is a JWS object with the following layout:
+
+~~~ cddl
+{::include cddl/signed-json-cmw.cddl}
+~~~
+
+The payload MUST be the JSON-encoded Record or Collection CMW.
+
+~~~ cddl
+{::include cddl/signed-json-cmw-headers.cddl}
+~~~
+
+The protected header MUST include the signature algorithm identifier.
+The protected header MUST include the content type `application/cmw+cbor`.
+Other header parameters MAY be added to the header buckets, for example a `kid` that identifies the signing key.
+
+For clarity, the above uses the Flattened JSON Serialization ({{Section 7.2.2 of -jws}}).
+However, the Compact Serialization ({{Section 3.1 of -jws}}) can also be used.
+
 # Transporting CMW in COSE and JOSE Web Tokens {#webtokens}
 
 To facilitate the embedding of CMWs and CMW collections in CBOR-based protocols and web APIs, this document defines two `"cmw"` claims for use with JSON Web Tokens (JWT) and CBOR Web Tokens (CWT).
@@ -598,7 +640,7 @@ RATS conceptual messages are typically secured using cryptography.
 If the messages are already protected, then there are no additional security requirements imposed by the introduction of this encapsulation.
 If an adversary tries to modify the payload encapsulation, it will result in incorrect processing of the encapsulated message and lead to an error.
 If the messages are not protected, additional security must be added at a different layer.
-As an example, a `cbor-record` containing an UCCS (Unprotected CWT Claims Sets) {{-rats-uccs}} can be signed using COSE Sign1 {{-cose}}.
+As an example, a `cbor-record` containing an UCCS (Unprotected CWT Claims Sets) {{-rats-uccs}} can be signed as described in {{signed-cbor-cmw}}.
 
 ## Collections {#seccons-coll}
 
