@@ -164,16 +164,9 @@ This document reuses the terms defined in {{Section 2 of -senml-cf}}
 
 # Conceptual Message Wrappers
 
-A RATS Conceptual Message Wrapper (CMW) has a tree structure of leaves that contain payload messages associated with their content type.
-The two leaf node types are:
-
-* A CMW using a CBOR or JSON record ({{type-n-val}});
-* A CMW based on CBOR tags ({{cbor-tag}}).
-
-Intermediate tree nodes are either:
-
-* A CMW "collection" type that holds together multiple CMW items ({{cmw-coll}});
-* A CMW "tunnel" type that allows transporting CBOR CMWs in JSON collections and vice-versa ({{cmw-tunnel}}).
+A RATS Conceptual Message Wrapper (CMW) has a tree structure.
+Leaf nodes are of type "record" ({{type-n-val}}), or "CBOR tag" ({{cbor-tag}}).
+Intermediate nodes are of type "collection" ({{cmw-coll}}; they hold together multiple CMW items.
 
 The following snippet outlines the productions associated with the top-level types.
 
@@ -267,7 +260,7 @@ Although originally designed to support layered Attester and composite device us
 For instance, collections may be used to group Endorsements, Reference Values, Attestation Results, and more.
 A single CMW collection can contain a mix of different message types, and it can also be used to carry messages related to multiple devices simultaneously.
 
-The CMW collection ({{fig-cddl-collection}}) is defined as a CBOR map or JSON object with CMW values, either native or "tunnelled" ({{cmw-tunnel}}).
+The CMW collection ({{fig-cddl-collection}}) is defined as a CBOR map or JSON object containing CMW values.
 The position of a `cmw` entry in the `cmw-collection` is not significant.
 Labels can be strings (or integers in the CBOR serialization) that serve as a mnemonic for different conceptual messages in the collection.
 
@@ -298,34 +291,6 @@ MUST be provided by the attestation technology. For additional security consider
 A CMW Collection's tree structure is not required to be a spanning tree of the system's composite Attester topology.
 If the labels carry semantic content for a Verifier (e.g. to improve Verifier performance or aid human comprehension), the collection SHOULD be integrity protected.
 For example, the collection can be integrity protected by including it in a signed token such as a CWT or JWT.
-
-### CMW Tunnel {#cmw-tunnel}
-
-The CMW tunnel type ({{fig-cddl-tunnel}}) allows for moving a CMW in one serialization format, either JSON or CBOR, into a collection that uses the opposite serialization format.
-
-Both tunnel types are arrays with two elements.
-The first element, a fixed text string starting with a `#`, acts as a sentinel value.
-The `#`, which is not an acceptable start symbol for the `Content-Type` production ({{collected-cddl}}), makes it possible to disambiguate a CMW tunnel from a CMW record.
-
-~~~ cddl
-{::include cddl/cmw-tunnel.cddl}
-~~~
-{: #fig-cddl-tunnel artwork-align="left"
-   title="CDDL definition of the CMW tunnel format"}
-
-The conversion algorithms are described in the following subsections.
-
-#### CBOR-to-JSON
-
-The CBOR byte string of the serialised CBOR CMW is encoded as Base64 using the URL and filename safe alphabet ({{Section 5 of -base64}}) without padding.
-The obtained string is added as the second element of the `c2j-tunnel` array.
-The `c2j-tunnel` array is serialized as JSON.
-
-#### JSON-to-CBOR
-
-The UTF-8 string of the serialized JSON CMW is encoded as a CBOR byte string (Major type 2).
-The byte string is added as the second element of the `j2c-tunnel` array.
-The `j2c-tunnel` array is serialized as CBOR.
 
 ## Decapsulation Algorithm
 
@@ -448,7 +413,7 @@ END
 
 Section 6.1.8 of {{DICE-arch}} specifies the ConceptualMessageWrapper (CMW) format and its corresponding object identifier.
 The CMW format outlined in {{DICE-arch}} permits only a subset of the CMW grammar defined in this document.
-In particular, the tunnel and collection formats cannot be encoded using DICE CMWs.
+In particular, the collection format cannot be encoded using DICE CMWs.
 
 # Examples
 
@@ -525,7 +490,6 @@ lication/signed-corim+cbor"
 ## CBOR Collection
 
 The following example is a CBOR collection that assembles conceptual messages from three attesters: Evidence for attesters A and B and Attestation Results for attester C.
-Since attester C returns Attestation Results as CMW in JSON record format, the JSON record needs to be tunnelled.
 It is given an explicit collection type using the URI form.
 
 ~~~
@@ -535,7 +499,6 @@ It is given an explicit collection type using the URI form.
 ## JSON Collection
 
 The following example is a JSON collection that assembles Evidence from two attesters.
-Since attester B outputs Evidence as CMW in CMW record format, the CBOR record needs to be tunnelled.
 
 ~~~
 {::include cddl/collection-example-2.json}

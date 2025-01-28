@@ -7,7 +7,8 @@
   ],
   / attester B / 1: 1668576935(h'2347da55'),
   / attester C / 2: [
-    "#cmw-j2c-tunnel",
-    '[ "application/eat+jwt", "Li4u", 8 ]'
+    "application/eat+jwt",
+    h'2e2e2e',
+    8
   ]
 }

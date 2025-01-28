@@ -6,9 +6,10 @@
       "e30K",
       4
     ],
-    "attester B (tunnelled)": [
-      "#cmw-c2j-tunnel",
-      "g3gYYXBwbGljYXRpb24vZWF0LXVjcytjYm9yQaAE"
+    "attester B": [
+      "application/eat-ucs+cbor",
+      "oA",
+      4
     ]
   },
   "iss": "evidence collection daemon",
