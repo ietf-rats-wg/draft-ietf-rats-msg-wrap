@@ -1715,7 +1715,7 @@ A <code>signed-cbor-cmw</code> is a <code>COSE_Sign1</code> with the following l
 <div class="lang-cddl sourcecode" id="section-4-2">
 <pre>
 signed-cbor-cmw = [
-  protected: bytes .cbor signed-cbor-cmw-protected-hrd
+  protected: bytes .cbor signed-cbor-cmw-protected-hdr
   unprotected: signed-cbor-cmw-unprotected-hdr
   payload: bytes .cbor cbor-cmw
   signature: bytes
@@ -2178,7 +2178,7 @@ VCHAR     =  %x21-7E           ; printable ASCII (no SP)
 '
 
 signed-cbor-cmw = [
-  protected: bytes .cbor signed-cbor-cmw-protected-hrd
+  protected: bytes .cbor signed-cbor-cmw-protected-hdr
   unprotected: signed-cbor-cmw-unprotected-hdr
   payload: bytes .cbor cbor-cmw
   signature: bytes

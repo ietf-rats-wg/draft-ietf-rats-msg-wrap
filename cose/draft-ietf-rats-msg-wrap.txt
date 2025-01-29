@@ -477,7 +477,7 @@ Table of Contents
    COSE_Sign1 with the following layout:
 
    signed-cbor-cmw = [
-     protected: bytes .cbor signed-cbor-cmw-protected-hrd
+     protected: bytes .cbor signed-cbor-cmw-protected-hdr
      unprotected: signed-cbor-cmw-unprotected-hdr
      payload: bytes .cbor cbor-cmw
      signature: bytes
@@ -871,7 +871,7 @@ lication/signed-corim+cbor"
    '
 
    signed-cbor-cmw = [
-     protected: bytes .cbor signed-cbor-cmw-protected-hrd
+     protected: bytes .cbor signed-cbor-cmw-protected-hdr
      unprotected: signed-cbor-cmw-unprotected-hdr
      payload: bytes .cbor cbor-cmw
      signature: bytes
