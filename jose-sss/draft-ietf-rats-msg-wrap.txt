@@ -111,17 +111,19 @@ Table of Contents
    12. IANA Considerations
      12.1.  CWT cmw Claim Registration
      12.2.  JWT cmw Claim Registration
-     12.3.  CBOR Tag Registration
-     12.4.  RATS Conceptual Message Wrapper (CMW) Indicators Registry
-       12.4.1.  Instructions for the Designated Expert
-       12.4.2.  Structure of Entries
-       12.4.3.  Provisional Registration
-     12.5.  Media Types
-       12.5.1.  application/cmw+cbor
-       12.5.2.  application/cmw+json
-       12.5.3.  application/cmw+cose
-     12.6.  CoAP Content Formats
-     12.7.  New SMI Numbers Registrations
+     12.3.  +jws Structured Syntax Suffix
+       12.3.1.  Registry Contents
+     12.4.  CBOR Tag Registration
+     12.5.  RATS Conceptual Message Wrapper (CMW) Indicators Registry
+       12.5.1.  Instructions for the Designated Expert
+       12.5.2.  Structure of Entries
+       12.5.3.  Provisional Registration
+     12.6.  Media Types
+       12.6.1.  application/cmw+cbor
+       12.6.2.  application/cmw+json
+       12.6.3.  application/cmw+cose
+     12.7.  CoAP Content Formats
+     12.8.  New SMI Numbers Registrations
    13. References
      13.1.  Normative References
      13.2.  Informative References
@@ -297,7 +299,7 @@ Table of Contents
       Values and Endorsements within the same application/signed-
       corim+cbor), or if the same profile identifier is shared by
       different conceptual messages.  Future specifications may add new
-      values to the ind field; see Section 12.4.
+      values to the ind field; see Section 12.5.
 
 3.2.  CMW CBOR Tags
 
@@ -1034,7 +1036,32 @@ lication/signed-corim+cbor"
 
    *  Specification Document(s): Section 3.1 and Section 3.3 of RFCthis
 
-12.3.  CBOR Tag Registration
+12.3.  +jws Structured Syntax Suffix
+
+   IANA is requested to register the +jws structured syntax suffix in
+   the "Structured Syntax Suffixes" registry
+   [IANA.media-type-structured-suffix] in the manner described in
+   [RFC6838], which can be used to indicate that the media type is
+   encoded as JSON Web Signature (JWS) [RFC7515].
+
+12.3.1.  Registry Contents
+
+   Name:  JSON Web Signature (JWS)
+   +suffix:  +jws
+   References:  [RFC7515]
+   Encoding Considerations:  8bit; values are represented as a JSON
+      Object or as a series of base64url-encoded values each separated
+      from the next by a single period ('.') character.
+   Interoperability Considerations:  n/a
+   Fragment Identifier Considerations:  n/a
+   Security Considerations:  See Section 10 of [RFC7515]
+   Contact:  RATS WG mailing list (rats@ietf.org), or IETF Security Area
+      (saag@ietf.org)
+   Author/Change Controller:  Remote ATtestation ProcedureS (RATS)
+      Working Group.  The IETF has change control over this
+      registration.
+
+12.4.  CBOR Tag Registration
 
    IANA is requested to add the following tag to the "CBOR Tags"
    [IANA.cbor-tags] registry.
@@ -1050,7 +1077,7 @@ lication/signed-corim+cbor"
 
                                   Table 1
 
-12.4.  RATS Conceptual Message Wrapper (CMW) Indicators Registry
+12.5.  RATS Conceptual Message Wrapper (CMW) Indicators Registry
 
    This specification defines a new "RATS Conceptual Message Wrapper
    (CMW) Indicators" registry, with the policy "Expert Review"
@@ -1062,14 +1089,14 @@ lication/signed-corim+cbor"
    This registry is to be added to the Remote Attestation Procedures
    (RATS) registry group at [IANA.rats].
 
-12.4.1.  Instructions for the Designated Expert
+12.5.1.  Instructions for the Designated Expert
 
    The expert is instructed to add the values incrementally.
 
    Acceptable values are those corresponding to RATS Conceptual Messages
    defined by the RATS architecture [RFC9334] and any of its updates.
 
-12.4.2.  Structure of Entries
+12.5.2.  Structure of Entries
 
    Each entry in the registry must include:
 
@@ -1102,7 +1129,7 @@ lication/signed-corim+cbor"
 
              Table 2: CMW Indicators Registry Initial Contents
 
-12.4.3.  Provisional Registration
+12.5.3.  Provisional Registration
 
    Before the creation of the registry by IANA, new codepoints can be
    added to the provisional CMW Indicators registry (https://github.com/
@@ -1116,7 +1143,7 @@ lication/signed-corim+cbor"
    the permanent registry, which is expected to coincide with the
    publication of the current document.
 
-12.5.  Media Types
+12.6.  Media Types
 
    IANA is requested to add the following media types to the "Media
    Types" registry [IANA.media-types].
@@ -1135,7 +1162,7 @@ lication/signed-corim+cbor"
 
                          Table 3: CMW Media Types
 
-12.5.1.  application/cmw+cbor
+12.6.1.  application/cmw+cbor
 
    Type name:  application
    Subtype name:  cmw+cbor
@@ -1163,7 +1190,7 @@ lication/signed-corim+cbor"
    Author/Change controller:  IETF
    Provisional registration:  no
 
-12.5.2.  application/cmw+json
+12.6.2.  application/cmw+json
 
    Type name:  application
    Subtype name:  cmw+json
@@ -1191,7 +1218,7 @@ lication/signed-corim+cbor"
    Author/Change controller:  IETF
    Provisional registration:  no
 
-12.5.3.  application/cmw+cose
+12.6.3.  application/cmw+cose
 
    Type name:  application
    Subtype name:  cmw+cose
@@ -1217,7 +1244,7 @@ lication/signed-corim+cbor"
    Author/Change controller:  IETF
    Provisional registration:  no
 
-12.6.  CoAP Content Formats
+12.7.  CoAP Content Formats
 
    IANA is requested to register the following Content-Format numbers in
    the "CoAP Content-Formats" registry, within the "Constrained RESTful
@@ -1242,7 +1269,7 @@ lication/signed-corim+cbor"
 
    If possible, TBD1 and TBD2 should be assigned in the 256..9999 range.
 
-12.7.  New SMI Numbers Registrations
+12.8.  New SMI Numbers Registrations
 
    IANA is requested to assign an object identifier (OID) for the CMW
    extension defined in Section 7 in the "SMI Security for PKIX
@@ -1293,6 +1320,11 @@ lication/signed-corim+cbor"
 
    [IANA.jwt] IANA, "JSON Web Token (JWT)",
               <https://www.iana.org/assignments/jwt>.
+
+   [IANA.media-type-structured-suffix]
+              IANA, "Structured Syntax Suffixes",
+              <https://www.iana.org/assignments/media-type-structured-
+              suffix>.
 
    [IANA.media-types]
               IANA, "Media Types",
