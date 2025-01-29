@@ -122,6 +122,7 @@ Table of Contents
        12.6.1.  application/cmw+cbor
        12.6.2.  application/cmw+json
        12.6.3.  application/cmw+cose
+       12.6.4.  application/cmw+jws
      12.7.  CoAP Content Formats
      12.8.  New SMI Numbers Registrations
    13. References
@@ -1159,6 +1160,8 @@ lication/signed-corim+cbor"
      +----------+----------------------+----------------------------+
      | cmw+cose | application/cmw+cose | Section 4 of RFCthis       |
      +----------+----------------------+----------------------------+
+     | cmw+jws  | application/cmw+jws  | Section 5 of RFCthis       |
+     +----------+----------------------+----------------------------+
 
                          Table 3: CMW Media Types
 
@@ -1244,6 +1247,33 @@ lication/signed-corim+cbor"
    Author/Change controller:  IETF
    Provisional registration:  no
 
+12.6.4.  application/cmw+jws
+
+   Type name:  application
+   Subtype name:  cmw+jws
+   Required parameters:  n/a
+   Optional parameters:  cmwc_t (CMW collection type in string format.
+      OIDs must use the dotted-decimal notation.  The parameter value is
+      case-insensitive.  It MUST NOT be used for CMW that are not
+      collections.)
+   Encoding considerations:  8bit; values are represented as a JSON
+      Object or as a series of base64url-encoded values each separated
+      from the next by a single period ('.') character.
+   Security considerations:  Section 11 of RFCthis
+   Interoperability considerations:  n/a
+   Published specification:  RFCthis
+   Applications that use this media type:  Attesters, Verifiers,
+      Endorsers and Reference-Value providers, Relying Parties that need
+      to transfer CMW payloads over HTTP(S), CoAP(S), and other
+      transports.
+   Fragment identifier considerations:  n/a
+   Person & email address to contact for further information:  RATS WG
+      mailing list (rats@ietf.org)
+   Intended usage:  COMMON
+   Restrictions on usage:  none
+   Author/Change controller:  IETF
+   Provisional registration:  no
+
 12.7.  CoAP Content Formats
 
    IANA is requested to register the following Content-Format numbers in
@@ -1263,6 +1293,9 @@ lication/signed-corim+cbor"
    +--------------+----------------+------+----------------------------+
    | application/ | -              | TBD3 | Section 4 of RFCthis       |
    | cmw+cose     |                |      |                            |
+   +--------------+----------------+------+----------------------------+
+   | application/ | -              | TBD4 | Section 5 of RFCthis       |
+   | cmw+jws      |                |      |                            |
    +--------------+----------------+------+----------------------------+
 
                      Table 4: New CoAP Content Formats
