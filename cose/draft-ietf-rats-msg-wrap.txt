@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 1 August 2025                                             Intel
+Expires: 2 August 2025                                             Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                         28 January 2025
+                                                         29 January 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 August 2025.
+   This Internet-Draft will expire on 2 August 2025.
 
 Copyright Notice
 
@@ -485,7 +485,7 @@ Table of Contents
 
    The payload MUST be the CBOR-encoded Tag, Record or Collection CMW.
 
-   signed-cbor-cmw-protected-hrd = {
+   signed-cbor-cmw-protected-hdr = {
      1 => int                    ; alg
      2 => "application/cmw+cbor" ; cty
      * cose.label => cose.values
@@ -877,7 +877,7 @@ lication/signed-corim+cbor"
      signature: bytes
    ]
 
-   signed-cbor-cmw-protected-hrd = {
+   signed-cbor-cmw-protected-hdr = {
      1 => int                    ; alg
      2 => "application/cmw+cbor" ; cty
      * cose.label => cose.values
