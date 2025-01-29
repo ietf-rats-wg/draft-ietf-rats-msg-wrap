@@ -683,6 +683,41 @@ IANA is requested to add a new `cmw` claim to the "JSON Web Token Claims" regist
 * Change Controller: IETF
 * Specification Document(s): {{type-n-val}} and {{cmw-coll}} of {{&SELF}}
 
+## `+jws` Structured Syntax Suffix
+
+IANA is requested to register the `+jws` structured syntax suffix in the "Structured Syntax Suffixes" registry {{!IANA.media-type-structured-suffix}} in the manner described in {{-media-types}}, which can be used to indicate that the media type is encoded as JSON Web Signature (JWS) {{-jws}}.
+
+### Registry Contents
+
+{:compact}
+Name:
+: JSON Web Signature (JWS)
+
++suffix:
+: +jws
+
+References:
+: {{-jws}}
+
+Encoding Considerations:
+: 8bit; values are represented as a JSON Object or as a series of base64url-encoded values each separated from the next by a single period ('.') character.
+
+Interoperability Considerations:
+: n/a
+
+Fragment Identifier Considerations:
+: n/a
+
+Security Considerations:
+: See {{Section 10 of -jws}}
+
+Contact:
+: RATS WG mailing list (rats@ietf.org), or IETF Security Area (saag@ietf.org)
+
+Author/Change Controller:
+: Remote ATtestation ProcedureS (RATS) Working Group.
+  The IETF has change control over this registration.
+
 ## CBOR Tag Registration {#iana-cbor-tag}
 
 IANA is requested to add the following tag to the "CBOR Tags" {{!IANA.cbor-tags}} registry.
