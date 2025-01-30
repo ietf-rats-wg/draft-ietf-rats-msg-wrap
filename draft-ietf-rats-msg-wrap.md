@@ -648,6 +648,41 @@ IANA is requested to add a new `cmw` claim to the "JSON Web Token Claims" regist
 * Change Controller: IETF
 * Specification Document(s): {{type-n-val}} and {{cmw-coll}} of {{&SELF}}
 
+## `+jws` Structured Syntax Suffix
+
+IANA is requested to register the `+jws` structured syntax suffix in the "Structured Syntax Suffixes" registry {{!IANA.media-type-structured-suffix}} in the manner described in {{-media-types}}, which can be used to indicate that the media type is encoded as JSON Web Signature (JWS) {{-jws}}.
+
+### Registry Contents
+
+{:compact}
+Name:
+: JSON Web Signature (JWS)
+
++suffix:
+: +jws
+
+References:
+: {{-jws}}
+
+Encoding Considerations:
+: 8bit; values are represented as a JSON Object or as a series of base64url-encoded values each separated from the next by a single period ('.') character.
+
+Interoperability Considerations:
+: n/a
+
+Fragment Identifier Considerations:
+: n/a
+
+Security Considerations:
+: See {{Section 10 of -jws}}
+
+Contact:
+: RATS WG mailing list (rats@ietf.org), or IETF Security Area (saag@ietf.org)
+
+Author/Change Controller:
+: Remote ATtestation ProcedureS (RATS) Working Group.
+  The IETF has change control over this registration.
+
 ## CBOR Tag Registration {#iana-cbor-tag}
 
 IANA is requested to add the following tag to the "CBOR Tags" {{!IANA.cbor-tags}} registry.
@@ -711,6 +746,8 @@ IANA is requested to add the following media types to the "Media Types" registry
 |-----------------|-------------------------|-----------|
 | `cmw+cbor` | `application/cmw+cbor` | {{type-n-val}}, {{cbor-tag}} and {{cmw-coll}} of {{&SELF}} |
 | `cmw+json` | `application/cmw+json` | {{type-n-val}} and {{cmw-coll}} of {{&SELF}} |
+| `cmw+cose` | `application/cmw+cose` | {{signed-cbor-cmw}} of {{&SELF}} |
+| `cmw+jws` | `application/cmw+jws` | {{signed-json-cmw}} of {{&SELF}} |
 {: #tab-mt-regs title="CMW Media Types"}
 
 ### `application/cmw+cbor`
@@ -811,6 +848,104 @@ Author/Change controller:
 Provisional registration:
 : no
 
+### `application/cmw+cose`
+
+{:compact}
+Type name:
+: application
+
+Subtype name:
+: cmw+cose
+
+Required parameters:
+: n/a
+
+Optional parameters:
+: `cmwc_t` (CMW collection type in string format.  OIDs must use the
+  dotted-decimal notation.  The parameter value is case-insensitive.  It MUST NOT be used for CMW that are not collections.)  Note that the `cose-type` parameter is explicitly not supported, as it is understood to be `"cose-sign1"`.
+
+Encoding considerations:
+: binary (CBOR)
+
+Security considerations:
+: {{seccons}} of {{&SELF}}
+
+Interoperability considerations:
+: n/a
+
+Published specification:
+: {{&SELF}}
+
+Applications that use this media type:
+: Attesters, Verifiers, Endorsers and Reference-Value providers, Relying Parties that need to transfer CMW payloads over HTTP(S), CoAP(S), and other transports.
+
+Fragment identifier considerations:
+: n/a
+
+Person & email address to contact for further information:
+: RATS WG mailing list (rats@ietf.org)
+
+Intended usage:
+: COMMON
+
+Restrictions on usage:
+: none
+
+Author/Change controller:
+: IETF
+
+Provisional registration:
+: no
+
+### `application/cmw+jws`
+
+{:compact}
+Type name:
+: application
+
+Subtype name:
+: cmw+jws
+
+Required parameters:
+: n/a
+
+Optional parameters:
+: `cmwc_t` (CMW collection type in string format.  OIDs must use the
+  dotted-decimal notation.  The parameter value is case-insensitive.  It MUST NOT be used for CMW that are not collections.)
+
+Encoding considerations:
+: 8bit; values are represented as a JSON Object or as a series of base64url-encoded values each separated from the next by a single period ('.') character.
+
+Security considerations:
+: {{seccons}} of {{&SELF}}
+
+Interoperability considerations:
+: n/a
+
+Published specification:
+: {{&SELF}}
+
+Applications that use this media type:
+: Attesters, Verifiers, Endorsers and Reference-Value providers, Relying Parties that need to transfer CMW payloads over HTTP(S), CoAP(S), and other transports.
+
+Fragment identifier considerations:
+: n/a
+
+Person & email address to contact for further information:
+: RATS WG mailing list (rats@ietf.org)
+
+Intended usage:
+: COMMON
+
+Restrictions on usage:
+: none
+
+Author/Change controller:
+: IETF
+
+Provisional registration:
+: no
+
 ## CoAP Content Formats
 
 IANA is requested to register the following Content-Format numbers in the "CoAP Content-Formats" registry, within the "Constrained RESTful Environments (CoRE) Parameters" registry group {{!IANA.core-parameters}}:
@@ -818,6 +953,8 @@ IANA is requested to register the following Content-Format numbers in the "CoAP 
 | Content-Type | Content Coding | ID | Reference |
 | application/cmw+cbor | - | TBD1 | {{type-n-val}}, {{cbor-tag}} and {{cmw-coll}} of {{&SELF}} |
 | application/cmw+json | - | TBD2 | {{type-n-val}} and {{cmw-coll}} of {{&SELF}} |
+| application/cmw+cose | - | TBD3 | {{signed-cbor-cmw}} of {{&SELF}} |
+| application/cmw+jws | - | TBD4 | {{signed-json-cmw}} of {{&SELF}} |
 {: align="left" title="New CoAP Content Formats"}
 
 If possible, TBD1 and TBD2 should be assigned in the 256..9999 range.
