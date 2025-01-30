@@ -47,7 +47,6 @@ SIGNED_CBOR_CMW_CDDL_FRAGS += cmw-start.cddl
 SIGNED_CBOR_CMW_CDDL_FRAGS += cmw-record.cddl
 SIGNED_CBOR_CMW_CDDL_FRAGS += cmw-cbor-tag.cddl
 SIGNED_CBOR_CMW_CDDL_FRAGS += cmw-collection.cddl
-SIGNED_CBOR_CMW_CDDL_FRAGS += cmw-tunnel.cddl
 SIGNED_CBOR_CMW_CDDL_FRAGS += common-types.cddl
 SIGNED_CBOR_CMW_CDDL_FRAGS += rfc9193.cddl
 
@@ -57,7 +56,6 @@ SIGNED_JSON_CMW_CDDL_FRAGS += cmw-start.cddl
 SIGNED_JSON_CMW_CDDL_FRAGS += cmw-record.cddl
 SIGNED_JSON_CMW_CDDL_FRAGS += cmw-cbor-tag.cddl
 SIGNED_JSON_CMW_CDDL_FRAGS += cmw-collection.cddl
-SIGNED_JSON_CMW_CDDL_FRAGS += cmw-tunnel.cddl
 SIGNED_JSON_CMW_CDDL_FRAGS += common-types.cddl
 SIGNED_JSON_CMW_CDDL_FRAGS += rfc9193.cddl
 
