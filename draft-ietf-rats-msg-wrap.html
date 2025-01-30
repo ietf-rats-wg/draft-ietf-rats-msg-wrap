@@ -2007,7 +2007,7 @@ tchar          = "!" / "#" / "$" / "%" / "&amp;" / "\'" / "*"
                / DIGIT / ALPHA
 quoted-string  = %x22 *( qdtext / quoted-pair ) %x22
 qdtext         = SP / %x21 / %x23-5B / %x5D-7E
-quoted-pair    = "\" ( SP / VCHAR )
+quoted-pair    = "\\" ( SP / VCHAR )
 
 Media-Type-Name = type-name "/" subtype-name
 
