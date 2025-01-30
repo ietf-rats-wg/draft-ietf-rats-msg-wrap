@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-28T00:50:50.690297+00:00",
+  "timestamp": "2025-01-30T00:49:33.133280+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2093,7 +2093,7 @@
       "labels": [],
       "body": "This is to reopen #133 \r\n\r\nThe double meaning of CMW CBOR Tag wasn't fixed (3.2 vs 10.3)\r\n\r\nPlease find an alternate to \"CMW CBOR Tag\". It sounds too much like what is in 10.3 and is out of line with common use.\r\n\r\nThe grammar of the first sentence isn't right.\r\n\r\nNote that I was not asked to sign off on the issue even though I was the one that opened it.",
       "createdAt": "2024-11-22T18:35:56Z",
-      "updatedAt": "2025-01-22T13:20:44Z",
+      "updatedAt": "2025-01-29T10:00:35Z",
       "closedAt": null,
       "comments": [
         {
@@ -2116,6 +2116,20 @@
           "body": "@laurencelundblade, see \ud83d\udc46.  Would that work for you?  Do you have a better proposal?",
           "createdAt": "2025-01-22T13:20:42Z",
           "updatedAt": "2025-01-22T13:20:42Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> \"CMW TN\"\n\nI prefer \"CMW TN Tag\" to distinguish it as a \"tag\" since other text uses either record, collection, or tag.",
+          "createdAt": "2025-01-28T18:57:03Z",
+          "updatedAt": "2025-01-28T18:57:03Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > \"CMW TN\"\n> \n> I prefer \"CMW TN Tag\" to distinguish it as a \"tag\" since other text uses either record, collection, or tag.\n\nI am fine with it. ",
+          "createdAt": "2025-01-29T10:00:34Z",
+          "updatedAt": "2025-01-29T10:00:34Z"
         }
       ]
     },
@@ -2195,7 +2209,7 @@
       "labels": [],
       "body": "Section 5 of CMW defines an OID to put CMW's into X.509 (which generalizes to any ASN.1 messages).\r\n\r\nThe problem with this is that to put an ASN.1 format token in an ASN.1 format message, you must have a JSON or CBOR layer.\r\n\r\nFor example, to put an ASN.1 format attestation token like those that are being worked on by Mike O, in an X.509 cert, you'd have to have a small CBOR or JSON layer for the CMW Record.\r\n\r\nRight now, a CMW Record is only JSON and CBOR. It seems super useful to define a CMW record in ASN.1 format. See discussion on the RATS list.\r\n\r\nInserting a small CBOR or JSON layer may not be completely unworkable, but:\r\n- There are very particular ASN.1-only environments that are important in the rats ecosystem\r\n- We will probably define an ASN.1 CMW record (or \"receptacle\") because it is super general and useful; this would make section 5 a bit redundant.\r\n- The special case syntax design in section 5 is a bit similar to the special case design of EAT submods that we've come to realize is too complex",
       "createdAt": "2024-11-27T20:47:42Z",
-      "updatedAt": "2025-01-22T13:14:29Z",
+      "updatedAt": "2025-01-28T19:02:24Z",
       "closedAt": null,
       "comments": [
         {
@@ -2204,6 +2218,13 @@
           "body": "The addition of a CMW in ASN.1 form is not in mutual exclusion with `id-pe-cmw`.\n\nI proposed an ASN.1 CMW - see [wiki](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/wiki/CMW-in-ASN.1) - which hasn't got much traction AFAICT.\n\nNote also that such CMW could be easily specified in a subsequent document.\nMy suggestion is we leave the status quo (i.e., JSON/CBOR CMW and `id-pe-cmw` for X.509 plug-in), and if people do care about ASN.1, we will draft a new document with the wiki proposal as its starting point.\n",
           "createdAt": "2025-01-22T13:14:27Z",
           "updatedAt": "2025-01-22T13:14:27Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Wouldn't it be easy to extend at the CHOICE:\n\nCMW ::= CHOICE {\n    json UTF8String,\n    cbor OCTET STRING\n    **der OCTET STRING**\n}",
+          "createdAt": "2025-01-28T19:02:23Z",
+          "updatedAt": "2025-01-28T19:02:23Z"
         }
       ]
     },
@@ -2235,7 +2256,7 @@
       "labels": [],
       "body": "The amount of text added to CWT that says how COSE is supported is pretty small. The text that adds COSE to CoSWID is larger, but I don't think all the stuff CoSWID did is necessary.\r\n\r\nIt seems very clear that COSE and JOSE are the way to do attestation security, the same as EAT does. There's probably no controversy over it or much debate.\r\n\r\nSince CMW is very clearly an evidence format, it seems kind of important to have security.\r\n\r\nNote also recent discussion on TLS and composite attestation on the rats mailing list. It seems like COSE/JOSE-secured evidence is useful and sometimes preferable for composite attestation evidence compared to TLS.\r\n\r\nIt seems useful for the rats community to know exactly what security should be used to promote interoperability. It's probably not helpful for 1,000 flowers to bloom (lots of attestation security mechanism).",
       "createdAt": "2024-12-04T05:51:32Z",
-      "updatedAt": "2025-01-22T12:40:31Z",
+      "updatedAt": "2025-01-29T09:54:02Z",
       "closedAt": null,
       "comments": [
         {
@@ -2258,6 +2279,27 @@
           "body": "> +1 I want to add normative text about COSE/JOSE use.\n\nWFM too\n\n> I'm also interested in each cmwc_t imposing its own requirements on protected and unprotected headers.\n\nYou mean something like:\n\n_\"Specific cmwc_t values MAY impose further requirements on the composition of COSE headers.\"_\n\n?\n\n> As a baseline I'd require the following protected headers\n> \n> For COSE, require COSE_Sign1 and headers\n> \n> ```\n>   &(alg: 1) => int\n>   &(content-type: 3) => \"application/cmw+cbor\"\n\nOK\n\n> ```\n>   &(kid: 4) => bstr\n> ```\n\nNot sure about this.  See also the discussion at https://github.com/ietf-rats-wg/draft-ietf-rats-corim/issues/363\n\n> For JOSE, require JWS compact serialization and headers\n> \n> ```\n>   \"alg\" => text\n>   \"cty\" => \"application/cmw+json\"\n>   \"kid\" => text\n> ```\n\nditto (kid)\n\n> We can call these application/cmw+cose and application/cmw+jose, both with a cmwc_t parameter. I'm not particularly confident about the `+jose` versus `+jws` versus `-jws+json` naming though. My preference is just `+jose` even if it's not intended for JWE.\n\nCurrently, `+jose` is not a registered [SSS](https://www.iana.org/assignments/media-type-structured-suffix/media-type-structured-suffix.xhtml).\nWe could request it via the CMW document, like we did for +cwt in the [EAT media-types I-D](https://www.ietf.org/archive/id/draft-ietf-rats-eat-media-type-12.html#section-6.1)\n\n\n",
           "createdAt": "2025-01-22T12:40:30Z",
           "updatedAt": "2025-01-22T12:40:30Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "\n> Currently, `+jose` is not a registered [SSS](https://www.iana.org/assignments/media-type-structured-suffix/media-type-structured-suffix.xhtml). We could request it via the CMW document, like we did for +cwt in the [EAT media-types I-D](https://www.ietf.org/archive/id/draft-ietf-rats-eat-media-type-12.html#section-6.1)\n\nDigging a bit more: JOSE has two separate media types for its two serialisations:\n\n1. `application/jose` for [compact](https://www.rfc-editor.org/rfc/rfc7515.html#section-3.1)\n1. `application/jose+json` for [JSON](https://www.rfc-editor.org/rfc/rfc7515.html#section-3.2)\n\nCorrespondingly, there should be two `+jose` SSSs, e.g.:\n\n1. `+jose-c`\n1. `+jose-j`\n\nDoes it seem reasonable to you?",
+          "createdAt": "2025-01-28T16:35:27Z",
+          "updatedAt": "2025-01-28T16:35:27Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "No argument here, though I\u2019d only want compact for cmw since that ensures signer signer semantics ",
+          "createdAt": "2025-01-28T21:45:46Z",
+          "updatedAt": "2025-01-28T21:46:51Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> No argument here, though I\u2019d only want compact for cmw since that ensures signer signer semantics\n\nStarting simple #167. Let's see if this is acceptable to the JOSE crowd.",
+          "createdAt": "2025-01-29T09:54:01Z",
+          "updatedAt": "2025-01-29T09:54:01Z"
         }
       ]
     },
@@ -2320,6 +2362,69 @@
       "updatedAt": "2025-01-24T10:54:53Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 166,
+      "id": "I_kwDOIGCt2M6n8DNY",
+      "title": "Add prose and CDDL for the payloads",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/166",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Add prose and supporting CDDL for both COSE Sign1 and JWS.",
+      "createdAt": "2025-01-29T08:22:57Z",
+      "updatedAt": "2025-01-29T08:22:57Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 167,
+      "id": "I_kwDOIGCt2M6n8DtO",
+      "title": "Add media types and SSS for JOSE",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/167",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Add associated media types, including registering the structured syntax suffix for JOSE.",
+      "createdAt": "2025-01-29T08:24:03Z",
+      "updatedAt": "2025-01-29T08:24:03Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 169,
+      "id": "I_kwDOIGCt2M6n9Qtt",
+      "title": "Is the `cmw` claim too coarse-grained to be useful?",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/169",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "\nLaurence made the proposal to drop the \"cmw\" CWT and JWT claims in favour of claims carrying more specific semantics: https://mailarchive.ietf.org/arch/msg/rats/u8Ug1k9DY27zQSccj_HnUmpDydU/\n\nI may be mistaken (in which case, please help me finding references to any related discussions), but ISTM that the discussion thread on the RATS list has drifted off, and there was no conclusion reached regarding that particular point.\n\nSummarising:\n\n1. \"cmw\" semantic is very generic, it needs extra information (e.g., specific media type, profile) to be understood.\n2. There can only be one \"cmw\" claim in a claims-set.\n\nWhat do people think?\n",
+      "createdAt": "2025-01-29T10:49:50Z",
+      "updatedAt": "2025-01-29T23:22:05Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'll start.\n\nEven with the stated limitations, I think the \"cmw\" claims, as defined, have value.",
+          "createdAt": "2025-01-29T10:52:18Z",
+          "updatedAt": "2025-01-29T10:52:18Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "CMW claims are about the same granularity as EAT Measurements claim or an EAT submod claim that contains a set or sets of claims.",
+          "createdAt": "2025-01-29T23:22:03Z",
+          "updatedAt": "2025-01-29T23:22:03Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -10481,7 +10586,7 @@
       "labels": [],
       "body": "Fix #159",
       "createdAt": "2025-01-22T13:05:53Z",
-      "updatedAt": "2025-01-22T13:06:03Z",
+      "updatedAt": "2025-01-29T23:53:36Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "16bcbd16e87a1fa053f4cb2128e8f98960338949",
@@ -10501,7 +10606,204 @@
           "updatedAt": "2025-01-22T13:06:02Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6Z77Md",
+          "commit": {
+            "abbreviatedOid": "6287445"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-01-29T23:53:36Z",
+          "updatedAt": "2025-01-29T23:53:36Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 164,
+      "id": "PR_kwDOIGCt2M6JQrUB",
+      "title": "add COSE- and JOSE-based signatures",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/164",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #166 ",
+      "createdAt": "2025-01-28T17:22:52Z",
+      "updatedAt": "2025-01-29T08:34:55Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "16bcbd16e87a1fa053f4cb2128e8f98960338949",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "cose",
+      "headRefOid": "9eccfdf5de190f6ed06136c634ea3c2543733977",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze ",
+          "createdAt": "2025-01-28T17:23:19Z",
+          "updatedAt": "2025-01-28T17:23:19Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6ZurSf",
+          "commit": {
+            "abbreviatedOid": "480fb60"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-01-28T18:49:10Z",
+          "updatedAt": "2025-01-28T18:49:10Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6Zx1PT",
+          "commit": {
+            "abbreviatedOid": "480fb60"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-29T04:36:31Z",
+          "updatedAt": "2025-01-29T04:41:11Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "```suggestion\r\nsigned-cbor-cmw-protected-hdr = {\r\n```",
+              "createdAt": "2025-01-29T04:36:31Z",
+              "updatedAt": "2025-01-29T04:41:11Z"
+            },
+            {
+              "originalPosition": 2,
+              "body": "```suggestion\r\n  protected: bytes .cbor signed-cbor-cmw-protected-hdr\r\n```",
+              "createdAt": "2025-01-29T04:36:50Z",
+              "updatedAt": "2025-01-29T04:41:11Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 165,
+      "id": "PR_kwDOIGCt2M6JQ5_z",
+      "title": "drop tunnels",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/165",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #163",
+      "createdAt": "2025-01-28T17:53:04Z",
+      "updatedAt": "2025-01-29T02:48:32Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "16bcbd16e87a1fa053f4cb2128e8f98960338949",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "drop-tunnels",
+      "headRefOid": "7b7ea714e6a345ea6cfe43c4ab2883d64823eb0d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze ",
+          "createdAt": "2025-01-28T17:53:17Z",
+          "updatedAt": "2025-01-28T17:53:17Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6Zunqp",
+          "commit": {
+            "abbreviatedOid": "7b7ea71"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-01-28T18:42:01Z",
+          "updatedAt": "2025-01-28T18:42:01Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6ZxQrQ",
+          "commit": {
+            "abbreviatedOid": "7b7ea71"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-29T02:48:32Z",
+          "updatedAt": "2025-01-29T02:48:32Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 168,
+      "id": "PR_kwDOIGCt2M6JVSIG",
+      "title": "IANA registrations for signed CMW's ",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/168",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "* Add `+jws` Structured Syntax Suffix (e4017c6d2da1d9bc8a44954064f0800c832f4e1a)\r\n* Add `cmw+jws` media type and CoAP C-F (c24c4878845bef2dece8e07451a57aeca4ccb916)\r\n* Add `cmw+cose` media type and CoAP C-F (396eccb0979644892172fd785a0c262c9ffc2e42)\r\n\r\nFix #167 \r\n\r\n**NOTE**: this PR branches off #166 ",
+      "createdAt": "2025-01-29T09:30:01Z",
+      "updatedAt": "2025-01-29T23:43:13Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "16bcbd16e87a1fa053f4cb2128e8f98960338949",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "jose-sss",
+      "headRefOid": "c24c4878845bef2dece8e07451a57aeca4ccb916",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze ",
+          "createdAt": "2025-01-29T09:30:20Z",
+          "updatedAt": "2025-01-29T09:30:20Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6Z74rp",
+          "commit": {
+            "abbreviatedOid": "c24c487"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-01-29T23:43:13Z",
+          "updatedAt": "2025-01-29T23:43:13Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
