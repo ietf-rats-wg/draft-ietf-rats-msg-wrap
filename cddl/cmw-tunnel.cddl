@@ -1,2 +1,0 @@
-c2j-tunnel = [ "#cmw-c2j-tunnel", base64url-string ]
-j2c-tunnel = [ "#cmw-j2c-tunnel", bytes ]
