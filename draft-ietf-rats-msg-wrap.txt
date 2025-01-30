@@ -85,7 +85,6 @@ Table of Contents
      3.2.  CMW CBOR Tags
      3.3.  CMW Collections
        3.3.1.  CMW Collections' role in composite Attester topology
-       3.3.2.  CMW Tunnel
      3.4.  Decapsulation Algorithm
    4.  Transporting CMW in COSE and JOSE Web Tokens
      4.1.  Encoding Requirements
@@ -207,21 +206,10 @@ Table of Contents
 
 3.  Conceptual Message Wrappers
 
-   A RATS Conceptual Message Wrapper (CMW) has a tree structure of
-   leaves that contain payload messages associated with their content
-   type.  The two leaf node types are:
-
-   *  A CMW using a CBOR or JSON record (Section 3.1);
-
-   *  A CMW based on CBOR tags (Section 3.2).
-
-   Intermediate tree nodes are either:
-
-   *  A CMW "collection" type that holds together multiple CMW items
-      (Section 3.3);
-
-   *  A CMW "tunnel" type that allows transporting CBOR CMWs in JSON
-      collections and vice-versa (Section 3.3.2).
+   A RATS Conceptual Message Wrapper (CMW) has a tree structure.  Leaf
+   nodes are of type "record" (Section 3.1), or "CBOR tag"
+   (Section 3.2).  Intermediate nodes are of type "collection"
+   (Section 3.3; they hold together multiple CMW items.
 
    The following snippet outlines the productions associated with the
    top-level types.
@@ -355,11 +343,10 @@ Table of Contents
    simultaneously.
 
    The CMW collection (Figure 3) is defined as a CBOR map or JSON object
-   with CMW values, either native or "tunnelled" (Section 3.3.2).  The
-   position of a cmw entry in the cmw-collection is not significant.
-   Labels can be strings (or integers in the CBOR serialization) that
-   serve as a mnemonic for different conceptual messages in the
-   collection.
+   containing CMW values.  The position of a cmw entry in the cmw-
+   collection is not significant.  Labels can be strings (or integers in
+   the CBOR serialization) that serve as a mnemonic for different
+   conceptual messages in the collection.
 
    A collection MUST have at least one CMW entry.
 
@@ -375,12 +362,12 @@ Table of Contents
 
    json-collection = {
      ? "__cmwc_t": ~uri / oid
-     + &(label: text) => json-cmw / c2j-tunnel
+     + &(label: text) => json-cmw
    }
 
    cbor-collection = {
      ? "__cmwc_t": ~uri / oid
-     + &(label: (int / text)) => cbor-cmw / j2c-tunnel
+     + &(label: (int / text)) => cbor-cmw
    }
 
            Figure 3: CDDL definition of the CMW collection format
@@ -408,39 +395,6 @@ Table of Contents
    performance or aid human comprehension), the collection SHOULD be
    integrity protected.  For example, the collection can be integrity
    protected by including it in a signed token such as a CWT or JWT.
-
-3.3.2.  CMW Tunnel
-
-   The CMW tunnel type (Figure 4) allows for moving a CMW in one
-   serialization format, either JSON or CBOR, into a collection that
-   uses the opposite serialization format.
-
-   Both tunnel types are arrays with two elements.  The first element, a
-   fixed text string starting with a #, acts as a sentinel value.  The
-   #, which is not an acceptable start symbol for the Content-Type
-   production (Section 7), makes it possible to disambiguate a CMW
-   tunnel from a CMW record.
-
-   c2j-tunnel = [ "#cmw-c2j-tunnel", base64url-string ]
-   j2c-tunnel = [ "#cmw-j2c-tunnel", bytes ]
-
-             Figure 4: CDDL definition of the CMW tunnel format
-
-   The conversion algorithms are described in the following subsections.
-
-3.3.2.1.  CBOR-to-JSON
-
-   The CBOR byte string of the serialised CBOR CMW is encoded as Base64
-   using the URL and filename safe alphabet (Section 5 of [RFC4648])
-   without padding.  The obtained string is added as the second element
-   of the c2j-tunnel array.  The c2j-tunnel array is serialized as JSON.
-
-3.3.2.2.  JSON-to-CBOR
-
-   The UTF-8 string of the serialized JSON CMW is encoded as a CBOR byte
-   string (Major type 2).  The byte string is added as the second
-   element of the j2c-tunnel array.  The j2c-tunnel array is serialized
-   as CBOR.
 
 3.4.  Decapsulation Algorithm
 
@@ -574,8 +528,8 @@ Table of Contents
    Section 6.1.8 of [DICE-arch] specifies the ConceptualMessageWrapper
    (CMW) format and its corresponding object identifier.  The CMW format
    outlined in [DICE-arch] permits only a subset of the CMW grammar
-   defined in this document.  In particular, the tunnel and collection
-   formats cannot be encoded using DICE CMWs.
+   defined in this document.  In particular, the collection format
+   cannot be encoded using DICE CMWs.
 
 6.  Examples
 
@@ -657,10 +611,8 @@ lication/signed-corim+cbor"
 
    The following example is a CBOR collection that assembles conceptual
    messages from three attesters: Evidence for attesters A and B and
-   Attestation Results for attester C.  Since attester C returns
-   Attestation Results as CMW in JSON record format, the JSON record
-   needs to be tunnelled.  It is given an explicit collection type using
-   the URI form.
+   Attestation Results for attester C.  It is given an explicit
+   collection type using the URI form.
 
    {
      "__cmwc_t": "tag:example.com,2024:composite-attester",
@@ -671,16 +623,16 @@ lication/signed-corim+cbor"
      ],
      / attester B / 1: 1668576935(h'2347da55'),
      / attester C / 2: [
-       "#cmw-j2c-tunnel",
-       '[ "application/eat+jwt", "Li4u", 8 ]'
+       "application/eat+jwt",
+       h'2e2e2e',
+       8
      ]
    }
 
 6.6.  JSON Collection
 
    The following example is a JSON collection that assembles Evidence
-   from two attesters.  Since attester B outputs Evidence as CMW in CMW
-   record format, the CBOR record needs to be tunnelled.
+   from two attesters.
 
    {
      "__cmwc_t": "tag:example.com,2024:another-composite-attester",
@@ -689,9 +641,10 @@ lication/signed-corim+cbor"
        "e30K",
        4
      ],
-     "attester B (tunnelled)": [
-       "#cmw-c2j-tunnel",
-       "g3gYYXBwbGljYXRpb24vZWF0LXVjcytjYm9yQaAE"
+     "attester B": [
+       "application/eat-ucs+cbor",
+       "oA",
+       4
      ]
    }
 
@@ -708,9 +661,10 @@ lication/signed-corim+cbor"
          "e30K",
          4
        ],
-       "attester B (tunnelled)": [
-         "#cmw-c2j-tunnel",
-         "g3gYYXBwbGljYXRpb24vZWF0LXVjcytjYm9yQaAE"
+       "attester B": [
+         "application/eat-ucs+cbor",
+         "oA",
+         4
        ]
      },
      "iss": "evidence collection daemon",
@@ -744,16 +698,13 @@ lication/signed-corim+cbor"
 
    json-collection = {
      ? "__cmwc_t": ~uri / oid
-     + &(label: text) => json-cmw / c2j-tunnel
+     + &(label: text) => json-cmw
    }
 
    cbor-collection = {
      ? "__cmwc_t": ~uri / oid
-     + &(label: (int / text)) => cbor-cmw / j2c-tunnel
+     + &(label: (int / text)) => cbor-cmw
    }
-
-   c2j-tunnel = [ "#cmw-c2j-tunnel", base64url-string ]
-   j2c-tunnel = [ "#cmw-j2c-tunnel", bytes ]
 
    media-type = text .abnf ("Content-Type" .cat Content-Type-ABNF)
    base64url-string = text .regexp "[A-Za-z0-9_-]+"
@@ -1341,7 +1292,7 @@ lication/signed-corim+cbor"
 
 Appendix A.  Registering and Using CMWs
 
-   Figure 5 describes the registration preconditions for using CMWs in
+   Figure 4 describes the registration preconditions for using CMWs in
    either CMW record or CBOR tag forms.  When using CMW collection, the
    preconditions apply for each entry in the collection.
 
@@ -1374,7 +1325,7 @@ Appendix A.  Registering and Using CMWs
       /                 CMW                  /
      `--------------------------------------'
 
-                       Figure 5: How To Create a CMW
+                       Figure 4: How To Create a CMW
 
 Appendix B.  Open Issues
 

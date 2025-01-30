@@ -1192,9 +1192,6 @@ In addition, a Media Type and a CoAP Content-Format are defined for transporting
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.1">
                     <p id="section-toc.1-1.3.2.3.2.1.1"><a href="#section-3.3.1" class="auto internal xref">3.3.1</a>.  <a href="#name-cmw-collections-role-in-com" class="internal xref">CMW Collections' role in composite Attester topology</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.2">
-                    <p id="section-toc.1-1.3.2.3.2.2.1"><a href="#section-3.3.2" class="auto internal xref">3.3.2</a>.  <a href="#name-cmw-tunnel" class="internal xref">CMW Tunnel</a></p>
-</li>
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
@@ -1422,27 +1419,11 @@ defined in <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.<a hr
       <h2 id="name-conceptual-message-wrappers">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-conceptual-message-wrappers" class="section-name selfRef">Conceptual Message Wrappers</a>
       </h2>
-<p id="section-3-1">A RATS Conceptual Message Wrapper (CMW) has a tree structure of leaves that contain payload messages associated with their content type.
-The two leaf node types are:<a href="#section-3-1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-3-2.1">
-          <p id="section-3-2.1.1">A CMW using a CBOR or JSON record (<a href="#type-n-val" class="auto internal xref">Section 3.1</a>);<a href="#section-3-2.1.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-3-2.2">
-          <p id="section-3-2.2.1">A CMW based on CBOR tags (<a href="#cbor-tag" class="auto internal xref">Section 3.2</a>).<a href="#section-3-2.2.1" class="pilcrow">¶</a></p>
-</li>
-      </ul>
-<p id="section-3-3">Intermediate tree nodes are either:<a href="#section-3-3" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-3-4.1">
-          <p id="section-3-4.1.1">A CMW "collection" type that holds together multiple CMW items (<a href="#cmw-coll" class="auto internal xref">Section 3.3</a>);<a href="#section-3-4.1.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-3-4.2">
-          <p id="section-3-4.2.1">A CMW "tunnel" type that allows transporting CBOR CMWs in JSON collections and vice-versa (<a href="#cmw-tunnel" class="auto internal xref">Section 3.3.2</a>).<a href="#section-3-4.2.1" class="pilcrow">¶</a></p>
-</li>
-      </ul>
-<p id="section-3-5">The following snippet outlines the productions associated with the top-level types.<a href="#section-3-5" class="pilcrow">¶</a></p>
-<div class="lang-cddl sourcecode" id="section-3-6">
+<p id="section-3-1">A RATS Conceptual Message Wrapper (CMW) has a tree structure.
+Leaf nodes are of type "record" (<a href="#type-n-val" class="auto internal xref">Section 3.1</a>), or "CBOR tag" (<a href="#cbor-tag" class="auto internal xref">Section 3.2</a>).
+Intermediate nodes are of type "collection" (<a href="#cmw-coll" class="auto internal xref">Section 3.3</a>; they hold together multiple CMW items.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">The following snippet outlines the productions associated with the top-level types.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<div class="lang-cddl sourcecode" id="section-3-3">
 <pre>
 start = cmw
 
@@ -1450,13 +1431,13 @@ cmw = json-cmw / cbor-cmw
 
 json-cmw = json-record / json-collection
 cbor-cmw = cbor-record / cbor-collection / $cbor-tag
-</pre><a href="#section-3-6" class="pilcrow">¶</a>
+</pre><a href="#section-3-3" class="pilcrow">¶</a>
 </div>
-<p id="section-3-7">The complete CDDL can be found in <a href="#collected-cddl" class="auto internal xref">Section 7</a>.<a href="#section-3-7" class="pilcrow">¶</a></p>
-<p id="section-3-8"><a href="#webtokens" class="auto internal xref">Section 4</a> and <a href="#x509" class="auto internal xref">Section 5</a> describe the transport of CMWs using CBOR and JSON Web Tokens and PKIX messages, respectively.<a href="#section-3-8" class="pilcrow">¶</a></p>
-<p id="section-3-9">This document only defines an encapsulation, not a security format.
+<p id="section-3-4">The complete CDDL can be found in <a href="#collected-cddl" class="auto internal xref">Section 7</a>.<a href="#section-3-4" class="pilcrow">¶</a></p>
+<p id="section-3-5"><a href="#webtokens" class="auto internal xref">Section 4</a> and <a href="#x509" class="auto internal xref">Section 5</a> describe the transport of CMWs using CBOR and JSON Web Tokens and PKIX messages, respectively.<a href="#section-3-5" class="pilcrow">¶</a></p>
+<p id="section-3-6">This document only defines an encapsulation, not a security format.
 It is the responsibility of the Attester to ensure that the CMW contents have the necessary security protection.
-Security considerations are discussed in <a href="#seccons" class="auto internal xref">Section 9</a>.<a href="#section-3-9" class="pilcrow">¶</a></p>
+Security considerations are discussed in <a href="#seccons" class="auto internal xref">Section 9</a>.<a href="#section-3-6" class="pilcrow">¶</a></p>
 <div id="type-n-val">
 <section id="section-3.1">
         <h3 id="name-cmw-record">
@@ -1576,7 +1557,7 @@ To allow aggregation of multiple, potentially non-homogeneous evidence formats c
 <p id="section-3.3-2">Although originally designed to support layered Attester and composite device use cases, the CMW collection can be adapted for other scenarios that require the aggregation of RATS conceptual messages.
 For instance, collections may be used to group Endorsements, Reference Values, Attestation Results, and more.
 A single CMW collection can contain a mix of different message types, and it can also be used to carry messages related to multiple devices simultaneously.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
-<p id="section-3.3-3">The CMW collection (<a href="#fig-cddl-collection" class="auto internal xref">Figure 3</a>) is defined as a CBOR map or JSON object with CMW values, either native or "tunnelled" (<a href="#cmw-tunnel" class="auto internal xref">Section 3.3.2</a>).
+<p id="section-3.3-3">The CMW collection (<a href="#fig-cddl-collection" class="auto internal xref">Figure 3</a>) is defined as a CBOR map or JSON object containing CMW values.
 The position of a <code>cmw</code> entry in the <code>cmw-collection</code> is not significant.
 Labels can be strings (or integers in the CBOR serialization) that serve as a mnemonic for different conceptual messages in the collection.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
 <p id="section-3.3-4">A collection <span class="bcp14">MUST</span> have at least one CMW entry.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
@@ -1591,12 +1572,12 @@ The URI is always in the absolute form (<span><a href="https://rfc-editor.org/rf
 <pre>
 json-collection = {
   ? "__cmwc_t": ~uri / oid
-  + &amp;(label: text) =&gt; json-cmw / c2j-tunnel
+  + &amp;(label: text) =&gt; json-cmw
 }
 
 cbor-collection = {
   ? "__cmwc_t": ~uri / oid
-  + &amp;(label: (int / text)) =&gt; cbor-cmw / j2c-tunnel
+  + &amp;(label: (int / text)) =&gt; cbor-cmw
 }
 </pre>
 </div>
@@ -1618,50 +1599,6 @@ bound to prevent an attacker from replacing Evidence from a compromised device w
 <p id="section-3.3.1-1">A CMW Collection's tree structure is not required to be a spanning tree of the system's composite Attester topology.
 If the labels carry semantic content for a Verifier (e.g. to improve Verifier performance or aid human comprehension), the collection <span class="bcp14">SHOULD</span> be integrity protected.
 For example, the collection can be integrity protected by including it in a signed token such as a CWT or JWT.<a href="#section-3.3.1-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="cmw-tunnel">
-<section id="section-3.3.2">
-          <h4 id="name-cmw-tunnel">
-<a href="#section-3.3.2" class="section-number selfRef">3.3.2. </a><a href="#name-cmw-tunnel" class="section-name selfRef">CMW Tunnel</a>
-          </h4>
-<p id="section-3.3.2-1">The CMW tunnel type (<a href="#fig-cddl-tunnel" class="auto internal xref">Figure 4</a>) allows for moving a CMW in one serialization format, either JSON or CBOR, into a collection that uses the opposite serialization format.<a href="#section-3.3.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.3.2-2">Both tunnel types are arrays with two elements.
-The first element, a fixed text string starting with a <code>#</code>, acts as a sentinel value.
-The <code>#</code>, which is not an acceptable start symbol for the <code>Content-Type</code> production (<a href="#collected-cddl" class="auto internal xref">Section 7</a>), makes it possible to disambiguate a CMW tunnel from a CMW record.<a href="#section-3.3.2-2" class="pilcrow">¶</a></p>
-<span id="name-cddl-definition-of-the-cmw-t"></span><div id="fig-cddl-tunnel">
-<figure id="figure-4">
-            <div class="alignLeft art-cddl art-text artwork" id="section-3.3.2-3.1">
-<pre>
-c2j-tunnel = [ "#cmw-c2j-tunnel", base64url-string ]
-j2c-tunnel = [ "#cmw-j2c-tunnel", bytes ]
-</pre>
-</div>
-<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
-<a href="#name-cddl-definition-of-the-cmw-t" class="selfRef">CDDL definition of the CMW tunnel format</a>
-            </figcaption></figure>
-</div>
-<p id="section-3.3.2-4">The conversion algorithms are described in the following subsections.<a href="#section-3.3.2-4" class="pilcrow">¶</a></p>
-<div id="cbor-to-json">
-<section id="section-3.3.2.1">
-            <h5 id="name-cbor-to-json">
-<a href="#section-3.3.2.1" class="section-number selfRef">3.3.2.1. </a><a href="#name-cbor-to-json" class="section-name selfRef">CBOR-to-JSON</a>
-            </h5>
-<p id="section-3.3.2.1-1">The CBOR byte string of the serialised CBOR CMW is encoded as Base64 using the URL and filename safe alphabet (<span><a href="https://rfc-editor.org/rfc/rfc4648#section-5" class="relref">Section 5</a> of [<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>) without padding.
-The obtained string is added as the second element of the <code>c2j-tunnel</code> array.
-The <code>c2j-tunnel</code> array is serialized as JSON.<a href="#section-3.3.2.1-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="json-to-cbor">
-<section id="section-3.3.2.2">
-            <h5 id="name-json-to-cbor">
-<a href="#section-3.3.2.2" class="section-number selfRef">3.3.2.2. </a><a href="#name-json-to-cbor" class="section-name selfRef">JSON-to-CBOR</a>
-            </h5>
-<p id="section-3.3.2.2-1">The UTF-8 string of the serialized JSON CMW is encoded as a CBOR byte string (Major type 2).
-The byte string is added as the second element of the <code>j2c-tunnel</code> array.
-The <code>j2c-tunnel</code> array is serialized as CBOR.<a href="#section-3.3.2.2-1" class="pilcrow">¶</a></p>
-</section>
-</div>
 </section>
 </div>
 </section>
@@ -1804,7 +1741,7 @@ END
         </h3>
 <p id="section-5.2-1">Section 6.1.8 of <span>[<a href="#DICE-arch" class="cite xref">DICE-arch</a>]</span> specifies the ConceptualMessageWrapper (CMW) format and its corresponding object identifier.
 The CMW format outlined in <span>[<a href="#DICE-arch" class="cite xref">DICE-arch</a>]</span> permits only a subset of the CMW grammar defined in this document.
-In particular, the tunnel and collection formats cannot be encoded using DICE CMWs.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+In particular, the collection format cannot be encoded using DICE CMWs.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1928,7 +1865,6 @@ lication/signed-corim+cbor"
 <a href="#section-6.5" class="section-number selfRef">6.5. </a><a href="#name-cbor-collection" class="section-name selfRef">CBOR Collection</a>
         </h3>
 <p id="section-6.5-1">The following example is a CBOR collection that assembles conceptual messages from three attesters: Evidence for attesters A and B and Attestation Results for attester C.
-Since attester C returns Attestation Results as CMW in JSON record format, the JSON record needs to be tunnelled.
 It is given an explicit collection type using the URI form.<a href="#section-6.5-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.5-2">
 <pre>
@@ -1941,8 +1877,9 @@ It is given an explicit collection type using the URI form.<a href="#section-6.5
   ],
   / attester B / 1: 1668576935(h'2347da55'),
   / attester C / 2: [
-    "#cmw-j2c-tunnel",
-    '[ "application/eat+jwt", "Li4u", 8 ]'
+    "application/eat+jwt",
+    h'2e2e2e',
+    8
   ]
 }
 </pre><a href="#section-6.5-2" class="pilcrow">¶</a>
@@ -1954,8 +1891,7 @@ It is given an explicit collection type using the URI form.<a href="#section-6.5
         <h3 id="name-json-collection">
 <a href="#section-6.6" class="section-number selfRef">6.6. </a><a href="#name-json-collection" class="section-name selfRef">JSON Collection</a>
         </h3>
-<p id="section-6.6-1">The following example is a JSON collection that assembles Evidence from two attesters.
-Since attester B outputs Evidence as CMW in CMW record format, the CBOR record needs to be tunnelled.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
+<p id="section-6.6-1">The following example is a JSON collection that assembles Evidence from two attesters.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.6-2">
 <pre>
 {
@@ -1965,9 +1901,10 @@ Since attester B outputs Evidence as CMW in CMW record format, the CBOR record n
     "e30K",
     4
   ],
-  "attester B (tunnelled)": [
-    "#cmw-c2j-tunnel",
-    "g3gYYXBwbGljYXRpb24vZWF0LXVjcytjYm9yQaAE"
+  "attester B": [
+    "application/eat-ucs+cbor",
+    "oA",
+    4
   ]
 }
 </pre><a href="#section-6.6-2" class="pilcrow">¶</a>
@@ -1990,9 +1927,10 @@ Since attester B outputs Evidence as CMW in CMW record format, the CBOR record n
       "e30K",
       4
     ],
-    "attester B (tunnelled)": [
-      "#cmw-c2j-tunnel",
-      "g3gYYXBwbGljYXRpb24vZWF0LXVjcytjYm9yQaAE"
+    "attester B": [
+      "application/eat-ucs+cbor",
+      "oA",
+      4
     ]
   },
   "iss": "evidence collection daemon",
@@ -2036,16 +1974,13 @@ cbor-tagged-data&lt;tn&gt; = #6.&lt;tn&gt;(bytes)
 
 json-collection = {
   ? "__cmwc_t": ~uri / oid
-  + &amp;(label: text) =&gt; json-cmw / c2j-tunnel
+  + &amp;(label: text) =&gt; json-cmw
 }
 
 cbor-collection = {
   ? "__cmwc_t": ~uri / oid
-  + &amp;(label: (int / text)) =&gt; cbor-cmw / j2c-tunnel
+  + &amp;(label: (int / text)) =&gt; cbor-cmw
 }
-
-c2j-tunnel = [ "#cmw-c2j-tunnel", base64url-string ]
-j2c-tunnel = [ "#cmw-j2c-tunnel", bytes ]
 
 media-type = text .abnf ("Content-Type" .cat Content-Type-ABNF)
 base64url-string = text .regexp "[A-Za-z0-9_-]+"
@@ -2847,11 +2782,11 @@ dotted-decimal notation.  The parameter value is case-insensitive.  It <span cla
       <h2 id="name-registering-and-using-cmws">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-registering-and-using-cmws" class="section-name selfRef">Registering and Using CMWs</a>
       </h2>
-<p id="appendix-A-1"><a href="#fig-howto-cmw" class="auto internal xref">Figure 5</a> describes the registration preconditions for using
+<p id="appendix-A-1"><a href="#fig-howto-cmw" class="auto internal xref">Figure 4</a> describes the registration preconditions for using
 CMWs in either CMW record or CBOR tag forms.
 When using CMW collection, the preconditions apply for each entry in the collection.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <span id="name-how-to-create-a-cmw"></span><div id="fig-howto-cmw">
-<figure id="figure-5">
+<figure id="figure-4">
         <div id="appendix-A-2.1">
           <div class="alignLeft art-svg artwork" id="appendix-A-2.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="496" width="344" viewBox="0 0 344 496" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
@@ -2947,7 +2882,7 @@ When using CMW collection, the preconditions apply for each entry in the collect
             </svg><a href="#appendix-A-2.1.1" class="pilcrow">¶</a>
 </div>
 </div>
-<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
 <a href="#name-how-to-create-a-cmw" class="selfRef">How To Create a CMW</a>
         </figcaption></figure>
 </div>
