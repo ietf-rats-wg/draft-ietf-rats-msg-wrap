@@ -17,6 +17,7 @@ CMW_CBOR_EXAMPLES += collection-example-1.diag
 CMW_CBOR_EXAMPLES += collection-example-2.diag
 
 CMW_JSON_EXAMPLES := cmw-example-1.json
+CMW_JSON_EXAMPLES += cmw-example-2.json
 CMW_JSON_EXAMPLES += collection-example-1.json
 CMW_JSON_EXAMPLES += collection-example-2.json
 
