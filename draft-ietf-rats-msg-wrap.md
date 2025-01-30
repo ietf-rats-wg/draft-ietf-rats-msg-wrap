@@ -42,6 +42,7 @@ contributor:
    contribution: Laurence made significant contributions to enhancing the security requirements and considerations for CMW collections.
 
 normative:
+  RFC3986: uri
   RFC4648: base64
   RFC5280: pkix
   RFC6838: media-types
@@ -276,6 +277,7 @@ A collection MUST have at least one CMW entry.
 The `"__cmwc_t"` key is reserved for associating an optional type to the overall collection and MUST NOT be used for a label.
 The collection type is either a Uniform Resource Identifier (URI) or an object identifier (OID).
 The OID is always absolute and never relative.
+The URI is always in the absolute form ({{Section 4.3 of -uri}}).
 
 Since the collection type is recursive, implementations may limit the allowed depth of nesting.
 
