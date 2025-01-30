@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 11 July 2025                                              Intel
+Expires: 3 August 2025                                             Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                          7 January 2025
+                                                         30 January 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 July 2025.
+   This Internet-Draft will expire on 3 August 2025.
 
 Copyright Notice
 
@@ -367,7 +367,8 @@ Table of Contents
    the overall collection and MUST NOT be used for a label.  The
    collection type is either a Uniform Resource Identifier (URI) or an
    object identifier (OID).  The OID is always absolute and never
-   relative.
+   relative.  The URI is always in the absolute form (Section 4.3 of
+   [RFC3986]).
 
    Since the collection type is recursive, implementations may limit the
    allowed depth of nesting.
@@ -1174,6 +1175,11 @@ lication/signed-corim+cbor"
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
+              Resource Identifier (URI): Generic Syntax", STD 66,
+              RFC 3986, DOI 10.17487/RFC3986, January 2005,
+              <https://www.rfc-editor.org/rfc/rfc3986>.
 
    [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
               Encodings", RFC 4648, DOI 10.17487/RFC4648, October 2006,
