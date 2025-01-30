@@ -1,0 +1,6 @@
+signed-cbor-cmw = [
+  protected: bytes .cbor signed-cbor-cmw-protected-hdr
+  unprotected: signed-cbor-cmw-unprotected-hdr
+  payload: bytes .cbor cbor-cmw
+  signature: bytes
+]

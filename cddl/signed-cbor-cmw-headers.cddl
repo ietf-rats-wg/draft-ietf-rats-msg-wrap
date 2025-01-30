@@ -1,0 +1,12 @@
+signed-cbor-cmw-protected-hdr = {
+  1 => int                    ; alg
+  2 => "application/cmw+cbor" ; cty
+  * cose.label => cose.values
+}
+
+signed-cbor-cmw-unprotected-hdr = {
+  * cose.label => cose.values
+}
+
+cose.label = int / text
+cose.values = any

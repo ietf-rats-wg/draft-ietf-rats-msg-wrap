@@ -1,0 +1,6 @@
+signed-json-cmw = {
+  "protected": text .b64u (text .json signed-json-cmw-protected-hdr)
+  ? "header": text .b64u (text .json signed-json-cmw-unprotected-hdr)
+  "payload": text .b64u (text .json json-cmw)
+  "signature": text .b64u bytes
+}

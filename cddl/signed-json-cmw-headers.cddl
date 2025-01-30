@@ -1,0 +1,9 @@
+signed-json-cmw-protected-hdr = {
+  "alg": text
+  "cty": "application/cmw+json"
+  * text => text
+}
+
+signed-json-cmw-unprotected-hdr = {
+  * text => text
+}
