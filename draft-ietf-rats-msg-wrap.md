@@ -961,7 +961,7 @@ If possible, TBD1 and TBD2 should be assigned in the 256..9999 range.
 
 ### Registering new CoAP Content-Formats for Parameterized CMW Media Types
 
-New CoAP Content-Formats can be created based on parameterized instances of the `application/cmw+json` and `application/cmw+cbor` media types.
+New CoAP Content-Formats can be created based on parameterized instances of the `application/cmw+json`, `application/cmw+cbor`, `application/cmw+cose` and `application/cmw+jws` media types.
 
 When assigning a new CoAP Content-Format ID for a CMW media type that utilizes the `cmwc_t` parameter, the registrar must check (directly or through the Designated Expert) that:
 
