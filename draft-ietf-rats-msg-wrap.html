@@ -1446,7 +1446,7 @@ defined in <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.<a hr
       </h2>
 <p id="section-3-1">A RATS Conceptual Message Wrapper (CMW) has a tree structure.
 Leaf nodes are of type "record" (<a href="#type-n-val" class="auto internal xref">Section 3.1</a>), or "CBOR tag" (<a href="#cbor-tag" class="auto internal xref">Section 3.2</a>).
-Intermediate nodes are of type "collection" (<a href="#cmw-coll" class="auto internal xref">Section 3.3</a>; they hold together multiple CMW items.<a href="#section-3-1" class="pilcrow">¶</a></p>
+Intermediate nodes are of type "collection" (<a href="#cmw-coll" class="auto internal xref">Section 3.3</a>); they hold together multiple CMW items.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">The following snippet outlines the productions associated with the top-level types.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div class="lang-cddl sourcecode" id="section-3-3">
 <pre>
@@ -1733,7 +1733,7 @@ signed-json-cmw-unprotected-hdr = {
 </pre><a href="#section-5-4" class="pilcrow">¶</a>
 </div>
 <p id="section-5-5">The protected header <span class="bcp14">MUST</span> include the signature algorithm identifier.
-The protected header <span class="bcp14">MUST</span> include the content type <code>application/cmw+cbor</code>.
+The protected header <span class="bcp14">MUST</span> include the content type <code>application/cmw+json</code>.
 Other header parameters <span class="bcp14">MAY</span> be added to the header buckets, for example a <code>kid</code> that identifies the signing key.<a href="#section-5-5" class="pilcrow">¶</a></p>
 <p id="section-5-6">For clarity, the above uses the Flattened JSON Serialization (<span><a href="https://rfc-editor.org/rfc/rfc7515#section-7.2.2" class="relref">Section 7.2.2</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>).
 However, the Compact Serialization (<span><a href="https://rfc-editor.org/rfc/rfc7515#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>) can also be used.<a href="#section-5-6" class="pilcrow">¶</a></p>
