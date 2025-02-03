@@ -203,7 +203,7 @@ Each contains two or three members:
 `type`:
 : Either a text string representing a Content-Type (e.g., an EAT media type
 {{-rats-eat-mt}}) or an unsigned integer corresponding to a CoAP Content-Format
-number ({{Section 12.3 of -coap}}).
+ID ({{Section 12.3 of -coap}}).
 The latter MUST NOT be used in the JSON serialization.
 
 `value`:
@@ -491,7 +491,7 @@ with the following wire representation:
 Note that a Media-Type-Name can also be used with the CBOR record form,
 for example if it is known that the receiver cannot handle CoAP
 Content-Formats, or (unlike the case in point) if a CoAP Content-Format
-number has not been registrered.
+ID has not been registrered.
 
 ~~~ cbor-diag
 {::include cddl/cmw-example-2.diag}
@@ -946,9 +946,9 @@ Author/Change controller:
 Provisional registration:
 : no
 
-## CoAP Content Formats
+## CoAP Content-Formats
 
-IANA is requested to register the following Content-Format numbers in the "CoAP Content-Formats" registry, within the "Constrained RESTful Environments (CoRE) Parameters" registry group {{!IANA.core-parameters}}:
+IANA is requested to register the following Content-Format IDs in the "CoAP Content-Formats" registry, within the "Constrained RESTful Environments (CoRE) Parameters" registry group {{!IANA.core-parameters}}:
 
 | Content-Type | Content Coding | ID | Reference |
 | application/cmw+cbor | - | TBD1 | {{type-n-val}}, {{cbor-tag}} and {{cmw-coll}} of {{&SELF}} |
@@ -958,6 +958,15 @@ IANA is requested to register the following Content-Format numbers in the "CoAP 
 {: align="left" title="New CoAP Content Formats"}
 
 If possible, TBD1 and TBD2 should be assigned in the 256..9999 range.
+
+### Registering new CoAP Content-Formats for Parameterized CMW Media Types
+
+New CoAP Content-Formats can be created based on parameterized instances of the `application/cmw+json`, `application/cmw+cbor`, `application/cmw+cose` and `application/cmw+jws` media types.
+
+When assigning a new CoAP Content-Format ID for a CMW media type that utilizes the `cmwc_t` parameter, the registrar must check (directly or through the Designated Expert) that:
+
+* The corresponding CMW type is a collection ({{cmw-coll}}), and
+* The `cmwc_t` value is either a (non-relative) OID or an absolute URI.
 
 ## New SMI Numbers Registrations
 
