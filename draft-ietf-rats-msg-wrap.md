@@ -168,7 +168,7 @@ This document reuses the terms defined in {{Section 2 of -senml-cf}}
 
 A RATS Conceptual Message Wrapper (CMW) has a tree structure.
 Leaf nodes are of type "record" ({{type-n-val}}), or "CBOR tag" ({{cbor-tag}}).
-Intermediate nodes are of type "collection" ({{cmw-coll}}; they hold together multiple CMW items.
+Intermediate nodes are of type "collection" ({{cmw-coll}}); they hold together multiple CMW items.
 
 The following snippet outlines the productions associated with the top-level types.
 
@@ -357,7 +357,7 @@ The payload MUST be the JSON-encoded Record or Collection CMW.
 ~~~
 
 The protected header MUST include the signature algorithm identifier.
-The protected header MUST include the content type `application/cmw+cbor`.
+The protected header MUST include the content type `application/cmw+json`.
 Other header parameters MAY be added to the header buckets, for example a `kid` that identifies the signing key.
 
 For clarity, the above uses the Flattened JSON Serialization ({{Section 7.2.2 of -jws}}).
