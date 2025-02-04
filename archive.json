@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-30T00:49:33.133280+00:00",
+  "timestamp": "2025-02-04T00:50:52.124884+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -62,7 +62,7 @@
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/1",
       "state": "CLOSED",
       "author": "ionut-arm",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [
         "thomas-fossati"
       ],
@@ -80,7 +80,7 @@
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/2",
       "state": "CLOSED",
       "author": "ionut-arm",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [
         "thomas-fossati"
       ],
@@ -2235,7 +2235,7 @@
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/155",
       "state": "OPEN",
       "author": "ionut-arm",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "The CDDL defines the following for use of CBOR tags:\r\n\r\n```cddl\r\ncbor-cmw = cbor-record / cbor-collection / $cbor-tag\r\n\r\n[...]\r\n\r\ncbor-tagged-cbor<tn, fmt> = #6.<tn>(bytes .cbor fmt)\r\n\r\ncbor-tagged-data<tn> = #6.<tn>(bytes)\r\n```\r\n\r\nCould there be a more explicit link established between them?",
@@ -2308,7 +2308,7 @@
       "id": "I_kwDOIGCt2M6ljuit",
       "title": "`__cmwc_t` URIs should be absolute too?",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/159",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -2317,8 +2317,8 @@
       "labels": [],
       "body": "Allowed types for `__cmwc_t` values are:\r\n* absolute (i.e., non-relative) OIDs\r\n* URIs \r\n\r\nNote that a (URI) relative reference can be any string (more or less), including the empty one.\r\n\r\nBesides, a relative OID in dot-decimal notation (e.g., `.2.3.4`) parses OK as a relative reference, making the restriction we put on OID a bit moot.\r\n\r\nThirdly, it is completely undetermined what URI would be the base to resolve a relative form.\r\n\r\nFor these reasons, I advise we make URIs absolute too.\r\n\r\n\r\n\r\n\r\n",
       "createdAt": "2025-01-09T11:49:29Z",
-      "updatedAt": "2025-01-22T13:06:31Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-30T07:52:45Z",
+      "closedAt": "2025-01-30T07:52:45Z",
       "comments": [
         {
           "author": "deeglaze",
@@ -2334,7 +2334,7 @@
       "id": "I_kwDOIGCt2M6m6Q6s",
       "title": "missing escape in `.abnf`'d `quoted-pair`",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/160",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -2343,8 +2343,8 @@
       "labels": [],
       "body": "Today, I was made aware that one cannot blindly import ABNF via `.abnf/.cat` in their CDDL files (as we do with RFC9193's `Content-Type`).\nOne should also pay attention to interactions between nested parsers.\n\nThe relevant paragraph of RFC 9682 (which Carsten pointed me to) is the following:\n\n> Note that this approach also works well with the use of byte strings\n> in Section 3 of [RFC9165].  _It does require some care when copying-\n> and-pasting into CDDL models from ABNF that contains single quotes\n> (which may also hide as apostrophes in comments); these need to be\n> escaped or possibly replaced by %x27._\n>\n> **Note 1**: Section 3 of [RFC9165] is `.abnf`\n> **Note 2**: The prose above should warn to do the same thing for backslash (%5C).\n\n\nTherefore, our\n```abnf\nquoted-pair    = \"\\\" ( SP / VCHAR )\n```\nneeds to be escaped, as in:\n```abnf\nquoted-pair    = \"\\\\\" ( SP / VCHAR )\n```",
       "createdAt": "2025-01-20T21:25:05Z",
-      "updatedAt": "2025-01-22T13:06:25Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-30T07:53:29Z",
+      "closedAt": "2025-01-30T07:53:29Z",
       "comments": []
     },
     {
@@ -2352,15 +2352,15 @@
       "id": "I_kwDOIGCt2M6ncCkb",
       "title": "dropping tunnels",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/163",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This is the synopsis of a very long side discussion with @laurencelundblade.\n\nTL;DR: tunnels are not needed.\n\nTo support the case where the sub-attester and lead-attester implement incompatible encodings, it is sufficient for the sub to convey the full media-type information to the lead so that the latter can assemble the wrapping CMW using the lead-supported encoding before adding it to the collection.\n\nFor example, with a JSON lead and a CBOR sub that produces evidence as UCCS EAT (e.g., `{10:h'ffff'}`), instead of the tunnel:\n```json\n{\n  \"sub\": [ \"#cmw-c2j-tunnel\", \"gngYYXBwbGljYXRpb24vZWF0LXVjcytjYm9yoQpC//8\" ],\n\n  \"moresubs\": \"...\"\n}\n```\n(where the tunnel value is the b64u of the CBOR encoding of  `[ \"application/eat-ucs+cbor\", {10:h'ffff'} ]`), a more straightforward:\n```json\n{\n  \"sub\": [ \"application/eat-ucs+cbor\", \"oQpC//8\" ],\n\n  \"moresubs\": \"...\"\n}\n```\ncan be obtained.\n\nLaurence's key observation is that the API between lead and sub must _in any case_ convey some sort of typing information (at least the serialisation format JSON or CBOR, to know which one of `c2j` or `j2c` to use, or not use), e.g.:\n```golang\nfunc CollectCMWEvidence(sub Attester) (serialisation CMWSerialisation, cmw []byte) {}\n```\nwhich is very similar to the \"Type & Blob\" API that would allow us to drop tunnels altogether:\n```golang\nfunc GetTypedEvidence(sub Attester) (mediaType string, blob []byte) {}\n```\n\n\n\n",
       "createdAt": "2025-01-24T10:54:53Z",
-      "updatedAt": "2025-01-24T10:54:53Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-30T07:53:05Z",
+      "closedAt": "2025-01-30T07:53:05Z",
       "comments": []
     },
     {
@@ -2368,15 +2368,15 @@
       "id": "I_kwDOIGCt2M6n8DNY",
       "title": "Add prose and CDDL for the payloads",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/166",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Add prose and supporting CDDL for both COSE Sign1 and JWS.",
       "createdAt": "2025-01-29T08:22:57Z",
-      "updatedAt": "2025-01-29T08:22:57Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-30T08:02:54Z",
+      "closedAt": "2025-01-30T08:02:54Z",
       "comments": []
     },
     {
@@ -2384,15 +2384,15 @@
       "id": "I_kwDOIGCt2M6n8DtO",
       "title": "Add media types and SSS for JOSE",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/167",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Add associated media types, including registering the structured syntax suffix for JOSE.",
       "createdAt": "2025-01-29T08:24:03Z",
-      "updatedAt": "2025-01-29T08:24:03Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-30T08:03:50Z",
+      "closedAt": "2025-01-30T08:03:50Z",
       "comments": []
     },
     {
@@ -2522,7 +2522,7 @@
             "abbreviatedOid": "4446936"
           },
           "author": "ionut-arm",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2022-10-12T14:13:52Z",
@@ -2562,7 +2562,7 @@
             "abbreviatedOid": "4446936"
           },
           "author": "ionut-arm",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2022-10-12T15:05:12Z",
@@ -9171,7 +9171,7 @@
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/128",
       "state": "CLOSED",
       "author": "ionut-arm",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
@@ -9190,7 +9190,7 @@
       "comments": [
         {
           "author": "ionut-arm",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Closing this in favour of the less-invasive #141 ",
           "createdAt": "2024-11-15T10:58:45Z",
           "updatedAt": "2024-11-15T10:58:45Z"
@@ -10112,24 +10112,26 @@
       "id": "PR_kwDOIGCt2M6CIw9Y",
       "title": "what to check when assigning new CoAP C-Fs based on `application/cmw`",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/146",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Response attempt at @cabo's question: _\"How do application/cmw+cbor with cmwc_t parameters get Content format numbers?\"_\r\n",
       "createdAt": "2024-11-16T19:04:32Z",
-      "updatedAt": "2024-11-20T09:16:44Z",
+      "updatedAt": "2025-02-03T09:42:40Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
-      "baseRefOid": "941d98e6bdd6147d202348f7f224fe93fd968f2c",
+      "baseRefOid": "279858ad6cf5652e738ae838327d9e1c89519794",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "cf-help",
-      "headRefOid": "21de6aed790b368a343db42b51de9f743a56d7f1",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "1c2768aacb570fd99d44dc9b3e9edd644f70b75c",
+      "closedAt": "2025-02-03T09:42:40Z",
+      "mergedAt": "2025-02-03T09:42:40Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "6a2d91b2fd9b3a0e23f00bc0284de218404cb7b8"
+      },
       "comments": [
         {
           "author": "deeglaze",
@@ -10172,6 +10174,13 @@
           "body": "OK, so here's an example JSON collection with a plain-old CMW leaf, a tunnelled CMW CBOR collection and a JSON sub-collection:\r\n\r\n```\r\ncollection\r\n \u2502\u00a0media type: application/cmw+json; cmwc_t=\"tag:ietf.org,2024:X\"\r\n \u2502\u00a0value: N/A\r\n \u2502\u00a0collection type: tag:ietf.org,2024:X\r\n \u2502\u00a0collection key: N/A\r\n \u2502\r\n \u251c\u2500\u2500 leaf node\r\n \u2502   \u2502 media type: application/eat-ucs+cbor\r\n \u2502\u00a0  \u2502 value: b64u(0xa10a...)\r\n \u2502\u00a0  \u2502 collection type: N/A\r\n \u2502\u00a0  \u2502 collection key: \"bretwaldadom\"\r\n \u2502\r\n \u251c\u2500\u2500 collection\r\n \u2502   \u2502 media type: application/cmw+json; cmwc_t=\"tag:ietf.org,2024:Y\"\r\n \u2502   \u2502 value: N/A\r\n \u2502   \u2502 collection type: tag:ietf.org,2024:Y\r\n \u2502   \u2502 collection key: \"murmurless\"\r\n \u2502\u00a0  \u2502\r\n \u2502\u00a0\u00a0 \u2514\u2500\u2500 leaf node\r\n \u2502\u00a0      \u2502 media type: application/eat-ucs+json\r\n \u2502\u00a0      \u2502 value: b64u({\"eat_nonce\": ...})\r\n \u2502\u00a0      \u2502 collection type: N/A\r\n \u2502\u00a0      \u2502 collection key: \"polyscopic\"\r\n \u2502\r\n \u2514\u2500\u2500 tunnel node\r\n     \u2502\u00a0type: #c2j-tunnel\r\n     \u2502\u00a0value: b64u(0xa1008219...)\r\n     \u2502\u00a0collection type: N/A\r\n     \u2502\u00a0collection key: \"photelectrograph\"\r\n```\r\n\r\nIt's not impossible that a real composite device would produce something similar to this.\r\n\r\nCould you tell me where you think the type system breaks?  (Feel free to tweak it to illustrate your case.)\r\n\r\n(I could create a very similar CBOR collection if needed.)\r\n\r\n",
           "createdAt": "2024-11-19T10:44:44Z",
           "updatedAt": "2024-11-19T14:15:25Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> LGTM - But noticed the build is broken. (still references to cmw-tunnel.cddl)\r\n\r\nThanks, fixed in [b59c148](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/146/commits/b59c1488b520a58c3639ce5e1e0b9118c6cbc439).\r\n\r\nBTW, I have added `cmw+jws` and `cmw+cose` to the lot in [1c2768a](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/146/commits/1c2768aacb570fd99d44dc9b3e9edd644f70b75c).",
+          "createdAt": "2025-01-31T06:03:00Z",
+          "updatedAt": "2025-01-31T06:03:00Z"
         }
       ],
       "reviews": [
@@ -10234,6 +10243,39 @@
               "updatedAt": "2024-11-20T09:16:44Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6Z9_Ax",
+          "commit": {
+            "abbreviatedOid": "21de6ae"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-30T07:54:58Z",
+          "updatedAt": "2025-01-30T07:54:59Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "```suggestion\r\n* The `cmwc_t` value is either a (non-relative) OID or an absolute URI.\r\n```",
+              "createdAt": "2025-01-30T07:54:59Z",
+              "updatedAt": "2025-01-30T07:54:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6aGe-j",
+          "commit": {
+            "abbreviatedOid": "29b69e7"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM - But noticed the build is broken. (still references to cmw-tunnel.cddl)",
+          "createdAt": "2025-01-31T00:21:48Z",
+          "updatedAt": "2025-01-31T00:21:48Z",
+          "comments": []
         }
       ]
     },
@@ -10478,24 +10520,26 @@
       "id": "PR_kwDOIGCt2M6IiQXg",
       "title": "fix: add missing escape in .abnf'd quoted-pair",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/161",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fix #160",
       "createdAt": "2025-01-21T19:19:32Z",
-      "updatedAt": "2025-01-24T04:06:09Z",
+      "updatedAt": "2025-01-30T07:53:31Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "16bcbd16e87a1fa053f4cb2128e8f98960338949",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "mediatype-fix",
       "headRefOid": "3413371f44887f8f5cefb6a55fc6ddf89425b7b5",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-01-30T07:53:28Z",
+      "mergedAt": "2025-01-30T07:53:28Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "9e241f0805089f5d37157685c35343f646cca68c"
+      },
       "comments": [
         {
           "author": "thomas-fossati",
@@ -10579,24 +10623,26 @@
       "id": "PR_kwDOIGCt2M6IoFA3",
       "title": "`__cmwc_t` URIs are absolute",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/162",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fix #159",
       "createdAt": "2025-01-22T13:05:53Z",
-      "updatedAt": "2025-01-29T23:53:36Z",
+      "updatedAt": "2025-01-30T07:52:47Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "16bcbd16e87a1fa053f4cb2128e8f98960338949",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "abs-uri-ty",
       "headRefOid": "6287445db42b41f920800715696344cbd2b8f2b1",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-01-30T07:52:44Z",
+      "mergedAt": "2025-01-30T07:52:44Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "31c1f244aca8e62cd182cf50262c4c8d22885c1b"
+      },
       "comments": [
         {
           "author": "thomas-fossati",
@@ -10619,6 +10665,19 @@
           "createdAt": "2025-01-29T23:53:36Z",
           "updatedAt": "2025-01-29T23:53:36Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6Z9K91",
+          "commit": {
+            "abbreviatedOid": "6287445"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-30T05:33:29Z",
+          "updatedAt": "2025-01-30T05:33:29Z",
+          "comments": []
         }
       ]
     },
@@ -10627,24 +10686,26 @@
       "id": "PR_kwDOIGCt2M6JQrUB",
       "title": "add COSE- and JOSE-based signatures",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/164",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fix #166 ",
       "createdAt": "2025-01-28T17:22:52Z",
-      "updatedAt": "2025-01-29T08:34:55Z",
+      "updatedAt": "2025-01-30T08:02:58Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "16bcbd16e87a1fa053f4cb2128e8f98960338949",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "cose",
       "headRefOid": "9eccfdf5de190f6ed06136c634ea3c2543733977",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-01-30T08:02:53Z",
+      "mergedAt": "2025-01-30T08:02:53Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "00fa5c3ceeb7ae0eea1ef4de8169cdaeba7f3ff1"
+      },
       "comments": [
         {
           "author": "thomas-fossati",
@@ -10701,24 +10762,26 @@
       "id": "PR_kwDOIGCt2M6JQ5_z",
       "title": "drop tunnels",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/165",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fix #163",
       "createdAt": "2025-01-28T17:53:04Z",
-      "updatedAt": "2025-01-29T02:48:32Z",
+      "updatedAt": "2025-01-30T07:53:08Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "16bcbd16e87a1fa053f4cb2128e8f98960338949",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "drop-tunnels",
       "headRefOid": "7b7ea714e6a345ea6cfe43c4ab2883d64823eb0d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-01-30T07:53:04Z",
+      "mergedAt": "2025-01-30T07:53:04Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "a9fe697a34147b7566c2899b99a832272e5dd7b4"
+      },
       "comments": [
         {
           "author": "thomas-fossati",
@@ -10762,24 +10825,26 @@
       "id": "PR_kwDOIGCt2M6JVSIG",
       "title": "IANA registrations for signed CMW's ",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/168",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "* Add `+jws` Structured Syntax Suffix (e4017c6d2da1d9bc8a44954064f0800c832f4e1a)\r\n* Add `cmw+jws` media type and CoAP C-F (c24c4878845bef2dece8e07451a57aeca4ccb916)\r\n* Add `cmw+cose` media type and CoAP C-F (396eccb0979644892172fd785a0c262c9ffc2e42)\r\n\r\nFix #167 \r\n\r\n**NOTE**: this PR branches off #166 ",
       "createdAt": "2025-01-29T09:30:01Z",
-      "updatedAt": "2025-01-29T23:43:13Z",
+      "updatedAt": "2025-01-30T08:03:55Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "16bcbd16e87a1fa053f4cb2128e8f98960338949",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "jose-sss",
       "headRefOid": "c24c4878845bef2dece8e07451a57aeca4ccb916",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-01-30T08:03:49Z",
+      "mergedAt": "2025-01-30T08:03:49Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "ba4ab94213140382874b72ff52f0965d4c75057d"
+      },
       "comments": [
         {
           "author": "thomas-fossati",
@@ -10787,6 +10852,13 @@
           "body": "cc @deeglaze ",
           "createdAt": "2025-01-29T09:30:20Z",
           "updatedAt": "2025-01-29T09:30:20Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Thanks Thomas :)",
+          "createdAt": "2025-01-30T05:30:46Z",
+          "updatedAt": "2025-01-30T05:30:46Z"
         }
       ],
       "reviews": [
@@ -10801,6 +10873,103 @@
           "body": "LGTM",
           "createdAt": "2025-01-29T23:43:13Z",
           "updatedAt": "2025-01-29T23:43:13Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6Z9KAj",
+          "commit": {
+            "abbreviatedOid": "c24c487"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-30T05:30:33Z",
+          "updatedAt": "2025-01-30T05:30:33Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 170,
+      "id": "PR_kwDOIGCt2M6JdxGb",
+      "title": "remove dead dependencies (unbreak `main`)",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/170",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "${title}",
+      "createdAt": "2025-01-30T08:12:25Z",
+      "updatedAt": "2025-01-31T05:34:38Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "ba4ab94213140382874b72ff52f0965d4c75057d",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "fix-broken-main",
+      "headRefOid": "b792e468f1ef0ba0d352d2b6f47c4d3c657b6376",
+      "closedAt": "2025-01-31T05:34:32Z",
+      "mergedAt": "2025-01-31T05:34:32Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "279858ad6cf5652e738ae838327d9e1c89519794"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6aGUr_",
+          "commit": {
+            "abbreviatedOid": "b792e46"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-01-30T23:51:22Z",
+          "updatedAt": "2025-01-30T23:51:22Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 171,
+      "id": "PR_kwDOIGCt2M6J10G7",
+      "title": "Fix typos",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/171",
+      "state": "MERGED",
+      "author": "ionut-arm",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-02-03T12:17:38Z",
+      "updatedAt": "2025-02-03T12:43:03Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "6a2d91b2fd9b3a0e23f00bc0284de218404cb7b8",
+      "headRepository": "ionut-arm/draft-ietf-rats-msg-wrap",
+      "headRefName": "typo-jws",
+      "headRefOid": "1c8dcfaf5571636c425549c81195461a0af0cc82",
+      "closedAt": "2025-02-03T12:43:02Z",
+      "mergedAt": "2025-02-03T12:43:02Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "d00643d16930819cdf141122576845286cd93beb"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6aXOwm",
+          "commit": {
+            "abbreviatedOid": "1c8dcfa"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks!",
+          "createdAt": "2025-02-03T12:41:24Z",
+          "updatedAt": "2025-02-03T12:41:24Z",
           "comments": []
         }
       ]
