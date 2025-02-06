@@ -226,14 +226,14 @@ both Reference Values and Endorsements within the same `application/signed-corim
 shared by different conceptual messages.
 Future specifications may add new values to the `ind` field; see {{iana-ind-ext}}.
 
-## CMW CBOR Tags {#cbor-tag}
+## CMW TN Tags {#cbor-tag}
 
-CMW of type CBOR Tag derive their tag numbers from a corresponding CoAP Content-Format ID using the `TN()` transform defined in {{Appendix B of RFC9277}}.
+CMW of type "TN Tag" derive their tag numbers from a corresponding CoAP Content-Format ID using the `TN()` transform defined in {{Appendix B of RFC9277}}.
 Such CBOR tag numbers are in range \[1668546817, 1668612095\].
 
 The RATS conceptual message is first serialized according to the Content-Format ID and then encoded as a CBOR byte string, to which the TN-derived tag number is prepended.
 
-The CMW CBOR Tag is defined in {{fig-cddl-cbor-tag}} using two different macros.
+The CMW TN Tag is defined in {{fig-cddl-cbor-tag}} using two different macros.
 One for CBOR-encoded types, the other for all other types.
 Both macros take the CBOR tag number `tn` as a parameter.
 The `cbor-tagged-cbor` macro takes the CDDL definition of the associated conceptual message `fmt` as a second parameter.
@@ -242,9 +242,9 @@ The `cbor-tagged-cbor` macro takes the CDDL definition of the associated concept
 {::include cddl/cmw-cbor-tag.cddl}
 ~~~
 {: #fig-cddl-cbor-tag artwork-align="left"
-   title="CDDL definition of the CBOR Tag format macros"}
+   title="CDDL definition of the TN Tag format macros"}
 
-To add a new CMW, the `$cbor-tag` type socket is extended with a new instance of the CMW CBOR Tag macro.
+To add a new CMW, the `$cbor-tag` type socket is extended with a new instance of the `cbor-tagged-data` macro.
 For example, to associate conceptual messages of type `my-evidence` with CBOR Tag `1668576819`, one would extend `$cbor-tag` as follows:
 
 ~~~ cddl
@@ -497,7 +497,7 @@ ID has not been registrered.
 {::include cddl/cmw-example-2.diag}
 ~~~
 
-## CBOR Tag {#ex-ct}
+## TN Tag {#ex-ct}
 
 ~~~ cbor-diag
 {::include cddl/cmw-example-tag-1.diag}
@@ -599,7 +599,7 @@ The developers can be contacted on the Zulip channel:
 
 # Security Considerations {#seccons}
 
-## Records and CBOR Tags
+## Records and TN Tags
 
 RATS conceptual messages are typically secured using cryptography.
 If the messages are already protected, then there are no additional security requirements imposed by the introduction of this encapsulation.
