@@ -130,7 +130,7 @@ technology.
 
 A further goal is to ensure the scalability of implementations.
 This means that adding new message handlers should not change the core of the processor, and that a CMW stack can be designed to offer a plug-in interface for both encoding and decoding.
-To achieve this, the format must provide consistent message encapsulation and strong, explicit typing.
+To achieve this, the format must provide consistent message encapsulation and explicit typing.
 These features allow for selecting the appropriate message handler based on its type identifier.
 An opaque message can then be passed between the core and the handler.
 
