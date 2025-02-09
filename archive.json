@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-06T00:51:34.760196+00:00",
+  "timestamp": "2025-02-09T00:54:20.595356+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2145,7 +2145,7 @@
       "labels": [],
       "body": "There's general agreement that tags are only in CMW because some early implementations use them. If we were writing the document today we would leave out section 3.2 and focus solely on content format and media type.\r\n\r\nPlease remove mention of tags in the abstract and introduction.\r\n\r\nPlease note that section 3.2 is not recommended practice.\r\n\r\n\r\n",
       "createdAt": "2024-11-22T18:43:09Z",
-      "updatedAt": "2024-11-22T18:59:19Z",
+      "updatedAt": "2025-02-06T14:11:28Z",
       "closedAt": null,
       "comments": [
         {
@@ -2154,6 +2154,13 @@
           "body": "I disagree that there is general agreement. Given the choice implementers still prefer using a CBOR tag over the alternatives. The CMW draft doesn't explain why use of CBOR tags breaks something or why they are undesirable. The draft should take the position of highlighting the tradeoffs from using one vs. the other. All of them are legitimate forms of tagging content per IANA.",
           "createdAt": "2024-11-22T18:59:17Z",
           "updatedAt": "2024-11-22T18:59:17Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@laurencelundblade now that tags are TN-only, can we close this?",
+          "createdAt": "2025-02-06T14:10:57Z",
+          "updatedAt": "2025-02-06T14:11:28Z"
         }
       ]
     },
@@ -2209,7 +2216,7 @@
       "labels": [],
       "body": "Section 5 of CMW defines an OID to put CMW's into X.509 (which generalizes to any ASN.1 messages).\r\n\r\nThe problem with this is that to put an ASN.1 format token in an ASN.1 format message, you must have a JSON or CBOR layer.\r\n\r\nFor example, to put an ASN.1 format attestation token like those that are being worked on by Mike O, in an X.509 cert, you'd have to have a small CBOR or JSON layer for the CMW Record.\r\n\r\nRight now, a CMW Record is only JSON and CBOR. It seems super useful to define a CMW record in ASN.1 format. See discussion on the RATS list.\r\n\r\nInserting a small CBOR or JSON layer may not be completely unworkable, but:\r\n- There are very particular ASN.1-only environments that are important in the rats ecosystem\r\n- We will probably define an ASN.1 CMW record (or \"receptacle\") because it is super general and useful; this would make section 5 a bit redundant.\r\n- The special case syntax design in section 5 is a bit similar to the special case design of EAT submods that we've come to realize is too complex",
       "createdAt": "2024-11-27T20:47:42Z",
-      "updatedAt": "2025-01-28T19:02:24Z",
+      "updatedAt": "2025-02-06T16:03:04Z",
       "closedAt": null,
       "comments": [
         {
@@ -2222,9 +2229,16 @@
         {
           "author": "nedmsmith",
           "authorAssociation": "COLLABORATOR",
-          "body": "Wouldn't it be easy to extend at the CHOICE:\n\nCMW ::= CHOICE {\n    json UTF8String,\n    cbor OCTET STRING\n    **der OCTET STRING**\n}",
+          "body": "Wouldn't it be easy to extend at the CHOICE:\n\n```asn.1\nCMW ::= CHOICE {\n    json UTF8String,\n    cbor OCTET STRING\n    **der OCTET STRING**\n}\n```",
           "createdAt": "2025-01-28T19:02:23Z",
-          "updatedAt": "2025-01-28T19:02:23Z"
+          "updatedAt": "2025-02-06T14:30:26Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "If by `der` you mean a DER-encoded CMW, I don't think we can add it without also defining the ASN.1 format of such a CMW.\n\nAnd even if/when we have it, there are probably better ways to plug it into a wrapping ASN.1 blob than doing DER-in-DER, no?",
+          "createdAt": "2025-02-06T16:02:59Z",
+          "updatedAt": "2025-02-06T16:02:59Z"
         }
       ]
     },
@@ -2249,15 +2263,15 @@
       "id": "I_kwDOIGCt2M6h7HrI",
       "title": "Consider supporting COSE/JOSE security",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/156",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "laurencelundblade",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "The amount of text added to CWT that says how COSE is supported is pretty small. The text that adds COSE to CoSWID is larger, but I don't think all the stuff CoSWID did is necessary.\r\n\r\nIt seems very clear that COSE and JOSE are the way to do attestation security, the same as EAT does. There's probably no controversy over it or much debate.\r\n\r\nSince CMW is very clearly an evidence format, it seems kind of important to have security.\r\n\r\nNote also recent discussion on TLS and composite attestation on the rats mailing list. It seems like COSE/JOSE-secured evidence is useful and sometimes preferable for composite attestation evidence compared to TLS.\r\n\r\nIt seems useful for the rats community to know exactly what security should be used to promote interoperability. It's probably not helpful for 1,000 flowers to bloom (lots of attestation security mechanism).",
       "createdAt": "2024-12-04T05:51:32Z",
-      "updatedAt": "2025-01-29T09:54:02Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-07T19:24:06Z",
+      "closedAt": "2025-02-07T19:10:29Z",
       "comments": [
         {
           "author": "deeglaze",
@@ -2300,6 +2314,41 @@
           "body": "> No argument here, though I\u2019d only want compact for cmw since that ensures signer signer semantics\n\nStarting simple #167. Let's see if this is acceptable to the JOSE crowd.",
           "createdAt": "2025-01-29T09:54:01Z",
           "updatedAt": "2025-01-29T09:54:01Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@laurencelundblade to check if the issue has been addressed by #166 and #167.\n\nIf so, please set it to closed.",
+          "createdAt": "2025-02-06T15:57:35Z",
+          "updatedAt": "2025-02-06T15:57:35Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "Hi, trying to get switched back to CMW mode from EAT AUTH48 mode, but not quite there yet.\n\nWhy are alg ID and content types made mandatory? COSE, CoSWID, CWT and EAT don't require them. Seems like over specification.  \n\nI believe the reason COSE, CWT,... don't is to save a few bytes as it is possible to know them from some larger context.\n\n It seems like CWT should align or have a good reason to differ.\n",
+          "createdAt": "2025-02-06T23:11:35Z",
+          "updatedAt": "2025-02-06T23:11:35Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Hi, trying to get switched back to CMW mode from EAT AUTH48 mode, but not quite there yet.\n\nNearly there! \ud83e\udd73 \n \n> Why are alg ID and content types made mandatory? COSE, CoSWID, CWT and EAT don't require them. Seems like over specification.\n> I believe the reason COSE, CWT,... don't is to save a few bytes as it is possible to know them from some larger context.\n> \n> It seems like CWT should align or have a good reason to differ.\n\nIt makes sense for COSE and CWT, which are very generic security envelopes, to refrain from making strong requirements.\n\nFor EAT, it is also sensible to avoid any such requirement, as the profile mechanism allows compressing many protocol parameters, including crypto algorithms, into a single OID or URI.\n\nCoSWID, OTOH, _does_ specify what goes in the protected headers; see [Section 7 of RFC9393](https://www.rfc-editor.org/rfc/rfc9393.html#section-7).\n\nRegarding the choices currently made:\n\n* alg ID seems a no-brainer to me.  It is small and, interop-wise, very beneficial.\n* For content type, COSE makes it a SHOULD.  If the argument is saving a few bytes (which makes total sense to me), we can also allow the corresponding C-F (currently called \"TBD1\" in the IANA table) alongside the string form.\n",
+          "createdAt": "2025-02-07T08:31:21Z",
+          "updatedAt": "2025-02-07T08:31:21Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "> For EAT, it is also sensible to avoid any such requirement, as the profile mechanism allows compressing many protocol parameters, including crypto algorithms, into a single OID or URI.\n\nI am mostly thinking about CMW as a brother/sister to EAT, particularly because of the plan to convert EAT submodules to CMW collections and because CMW is officially a RATS evidence format. EAT+CMW is the RATS evidence format.\n\nSo I'm seeking alignment between EAT and CMW on most things.\n\n> \n> CoSWID, OTOH, does specify what goes in the protected headers; see [Section 7 of RFC9393](https://www.rfc-editor.org/rfc/rfc9393.html#section-7).\n\nYes, you are right. I missed that. I still think it is an over-specification in CoSWID, but CoSWID is not the peer to EAT that CMW is.\n\n> \n> Regarding the choices currently made:\n> \n> alg ID seems a no-brainer to me. It is small and, interop-wise, very beneficial.\n>\n> For content type, COSE makes it a SHOULD. If the argument is saving a few bytes (which makes total sense to me), we can also allow the corresponding C-F (currently called \"TBD1\" in the IANA table) alongside the string form.\n\nI'd like to see it be the same as EAT so implementors don't have to think about and resolve differences between the two.\n\nThis begs the question about applying EAT profiles to CMW. I haven't thought that through yet.",
+          "createdAt": "2025-02-07T19:10:29Z",
+          "updatedAt": "2025-02-07T19:22:38Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "Also, big thanks for adding COSE to CMW! Really appreciate that!",
+          "createdAt": "2025-02-07T19:24:05Z",
+          "updatedAt": "2025-02-07T19:24:05Z"
         }
       ]
     },
@@ -2407,7 +2456,7 @@
       "labels": [],
       "body": "\nLaurence made the proposal to drop the \"cmw\" CWT and JWT claims in favour of claims carrying more specific semantics: https://mailarchive.ietf.org/arch/msg/rats/u8Ug1k9DY27zQSccj_HnUmpDydU/\n\nI may be mistaken (in which case, please help me finding references to any related discussions), but ISTM that the discussion thread on the RATS list has drifted off, and there was no conclusion reached regarding that particular point.\n\nSummarising:\n\n1. \"cmw\" semantic is very generic, it needs extra information (e.g., specific media type, profile) to be understood.\n2. There can only be one \"cmw\" claim in a claims-set.\n\nWhat do people think?\n",
       "createdAt": "2025-01-29T10:49:50Z",
-      "updatedAt": "2025-01-29T23:22:05Z",
+      "updatedAt": "2025-02-06T14:29:14Z",
       "closedAt": null,
       "comments": [
         {
@@ -2423,8 +2472,31 @@
           "body": "CMW claims are about the same granularity as EAT Measurements claim or an EAT submod claim that contains a set or sets of claims.",
           "createdAt": "2025-01-29T23:22:03Z",
           "updatedAt": "2025-01-29T23:22:03Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> CMW claims are about the same granularity as EAT Measurements claim or an EAT submod claim that contains a set or sets of claims.\n\nCorrect.  \n\nIt is probably worth adding some caveats for the reader, e.g.:\n\n> _There are certain limitations related to the use of the \"cmw\" claim that the reader should be aware of:_\n> 1. _Only one \"cmw\" claim is allowed at each nesting level._\n> 2. _The meaning of the CMW being carried depends on the context. For example, when included in an EAT, the profile (Section 6 of RFC9711) will specify what the CMW is expected to contain._",
+          "createdAt": "2025-02-06T14:29:12Z",
+          "updatedAt": "2025-02-06T14:29:12Z"
         }
       ]
+    },
+    {
+      "number": 175,
+      "id": "I_kwDOIGCt2M6pSupf",
+      "title": "Section 3.4 is only for CBOR, but doesn't say so",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/175",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "You can just add \"CBOR\" to the subheading.\n\nMaybe there should be a demux algorithm for JSON too?\n\nMost implementations won't do this because CBOR decoders provide functions to check for array, map, tag.\n\nIndefinite length arrays aren't checked for for records. I know there's no good reason of them to be indefinite, but it's allowed, right?\n\n",
+      "createdAt": "2025-02-08T21:00:39Z",
+      "updatedAt": "2025-02-08T21:00:39Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -10437,13 +10509,13 @@
       "labels": [],
       "body": "Capturing a suggestion made by @laurencelundblade",
       "createdAt": "2024-12-17T14:13:06Z",
-      "updatedAt": "2024-12-17T15:36:05Z",
+      "updatedAt": "2025-02-08T18:51:19Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "18e88daeb38a42067c95229b336a40239c875ea4",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "design-principles",
-      "headRefOid": "e1e0166ed76599d58bdda53c6c8b41154604a9d8",
+      "headRefOid": "867d1aab34e14089eec508a6f4f52a0611e66edc",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -10455,6 +10527,20 @@
           "body": "cc @deeglaze ",
           "createdAt": "2024-12-17T14:13:23Z",
           "updatedAt": "2024-12-17T14:13:23Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@nedmsmith @laurencelundblade @hannestschofenig @henkbirkholz : Is this ready to merge?",
+          "createdAt": "2025-02-06T14:10:01Z",
+          "updatedAt": "2025-02-06T14:10:01Z"
+        },
+        {
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I added a few remarks. The intention of the text is good.",
+          "createdAt": "2025-02-08T13:35:33Z",
+          "updatedAt": "2025-02-08T13:35:33Z"
         }
       ],
       "reviews": [
@@ -10470,6 +10556,66 @@
           "createdAt": "2024-12-17T15:36:05Z",
           "updatedAt": "2024-12-17T15:36:05Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6bMzdJ",
+          "commit": {
+            "abbreviatedOid": "e1e0166"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-08T13:33:02Z",
+          "updatedAt": "2025-02-08T13:33:03Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nTo achieve this, the format must provide consistent message encapsulation and explicit typing.\r\n```",
+              "createdAt": "2025-02-08T13:33:02Z",
+              "updatedAt": "2025-02-08T13:33:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6bMz5I",
+          "commit": {
+            "abbreviatedOid": "e1e0166"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-08T13:34:04Z",
+          "updatedAt": "2025-02-08T13:34:04Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\nA further design goal is extensibility.\r\n```",
+              "createdAt": "2025-02-08T13:34:04Z",
+              "updatedAt": "2025-02-08T18:51:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6bM0jn",
+          "commit": {
+            "abbreviatedOid": "e1e0166"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-08T13:35:08Z",
+          "updatedAt": "2025-02-08T13:35:08Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nThis means that adding support for new conceptual messages and new attestation technologies should not change the core of the processor, and that a CMW stack can be designed to offer a plug-in interface for both encoding and decoding.\r\n```",
+              "createdAt": "2025-02-08T13:35:08Z",
+              "updatedAt": "2025-02-08T13:35:08Z"
+            }
+          ]
         }
       ]
     },
@@ -10769,7 +10915,7 @@
       "labels": [],
       "body": "Fix #163",
       "createdAt": "2025-01-28T17:53:04Z",
-      "updatedAt": "2025-01-30T07:53:08Z",
+      "updatedAt": "2025-02-07T19:45:55Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "16bcbd16e87a1fa053f4cb2128e8f98960338949",
@@ -10789,6 +10935,13 @@
           "body": "cc @deeglaze ",
           "createdAt": "2025-01-28T17:53:17Z",
           "updatedAt": "2025-01-28T17:53:17Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "We will alway remember tunnels.\r\n![elomoJxFRpaB4-gI6kENbg](https://github.com/user-attachments/assets/97ab4b0a-c56f-475f-93c6-677c9705c061)\r\n",
+          "createdAt": "2025-02-07T19:45:54Z",
+          "updatedAt": "2025-02-07T19:45:54Z"
         }
       ],
       "reviews": [
@@ -10973,6 +11126,140 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 172,
+      "id": "PR_kwDOIGCt2M6KTv6u",
+      "title": "s/\"CMW CBOR Tag\"/\"CMW TN Tag\"/ to avoid ambiguity",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/172",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #148",
+      "createdAt": "2025-02-06T16:58:48Z",
+      "updatedAt": "2025-02-08T18:56:43Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "d00643d16930819cdf141122576845286cd93beb",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "cmw-tn-tag",
+      "headRefOid": "fae632d9891a88a47a9a56018a758ea62e988964",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze ",
+          "createdAt": "2025-02-06T16:59:02Z",
+          "updatedAt": "2025-02-06T16:59:02Z"
+        },
+        {
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Here is the problem: You use \"TN Tag\" when TN standards for \"Tag Number\". Consequently, Tag Number Tag sounds a bit strange. Can we just omit use the term \"TN\" instead of \"TN Tag\"?",
+          "createdAt": "2025-02-08T13:39:28Z",
+          "updatedAt": "2025-02-08T13:39:28Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> Here is the problem: You use \"TN Tag\" when TN standards for \"Tag Number\". Consequently, Tag Number Tag sounds a bit strange. Can we just omit use the term \"TN\" instead of \"TN Tag\"?\r\n\r\nUnfortunately in English when acronyms are used more frequently than what they expand to, they take on more connotation and might need redundant words after to disambiguate. The TN is a specific number range for C-Fs to be used with cbor major type 6. It is not a complete tag `#6.TN`.\r\n\r\nI think \u201cTN tag\u201d is clearer.",
+          "createdAt": "2025-02-08T18:56:42Z",
+          "updatedAt": "2025-02-08T18:56:42Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6a7vml",
+          "commit": {
+            "abbreviatedOid": "fae632d"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "less ambiguous, also good for bashing",
+          "createdAt": "2025-02-06T17:01:42Z",
+          "updatedAt": "2025-02-06T17:01:42Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6bM2N3",
+          "commit": {
+            "abbreviatedOid": "fae632d"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-08T13:37:41Z",
+          "updatedAt": "2025-02-08T13:37:41Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n## CMW Tag Number (TN) {#cbor-tag}\r\n```",
+              "createdAt": "2025-02-08T13:37:41Z",
+              "updatedAt": "2025-02-08T13:37:52Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 173,
+      "id": "PR_kwDOIGCt2M6KhNWe",
+      "title": "Editorial Update to the Abstract",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/173",
+      "state": "OPEN",
+      "author": "hannestschofenig",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-02-08T13:45:42Z",
+      "updatedAt": "2025-02-08T13:45:42Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "d00643d16930819cdf141122576845286cd93beb",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "hannestschofenig-patch-1",
+      "headRefOid": "9f4278698c16a512d9156595e3ef012e16149185",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 174,
+      "id": "PR_kwDOIGCt2M6KhOfS",
+      "title": "Improve Introduction",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/174",
+      "state": "OPEN",
+      "author": "hannestschofenig",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-02-08T13:57:01Z",
+      "updatedAt": "2025-02-08T13:57:35Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "d00643d16930819cdf141122576845286cd93beb",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "hannestschofenig-patch-3",
+      "headRefOid": "41b4e4cc947a5a9b2c0952c2b8be638ea663f778",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
