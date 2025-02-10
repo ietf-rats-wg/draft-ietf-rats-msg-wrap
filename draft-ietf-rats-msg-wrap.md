@@ -593,7 +593,9 @@ The developers can be contacted on the Zulip channel:
 
 ## Protecting CMW Records
 
-CMW itself does not provide any mechanisms for authenticity, integrity protection, or confidentiality. It is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly. In some scenarios, a secure channel (e.g., via TLS) or object-level security (e.g., using JWT) may be sufficient, but this is not always the case.
+CMW itself does not provide any mechanisms for authenticity, integrity protection, or confidentiality.
+It is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly.
+In some scenarios, a secure channel (e.g., via TLS) or object-level security (e.g., using JWT) may be sufficient, but this is not always the case.
 
 When a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically bound to prevent an attacker from replacing Evidence from a compromised device with that from a non-compromised device. Authenticity and integrity protection MUST be provided by the attestation technology. For additional security considerations related to collections, refer to {{seccons-coll}}.
 
