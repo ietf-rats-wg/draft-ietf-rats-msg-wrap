@@ -281,14 +281,6 @@ Since the collection type is recursive, implementations may limit the allowed de
 {: #fig-cddl-collection artwork-align="left"
    title="CDDL definition of the CMW collection format"}
 
-CMW itself provides no facilities for authenticity, integrity protection, or confidentiality.
-It is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly.
-A secure channel (e.g., via TLS) or object-level security (e.g., using JWT) may suffice in some scenarios, but not in all.
-
-When a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically
-bound to prevent an attacker from replacing Evidence from a compromised device with Evidence from a non-compromised device. The protection of authenticity and integrity
-MUST be provided by the attestation technology. For additional security considerations related to collections, refer to {{seccons-coll}}.
-
 ### CMW Collections' role in composite Attester topology
 
 A CMW Collection's tree structure is not required to be a spanning tree of the system's composite Attester topology.
@@ -599,15 +591,15 @@ The developers can be contacted on the Zulip channel:
 
 # Security Considerations {#seccons}
 
-## Records and CBOR Tags
+## Protecting CMW Records
 
-RATS conceptual messages are typically secured using cryptography.
-If the messages are already protected, then there are no additional security requirements imposed by the introduction of this encapsulation.
-If an adversary tries to modify the payload encapsulation, it will result in incorrect processing of the encapsulated message and lead to an error.
-If the messages are not protected, additional security must be added at a different layer.
-As an example, a `cbor-record` containing an UCCS (Unprotected CWT Claims Sets) {{-rats-uccs}} can be signed as described in {{signed-cbor-cmw}}.
+CMW itself does not provide any mechanisms for authenticity, integrity protection, or confidentiality. It is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly. In some scenarios, a secure channel (e.g., via TLS) or object-level security (e.g., using JWT) may be sufficient, but this is not always the case.
 
-## Collections {#seccons-coll}
+When a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically bound to prevent an attacker from replacing Evidence from a compromised device with that from a non-compromised device. Authenticity and integrity protection MUST be provided by the attestation technology. For additional security considerations related to collections, refer to {{seccons-coll}}.
+
+RATS conceptual messages are typically secured using cryptography. If the messages are already protected, no additional security requirements are imposed by this encapsulation. However, if an adversary attempts to modify the payload encapsulation, it will result in incorrect processing of the encapsulated message, leading to an error. If the messages are not protected, additional security must be added at a different layer. For example, a cbor-record containing an Unprotected CWT Claims Set (UCCS) {{-rats-uccs}} can be signed as described in {{signed-cbor-cmw}}.
+
+## CMW Collections {#seccons-coll}
 
 If the collection is not protected from tampering by external security measures (such as object security primitives) or internal mechanisms (such as intra-item binding), an attacker could easily manipulate the collection's contents.
 It is the responsibility of the Attester who creates the CMW collection to ensure that the contents of the collection are integrity-protected.
