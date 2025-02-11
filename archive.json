@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-09T00:54:20.595356+00:00",
+  "timestamp": "2025-02-11T00:51:24.203115+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2263,15 +2263,15 @@
       "id": "I_kwDOIGCt2M6h7HrI",
       "title": "Consider supporting COSE/JOSE security",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/156",
-      "state": "CLOSED",
+      "state": "OPEN",
       "author": "laurencelundblade",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "The amount of text added to CWT that says how COSE is supported is pretty small. The text that adds COSE to CoSWID is larger, but I don't think all the stuff CoSWID did is necessary.\r\n\r\nIt seems very clear that COSE and JOSE are the way to do attestation security, the same as EAT does. There's probably no controversy over it or much debate.\r\n\r\nSince CMW is very clearly an evidence format, it seems kind of important to have security.\r\n\r\nNote also recent discussion on TLS and composite attestation on the rats mailing list. It seems like COSE/JOSE-secured evidence is useful and sometimes preferable for composite attestation evidence compared to TLS.\r\n\r\nIt seems useful for the rats community to know exactly what security should be used to promote interoperability. It's probably not helpful for 1,000 flowers to bloom (lots of attestation security mechanism).",
       "createdAt": "2024-12-04T05:51:32Z",
-      "updatedAt": "2025-02-07T19:24:06Z",
-      "closedAt": "2025-02-07T19:10:29Z",
+      "updatedAt": "2025-02-09T12:28:04Z",
+      "closedAt": null,
       "comments": [
         {
           "author": "deeglaze",
@@ -2349,6 +2349,34 @@
           "body": "Also, big thanks for adding COSE to CMW! Really appreciate that!",
           "createdAt": "2025-02-07T19:24:05Z",
           "updatedAt": "2025-02-07T19:24:05Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "As a \"midpoint solution,\" I propose:\n\n* Relaxing the MUSTs in _\"The protected header MUST include the signature algorithm identifier. The protected header MUST include the content type application/cmw+json.\"_ to SHOULDs.\n* Allowing the CoAP C-F alongside the media type: `\"cty\": \"application/cmw+json\" / TBD1`\n\nWDYT?",
+          "createdAt": "2025-02-09T04:11:27Z",
+          "updatedAt": "2025-02-09T04:11:27Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "The signature structure doesn't have enough context in it to distinguish signing different kinds of documents when the content type is dropped. That said, for a specification I guess we want to just rely on COSE usage profiles more generally than have idiosyncratic requirements on a per-content-type basis.\n\nEdit: regarding the C-F alongside the media type, I don't understand. Do you just mean using an integer where JWS always has a string? I don't know why you'd use JSON for a constrained environment when CBOR is there. We can drop the content-type protected header in COSE when the payload is tagged with the application/cmw+cbor TN.",
+          "createdAt": "2025-02-09T04:29:36Z",
+          "updatedAt": "2025-02-09T04:33:12Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> The signature structure doesn't have enough context in it to distinguish signing different kinds of documents when the content type is dropped. That said, for a specification I guess we want to just rely on COSE usage profiles more generally than have idiosyncratic requirements on a per-content-type basis.\n\nIs there a spec for \"COSE usage profiles\" that a CMW user can take inspiration from?\n\n> Edit: regarding the C-F alongside the media type, I don't understand. Do you just mean using an integer where JWS always has a string? I don't know why you'd use JSON for a constrained environment when CBOR is there. We can drop the content-type protected header in COSE when the payload is tagged with the application/cmw+cbor TN.\n\nThe suggestion to also allow the C-F version of \"application/cmw+cbor\" in COSE's `cty` is to save bytes in constrained use cases.\n",
+          "createdAt": "2025-02-09T05:12:30Z",
+          "updatedAt": "2025-02-09T05:13:09Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> This begs the question about applying EAT profiles to CMW. I haven't thought that through yet.\n\nFor cbor-record/-tag CMWs that encapsulate EATs, the EAT profile applies.  Possibly, manifesting itself via the `eat_profile` parameter in the media type of the CMW.\n\nFor cbor-/json-collection CMWs, the `__cmwc_t` can be used as a \"super\" profile.",
+          "createdAt": "2025-02-09T12:28:03Z",
+          "updatedAt": "2025-02-09T12:28:03Z"
         }
       ]
     },
@@ -2494,9 +2522,17 @@
       "labels": [],
       "body": "You can just add \"CBOR\" to the subheading.\n\nMaybe there should be a demux algorithm for JSON too?\n\nMost implementations won't do this because CBOR decoders provide functions to check for array, map, tag.\n\nIndefinite length arrays aren't checked for for records. I know there's no good reason of them to be indefinite, but it's allowed, right?\n\n",
       "createdAt": "2025-02-08T21:00:39Z",
-      "updatedAt": "2025-02-08T21:00:39Z",
+      "updatedAt": "2025-02-09T03:23:10Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> You can just add \"CBOR\" to the subheading.\n> \n> Maybe there should be a demux algorithm for JSON too?\n\nDemux covers both CBOR and JSON.  The `0x5b` (`[`) and `0x7b` (`{`) cases catch JSON records and collections.\n\n> Indefinite length arrays aren't checked for records. I know there's no good reason for them to be indefinite, but it's allowed, right?\n\nIndefinite length for `cbor-record` shouldn't be allowed; we should point that out more explicitly.\n\n\n",
+          "createdAt": "2025-02-09T03:23:09Z",
+          "updatedAt": "2025-02-09T03:23:09Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -11139,7 +11175,7 @@
       "labels": [],
       "body": "Fix #148",
       "createdAt": "2025-02-06T16:58:48Z",
-      "updatedAt": "2025-02-08T18:56:43Z",
+      "updatedAt": "2025-02-09T03:41:31Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "d00643d16930819cdf141122576845286cd93beb",
@@ -11171,6 +11207,20 @@
           "body": "> Here is the problem: You use \"TN Tag\" when TN standards for \"Tag Number\". Consequently, Tag Number Tag sounds a bit strange. Can we just omit use the term \"TN\" instead of \"TN Tag\"?\r\n\r\nUnfortunately in English when acronyms are used more frequently than what they expand to, they take on more connotation and might need redundant words after to disambiguate. The TN is a specific number range for C-Fs to be used with cbor major type 6. It is not a complete tag `#6.TN`.\r\n\r\nI think \u201cTN tag\u201d is clearer.",
           "createdAt": "2025-02-08T18:56:42Z",
           "updatedAt": "2025-02-08T18:56:42Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "\"CoSWID tag\", \"CWT CBOR Tag\" or \"UCCS tag\" and \"CMW tag\" (CMW section 10.3) are all things that have an assigned tag number and defined tag content.  This here is not that at all.\r\n\r\nSo how about \"CMW Tag Receptacle\" or \"CMW Tag Socket\"? \"CMW Tagged Item\" is maybe another. \"Tagged\" distinguishes from \"Tag\". \r\n\r\nThe phrase to name this should not end in \"tag\" to distinguish from \"CMW tag\" and the like.\r\n\r\n",
+          "createdAt": "2025-02-09T00:54:55Z",
+          "updatedAt": "2025-02-09T00:54:55Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This is the implementation of a proposal from Ned, which was discussed in #148. That is the place dedicated to converging on this bikeshed\u2019s colour. If you are not satisfied with Ned\u2019s tint, please feel free to make suggestions on the issue.\r\nI'm just your humble house painter.",
+          "createdAt": "2025-02-09T03:38:35Z",
+          "updatedAt": "2025-02-09T03:41:31Z"
         }
       ],
       "reviews": [
@@ -11260,6 +11310,193 @@
       "mergeCommit": null,
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 176,
+      "id": "PR_kwDOIGCt2M6KoZpq",
+      "title": "Captured security aspects in the security consideration section",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/176",
+      "state": "OPEN",
+      "author": "hannestschofenig",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-02-10T11:50:14Z",
+      "updatedAt": "2025-02-10T13:35:49Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "d00643d16930819cdf141122576845286cd93beb",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "hannestschofenig-patch-4",
+      "headRefOid": "b01627494d2c5e1951891a8e77b94b77e4753888",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6bUImX",
+          "commit": {
+            "abbreviatedOid": "c18475c"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-10T13:23:59Z",
+          "updatedAt": "2025-02-10T13:23:59Z",
+          "comments": [
+            {
+              "originalPosition": 22,
+              "body": "one sentence per line\r\n\r\n```suggestion\r\nCMW itself does not provide any mechanisms for authenticity, integrity protection, or confidentiality.\r\nIt is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly.\r\nIn some scenarios, a secure channel (e.g., via TLS) or object-level security (e.g., using JWT) may be sufficient, but this is not always the case.\r\n```",
+              "createdAt": "2025-02-10T13:23:59Z",
+              "updatedAt": "2025-02-10T13:23:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6bUI9Q",
+          "commit": {
+            "abbreviatedOid": "50f87b5"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-10T13:24:34Z",
+          "updatedAt": "2025-02-10T13:24:35Z",
+          "comments": [
+            {
+              "originalPosition": 26,
+              "body": "```suggestion\r\nWhen a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically bound to prevent an attacker from replacing Evidence from a compromised device with that from a non-compromised device.\r\nAuthenticity and integrity protection MUST be provided by the attestation technology. For additional security considerations related to collections, refer to {{seccons-coll}}.\r\n```",
+              "createdAt": "2025-02-10T13:24:34Z",
+              "updatedAt": "2025-02-10T13:24:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6bUJgg",
+          "commit": {
+            "abbreviatedOid": "d0203ad"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-10T13:25:31Z",
+          "updatedAt": "2025-02-10T13:25:32Z",
+          "comments": [
+            {
+              "originalPosition": 34,
+              "body": "```suggestion\r\nRATS conceptual messages are typically secured using cryptography.\r\nIf the messages are already protected, no additional security requirements are imposed by this encapsulation.\r\nHowever, if an adversary attempts to modify the payload encapsulation, it will result in incorrect processing of the encapsulated message, leading to an error.\r\nIf the messages are not protected, additional security must be added at a different layer.\r\nFor example, a cbor-record containing an Unprotected CWT Claims Set (UCCS) {{-rats-uccs}} can be signed as described in {{signed-cbor-cmw}}.\r\n```",
+              "createdAt": "2025-02-10T13:25:31Z",
+              "updatedAt": "2025-02-10T13:25:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6bUKi6",
+          "commit": {
+            "abbreviatedOid": "f06bb29"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-10T13:27:11Z",
+          "updatedAt": "2025-02-10T13:27:11Z",
+          "comments": [
+            {
+              "originalPosition": 27,
+              "body": "```suggestion\r\nAuthenticity and integrity protection MUST be provided by the attestation technology.\r\nFor additional security considerations related to collections, refer to {{seccons-coll}}.\r\n```",
+              "createdAt": "2025-02-10T13:27:11Z",
+              "updatedAt": "2025-02-10T13:27:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6bULzB",
+          "commit": {
+            "abbreviatedOid": "b016274"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-10T13:29:10Z",
+          "updatedAt": "2025-02-10T13:29:10Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "these three sentences don't belong in this section (i.e., monads): they talk about a collection use case.",
+              "createdAt": "2025-02-10T13:29:10Z",
+              "updatedAt": "2025-02-10T13:29:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6bUMq6",
+          "commit": {
+            "abbreviatedOid": "b016274"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-10T13:30:33Z",
+          "updatedAt": "2025-02-10T13:30:33Z",
+          "comments": [
+            {
+              "originalPosition": 34,
+              "body": "No need for \"however,\" since it is not an adversative.\r\n\r\n```suggestion\r\nIf an adversary attempts to modify the payload encapsulation, it will result in incorrect processing of the encapsulated message, leading to an error.\r\n```",
+              "createdAt": "2025-02-10T13:30:33Z",
+              "updatedAt": "2025-02-10T13:30:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6bUNIF",
+          "commit": {
+            "abbreviatedOid": "b016274"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-10T13:31:14Z",
+          "updatedAt": "2025-02-10T13:31:15Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "we use backticks for information elements.\r\n\r\n```suggestion\r\nFor example, a `cbor-record` containing an Unprotected CWT Claims Set (UCCS) {{-rats-uccs}} can be signed as described in {{signed-cbor-cmw}}.\r\n```",
+              "createdAt": "2025-02-10T13:31:14Z",
+              "updatedAt": "2025-02-10T13:31:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6bUP43",
+          "commit": {
+            "abbreviatedOid": "b016274"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-10T13:35:48Z",
+          "updatedAt": "2025-02-10T13:35:49Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "not just records, also TNs",
+              "createdAt": "2025-02-10T13:35:49Z",
+              "updatedAt": "2025-02-10T13:35:49Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
