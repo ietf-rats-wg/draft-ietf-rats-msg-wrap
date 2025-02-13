@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 12 August 2025                                            Intel
+Expires: 17 August 2025                                            Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                         8 February 2025
+                                                        13 February 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -21,8 +21,8 @@ Expires: 12 August 2025                                            Intel
 Abstract
 
    This document defines a conceptual message wrapper (CMW) format - an
-   encapsulation method applicable to any conceptual message, such as
-   Evidence, Attestation Results, Endorsements, and Reference Values.
+   encapsulation method applicable to any RATS conceptual message, such
+   as Evidence, Attestation Results, Endorsements, and Reference Values.
    It also describes a collection type that aggregates one or more CMWs
    into a single message.
 
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 August 2025.
+   This Internet-Draft will expire on 17 August 2025.
 
 Copyright Notice
 
