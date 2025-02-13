@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 7 August 2025                                             Intel
+Expires: 17 August 2025                                            Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                         3 February 2025
+                                                        13 February 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 August 2025.
+   This Internet-Draft will expire on 17 August 2025.
 
 Copyright Notice
 
@@ -166,6 +166,16 @@ Table of Contents
    to parse attestation-related conceptual messages, such as different
    Evidence formats, but can instead utilize the CMW format to be
    agnostic to the attestation technology.
+
+   A further design goal is extensibility.  This means that adding
+   support for new conceptual messages and new attestation technologies
+   should not change the core of the processor, and that a CMW stack can
+   be designed to offer a plug-in interface for both encoding and
+   decoding.  To achieve this, the format must provide consistent
+   message encapsulation and explicit typing.  These features allow for
+   selecting the appropriate message handler based on its type
+   identifier.  An opaque message can then be passed between the core
+   and the handler.
 
    This document defines two encapsulation formats for RATS conceptual
    messages that aim to achieve the goals stated above.
@@ -1451,9 +1461,9 @@ lication/signed-corim+cbor"
               Voit, E., Birkholz, H., Hardjono, T., Fossati, T., and V.
               Scarlata, "Attestation Results for Secure Interactions",
               Work in Progress, Internet-Draft, draft-ietf-rats-ar4si-
-              07, 2 September 2024,
+              08, 6 February 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              ar4si-07>.
+              ar4si-08>.
 
    [I-D.ietf-rats-corim]
               Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
