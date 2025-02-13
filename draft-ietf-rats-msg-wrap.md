@@ -93,7 +93,8 @@ entity:
 
 --- abstract
 
-This document defines a conceptual message wrapper (CMW) format - an encapsulation method applicable to any RATS conceptual message, such as Evidence, Attestation Results, Endorsements, and Reference Values. It also describes a collection type that aggregates one or more CMWs into a single message.
+This document defines a conceptual message wrapper (CMW) format - an encapsulation method applicable to any RATS conceptual message, such as Evidence, Attestation Results, Endorsements, and Reference Values.
+It also describes a collection type that aggregates one or more CMWs into a single message.
 
 In addition, this document specifies a corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, and an X.509 extension. These mechanisms enable the embedding of enveloped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols. Moreover, a Media Type and a CoAP Content-Format are defined for transporting CMWs over HTTP, MIME, CoAP, and other Internet protocols.
 
