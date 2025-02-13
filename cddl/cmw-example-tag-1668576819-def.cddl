@@ -1,4 +1,4 @@
-$cbor-tag /= cbor-tagged-cbor<1668576819, my-evidence>
+$cbor-tagged-item /= cbor-tagged-item-cbor<1668576819, my-evidence>
 
 my-evidence = {
   &(eat_nonce: 10) => bstr .size (8..64)

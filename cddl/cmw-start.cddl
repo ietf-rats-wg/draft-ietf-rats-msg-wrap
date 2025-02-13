@@ -3,4 +3,4 @@ start = cmw
 cmw = json-cmw / cbor-cmw
 
 json-cmw = json-record / json-collection
-cbor-cmw = cbor-record / cbor-collection / $cbor-tag
+cbor-cmw = cbor-record / cbor-collection / $cbor-tagged-item
