@@ -125,7 +125,7 @@ serialization formats used by various attestation technologies. This approach st
 the implementation process for developers, enabling easier support for diverse attestation
 technologies. For instance, a Relying Party application implementer does not need to parse
 attestation-related messages, such as Evidence from Attesters on IoT devices with Trusted
-Platform Modules or servers using confidential computing hardware like Intel Trust
+Platform Modules (TPM) or servers using confidential computing hardware like Intel Trust
 Domain Extensions (TDX). Instead, they can leverage the CMW format, remaining agnostic
 to the specific attestation technology.
 
