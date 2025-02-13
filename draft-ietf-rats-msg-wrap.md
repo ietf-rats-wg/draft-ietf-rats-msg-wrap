@@ -1002,36 +1002,36 @@ CMWs in either CMW record or CBOR tag forms.
 When using CMW collection, the preconditions apply for each entry in the collection.
 
 ~~~ aasvg
-       .---------------.   .---------.
-      | Reuse EAT/CoRIM | | Register  |
-      | media type(s)   | | new media |
-      | + profile       | | type      |
-       `---+----+------'   `-+----+--'
-           |    |            |    |
-           |  .-+------------+-.  |
-           | |  |  Register  |  | |
-         .-(-+-'   new CoAP   `-+-(-.
-        |  | |  Content-Format  | |  |
-        |  |  `-------+--------'  |  |
-        |  |          |           |  |
-        |  |          v           |  |
-        |  |   .--------------.   |  |
-        |  |  | Automatically  |  |  |
-        |  |  | derive CBOR    |  |  |
-        |  |  | tag [RFC9277]  |  |  |
-        |  |   `------+-------'   |  |
-        |  |          |           |  |
-        |  |          |           |  |
-        |  |          |           |  |
-        |  |          v           |  |
-        |  |   .----------------. |  |
-        |  |  /  CBOR tag CMW  /  |  |
-        v  v `----------------'   v  v
-    .--------------------------------------.
-   /                 CMW                  /
-  `--------------------------------------'
+     .---------------.   .---------.
+    | Reuse EAT/CoRIM | | Register  |
+    | media type(s)   | | new media |
+    | + profile       | | type      |
+     `---+----+------'   `-+----+--'
+         |    |            |    |
+         |  .-+------------+-.  |
+         | |  |  Register  |  | |
+       .-(-+-'   new CoAP   `-+-(-.
+      |  | |  Content-Format  | |  |
+      |  |  `-------+--------'  |  |
+      |  |          |           |  |
+      |  |          v           |  |
+      |  |   .--------------.   |  |
+      |  |  | Automatically  |  |  |
+      |  |  | derive CBOR    |  |  |
+      |  |  | tag [RFC9277]  |  |  |
+      |  |   `------+-------'   |  |
+      |  |          |           |  |
+      |  |          |           |  |
+      |  |          |           |  |
+      |  |          v           |  |
+      |  |   .----------------. |  |
+      |  |  /  CBOR tag CMW  /  |  |
+      v  v `----------------'   v  v
+  .--------------------------------------.
+ /                 CMW                  /
+`--------------------------------------'
 ~~~
-{: #fig-howto-cmw artwork-align="left"
+{: #fig-howto-cmw artwork-align="center"
    title="How To Create a CMW"}
 
 # Open Issues
