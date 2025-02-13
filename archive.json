@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-11T00:51:24.203115+00:00",
+  "timestamp": "2025-02-13T00:51:47.523380+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2093,7 +2093,7 @@
       "labels": [],
       "body": "This is to reopen #133 \r\n\r\nThe double meaning of CMW CBOR Tag wasn't fixed (3.2 vs 10.3)\r\n\r\nPlease find an alternate to \"CMW CBOR Tag\". It sounds too much like what is in 10.3 and is out of line with common use.\r\n\r\nThe grammar of the first sentence isn't right.\r\n\r\nNote that I was not asked to sign off on the issue even though I was the one that opened it.",
       "createdAt": "2024-11-22T18:35:56Z",
-      "updatedAt": "2025-01-29T10:00:35Z",
+      "updatedAt": "2025-02-12T09:04:01Z",
       "closedAt": null,
       "comments": [
         {
@@ -2130,6 +2130,20 @@
           "body": "> > \"CMW TN\"\n> \n> I prefer \"CMW TN Tag\" to distinguish it as a \"tag\" since other text uses either record, collection, or tag.\n\nI am fine with it. ",
           "createdAt": "2025-01-29T10:00:34Z",
           "updatedAt": "2025-01-29T10:00:34Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "\"CoSWID tag\", \"CWT CBOR Tag\" or \"UCCS tag\" and \"CMW tag\" (CMW section 10.3) are all things that have an assigned tag number and defined tag content. This here is not that at all.\n\nSo how about \"CMW Tag Receptacle\" or \"CMW Tag Socket\"? \"CMW Tagged Item\" is maybe another. \"Tagged\" distinguishes from \"Tag\".\n\nThe phrase to name this should not end in \"tag\" to distinguish from \"CMW tag\" and the like.",
+          "createdAt": "2025-02-12T05:19:03Z",
+          "updatedAt": "2025-02-12T05:19:03Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> \"CoSWID tag\", \"CWT CBOR Tag\" or \"UCCS tag\" and \"CMW tag\" (CMW section 10.3) are all things that have an assigned tag number and defined tag content. This here is not that at all.\n> \n> So how about \"CMW Tag Receptacle\" or \"CMW Tag Socket\"? \"CMW Tagged Item\" is maybe another. \"Tagged\" distinguishes from \"Tag\".\n> \n> The phrase to name this should not end in \"tag\" to distinguish from \"CMW tag\" and the like.\n\nI am fine with \"CMW Tagged Item\".\n\n@nedmsmith @henkbirkholz @hannestschofenig @deeglaze: let me know if you don't like it.\nIf not, I'm going to do the search/replace.\n",
+          "createdAt": "2025-02-12T08:39:26Z",
+          "updatedAt": "2025-02-12T09:04:01Z"
         }
       ]
     },
@@ -2145,7 +2159,7 @@
       "labels": [],
       "body": "There's general agreement that tags are only in CMW because some early implementations use them. If we were writing the document today we would leave out section 3.2 and focus solely on content format and media type.\r\n\r\nPlease remove mention of tags in the abstract and introduction.\r\n\r\nPlease note that section 3.2 is not recommended practice.\r\n\r\n\r\n",
       "createdAt": "2024-11-22T18:43:09Z",
-      "updatedAt": "2025-02-06T14:11:28Z",
+      "updatedAt": "2025-02-12T23:26:23Z",
       "closedAt": null,
       "comments": [
         {
@@ -2161,6 +2175,13 @@
           "body": "@laurencelundblade now that tags are TN-only, can we close this?",
           "createdAt": "2025-02-06T14:10:57Z",
           "updatedAt": "2025-02-06T14:11:28Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Makes sense to close it but I still don't agree that restricting CMW to only TN tags was necessary or desriable.",
+          "createdAt": "2025-02-12T23:26:22Z",
+          "updatedAt": "2025-02-12T23:26:22Z"
         }
       ]
     },
@@ -2270,7 +2291,7 @@
       "labels": [],
       "body": "The amount of text added to CWT that says how COSE is supported is pretty small. The text that adds COSE to CoSWID is larger, but I don't think all the stuff CoSWID did is necessary.\r\n\r\nIt seems very clear that COSE and JOSE are the way to do attestation security, the same as EAT does. There's probably no controversy over it or much debate.\r\n\r\nSince CMW is very clearly an evidence format, it seems kind of important to have security.\r\n\r\nNote also recent discussion on TLS and composite attestation on the rats mailing list. It seems like COSE/JOSE-secured evidence is useful and sometimes preferable for composite attestation evidence compared to TLS.\r\n\r\nIt seems useful for the rats community to know exactly what security should be used to promote interoperability. It's probably not helpful for 1,000 flowers to bloom (lots of attestation security mechanism).",
       "createdAt": "2024-12-04T05:51:32Z",
-      "updatedAt": "2025-02-09T12:28:04Z",
+      "updatedAt": "2025-02-12T23:00:34Z",
       "closedAt": null,
       "comments": [
         {
@@ -2283,9 +2304,9 @@
         {
           "author": "nedmsmith",
           "authorAssociation": "COLLABORATOR",
-          "body": "> Since CMW is very clearly an evidence format\n\nBut not exclusively and Evidence format...",
+          "body": "> Since CMW is very clearly an evidence format\n\nBut not exclusively an Evidence format...",
           "createdAt": "2025-01-21T20:18:16Z",
-          "updatedAt": "2025-01-21T20:18:16Z"
+          "updatedAt": "2025-02-12T23:00:34Z"
         },
         {
           "author": "thomas-fossati",
@@ -10545,13 +10566,13 @@
       "labels": [],
       "body": "Capturing a suggestion made by @laurencelundblade",
       "createdAt": "2024-12-17T14:13:06Z",
-      "updatedAt": "2025-02-08T18:51:19Z",
+      "updatedAt": "2025-02-12T23:08:34Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "18e88daeb38a42067c95229b336a40239c875ea4",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "design-principles",
-      "headRefOid": "867d1aab34e14089eec508a6f4f52a0611e66edc",
+      "headRefOid": "639328be9146bb9efe93700ce30bf88da900d537",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -10652,6 +10673,19 @@
               "updatedAt": "2025-02-08T13:35:08Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6bxbw2",
+          "commit": {
+            "abbreviatedOid": "867d1aa"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "WFM",
+          "createdAt": "2025-02-12T23:07:16Z",
+          "updatedAt": "2025-02-12T23:07:16Z",
+          "comments": []
         }
       ]
     },
@@ -11175,7 +11209,7 @@
       "labels": [],
       "body": "Fix #148",
       "createdAt": "2025-02-06T16:58:48Z",
-      "updatedAt": "2025-02-09T03:41:31Z",
+      "updatedAt": "2025-02-12T23:04:47Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "d00643d16930819cdf141122576845286cd93beb",
@@ -11256,6 +11290,19 @@
               "updatedAt": "2025-02-08T13:37:52Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6bxaxE",
+          "commit": {
+            "abbreviatedOid": "fae632d"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-02-12T23:04:47Z",
+          "updatedAt": "2025-02-12T23:04:47Z",
+          "comments": []
         }
       ]
     },
@@ -11271,7 +11318,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-02-08T13:45:42Z",
-      "updatedAt": "2025-02-08T13:45:42Z",
+      "updatedAt": "2025-02-12T23:20:49Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "d00643d16930819cdf141122576845286cd93beb",
@@ -11283,7 +11330,34 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6bxf9G",
+          "commit": {
+            "abbreviatedOid": "9f42786"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "see suggested text",
+          "createdAt": "2025-02-12T23:18:34Z",
+          "updatedAt": "2025-02-12T23:20:49Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nThis document defines a conceptual message wrapper (CMW) format - an encapsulation method applicable to any conceptual message, such as Evidence, Attestation Results, Endorsements, and Reference Values. It also describes a collection type that envelopes one or more CMWs into a single aggreated message.\r\n```",
+              "createdAt": "2025-02-12T23:18:34Z",
+              "updatedAt": "2025-02-12T23:20:49Z"
+            },
+            {
+              "originalPosition": 11,
+              "body": "```suggestion\r\nIn addition, this document specifies a corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, and an X.509 extension. These mechanisms enable the embedding of enveloped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols. Moreover, a Media Type and a CoAP Content-Format are defined for transporting CMWs over HTTP, MIME, CoAP, and other Internet protocols.\r\n```\r\n\r\n\"wrapping\" can be misinterpreted as encryption.",
+              "createdAt": "2025-02-12T23:20:16Z",
+              "updatedAt": "2025-02-12T23:20:49Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 174,
@@ -11297,7 +11371,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-02-08T13:57:01Z",
-      "updatedAt": "2025-02-08T13:57:35Z",
+      "updatedAt": "2025-02-12T23:14:21Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "d00643d16930819cdf141122576845286cd93beb",
@@ -11309,7 +11383,34 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6bxctG",
+          "commit": {
+            "abbreviatedOid": "41b4e4c"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "See comments.",
+          "createdAt": "2025-02-12T23:10:28Z",
+          "updatedAt": "2025-02-12T23:14:21Z",
+          "comments": [
+            {
+              "originalPosition": 34,
+              "body": "```suggestion\r\n- In a \"passport\" topology, Attestation Results for Secure Interactions (AR4SI) payloads\r\n```",
+              "createdAt": "2025-02-12T23:10:28Z",
+              "updatedAt": "2025-02-12T23:14:21Z"
+            },
+            {
+              "originalPosition": 34,
+              "body": "AR4SI is exemplary, and without some additional adaptation, AR4SI isn't even a message that can be sent. Better to say? \"In a 'passport' topology, an attestation result payload (e.g., AR4SI [I-D.ar4si]) ...\"",
+              "createdAt": "2025-02-12T23:13:50Z",
+              "updatedAt": "2025-02-12T23:14:21Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 176,
@@ -11323,7 +11424,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-02-10T11:50:14Z",
-      "updatedAt": "2025-02-10T13:35:49Z",
+      "updatedAt": "2025-02-12T22:58:25Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "d00643d16930819cdf141122576845286cd93beb",
@@ -11493,6 +11594,26 @@
               "body": "not just records, also TNs",
               "createdAt": "2025-02-10T13:35:49Z",
               "updatedAt": "2025-02-10T13:35:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6bxXxC",
+          "commit": {
+            "abbreviatedOid": "b016274"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-12T22:56:55Z",
+          "updatedAt": "2025-02-12T22:58:25Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "```suggestion\r\n## CMW Protection\r\n```",
+              "createdAt": "2025-02-12T22:56:56Z",
+              "updatedAt": "2025-02-12T22:58:25Z"
             }
           ]
         }
