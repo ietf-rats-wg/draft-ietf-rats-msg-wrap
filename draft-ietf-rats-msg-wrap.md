@@ -115,7 +115,7 @@ For example,
 the Attester to the Relying Party and then from the Relying Party to the Verifier,
 each leg following a separate protocol path.
 
-- In "passport" mode, Attestation Results for Secure Interactions (AR4SI) payloads
+- In a "passport" topology, an attestation result payload (e.g., Attestation Results for Secure Interactions (AR4SI) [I-D.ar4si])
 ({{-rats-ar4si}}) are initially sent from the Verifier to the Attester, and later,
 via a different channel, from the Attester to the Relying Party.
 
