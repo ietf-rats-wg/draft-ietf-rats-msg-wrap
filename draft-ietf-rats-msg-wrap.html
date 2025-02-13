@@ -11,11 +11,11 @@
 <meta content="Hannes Tschofenig" name="author">
 <meta content="Dionna Glaze" name="author">
 <meta content="
-       This document defines the RATS conceptual message wrapper (CMW) format, a type of encapsulation format that can be used for any RATS messages, such as Evidence, Attestation Results, Endorsements, and Reference Values.
-Additionally, the document describes a collection type that enables the aggregation of one or more CMWs into a single message. 
-       This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
-These allow embedding the wrapped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols.
-In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols. 
+       This document defines a conceptual message wrapper (CMW) format - an encapsulation method applicable to any RATS conceptual message, such as Evidence, Attestation Results, Endorsements, and Reference Values.
+It also describes a collection type that aggregates one or more CMWs into a single message. 
+       In addition, this document specifies a corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, and an X.509 extension.
+These mechanisms enable the embedding of enveloped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols.
+Moreover, a Media Type and a CoAP Content-Format are defined for transporting CMWs over HTTP, MIME, CoAP, and other Internet protocols. 
     " name="description">
 <meta content="xml2rfc 3.26.0" name="generator">
 <meta content="evidence" name="keyword">
@@ -1106,11 +1106,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">RATS Conceptual Messages Wrapper (CMW)</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document defines the RATS conceptual message wrapper (CMW) format, a type of encapsulation format that can be used for any RATS messages, such as Evidence, Attestation Results, Endorsements, and Reference Values.
-Additionally, the document describes a collection type that enables the aggregation of one or more CMWs into a single message.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-<p id="section-abstract-2">This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
-These allow embedding the wrapped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols.
-In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This document defines a conceptual message wrapper (CMW) format - an encapsulation method applicable to any RATS conceptual message, such as Evidence, Attestation Results, Endorsements, and Reference Values.
+It also describes a collection type that aggregates one or more CMWs into a single message.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">In addition, this document specifies a corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, and an X.509 extension.
+These mechanisms enable the embedding of enveloped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols.
+Moreover, a Media Type and a CoAP Content-Format are defined for transporting CMWs over HTTP, MIME, CoAP, and other Internet protocols.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-discussion-venues">
