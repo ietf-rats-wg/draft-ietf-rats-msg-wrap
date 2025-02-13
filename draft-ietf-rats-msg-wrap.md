@@ -287,14 +287,6 @@ Since the collection type is recursive, implementations may limit the allowed de
 {: #fig-cddl-collection artwork-align="left"
    title="CDDL definition of the CMW collection format"}
 
-CMW itself provides no facilities for authenticity, integrity protection, or confidentiality.
-It is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly.
-A secure channel (e.g., via TLS) or object-level security (e.g., using JWT) may suffice in some scenarios, but not in all.
-
-When a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically
-bound to prevent an attacker from replacing Evidence from a compromised device with Evidence from a non-compromised device. The protection of authenticity and integrity
-MUST be provided by the attestation technology. For additional security considerations related to collections, refer to {{seccons-coll}}.
-
 ### CMW Collections' role in composite Attester topology
 
 A CMW Collection's tree structure is not required to be a spanning tree of the system's composite Attester topology.
@@ -328,7 +320,11 @@ func CMWTypeDemux(b []byte) (CMW, error) {
 }
 ~~~
 
-# Sign CBOR CMW using COSE Sign1 {#signed-cbor-cmw}
+# Cryptographic Protection of CMWs {#crypto}
+
+This section highlights a number of mechanisms to add cryptographic protection to CMWs.
+
+## Signing CBOR CMW using COSE Sign1 {#signed-cbor-cmw}
 
 A CBOR CMW can be signed using COSE {{-cose}}.
 A `signed-cbor-cmw` is a `COSE_Sign1` with the following layout:
@@ -347,7 +343,7 @@ The protected header MUST include the signature algorithm identifier.
 The protected header MUST include the content type `application/cmw+cbor`.
 Other header parameters MAY be added to the header buckets, for example a `kid` that identifies the signing key.
 
-# Sign JSON CMW using JWS {#signed-json-cmw}
+## Signing JSON CMW using JWS {#signed-json-cmw}
 
 A JSON CMW can be signed using JSON Web Signature (JWS) {{-jws}}.
 A `signed-json-cmw` is a JWS object with the following layout:
@@ -369,13 +365,13 @@ Other header parameters MAY be added to the header buckets, for example a `kid` 
 For clarity, the above uses the Flattened JSON Serialization ({{Section 7.2.2 of -jws}}).
 However, the Compact Serialization ({{Section 3.1 of -jws}}) can also be used.
 
-# Transporting CMW in COSE and JOSE Web Tokens {#webtokens}
+## Transporting CMW in COSE and JOSE Web Tokens {#webtokens}
 
 To facilitate the embedding of CMWs and CMW collections in CBOR-based protocols and web APIs, this document defines two `"cmw"` claims for use with JSON Web Tokens (JWT) and CBOR Web Tokens (CWT).
 
 The definitions for these claims can be found in {{iana-jwt}} and {{iana-cwt}}, respectively.
 
-## Encoding Requirements
+### Encoding Requirements
 
 A CMW collection carried in a `"cmw"` JWT claim MUST be a `json-collection`.
 A CMW collection carried in a `"cmw"` CWT claim MUST be a `cbor-collection`.
@@ -383,7 +379,7 @@ A CMW collection carried in a `"cmw"` CWT claim MUST be a `cbor-collection`.
 A CMW record carried in a `"cmw"` JWT claim MUST be a `json-record`.
 A CMW record carried in a `"cmw"` CWT claim MUST be a `cbor-record`.
 
-# Transporting CMW in X.509 Messages {#x509}
+## Transporting CMW in X.509 Messages {#x509}
 
 CMW may need to be transported in PKIX messages, such as Certificate Signing Requests (CSRs) or in X.509 Certificates and Certificate Revocation Lists (CRLs).
 
@@ -417,7 +413,7 @@ The CMW MUST include the serialized CMW object in either JSON or CBOR format, ut
 
 The DER-encoded CMW is the value of the OCTET STRING for the extnValue field of the extension.
 
-## ASN.1 Module {#asn1-x509}
+### ASN.1 Module {#asn1-x509}
 
 This section provides an ASN.1 module {{X.680}} for the CMW extension, following the conventions established in {{-pkix-mods}} and {{-more-pkix-mods}}.
 
@@ -459,7 +455,7 @@ CMW ::= CHOICE {
 END
 ~~~
 
-## Compatibility with DICE `ConceptualMessageWrapper`
+### Compatibility with DICE `ConceptualMessageWrapper`
 
 Section 6.1.8 of {{DICE-arch}} specifies the ConceptualMessageWrapper (CMW) format and its corresponding object identifier.
 The CMW format outlined in {{DICE-arch}} permits only a subset of the CMW grammar defined in this document.
@@ -605,15 +601,25 @@ The developers can be contacted on the Zulip channel:
 
 # Security Considerations {#seccons}
 
-## Records and CBOR Tags
+## CMW Protection
+
+CMW itself does not provide any mechanisms for authenticity, integrity protection, or confidentiality.
+It is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly.
+In some scenarios, a secure channel (e.g., via TLS) or object-level security (e.g., using JWT) may be sufficient, but this is not always the case.
+
+When a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically bound to prevent an attacker from replacing Evidence from a compromised device with that from a non-compromised device.
+Authenticity and integrity protection MUST be provided by the attestation technology.
+For additional security considerations related to collections, refer to {{seccons-coll}}.
 
 RATS conceptual messages are typically secured using cryptography.
-If the messages are already protected, then there are no additional security requirements imposed by the introduction of this encapsulation.
-If an adversary tries to modify the payload encapsulation, it will result in incorrect processing of the encapsulated message and lead to an error.
+If the messages are already protected, no additional security requirements are imposed by this encapsulation.
+If an adversary attempts to modify the payload encapsulation, it will result in incorrect processing of the encapsulated message, leading to an error.
 If the messages are not protected, additional security must be added at a different layer.
-As an example, a `cbor-record` containing an UCCS (Unprotected CWT Claims Sets) {{-rats-uccs}} can be signed as described in {{signed-cbor-cmw}}.
+For example, a `cbor-record` containing an Unprotected CWT Claims Set (UCCS) {{-rats-uccs}} can be signed as described in {{signed-cbor-cmw}}.
 
-## Collections {#seccons-coll}
+{{crypto}} describes a number of methods that can be used to add cryptographic protection to CMW.
+
+## CMW Collections {#seccons-coll}
 
 If the collection is not protected from tampering by external security measures (such as object security primitives) or internal mechanisms (such as intra-item binding), an attacker could easily manipulate the collection's contents.
 It is the responsibility of the Attester who creates the CMW collection to ensure that the contents of the collection are integrity-protected.
