@@ -163,10 +163,10 @@ Table of Contents
    diverse attestation technologies.  For instance, a Relying Party
    application implementer does not need to parse attestation-related
    messages, such as Evidence from Attesters on IoT devices with Trusted
-   Platform Modules or servers using confidential computing hardware
-   like Intel Trust Domain Extensions (TDX).  Instead, they can leverage
-   the CMW format, remaining agnostic to the specific attestation
-   technology.
+   Platform Modules (TPM) or servers using confidential computing
+   hardware like Intel Trust Domain Extensions (TDX).  Instead, they can
+   leverage the CMW format, remaining agnostic to the specific
+   attestation technology.
 
    This document defines two encapsulation formats for RATS conceptual
    messages that aim to achieve the goals stated above.
