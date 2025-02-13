@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 14 August 2025                                            Intel
+Expires: 17 August 2025                                            Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                        10 February 2025
+                                                        13 February 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 August 2025.
+   This Internet-Draft will expire on 17 August 2025.
 
 Copyright Notice
 
@@ -905,13 +905,13 @@ lication/signed-corim+cbor"
 
    RATS conceptual messages are typically secured using cryptography.
    If the messages are already protected, no additional security
-   requirements are imposed by this encapsulation.  However, if an
-   adversary attempts to modify the payload encapsulation, it will
-   result in incorrect processing of the encapsulated message, leading
-   to an error.  If the messages are not protected, additional security
-   must be added at a different layer.  For example, a cbor-record
-   containing an Unprotected CWT Claims Set (UCCS) [I-D.ietf-rats-uccs]
-   can be signed as described in Section 4.
+   requirements are imposed by this encapsulation.  If an adversary
+   attempts to modify the payload encapsulation, it will result in
+   incorrect processing of the encapsulated message, leading to an
+   error.  If the messages are not protected, additional security must
+   be added at a different layer.  For example, a cbor-record containing
+   an Unprotected CWT Claims Set (UCCS) [I-D.ietf-rats-uccs] can be
+   signed as described in Section 4.
 
 11.2.  CMW Collections
 
