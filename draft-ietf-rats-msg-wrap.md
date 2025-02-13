@@ -591,7 +591,7 @@ The developers can be contacted on the Zulip channel:
 
 # Security Considerations {#seccons}
 
-## Protecting CMW Records
+## CMW Protection
 
 CMW itself does not provide any mechanisms for authenticity, integrity protection, or confidentiality.
 It is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly.
