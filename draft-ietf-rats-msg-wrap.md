@@ -104,31 +104,30 @@ In addition, a Media Type and a CoAP Content-Format are defined for transporting
 
 # Introduction
 
-The RATS architecture defines a handful of conceptual messages
+The IETF Remote ATtestation procedureS (RATS) architecture defines a handful of conceptual messages
 (see {{Section 8 of -rats-arch}}), such as Evidence and Attestation Results.
 Each conceptual message can have multiple claims encoding and serialization
 formats ({{Section 9 of -rats-arch}}). Throughout their lifetime, RATS
 conceptual messages are typically transported over different protocols.
 For example,
 
-- EAT {{-rats-eat}} Evidence in a "background check" topological
-arrangement first flows from Attester to Relying Party, and then from Relying
-Party to Verifier, over separate protocol legs.
+- In a "background check" topology, EAT Evidence {{-rats-eat}} first flows from
+the Attester to the Relying Party and then from the Relying Party to the Verifier,
+each leg following a separate protocol path.
 
-- Attestation Results for Secure Interactions (AR4SI) {{-rats-ar4si}} payloads in
-"passport" mode would be sent by the Verifier to the Attester and then, at a later
-point in time and over a different channel, from the Attester to the Relying Party.
+- In a "passport" topology, an attestation result payload (e.g., Attestation Results for Secure Interactions (AR4SI) {{-rats-ar4si}})
+is initially sent from the Verifier to the Attester, and later,
+via a different channel, from the Attester to the Relying Party.
 
-It is desirable to reuse any typing information associated with the messages
-across such protocol boundaries to minimize the cost associated with
-type registrations and maximize interoperability. With the CMW format described
-in this document, protocol designers do not need to update protocol specifications
-to support different conceptual messages. This approach reduces the implementation
-effort for developers to support different attestation technologies. For example,
-an implementer of a Relying Party application does not need to parse
-attestation-related conceptual messages, such as different Evidence formats,
-but can instead utilize the CMW format to be agnostic to the attestation
-technology.
+By using the CMW format outlined in this document, protocol designers can avoid the need
+to update protocol specifications to accommodate different conceptual messages and
+serialization formats used by various attestation technologies. This approach streamlines
+the implementation process for developers, enabling easier support for diverse attestation
+technologies. For instance, a Relying Party application implementer does not need to parse
+attestation-related messages, such as Evidence from Attesters on IoT devices with Trusted
+Platform Modules (TPM) or servers using confidential computing hardware like Intel Trust
+Domain Extensions (TDX). Instead, they can leverage the CMW format, remaining agnostic
+to the specific attestation technology.
 
 A further design goal is extensibility.
 This means that adding support for new conceptual messages and new attestation technologies should not change the core of the processor, and that a CMW stack can be designed to offer a plug-in interface for both encoding and decoding.
