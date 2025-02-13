@@ -605,7 +605,7 @@ RATS conceptual messages are typically secured using cryptography.
 If the messages are already protected, no additional security requirements are imposed by this encapsulation.
 If an adversary attempts to modify the payload encapsulation, it will result in incorrect processing of the encapsulated message, leading to an error.
 If the messages are not protected, additional security must be added at a different layer.
-For example, a cbor-record containing an Unprotected CWT Claims Set (UCCS) {{-rats-uccs}} can be signed as described in {{signed-cbor-cmw}}.
+For example, a `cbor-record` containing an Unprotected CWT Claims Set (UCCS) {{-rats-uccs}} can be signed as described in {{signed-cbor-cmw}}.
 
 ## CMW Collections {#seccons-coll}
 
