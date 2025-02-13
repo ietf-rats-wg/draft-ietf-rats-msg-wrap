@@ -130,6 +130,12 @@ attestation-related conceptual messages, such as different Evidence formats,
 but can instead utilize the CMW format to be agnostic to the attestation
 technology.
 
+A further design goal is extensibility.
+This means that adding support for new conceptual messages and new attestation technologies should not change the core of the processor, and that a CMW stack can be designed to offer a plug-in interface for both encoding and decoding.
+To achieve this, the format must provide consistent message encapsulation and explicit typing.
+These features allow for selecting the appropriate message handler based on its type identifier.
+An opaque message can then be passed between the core and the handler.
+
 This document defines two encapsulation formats for RATS conceptual
 messages that aim to achieve the goals stated above.
 
