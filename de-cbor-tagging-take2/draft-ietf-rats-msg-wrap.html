@@ -1399,27 +1399,32 @@ an implementer of a Relying Party application does not need to parse
 attestation-related conceptual messages, such as different Evidence formats,
 but can instead utilize the CMW format to be agnostic to the attestation
 technology.<a href="#section-1-3" class="pilcrow">¶</a></p>
-<p id="section-1-4">This document defines two encapsulation formats for RATS conceptual
-messages that aim to achieve the goals stated above.<a href="#section-1-4" class="pilcrow">¶</a></p>
-<p id="section-1-5">These encapsulation formats have been specifically designed to possess the following characteristics:<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-4">A further design goal is extensibility.
+This means that adding support for new conceptual messages and new attestation technologies should not change the core of the processor, and that a CMW stack can be designed to offer a plug-in interface for both encoding and decoding.
+To achieve this, the format must provide consistent message encapsulation and explicit typing.
+These features allow for selecting the appropriate message handler based on its type identifier.
+An opaque message can then be passed between the core and the handler.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-5">This document defines two encapsulation formats for RATS conceptual
+messages that aim to achieve the goals stated above.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6">These encapsulation formats have been specifically designed to possess the following characteristics:<a href="#section-1-6" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-1-6.1">
-          <p id="section-1-6.1.1">They are self-describing, which means that they can convey precise typing information without relying on the framing provided by the embedding protocol or the storage system.<a href="#section-1-6.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-1-7.1">
+          <p id="section-1-7.1.1">They are self-describing, which means that they can convey precise typing information without relying on the framing provided by the embedding protocol or the storage system.<a href="#section-1-7.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-6.2">
-          <p id="section-1-6.2.1">They are based on media types <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>, which allows the cost of their registration to be spread across numerous usage scenarios.<a href="#section-1-6.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-1-7.2">
+          <p id="section-1-7.2.1">They are based on media types <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>, which allows the cost of their registration to be spread across numerous usage scenarios.<a href="#section-1-7.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-1-7">A protocol designer could use these formats, for example, to convey
+<p id="section-1-8">A protocol designer could use these formats, for example, to convey
 Evidence, Endorsements and Reference Values in certificates and CRLs
 extensions (<span>[<a href="#DICE-arch" class="cite xref">DICE-arch</a>]</span>), to embed Attestation Results or Evidence as
 first-class authentication credentials in TLS handshake messages
 <span>[<a href="#I-D.fossati-tls-attestation" class="cite xref">I-D.fossati-tls-attestation</a>]</span>, to transport attestation-related payloads in RESTful APIs,
 or for stable storage of Attestation Results in the form of file system
-objects.<a href="#section-1-7" class="pilcrow">¶</a></p>
-<p id="section-1-8">This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
+objects.<a href="#section-1-8" class="pilcrow">¶</a></p>
+<p id="section-1-9">This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
 These allow embedding the wrapped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols.
-In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.<a href="#section-1-8" class="pilcrow">¶</a></p>
+In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.<a href="#section-1-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
