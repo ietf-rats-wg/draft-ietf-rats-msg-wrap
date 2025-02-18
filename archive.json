@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-16T00:55:58.626086+00:00",
+  "timestamp": "2025-02-18T00:51:25.341658+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2255,7 +2255,7 @@
       "labels": [],
       "body": "What is the right way to use cmw to wrap an already defined conceptual message such as SGX or TPM?\r\n\r\nThe goals of cmw suggest this use case can be supported.\r\n\"This document defines the RATS conceptual message wrapper (CMW) format, a type of encapsulation format that can be used for any RATS messages, such as Evidence, Attestation Results, Endorsements, and Reference Values.\"\r\n\r\nGiven the legacy CM has a media-type / CF and it's native encoding is binary. Is it expected that the cbor-record form should be used (even though the binary encoding isn't cbor)? The I-D text \"When using CBOR, the value field MUST be encoded as a CBOR byte string.\" is rather terse in that it doesn't describe that the contents, though not originally cbor, is converted to a cbor `bytes`. The implications of this conversion are not stated. For example, does it mean word endieness must be taken into account etc...?\r\n\r\nThe media-type / CF in `type` may be sufficient to tell the parser what `bytes` contains.  So, the only part that is cbor is the `cbor-record` array. What follows in `bytes` is a cbor-ized representation of what is described by the media-type/CF.  Normally, the media-type/CF would describe the content in its native form, whereas in CMW I-D it is a cbor-ized native form. The draft should include words to this effect IMO.\r\n\r\nNote: When using the TN form, the cm-type information isn't included in the TN tag unless the cm-type is intrinsic to the media-type or there is a profile or other token that includes it. cm-type is optional because it only applies to cases where the media-type is ambiguous wrt cm-type. If cm-type were required to be specified as part of the media-type definition. Would there be use cases for when it needs to be included in the cbor-record/json-record form? For the use case above, the media-type definition (if one existed already) could be updated to include an optional \"cm-type\" token. If it didn't exist, it isn't extra work to include a cm-type token. E.g., \"application/my-cm; cm-type=1\". \r\n\r\nNote: If the CM is something like corim, which might contain both RVs and Endorsements, the cm-type should indicate both 0 and 1. It isn't clear how to do this with the current def. If it was a bit field (1,2,4,8,....) then 3 would mean two of the bits are true at the same time. The I-D should describe how this use case is handled.\r\n\r\n",
       "createdAt": "2024-11-25T18:54:47Z",
-      "updatedAt": "2024-11-26T18:53:01Z",
+      "updatedAt": "2025-02-17T18:52:44Z",
       "closedAt": null,
       "comments": [
         {
@@ -2264,6 +2264,13 @@
           "body": "> > Given the legacy CM has a media-type / CF and it's native encoding is binary. Is it expected that the cbor-record form should be used (even though the binary encoding isn't cbor)?\r\n> \r\n> No, JSON is an equivalently valid option.\r\n\r\nSome guidance as to why someone might choose one form over the other might be helpful. Otherwise, why not just always choose one (and never choose the other)? For example, if the cbor form is always chosen but a conveyance protocol only handles text, then the cbor form can be base64 encoded just before putting it in the protocol's payload structure. It might not be reasonable to expect a designer of a component buried deep in a system to know which conveyance protocol will ultimately be chosen. It seems unnecessary for that designer to encode it both ways, for example. \r\n\r\n> > The I-D text \"When using CBOR, the value field MUST be encoded as a CBOR byte string.\" is rather terse in that it doesn't describe that the contents, though not originally cbor, is converted to a cbor `bytes`. The implications of this conversion are not stated. For example, does it mean word endieness must be taken into account etc...?\r\n> \r\n> Endianness and any other serialization details are captured by the media type/CF.  This goes in the CMW's `type`.\r\n\r\nSaid another way, is it the expectation of CMW that the native format MUST be in a serialized form?\r\n\r\n> \r\n> The CMW's `value` is whatever the `type` says, wrapped in `bstr` when the CMW is CBOR-encoded, wrapped in `b64u` when the CMW is JSON-encoded.\r\n> \r\n> > The media-type / CF in `type` may be sufficient to tell the parser what `bytes` contains.\r\n> \r\n> Well, it _must_ be sufficient, there has to be no syntactic ambiguity.\r\n> \r\n> > So, the only part that is cbor is the `cbor-record` array. What follows in `bytes` is a cbor-ized representation of what is described by the media-type/CF.\r\n> \r\n> If by \"cbor-ized representation\" you mean bstr-wrapping, then yes.\r\n\r\nYes\r\n\r\n> Pulling out one of the examples from \u00a76.2 - with some extra decoration:\r\n> \r\n> ```\r\n> 82             # array(2)           + CMW array \"header\"\r\n>    19 7531     # unsigned(30001)    + CBOR-encoded C-F type\r\n>    44          # bytes(4)           + CBOR bstr wrapping of...\r\n>       2347da55 # \"#G\\xDAU\"          - ...the real thing in its \"native\" form\r\n> ```\r\n> \r\n> \r\n> So you can think of `h'8219753144'` as the CBOR wrapper (including complete typing info) of the \"real thing\" , i.e., `h'2347da55'` in its native form.\r\n\r\nI found the extra decoration helpful. Maybe a sentence or two can be added to highlight that `h'2347da55'` is in its native form?\r\n\r\n> > Normally, the media-type/CF would describe the content in its native form, whereas in CMW I-D it is a cbor-ized native form. The draft should include words to this effect IMO.\r\n> \r\n> hmm, I am not sure I get the subtlety you are trying to suggest.\r\n\r\nMaybe the extra decoration suggested above would be sufficient.\r\n\r\n> In \u00a73.1 we say:\r\n> \r\n> > \"_When using JSON, the value field MUST be encoded as Base64 using the URL and filename safe alphabet without padding._\"\r\n> \r\n> I.e., we require the \"native form\" to be b64u-encoded.\r\n\r\nThis wording is more clear IMHO.\r\n\r\n> \r\n> > \"_When using CBOR, the value field MUST be encoded as a CBOR byte string._\"\r\n> \r\n> I.e., we require the \"native form\" to be bstr-encoded.\r\n\r\nditto\r\n\r\n> \r\n> Those two clearly establish the boundary between JSON-/CBOR-wrapping and the real thing.\r\n\r\n> > Note: When using the TN form, the cm-type information isn't included in the TN tag unless the cm-type is intrinsic to the media-type or there is a profile or other token that includes it. cm-type is optional because it only applies to cases where the media-type is ambiguous wrt cm-type.\r\n> \r\n> Yes.\r\n\r\nDoes it make sense to add wording to this effect then? Something like: \"When using the TN form the media-type registration SHOULD define a `cm-type` parameter that identifies the CM type.\"\r\n\r\nThe I-D might define the details of the parameter. As in:\r\n\"cm-type=_numeric_\" where 1 refers to reference values, 2 refers to endorsements, 4 refers to evidence, and 8 refers to attestation results. Combinations of conceptual messages can be represented by addition. E.g., 1 + 2 = 3 meaning both reference values and endorsements are represented.\" \r\n\r\n> > If cm-type were required to be specified as part of the media-type definition. Would there be use cases for when it needs to be included in the cbor-record/json-record form? For the use case above, the media-type definition (if one existed already) could be updated to include an optional \"cm-type\" token. If it didn't exist, it isn't extra work to include a cm-type token. E.g., \"application/my-cm; cm-type=1\".\r\n> \r\n> Agree.\r\n> \r\n> > Note: If the CM is something like corim, which might contain both RVs and Endorsements, the cm-type should indicate both 0 and 1. It isn't clear how to do this with the current def. If it was a bit field (1,2,4,8,....) then 3 would mean two of the bits are true at the same time. The I-D should describe how this use case is handled.\r\n> \r\n> The definition of `ind` in \u00a73.1 looks pretty solid to me:\r\n> \r\n> > _\"An optional bitmap that indicates which conceptual message types are carried in the value field. Any combination (i.e., any value between 1 and 15, included) is allowed.\"_\r\n> \r\n> What do you think is missing?  We also provide an example in \u00a76.4 (\"CBOR Record with explicit CM indicator\") where `ind` 0b0000_0011 (3) is used to exemplify a CM with Ref-Vals + Endorsements.\r\n\r\nI was misreading the CDDL to mean enumeration. My bad.\r\n\r\n",
           "createdAt": "2024-11-26T11:28:13Z",
           "updatedAt": "2024-11-26T18:53:01Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "If I'm understanding this correctly, I think the answer is that you use the encoding (CBOR, JSON,...) for CMW that matches the encoding of the surrounding protocol.  For example, when putting the output of the TPM into a JSON encoded EAT, you use a JSON encoded CMW.  It doesn't matter what the encoding or format of the conceptual message being embedded is.\n\nThe content-type/format definition document should tell everything (byte ordering...). Otherwise it's a bad definition.",
+          "createdAt": "2025-02-17T18:42:52Z",
+          "updatedAt": "2025-02-17T18:52:44Z"
         }
       ]
     },
@@ -2554,7 +2561,7 @@
       "labels": [],
       "body": "\nLaurence made the proposal to drop the \"cmw\" CWT and JWT claims in favour of claims carrying more specific semantics: https://mailarchive.ietf.org/arch/msg/rats/u8Ug1k9DY27zQSccj_HnUmpDydU/\n\nI may be mistaken (in which case, please help me finding references to any related discussions), but ISTM that the discussion thread on the RATS list has drifted off, and there was no conclusion reached regarding that particular point.\n\nSummarising:\n\n1. \"cmw\" semantic is very generic, it needs extra information (e.g., specific media type, profile) to be understood.\n2. There can only be one \"cmw\" claim in a claims-set.\n\nWhat do people think?\n",
       "createdAt": "2025-01-29T10:49:50Z",
-      "updatedAt": "2025-02-13T19:22:42Z",
+      "updatedAt": "2025-02-16T19:19:59Z",
       "closedAt": null,
       "comments": [
         {
@@ -2584,6 +2591,13 @@
           "body": "> CMW claims are about the same granularity as EAT Measurements claim or an EAT submod claim that contains a set or sets of claims.\n\nI dunno about that. A CMW can be endorsements, results, evidence or reference values or all four. That seems way more open-ended than measurements or submods.\n\nEAT itself can be evidence or attestation results. There's not any way to mix evidence and results in one EAT so nothing needed to be said, but there is a way to mix them in CMW.\n\nIn a sense claims are cheap. It's not costly to define one CMW-format claim that is submods only and other CMW-format claims for other uses cases. Would be interested to hear about some specific ones. Like how would you construct an evidence token that bundles the corresponding endorsement the way CMS/TLS carry corresponding cert chains.\n\nAlso, attestation is more complicated and confusing than CMS, TLS and such, so it seems helpful to the reader/implementor to be more clear and specific. Also helps things interoperate.\n\n\n",
           "createdAt": "2025-02-13T19:22:40Z",
           "updatedAt": "2025-02-13T19:22:40Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "I have convinced myself that for EAT, a \"nested-token\" claims is much preferred to a \"cmw\" claim. It just seems confusing and chaotic for humans and implementations to have to traverse and sift a generic \"cmw\" claims to sort evidence from endorsements and such. This idea probably applies to all uses of the \"cmw\" claim, but I'm focusing on EAT here. Here's a first pass at text for the \"nested-token\" claim:\n\nThe \"nested-token\" claim replaces the \"submods\" claim for subordinate modules, as defined in [EAT section 4.2.18.3] on Nested Tokens. These nested tokens typically represent claim sets from distinct subordinate attesting environments.\n\nIn an evidence EAT, every member, regardless of nesting depth, of the nested-token claim MUST be evidence. Likewise, in an attestation results EAT, every member MUST be attestation results. The \"ind\" item from CMW MUST NOT be used in the nested-token claim.\n\nEach member's message type is identified by a \"type\" item. Members can be of any format, including non-CBOR/JSON types and those defined outside the RATS WG. However, they MUST always be either evidence or attestation results.\n\nIf there is a need to carry endorsements, reference values, or other non-evidence/attestation result messages in an EAT, a separate claim (or multiple separate claims) SHOULD be defined for those purposes.\n\nFinally, EAT is transitioning away from the CBOR tag mechanism for identifying messages within claims, as it only applies to CBOR and lacks a JSON equivalent. Instead, content type/format is preferred for its universality.",
+          "createdAt": "2025-02-16T18:47:04Z",
+          "updatedAt": "2025-02-16T19:19:59Z"
         }
       ]
     },
@@ -11919,7 +11933,7 @@
       "labels": [],
       "body": "Fix #148\r\n\r\nThis PR supersedes #172 using the name suggested by Laurence.",
       "createdAt": "2025-02-13T14:36:15Z",
-      "updatedAt": "2025-02-14T20:36:45Z",
+      "updatedAt": "2025-02-17T08:45:58Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "468913887d4b2d43b6a8acbd4a8d71099a775d9b",
@@ -12005,6 +12019,26 @@
               "updatedAt": "2025-02-14T20:36:45Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6cL9TS",
+          "commit": {
+            "abbreviatedOid": "befea6b"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-17T08:45:58Z",
+          "updatedAt": "2025-02-17T08:45:58Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "> Isn't this re-introducing the problem of CMW Tag and CBOR Tag being confusing?\r\n\r\nyes.\r\n\r\nQuoting the [relevant bit from the Issue](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/148#issuecomment-2652690390) where this is discussed:\r\n\r\n> _\"The phrase to name this should not end in \"tag\" to distinguish from \"CMW tag\" and the like.\"_",
+              "createdAt": "2025-02-17T08:45:58Z",
+              "updatedAt": "2025-02-17T08:45:58Z"
+            }
+          ]
         }
       ]
     },
@@ -12046,6 +12080,74 @@
           "body": "",
           "createdAt": "2025-02-13T18:31:41Z",
           "updatedAt": "2025-02-13T18:31:41Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 180,
+      "id": "PR_kwDOIGCt2M6LfDmh",
+      "title": "Reword \"background check\" in intro",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/180",
+      "state": "OPEN",
+      "author": "ionut-arm",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Previous version made it sound like EAT was the only acceptable evidence type.",
+      "createdAt": "2025-02-17T16:34:37Z",
+      "updatedAt": "2025-02-17T18:32:40Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "4cb7eeadf2227e4b616d227ccea8d6d89d766067",
+      "headRepository": "ionut-arm/draft-ietf-rats-msg-wrap",
+      "headRefName": "intro-bg-chk",
+      "headRefOid": "1a8f9e15ab3a25cc1f72b9c6c9a96ea8652b3b38",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "+1 to this change",
+          "createdAt": "2025-02-17T18:32:39Z",
+          "updatedAt": "2025-02-17T18:32:39Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6cQj8I",
+          "commit": {
+            "abbreviatedOid": "88c4886"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-17T17:03:38Z",
+          "updatedAt": "2025-02-17T17:03:38Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n- In a \"background check\" topology, Evidence (e.g., EAT {{-rats-eat}}) first flows from\r\n```",
+              "createdAt": "2025-02-17T17:03:38Z",
+              "updatedAt": "2025-02-17T17:03:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6cRNS6",
+          "commit": {
+            "abbreviatedOid": "1a8f9e1"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM, thanks!",
+          "createdAt": "2025-02-17T18:18:53Z",
+          "updatedAt": "2025-02-17T18:18:53Z",
           "comments": []
         }
       ]
