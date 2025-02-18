@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 17 August 2025                                            Intel
+Expires: 22 August 2025                                            Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                        13 February 2025
+                                                        18 February 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 August 2025.
+   This Internet-Draft will expire on 22 August 2025.
 
 Copyright Notice
 
@@ -145,10 +145,10 @@ Table of Contents
    [RFC9334]).  Throughout their lifetime, RATS conceptual messages are
    typically transported over different protocols.  For example,
 
-   *  In a "background check" topology, EAT Evidence [I-D.ietf-rats-eat]
-      first flows from the Attester to the Relying Party and then from
-      the Relying Party to the Verifier, each leg following a separate
-      protocol path.
+   *  In a "background check" topology, Evidence (e.g., EAT
+      [I-D.ietf-rats-eat]) first flows from the Attester to the Relying
+      Party and then from the Relying Party to the Verifier, each leg
+      following a separate protocol path.
 
    *  In a "passport" topology, an attestation result payload (e.g.,
       Attestation Results for Secure Interactions (AR4SI)
