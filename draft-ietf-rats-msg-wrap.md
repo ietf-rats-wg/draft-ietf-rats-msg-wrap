@@ -39,7 +39,7 @@ contributor:
  - name: Laurence Lundblade
    organization: Security Theory LLC
    email: lgl@securitytheory.com
-   contribution: Laurence made significant contributions to enhancing the security requirements and considerations for CMW collections.
+   contribution: Laurence made significant contributions to enhancing the security requirements and considerations for Collection CMWs.
 
 normative:
   RFC3986: uri
@@ -172,8 +172,8 @@ This document reuses the terms defined in {{Section 2 of -senml-cf}}
 # Conceptual Message Wrappers
 
 A RATS Conceptual Message Wrapper (CMW) has a tree structure.
-Leaf nodes are of type "record" ({{type-n-val}}), or "CBOR tag" ({{cbor-tag}}).
-Intermediate nodes are of type "collection" ({{cmw-coll}}); they hold together multiple CMW items.
+Leaf nodes are of type "Record" ({{type-n-val}}), or "Tag" ({{cbor-tag}}).
+Intermediate nodes are of type "Collection" ({{cmw-coll}}); they hold together multiple CMW items.
 
 The following snippet outlines the productions associated with the top-level types.
 
@@ -189,9 +189,9 @@ This document only defines an encapsulation, not a security format.
 It is the responsibility of the Attester to ensure that the CMW contents have the necessary security protection.
 Security considerations are discussed in {{seccons}}.
 
-## CMW Record {#type-n-val}
+## Record CMW {#type-n-val}
 
-The format of the CMW record is shown in {{fig-cddl-record}}.
+The format of the Record CMW is shown in {{fig-cddl-record}}.
 The JSON {{-json}} and CBOR {{-cbor}} representations are provided separately.
 Both the `json-record` and `cbor-record` have the same fields except for slight differences in the types discussed below.
 
@@ -199,7 +199,7 @@ Both the `json-record` and `cbor-record` have the same fields except for slight 
 {::include cddl/cmw-record.cddl}
 ~~~
 {: #fig-cddl-record artwork-align="left"
-   title="CDDL definition of the Record format"}
+   title="CDDL definition of the Record CMW"}
 
 Each contains two or three members:
 
@@ -231,66 +231,66 @@ both Reference Values and Endorsements within the same `application/signed-corim
 shared by different conceptual messages.
 Future specifications may add new values to the `ind` field; see {{iana-ind-ext}}.
 
-## CMW CBOR Tags {#cbor-tag}
+## Tag CMW {#cbor-tag}
 
-CMW of type CBOR Tag derive their tag numbers from a corresponding CoAP Content-Format ID using the `TN()` transform defined in {{Appendix B of RFC9277}}.
+Tag CMWs derive their tag numbers from a corresponding CoAP Content-Format ID using the `TN()` transform defined in {{Appendix B of RFC9277}}.
 Such CBOR tag numbers are in range \[1668546817, 1668612095\].
 
 The RATS conceptual message is first serialized according to the Content-Format ID and then encoded as a CBOR byte string, to which the TN-derived tag number is prepended.
 
-The CMW CBOR Tag is defined in {{fig-cddl-cbor-tag}} using two different macros.
+The Tag CMW is defined in {{fig-cddl-cbor-tag}} using two different macros.
 One for CBOR-encoded types, the other for all other types.
 Both macros take the CBOR tag number `tn` as a parameter.
-The `cbor-tagged-cbor` macro takes the CDDL definition of the associated conceptual message `fmt` as a second parameter.
+The `tag-cm-cbor` macro takes the CDDL definition of the associated conceptual message `fmt` as a second parameter.
 
 ~~~ cddl
 {::include cddl/cmw-cbor-tag.cddl}
 ~~~
 {: #fig-cddl-cbor-tag artwork-align="left"
-   title="CDDL definition of the CBOR Tag format macros"}
+   title="CDDL definition of the Tag CMW macros"}
 
-To add a new CMW, the `$cbor-tag` type socket is extended with a new instance of the CMW CBOR Tag macro.
-For example, to associate conceptual messages of type `my-evidence` with CBOR Tag `1668576819`, one would extend `$cbor-tag` as follows:
+To add a new CMW, the `$cbor-tag` type socket is extended with a new instance of the Tag CMW macro.
+For example, to associate conceptual messages of type `my-evidence` with CBOR tag `1668576819`, one would extend `$cbor-tag` as follows:
 
 ~~~ cddl
 {::include cddl/cmw-example-tag-1668576819-def.cddl}
 ~~~
 
-## CMW Collections {#cmw-coll}
+## Collection CMW {#cmw-coll}
 
 Layered Attesters and composite devices ({{Sections 3.2 and 3.3 of -rats-arch}}) generate Evidence that consists of multiple parts.
 For example, in data center servers, it is not uncommon for separate attesting environments (AE) to serve a subsection of the entire machine.
 One AE might measure and attest to what was booted on the main CPU, while another AE might measure and attest to what was booted on a SmartNIC plugged into a PCIe slot, and a third AE might measure and attest to what was booted on the machine's GPU.
-To allow aggregation of multiple, potentially non-homogeneous evidence formats collected from different AEs, this document defines a CMW "collection" as a container that holds several CMW items, each with a label that is unique within the scope of the collection.
+To allow aggregation of multiple, potentially non-homogeneous evidence formats collected from different AEs, this document defines a Collection CMW as a container that holds several CMW items, each with a label that is unique within the scope of the Collection.
 
-Although originally designed to support layered Attester and composite device use cases, the CMW collection can be adapted for other scenarios that require the aggregation of RATS conceptual messages.
-For instance, collections may be used to group Endorsements, Reference Values, Attestation Results, and more.
-A single CMW collection can contain a mix of different message types, and it can also be used to carry messages related to multiple devices simultaneously.
+Although originally designed to support layered Attester and composite device use cases, the Collection CMW can be adapted for other scenarios that require the aggregation of RATS conceptual messages.
+For instance, Collections may be used to group Endorsements, Reference Values, Attestation Results, and more.
+A single Collection CMW can contain a mix of different message types, and it can also be used to carry messages related to multiple devices simultaneously.
 
-The CMW collection ({{fig-cddl-collection}}) is defined as a CBOR map or JSON object containing CMW values.
+The Collection CMW ({{fig-cddl-collection}}) is defined as a CBOR map or JSON object containing CMW values.
 The position of a `cmw` entry in the `cmw-collection` is not significant.
-Labels can be strings (or integers in the CBOR serialization) that serve as a mnemonic for different conceptual messages in the collection.
+Labels can be strings (or integers in the CBOR serialization) that serve as a mnemonic for different conceptual messages in the Collection.
 
-A collection MUST have at least one CMW entry.
+A Collection MUST have at least one CMW entry.
 
-The `"__cmwc_t"` key is reserved for associating an optional type to the overall collection and MUST NOT be used for a label.
-The collection type is either a Uniform Resource Identifier (URI) or an object identifier (OID).
+The `"__cmwc_t"` key is reserved for associating an optional type to the overall Collection and MUST NOT be used for a label.
+The value of the `"__cmwc_t"` key is either a Uniform Resource Identifier (URI) or an object identifier (OID).
 The OID is always absolute and never relative.
 The URI is always in the absolute form ({{Section 4.3 of -uri}}).
 
-Since the collection type is recursive, implementations may limit the allowed depth of nesting.
+Since the Collection CMW is recursive (a Collection CMW is itself a CMW), implementations may limit the allowed depth of nesting.
 
 ~~~ cddl
 {::include cddl/cmw-collection.cddl}
 ~~~
 {: #fig-cddl-collection artwork-align="left"
-   title="CDDL definition of the CMW collection format"}
+   title="CDDL definition of the Collection CMW"}
 
-### CMW Collections' role in composite Attester topology
+### Collection CMW role in composite Attester topology
 
-A CMW Collection's tree structure is not required to be a spanning tree of the system's composite Attester topology.
-If the labels carry semantic content for a Verifier (e.g. to improve Verifier performance or aid human comprehension), the collection SHOULD be integrity protected.
-For example, the collection can be integrity protected by including it in a signed token such as a CWT or JWT.
+A Collection CMW's tree structure is not required to be a spanning tree of the system's composite Attester topology.
+If the labels carry semantic content for a Verifier (e.g. to improve Verifier performance or aid human comprehension), the Collection SHOULD be integrity protected.
+For example, the Collection can be integrity protected by including it in a signed token such as a CWT or JWT.
 
 ## Decapsulation Algorithm
 
@@ -366,17 +366,17 @@ However, the Compact Serialization ({{Section 3.1 of -jws}}) can also be used.
 
 ## Transporting CMW in COSE and JOSE Web Tokens {#webtokens}
 
-To facilitate the embedding of CMWs and CMW collections in CBOR-based protocols and web APIs, this document defines two `"cmw"` claims for use with JSON Web Tokens (JWT) and CBOR Web Tokens (CWT).
+To facilitate the embedding of CMWs in CBOR-based protocols and web APIs, this document defines two `"cmw"` claims for use with JSON Web Tokens (JWT) and CBOR Web Tokens (CWT).
 
 The definitions for these claims can be found in {{iana-jwt}} and {{iana-cwt}}, respectively.
 
 ### Encoding Requirements
 
-A CMW collection carried in a `"cmw"` JWT claim MUST be a `json-collection`.
-A CMW collection carried in a `"cmw"` CWT claim MUST be a `cbor-collection`.
+A Collection CMW carried in a `"cmw"` JWT claim MUST be a `json-collection`.
+A Collection CMW carried in a `"cmw"` CWT claim MUST be a `cbor-collection`.
 
-A CMW record carried in a `"cmw"` JWT claim MUST be a `json-record`.
-A CMW record carried in a `"cmw"` CWT claim MUST be a `cbor-record`.
+A Record CMW carried in a `"cmw"` JWT claim MUST be a `json-record`.
+A Record CMW carried in a `"cmw"` CWT claim MUST be a `cbor-record`.
 
 ## Transporting CMW in X.509 Messages {#x509}
 
@@ -458,7 +458,7 @@ END
 
 Section 6.1.8 of {{DICE-arch}} specifies the ConceptualMessageWrapper (CMW) format and its corresponding object identifier.
 The CMW format outlined in {{DICE-arch}} permits only a subset of the CMW grammar defined in this document.
-In particular, the collection format cannot be encoded using DICE CMWs.
+In particular, the Collection format cannot be encoded using DICE CMWs.
 
 # Examples
 
@@ -471,13 +471,13 @@ CBOR tag `1668576935` is derived applying the `TN()` transform as described in
 All the examples focus on the wrapping aspects.
 The wrapped messages are not instances of real Conceptual Messages.
 
-## JSON Record {#ex-ja}
+## JSON-encoded Record {#ex-ja}
 
 ~~~ cbor-diag
 {::include cddl/cmw-example-1.json}
 ~~~
 
-## CBOR Record {#ex-ca}
+## CBOR-encoded Record {#ex-ca}
 
 ~~~ cbor-diag
 {::include cddl/cmw-example-1.diag}
@@ -489,7 +489,7 @@ with the following wire representation:
 {::include cddl/cmw-example-1.pretty}
 ~~~
 
-Note that a Media-Type-Name can also be used with the CBOR record form,
+Note that a Media-Type-Name can also be used with the CBOR-encoded Record form,
 for example if it is known that the receiver cannot handle CoAP
 Content-Formats, or (unlike the case in point) if a CoAP Content-Format
 ID has not been registrered.
@@ -498,7 +498,7 @@ ID has not been registrered.
 {::include cddl/cmw-example-2.diag}
 ~~~
 
-## CBOR Tag {#ex-ct}
+## CBOR-encoded Tag CMW {#ex-ct}
 
 ~~~ cbor-diag
 {::include cddl/cmw-example-tag-1.diag}
@@ -510,7 +510,7 @@ with the following wire representation:
 {::include cddl/cmw-example-tag-1.pretty}
 ~~~
 
-## CBOR Record with explicit CM indicator {#ex-ca-ind}
+## CBOR-encoded Record with explicit CM indicator {#ex-ca-ind}
 
 This is an example of a signed CoRIM (Concise Reference Integrity Manifest) {{-rats-corim}} with an explicit `ind` value of `0b0000_0011` (3), indicating that the wrapped message contains both Reference Values and Endorsements.
 
@@ -532,18 +532,18 @@ lication/signed-corim+cbor"
    03                                   # unsigned(3)
 ~~~
 
-## CBOR Collection
+## CBOR-encoded Collection
 
-The following example is a CBOR collection that assembles conceptual messages from three attesters: Evidence for attesters A and B and Attestation Results for attester C.
-It is given an explicit collection type using the URI form.
+The following example is a CBOR-encoded Collection CMW that assembles conceptual messages from three attesters: Evidence for attesters A and B and Attestation Results for attester C.
+It is given an explicit `"cmwc_t"` using the URI form.
 
 ~~~
 {::include cddl/collection-example-2.diag}
 ~~~
 
-## JSON Collection
+## JSON-encoded Collection
 
-The following example is a JSON collection that assembles Evidence from two attesters.
+The following example is a JSON-encoded Collection CMW that assembles Evidence from two attesters.
 
 ~~~
 {::include cddl/collection-example-2.json}
@@ -551,7 +551,7 @@ The following example is a JSON collection that assembles Evidence from two atte
 
 ## Use in JWT
 
-The following example shows the use of the `"cmw"` JWT claim to transport a CMW collection in a JWT Claims Set {{-jwt}}:
+The following example shows the use of the `"cmw"` JWT claim to transport a Collection CMW in a JWT Claims Set {{-jwt}}:
 
 ~~~
 {::include cddl/eat-example-1.json}
@@ -608,7 +608,7 @@ In some scenarios, a secure channel (e.g., via TLS) or object-level security (e.
 
 When a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically bound to prevent an attacker from replacing Evidence from a compromised device with that from a non-compromised device.
 Authenticity and integrity protection MUST be provided by the attestation technology.
-For additional security considerations related to collections, refer to {{seccons-coll}}.
+For additional security considerations related to Collections, refer to {{seccons-coll}}.
 
 RATS conceptual messages are typically secured using cryptography.
 If the messages are already protected, no additional security requirements are imposed by this encapsulation.
@@ -618,17 +618,17 @@ For example, a `cbor-record` containing an Unprotected CWT Claims Set (UCCS) {{-
 
 {{crypto}} describes a number of methods that can be used to add cryptographic protection to CMW.
 
-## CMW Collections {#seccons-coll}
+## Collection CMWs {#seccons-coll}
 
-If the collection is not protected from tampering by external security measures (such as object security primitives) or internal mechanisms (such as intra-item binding), an attacker could easily manipulate the collection's contents.
-It is the responsibility of the Attester who creates the CMW collection to ensure that the contents of the collection are integrity-protected.
+If the Collection CMW is not protected from tampering by external security measures (such as object security primitives) or internal mechanisms (such as intra-item binding), an attacker could easily manipulate the Collection's contents.
+It is the responsibility of the Attester who creates the Collection CMW to ensure that the contents of the Collection are integrity-protected.
 The designer of the attestation technology is typically in charge of ensuring that the security properties are met, not the user of the conceptual message wrapper.
-In particular, when a CMW is used to carry multiple Evidence messages for a composite device or layered attestation, there should be strong binding between the Evidence messages within the collection.
+In particular, when a CMW is used to carry multiple Evidence messages for a composite device or layered attestation, there should be strong binding between the Evidence messages within the Collection.
 This binding is needed to prevent attacks where Evidence from a subverted part of the device is replaced by Evidence from a separate non-subverted device.
 The binding of Evidence messages should be some form of attestation.
-For example, key material used to sign/bind an entire CMW collection should be an attestation key, handled as described in {{Section 12.1 of -rats-arch}}.
-The binding does not necessarily have to be a signature over the CMW collection, it might also be achieved through identifiers, cross-linking, signing or hashing between the members of the collection.
-Client-authenticated TLS may be used to bind a CMW collection of Evidence messages.
+For example, key material used to sign/bind an entire Collection CMW should be an attestation key, handled as described in {{Section 12.1 of -rats-arch}}.
+The binding does not necessarily have to be a signature over the Collection CMW, it might also be achieved through identifiers, cross-linking, signing or hashing between the members of the Collection.
+Client-authenticated TLS may be used to bind a Collection CMW of Evidence messages.
 However, the client key used with TLS should not be that of the end-user or owner of the device.
 Instead, it should be attestation-oriented key material from the device or the attester manufacturer.
 
@@ -646,7 +646,7 @@ IANA is requested to add a new `cmw` claim to the "CBOR Web Token (CWT) Claims" 
 * Claim Description: A RATS Conceptual Message Wrapper
 * JWT Claim Name: cmw
 * Claim Key: CPA299
-* Claim Value Type(s): CBOR Map, CBOR Array, or CBOR Tag
+* Claim Value Type(s): CBOR map, CBOR array, or CBOR tag
 * Change Controller: IETF
 * Specification Document(s): {{type-n-val}}, {{cmw-coll}} and {{cbor-tag}} of {{&SELF}}
 
@@ -774,8 +774,8 @@ Required parameters:
 : n/a
 
 Optional parameters:
-: `cmwc_t` (CMW collection type in string format.  OIDs must use the
-  dotted-decimal notation.  The parameter value is case-insensitive.  It MUST NOT be used for CMW that are not collections.)
+: `cmwc_t` (Collection CMW type in string format.  OIDs must use the
+  dotted-decimal notation.  The parameter value is case-insensitive.  It must not be used for CMW that are not Collections.)
 
 Encoding considerations:
 : binary (CBOR)
@@ -823,8 +823,8 @@ Required parameters:
 : n/a
 
 Optional parameters:
-: `cmwc_t` (CMW collection type in string format.  OIDs must use the
-  dotted-decimal notation.  The parameter value is case-insensitive.  It MUST NOT be used for CMW that are not collections.)
+: `cmwc_t` (Collection CMW type in string format.  OIDs must use the
+  dotted-decimal notation.  The parameter value is case-insensitive.  It must not be used for CMW that are not Collections.)
 
 Encoding considerations:
 : binary (JSON is UTF-8-encoded text)
@@ -872,8 +872,8 @@ Required parameters:
 : n/a
 
 Optional parameters:
-: `cmwc_t` (CMW collection type in string format.  OIDs must use the
-  dotted-decimal notation.  The parameter value is case-insensitive.  It MUST NOT be used for CMW that are not collections.)  Note that the `cose-type` parameter is explicitly not supported, as it is understood to be `"cose-sign1"`.
+: `cmwc_t` (Collection CMW type in string format.  OIDs must use the
+  dotted-decimal notation.  The parameter value is case-insensitive.  It must not be used for CMW that are not Collections.)  Note that the `cose-type` parameter is explicitly not supported, as it is understood to be `"cose-sign1"`.
 
 Encoding considerations:
 : binary (CBOR)
@@ -921,8 +921,8 @@ Required parameters:
 : n/a
 
 Optional parameters:
-: `cmwc_t` (CMW collection type in string format.  OIDs must use the
-  dotted-decimal notation.  The parameter value is case-insensitive.  It MUST NOT be used for CMW that are not collections.)
+: `cmwc_t` (Collection CMW type in string format.  OIDs must use the
+  dotted-decimal notation.  The parameter value is case-insensitive.  It must not be used for CMW that are not Collections.)
 
 Encoding considerations:
 : 8bit; values are represented as a JSON Object or as a series of base64url-encoded values each separated from the next by a single period ('.') character.
@@ -976,7 +976,7 @@ New CoAP Content-Formats can be created based on parameterized instances of the 
 
 When assigning a new CoAP Content-Format ID for a CMW media type that utilizes the `cmwc_t` parameter, the registrar must check (directly or through the Designated Expert) that:
 
-* The corresponding CMW type is a collection ({{cmw-coll}}), and
+* The corresponding CMW is a Collection ({{cmw-coll}}), and
 * The `cmwc_t` value is either a (non-relative) OID or an absolute URI.
 
 ## New SMI Numbers Registrations
@@ -998,8 +998,8 @@ IANA is requested to assign an object identifier (OID) for the ASN.1 Module defi
 # Registering and Using CMWs
 
 {{fig-howto-cmw}} describes the registration preconditions for using
-CMWs in either CMW record or CBOR tag forms.
-When using CMW collection, the preconditions apply for each entry in the collection.
+CMWs in either Record CMW or Tag CMW forms.
+When using Collection CMW, the preconditions apply for each entry in the Collection.
 
 ~~~ aasvg
      .---------------.   .---------.
@@ -1025,10 +1025,10 @@ When using CMW collection, the preconditions apply for each entry in the collect
       |  |          |           |  |
       |  |          v           |  |
       |  |   .----------------. |  |
-      |  |  /  CBOR tag CMW  /  |  |
+      |  |  /    Tag CMW     /  |  |
       v  v `----------------'   v  v
   .--------------------------------------.
- /                 CMW                  /
+ /             Record CMW               /
 `--------------------------------------'
 ~~~
 {: #fig-howto-cmw artwork-align="center"
@@ -1056,7 +1056,7 @@ and
 Tom Jones
 for their reviews and suggestions.
 
-The definition of a CMW collection has been modelled on a proposal originally made by Simon Frost for an EAT-based Evidence collection type.  The CMW collection intentionally attains binary compatibility with Simon's design and aims at superseding it by also generalizing on the allowed Evidence formats.
+The definition of a Collection CMW has been modelled on a proposal originally made by Simon Frost for an EAT-based Evidence collection type.  The Collection CMW intentionally attains binary compatibility with Simon's design and aims at superseding it by also generalizing on the allowed Evidence formats.
 
 [^note]: Note:
 [^issue]: Open issue:
