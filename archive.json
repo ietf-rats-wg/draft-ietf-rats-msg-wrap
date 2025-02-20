@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-18T00:51:25.341658+00:00",
+  "timestamp": "2025-02-20T00:52:14.482845+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2649,9 +2649,9 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "There is some vagueness around the encoding of CBOR CMWs.\n\nIn particular, we are silent on whether we allow [indefinite-length](https://datatracker.ietf.org/doc/html/rfc8949#section-3.2).\n\nIndefinite-length encoding would only be necessary if we want to support \"streaming\" CMWs, that is, situations where the CMW producer begins serialising before the complete CM length is known or before the number of items in a collection is known.\n\nI am not personally aware of any such use case.\n\nIf you think it's important to keep this feature, please speak up; otherwise, we should explicitly say no to indefinite-length to avoid variability that is not strictly required.\n\nPS: If we allow indefinite-length, the demux algorithm needs to be modified.",
+      "body": "There is some vagueness around the encoding of CBOR CMWs.\n\nIn particular, we are silent on whether we allow [indefinite-length](https://datatracker.ietf.org/doc/html/rfc8949#section-3.2).\n\nIndefinite-length encoding would only be necessary if we want to support \"streaming\" CMWs, that is, situations where the CMW producer begins serialising before the complete CM length is known or before the number of items in a collection is known.\n\nI am not personally aware of any such use case.\n\nIf you think it's important to keep this feature, please speak up; otherwise, we should explicitly say no to indefinite-length to avoid variability that is not strictly required.\n\nPS: If we allow indefinite-length, the demux algorithm needs to be modified, adding 0x9F for records and 0xBF for collections.",
       "createdAt": "2025-02-14T08:42:08Z",
-      "updatedAt": "2025-02-14T21:19:37Z",
+      "updatedAt": "2025-02-18T17:56:21Z",
       "closedAt": null,
       "comments": [
         {
@@ -12089,24 +12089,26 @@
       "id": "PR_kwDOIGCt2M6LfDmh",
       "title": "Reword \"background check\" in intro",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/180",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "ionut-arm",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Previous version made it sound like EAT was the only acceptable evidence type.",
       "createdAt": "2025-02-17T16:34:37Z",
-      "updatedAt": "2025-02-17T18:32:40Z",
+      "updatedAt": "2025-02-18T17:53:31Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "4cb7eeadf2227e4b616d227ccea8d6d89d766067",
       "headRepository": "ionut-arm/draft-ietf-rats-msg-wrap",
       "headRefName": "intro-bg-chk",
       "headRefOid": "1a8f9e15ab3a25cc1f72b9c6c9a96ea8652b3b38",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-02-18T17:53:31Z",
+      "mergedAt": "2025-02-18T17:53:31Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "f5cebf703df60cc86f020c3cff6734cf3d6eef60"
+      },
       "comments": [
         {
           "author": "laurencelundblade",
