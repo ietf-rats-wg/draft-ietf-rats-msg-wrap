@@ -535,7 +535,7 @@ lication/signed-corim+cbor"
 ## CBOR-encoded Collection
 
 The following example is a CBOR-encoded Collection CMW that assembles conceptual messages from three attesters: Evidence for attesters A and B and Attestation Results for attester C.
-It is given an explicit `"cmwc_t"` using the URI form.
+It is given an explicit `"__cmwc_t"` using the URI form.
 
 ~~~
 {::include cddl/collection-example-2.diag}
