@@ -687,7 +687,7 @@ lication/signed-corim+cbor"
    The following example is a CBOR-encoded Collection CMW that assembles
    conceptual messages from three attesters: Evidence for attesters A
    and B and Attestation Results for attester C.  It is given an
-   explicit "cmwc_t" using the URI form.
+   explicit "__cmwc_t" using the URI form.
 
    {
      "__cmwc_t": "tag:example.com,2024:composite-attester",
