@@ -286,12 +286,6 @@ Since the Collection CMW is recursive (a Collection CMW is itself a CMW), implem
 {: #fig-cddl-collection artwork-align="left"
    title="CDDL definition of the Collection CMW"}
 
-### Collection CMW role in composite Attester topology
-
-A Collection CMW's tree structure is not required to be a spanning tree of the system's composite Attester topology.
-If the labels carry semantic content for a Verifier (e.g. to improve Verifier performance or aid human comprehension), the Collection SHOULD be integrity protected.
-For example, the Collection can be integrity protected by including it in a signed token such as a CWT or JWT.
-
 ## Decapsulation Algorithm
 
 Once any external framing is removed (for example, if the CMW is carried in a certificate extension), the CMW decoder performs a 1-byte lookahead to determine how to decode the remaining byte buffer.
