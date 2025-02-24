@@ -1,3 +1,3 @@
-cbor-tagged-cbor<tn, fmt> = #6.<tn>(bytes .cbor fmt)
+tag-cm-cbor<tn, fmt> = #6.<tn>(bytes .cbor fmt)
 
-cbor-tagged-data<tn> = #6.<tn>(bytes)
+tag-cm-data<tn> = #6.<tn>(bytes)
