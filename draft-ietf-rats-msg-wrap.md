@@ -303,7 +303,8 @@ func CMWTypeDemux(b []byte) (CMW, error) {
     return Unknown
   }
 
-  if b[0] == 0x82 || b[0] == 0x83 {
+
+  if b[0] == 0x82 || b[0] == 0x83 || b[0] == 0x9f {
     return CBORRecord
   } else if b[0] == 0xda {
     return CBORTag
