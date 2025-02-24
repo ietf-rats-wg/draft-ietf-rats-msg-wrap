@@ -84,7 +84,6 @@ Table of Contents
      3.1.  Record CMW
      3.2.  Tag CMW
      3.3.  Collection CMW
-       3.3.1.  Collection CMW role in composite Attester topology
      3.4.  Decapsulation Algorithm
    4.  Cryptographic Protection of CMWs
      4.1.  Signing CBOR CMW using COSE Sign1
@@ -391,15 +390,6 @@ Table of Contents
    }
 
               Figure 3: CDDL definition of the Collection CMW
-
-3.3.1.  Collection CMW role in composite Attester topology
-
-   A Collection CMW's tree structure is not required to be a spanning
-   tree of the system's composite Attester topology.  If the labels
-   carry semantic content for a Verifier (e.g. to improve Verifier
-   performance or aid human comprehension), the Collection SHOULD be
-   integrity protected.  For example, the Collection can be integrity
-   protected by including it in a signed token such as a CWT or JWT.
 
 3.4.  Decapsulation Algorithm
 
