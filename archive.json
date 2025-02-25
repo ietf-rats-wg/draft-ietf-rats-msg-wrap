@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-23T00:56:09.185840+00:00",
+  "timestamp": "2025-02-25T00:53:25.992905+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2086,15 +2086,15 @@
       "id": "I_kwDOIGCt2M6f_Sb4",
       "title": "Consistent use of term \"tag\" (re open)",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/148",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "laurencelundblade",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "This is to reopen #133 \r\n\r\nThe double meaning of CMW CBOR Tag wasn't fixed (3.2 vs 10.3)\r\n\r\nPlease find an alternate to \"CMW CBOR Tag\". It sounds too much like what is in 10.3 and is out of line with common use.\r\n\r\nThe grammar of the first sentence isn't right.\r\n\r\nNote that I was not asked to sign off on the issue even though I was the one that opened it.",
       "createdAt": "2024-11-22T18:35:56Z",
-      "updatedAt": "2025-02-21T10:05:05Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-24T18:43:50Z",
+      "closedAt": "2025-02-24T18:43:50Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -2359,9 +2359,17 @@
       "labels": [],
       "body": "The CDDL defines the following for use of CBOR tags:\r\n\r\n```cddl\r\ncbor-cmw = cbor-record / cbor-collection / $cbor-tag\r\n\r\n[...]\r\n\r\ncbor-tagged-cbor<tn, fmt> = #6.<tn>(bytes .cbor fmt)\r\n\r\ncbor-tagged-data<tn> = #6.<tn>(bytes)\r\n```\r\n\r\nCould there be a more explicit link established between them?",
       "createdAt": "2024-12-02T11:35:33Z",
-      "updatedAt": "2024-12-02T11:35:33Z",
+      "updatedAt": "2025-02-24T19:01:48Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@ionut-arm , would it be sufficient to subsection [Section 3.2](https://ietf-rats-wg.github.io/draft-ietf-rats-msg-wrap/draft-ietf-rats-msg-wrap.html#section-3.2) at [this point](https://ietf-rats-wg.github.io/draft-ietf-rats-msg-wrap/draft-ietf-rats-msg-wrap.html#section-3.2-5) like this:\n\n> **3.2.1 Adding a new Tag CMW**\n> _\"To add a new Tag CMW, [...]\"_ ",
+          "createdAt": "2025-02-24T19:01:44Z",
+          "updatedAt": "2025-02-24T19:01:44Z"
+        }
+      ]
     },
     {
       "number": 156,
@@ -2375,7 +2383,7 @@
       "labels": [],
       "body": "The amount of text added to CWT that says how COSE is supported is pretty small. The text that adds COSE to CoSWID is larger, but I don't think all the stuff CoSWID did is necessary.\r\n\r\nIt seems very clear that COSE and JOSE are the way to do attestation security, the same as EAT does. There's probably no controversy over it or much debate.\r\n\r\nSince CMW is very clearly an evidence format, it seems kind of important to have security.\r\n\r\nNote also recent discussion on TLS and composite attestation on the rats mailing list. It seems like COSE/JOSE-secured evidence is useful and sometimes preferable for composite attestation evidence compared to TLS.\r\n\r\nIt seems useful for the rats community to know exactly what security should be used to promote interoperability. It's probably not helpful for 1,000 flowers to bloom (lots of attestation security mechanism).",
       "createdAt": "2024-12-04T05:51:32Z",
-      "updatedAt": "2025-02-12T23:00:34Z",
+      "updatedAt": "2025-02-24T18:50:19Z",
       "closedAt": null,
       "comments": [
         {
@@ -2482,6 +2490,13 @@
           "body": "> This begs the question about applying EAT profiles to CMW. I haven't thought that through yet.\n\nFor cbor-record/-tag CMWs that encapsulate EATs, the EAT profile applies.  Possibly, manifesting itself via the `eat_profile` parameter in the media type of the CMW.\n\nFor cbor-/json-collection CMWs, the `__cmwc_t` can be used as a \"super\" profile.",
           "createdAt": "2025-02-09T12:28:03Z",
           "updatedAt": "2025-02-09T12:28:03Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@laurencelundblade can you please comment on the proposal https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/156#issuecomment-2646059143",
+          "createdAt": "2025-02-24T18:50:15Z",
+          "updatedAt": "2025-02-24T18:50:15Z"
         }
       ]
     },
@@ -2672,15 +2687,15 @@
       "id": "I_kwDOIGCt2M6qDbRy",
       "title": "dropping indefinite-length encoding of CBOR CMWs",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/179",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "There is some vagueness around the encoding of CBOR CMWs.\n\nIn particular, we are silent on whether we allow [indefinite-length](https://datatracker.ietf.org/doc/html/rfc8949#section-3.2).\n\nIndefinite-length encoding would only be necessary if we want to support \"streaming\" CMWs, that is, situations where the CMW producer begins serialising before the complete CM length is known or before the number of items in a collection is known.\n\nI am not personally aware of any such use case.\n\nIf you think it's important to keep this feature, please speak up; otherwise, we should explicitly say no to indefinite-length to avoid variability that is not strictly required.\n\nPS: If we allow indefinite-length, the demux algorithm needs to be modified, adding 0x9F for records and 0xBF for collections.",
       "createdAt": "2025-02-14T08:42:08Z",
-      "updatedAt": "2025-02-21T10:27:09Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-24T18:44:16Z",
+      "closedAt": "2025-02-24T18:44:16Z",
       "comments": [
         {
           "author": "laurencelundblade",
@@ -2717,15 +2732,15 @@
       "id": "I_kwDOIGCt2M6q-zTX",
       "title": "\u00a73.3.1 is now redundant",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/182",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "\u00a73.3.1 ([CMW Collections' role in composite Attester topology](https://ietf-rats-wg.github.io/draft-ietf-rats-msg-wrap/draft-ietf-rats-msg-wrap.html#name-cmw-collections-role-in-com)) was introduced at a time when the \"composite attester\" concept was only alluded to.  This is now thoroughly detailed in \u00a73.3 and \u00a78.2, which renders \u00a73.3.1 somewhat obsolete, as it basically contains duplicated content.",
       "createdAt": "2025-02-21T10:10:58Z",
-      "updatedAt": "2025-02-21T10:10:58Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-24T18:45:48Z",
+      "closedAt": "2025-02-24T18:45:48Z",
       "comments": []
     }
   ],
@@ -12244,24 +12259,26 @@
       "id": "PR_kwDOIGCt2M6MBpLp",
       "title": "Adam's Sweep",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/181",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Rename \"CMW record\" to \"Record CMW\"\r\nRename \"CMW tag\" to \"Tag CMW\"\r\nRename \"CMW collection\" to \"Collection CMW\"\r\n\r\nFix #148 ",
       "createdAt": "2025-02-21T10:05:33Z",
-      "updatedAt": "2025-02-22T17:29:17Z",
+      "updatedAt": "2025-02-24T18:43:49Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "f5cebf703df60cc86f020c3cff6734cf3d6eef60",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "adam-s-sweep",
       "headRefOid": "47428716fb1c9c8c543a8eed16ce07ce2146d73f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-02-24T18:43:49Z",
+      "mergedAt": "2025-02-24T18:43:49Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "19694a3e64077078d6068e3ef74ad86da2ec8a6d"
+      },
       "comments": [
         {
           "author": "thomas-fossati",
@@ -12283,6 +12300,13 @@
           "body": "> BTW, according to Mark Twain, it was Eve that did all the naming https://en.wikipedia.org/wiki/Extracts_from_Adam%27s_Diary#Plot\r\n\r\nTwain is one of my idols.  He MUST be right.",
           "createdAt": "2025-02-21T19:04:56Z",
           "updatedAt": "2025-02-21T19:04:56Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@nedmsmith @hannestschofenig could you please have a look?",
+          "createdAt": "2025-02-24T09:09:56Z",
+          "updatedAt": "2025-02-24T09:09:56Z"
         }
       ],
       "reviews": [
@@ -12404,6 +12428,32 @@
           "createdAt": "2025-02-22T17:29:17Z",
           "updatedAt": "2025-02-22T17:29:17Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6dNNmY",
+          "commit": {
+            "abbreviatedOid": "4742871"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "I have no opinion about the names",
+          "createdAt": "2025-02-24T15:17:27Z",
+          "updatedAt": "2025-02-24T15:17:27Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6dPhKH",
+          "commit": {
+            "abbreviatedOid": "4742871"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-02-24T18:35:52Z",
+          "updatedAt": "2025-02-24T18:35:52Z",
+          "comments": []
         }
       ]
     },
@@ -12412,24 +12462,26 @@
       "id": "PR_kwDOIGCt2M6MBsiH",
       "title": "remove (now) redundant \u00a73.3.1",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/183",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fix #182 ",
       "createdAt": "2025-02-21T10:12:19Z",
-      "updatedAt": "2025-02-22T17:24:41Z",
+      "updatedAt": "2025-02-24T18:45:47Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
-      "baseRefOid": "f5cebf703df60cc86f020c3cff6734cf3d6eef60",
+      "baseRefOid": "0af55c0597279add20649f9cd6aebbdb077e559c",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "no-331",
-      "headRefOid": "b5f3782d209b7e5353349e8eff0b92ca46071278",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "c55707aa6b28dffcca10f804e4cc28806ec141d2",
+      "closedAt": "2025-02-24T18:45:47Z",
+      "mergedAt": "2025-02-24T18:45:47Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "2f92bd383df48a0a2131da1eea6172f69808d231"
+      },
       "comments": [
         {
           "author": "thomas-fossati",
@@ -12458,6 +12510,13 @@
           "body": "I think it could be very useful to discuss mapping of an evidence / results message structure to composite attester structure, but it should probably span EAT and CMW, should probably be a lot longer and more detailed than this and probably not main line in the CMW draft. That is maybe in a second document or a CMW appendix.",
           "createdAt": "2025-02-21T19:21:03Z",
           "updatedAt": "2025-02-21T19:21:03Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@nedmsmith @hannestschofenig could you please have a look?",
+          "createdAt": "2025-02-24T09:09:37Z",
+          "updatedAt": "2025-02-24T09:09:37Z"
         }
       ],
       "reviews": [
@@ -12499,6 +12558,32 @@
           "createdAt": "2025-02-22T17:24:41Z",
           "updatedAt": "2025-02-22T17:24:41Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6dNOIY",
+          "commit": {
+            "abbreviatedOid": "b5f3782"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-24T15:18:12Z",
+          "updatedAt": "2025-02-24T15:18:12Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6dPeTZ",
+          "commit": {
+            "abbreviatedOid": "b5f3782"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-02-24T18:30:09Z",
+          "updatedAt": "2025-02-24T18:30:09Z",
+          "comments": []
         }
       ]
     },
@@ -12507,24 +12592,26 @@
       "id": "PR_kwDOIGCt2M6MB3cI",
       "title": "add indef-length to record demux",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/184",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fix #179 ",
       "createdAt": "2025-02-21T10:33:51Z",
-      "updatedAt": "2025-02-21T15:37:13Z",
+      "updatedAt": "2025-02-24T18:44:19Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "f5cebf703df60cc86f020c3cff6734cf3d6eef60",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "indef-demux",
       "headRefOid": "6e0e450609c415faf9493fdf68366cd7482b268b",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-02-24T18:44:15Z",
+      "mergedAt": "2025-02-24T18:44:14Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "0af55c0597279add20649f9cd6aebbdb077e559c"
+      },
       "comments": [
         {
           "author": "thomas-fossati",
@@ -12546,6 +12633,13 @@
           "body": "> A record is always length 2 though. Shouldn\u2019t we only care about indefinite length collections?\r\n\r\nIt's 2 or 3 - with the optional cm-indicator.  However, if we allow indefinite-length, I don't think we can say map yes, array no.",
           "createdAt": "2025-02-21T15:35:23Z",
           "updatedAt": "2025-02-21T15:35:23Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@nedmsmith @hannestschofenig @henkbirkholz @laurencelundblade could you please have a look.",
+          "createdAt": "2025-02-24T09:09:12Z",
+          "updatedAt": "2025-02-24T09:09:12Z"
         }
       ],
       "reviews": [
@@ -12560,6 +12654,45 @@
           "body": "",
           "createdAt": "2025-02-21T15:37:13Z",
           "updatedAt": "2025-02-21T15:37:13Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6dNPoG",
+          "commit": {
+            "abbreviatedOid": "6e0e450"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "I do not have any indefinite length use cases. ",
+          "createdAt": "2025-02-24T15:20:19Z",
+          "updatedAt": "2025-02-24T15:20:19Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6dPdcZ",
+          "commit": {
+            "abbreviatedOid": "6e0e450"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-02-24T18:28:25Z",
+          "updatedAt": "2025-02-24T18:28:25Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6dPexG",
+          "commit": {
+            "abbreviatedOid": "6e0e450"
+          },
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-24T18:31:04Z",
+          "updatedAt": "2025-02-24T18:31:04Z",
           "comments": []
         }
       ]
