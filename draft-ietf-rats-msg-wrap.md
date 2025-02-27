@@ -249,7 +249,7 @@ The `tag-cm-cbor` macro takes the CDDL definition of the associated conceptual m
 {: #fig-cddl-cbor-tag artwork-align="left"
    title="CDDL definition of the Tag CMW macros"}
 
-### How To Plug in a new Tag CMW
+### How To Plug in a New Tag CMW
 
 To plug a new Tag CMW into the CDDL defined in {{collected-cddl}}, the `$cbor-tag` type socket must be extended with a new instance of the Tag CMW macro.
 
