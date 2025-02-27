@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-25T00:53:25.992905+00:00",
+  "timestamp": "2025-02-27T00:53:05.419982+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2604,7 +2604,7 @@
       "labels": [],
       "body": "\nLaurence made the proposal to drop the \"cmw\" CWT and JWT claims in favour of claims carrying more specific semantics: https://mailarchive.ietf.org/arch/msg/rats/u8Ug1k9DY27zQSccj_HnUmpDydU/\n\nI may be mistaken (in which case, please help me finding references to any related discussions), but ISTM that the discussion thread on the RATS list has drifted off, and there was no conclusion reached regarding that particular point.\n\nSummarising:\n\n1. \"cmw\" semantic is very generic, it needs extra information (e.g., specific media type, profile) to be understood.\n2. There can only be one \"cmw\" claim in a claims-set.\n\nWhat do people think?\n",
       "createdAt": "2025-01-29T10:49:50Z",
-      "updatedAt": "2025-02-16T19:19:59Z",
+      "updatedAt": "2025-02-26T18:24:53Z",
       "closedAt": null,
       "comments": [
         {
@@ -2641,6 +2641,13 @@
           "body": "I have convinced myself that for EAT, a \"nested-token\" claims is much preferred to a \"cmw\" claim. It just seems confusing and chaotic for humans and implementations to have to traverse and sift a generic \"cmw\" claims to sort evidence from endorsements and such. This idea probably applies to all uses of the \"cmw\" claim, but I'm focusing on EAT here. Here's a first pass at text for the \"nested-token\" claim:\n\nThe \"nested-token\" claim replaces the \"submods\" claim for subordinate modules, as defined in [EAT section 4.2.18.3] on Nested Tokens. These nested tokens typically represent claim sets from distinct subordinate attesting environments.\n\nIn an evidence EAT, every member, regardless of nesting depth, of the nested-token claim MUST be evidence. Likewise, in an attestation results EAT, every member MUST be attestation results. The \"ind\" item from CMW MUST NOT be used in the nested-token claim.\n\nEach member's message type is identified by a \"type\" item. Members can be of any format, including non-CBOR/JSON types and those defined outside the RATS WG. However, they MUST always be either evidence or attestation results.\n\nIf there is a need to carry endorsements, reference values, or other non-evidence/attestation result messages in an EAT, a separate claim (or multiple separate claims) SHOULD be defined for those purposes.\n\nFinally, EAT is transitioning away from the CBOR tag mechanism for identifying messages within claims, as it only applies to CBOR and lacks a JSON equivalent. Instead, content type/format is preferred for its universality.",
           "createdAt": "2025-02-16T18:47:04Z",
           "updatedAt": "2025-02-16T19:19:59Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "A note on this point:\n\n> I have convinced myself that for EAT, a \"nested-token\" claims is much preferred to a \"cmw\" claim.\n\nEAT scope is Evidence and Attestation Results.\n\nFor uses of CMW that include other kinds of conceptual messages (e.g., Endorsements, Reference Values and Policies), `\"nested-token\"` would not be appropriate.  Using `\"cmw\"` in such cases seems like a good way to plug the CMW into a JWT/CWT.\n",
+          "createdAt": "2025-02-26T18:24:52Z",
+          "updatedAt": "2025-02-26T18:24:52Z"
         }
       ]
     },
