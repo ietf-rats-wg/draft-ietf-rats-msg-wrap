@@ -1,6 +1,6 @@
 signed-cbor-cmw-protected-hdr = {
-  1 => int                    ; alg
-  2 => "application/cmw+cbor" ; cty
+  1 => int                           ; alg
+  2 => "application/cmw+cbor" / TBD1 ; cty
   * cose.label => cose.values
 }
 

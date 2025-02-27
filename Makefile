@@ -32,5 +32,7 @@ $(drafts_txt):: $(EXAMPLES_DIAG) $(EXAMPLES_JSON) $(EXAMPLES_PRETTY) $(CDDL_FILE
 $(EXAMPLES_PRETTY): $(EXAMPLES_DIAG)
 	$(MAKE) -C cddl
 
+cddl/%.cddl: cddl/%.cddl.in ; $(MAKE) -C cddl
+
 clean::
 	$(MAKE) -C cddl clean
