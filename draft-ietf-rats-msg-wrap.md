@@ -249,11 +249,21 @@ The `tag-cm-cbor` macro takes the CDDL definition of the associated conceptual m
 {: #fig-cddl-cbor-tag artwork-align="left"
    title="CDDL definition of the Tag CMW macros"}
 
-To add a new CMW, the `$cbor-tag` type socket is extended with a new instance of the Tag CMW macro.
-For example, to associate conceptual messages of type `my-evidence` with CBOR tag `1668576819`, one would extend `$cbor-tag` as follows:
+### How To Plug in a New Tag CMW
+
+To plug a new Tag CMW into the CDDL defined in {{collected-cddl}}, the `$cbor-tag` type socket must be extended with a new instance of the Tag CMW macro (i.e., one of `tag-cm-cbor` or `tag-cm-data`).
+
+For instance, if a conceptual message of type `my-evidence` has a TN-derived CBOR tag `1668576819`, `$cbor-tag` would be extended as follows:
+
 
 ~~~ cddl
 {::include cddl/cmw-example-tag-1668576819-def.cddl}
+~~~
+
+Instead, if a (non-CBOR) conceptual message has a TN-derived CBOR tag `1668576935`, `$cbor-tag` would be extended as follows:
+
+~~~ cddl
+{::include cddl/cmw-example-tag-1668576935-def.cddl}
 ~~~
 
 ## Collection CMW {#cmw-coll}
