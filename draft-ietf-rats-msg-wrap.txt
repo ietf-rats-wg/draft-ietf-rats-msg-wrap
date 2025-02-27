@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 28 August 2025                                            Intel
+Expires: 31 August 2025                                            Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                        24 February 2025
+                                                        27 February 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 August 2025.
+   This Internet-Draft will expire on 31 August 2025.
 
 Copyright Notice
 
@@ -83,6 +83,7 @@ Table of Contents
    3.  Conceptual Message Wrappers
      3.1.  Record CMW
      3.2.  Tag CMW
+       3.2.1.  How To Plug in a New Tag CMW
      3.3.  Collection CMW
      3.4.  Decapsulation Algorithm
    4.  Cryptographic Protection of CMWs
@@ -326,16 +327,25 @@ Table of Contents
 
               Figure 2: CDDL definition of the Tag CMW macros
 
-   To add a new CMW, the $cbor-tag type socket is extended with a new
-   instance of the Tag CMW macro.  For example, to associate conceptual
-   messages of type my-evidence with CBOR tag 1668576819, one would
-   extend $cbor-tag as follows:
+3.2.1.  How To Plug in a New Tag CMW
+
+   To plug a new Tag CMW into the CDDL defined in Section 6, the $cbor-
+   tag type socket must be extended with a new instance of the Tag CMW
+   macro (i.e., one of tag-cm-cbor or tag-cm-data).
+
+   For instance, if a conceptual message of type my-evidence has a TN-
+   derived CBOR tag 1668576819, $cbor-tag would be extended as follows:
 
    $cbor-tag /= tag-cm-cbor<1668576819, my-evidence>
 
    my-evidence = {
      &(eat_nonce: 10) => bstr .size (8..64)
    }
+
+   Instead, if a (non-CBOR) conceptual message has a TN-derived CBOR tag
+   1668576935, $cbor-tag would be extended as follows:
+
+   $cbor-tag /= tag-cm-data<1668576935>
 
 3.3.  Collection CMW
 
