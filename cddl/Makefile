@@ -4,6 +4,7 @@ SHELL := /bin/bash
 
 include cddl-check-template.mk
 include frags.mk
+include subst.mk
 
 check:: check-cmw check-cmw-examples
 check:: check-eat check-eat-examples

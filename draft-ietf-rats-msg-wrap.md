@@ -344,7 +344,7 @@ The payload MUST be the CBOR-encoded Tag, Record or Collection CMW.
 ~~~
 
 The protected header MUST include the signature algorithm identifier.
-The protected header MUST include the content type `application/cmw+cbor`.
+The protected header MUST include either the content type `application/cmw+cbor` or the CoAP Content-Format TBD1.
 Other header parameters MAY be added to the header buckets, for example a `kid` that identifies the signing key.
 
 ## Signing JSON CMW using JWS {#signed-json-cmw}
