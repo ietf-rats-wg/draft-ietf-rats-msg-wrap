@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 31 August 2025                                            Intel
+Expires: 1 September 2025                                          Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                        27 February 2025
+                                                        28 February 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 August 2025.
+   This Internet-Draft will expire on 1 September 2025.
 
 Copyright Notice
 
@@ -449,8 +449,8 @@ Table of Contents
    The payload MUST be the CBOR-encoded Tag, Record or Collection CMW.
 
    signed-cbor-cmw-protected-hdr = {
-     1 => int                    ; alg
-     2 => "application/cmw+cbor" ; cty
+     1 => int                           ; alg
+     2 => "application/cmw+cbor" / 10000 ; cty
      * cose.label => cose.values
    }
 
@@ -462,9 +462,10 @@ Table of Contents
    cose.values = any
 
    The protected header MUST include the signature algorithm identifier.
-   The protected header MUST include the content type application/
-   cmw+cbor.  Other header parameters MAY be added to the header
-   buckets, for example a kid that identifies the signing key.
+   The protected header MUST include either the content type
+   application/cmw+cbor or the CoAP Content-Format TBD1.  Other header
+   parameters MAY be added to the header buckets, for example a kid that
+   identifies the signing key.
 
 4.2.  Signing JSON CMW using JWS
 
@@ -838,8 +839,8 @@ lication/signed-corim+cbor"
    ]
 
    signed-cbor-cmw-protected-hdr = {
-     1 => int                    ; alg
-     2 => "application/cmw+cbor" ; cty
+     1 => int                           ; alg
+     2 => "application/cmw+cbor" / 10000 ; cty
      * cose.label => cose.values
    }
 
