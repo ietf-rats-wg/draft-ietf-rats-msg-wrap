@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 1 September 2025                                          Intel
+Expires: 4 September 2025                                          Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                        28 February 2025
+                                                            3 March 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 September 2025.
+   This Internet-Draft will expire on 4 September 2025.
 
 Copyright Notice
 
@@ -449,7 +449,7 @@ Table of Contents
    The payload MUST be the CBOR-encoded Tag, Record or Collection CMW.
 
    signed-cbor-cmw-protected-hdr = {
-     1 => int                           ; alg
+     1 => int                            ; alg
      2 => "application/cmw+cbor" / 10000 ; cty
      * cose.label => cose.values
    }
@@ -839,7 +839,7 @@ lication/signed-corim+cbor"
    ]
 
    signed-cbor-cmw-protected-hdr = {
-     1 => int                           ; alg
+     1 => int                            ; alg
      2 => "application/cmw+cbor" / 10000 ; cty
      * cose.label => cose.values
    }
@@ -1446,9 +1446,9 @@ lication/signed-corim+cbor"
    [I-D.bormann-cbor-draft-numbers]
               Bormann, C., "Managing CBOR codepoints in Internet-
               Drafts", Work in Progress, Internet-Draft, draft-bormann-
-              cbor-draft-numbers-04, 29 August 2024,
+              cbor-draft-numbers-05, 1 March 2025,
               <https://datatracker.ietf.org/doc/html/draft-bormann-cbor-
-              draft-numbers-04>.
+              draft-numbers-05>.
 
    [I-D.fossati-tls-attestation]
               Tschofenig, H., Sheffer, Y., Howard, P., Mihalcea, I.,
@@ -1463,9 +1463,9 @@ lication/signed-corim+cbor"
               Ounsworth, M., Tschofenig, H., Birkholz, H., Wiseman, M.,
               and N. Smith, "Use of Remote Attestation with
               Certification Signing Requests", Work in Progress,
-              Internet-Draft, draft-ietf-lamps-csr-attestation-16, 1
-              February 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-lamps-csr-attestation-16>.
+              Internet-Draft, draft-ietf-lamps-csr-attestation-17, 2
+              March 2025, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-lamps-csr-attestation-17>.
 
    [I-D.ietf-rats-ar4si]
               Voit, E., Birkholz, H., Hardjono, T., Fossati, T., and V.
@@ -1478,9 +1478,9 @@ lication/signed-corim+cbor"
    [I-D.ietf-rats-corim]
               Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
               W. Pan, "Concise Reference Integrity Manifest", Work in
-              Progress, Internet-Draft, draft-ietf-rats-corim-06, 18
-              October 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-rats-corim-06>.
+              Progress, Internet-Draft, draft-ietf-rats-corim-07, 3
+              March 2025, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-rats-corim-07>.
 
    [I-D.ietf-rats-eat]
               Lundblade, L., Mandyam, G., O'Donoghue, J., and C.
