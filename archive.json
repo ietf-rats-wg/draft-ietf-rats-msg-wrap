@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-02T00:56:46.418243+00:00",
+  "timestamp": "2025-03-04T00:54:01.757151+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -12962,6 +12962,48 @@
           "body": "LGTM",
           "createdAt": "2025-02-27T17:35:46Z",
           "updatedAt": "2025-02-27T17:35:46Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 187,
+      "id": "PR_kwDOIGCt2M6NMFxC",
+      "title": "align when placeholder is substituted",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/187",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-03-03T17:59:56Z",
+      "updatedAt": "2025-03-03T20:47:08Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "e588b4026e9b048ddf099aec2d3aafe0e54b26bf",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "typo-align",
+      "headRefOid": "f4ccba737b3c9d0895d42d95a0be5a1a9a4211c9",
+      "closedAt": "2025-03-03T20:47:05Z",
+      "mergedAt": "2025-03-03T20:47:05Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "143f268861d2d120ed1b49b314f753830f13512c"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6eQ5KU",
+          "commit": {
+            "abbreviatedOid": "f4ccba7"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-03-03T20:34:18Z",
+          "updatedAt": "2025-03-03T20:34:18Z",
           "comments": []
         }
       ]
