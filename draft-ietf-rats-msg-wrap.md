@@ -390,6 +390,7 @@ CMW may need to be transported in PKIX messages, such as Certificate Signing Req
 The use of CMW in CSRs is documented in {{-csr-a}}, while its application in X.509 Certificates and CRLs is detailed in Section 6.1 of {{DICE-arch}}.
 
 This section outlines the CMW extension designed to carry CMW objects.
+{{seccons-x509}} addresses privacy and security considerations related to the transport of CMW within X.509 objects.
 
 The CMW extension MAY be included in X.509 Certificates, CRLs {{-pkix}}, and CSRs.
 
@@ -636,6 +637,13 @@ The binding does not necessarily have to be a signature over the Collection CMW,
 Client-authenticated TLS may be used to bind a Collection CMW of Evidence messages.
 However, the client key used with TLS should not be that of the end-user or owner of the device.
 Instead, it should be attestation-oriented key material from the device or the attester manufacturer.
+
+## CMW in X.509 {#seccons-x509}
+
+Publishing attestation information in a public certificate raises privacy and, in some cases, security concerns.
+For instance, an individual seeking a publicly-trusted code signing certificate may be willing to disclose the details of the hardware where their code signing keys are stored (e.g., HSM model, patch level, etc.).
+However, they likely do not want this information to be publicly accessible.
+Applications that intend to include attestation data in X.509 certificates should define a Certificate Practices Statement that clearly defines the circumstances under which the Certificate Authority (CA) can include attestation data in certificates.
 
 # IANA Considerations
 
@@ -1055,6 +1063,7 @@ Carl Wallace,
 Carsten Bormann,
 {{{Ionuț Mihalcea}}},
 Michael B. Jones,
+Mike Ounsworth,
 Mohit Sethi,
 Russ Housley,
 and
