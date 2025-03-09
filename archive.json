@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-06T00:53:50.893305+00:00",
+  "timestamp": "2025-03-09T00:46:26.166189+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2805,6 +2805,32 @@
       "updatedAt": "2025-02-24T18:45:48Z",
       "closedAt": "2025-02-24T18:45:48Z",
       "comments": []
+    },
+    {
+      "number": 188,
+      "id": "I_kwDOIGCt2M6tDy7z",
+      "title": "X.509-related security considerations",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/188",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "thomas-fossati"
+      ],
+      "labels": [],
+      "body": "[Comment from @ounsworth](https://mailarchive.ietf.org/arch/msg/rats/1vhrKLnWF40wDke8zrNMd0lKw4g/) on the RATS mailing list:\n\n> I would like (something like) the following sentence to be added to the section prior to publication.\n> \n> _\"Note that there are privacy, and in some cases security, concerns with publishing attestation information in a public certificate. Consider, for example, someone seeking a publicly-trusted code signing certificate. They may be willing to share with their CA the details of the hardware in which their code signing keys are stored (HSM model, patch level, etc), but they probably do not want this published. Applications that wish to place attestation data into X.509 certificates SHOULD define a Certificate Practices Statement that clearly defines under which circumstances the CA can place attestation data into certificates.\u201d_",
+      "createdAt": "2025-03-07T16:36:27Z",
+      "updatedAt": "2025-03-07T17:02:54Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Excellent. Yes we\u2019ve been discussing this ourselves, though it\u2019ll take more engagement with tcg or ccc to come to an agreement on the expected security practices to assign a given OID to an attested CSR",
+          "createdAt": "2025-03-07T17:02:53Z",
+          "updatedAt": "2025-03-07T17:02:53Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -13005,6 +13031,146 @@
           "createdAt": "2025-03-03T20:34:18Z",
           "updatedAt": "2025-03-03T20:34:18Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 189,
+      "id": "PR_kwDOIGCt2M6NzW0Y",
+      "title": "seccons += x.509",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/189",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #188 ",
+      "createdAt": "2025-03-07T16:52:50Z",
+      "updatedAt": "2025-03-07T20:03:04Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "143f268861d2d120ed1b49b314f753830f13512c",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "x509-seccons",
+      "headRefOid": "4c85cb802c5113cfc0374be347d1f3dbfde489de",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze \r\ncc @ounsworth",
+          "createdAt": "2025-03-07T16:53:28Z",
+          "updatedAt": "2025-03-07T16:53:28Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6fBD-r",
+          "commit": {
+            "abbreviatedOid": "4c85cb8"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-07T17:03:39Z",
+          "updatedAt": "2025-03-07T17:03:39Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6fBF_j",
+          "commit": {
+            "abbreviatedOid": "4c85cb8"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "See additional comments",
+          "createdAt": "2025-03-07T17:07:36Z",
+          "updatedAt": "2025-03-07T17:12:03Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "```suggestion\r\n\r\nThe privacy implications of including Evidence in a CMW in X.509 certificates issued by embedded CAs are comparable to its inclusion in other signed structures, such as web tokens.\r\nThe Verifier may be required to understand the privacy properties of disclosed Evidence and take appropriate measures to protect the privacy interests of the Attester.\r\n```",
+              "createdAt": "2025-03-07T17:07:36Z",
+              "updatedAt": "2025-03-07T17:26:19Z"
+            },
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\r\nPublishing attestation information (Attestation Results) in a public certificate raises privacy and, in some cases, security concerns.\r\n```",
+              "createdAt": "2025-03-07T17:08:19Z",
+              "updatedAt": "2025-03-07T17:12:03Z"
+            },
+            {
+              "originalPosition": 17,
+              "body": "Note that the privacy implications of publishing attestation results in a Web Token or any other structure besides a certificate are similar/same as with certificates. The wording shouldn't bias certificates. Possibly, the better approach is to create a section on privacy considerations and address the topic more generally?",
+              "createdAt": "2025-03-07T17:11:08Z",
+              "updatedAt": "2025-03-07T17:12:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6fBSWR",
+          "commit": {
+            "abbreviatedOid": "4c85cb8"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-07T17:33:29Z",
+          "updatedAt": "2025-03-07T17:33:29Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "Mike\u2019s concern is about evidence claims that should remain private between the attester and the verifier. There\u2019s a risk of unwarranted disclosure if the verifier includes them in an x509 cert. It\u2019s not about DICE-style certs.",
+              "createdAt": "2025-03-07T17:33:29Z",
+              "updatedAt": "2025-03-07T17:33:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6fCal4",
+          "commit": {
+            "abbreviatedOid": "4c85cb8"
+          },
+          "author": "ounsworth",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-07T19:59:21Z",
+          "updatedAt": "2025-03-07T19:59:21Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "Ohh. Good point. I was thinking of evidence more than attestation results.\r\nYou need to be really careful putting evidence into a X.509 cert (and I'm sure some people will want to, still a little bit careful but probably less so with ARs.",
+              "createdAt": "2025-03-07T19:59:21Z",
+              "updatedAt": "2025-03-07T19:59:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6fCcML",
+          "commit": {
+            "abbreviatedOid": "4c85cb8"
+          },
+          "author": "ounsworth",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-07T20:03:04Z",
+          "updatedAt": "2025-03-07T20:03:04Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "Right, exactly. Once you start talking about CSRs and X.509, there's an assumption that the contents of the CSR just get dumped over into the X.509 cert. I just think it needs to be called out that certain types of attestation data (mainly evidence, but probably also endorsements and ARs) are 100% reasonable to put in a CSR, and 100% unreasonable to put in an X.509 cert.\r\n\r\nIn the LAMPS CSR-Attest draft, we have danced around this issue very carefully and very clearly stated that this is a CSR mech and not an X.509 mech ... we recognize the need for that, but we will address that in another document that has space to treat the security and privacy implications properly.",
+              "createdAt": "2025-03-07T20:03:04Z",
+              "updatedAt": "2025-03-07T20:03:05Z"
+            }
+          ]
         }
       ]
     }
