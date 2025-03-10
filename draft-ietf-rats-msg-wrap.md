@@ -390,7 +390,7 @@ CMW may need to be transported in PKIX messages, such as Certificate Signing Req
 The use of CMW in CSRs is documented in {{-csr-a}}, while its application in X.509 Certificates and CRLs is detailed in Section 6.1 of {{DICE-arch}}.
 
 This section outlines the CMW extension designed to carry CMW objects.
-{{seccons-x509}} addresses privacy and security considerations related to the transport of CMW within X.509 objects.
+{{privcons}} discusses some privacy considerations related to the transport of CMW within X.509 objects.
 
 The CMW extension MAY be included in X.509 Certificates, CRLs {{-pkix}}, and CSRs.
 
@@ -604,7 +604,21 @@ The license is Apache 2.0.
 The developers can be contacted on the Zulip channel:
 [](https://veraison.zulipchat.com/#narrow/stream/383526-CMW/).
 
+# Privacy Considerations {#privcons}
+
+The privacy considerations outlined in {{Section 11 of -rats-arch}} are fully applicable.
+In particular, when a CMW contains Personally Identifying Information (PII), which is the case for Evidence and sometimes Attestation Results, care must be taken to prevent unintended recipients from accessing it.
+Generally, utilizing secure channels between the parties exchanging CMWs can help address or mitigate these concerns.
+A specific scenario arises when a public key certificate is issued based on Evidence information provided by the certificate requestor to the issuing Certificate Authority (CA).
+For instance, an individual seeking a publicly-trusted code signing certificate may be willing to disclose the details of the hardware where their code signing keys are stored (e.g., HSM model, patch level, etc.).
+However, they likely do not want this information to be publicly accessible.
+Applications that intend to publicly "broadcast" Evidence claims received from a third party via X.509 certificates should define a Certificate Practices Statement that clearly specifies the circumstances under which the CA can include such data in the issued certificate.
+Note that the aforementioned consideration does not apply to cases where X.509 is explicitly designed as a security envelope for Evidence claims, such as in DICE {{DICE-arch}}.
+
 # Security Considerations {#seccons}
+
+The security considerations discussed in {{Section 12.2 of -rats-arch}} concerning the protection of conceptual messages are fully applicable.
+The following subsections provide further elaboration on these points, particularly in relation to Collection CMWs.
 
 ## CMW Protection
 
@@ -637,13 +651,6 @@ The binding does not necessarily have to be a signature over the Collection CMW,
 Client-authenticated TLS may be used to bind a Collection CMW of Evidence messages.
 However, the client key used with TLS should not be that of the end-user or owner of the device.
 Instead, it should be attestation-oriented key material from the device or the attester manufacturer.
-
-## CMW in X.509 {#seccons-x509}
-
-Publishing attestation information in a public certificate raises privacy and, in some cases, security concerns.
-For instance, an individual seeking a publicly-trusted code signing certificate may be willing to disclose the details of the hardware where their code signing keys are stored (e.g., HSM model, patch level, etc.).
-However, they likely do not want this information to be publicly accessible.
-Applications that intend to include attestation data in X.509 certificates should define a Certificate Practices Statement that clearly defines the circumstances under which the Certificate Authority (CA) can include attestation data in certificates.
 
 # IANA Considerations
 
