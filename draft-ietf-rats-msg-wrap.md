@@ -607,7 +607,7 @@ The developers can be contacted on the Zulip channel:
 # Privacy Considerations {#privcons}
 
 The privacy considerations outlined in {{Section 11 of -rats-arch}} are fully applicable.
-In particular, when a CMW contains Personally Identifying Information (PII), which is the case for Evidence and sometimes Attestation Results, care must be taken to prevent unintended recipients from accessing it.
+In particular, when a CMW contains Personally Identifying Information (PII), which is the case for Evidence and sometimes for other conceptual messages as well, care must be taken to prevent unintended recipients from accessing it.
 Generally, utilizing secure channels between the parties exchanging CMWs can help address or mitigate these concerns.
 A specific scenario arises when a public key certificate is issued based on Evidence information provided by the certificate requestor to the issuing Certificate Authority (CA).
 For instance, an individual seeking a publicly-trusted code signing certificate may be willing to disclose the details of the hardware where their code signing keys are stored (e.g., HSM model, patch level, etc.).
