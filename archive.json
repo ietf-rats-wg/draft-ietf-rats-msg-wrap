@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-09T00:46:26.166189+00:00",
+  "timestamp": "2025-03-11T00:54:33.141397+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -13037,22 +13037,22 @@
     {
       "number": 189,
       "id": "PR_kwDOIGCt2M6NzW0Y",
-      "title": "seccons += x.509",
+      "title": "Add privacy considerations",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/189",
       "state": "OPEN",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "Fix #188 ",
+      "body": "Initially intended to address #188, it morphed into the addition of a standalone \u201cprivacy considerations\u201d section, which also discusses the point originally raised by @ounsworth.\r\n\r\nFix #188 ",
       "createdAt": "2025-03-07T16:52:50Z",
-      "updatedAt": "2025-03-07T20:03:04Z",
+      "updatedAt": "2025-03-10T17:06:10Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "143f268861d2d120ed1b49b314f753830f13512c",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "x509-seccons",
-      "headRefOid": "4c85cb802c5113cfc0374be347d1f3dbfde489de",
+      "headRefOid": "ee7013946e7510d8d1b659fe0f8cddb7923760f5",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -13169,6 +13169,26 @@
               "body": "Right, exactly. Once you start talking about CSRs and X.509, there's an assumption that the contents of the CSR just get dumped over into the X.509 cert. I just think it needs to be called out that certain types of attestation data (mainly evidence, but probably also endorsements and ARs) are 100% reasonable to put in a CSR, and 100% unreasonable to put in an X.509 cert.\r\n\r\nIn the LAMPS CSR-Attest draft, we have danced around this issue very carefully and very clearly stated that this is a CSR mech and not an X.509 mech ... we recognize the need for that, but we will address that in another document that has space to treat the security and privacy implications properly.",
               "createdAt": "2025-03-07T20:03:04Z",
               "updatedAt": "2025-03-07T20:03:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6fNidz",
+          "commit": {
+            "abbreviatedOid": "4c85cb8"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-10T14:17:06Z",
+          "updatedAt": "2025-03-10T14:17:06Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "> [\u2026] Possibly, the better approach is to create a section on privacy considerations and address the topic more generally?\r\n\r\n[b6f21d4](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/189/commits/b6f21d4ace5c27b3c7cfc0191ee0f594fded0509) takes a stab at it.\r\n",
+              "createdAt": "2025-03-10T14:17:06Z",
+              "updatedAt": "2025-03-10T14:17:06Z"
             }
           ]
         }
