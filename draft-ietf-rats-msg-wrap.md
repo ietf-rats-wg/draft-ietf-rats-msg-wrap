@@ -973,7 +973,7 @@ IANA is requested to register the following Content-Format IDs in the "CoAP Cont
 | application/cmw+jws | - | TBD4 | {{signed-json-cmw}} of {{&SELF}} |
 {: align="left" title="New CoAP Content Formats"}
 
-If possible, TBD1 and TBD2 should be assigned in the 256..9999 range.
+If possible, TBD1, TBD2, TBD3 and TBD4 should be assigned in the 256..9999 range.
 
 ### Registering new CoAP Content-Formats for Parameterized CMW Media Types
 
