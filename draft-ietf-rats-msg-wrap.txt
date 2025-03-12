@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 4 September 2025                                          Intel
+Expires: 13 September 2025                                         Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                            3 March 2025
+                                                           12 March 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 September 2025.
+   This Internet-Draft will expire on 13 September 2025.
 
 Copyright Notice
 
@@ -1274,7 +1274,8 @@ lication/signed-corim+cbor"
 
                      Table 4: New CoAP Content Formats
 
-   If possible, TBD1 and TBD2 should be assigned in the 256..9999 range.
+   If possible, TBD1, TBD2, TBD3 and TBD4 should be assigned in the
+   256..9999 range.
 
 9.7.1.  Registering new CoAP Content-Formats for Parameterized CMW Media
         Types
