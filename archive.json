@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-11T00:54:33.141397+00:00",
+  "timestamp": "2025-03-13T00:54:31.491720+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2811,7 +2811,7 @@
       "id": "I_kwDOIGCt2M6tDy7z",
       "title": "X.509-related security considerations",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/188",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -2820,8 +2820,8 @@
       "labels": [],
       "body": "[Comment from @ounsworth](https://mailarchive.ietf.org/arch/msg/rats/1vhrKLnWF40wDke8zrNMd0lKw4g/) on the RATS mailing list:\n\n> I would like (something like) the following sentence to be added to the section prior to publication.\n> \n> _\"Note that there are privacy, and in some cases security, concerns with publishing attestation information in a public certificate. Consider, for example, someone seeking a publicly-trusted code signing certificate. They may be willing to share with their CA the details of the hardware in which their code signing keys are stored (HSM model, patch level, etc), but they probably do not want this published. Applications that wish to place attestation data into X.509 certificates SHOULD define a Certificate Practices Statement that clearly defines under which circumstances the CA can place attestation data into certificates.\u201d_",
       "createdAt": "2025-03-07T16:36:27Z",
-      "updatedAt": "2025-03-07T17:02:54Z",
-      "closedAt": null,
+      "updatedAt": "2025-03-12T17:00:35Z",
+      "closedAt": "2025-03-12T17:00:35Z",
       "comments": [
         {
           "author": "deeglaze",
@@ -2831,6 +2831,22 @@
           "updatedAt": "2025-03-07T17:02:53Z"
         }
       ]
+    },
+    {
+      "number": 190,
+      "id": "I_kwDOIGCt2M6tpGQ1",
+      "title": "IANA early review question",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/190",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Question from Amanda:\n\n> _\u201cShould Section 9.7 specify a preferred range for Content-Format values TBD3 and TBD4 as well?\u201d_",
+      "createdAt": "2025-03-12T09:00:15Z",
+      "updatedAt": "2025-03-12T16:31:29Z",
+      "closedAt": "2025-03-12T16:31:29Z",
+      "comments": []
     }
   ],
   "pulls": [
@@ -13039,24 +13055,26 @@
       "id": "PR_kwDOIGCt2M6NzW0Y",
       "title": "Add privacy considerations",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/189",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Initially intended to address #188, it morphed into the addition of a standalone \u201cprivacy considerations\u201d section, which also discusses the point originally raised by @ounsworth.\r\n\r\nFix #188 ",
       "createdAt": "2025-03-07T16:52:50Z",
-      "updatedAt": "2025-03-10T17:06:10Z",
+      "updatedAt": "2025-03-12T17:00:37Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "143f268861d2d120ed1b49b314f753830f13512c",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "x509-seccons",
       "headRefOid": "ee7013946e7510d8d1b659fe0f8cddb7923760f5",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-03-12T17:00:34Z",
+      "mergedAt": "2025-03-12T17:00:34Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "2bce48a7b8673446f32a3615d2cf66c1a3c008b6"
+      },
       "comments": [
         {
           "author": "thomas-fossati",
@@ -13191,6 +13209,82 @@
               "updatedAt": "2025-03-10T14:17:06Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6fsQ5C",
+          "commit": {
+            "abbreviatedOid": "ee70139"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-03-12T16:37:54Z",
+          "updatedAt": "2025-03-12T16:37:54Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 191,
+      "id": "PR_kwDOIGCt2M6OTo9e",
+      "title": "no C-F left behind",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/191",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #190 ",
+      "createdAt": "2025-03-12T09:02:55Z",
+      "updatedAt": "2025-03-12T16:31:32Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "143f268861d2d120ed1b49b314f753830f13512c",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "iana-early",
+      "headRefOid": "5ea8885226f55205e5e587390c9f22e457e9d2a8",
+      "closedAt": "2025-03-12T16:31:28Z",
+      "mergedAt": "2025-03-12T16:31:28Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "f9acea6cd93e5e21bf0c2333de98912f9b851112"
+      },
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze ",
+          "createdAt": "2025-03-12T09:03:12Z",
+          "updatedAt": "2025-03-12T09:03:12Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6fq7OF",
+          "commit": {
+            "abbreviatedOid": "5ea8885"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-12T14:53:27Z",
+          "updatedAt": "2025-03-12T14:53:27Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6fsAd4",
+          "commit": {
+            "abbreviatedOid": "5ea8885"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-03-12T16:18:43Z",
+          "updatedAt": "2025-03-12T16:18:43Z",
+          "comments": []
         }
       ]
     }
