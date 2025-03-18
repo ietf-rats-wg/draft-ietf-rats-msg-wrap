@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-16T00:58:34.163375+00:00",
+  "timestamp": "2025-03-18T00:54:34.585622+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2847,6 +2847,32 @@
       "updatedAt": "2025-03-12T16:31:29Z",
       "closedAt": "2025-03-12T16:31:29Z",
       "comments": []
+    },
+    {
+      "number": 192,
+      "id": "I_kwDOIGCt2M6uR1Ll",
+      "title": "Better definition of __cmwc_t",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/192",
+      "state": "OPEN",
+      "author": "laurencelundblade",
+      "authorAssociation": "NONE",
+      "assignees": [
+        "thomas-fossati"
+      ],
+      "labels": [],
+      "body": "Here's possible text:\n\n__cmwc_t functions similar to an EAT profile, but at a higher level. It can be used to indicate basics like CBOR serialization and COSE algorithms just as a profile in EAT does. At the higher level it can be used to indicate the allowed CMW collection message structures (this is somewhat parallel to the way EAT profiles indicate which claims are required and/or allowed). For example, a __cmwc_t  type might be defined for a bundle of evidence, endorsements and reference values.",
+      "createdAt": "2025-03-17T06:31:16Z",
+      "updatedAt": "2025-03-17T14:20:48Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks @laurencelundblade.  I\u2019ll put together a PR shortly.",
+          "createdAt": "2025-03-17T14:20:46Z",
+          "updatedAt": "2025-03-17T14:20:46Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -13284,6 +13310,67 @@
           "body": "LGTM",
           "createdAt": "2025-03-12T16:18:43Z",
           "updatedAt": "2025-03-12T16:18:43Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 193,
+      "id": "PR_kwDOIGCt2M6O76pz",
+      "title": "Laurence's stab at describing cmwc_t",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/193",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #192",
+      "createdAt": "2025-03-17T14:22:04Z",
+      "updatedAt": "2025-03-17T21:20:55Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "2bce48a7b8673446f32a3615d2cf66c1a3c008b6",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "laurence-cmwc-t",
+      "headRefOid": "85653b2239c59b69c855e21350188b4be5104828",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze ",
+          "createdAt": "2025-03-17T14:22:32Z",
+          "updatedAt": "2025-03-17T14:22:32Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6gYZbR",
+          "commit": {
+            "abbreviatedOid": "85653b2"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-17T14:30:08Z",
+          "updatedAt": "2025-03-17T14:30:08Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6gdl0Y",
+          "commit": {
+            "abbreviatedOid": "85653b2"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-03-17T21:20:55Z",
+          "updatedAt": "2025-03-17T21:20:55Z",
           "comments": []
         }
       ]
