@@ -288,6 +288,11 @@ The value of the `"__cmwc_t"` key is either a Uniform Resource Identifier (URI) 
 The OID is always absolute and never relative.
 The URI is always in the absolute form ({{Section 4.3 of -uri}}).
 
+The `"__cmwc_t"` key functions similar to an EAT profile claim (see {{Section 4.3.2 of -rats-eat}}), but at a higher level.
+It can be used to indicate basics like CBOR serialization and COSE algorithms just as a profile in EAT does.
+At the higher level, it can be used to describe the allowed CMW collection assembly (this is somewhat parallel to the way EAT profiles indicate which claims are required and/or allowed).
+For an example of a `"__cmwc_t"` that is defined for a bundle of endorsements and reference values, see {{Section 4.3.1 of -rats-corim}}.
+
 Since the Collection CMW is recursive (a Collection CMW is itself a CMW), implementations may limit the allowed depth of nesting.
 
 ~~~ cddl
