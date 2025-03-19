@@ -1,6 +1,6 @@
 # RATS Conceptual Message Wrapper
 
-This is the working area for the IETF [RATS Working Group](https://datatracker.ietf.org/wg/rats/documents/) Internet-Draft, "Concise Reference Integrity Manifest".
+This is the working area for the IETF [RATS Working Group](https://datatracker.ietf.org/wg/rats/documents/) Internet-Draft, "Conceptual Messages Wrapper".
 
 * [Editor's Copy](https://ietf-rats-wg.github.io/draft-ietf-rats-msg-wrap/#go.draft-ietf-rats-msg-wrap.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-rats-msg-wrap)
