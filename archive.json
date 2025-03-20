@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-18T00:54:34.585622+00:00",
+  "timestamp": "2025-03-20T00:54:08.856002+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2853,7 +2853,7 @@
       "id": "I_kwDOIGCt2M6uR1Ll",
       "title": "Better definition of __cmwc_t",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/192",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "laurencelundblade",
       "authorAssociation": "NONE",
       "assignees": [
@@ -2862,8 +2862,8 @@
       "labels": [],
       "body": "Here's possible text:\n\n__cmwc_t functions similar to an EAT profile, but at a higher level. It can be used to indicate basics like CBOR serialization and COSE algorithms just as a profile in EAT does. At the higher level it can be used to indicate the allowed CMW collection message structures (this is somewhat parallel to the way EAT profiles indicate which claims are required and/or allowed). For example, a __cmwc_t  type might be defined for a bundle of evidence, endorsements and reference values.",
       "createdAt": "2025-03-17T06:31:16Z",
-      "updatedAt": "2025-03-17T14:20:48Z",
-      "closedAt": null,
+      "updatedAt": "2025-03-18T10:27:57Z",
+      "closedAt": "2025-03-18T10:27:57Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -13319,24 +13319,26 @@
       "id": "PR_kwDOIGCt2M6O76pz",
       "title": "Laurence's stab at describing cmwc_t",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/193",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fix #192",
       "createdAt": "2025-03-17T14:22:04Z",
-      "updatedAt": "2025-03-17T21:20:55Z",
+      "updatedAt": "2025-03-18T10:28:00Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "2bce48a7b8673446f32a3615d2cf66c1a3c008b6",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "laurence-cmwc-t",
       "headRefOid": "85653b2239c59b69c855e21350188b4be5104828",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-03-18T10:27:56Z",
+      "mergedAt": "2025-03-18T10:27:56Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "f9ec63d2d94207c0cda33523dfd68ee41196dad0"
+      },
       "comments": [
         {
           "author": "thomas-fossati",
@@ -13371,6 +13373,48 @@
           "body": "LGTM",
           "createdAt": "2025-03-17T21:20:55Z",
           "updatedAt": "2025-03-17T21:20:55Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 194,
+      "id": "PR_kwDOIGCt2M6PPvEl",
+      "title": "Fix README intro",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/194",
+      "state": "MERGED",
+      "author": "ionut-arm",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-03-19T10:04:09Z",
+      "updatedAt": "2025-03-19T14:41:13Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "f9ec63d2d94207c0cda33523dfd68ee41196dad0",
+      "headRepository": "ionut-arm/draft-ietf-rats-msg-wrap",
+      "headRefName": "patch-1",
+      "headRefOid": "ae777eb9d8bbfac890af011d4af50e84c57dc00e",
+      "closedAt": "2025-03-19T11:00:45Z",
+      "mergedAt": "2025-03-19T11:00:45Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "96ce961281a8d9ef2e0192749f61d85c370236d1"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6gz72B",
+          "commit": {
+            "abbreviatedOid": "ae777eb"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "oops!",
+          "createdAt": "2025-03-19T11:00:37Z",
+          "updatedAt": "2025-03-19T11:00:37Z",
           "comments": []
         }
       ]
