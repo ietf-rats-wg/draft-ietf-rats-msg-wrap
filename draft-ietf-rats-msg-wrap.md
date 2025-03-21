@@ -670,7 +670,7 @@ IANA is requested to add a new `cmw` claim to the "CBOR Web Token (CWT) Claims" 
 * Claim Name: cmw
 * Claim Description: A RATS Conceptual Message Wrapper
 * JWT Claim Name: cmw
-* Claim Key: CPA299
+* Claim Key: CPA399
 * Claim Value Type(s): CBOR map, CBOR array, or CBOR tag
 * Change Controller: IETF
 * Specification Document(s): {{type-n-val}}, {{cmw-coll}} and {{cbor-tag}} of {{&SELF}}
@@ -1082,7 +1082,7 @@ and
 Tom Jones
 for their reviews and suggestions.
 
-The definition of a Collection CMW has been modelled on a proposal originally made by Simon Frost for an EAT-based Evidence collection type.  The Collection CMW intentionally attains binary compatibility with Simon's design and aims at superseding it by also generalizing on the allowed Evidence formats.
+The definition of a Collection CMW has been modelled on a proposal originally made by Simon Frost for an EAT-based Evidence collection type.  The Collection CMW aims at superseding it by generalizing the allowed Evidence formats.
 
 [^note]: Note:
 [^issue]: Open issue:
