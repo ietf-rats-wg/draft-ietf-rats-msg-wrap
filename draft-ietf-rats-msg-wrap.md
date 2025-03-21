@@ -404,7 +404,7 @@ The CMW extension MUST be identified by the following object identifier:
 ~~~asn.1
 id-pe-cmw  OBJECT IDENTIFIER ::=
         { iso(1) identified-organization(3) dod(6) internet(1)
-          security(5) mechanisms(5) pkix(7) id-pe(1) TBD }
+          security(5) mechanisms(5) pkix(7) id-pe(1) 35 }
 ~~~
 
 This extension SHOULD NOT be marked critical.
@@ -453,7 +453,7 @@ ext-CMW EXTENSION ::= {
 
 id-pe-cmw  OBJECT IDENTIFIER  ::=
    { iso(1) identified-organization(3) dod(6) internet(1)
-     security(5) mechanisms(5) pkix(7) id-pe(1) TBD }
+     security(5) mechanisms(5) pkix(7) id-pe(1) 35 }
 
 -- CMW Extension Syntax
 
@@ -1006,10 +1006,10 @@ When assigning a new CoAP Content-Format ID for a CMW media type that utilizes t
 
 ## New SMI Numbers Registrations
 
-IANA is requested to assign an object identifier (OID) for the CMW extension defined in {{x509}} in the "SMI Security for PKIX Certificate Extension" registry of the "SMI Numbers" {{!IANA.smi-numbers}} registry group:
+IANA has assigned an object identifier (OID) for the CMW extension defined in {{x509}} in the "SMI Security for PKIX Certificate Extension" registry of the "SMI Numbers" {{!IANA.smi-numbers}} registry group as follows:
 
 | Decimal | Description | References |
-| TBD | id-pe-cmw | {{x509}} of {{&SELF}} |
+| 35 | id-pe-cmw | {{x509}} of {{&SELF}} |
 {: align="left" title="New CMW Extension OID"}
 
 IANA is requested to assign an object identifier (OID) for the ASN.1 Module defined in {{asn1-x509}} in the "SMI Security for PKIX Module Identifier" registry of the "SMI Numbers" {{!IANA.smi-numbers}} registry group:
