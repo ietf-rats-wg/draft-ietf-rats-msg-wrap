@@ -387,6 +387,16 @@ Table of Contents
    relative.  The URI is always in the absolute form (Section 4.3 of
    [RFC3986]).
 
+   The "__cmwc_t" key functions similar to an EAT profile claim (see
+   Section 4.3.2 of [I-D.ietf-rats-eat]), but at a higher level.  It can
+   be used to indicate basics like CBOR serialization and COSE
+   algorithms just as a profile in EAT does.  At the higher level, it
+   can be used to describe the allowed CMW collection assembly (this is
+   somewhat parallel to the way EAT profiles indicate which claims are
+   required and/or allowed).  For an example of a "__cmwc_t" that is
+   defined for a bundle of endorsements and reference values, see
+   Section 4.3.1 of [I-D.ietf-rats-corim].
+
    Since the Collection CMW is recursive (a Collection CMW is itself a
    CMW), implementations may limit the allowed depth of nesting.
 

@@ -1615,10 +1615,14 @@ Labels can be strings (or integers in the CBOR serialization) that serve as a mn
 The value of the <code>"__cmwc_t"</code> key is either a Uniform Resource Identifier (URI) or an object identifier (OID).
 The OID is always absolute and never relative.
 The URI is always in the absolute form (<span><a href="https://rfc-editor.org/rfc/rfc3986#section-4.3" class="relref">Section 4.3</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>).<a href="#section-3.3-5" class="pilcrow">¶</a></p>
-<p id="section-3.3-6">Since the Collection CMW is recursive (a Collection CMW is itself a CMW), implementations may limit the allowed depth of nesting.<a href="#section-3.3-6" class="pilcrow">¶</a></p>
+<p id="section-3.3-6">The <code>"__cmwc_t"</code> key functions similar to an EAT profile claim (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-31#section-4.3.2" class="relref">Section 4.3.2</a> of [<a href="#I-D.ietf-rats-eat" class="cite xref">I-D.ietf-rats-eat</a>]</span>), but at a higher level.
+It can be used to indicate basics like CBOR serialization and COSE algorithms just as a profile in EAT does.
+At the higher level, it can be used to describe the allowed CMW collection assembly (this is somewhat parallel to the way EAT profiles indicate which claims are required and/or allowed).
+For an example of a <code>"__cmwc_t"</code> that is defined for a bundle of endorsements and reference values, see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-07#section-4.3.1" class="relref">Section 4.3.1</a> of [<a href="#I-D.ietf-rats-corim" class="cite xref">I-D.ietf-rats-corim</a>]</span>.<a href="#section-3.3-6" class="pilcrow">¶</a></p>
+<p id="section-3.3-7">Since the Collection CMW is recursive (a Collection CMW is itself a CMW), implementations may limit the allowed depth of nesting.<a href="#section-3.3-7" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-of-the-coll"></span><div id="fig-cddl-collection">
 <figure id="figure-3">
-          <div class="alignLeft art-cddl art-text artwork" id="section-3.3-7.1">
+          <div class="alignLeft art-cddl art-text artwork" id="section-3.3-8.1">
 <pre>
 json-collection = {
   ? "__cmwc_t": ~uri / oid
