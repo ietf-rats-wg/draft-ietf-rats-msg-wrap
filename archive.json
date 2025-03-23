@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-20T00:54:08.856002+00:00",
+  "timestamp": "2025-03-23T00:58:55.860724+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2873,6 +2873,24 @@
           "updatedAt": "2025-03-17T14:20:46Z"
         }
       ]
+    },
+    {
+      "number": 195,
+      "id": "I_kwDOIGCt2M6vGIu_",
+      "title": "Early allocation for `id-pe-cmw` isn\u2019t included yet",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/195",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "thomas-fossati"
+      ],
+      "labels": [],
+      "body": "[Message from Russ](https://mailarchive.ietf.org/arch/msg/rats/FWkqCSDHr_xWRJIFDkseMcIhfSw/) on the RATS list:\n\n> https://www.iana.org/assignments/smi-numbers/smi-numbers.xhtml#smi-numbers-1.3.6.1.5.5.7.1\n> \n> An OID has been assigned for id-pe-cmw, but this is not reflected in the ASN.1 module.\n> Russ\n\n",
+      "createdAt": "2025-03-21T08:02:30Z",
+      "updatedAt": "2025-03-21T16:36:59Z",
+      "closedAt": "2025-03-21T16:36:59Z",
+      "comments": []
     }
   ],
   "pulls": [
@@ -13415,6 +13433,186 @@
           "body": "oops!",
           "createdAt": "2025-03-19T11:00:37Z",
           "updatedAt": "2025-03-19T11:00:37Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 196,
+      "id": "PR_kwDOIGCt2M6Pk7i8",
+      "title": "Reflect early allocation for `id-pe-cmw`",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/196",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #195",
+      "createdAt": "2025-03-21T08:03:41Z",
+      "updatedAt": "2025-03-21T16:37:02Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "96ce961281a8d9ef2e0192749f61d85c370236d1",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "id-pe-cmw=35",
+      "headRefOid": "20e330f4ed267e399993c6166ded442d478e9915",
+      "closedAt": "2025-03-21T16:36:58Z",
+      "mergedAt": "2025-03-21T16:36:58Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "a56e5d0520e26af54dc4a29fa0a1babb76e9fc8a"
+      },
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze ",
+          "createdAt": "2025-03-21T08:03:49Z",
+          "updatedAt": "2025-03-21T08:03:49Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6hTiq1",
+          "commit": {
+            "abbreviatedOid": "20e330f"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-21T14:56:07Z",
+          "updatedAt": "2025-03-21T14:56:07Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6hUX2-",
+          "commit": {
+            "abbreviatedOid": "20e330f"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-03-21T16:01:45Z",
+          "updatedAt": "2025-03-21T16:01:45Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 197,
+      "id": "PR_kwDOIGCt2M6Pn6RA",
+      "title": "binary-compatibility with EAT collections is gone",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/197",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "* since CBOR tags are TN-only, binary compatibility with EAT collections is gone\r\n* requesting CBOR tag 299 was a typo: 399 is what I meant",
+      "createdAt": "2025-03-21T13:58:54Z",
+      "updatedAt": "2025-03-21T16:48:31Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "96ce961281a8d9ef2e0192749f61d85c370236d1",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "eat-collection-compat",
+      "headRefOid": "434014f54bdc90ead766b9490f0e942d1fadb14c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@deeglaze \r\n@simonfrost-arm",
+          "createdAt": "2025-03-21T13:59:14Z",
+          "updatedAt": "2025-03-21T13:59:14Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Do we really still need $cbor-tag? A two element array followed by a 16 bit number has a shorter encoding (4 bytes) than a 4 bytes tag number from the tn transformation (5 bytes).",
+          "createdAt": "2025-03-21T15:10:47Z",
+          "updatedAt": "2025-03-21T15:10:47Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Do we really still need $cbor-tag? A two element array followed by a 16 bit number has a shorter encoding (4 bytes) than a 4 bytes tag number from the tn transformation (5 bytes).\r\n\r\nWe might (or might not) use it for CCA.  Ned may have a use case too.  I get your point, but I don\u2019t see a very strong reason to remove it.",
+          "createdAt": "2025-03-21T16:41:51Z",
+          "updatedAt": "2025-03-21T16:42:10Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Ned may have a use case too.\r\n\r\nWe are using CBOR tagged CMWs. \r\nNote that when I made the case for saving a few bytes by allowing regular CBOR tags (not just TN tags) that argument fell on deaf ears. I'm still hopeful the IETF will reconsider and allow any CBOR tag as this will allow TCG CMW to be compliant with the IETF CMW RFC (and broaden the reach / value of CMW).",
+          "createdAt": "2025-03-21T16:48:30Z",
+          "updatedAt": "2025-03-21T16:48:30Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6hUZlH",
+          "commit": {
+            "abbreviatedOid": "434014f"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-21T16:04:20Z",
+          "updatedAt": "2025-03-21T16:04:20Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 198,
+      "id": "PR_kwDOIGCt2M6Ps9qG",
+      "title": "Rename ASN.1 module",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/198",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Remove \u201ccollection\u201d from the module name since it\u2019s not limited to transporting collections.",
+      "createdAt": "2025-03-22T03:16:09Z",
+      "updatedAt": "2025-03-22T03:32:34Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "a56e5d0520e26af54dc4a29fa0a1babb76e9fc8a",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "asn1-mod-rename",
+      "headRefOid": "becc706763be4521950d42607ea605a83bc190e1",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @deeglaze ",
+          "createdAt": "2025-03-22T03:16:30Z",
+          "updatedAt": "2025-03-22T03:16:30Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6hZXzL",
+          "commit": {
+            "abbreviatedOid": "becc706"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-22T03:32:34Z",
+          "updatedAt": "2025-03-22T03:32:34Z",
           "comments": []
         }
       ]
