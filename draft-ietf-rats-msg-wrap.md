@@ -431,7 +431,7 @@ This section provides an ASN.1 module {{X.680}} for the CMW extension, following
 CMWExtn
   { iso(1) identified-organization(3) dod(6) internet(1)
     security(5) mechanisms(5) pkix(7) id-mod(0)
-    id-mod-cmw-collection-extn(TBD) }
+    id-mod-cmw-extn(TBD) }
 
 DEFINITIONS IMPLICIT TAGS ::=
 BEGIN
@@ -1015,7 +1015,7 @@ IANA has assigned an object identifier (OID) for the CMW extension defined in {{
 IANA is requested to assign an object identifier (OID) for the ASN.1 Module defined in {{asn1-x509}} in the "SMI Security for PKIX Module Identifier" registry of the "SMI Numbers" {{!IANA.smi-numbers}} registry group:
 
 | Decimal | Description | References |
-| TBD | id-mod-cmw-collection-extn | {{asn1-x509}} of {{&SELF}} |
+| TBD | id-mod-cmw-extn | {{asn1-x509}} of {{&SELF}} |
 {: align="left" title="New ASN.1 Module OID"}
 
 --- back
