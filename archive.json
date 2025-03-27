@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-25T00:55:35.322826+00:00",
+  "timestamp": "2025-03-27T00:55:05.742923+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -13512,13 +13512,13 @@
       "labels": [],
       "body": "* since CBOR tags are TN-only, binary compatibility with EAT collections is gone\r\n* requesting CBOR tag 299 was a typo: 399 is what I meant",
       "createdAt": "2025-03-21T13:58:54Z",
-      "updatedAt": "2025-03-21T16:48:31Z",
+      "updatedAt": "2025-03-26T17:21:36Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
-      "baseRefOid": "96ce961281a8d9ef2e0192749f61d85c370236d1",
+      "baseRefOid": "da19c282e1ace5ba13788bbcda3151fae39c7278",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "eat-collection-compat",
-      "headRefOid": "434014f54bdc90ead766b9490f0e942d1fadb14c",
+      "headRefOid": "0d4ebb8a31a9cda31be1adab3b36fa26a878c166",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -13566,6 +13566,19 @@
           "createdAt": "2025-03-21T16:04:20Z",
           "updatedAt": "2025-03-21T16:04:20Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6iAi9P",
+          "commit": {
+            "abbreviatedOid": "0d4ebb8"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-03-26T17:21:36Z",
+          "updatedAt": "2025-03-26T17:21:36Z",
+          "comments": []
         }
       ]
     },
@@ -13574,24 +13587,26 @@
       "id": "PR_kwDOIGCt2M6Ps9qG",
       "title": "Rename ASN.1 module",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/198",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Remove \u201ccollection\u201d from the module name since it\u2019s not limited to transporting collections.",
       "createdAt": "2025-03-22T03:16:09Z",
-      "updatedAt": "2025-03-24T19:28:54Z",
+      "updatedAt": "2025-03-26T16:28:39Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "a56e5d0520e26af54dc4a29fa0a1babb76e9fc8a",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "asn1-mod-rename",
       "headRefOid": "becc706763be4521950d42607ea605a83bc190e1",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-03-26T16:28:39Z",
+      "mergedAt": "2025-03-26T16:28:39Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "da19c282e1ace5ba13788bbcda3151fae39c7278"
+      },
       "comments": [
         {
           "author": "thomas-fossati",
