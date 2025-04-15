@@ -2245,10 +2245,10 @@ The developers can be contacted on the Zulip channel:
 <p id="section-8-1">The privacy considerations outlined in <span><a href="https://rfc-editor.org/rfc/rfc9334#section-11" class="relref">Section 11</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> are fully applicable.
 In particular, when a CMW contains Personally Identifying Information (PII), which is the case for Evidence and sometimes for other conceptual messages as well, care must be taken to prevent unintended recipients from accessing it.
 Generally, utilizing secure channels between the parties exchanging CMWs can help address or mitigate these concerns.
-A specific scenario arises when a public key certificate is issued based on Evidence information provided by the certificate requestor to the issuing Certificate Authority (CA).
+A specific scenario arises when a public key certificate is issued based on Evidence information provided by the certificate requestor to the issuing Certification Authority (CA).
 For instance, an individual seeking a publicly-trusted code signing certificate may be willing to disclose the details of the hardware where their code signing keys are stored (e.g., HSM model, patch level, etc.).
 However, they likely do not want this information to be publicly accessible.
-Applications that intend to publicly "broadcast" Evidence claims received from a third party via X.509 certificates should define a Certificate Practices Statement that clearly specifies the circumstances under which the CA can include such data in the issued certificate.
+Applications that intend to publicly "broadcast" Evidence claims received from a third party via X.509 certificates should define a Certificate Practices Statement <span>[<a href="#RFC3647" class="cite xref">RFC3647</a>]</span> that clearly specifies the circumstances under which the CA can include such data in the issued certificate.
 Note that the aforementioned consideration does not apply to cases where X.509 is explicitly designed as a security envelope for Evidence claims, such as in DICE <span>[<a href="#DICE-arch" class="cite xref">DICE-arch</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -3225,6 +3225,10 @@ dotted-decimal notation.  The parameter value is case-insensitive.  It must not 
 <dt id="I-D.ietf-rats-uccs">[I-D.ietf-rats-uccs]</dt>
         <dd>
 <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">O'Donoghue, J.</span>, <span class="refAuthor">Cam-Winget, N.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"A CBOR Tag for Unprotected CWT Claims Sets"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-uccs-12</span>, <time datetime="2024-11-03" class="refDate">3 November 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-uccs-12">https://datatracker.ietf.org/doc/html/draft-ietf-rats-uccs-12</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3647">[RFC3647]</dt>
+        <dd>
+<span class="refAuthor">Chokhani, S.</span>, <span class="refAuthor">Ford, W.</span>, <span class="refAuthor">Sabett, R.</span>, <span class="refAuthor">Merrill, C.</span>, and <span class="refAuthor">S. Wu</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure Certificate Policy and Certification Practices Framework"</span>, <span class="seriesInfo">RFC 3647</span>, <span class="seriesInfo">DOI 10.17487/RFC3647</span>, <time datetime="2003-11" class="refDate">November 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3647">https://www.rfc-editor.org/rfc/rfc3647</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC5912">[RFC5912]</dt>
         <dd>

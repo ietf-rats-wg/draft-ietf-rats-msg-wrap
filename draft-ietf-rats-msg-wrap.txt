@@ -925,7 +925,7 @@ lication/signed-corim+cbor"
    utilizing secure channels between the parties exchanging CMWs can
    help address or mitigate these concerns.  A specific scenario arises
    when a public key certificate is issued based on Evidence information
-   provided by the certificate requestor to the issuing Certificate
+   provided by the certificate requestor to the issuing Certification
    Authority (CA).  For instance, an individual seeking a publicly-
    trusted code signing certificate may be willing to disclose the
    details of the hardware where their code signing keys are stored
@@ -933,11 +933,11 @@ lication/signed-corim+cbor"
    want this information to be publicly accessible.  Applications that
    intend to publicly "broadcast" Evidence claims received from a third
    party via X.509 certificates should define a Certificate Practices
-   Statement that clearly specifies the circumstances under which the CA
-   can include such data in the issued certificate.  Note that the
-   aforementioned consideration does not apply to cases where X.509 is
-   explicitly designed as a security envelope for Evidence claims, such
-   as in DICE [DICE-arch].
+   Statement [RFC3647] that clearly specifies the circumstances under
+   which the CA can include such data in the issued certificate.  Note
+   that the aforementioned consideration does not apply to cases where
+   X.509 is explicitly designed as a security envelope for Evidence
+   claims, such as in DICE [DICE-arch].
 
 9.  Security Considerations
 
@@ -1544,6 +1544,12 @@ lication/signed-corim+cbor"
               Work in Progress, Internet-Draft, draft-ietf-rats-uccs-12,
               3 November 2024, <https://datatracker.ietf.org/doc/html/
               draft-ietf-rats-uccs-12>.
+
+   [RFC3647]  Chokhani, S., Ford, W., Sabett, R., Merrill, C., and S.
+              Wu, "Internet X.509 Public Key Infrastructure Certificate
+              Policy and Certification Practices Framework", RFC 3647,
+              DOI 10.17487/RFC3647, November 2003,
+              <https://www.rfc-editor.org/rfc/rfc3647>.
 
    [RFC5912]  Hoffman, P. and J. Schaad, "New ASN.1 Modules for the
               Public Key Infrastructure Using X.509 (PKIX)", RFC 5912,
