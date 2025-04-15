@@ -66,6 +66,7 @@ normative:
   X.680: CCITT.X680.1994
 
 informative:
+  RFC3647: pkix-cps
   RFC5912: pkix-mods
   RFC6268: more-pkix-mods
   RFC7942: impl-status
@@ -614,10 +615,10 @@ The developers can be contacted on the Zulip channel:
 The privacy considerations outlined in {{Section 11 of -rats-arch}} are fully applicable.
 In particular, when a CMW contains Personally Identifying Information (PII), which is the case for Evidence and sometimes for other conceptual messages as well, care must be taken to prevent unintended recipients from accessing it.
 Generally, utilizing secure channels between the parties exchanging CMWs can help address or mitigate these concerns.
-A specific scenario arises when a public key certificate is issued based on Evidence information provided by the certificate requestor to the issuing Certificate Authority (CA).
+A specific scenario arises when a public key certificate is issued based on Evidence information provided by the certificate requestor to the issuing Certification Authority (CA).
 For instance, an individual seeking a publicly-trusted code signing certificate may be willing to disclose the details of the hardware where their code signing keys are stored (e.g., HSM model, patch level, etc.).
 However, they likely do not want this information to be publicly accessible.
-Applications that intend to publicly "broadcast" Evidence claims received from a third party via X.509 certificates should define a Certificate Practices Statement that clearly specifies the circumstances under which the CA can include such data in the issued certificate.
+Applications that intend to publicly "broadcast" Evidence claims received from a third party via X.509 certificates should define a Certificate Practices Statement {{-pkix-cps}} that clearly specifies the circumstances under which the CA can include such data in the issued certificate.
 Note that the aforementioned consideration does not apply to cases where X.509 is explicitly designed as a security envelope for Evidence claims, such as in DICE {{DICE-arch}}.
 
 # Security Considerations {#seccons}
