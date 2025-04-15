@@ -1082,7 +1082,7 @@ and
 Tom Jones
 for their reviews and suggestions.
 
-The definition of a Collection CMW has been modelled on a proposal originally made by Simon Frost for an EAT-based Evidence collection type.  The Collection CMW intentionally attains binary compatibility with Simon's design and aims at superseding it by also generalizing on the allowed Evidence formats.
+The definition of a Collection CMW has been modelled on a proposal originally made by Simon Frost for an EAT-based Evidence collection type.  The Collection CMW aims at superseding it by generalizing the allowed Evidence formats.
 
 [^note]: Note:
 [^issue]: Open issue:
