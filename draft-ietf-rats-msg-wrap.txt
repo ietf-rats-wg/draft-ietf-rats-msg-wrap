@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 16 October 2025                                           Intel
+Expires: 17 October 2025                                           Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                           14 April 2025
+                                                           15 April 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 October 2025.
+   This Internet-Draft will expire on 17 October 2025.
 
 Copyright Notice
 
@@ -1629,9 +1629,8 @@ Acknowledgments
 
    The definition of a Collection CMW has been modelled on a proposal
    originally made by Simon Frost for an EAT-based Evidence collection
-   type.  The Collection CMW intentionally attains binary compatibility
-   with Simon's design and aims at superseding it by also generalizing
-   on the allowed Evidence formats.
+   type.  The Collection CMW aims at superseding it by generalizing the
+   allowed Evidence formats.
 
 Contributors
 
