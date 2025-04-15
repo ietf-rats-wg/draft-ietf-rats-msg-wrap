@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-01T01:02:37.913373+00:00",
+  "timestamp": "2025-04-15T00:57:40.190794+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -13641,6 +13641,48 @@
           "body": "LGTM",
           "createdAt": "2025-03-24T19:28:54Z",
           "updatedAt": "2025-03-24T19:28:54Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 199,
+      "id": "PR_kwDOIGCt2M6Se6gR",
+      "title": "add CDDL release action (and related docs)",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/199",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-04-14T12:48:55Z",
+      "updatedAt": "2025-04-14T17:04:38Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "da19c282e1ace5ba13788bbcda3151fae39c7278",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "cddl-release",
+      "headRefOid": "e93dbbd5b39f0a8eb9040caa68c88b87931e639d",
+      "closedAt": "2025-04-14T17:04:32Z",
+      "mergedAt": "2025-04-14T17:04:32Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "83665588414251bd77b063357524d2d98ae3a90f"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6kzSyU",
+          "commit": {
+            "abbreviatedOid": "e93dbbd"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-04-14T16:23:12Z",
+          "updatedAt": "2025-04-14T16:23:12Z",
           "comments": []
         }
       ]
