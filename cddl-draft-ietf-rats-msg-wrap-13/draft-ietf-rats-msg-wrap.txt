@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 18 September 2025                                         Intel
+Expires: 18 October 2025                                           Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                           17 March 2025
+                                                           16 April 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 September 2025.
+   This Internet-Draft will expire on 18 October 2025.
 
 Copyright Notice
 
@@ -551,7 +551,7 @@ Table of Contents
 
    id-pe-cmw  OBJECT IDENTIFIER ::=
            { iso(1) identified-organization(3) dod(6) internet(1)
-             security(5) mechanisms(5) pkix(7) id-pe(1) TBD }
+             security(5) mechanisms(5) pkix(7) id-pe(1) 35 }
 
    This extension SHOULD NOT be marked critical.  It MAY be marked
    critical in cases where the attestation-related information is
@@ -579,7 +579,7 @@ Table of Contents
    CMWExtn
      { iso(1) identified-organization(3) dod(6) internet(1)
        security(5) mechanisms(5) pkix(7) id-mod(0)
-       id-mod-cmw-collection-extn(TBD) }
+       id-mod-cmw-extn(TBD) }
 
    DEFINITIONS IMPLICIT TAGS ::=
    BEGIN
@@ -601,7 +601,7 @@ Table of Contents
 
    id-pe-cmw  OBJECT IDENTIFIER  ::=
       { iso(1) identified-organization(3) dod(6) internet(1)
-        security(5) mechanisms(5) pkix(7) id-pe(1) TBD }
+        security(5) mechanisms(5) pkix(7) id-pe(1) 35 }
 
    -- CMW Extension Syntax
 
@@ -1336,15 +1336,15 @@ lication/signed-corim+cbor"
 
 10.8.  New SMI Numbers Registrations
 
-   IANA is requested to assign an object identifier (OID) for the CMW
-   extension defined in Section 4.4 in the "SMI Security for PKIX
-   Certificate Extension" registry of the "SMI Numbers"
-   [IANA.smi-numbers] registry group:
+   IANA has assigned an object identifier (OID) for the CMW extension
+   defined in Section 4.4 in the "SMI Security for PKIX Certificate
+   Extension" registry of the "SMI Numbers" [IANA.smi-numbers] registry
+   group as follows:
 
    +=========+=============+========================+
    | Decimal | Description | References             |
    +=========+=============+========================+
-   | TBD     | id-pe-cmw   | Section 4.4 of RFCthis |
+   | 35      | id-pe-cmw   | Section 4.4 of RFCthis |
    +---------+-------------+------------------------+
 
              Table 5: New CMW Extension OID
@@ -1354,13 +1354,13 @@ lication/signed-corim+cbor"
    Identifier" registry of the "SMI Numbers" [IANA.smi-numbers] registry
    group:
 
-   +=========+============================+==========================+
-   | Decimal | Description                | References               |
-   +=========+============================+==========================+
-   | TBD     | id-mod-cmw-collection-extn | Section 4.4.1 of RFCthis |
-   +---------+----------------------------+--------------------------+
+   +=========+=================+==========================+
+   | Decimal | Description     | References               |
+   +=========+=================+==========================+
+   | TBD     | id-mod-cmw-extn | Section 4.4.1 of RFCthis |
+   +---------+-----------------+--------------------------+
 
-                      Table 6: New ASN.1 Module OID
+                Table 6: New ASN.1 Module OID
 
 11.  References
 
@@ -1505,9 +1505,9 @@ lication/signed-corim+cbor"
               Ounsworth, M., Tschofenig, H., Birkholz, H., Wiseman, M.,
               and N. Smith, "Use of Remote Attestation with
               Certification Signing Requests", Work in Progress,
-              Internet-Draft, draft-ietf-lamps-csr-attestation-17, 2
+              Internet-Draft, draft-ietf-lamps-csr-attestation-18, 19
               March 2025, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-lamps-csr-attestation-17>.
+              ietf-lamps-csr-attestation-18>.
 
    [I-D.ietf-rats-ar4si]
               Voit, E., Birkholz, H., Hardjono, T., Fossati, T., and V.
@@ -1629,9 +1629,8 @@ Acknowledgments
 
    The definition of a Collection CMW has been modelled on a proposal
    originally made by Simon Frost for an EAT-based Evidence collection
-   type.  The Collection CMW intentionally attains binary compatibility
-   with Simon's design and aims at superseding it by also generalizing
-   on the allowed Evidence formats.
+   type.  The Collection CMW aims at superseding it by generalizing the
+   allowed Evidence formats.
 
 Contributors
 
