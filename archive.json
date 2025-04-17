@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-15T00:57:40.190794+00:00",
+  "timestamp": "2025-04-17T00:56:31.329301+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2328,7 +2328,7 @@
       "labels": [],
       "body": "Section 5 of CMW defines an OID to put CMW's into X.509 (which generalizes to any ASN.1 messages).\r\n\r\nThe problem with this is that to put an ASN.1 format token in an ASN.1 format message, you must have a JSON or CBOR layer.\r\n\r\nFor example, to put an ASN.1 format attestation token like those that are being worked on by Mike O, in an X.509 cert, you'd have to have a small CBOR or JSON layer for the CMW Record.\r\n\r\nRight now, a CMW Record is only JSON and CBOR. It seems super useful to define a CMW record in ASN.1 format. See discussion on the RATS list.\r\n\r\nInserting a small CBOR or JSON layer may not be completely unworkable, but:\r\n- There are very particular ASN.1-only environments that are important in the rats ecosystem\r\n- We will probably define an ASN.1 CMW record (or \"receptacle\") because it is super general and useful; this would make section 5 a bit redundant.\r\n- The special case syntax design in section 5 is a bit similar to the special case design of EAT submods that we've come to realize is too complex",
       "createdAt": "2024-11-27T20:47:42Z",
-      "updatedAt": "2025-02-13T18:44:46Z",
+      "updatedAt": "2025-04-15T07:11:46Z",
       "closedAt": null,
       "comments": [
         {
@@ -2358,6 +2358,13 @@
           "body": "I like the ASN.1 CMW. Seems correct.\n\nAgree that extending CHOICE with der OCTET STREAM won't work.\n\nStill contemplating this...",
           "createdAt": "2025-02-13T18:44:45Z",
           "updatedAt": "2025-02-13T18:44:45Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing as per https://mailarchive.ietf.org/arch/msg/rats/BOuynAn0LVKJse1YCRaBqIxmiYI/",
+          "createdAt": "2025-04-15T07:11:45Z",
+          "updatedAt": "2025-04-15T07:11:45Z"
         }
       ]
     },
@@ -2653,15 +2660,15 @@
       "id": "I_kwDOIGCt2M6n9Qtt",
       "title": "Is the `cmw` claim too coarse-grained to be useful?",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/169",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "\nLaurence made the proposal to drop the \"cmw\" CWT and JWT claims in favour of claims carrying more specific semantics: https://mailarchive.ietf.org/arch/msg/rats/u8Ug1k9DY27zQSccj_HnUmpDydU/\n\nI may be mistaken (in which case, please help me finding references to any related discussions), but ISTM that the discussion thread on the RATS list has drifted off, and there was no conclusion reached regarding that particular point.\n\nSummarising:\n\n1. \"cmw\" semantic is very generic, it needs extra information (e.g., specific media type, profile) to be understood.\n2. There can only be one \"cmw\" claim in a claims-set.\n\nWhat do people think?\n",
       "createdAt": "2025-01-29T10:49:50Z",
-      "updatedAt": "2025-02-26T18:24:53Z",
-      "closedAt": null,
+      "updatedAt": "2025-04-15T07:11:32Z",
+      "closedAt": "2025-04-15T07:11:31Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -2704,6 +2711,13 @@
           "body": "A note on this point:\n\n> I have convinced myself that for EAT, a \"nested-token\" claims is much preferred to a \"cmw\" claim.\n\nEAT scope is Evidence and Attestation Results.\n\nFor uses of CMW that include other kinds of conceptual messages (e.g., Endorsements, Reference Values and Policies), `\"nested-token\"` would not be appropriate.  Using `\"cmw\"` in such cases seems like a good way to plug the CMW into a JWT/CWT.\n",
           "createdAt": "2025-02-26T18:24:52Z",
           "updatedAt": "2025-02-26T18:24:52Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing as per https://mailarchive.ietf.org/arch/msg/rats/BOuynAn0LVKJse1YCRaBqIxmiYI/",
+          "createdAt": "2025-04-15T07:11:31Z",
+          "updatedAt": "2025-04-15T07:11:31Z"
         }
       ]
     },
@@ -13505,24 +13519,26 @@
       "id": "PR_kwDOIGCt2M6Pn6RA",
       "title": "binary-compatibility with EAT collections is gone",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/197",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "* since CBOR tags are TN-only, binary compatibility with EAT collections is gone\r\n* requesting CBOR tag 299 was a typo: 399 is what I meant",
       "createdAt": "2025-03-21T13:58:54Z",
-      "updatedAt": "2025-03-26T17:21:36Z",
+      "updatedAt": "2025-04-15T07:12:09Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "da19c282e1ace5ba13788bbcda3151fae39c7278",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "eat-collection-compat",
       "headRefOid": "0d4ebb8a31a9cda31be1adab3b36fa26a878c166",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-04-15T07:12:09Z",
+      "mergedAt": "2025-04-15T07:12:09Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "a184a02f0513ef370ef98c50601667c5dbf4fbfc"
+      },
       "comments": [
         {
           "author": "thomas-fossati",
@@ -13683,6 +13699,61 @@
           "body": "LGTM",
           "createdAt": "2025-04-14T16:23:12Z",
           "updatedAt": "2025-04-14T16:23:12Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 200,
+      "id": "PR_kwDOIGCt2M6SqoMu",
+      "title": "Russ's suggestions",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/200",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "* add reference to RFC3647\r\n* s/Certificate Authority/Certification Authority/",
+      "createdAt": "2025-04-15T13:04:49Z",
+      "updatedAt": "2025-04-15T16:07:04Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "a184a02f0513ef370ef98c50601667c5dbf4fbfc",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "russ",
+      "headRefOid": "08df1ec356a534135b9aad5588e70a378821c95c",
+      "closedAt": "2025-04-15T16:07:03Z",
+      "mergedAt": "2025-04-15T16:07:03Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "09cd3749eba07841f1bc05f2713c62d6b5f2fd2a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6lB4xh",
+          "commit": {
+            "abbreviatedOid": "08df1ec"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-15T14:50:46Z",
+          "updatedAt": "2025-04-15T14:50:46Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6lCoVs",
+          "commit": {
+            "abbreviatedOid": "08df1ec"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-15T15:43:08Z",
+          "updatedAt": "2025-04-15T15:43:08Z",
           "comments": []
         }
       ]
