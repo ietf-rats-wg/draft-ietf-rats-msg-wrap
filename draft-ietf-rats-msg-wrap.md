@@ -726,7 +726,7 @@ IANA is requested to add the following tag to the "CBOR Tags" {{!IANA.cbor-tags}
 
 | CBOR Tag | Data Item | Semantics | Reference |
 |----------|-----------|-----------|-----------|
-| CPA765 | CBOR map, CBOR array, CBOR tag | RATS Conceptual Message Wrapper | {{type-n-val}}, {{cbor-tag}} and {{cmw-coll}} of {{&SELF}} |
+| CPA907 | CBOR map, CBOR array, CBOR tag | RATS Conceptual Message Wrapper | {{type-n-val}}, {{cbor-tag}} and {{cmw-coll}} of {{&SELF}} |
 
 ## RATS Conceptual Message Wrapper (CMW) Indicators Registry {#iana-ind-ext}
 
