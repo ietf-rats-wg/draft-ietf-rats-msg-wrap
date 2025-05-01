@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-17T00:56:31.329301+00:00",
+  "timestamp": "2025-05-01T01:03:36.036013+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2321,15 +2321,15 @@
       "id": "I_kwDOIGCt2M6g65v3",
       "title": "Proposal to replace id-pe-cmw with ASN.1-based CMW Record",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/154",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "laurencelundblade",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "Section 5 of CMW defines an OID to put CMW's into X.509 (which generalizes to any ASN.1 messages).\r\n\r\nThe problem with this is that to put an ASN.1 format token in an ASN.1 format message, you must have a JSON or CBOR layer.\r\n\r\nFor example, to put an ASN.1 format attestation token like those that are being worked on by Mike O, in an X.509 cert, you'd have to have a small CBOR or JSON layer for the CMW Record.\r\n\r\nRight now, a CMW Record is only JSON and CBOR. It seems super useful to define a CMW record in ASN.1 format. See discussion on the RATS list.\r\n\r\nInserting a small CBOR or JSON layer may not be completely unworkable, but:\r\n- There are very particular ASN.1-only environments that are important in the rats ecosystem\r\n- We will probably define an ASN.1 CMW record (or \"receptacle\") because it is super general and useful; this would make section 5 a bit redundant.\r\n- The special case syntax design in section 5 is a bit similar to the special case design of EAT submods that we've come to realize is too complex",
       "createdAt": "2024-11-27T20:47:42Z",
-      "updatedAt": "2025-04-15T07:11:46Z",
-      "closedAt": null,
+      "updatedAt": "2025-04-29T11:42:06Z",
+      "closedAt": "2025-04-29T11:42:06Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -2904,6 +2904,22 @@
       "createdAt": "2025-03-21T08:02:30Z",
       "updatedAt": "2025-03-21T16:36:59Z",
       "closedAt": "2025-03-21T16:36:59Z",
+      "comments": []
+    },
+    {
+      "number": 201,
+      "id": "I_kwDOIGCt2M60fACy",
+      "title": "CBOR tag number",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/201",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "[Currently](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-13.html#section-10.4), the draft requests \u201cCPA765\u201d as the CBOR tag for CMW.\n\n@SimonFrost-Arm suggests 907 instead (i.e., \"CMV\\/\" in Roman numerals) which is quite cute.\n\nSince the request has not been initiated with IANA, it seems safe to make the change.\n\n",
+      "createdAt": "2025-04-29T11:49:59Z",
+      "updatedAt": "2025-04-29T11:49:59Z",
+      "closedAt": null,
       "comments": []
     }
   ],
@@ -13754,6 +13770,46 @@
           "body": "",
           "createdAt": "2025-04-15T15:43:08Z",
           "updatedAt": "2025-04-15T15:43:08Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 202,
+      "id": "PR_kwDOIGCt2M6UVQEn",
+      "title": "use 907 (`CMV\\/`) as CMW CBOR Tag number",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/202",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #201",
+      "createdAt": "2025-04-29T11:52:11Z",
+      "updatedAt": "2025-04-29T12:42:10Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "09cd3749eba07841f1bc05f2713c62d6b5f2fd2a",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "roman-tag-number",
+      "headRefOid": "deff7e6e90b526b325e2a5a5699e355cb146425c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6nFqSr",
+          "commit": {
+            "abbreviatedOid": "deff7e6"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-04-29T12:42:10Z",
+          "updatedAt": "2025-04-29T12:42:10Z",
           "comments": []
         }
       ]
