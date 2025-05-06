@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 17 October 2025                                           Intel
+Expires: 7 November 2025                                           Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                           15 April 2025
+                                                              6 May 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 October 2025.
+   This Internet-Draft will expire on 7 November 2025.
 
 Copyright Notice
 
@@ -1086,7 +1086,7 @@ lication/signed-corim+cbor"
     | CBOR   | Data Item   | Semantics       | Reference              |
     | Tag    |             |                 |                        |
     +========+=============+=================+========================+
-    | CPA765 | CBOR map,   | RATS Conceptual | Section 3.1,           |
+    | CPA907 | CBOR map,   | RATS Conceptual | Section 3.1,           |
     |        | CBOR array, | Message Wrapper | Section 3.2 and        |
     |        | CBOR tag    |                 | Section 3.3 of RFCthis |
     +--------+-------------+-----------------+------------------------+
@@ -1497,9 +1497,9 @@ lication/signed-corim+cbor"
               Deshpande, Y., Niemi, A., and T. Fossati, "Using
               Attestation in Transport Layer Security (TLS) and Datagram
               Transport Layer Security (DTLS)", Work in Progress,
-              Internet-Draft, draft-fossati-tls-attestation-08, 21
-              October 2024, <https://datatracker.ietf.org/doc/html/
-              draft-fossati-tls-attestation-08>.
+              Internet-Draft, draft-fossati-tls-attestation-09, 30 April
+              2025, <https://datatracker.ietf.org/doc/html/draft-
+              fossati-tls-attestation-09>.
 
    [I-D.ietf-lamps-csr-attestation]
               Ounsworth, M., Tschofenig, H., Birkholz, H., Wiseman, M.,
