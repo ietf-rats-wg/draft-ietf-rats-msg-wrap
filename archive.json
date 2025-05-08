@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-01T01:03:36.036013+00:00",
+  "timestamp": "2025-05-08T00:59:20.579789+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2911,15 +2911,17 @@
       "id": "I_kwDOIGCt2M60fACy",
       "title": "CBOR tag number",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/201",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "thomas-fossati"
+      ],
       "labels": [],
-      "body": "[Currently](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-13.html#section-10.4), the draft requests \u201cCPA765\u201d as the CBOR tag for CMW.\n\n@SimonFrost-Arm suggests 907 instead (i.e., \"CMV\\/\" in Roman numerals) which is quite cute.\n\nSince the request has not been initiated with IANA, it seems safe to make the change.\n\n",
+      "body": "[Currently](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-13.html#section-10.4), the draft requests \u201cCPA765\u201d as the CBOR tag for CMW.\n\n@SimonFrost-Arm suggests 907 instead (i.e., \u201cCMV\\\\/\" in Roman numerals) which is quite cute.\n\nSince the request has not been initiated with IANA, it seems safe to make the change.\n\n",
       "createdAt": "2025-04-29T11:49:59Z",
-      "updatedAt": "2025-04-29T11:49:59Z",
-      "closedAt": null,
+      "updatedAt": "2025-05-06T15:13:50Z",
+      "closedAt": "2025-05-06T15:13:50Z",
       "comments": []
     }
   ],
@@ -13779,24 +13781,26 @@
       "id": "PR_kwDOIGCt2M6UVQEn",
       "title": "use 907 (`CMV\\/`) as CMW CBOR Tag number",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/202",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "Fix #201",
+      "body": "CMW -> CMV\\\\/ -> CMVII -> 907\r\n\r\nhttps://roman-numerals.info/CMVII\r\n\r\nFix #201",
       "createdAt": "2025-04-29T11:52:11Z",
-      "updatedAt": "2025-04-29T12:42:10Z",
+      "updatedAt": "2025-05-06T15:13:49Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "09cd3749eba07841f1bc05f2713c62d6b5f2fd2a",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "roman-tag-number",
       "headRefOid": "deff7e6e90b526b325e2a5a5699e355cb146425c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-05-06T15:13:49Z",
+      "mergedAt": "2025-05-06T15:13:48Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "17e11ca8d4cd979990f05aa2622eff3d8d5b63b7"
+      },
       "comments": [],
       "reviews": [
         {
@@ -13810,6 +13814,19 @@
           "body": "LGTM",
           "createdAt": "2025-04-29T12:42:10Z",
           "updatedAt": "2025-04-29T12:42:10Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6n-kqn",
+          "commit": {
+            "abbreviatedOid": "deff7e6"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "202 Accept",
+          "createdAt": "2025-05-06T13:02:26Z",
+          "updatedAt": "2025-05-06T13:02:26Z",
           "comments": []
         }
       ]
