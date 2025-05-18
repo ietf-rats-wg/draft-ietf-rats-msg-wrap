@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-13T00:59:41.280388+00:00",
+  "timestamp": "2025-05-18T01:03:28.760636+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2939,6 +2939,22 @@
       "body": "From [Carl\u2019s WGLC review](https://mailarchive.ietf.org/arch/msg/rats/_0qptLEiQ3yLiwNV2x0M7_hbVCs/):\n\n* [ ] In 3, what is a PKIX message? (this gets defined later but maybe should be defined before first usage).\n \n* [ ] In 3.1, the MUST NOT for type field relative to JSON seems misplaced. It is not even an option.\n \n* [ ] Section 3.1 notes that any value between 1 and 15 is allowed for the ind field but the table in 10.5 allows for expansion up 32 bits with 0 allowed as well. There is no technical restraint on the size.\n \n* [ ] In 3.2.1, it may be worth stating that no CBOR tags are defined by this spec, so the socket is empty.\n \n* [ ] In 3.3, \u201cis always\u201d and \u201cnever\u201d for OID and URI contents should be MUST and MUST NOT.\n \n* [ ] In 3.3, re: cmc_t, the \u201cMUST NOT be used for a label\u201d is a bit strange since that is what it is used for. \u201cMUST NOT be used for any purpose other than described here\u201d or some requirement based on the uri / oid value type may be better. Should a cut be used here (as described in section 3.5.4 in RFC 8610)?\n \n* [ ] In 3.3, should \"may limit\" be \"MAY limit\" re: depth of nesting?\n \n* [ ] In 3.4, suggest describing what the bytes are as comments.\n \n* [ ] In 4.1, RFC 8152 has 2 as criticality and 3 as content type. 2 is used as content type here.\n \n* [ ] It may be good to have a section describing cm-type.\n",
       "createdAt": "2025-05-12T10:34:21Z",
       "updatedAt": "2025-05-12T10:34:34Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 204,
+      "id": "I_kwDOIGCt2M624nqT",
+      "title": "Clarify the use of \"conceptual\" in the document",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/204",
+      "state": "OPEN",
+      "author": "ionut-arm",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Make it clear that the word comes from RFC 9334, to avoid the impression that we're talking abstractly about messages.",
+      "createdAt": "2025-05-16T08:17:12Z",
+      "updatedAt": "2025-05-16T08:17:12Z",
       "closedAt": null,
       "comments": []
     }
