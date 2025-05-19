@@ -184,7 +184,7 @@ The following snippet outlines the productions associated with the top-level typ
 
 The complete CDDL can be found in {{collected-cddl}}.
 
-{{webtokens}} and {{x509}} describe the transport of CMWs using CBOR and JSON Web Tokens and PKIX messages, respectively.
+{{webtokens}} and {{x509}} describe the transport of CMWs using CBOR and JSON Web Tokens and PKIX messages, including Certificate Signing Requests (CSRs), X.509 Certificates, and Certificate Revocation Lists (CRLs).
 
 This document only defines an encapsulation, not a security format.
 It is the responsibility of the Attester to ensure that the CMW contents have the necessary security protection.
