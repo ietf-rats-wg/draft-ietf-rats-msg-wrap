@@ -210,7 +210,7 @@ Each contains two or three members:
 : Either a text string representing a Content-Type (e.g., an EAT media type
 {{-rats-eat-mt}}) or an unsigned integer corresponding to a CoAP Content-Format
 ID ({{Section 12.3 of -coap}}).
-The latter MUST NOT be used in the JSON serialization.
+The latter is not used in the JSON serialization.
 
 `value`:
 : The RATS conceptual message serialized according to the
