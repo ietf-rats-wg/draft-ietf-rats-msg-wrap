@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 18 October 2025                                           Intel
+Expires: 20 November 2025                                          Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                           16 April 2025
+                                                             19 May 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -20,11 +20,12 @@ Expires: 18 October 2025                                           Intel
 
 Abstract
 
-   This document defines a conceptual message wrapper (CMW) format - an
-   encapsulation method applicable to any RATS conceptual message, such
-   as Evidence, Attestation Results, Endorsements, and Reference Values.
-   It also describes a collection type that aggregates one or more CMWs
-   into a single message.
+   Section 8 of RFC 9334 defines "conceptual messages" as abstract
+   messages exchanged by RATS roles such as Evidence, Attestation
+   Results, Endorsements, and Reference Values.  This document defines a
+   "conceptual message" wrapper (CMW) format for any RATS conceptual
+   message and describes a collection type that aggregates one or more
+   CMWs into a single message.
 
    In addition, this document specifies a corresponding CBOR tag, JSON
    Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, and an X.509
@@ -60,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 October 2025.
+   This Internet-Draft will expire on 20 November 2025.
 
 Copyright Notice
 
@@ -925,7 +926,7 @@ lication/signed-corim+cbor"
    utilizing secure channels between the parties exchanging CMWs can
    help address or mitigate these concerns.  A specific scenario arises
    when a public key certificate is issued based on Evidence information
-   provided by the certificate requestor to the issuing Certificate
+   provided by the certificate requestor to the issuing Certification
    Authority (CA).  For instance, an individual seeking a publicly-
    trusted code signing certificate may be willing to disclose the
    details of the hardware where their code signing keys are stored
@@ -933,11 +934,11 @@ lication/signed-corim+cbor"
    want this information to be publicly accessible.  Applications that
    intend to publicly "broadcast" Evidence claims received from a third
    party via X.509 certificates should define a Certificate Practices
-   Statement that clearly specifies the circumstances under which the CA
-   can include such data in the issued certificate.  Note that the
-   aforementioned consideration does not apply to cases where X.509 is
-   explicitly designed as a security envelope for Evidence claims, such
-   as in DICE [DICE-arch].
+   Statement [RFC3647] that clearly specifies the circumstances under
+   which the CA can include such data in the issued certificate.  Note
+   that the aforementioned consideration does not apply to cases where
+   X.509 is explicitly designed as a security envelope for Evidence
+   claims, such as in DICE [DICE-arch].
 
 9.  Security Considerations
 
@@ -1086,7 +1087,7 @@ lication/signed-corim+cbor"
     | CBOR   | Data Item   | Semantics       | Reference              |
     | Tag    |             |                 |                        |
     +========+=============+=================+========================+
-    | CPA765 | CBOR map,   | RATS Conceptual | Section 3.1,           |
+    | CPA907 | CBOR map,   | RATS Conceptual | Section 3.1,           |
     |        | CBOR array, | Message Wrapper | Section 3.2 and        |
     |        | CBOR tag    |                 | Section 3.3 of RFCthis |
     +--------+-------------+-----------------+------------------------+
@@ -1497,9 +1498,9 @@ lication/signed-corim+cbor"
               Deshpande, Y., Niemi, A., and T. Fossati, "Using
               Attestation in Transport Layer Security (TLS) and Datagram
               Transport Layer Security (DTLS)", Work in Progress,
-              Internet-Draft, draft-fossati-tls-attestation-08, 21
-              October 2024, <https://datatracker.ietf.org/doc/html/
-              draft-fossati-tls-attestation-08>.
+              Internet-Draft, draft-fossati-tls-attestation-09, 30 April
+              2025, <https://datatracker.ietf.org/doc/html/draft-
+              fossati-tls-attestation-09>.
 
    [I-D.ietf-lamps-csr-attestation]
               Ounsworth, M., Tschofenig, H., Birkholz, H., Wiseman, M.,
@@ -1544,6 +1545,12 @@ lication/signed-corim+cbor"
               Work in Progress, Internet-Draft, draft-ietf-rats-uccs-12,
               3 November 2024, <https://datatracker.ietf.org/doc/html/
               draft-ietf-rats-uccs-12>.
+
+   [RFC3647]  Chokhani, S., Ford, W., Sabett, R., Merrill, C., and S.
+              Wu, "Internet X.509 Public Key Infrastructure Certificate
+              Policy and Certification Practices Framework", RFC 3647,
+              DOI 10.17487/RFC3647, November 2003,
+              <https://www.rfc-editor.org/rfc/rfc3647>.
 
    [RFC5912]  Hoffman, P. and J. Schaad, "New ASN.1 Modules for the
               Public Key Infrastructure Using X.509 (PKIX)", RFC 5912,
