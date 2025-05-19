@@ -94,8 +94,8 @@ entity:
 
 --- abstract
 
-This document defines a conceptual message wrapper (CMW) format - an encapsulation method applicable to any RATS conceptual message, such as Evidence, Attestation Results, Endorsements, and Reference Values.
-It also describes a collection type that aggregates one or more CMWs into a single message.
+Section 8 of RFC 9334 defines "conceptual messages" as abstract messages exchanged by RATS roles such as Evidence, Attestation Results, Endorsements, and Reference Values.
+This document defines a "conceptual message" wrapper (CMW) format for any RATS conceptual message and describes a collection type that aggregates one or more CMWs into a single message.
 
 In addition, this document specifies a corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, and an X.509 extension.
 These mechanisms enable the embedding of enveloped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols.
