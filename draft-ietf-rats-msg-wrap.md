@@ -312,21 +312,24 @@ Once any external framing is removed (for example, if the CMW is carried in a ce
 The following pseudo-code illustrates this process:
 
 ~~~
-func CMWTypeDemux(b []byte) (CMW, error) {
+func CMWTypeDemux(b []byte) CMWType {
   if len(b) == 0 {
     return Unknown
   }
 
-
-  if b[0] == 0x82 || b[0] == 0x83 || b[0] == 0x9f {
+  switch b[0] {
+  case 0x82: // 2-elements cbor-record (w/o ind field)
+  case 0x83: // 3-elements cbor-record (w/ ind field)
+  case 0x9f: // start of cbor-record using indefinite-length encoding
     return CBORRecord
-  } else if b[0] == 0xda {
+  case 0xda: // tag-cm-cbor (CBOR Tag in the TN range)
     return CBORTag
-  } else if b[0] == 0x5b {
+  case 0x5b: // ASCII '[', start of json-record
     return JSONRecord
-  } else if b[0] == 0x7b {
+  case 0x7b: // ASCII '{', start of json-collection
     return JSONCollection
-  } else if (b[0] >= 0xa0 && b[0] <= 0xbb) || b[0] == 0xbf {
+  case 0xa0..0xbb: // CBOR map start values, start of cbor-collection
+  case 0xbf:       // ditto
     return CBORCollection
   }
 
