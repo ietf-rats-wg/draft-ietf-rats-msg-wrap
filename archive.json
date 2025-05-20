@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-18T01:03:28.760636+00:00",
+  "timestamp": "2025-05-20T01:00:36.749860+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2936,9 +2936,9 @@
       "labels": [
         "WGLC"
       ],
-      "body": "From [Carl\u2019s WGLC review](https://mailarchive.ietf.org/arch/msg/rats/_0qptLEiQ3yLiwNV2x0M7_hbVCs/):\n\n* [ ] In 3, what is a PKIX message? (this gets defined later but maybe should be defined before first usage).\n \n* [ ] In 3.1, the MUST NOT for type field relative to JSON seems misplaced. It is not even an option.\n \n* [ ] Section 3.1 notes that any value between 1 and 15 is allowed for the ind field but the table in 10.5 allows for expansion up 32 bits with 0 allowed as well. There is no technical restraint on the size.\n \n* [ ] In 3.2.1, it may be worth stating that no CBOR tags are defined by this spec, so the socket is empty.\n \n* [ ] In 3.3, \u201cis always\u201d and \u201cnever\u201d for OID and URI contents should be MUST and MUST NOT.\n \n* [ ] In 3.3, re: cmc_t, the \u201cMUST NOT be used for a label\u201d is a bit strange since that is what it is used for. \u201cMUST NOT be used for any purpose other than described here\u201d or some requirement based on the uri / oid value type may be better. Should a cut be used here (as described in section 3.5.4 in RFC 8610)?\n \n* [ ] In 3.3, should \"may limit\" be \"MAY limit\" re: depth of nesting?\n \n* [ ] In 3.4, suggest describing what the bytes are as comments.\n \n* [ ] In 4.1, RFC 8152 has 2 as criticality and 3 as content type. 2 is used as content type here.\n \n* [ ] It may be good to have a section describing cm-type.\n",
+      "body": "From [Carl\u2019s WGLC review](https://mailarchive.ietf.org/arch/msg/rats/_0qptLEiQ3yLiwNV2x0M7_hbVCs/):\n\n \n \n \n* [ ] In 3.2.1, it may be worth stating that no CBOR tags are defined by this spec, so the socket is empty.\n \n* [ ] In 3.3, \u201cis always\u201d and \u201cnever\u201d for OID and URI contents should be MUST and MUST NOT.\n \n* [ ] In 3.3, re: cmc_t, the \u201cMUST NOT be used for a label\u201d is a bit strange since that is what it is used for. \u201cMUST NOT be used for any purpose other than described here\u201d or some requirement based on the uri / oid value type may be better. Should a cut be used here (as described in section 3.5.4 in RFC 8610)?\n \n* [ ] In 3.3, should \"may limit\" be \"MAY limit\" re: depth of nesting?\n \n* [ ] In 3.4, suggest describing what the bytes are as comments.\n \n* [ ] In 4.1, RFC 8152 has 2 as criticality and 3 as content type. 2 is used as content type here.\n \n* [ ] It may be good to have a section describing cm-type.\n",
       "createdAt": "2025-05-12T10:34:21Z",
-      "updatedAt": "2025-05-12T10:34:34Z",
+      "updatedAt": "2025-05-19T16:12:46Z",
       "closedAt": null,
       "comments": []
     },
@@ -2954,9 +2954,97 @@
       "labels": [],
       "body": "Make it clear that the word comes from RFC 9334, to avoid the impression that we're talking abstractly about messages.",
       "createdAt": "2025-05-16T08:17:12Z",
-      "updatedAt": "2025-05-16T08:17:12Z",
+      "updatedAt": "2025-05-19T14:52:23Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This is very clearly stated in the first paragraph of the Introduction:\n\n> The IETF Remote ATtestation procedureS (RATS) architecture defines a handful of conceptual messages (see [Section 8](https://rfc-editor.org/rfc/rfc9334#section-8) of [[RFC9334](https://ietf-rats-wg.github.io/draft-ietf-rats-msg-wrap/draft-ietf-rats-msg-wrap.html#RFC9334)]), such as Evidence and Attestation Results.\n\nIs the suggestion to add a similar reference to the Abstract?",
+          "createdAt": "2025-05-19T14:52:21Z",
+          "updatedAt": "2025-05-19T14:52:21Z"
+        }
+      ]
+    },
+    {
+      "number": 205,
+      "id": "I_kwDOIGCt2M63Lxbh",
+      "title": "Are JWS & COSE Sign1 sections needed?",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/205",
+      "state": "OPEN",
+      "author": "ionut-arm",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As title implies, are sections 4.1 and 4.2 needed, since both COSE Sign1 and JWS are specified pretty well?\n\nI'm assuming the most important parts of both are the headers, actually, since the rest seems quite run-of-the-mill application of the existing specs.",
+      "createdAt": "2025-05-19T10:17:22Z",
+      "updatedAt": "2025-05-19T14:29:12Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> As title implies, are sections 4.1 and 4.2 needed, since both COSE Sign1 and JWS are specified pretty well?\n> \n> I'm assuming the most important parts of both are the headers, actually,\n\nYes, these sections describe a profile of COSE / JOSE, respectively, specifying which headers are mandatory and how they should be populated.\n\n> since the rest seems quite run-of-the-mill application of the existing specs.\n\nYes.\n",
+          "createdAt": "2025-05-19T14:29:11Z",
+          "updatedAt": "2025-05-19T14:29:11Z"
+        }
+      ]
+    },
+    {
+      "number": 207,
+      "id": "I_kwDOIGCt2M63Pxre",
+      "title": "In 3, what is a PKIX message? (this gets defined later but maybe should be defined before first usage).",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/207",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-05-19T16:10:59Z",
+      "updatedAt": "2025-05-19T16:10:59Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 208,
+      "id": "I_kwDOIGCt2M63Px4j",
+      "title": "In 3.1, the MUST NOT for type field relative to JSON seems misplaced. It is not even an option.",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/208",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-05-19T16:11:22Z",
+      "updatedAt": "2025-05-19T16:11:22Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 209,
+      "id": "I_kwDOIGCt2M63PyoZ",
+      "title": "Section 3.1 notes that any value between 1 and 15 is allowed for the ind field but the table in 10.5 allows for expansion up 32 bits with 0 allowed as well. There is no technical restraint on the size.",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/209",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-05-19T16:12:46Z",
+      "updatedAt": "2025-05-19T16:13:03Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Good catch!",
+          "createdAt": "2025-05-19T16:13:03Z",
+          "updatedAt": "2025-05-19T16:13:03Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -13864,6 +13952,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 206,
+      "id": "PR_kwDOIGCt2M6WvZDC",
+      "title": "Describe \"conceptual\" in the abstract",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/206",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #204",
+      "createdAt": "2025-05-19T14:59:24Z",
+      "updatedAt": "2025-05-19T14:59:24Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "17e11ca8d4cd979990f05aa2622eff3d8d5b63b7",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "conceptual",
+      "headRefOid": "42ec24c2928592a66d8097176a005e29dda962d8",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
