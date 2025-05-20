@@ -287,7 +287,8 @@ Labels can be strings (or integers in the CBOR serialization) that serve as a mn
 
 A Collection MUST have at least one CMW entry.
 
-The `"__cmwc_t"` key is reserved for associating an optional type to the overall Collection and MUST NOT be used for a label.
+The `"__cmwc_t"` key is reserved for associating an optional type with the overall Collection and MUST NOT be used for any purpose other than described here.
+
 The value of the `"__cmwc_t"` key is either a Uniform Resource Identifier (URI) or an object identifier (OID).
 The OID MUST be absolute.
 The URI MUST be in the absolute form ({{Section 4.3 of -uri}}).
