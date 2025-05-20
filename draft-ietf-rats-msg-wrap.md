@@ -231,7 +231,22 @@ field contains multiple conceptual messages with different types (e.g.,
 both Reference Values and Endorsements within the same `application/signed-corim+cbor`), or if the same profile identifier is
 shared by different conceptual messages.
 The value MUST be non-zero. The absence of conceptual message indicator information is indicated by omitting the `ind` field entirely.
-Future specifications may add new values to the `ind` field; see {{iana-ind-ext}}.
+For further details, see {{cm-type}}.
+
+### CM Type {#cm-type}
+
+The `cm-type` type is the control type for the `ind` field.
+As such, it indicates which bits are allowed to be set in the `ind` byte string.
+
+~~~ cddl
+{::include cddl/cm-type.cddl}
+~~~
+{: #fig-cddl-cm-type artwork-align="left"
+   title="CDDL definition of the CM Type"}
+
+The `cm-type` currently has four allowed values: Reference Values, Endorsements, Evidence and Attestation Results, as defined in {{Section 8 of -rats-arch}}.
+
+Future specifications that extend the RATS Conceptual Messages set can add new values to the `cm-type` using the process defined in {{iana-ind-ext}}.
 
 ## Tag CMW {#cbor-tag}
 

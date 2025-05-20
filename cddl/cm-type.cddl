@@ -1,0 +1,6 @@
+cm-type = &(
+  reference-values: 0
+  endorsements: 1
+  evidence: 2
+  attestation-results: 3
+)
