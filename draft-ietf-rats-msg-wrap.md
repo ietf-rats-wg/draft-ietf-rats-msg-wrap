@@ -289,8 +289,8 @@ A Collection MUST have at least one CMW entry.
 
 The `"__cmwc_t"` key is reserved for associating an optional type to the overall Collection and MUST NOT be used for a label.
 The value of the `"__cmwc_t"` key is either a Uniform Resource Identifier (URI) or an object identifier (OID).
-The OID is always absolute and never relative.
-The URI is always in the absolute form ({{Section 4.3 of -uri}}).
+The OID MUST be absolute.
+The URI MUST be in the absolute form ({{Section 4.3 of -uri}}).
 
 The `"__cmwc_t"` key functions similar to an EAT profile claim (see {{Section 4.3.2 of -rats-eat}}), but at a higher level.
 It can be used to indicate basics like CBOR serialization and COSE algorithms just as a profile in EAT does.
