@@ -221,7 +221,7 @@ This always applies, even if the conceptual message format is already textual (e
 When using CBOR, the value field MUST be encoded as a CBOR byte string.
 
 `ind`:
-: An optional 4-byte bitmap that indicates which conceptual message types are
+: An optional bitmap with a maximum size of 4-bytes that indicates which conceptual message types are
 carried in the `value` field.  Any combination (i.e., any value between
 1 and 2<sup>32</sup>-1 included) is allowed.  (However, note that only four values are registered at the time of writing, so the acceptable values is currently limited to 1 to 15.)  This is useful only if the `type` is
 potentially ambiguous and there is no further context available to the
