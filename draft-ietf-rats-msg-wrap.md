@@ -268,6 +268,8 @@ Instead, if a (non-CBOR) conceptual message has a TN-derived CBOR tag `166857693
 {::include cddl/cmw-example-tag-1668576935-def.cddl}
 ~~~
 
+Note that since this specification defines no Tag CMW, the socket is currently empty.
+
 ## Collection CMW {#cmw-coll}
 
 Layered Attesters and composite devices ({{Sections 3.2 and 3.3 of -rats-arch}}) generate Evidence that consists of multiple parts.
