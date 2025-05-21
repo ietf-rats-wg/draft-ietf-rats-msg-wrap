@@ -83,6 +83,7 @@ Table of Contents
    2.  Conventions and Definitions
    3.  Conceptual Message Wrappers
      3.1.  Record CMW
+       3.1.1.  CM Type
      3.2.  Tag CMW
        3.2.1.  How To Plug in a New Tag CMW
      3.3.  Collection CMW
@@ -294,13 +295,13 @@ Table of Contents
       CBOR byte string.
 
    ind:
-      An optional bitmap with a maximum size of 4-bytes that indicates
+      An optional bitmap with a maximum size of 4 bytes that indicates
       which conceptual message types are carried in the value field.
       Any combination (i.e., any value between 1 and 2^32-1 included) is
       allowed.  Only four values are registered at the time of writing,
-      so the acceptable values is currently limited to 1 to 15.  This is
-      useful only if the type is potentially ambiguous and there is no
-      further context available to the CMW consumer to decide.  For
+      so the acceptable values are currently limited to 1 to 15.  This
+      is useful only if the type is potentially ambiguous, and there is
+      no further context available to the CMW consumer to decide.  For
       example, this might be the case if the base media type is not
       profiled (e.g., application/eat+cwt), if the value field contains
       multiple conceptual messages with different types (e.g., both
@@ -308,8 +309,30 @@ Table of Contents
       signed-corim+cbor), or if the same profile identifier is shared by
       different conceptual messages.  The value MUST be non-zero.  The
       absence of conceptual message indicator information is indicated
-      by omitting the ind field entirely.  Future specifications may add
-      new values to the ind field; see Section 10.5.
+      by omitting the ind field entirely.  For further details, see
+      Section 3.1.1.
+
+3.1.1.  CM Type
+
+   The cm-type type is the control type for the ind field.  As such, it
+   indicates which bits are allowed to be set in the ind byte string.
+
+   cm-type = &(
+     reference-values: 0
+     endorsements: 1
+     evidence: 2
+     attestation-results: 3
+   )
+
+                  Figure 2: CDDL definition of the CM Type
+
+   The cm-type currently has four allowed values: Reference Values,
+   Endorsements, Evidence and Attestation Results, as defined in
+   Section 8 of [RFC9334].
+
+   Future specifications that extend the RATS Conceptual Messages set
+   can add new values to the cm-type using the process defined in
+   Section 10.5.
 
 3.2.  Tag CMW
 
@@ -322,7 +345,7 @@ Table of Contents
    Content-Format ID and then encoded as a CBOR byte string, to which
    the TN-derived tag number is prepended.
 
-   The Tag CMW is defined in Figure 2 using two different macros.  One
+   The Tag CMW is defined in Figure 3 using two different macros.  One
    for CBOR-encoded types, the other for all other types.  Both macros
    take the CBOR tag number tn as a parameter.  The tag-cm-cbor macro
    takes the CDDL definition of the associated conceptual message fmt as
@@ -332,7 +355,7 @@ Table of Contents
 
    tag-cm-data<tn> = #6.<tn>(bytes)
 
-              Figure 2: CDDL definition of the Tag CMW macros
+              Figure 3: CDDL definition of the Tag CMW macros
 
 3.2.1.  How To Plug in a New Tag CMW
 
@@ -381,7 +404,7 @@ Table of Contents
    and it can also be used to carry messages related to multiple devices
    simultaneously.
 
-   The Collection CMW (Figure 3) is defined as a CBOR map or JSON object
+   The Collection CMW (Figure 4) is defined as a CBOR map or JSON object
    containing CMW values.  The position of a cmw entry in the cmw-
    collection is not significant.  Labels can be strings (or integers in
    the CBOR serialization) that serve as a mnemonic for different
@@ -421,7 +444,7 @@ Table of Contents
      + &(label: (int / text)) => cbor-cmw
    }
 
-              Figure 3: CDDL definition of the Collection CMW
+              Figure 4: CDDL definition of the Collection CMW
 
 3.4.  Decapsulation Algorithm
 
@@ -812,16 +835,16 @@ lication/signed-corim+cbor"
    media-type = text .abnf ("Content-Type" .cat Content-Type-ABNF)
    base64url-string = text .regexp "[A-Za-z0-9_-]+"
 
+   coap-content-format-type = uint .size 2
+
+   oid = text .regexp "([0-2])((\\.0)|(\\.[1-9][0-9]*))*"
+
    cm-type = &(
      reference-values: 0
      endorsements: 1
      evidence: 2
      attestation-results: 3
    )
-
-   coap-content-format-type = uint .size 2
-
-   oid = text .regexp "([0-2])((\\.0)|(\\.[1-9][0-9]*))*"
 
    Content-Type-ABNF = '
 
@@ -1598,7 +1621,7 @@ lication/signed-corim+cbor"
 
 Appendix A.  Registering and Using CMWs
 
-   Figure 4 describes the registration preconditions for using CMWs in
+   Figure 5 describes the registration preconditions for using CMWs in
    either Record CMW or Tag CMW forms.  When using Collection CMW, the
    preconditions apply for each entry in the Collection.
 
@@ -1631,7 +1654,7 @@ Appendix A.  Registering and Using CMWs
                  /             Record CMW               /
                 `--------------------------------------'
 
-                       Figure 4: How To Create a CMW
+                       Figure 5: How To Create a CMW
 
 Appendix B.  Open Issues
 

@@ -1181,7 +1181,12 @@ Moreover, a Media Type and a CoAP Content-Format are defined for transporting CM
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-conceptual-message-wrappers" class="internal xref">Conceptual Message Wrappers</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-record-cmw" class="internal xref">Record CMW</a></p>
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-record-cmw" class="internal xref">Record CMW</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.1">
+                    <p id="section-toc.1-1.3.2.1.2.1.1" class="keepWithNext"><a href="#section-3.1.1" class="auto internal xref">3.1.1</a>.  <a href="#name-cm-type" class="internal xref">CM Type</a></p>
+</li>
+                </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
                 <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-tag-cmw" class="internal xref">Tag CMW</a></p>
@@ -1529,20 +1534,47 @@ When using CBOR, the value field <span class="bcp14">MUST</span> be encoded as a
 <dt id="section-3.1-4.5">
 <code>ind</code>:</dt>
           <dd style="margin-left: 1.5em" id="section-3.1-4.6">
-            <p id="section-3.1-4.6.1">An optional bitmap with a maximum size of 4-bytes that indicates which conceptual message types are
+            <p id="section-3.1-4.6.1">An optional bitmap with a maximum size of 4 bytes that indicates which conceptual message types are
 carried in the <code>value</code> field.  Any combination (i.e., any value between
-1 and 2<sup>32</sup>-1 included) is allowed.  Only four values are registered at the time of writing, so the acceptable values is currently limited to 1 to 15.  This is useful only if the <code>type</code> is
-potentially ambiguous and there is no further context available to the
+1 and 2<sup>32</sup>-1 included) is allowed.  Only four values are registered at the time of writing, so the acceptable values are currently limited to 1 to 15.  This is useful only if the <code>type</code> is
+potentially ambiguous, and there is no further context available to the
 CMW consumer to decide.  For example, this might be the case if the base
 media type is not profiled (e.g., <code>application/eat+cwt</code>), if the <code>value</code>
 field contains multiple conceptual messages with different types (e.g.,
 both Reference Values and Endorsements within the same <code>application/signed-corim+cbor</code>), or if the same profile identifier is
 shared by different conceptual messages.
 The value <span class="bcp14">MUST</span> be non-zero. The absence of conceptual message indicator information is indicated by omitting the <code>ind</code> field entirely.
-Future specifications may add new values to the <code>ind</code> field; see <a href="#iana-ind-ext" class="auto internal xref">Section 10.5</a>.<a href="#section-3.1-4.6.1" class="pilcrow">¶</a></p>
+For further details, see <a href="#cm-type" class="auto internal xref">Section 3.1.1</a>.<a href="#section-3.1-4.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
+<div id="cm-type">
+<section id="section-3.1.1">
+          <h4 id="name-cm-type">
+<a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-cm-type" class="section-name selfRef">CM Type</a>
+          </h4>
+<p id="section-3.1.1-1">The <code>cm-type</code> type is the control type for the <code>ind</code> field.
+As such, it indicates which bits are allowed to be set in the <code>ind</code> byte string.<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
+<span id="name-cddl-definition-of-the-cm-t"></span><div id="fig-cddl-cm-type">
+<figure id="figure-2">
+            <div class="alignLeft art-cddl art-text artwork" id="section-3.1.1-2.1">
+<pre>
+cm-type = &amp;(
+  reference-values: 0
+  endorsements: 1
+  evidence: 2
+  attestation-results: 3
+)
+</pre>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-cddl-definition-of-the-cm-t" class="selfRef">CDDL definition of the CM Type</a>
+            </figcaption></figure>
+</div>
+<p id="section-3.1.1-3">The <code>cm-type</code> currently has four allowed values: Reference Values, Endorsements, Evidence and Attestation Results, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9334#section-8" class="relref">Section 8</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-4">Future specifications that extend the RATS Conceptual Messages set can add new values to the <code>cm-type</code> using the process defined in <a href="#iana-ind-ext" class="auto internal xref">Section 10.5</a>.<a href="#section-3.1.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="cbor-tag">
@@ -1553,12 +1585,12 @@ Future specifications may add new values to the <code>ind</code> field; see <a h
 <p id="section-3.2-1">Tag CMWs derive their tag numbers from a corresponding CoAP Content-Format ID using the <code>TN()</code> transform defined in <span><a href="https://rfc-editor.org/rfc/rfc9277#appendix-B" class="relref">Appendix B</a> of [<a href="#RFC9277" class="cite xref">RFC9277</a>]</span>.
 Such CBOR tag numbers are in range [1668546817, 1668612095].<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">The RATS conceptual message is first serialized according to the Content-Format ID and then encoded as a CBOR byte string, to which the TN-derived tag number is prepended.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.2-3">The Tag CMW is defined in <a href="#fig-cddl-cbor-tag" class="auto internal xref">Figure 2</a> using two different macros.
+<p id="section-3.2-3">The Tag CMW is defined in <a href="#fig-cddl-cbor-tag" class="auto internal xref">Figure 3</a> using two different macros.
 One for CBOR-encoded types, the other for all other types.
 Both macros take the CBOR tag number <code>tn</code> as a parameter.
 The <code>tag-cm-cbor</code> macro takes the CDDL definition of the associated conceptual message <code>fmt</code> as a second parameter.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-of-the-tag-"></span><div id="fig-cddl-cbor-tag">
-<figure id="figure-2">
+<figure id="figure-3">
           <div class="alignLeft art-cddl art-text artwork" id="section-3.2-4.1">
 <pre>
 tag-cm-cbor&lt;tn, fmt&gt; = #6.&lt;tn&gt;(bytes .cbor fmt)
@@ -1566,7 +1598,7 @@ tag-cm-cbor&lt;tn, fmt&gt; = #6.&lt;tn&gt;(bytes .cbor fmt)
 tag-cm-data&lt;tn&gt; = #6.&lt;tn&gt;(bytes)
 </pre>
 </div>
-<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
 <a href="#name-cddl-definition-of-the-tag-" class="selfRef">CDDL definition of the Tag CMW macros</a>
           </figcaption></figure>
 </div>
@@ -1609,7 +1641,7 @@ To allow aggregation of multiple, potentially non-homogeneous evidence formats c
 <p id="section-3.3-2">Although originally designed to support layered Attester and composite device use cases, the Collection CMW can be adapted for other scenarios that require the aggregation of RATS conceptual messages.
 For instance, Collections may be used to group Endorsements, Reference Values, Attestation Results, and more.
 A single Collection CMW can contain a mix of different message types, and it can also be used to carry messages related to multiple devices simultaneously.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
-<p id="section-3.3-3">The Collection CMW (<a href="#fig-cddl-collection" class="auto internal xref">Figure 3</a>) is defined as a CBOR map or JSON object containing CMW values.
+<p id="section-3.3-3">The Collection CMW (<a href="#fig-cddl-collection" class="auto internal xref">Figure 4</a>) is defined as a CBOR map or JSON object containing CMW values.
 The position of a <code>cmw</code> entry in the <code>cmw-collection</code> is not significant.
 Labels can be strings (or integers in the CBOR serialization) that serve as a mnemonic for different conceptual messages in the Collection.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
 <p id="section-3.3-4">A Collection <span class="bcp14">MUST</span> have at least one CMW entry.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
@@ -1623,7 +1655,7 @@ At the higher level, it can be used to describe the allowed CMW collection assem
 For an example of a <code>"__cmwc_t"</code> that is defined for a bundle of endorsements and reference values, see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-07#section-4.3.1" class="relref">Section 4.3.1</a> of [<a href="#I-D.ietf-rats-corim" class="cite xref">I-D.ietf-rats-corim</a>]</span>.<a href="#section-3.3-7" class="pilcrow">¶</a></p>
 <p id="section-3.3-8">Since the Collection CMW is recursive (a Collection CMW is itself a CMW), implementations <span class="bcp14">MAY</span> limit the allowed depth of nesting.<a href="#section-3.3-8" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-of-the-coll"></span><div id="fig-cddl-collection">
-<figure id="figure-3">
+<figure id="figure-4">
           <div class="alignLeft art-cddl art-text artwork" id="section-3.3-9.1">
 <pre>
 json-collection = {
@@ -1637,7 +1669,7 @@ cbor-collection = {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
 <a href="#name-cddl-definition-of-the-coll" class="selfRef">CDDL definition of the Collection CMW</a>
           </figcaption></figure>
 </div>
@@ -2115,16 +2147,16 @@ cbor-collection = {
 media-type = text .abnf ("Content-Type" .cat Content-Type-ABNF)
 base64url-string = text .regexp "[A-Za-z0-9_-]+"
 
+coap-content-format-type = uint .size 2
+
+oid = text .regexp "([0-2])((\\.0)|(\\.[1-9][0-9]*))*"
+
 cm-type = &amp;(
   reference-values: 0
   endorsements: 1
   evidence: 2
   attestation-results: 3
 )
-
-coap-content-format-type = uint .size 2
-
-oid = text .regexp "([0-2])((\\.0)|(\\.[1-9][0-9]*))*"
 
 Content-Type-ABNF = '
 
@@ -3269,11 +3301,11 @@ dotted-decimal notation.  The parameter value is case-insensitive.  It must not 
       <h2 id="name-registering-and-using-cmws">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-registering-and-using-cmws" class="section-name selfRef">Registering and Using CMWs</a>
       </h2>
-<p id="appendix-A-1"><a href="#fig-howto-cmw" class="auto internal xref">Figure 4</a> describes the registration preconditions for using
+<p id="appendix-A-1"><a href="#fig-howto-cmw" class="auto internal xref">Figure 5</a> describes the registration preconditions for using
 CMWs in either Record CMW or Tag CMW forms.
 When using Collection CMW, the preconditions apply for each entry in the Collection.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <span id="name-how-to-create-a-cmw"></span><div id="fig-howto-cmw">
-<figure id="figure-4">
+<figure id="figure-5">
         <div id="appendix-A-2.1">
           <div class="alignCenter art-svg artwork" id="appendix-A-2.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="480" width="344" viewBox="0 0 344 480" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
@@ -3369,7 +3401,7 @@ When using Collection CMW, the preconditions apply for each entry in the Collect
             </svg><a href="#appendix-A-2.1.1" class="pilcrow">¶</a>
 </div>
 </div>
-<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
 <a href="#name-how-to-create-a-cmw" class="selfRef">How To Create a CMW</a>
         </figcaption></figure>
 </div>
