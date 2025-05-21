@@ -1471,7 +1471,7 @@ cbor-cmw = cbor-record / cbor-collection / $cbor-tag
 </pre><a href="#section-3-3" class="pilcrow">¶</a>
 </div>
 <p id="section-3-4">The complete CDDL can be found in <a href="#collected-cddl" class="auto internal xref">Section 6</a>.<a href="#section-3-4" class="pilcrow">¶</a></p>
-<p id="section-3-5"><a href="#webtokens" class="auto internal xref">Section 4.3</a> and <a href="#x509" class="auto internal xref">Section 4.4</a> describe the transport of CMWs using CBOR and JSON Web Tokens and PKIX messages, respectively.<a href="#section-3-5" class="pilcrow">¶</a></p>
+<p id="section-3-5"><a href="#webtokens" class="auto internal xref">Section 4.3</a> and <a href="#x509" class="auto internal xref">Section 4.4</a> describe the transport of CMWs using CBOR and JSON Web Tokens and PKIX messages, including Certificate Signing Requests (CSRs), X.509 Certificates, and Certificate Revocation Lists (CRLs).<a href="#section-3-5" class="pilcrow">¶</a></p>
 <p id="section-3-6">This document only defines an encapsulation, not a security format.
 It is the responsibility of the Attester to ensure that the CMW contents have the necessary security protection.
 Security considerations are discussed in <a href="#seccons" class="auto internal xref">Section 9</a>.<a href="#section-3-6" class="pilcrow">¶</a></p>
@@ -1512,7 +1512,7 @@ cbor-record = [
             <p id="section-3.1-4.2.1">Either a text string representing a Content-Type (e.g., an EAT media type
 <span>[<a href="#I-D.ietf-rats-eat-media-type" class="cite xref">I-D.ietf-rats-eat-media-type</a>]</span>) or an unsigned integer corresponding to a CoAP Content-Format
 ID (<span><a href="https://rfc-editor.org/rfc/rfc7252#section-12.3" class="relref">Section 12.3</a> of [<a href="#RFC7252" class="cite xref">RFC7252</a>]</span>).
-The latter <span class="bcp14">MUST NOT</span> be used in the JSON serialization.<a href="#section-3.1-4.2.1" class="pilcrow">¶</a></p>
+The latter is not used in the JSON serialization.<a href="#section-3.1-4.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.1-4.3">
@@ -1529,15 +1529,16 @@ When using CBOR, the value field <span class="bcp14">MUST</span> be encoded as a
 <dt id="section-3.1-4.5">
 <code>ind</code>:</dt>
           <dd style="margin-left: 1.5em" id="section-3.1-4.6">
-            <p id="section-3.1-4.6.1">An optional bitmap that indicates which conceptual message types are
+            <p id="section-3.1-4.6.1">An optional bitmap with a maximum size of 4-bytes that indicates which conceptual message types are
 carried in the <code>value</code> field.  Any combination (i.e., any value between
-1 and 15, included) is allowed.  This is useful only if the <code>type</code> is
+1 and 2<sup>32</sup>-1 included) is allowed.  Only four values are registered at the time of writing, so the acceptable values is currently limited to 1 to 15.  This is useful only if the <code>type</code> is
 potentially ambiguous and there is no further context available to the
 CMW consumer to decide.  For example, this might be the case if the base
 media type is not profiled (e.g., <code>application/eat+cwt</code>), if the <code>value</code>
 field contains multiple conceptual messages with different types (e.g.,
 both Reference Values and Endorsements within the same <code>application/signed-corim+cbor</code>), or if the same profile identifier is
 shared by different conceptual messages.
+The value <span class="bcp14">MUST</span> be non-zero. The absence of conceptual message indicator information is indicated by omitting the <code>ind</code> field entirely.
 Future specifications may add new values to the <code>ind</code> field; see <a href="#iana-ind-ext" class="auto internal xref">Section 10.5</a>.<a href="#section-3.1-4.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
@@ -1591,6 +1592,7 @@ my-evidence = {
 $cbor-tag /= tag-cm-data&lt;1668576935&gt;
 </pre><a href="#section-3.2.1-5" class="pilcrow">¶</a>
 </div>
+<p id="section-3.2.1-6">Note that since this specification defines no Tag CMW, the socket is currently empty.<a href="#section-3.2.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1611,18 +1613,18 @@ A single Collection CMW can contain a mix of different message types, and it can
 The position of a <code>cmw</code> entry in the <code>cmw-collection</code> is not significant.
 Labels can be strings (or integers in the CBOR serialization) that serve as a mnemonic for different conceptual messages in the Collection.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
 <p id="section-3.3-4">A Collection <span class="bcp14">MUST</span> have at least one CMW entry.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
-<p id="section-3.3-5">The <code>"__cmwc_t"</code> key is reserved for associating an optional type to the overall Collection and <span class="bcp14">MUST NOT</span> be used for a label.
-The value of the <code>"__cmwc_t"</code> key is either a Uniform Resource Identifier (URI) or an object identifier (OID).
-The OID is always absolute and never relative.
-The URI is always in the absolute form (<span><a href="https://rfc-editor.org/rfc/rfc3986#section-4.3" class="relref">Section 4.3</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>).<a href="#section-3.3-5" class="pilcrow">¶</a></p>
-<p id="section-3.3-6">The <code>"__cmwc_t"</code> key functions similar to an EAT profile claim (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-31#section-4.3.2" class="relref">Section 4.3.2</a> of [<a href="#I-D.ietf-rats-eat" class="cite xref">I-D.ietf-rats-eat</a>]</span>), but at a higher level.
+<p id="section-3.3-5">The <code>"__cmwc_t"</code> key is reserved for associating an optional type with the overall Collection and <span class="bcp14">MUST NOT</span> be used for any purpose other than described here.<a href="#section-3.3-5" class="pilcrow">¶</a></p>
+<p id="section-3.3-6">The value of the <code>"__cmwc_t"</code> key is either a Uniform Resource Identifier (URI) or an object identifier (OID).
+The OID <span class="bcp14">MUST</span> be absolute.
+The URI <span class="bcp14">MUST</span> be in the absolute form (<span><a href="https://rfc-editor.org/rfc/rfc3986#section-4.3" class="relref">Section 4.3</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>).<a href="#section-3.3-6" class="pilcrow">¶</a></p>
+<p id="section-3.3-7">The <code>"__cmwc_t"</code> key functions similar to an EAT profile claim (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-31#section-4.3.2" class="relref">Section 4.3.2</a> of [<a href="#I-D.ietf-rats-eat" class="cite xref">I-D.ietf-rats-eat</a>]</span>), but at a higher level.
 It can be used to indicate basics like CBOR serialization and COSE algorithms just as a profile in EAT does.
 At the higher level, it can be used to describe the allowed CMW collection assembly (this is somewhat parallel to the way EAT profiles indicate which claims are required and/or allowed).
-For an example of a <code>"__cmwc_t"</code> that is defined for a bundle of endorsements and reference values, see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-07#section-4.3.1" class="relref">Section 4.3.1</a> of [<a href="#I-D.ietf-rats-corim" class="cite xref">I-D.ietf-rats-corim</a>]</span>.<a href="#section-3.3-6" class="pilcrow">¶</a></p>
-<p id="section-3.3-7">Since the Collection CMW is recursive (a Collection CMW is itself a CMW), implementations may limit the allowed depth of nesting.<a href="#section-3.3-7" class="pilcrow">¶</a></p>
+For an example of a <code>"__cmwc_t"</code> that is defined for a bundle of endorsements and reference values, see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-07#section-4.3.1" class="relref">Section 4.3.1</a> of [<a href="#I-D.ietf-rats-corim" class="cite xref">I-D.ietf-rats-corim</a>]</span>.<a href="#section-3.3-7" class="pilcrow">¶</a></p>
+<p id="section-3.3-8">Since the Collection CMW is recursive (a Collection CMW is itself a CMW), implementations <span class="bcp14">MAY</span> limit the allowed depth of nesting.<a href="#section-3.3-8" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-of-the-coll"></span><div id="fig-cddl-collection">
 <figure id="figure-3">
-          <div class="alignLeft art-cddl art-text artwork" id="section-3.3-8.1">
+          <div class="alignLeft art-cddl art-text artwork" id="section-3.3-9.1">
 <pre>
 json-collection = {
   ? "__cmwc_t": ~uri / oid
@@ -1650,21 +1652,24 @@ cbor-collection = {
 The following pseudo-code illustrates this process:<a href="#section-3.4-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3.4-2">
 <pre>
-func CMWTypeDemux(b []byte) (CMW, error) {
+func CMWTypeDemux(b []byte) CMWType {
   if len(b) == 0 {
     return Unknown
   }
 
-
-  if b[0] == 0x82 || b[0] == 0x83 || b[0] == 0x9f {
+  switch b[0] {
+  case 0x82: // 2-elements cbor-record (w/o ind field)
+  case 0x83: // 3-elements cbor-record (w/ ind field)
+  case 0x9f: // start of cbor-record using indefinite-length encoding
     return CBORRecord
-  } else if b[0] == 0xda {
+  case 0xda: // tag-cm-cbor (CBOR Tag in the TN range)
     return CBORTag
-  } else if b[0] == 0x5b {
+  case 0x5b: // ASCII '[', start of json-record
     return JSONRecord
-  } else if b[0] == 0x7b {
+  case 0x7b: // ASCII '{', start of json-collection
     return JSONCollection
-  } else if (b[0] &gt;= 0xa0 &amp;&amp; b[0] &lt;= 0xbb) || b[0] == 0xbf {
+  case 0xa0..0xbb: // CBOR map start values, start of cbor-collection
+  case 0xbf:       // ditto
     return CBORCollection
   }
 
@@ -1704,7 +1709,7 @@ signed-cbor-cmw = [
 <pre>
 signed-cbor-cmw-protected-hdr = {
   1 =&gt; int                            ; alg
-  2 =&gt; "application/cmw+cbor" / 10000 ; cty
+  3 =&gt; "application/cmw+cbor" / 10000 ; cty
   * cose.label =&gt; cose.values
 }
 
@@ -2164,7 +2169,7 @@ signed-cbor-cmw = [
 
 signed-cbor-cmw-protected-hdr = {
   1 =&gt; int                            ; alg
-  2 =&gt; "application/cmw+cbor" / 10000 ; cty
+  3 =&gt; "application/cmw+cbor" / 10000 ; cty
   * cose.label =&gt; cose.values
 }
 
