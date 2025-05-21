@@ -94,8 +94,8 @@ entity:
 
 --- abstract
 
-This document defines a conceptual message wrapper (CMW) format - an encapsulation method applicable to any RATS conceptual message, such as Evidence, Attestation Results, Endorsements, and Reference Values.
-It also describes a collection type that aggregates one or more CMWs into a single message.
+Section 8 of RFC 9334 defines "conceptual messages" as abstract messages exchanged by RATS roles such as Evidence, Attestation Results, Endorsements, and Reference Values.
+This document defines a "conceptual message" wrapper (CMW) format for any RATS conceptual message and describes a collection type that aggregates one or more CMWs into a single message.
 
 In addition, this document specifies a corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, and an X.509 extension.
 These mechanisms enable the embedding of enveloped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols.
@@ -221,10 +221,10 @@ This always applies, even if the conceptual message format is already textual (e
 When using CBOR, the value field MUST be encoded as a CBOR byte string.
 
 `ind`:
-: An optional 4-byte bitmap that indicates which conceptual message types are
+: An optional bitmap with a maximum size of 4 bytes that indicates which conceptual message types are
 carried in the `value` field.  Any combination (i.e., any value between
-1 and 2<sup>32</sup>-1 included) is allowed.  (However, note that only four values are registered at the time of writing, so the acceptable values is currently limited to 1 to 15.)  This is useful only if the `type` is
-potentially ambiguous and there is no further context available to the
+1 and 2<sup>32</sup>-1 included) is allowed.  Only four values are registered at the time of writing, so the acceptable values are currently limited to 1 to 15.  This is useful only if the `type` is
+potentially ambiguous, and there is no further context available to the
 CMW consumer to decide.  For example, this might be the case if the base
 media type is not profiled (e.g., `application/eat+cwt`), if the `value`
 field contains multiple conceptual messages with different types (e.g.,
