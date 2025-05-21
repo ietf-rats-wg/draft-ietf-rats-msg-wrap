@@ -184,7 +184,7 @@ The following snippet outlines the productions associated with the top-level typ
 
 The complete CDDL can be found in {{collected-cddl}}.
 
-{{webtokens}} and {{x509}} describe the transport of CMWs using CBOR and JSON Web Tokens and PKIX messages, respectively.
+{{webtokens}} and {{x509}} describe the transport of CMWs using CBOR and JSON Web Tokens and PKIX messages, including Certificate Signing Requests (CSRs), X.509 Certificates, and Certificate Revocation Lists (CRLs).
 
 This document only defines an encapsulation, not a security format.
 It is the responsibility of the Attester to ensure that the CMW contents have the necessary security protection.
@@ -210,7 +210,7 @@ Each contains two or three members:
 : Either a text string representing a Content-Type (e.g., an EAT media type
 {{-rats-eat-mt}}) or an unsigned integer corresponding to a CoAP Content-Format
 ID ({{Section 12.3 of -coap}}).
-The latter MUST NOT be used in the JSON serialization.
+The latter is not used in the JSON serialization.
 
 `value`:
 : The RATS conceptual message serialized according to the
@@ -221,15 +221,16 @@ This always applies, even if the conceptual message format is already textual (e
 When using CBOR, the value field MUST be encoded as a CBOR byte string.
 
 `ind`:
-: An optional bitmap that indicates which conceptual message types are
+: An optional bitmap with a maximum size of 4-bytes that indicates which conceptual message types are
 carried in the `value` field.  Any combination (i.e., any value between
-1 and 15, included) is allowed.  This is useful only if the `type` is
+1 and 2<sup>32</sup>-1 included) is allowed.  Only four values are registered at the time of writing, so the acceptable values is currently limited to 1 to 15.  This is useful only if the `type` is
 potentially ambiguous and there is no further context available to the
 CMW consumer to decide.  For example, this might be the case if the base
 media type is not profiled (e.g., `application/eat+cwt`), if the `value`
 field contains multiple conceptual messages with different types (e.g.,
 both Reference Values and Endorsements within the same `application/signed-corim+cbor`), or if the same profile identifier is
 shared by different conceptual messages.
+The value MUST be non-zero. The absence of conceptual message indicator information is indicated by omitting the `ind` field entirely.
 Future specifications may add new values to the `ind` field; see {{iana-ind-ext}}.
 
 ## Tag CMW {#cbor-tag}
@@ -267,6 +268,8 @@ Instead, if a (non-CBOR) conceptual message has a TN-derived CBOR tag `166857693
 {::include cddl/cmw-example-tag-1668576935-def.cddl}
 ~~~
 
+Note that since this specification defines no Tag CMW, the socket is currently empty.
+
 ## Collection CMW {#cmw-coll}
 
 Layered Attesters and composite devices ({{Sections 3.2 and 3.3 of -rats-arch}}) generate Evidence that consists of multiple parts.
@@ -284,17 +287,18 @@ Labels can be strings (or integers in the CBOR serialization) that serve as a mn
 
 A Collection MUST have at least one CMW entry.
 
-The `"__cmwc_t"` key is reserved for associating an optional type to the overall Collection and MUST NOT be used for a label.
+The `"__cmwc_t"` key is reserved for associating an optional type with the overall Collection and MUST NOT be used for any purpose other than described here.
+
 The value of the `"__cmwc_t"` key is either a Uniform Resource Identifier (URI) or an object identifier (OID).
-The OID is always absolute and never relative.
-The URI is always in the absolute form ({{Section 4.3 of -uri}}).
+The OID MUST be absolute.
+The URI MUST be in the absolute form ({{Section 4.3 of -uri}}).
 
 The `"__cmwc_t"` key functions similar to an EAT profile claim (see {{Section 4.3.2 of -rats-eat}}), but at a higher level.
 It can be used to indicate basics like CBOR serialization and COSE algorithms just as a profile in EAT does.
 At the higher level, it can be used to describe the allowed CMW collection assembly (this is somewhat parallel to the way EAT profiles indicate which claims are required and/or allowed).
 For an example of a `"__cmwc_t"` that is defined for a bundle of endorsements and reference values, see {{Section 4.3.1 of -rats-corim}}.
 
-Since the Collection CMW is recursive (a Collection CMW is itself a CMW), implementations may limit the allowed depth of nesting.
+Since the Collection CMW is recursive (a Collection CMW is itself a CMW), implementations MAY limit the allowed depth of nesting.
 
 ~~~ cddl
 {::include cddl/cmw-collection.cddl}
@@ -308,21 +312,24 @@ Once any external framing is removed (for example, if the CMW is carried in a ce
 The following pseudo-code illustrates this process:
 
 ~~~
-func CMWTypeDemux(b []byte) (CMW, error) {
+func CMWTypeDemux(b []byte) CMWType {
   if len(b) == 0 {
     return Unknown
   }
 
-
-  if b[0] == 0x82 || b[0] == 0x83 || b[0] == 0x9f {
+  switch b[0] {
+  case 0x82: // 2-elements cbor-record (w/o ind field)
+  case 0x83: // 3-elements cbor-record (w/ ind field)
+  case 0x9f: // start of cbor-record using indefinite-length encoding
     return CBORRecord
-  } else if b[0] == 0xda {
+  case 0xda: // tag-cm-cbor (CBOR Tag in the TN range)
     return CBORTag
-  } else if b[0] == 0x5b {
+  case 0x5b: // ASCII '[', start of json-record
     return JSONRecord
-  } else if b[0] == 0x7b {
+  case 0x7b: // ASCII '{', start of json-collection
     return JSONCollection
-  } else if (b[0] >= 0xa0 && b[0] <= 0xbb) || b[0] == 0xbf {
+  case 0xa0..0xbb: // CBOR map start values, start of cbor-collection
+  case 0xbf:       // ditto
     return CBORCollection
   }
 
