@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 21 November 2025                                          Intel
+Expires: 22 November 2025                                          Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                             20 May 2025
+                                                             21 May 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -20,11 +20,12 @@ Expires: 21 November 2025                                          Intel
 
 Abstract
 
-   This document defines a conceptual message wrapper (CMW) format - an
-   encapsulation method applicable to any RATS conceptual message, such
-   as Evidence, Attestation Results, Endorsements, and Reference Values.
-   It also describes a collection type that aggregates one or more CMWs
-   into a single message.
+   Section 8 of RFC 9334 defines "conceptual messages" as abstract
+   messages exchanged by RATS roles such as Evidence, Attestation
+   Results, Endorsements, and Reference Values.  This document defines a
+   "conceptual message" wrapper (CMW) format for any RATS conceptual
+   message and describes a collection type that aggregates one or more
+   CMWs into a single message.
 
    In addition, this document specifies a corresponding CBOR tag, JSON
    Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, and an X.509
@@ -60,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 November 2025.
+   This Internet-Draft will expire on 22 November 2025.
 
 Copyright Notice
 
@@ -294,13 +295,13 @@ Table of Contents
       CBOR byte string.
 
    ind:
-      An optional 4-byte bitmap that indicates which conceptual message
-      types are carried in the value field.  Any combination (i.e., any
-      value between 1 and 2^32-1 included) is allowed.  (However, note
-      that only four values are registered at the time of writing, so
-      the acceptable values is currently limited to 1 to 15.)  This is
-      useful only if the type is potentially ambiguous and there is no
-      further context available to the CMW consumer to decide.  For
+      An optional bitmap with a maximum size of 4 bytes that indicates
+      which conceptual message types are carried in the value field.
+      Any combination (i.e., any value between 1 and 2^32-1 included) is
+      allowed.  Only four values are registered at the time of writing,
+      so the acceptable values are currently limited to 1 to 15.  This
+      is useful only if the type is potentially ambiguous, and there is
+      no further context available to the CMW consumer to decide.  For
       example, this might be the case if the base media type is not
       profiled (e.g., application/eat+cwt), if the value field contains
       multiple conceptual messages with different types (e.g., both
