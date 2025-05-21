@@ -221,17 +221,32 @@ This always applies, even if the conceptual message format is already textual (e
 When using CBOR, the value field MUST be encoded as a CBOR byte string.
 
 `ind`:
-: An optional bitmap with a maximum size of 4-bytes that indicates which conceptual message types are
+: An optional bitmap with a maximum size of 4 bytes that indicates which conceptual message types are
 carried in the `value` field.  Any combination (i.e., any value between
-1 and 2<sup>32</sup>-1 included) is allowed.  Only four values are registered at the time of writing, so the acceptable values is currently limited to 1 to 15.  This is useful only if the `type` is
-potentially ambiguous and there is no further context available to the
+1 and 2<sup>32</sup>-1 included) is allowed.  Only four values are registered at the time of writing, so the acceptable values are currently limited to 1 to 15.  This is useful only if the `type` is
+potentially ambiguous, and there is no further context available to the
 CMW consumer to decide.  For example, this might be the case if the base
 media type is not profiled (e.g., `application/eat+cwt`), if the `value`
 field contains multiple conceptual messages with different types (e.g.,
 both Reference Values and Endorsements within the same `application/signed-corim+cbor`), or if the same profile identifier is
 shared by different conceptual messages.
 The value MUST be non-zero. The absence of conceptual message indicator information is indicated by omitting the `ind` field entirely.
-Future specifications may add new values to the `ind` field; see {{iana-ind-ext}}.
+For further details, see {{cm-type}}.
+
+### CM Type {#cm-type}
+
+The `cm-type` type is the control type for the `ind` field.
+As such, it indicates which bits are allowed to be set in the `ind` byte string.
+
+~~~ cddl
+{::include cddl/cm-type.cddl}
+~~~
+{: #fig-cddl-cm-type artwork-align="left"
+   title="CDDL definition of the CM Type"}
+
+The `cm-type` currently has four allowed values: Reference Values, Endorsements, Evidence and Attestation Results, as defined in {{Section 8 of -rats-arch}}.
+
+Future specifications that extend the RATS Conceptual Messages set can add new values to the `cm-type` using the process defined in {{iana-ind-ext}}.
 
 ## Tag CMW {#cbor-tag}
 
