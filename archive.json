@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-20T01:00:36.749860+00:00",
+  "timestamp": "2025-05-22T00:59:29.862920+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2929,33 +2929,41 @@
       "id": "I_kwDOIGCt2M62Lm4l",
       "title": "Carl\u2019s WGLC review",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/203",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [
         "WGLC"
       ],
-      "body": "From [Carl\u2019s WGLC review](https://mailarchive.ietf.org/arch/msg/rats/_0qptLEiQ3yLiwNV2x0M7_hbVCs/):\n\n \n \n \n* [ ] In 3.2.1, it may be worth stating that no CBOR tags are defined by this spec, so the socket is empty.\n \n* [ ] In 3.3, \u201cis always\u201d and \u201cnever\u201d for OID and URI contents should be MUST and MUST NOT.\n \n* [ ] In 3.3, re: cmc_t, the \u201cMUST NOT be used for a label\u201d is a bit strange since that is what it is used for. \u201cMUST NOT be used for any purpose other than described here\u201d or some requirement based on the uri / oid value type may be better. Should a cut be used here (as described in section 3.5.4 in RFC 8610)?\n \n* [ ] In 3.3, should \"may limit\" be \"MAY limit\" re: depth of nesting?\n \n* [ ] In 3.4, suggest describing what the bytes are as comments.\n \n* [ ] In 4.1, RFC 8152 has 2 as criticality and 3 as content type. 2 is used as content type here.\n \n* [ ] It may be good to have a section describing cm-type.\n",
+      "body": "From [Carl\u2019s WGLC review](https://mailarchive.ietf.org/arch/msg/rats/_0qptLEiQ3yLiwNV2x0M7_hbVCs/):\n\n \n \n \n \n \n \n",
       "createdAt": "2025-05-12T10:34:21Z",
-      "updatedAt": "2025-05-19T16:12:46Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-05-21T07:07:27Z",
+      "closedAt": "2025-05-21T07:07:26Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "All sub-issues closed.",
+          "createdAt": "2025-05-21T07:07:26Z",
+          "updatedAt": "2025-05-21T07:07:26Z"
+        }
+      ]
     },
     {
       "number": 204,
       "id": "I_kwDOIGCt2M624nqT",
       "title": "Clarify the use of \"conceptual\" in the document",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/204",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "ionut-arm",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Make it clear that the word comes from RFC 9334, to avoid the impression that we're talking abstractly about messages.",
       "createdAt": "2025-05-16T08:17:12Z",
-      "updatedAt": "2025-05-19T14:52:23Z",
-      "closedAt": null,
+      "updatedAt": "2025-05-21T07:02:05Z",
+      "closedAt": "2025-05-21T07:02:05Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -2963,6 +2971,20 @@
           "body": "This is very clearly stated in the first paragraph of the Introduction:\n\n> The IETF Remote ATtestation procedureS (RATS) architecture defines a handful of conceptual messages (see [Section 8](https://rfc-editor.org/rfc/rfc9334#section-8) of [[RFC9334](https://ietf-rats-wg.github.io/draft-ietf-rats-msg-wrap/draft-ietf-rats-msg-wrap.html#RFC9334)]), such as Evidence and Attestation Results.\n\nIs the suggestion to add a similar reference to the Abstract?",
           "createdAt": "2025-05-19T14:52:21Z",
           "updatedAt": "2025-05-19T14:52:21Z"
+        },
+        {
+          "author": "ionut-arm",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I would add it in the \"Conventions and definitions\" section (as well), tbh. Not entirely sure how popular that section is, but generally speaking that seems like the right place.",
+          "createdAt": "2025-05-20T10:01:58Z",
+          "updatedAt": "2025-05-20T10:01:58Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "hmm, there, we already have:\n\n> \"The reader is assumed to be familiar with the vocabulary and concepts defined in [RFC9334].\"\n\nSince \"Conceptual Messages\" have a dedicated top-level section of the architecture document, I am pretty sure that\u2019s subsumed.  IMHO, it also happens a bit _too late_ in the document, given the \u201cCM\u201d in CMW is already discussed in the Abstract and Introduction.",
+          "createdAt": "2025-05-20T11:21:07Z",
+          "updatedAt": "2025-05-20T11:21:07Z"
         }
       ]
     },
@@ -2995,15 +3017,15 @@
       "id": "I_kwDOIGCt2M63Pxre",
       "title": "In 3, what is a PKIX message? (this gets defined later but maybe should be defined before first usage).",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/207",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-05-19T16:10:59Z",
-      "updatedAt": "2025-05-19T16:10:59Z",
-      "closedAt": null,
+      "updatedAt": "2025-05-21T07:02:38Z",
+      "closedAt": "2025-05-21T07:02:38Z",
       "comments": []
     },
     {
@@ -3011,15 +3033,15 @@
       "id": "I_kwDOIGCt2M63Px4j",
       "title": "In 3.1, the MUST NOT for type field relative to JSON seems misplaced. It is not even an option.",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/208",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-05-19T16:11:22Z",
-      "updatedAt": "2025-05-19T16:11:22Z",
-      "closedAt": null,
+      "updatedAt": "2025-05-21T07:02:39Z",
+      "closedAt": "2025-05-21T07:02:39Z",
       "comments": []
     },
     {
@@ -3027,24 +3049,182 @@
       "id": "I_kwDOIGCt2M63PyoZ",
       "title": "Section 3.1 notes that any value between 1 and 15 is allowed for the ind field but the table in 10.5 allows for expansion up 32 bits with 0 allowed as well. There is no technical restraint on the size.",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/209",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-05-19T16:12:46Z",
-      "updatedAt": "2025-05-19T16:13:03Z",
-      "closedAt": null,
+      "updatedAt": "2025-05-21T07:02:39Z",
+      "closedAt": "2025-05-21T07:02:39Z",
       "comments": [
         {
           "author": "thomas-fossati",
           "authorAssociation": "COLLABORATOR",
-          "body": "Good catch!",
+          "body": "> Section 3.1 notes that any value between 1 and 15 is allowed for the ind field but the table in 10.5 allows for expansion up 32 bits\n\nGood catch!",
           "createdAt": "2025-05-19T16:13:03Z",
-          "updatedAt": "2025-05-19T16:13:03Z"
+          "updatedAt": "2025-05-20T09:33:56Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> There is no technical restraint on the size.\n\nNote that there is a procedural restraint on the size, though, implied by the size of the codepoint space in the registry.",
+          "createdAt": "2025-05-20T09:32:46Z",
+          "updatedAt": "2025-05-20T09:32:46Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> [\u2026] with 0 allowed as well.\n\n0 should not be allowed.  Instead, the optional `ind` should be absent.",
+          "createdAt": "2025-05-20T09:33:38Z",
+          "updatedAt": "2025-05-20T09:33:38Z"
         }
       ]
+    },
+    {
+      "number": 210,
+      "id": "I_kwDOIGCt2M63WZ6P",
+      "title": "In 3.3, should \"may limit\" be \"MAY limit\" re: depth of nesting?",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/210",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-05-20T08:12:04Z",
+      "updatedAt": "2025-05-20T08:57:34Z",
+      "closedAt": "2025-05-20T08:57:34Z",
+      "comments": []
+    },
+    {
+      "number": 211,
+      "id": "I_kwDOIGCt2M63Wa8M",
+      "title": "In 3.4, suggest describing what the bytes are as comments.",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/211",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-05-20T08:13:31Z",
+      "updatedAt": "2025-05-21T07:02:41Z",
+      "closedAt": "2025-05-21T07:02:41Z",
+      "comments": []
+    },
+    {
+      "number": 212,
+      "id": "I_kwDOIGCt2M63WjOZ",
+      "title": "In 3.2.1, it may be worth stating that no CBOR tags are defined by this spec, so the socket is empty.",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/212",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-05-20T08:24:17Z",
+      "updatedAt": "2025-05-21T07:02:40Z",
+      "closedAt": "2025-05-21T07:02:40Z",
+      "comments": []
+    },
+    {
+      "number": 213,
+      "id": "I_kwDOIGCt2M63WlWx",
+      "title": "In 3.3, \u201cis always\u201d and \u201cnever\u201d for OID and URI contents should be MUST and MUST NOT.",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/213",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-05-20T08:27:10Z",
+      "updatedAt": "2025-05-21T07:02:40Z",
+      "closedAt": "2025-05-21T07:02:40Z",
+      "comments": []
+    },
+    {
+      "number": 214,
+      "id": "I_kwDOIGCt2M63W94S",
+      "title": "In 3.3, should \"may limit\" be \"MAY limit\" re: depth of nesting?",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/214",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-05-20T08:58:01Z",
+      "updatedAt": "2025-05-21T07:02:39Z",
+      "closedAt": "2025-05-21T07:02:39Z",
+      "comments": []
+    },
+    {
+      "number": 215,
+      "id": "I_kwDOIGCt2M63XXiO",
+      "title": "In 3.3, re: cmc_t, the \u201cMUST NOT be used for a label\u201d is a bit strange since that is what it is used for. \u201cMUST NOT be used for any purpose other than described here\u201d or some requirement based on the uri / oid value type may be better. Should a cut be used here (as described in section 3.5.4 in RFC 8610)?",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/215",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-05-20T09:34:12Z",
+      "updatedAt": "2025-05-21T07:02:40Z",
+      "closedAt": "2025-05-21T07:02:40Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Should a cut be used here (as described in section 3.5.4 in RFC 8610)?\n\nYes.  Note that the `:` used for `__cmwc_t` has already cut semantics (i.e., it should be equivalent to `^ =>`).",
+          "createdAt": "2025-05-20T09:35:28Z",
+          "updatedAt": "2025-05-20T09:35:28Z"
+        }
+      ]
+    },
+    {
+      "number": 216,
+      "id": "I_kwDOIGCt2M63XZnP",
+      "title": "In 4.1, RFC 8152 has 2 as criticality and 3 as content type. 2 is used as content type here.",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/216",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-05-20T09:36:50Z",
+      "updatedAt": "2025-05-21T07:02:41Z",
+      "closedAt": "2025-05-21T07:02:41Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> RFC 8152 has 2 as criticality and 3 as content type. 2 is used as content type here\n\nGood catch!",
+          "createdAt": "2025-05-20T09:44:48Z",
+          "updatedAt": "2025-05-20T09:44:48Z"
+        }
+      ]
+    },
+    {
+      "number": 218,
+      "id": "I_kwDOIGCt2M63ajxl",
+      "title": "It may be good to have a section describing cm-type.",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/218",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-05-20T14:14:56Z",
+      "updatedAt": "2025-05-21T07:06:45Z",
+      "closedAt": "2025-05-21T07:06:45Z",
+      "comments": []
     }
   ],
   "pulls": [
@@ -13958,26 +14138,310 @@
       "id": "PR_kwDOIGCt2M6WvZDC",
       "title": "Describe \"conceptual\" in the abstract",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/206",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fix #204",
       "createdAt": "2025-05-19T14:59:24Z",
-      "updatedAt": "2025-05-19T14:59:24Z",
+      "updatedAt": "2025-05-21T07:02:08Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "17e11ca8d4cd979990f05aa2622eff3d8d5b63b7",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "conceptual",
       "headRefOid": "42ec24c2928592a66d8097176a005e29dda962d8",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-05-21T07:02:04Z",
+      "mergedAt": "2025-05-21T07:02:04Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "98ca84840021c55c8c9725f79983011be09bdf57"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6qK6rt",
+          "commit": {
+            "abbreviatedOid": "42ec24c"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "sledge hammer clarification approved",
+          "createdAt": "2025-05-20T17:08:42Z",
+          "updatedAt": "2025-05-20T17:08:42Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 217,
+      "id": "PR_kwDOIGCt2M6W3KZI",
+      "title": "Carl\u2019s WGLC review",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/217",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addressing Carl\u2019s WGLC review comments.",
+      "createdAt": "2025-05-20T10:04:51Z",
+      "updatedAt": "2025-05-21T07:02:37Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "17e11ca8d4cd979990f05aa2622eff3d8d5b63b7",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "carl",
+      "headRefOid": "877ccabf189dd1d63113507edfc253f79e4fbf1a",
+      "closedAt": "2025-05-21T07:02:37Z",
+      "mergedAt": "2025-05-21T07:02:37Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "8e795fd5438191d70314c335d56706f6923ad424"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6qHnQE",
+          "commit": {
+            "abbreviatedOid": "1e76c68"
+          },
+          "author": "carl-wallace",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "Looks good to me. Thanks.",
+          "createdAt": "2025-05-20T13:09:48Z",
+          "updatedAt": "2025-05-20T13:09:48Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6qKX3B",
+          "commit": {
+            "abbreviatedOid": "1e76c68"
+          },
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-20T16:17:42Z",
+          "updatedAt": "2025-05-20T16:17:42Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6qKZYJ",
+          "commit": {
+            "abbreviatedOid": "1e76c68"
+          },
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-20T16:20:12Z",
+          "updatedAt": "2025-05-20T16:20:12Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6qKZmz",
+          "commit": {
+            "abbreviatedOid": "1e76c68"
+          },
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-20T16:20:35Z",
+          "updatedAt": "2025-05-20T16:20:35Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6qKqHj",
+          "commit": {
+            "abbreviatedOid": "1e76c68"
+          },
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2025-05-20T16:42:19Z",
+          "updatedAt": "2025-05-20T16:50:37Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "The byte length shouldn't be given here. The CBOR integer will get typically be encoded with preferred serialization so its length will vary.\r\n\r\nThe only reason to specify a length here is so that a constrained decoder knows an upper bound. 64-bits, the max of uint, is usually not a problem for constrained environments so it might just be best to not say anything about the length in this section, leaving it up to the message types registry.\r\n\r\nI'm also OK with 2**32 max. Can you use both .bits and .size on a uint? Also, it seems helpful to say that the max indicator is 31 in 10.5.\r\n\r\n",
+              "createdAt": "2025-05-20T16:42:19Z",
+              "updatedAt": "2025-05-20T16:50:37Z"
+            },
+            {
+              "originalPosition": 15,
+              "body": "This is good for deterministic encoding, something I've been spending a lot of time on in the CBOR WG. It avoids two representations at the data model level for the same thing.",
+              "createdAt": "2025-05-20T16:43:35Z",
+              "updatedAt": "2025-05-20T16:50:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6qK8fX",
+          "commit": {
+            "abbreviatedOid": "1e76c68"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-20T17:11:45Z",
+          "updatedAt": "2025-05-20T17:11:45Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "```suggestion\r\n: An optional bitmap with a maximum size of 4-bytes that indicates which conceptual message types are\r\n```",
+              "createdAt": "2025-05-20T17:11:45Z",
+              "updatedAt": "2025-05-20T17:11:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6qK9sT",
+          "commit": {
+            "abbreviatedOid": "1e76c68"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-20T17:13:33Z",
+          "updatedAt": "2025-05-20T17:13:34Z",
+          "comments": [
+            {
+              "originalPosition": 26,
+              "body": "```suggestion\r\n1 and 2<sup>32</sup>-1 included) is allowed.  Only four values are registered at the time of writing, so the acceptable values is currently limited to 1 to 15.  This is useful only if the `type` is\r\n```",
+              "createdAt": "2025-05-20T17:13:34Z",
+              "updatedAt": "2025-05-20T17:13:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6qK--2",
+          "commit": {
+            "abbreviatedOid": "9d6d6a1"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-20T17:15:53Z",
+          "updatedAt": "2025-05-20T17:15:53Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "I knew you\u2019d like this :-)",
+              "createdAt": "2025-05-20T17:15:53Z",
+              "updatedAt": "2025-05-20T17:15:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6qK_Eq",
+          "commit": {
+            "abbreviatedOid": "877ccab"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "Thank you for your input Lawrence!",
+          "createdAt": "2025-05-20T17:16:03Z",
+          "updatedAt": "2025-05-20T17:16:03Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6qLDgr",
+          "commit": {
+            "abbreviatedOid": "9d6d6a1"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-20T17:20:41Z",
+          "updatedAt": "2025-05-20T17:20:41Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "@henkbirkholz provided a fix in [ba38b7d](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/217/commits/ba38b7dcc8a72da052e436844b8876e55b8bc824)",
+              "createdAt": "2025-05-20T17:20:41Z",
+              "updatedAt": "2025-05-20T17:20:41Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 219,
+      "id": "PR_kwDOIGCt2M6W6z0h",
+      "title": "CM Type subsection",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/219",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Add a CM Type subsection\r\n\r\nFix #207\r\n\r\n(Note that this PR builds on top of Carl\u2019s WGLC review, #217)",
+      "createdAt": "2025-05-20T15:59:25Z",
+      "updatedAt": "2025-05-21T07:06:47Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "8e795fd5438191d70314c335d56706f6923ad424",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "cm-ind",
+      "headRefOid": "2be118c084e6ba25322222b465eaacdfcdd24587",
+      "closedAt": "2025-05-21T07:06:43Z",
+      "mergedAt": "2025-05-21T07:06:43Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "24f39337aded5bcb4fc5e19557f7e2988f658ec4"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6qKV4i",
+          "commit": {
+            "abbreviatedOid": "f2b02ae"
+          },
+          "author": "carl-wallace",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "Thanks. I think the addition of details on cm-type looks good and was worth adding.",
+          "createdAt": "2025-05-20T16:15:05Z",
+          "updatedAt": "2025-05-20T16:15:05Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6qKY_0",
+          "commit": {
+            "abbreviatedOid": "f2b02ae"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-05-20T16:19:33Z",
+          "updatedAt": "2025-05-20T16:19:33Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6qLBaU",
+          "commit": {
+            "abbreviatedOid": "f2b02ae"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-20T17:18:45Z",
+          "updatedAt": "2025-05-20T17:18:45Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
