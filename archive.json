@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-22T00:59:29.862920+00:00",
+  "timestamp": "2025-05-25T01:05:04.332530+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -2993,15 +2993,15 @@
       "id": "I_kwDOIGCt2M63Lxbh",
       "title": "Are JWS & COSE Sign1 sections needed?",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/205",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "ionut-arm",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "As title implies, are sections 4.1 and 4.2 needed, since both COSE Sign1 and JWS are specified pretty well?\n\nI'm assuming the most important parts of both are the headers, actually, since the rest seems quite run-of-the-mill application of the existing specs.",
       "createdAt": "2025-05-19T10:17:22Z",
-      "updatedAt": "2025-05-19T14:29:12Z",
-      "closedAt": null,
+      "updatedAt": "2025-05-23T08:22:32Z",
+      "closedAt": "2025-05-23T08:22:30Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -3009,6 +3009,13 @@
           "body": "> As title implies, are sections 4.1 and 4.2 needed, since both COSE Sign1 and JWS are specified pretty well?\n> \n> I'm assuming the most important parts of both are the headers, actually,\n\nYes, these sections describe a profile of COSE / JOSE, respectively, specifying which headers are mandatory and how they should be populated.\n\n> since the rest seems quite run-of-the-mill application of the existing specs.\n\nYes.\n",
           "createdAt": "2025-05-19T14:29:11Z",
           "updatedAt": "2025-05-19T14:29:11Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "As discussed and agreed with @ionut-arm, this can be closed.",
+          "createdAt": "2025-05-23T08:22:30Z",
+          "updatedAt": "2025-05-23T08:22:30Z"
         }
       ]
     },
