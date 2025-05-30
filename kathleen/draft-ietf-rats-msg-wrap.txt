@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 31 October 2025                                           Intel
+Expires: 1 December 2025                                           Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                           29 April 2025
+                                                             30 May 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -20,19 +20,20 @@ Expires: 31 October 2025                                           Intel
 
 Abstract
 
-   This document defines a conceptual message wrapper (CMW) format - an
-   encapsulation method applicable to any RATS conceptual message, such
-   as Evidence, Attestation Results, Endorsements, and Reference Values.
-   It also describes a collection type that aggregates one or more CMWs
-   into a single message.
+   Section 8 of RFC 9334 defines "conceptual messages" as abstract
+   messages exchanged by RATS roles such as Evidence, Attestation
+   Results, Endorsements, and Reference Values.  This document defines a
+   "conceptual message" wrapper (CMW) format for any RATS conceptual
+   message and describes a collection type that aggregates one or more
+   CMWs into a single message.
 
    In addition, this document specifies a corresponding CBOR tag, JSON
    Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, and an X.509
    extension.  These mechanisms enable the embedding of enveloped
    conceptual messages into CBOR-based protocols, web APIs, and PKIX
-   protocols.  Moreover, a Media Type and a CoAP Content-Format are
-   defined for transporting CMWs over HTTP, MIME, CoAP, and other
-   Internet protocols.
+   formats and protocols.  Moreover, a Media Type and a CoAP Content-
+   Format are defined for transporting CMWs over HTTP, MIME, CoAP, and
+   other Internet protocols.
 
 Discussion Venues
 
@@ -60,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 October 2025.
+   This Internet-Draft will expire on 1 December 2025.
 
 Copyright Notice
 
@@ -82,6 +83,7 @@ Table of Contents
    2.  Conventions and Definitions
    3.  Conceptual Message Wrappers
      3.1.  Record CMW
+       3.1.1.  CM Type
      3.2.  Tag CMW
        3.2.1.  How To Plug in a New Tag CMW
      3.3.  Collection CMW
@@ -91,7 +93,7 @@ Table of Contents
      4.2.  Signing JSON CMW using JWS
      4.3.  Transporting CMW in COSE and JOSE Web Tokens
        4.3.1.  Encoding Requirements
-     4.4.  Transporting CMW in X.509 Messages
+     4.4.  Transporting CMW in PKIX Formats
        4.4.1.  ASN.1 Module
        4.4.2.  Compatibility with DICE ConceptualMessageWrapper
    5.  Examples
@@ -204,8 +206,8 @@ Table of Contents
    This document also defines corresponding CBOR tag, JSON Web Tokens
    (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509
    extension.  These allow embedding the wrapped conceptual messages
-   into CBOR-based protocols, web APIs, and PKIX protocols.  In
-   addition, a Media Type and a CoAP Content-Format are defined for
+   into CBOR-based protocols, web APIs, and PKIX formats and protocols.
+   In addition, a Media Type and a CoAP Content-Format are defined for
    transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.
 
 2.  Conventions and Definitions
@@ -245,7 +247,9 @@ Table of Contents
    The complete CDDL can be found in Section 6.
 
    Section 4.3 and Section 4.4 describe the transport of CMWs using CBOR
-   and JSON Web Tokens and PKIX messages, respectively.
+   and JSON Web Tokens and PKIX formats, including Certificate Signing
+   Requests (CSRs), X.509 Certificates, and Certificate Revocation Lists
+   (CRLs).
 
    This document only defines an encapsulation, not a security format.
    It is the responsibility of the Attester to ensure that the CMW
@@ -279,8 +283,7 @@ Table of Contents
       Either a text string representing a Content-Type (e.g., an EAT
       media type [I-D.ietf-rats-eat-media-type]) or an unsigned integer
       corresponding to a CoAP Content-Format ID (Section 12.3 of
-      [RFC7252]).  The latter MUST NOT be used in the JSON
-      serialization.
+      [RFC7252]).  The latter is not used in the JSON serialization.
 
    value:
       The RATS conceptual message serialized according to the value
@@ -292,18 +295,44 @@ Table of Contents
       CBOR byte string.
 
    ind:
-      An optional bitmap that indicates which conceptual message types
-      are carried in the value field.  Any combination (i.e., any value
-      between 1 and 15, included) is allowed.  This is useful only if
-      the type is potentially ambiguous and there is no further context
-      available to the CMW consumer to decide.  For example, this might
-      be the case if the base media type is not profiled (e.g.,
-      application/eat+cwt), if the value field contains multiple
-      conceptual messages with different types (e.g., both Reference
-      Values and Endorsements within the same application/signed-
-      corim+cbor), or if the same profile identifier is shared by
-      different conceptual messages.  Future specifications may add new
-      values to the ind field; see Section 10.5.
+      An optional bitmap with a maximum size of 4 bytes that indicates
+      which conceptual message types are carried in the value field.
+      Any combination (i.e., any value between 1 and 2^32-1 included) is
+      allowed.  Only four values are registered at the time of writing,
+      so the acceptable values are currently limited to 1 to 15.  This
+      is useful only if the type is potentially ambiguous, and there is
+      no further context available to the CMW consumer to decide.  For
+      example, this might be the case if the base media type is not
+      profiled (e.g., application/eat+cwt), if the value field contains
+      multiple conceptual messages with different types (e.g., both
+      Reference Values and Endorsements within the same application/
+      signed-corim+cbor), or if the same profile identifier is shared by
+      different conceptual messages.  The value MUST be non-zero.  The
+      absence of conceptual message indicator information is indicated
+      by omitting the ind field entirely.  For further details, see
+      Section 3.1.1.
+
+3.1.1.  CM Type
+
+   The cm-type type is the control type for the ind field.  As such, it
+   indicates which bits are allowed to be set in the ind byte string.
+
+   cm-type = &(
+     reference-values: 0
+     endorsements: 1
+     evidence: 2
+     attestation-results: 3
+   )
+
+                  Figure 2: CDDL definition of the CM Type
+
+   The cm-type currently has four allowed values: Reference Values,
+   Endorsements, Evidence and Attestation Results, as defined in
+   Section 8 of [RFC9334].
+
+   Future specifications that extend the RATS Conceptual Messages set
+   can add new values to the cm-type using the process defined in
+   Section 10.5.
 
 3.2.  Tag CMW
 
@@ -316,7 +345,7 @@ Table of Contents
    Content-Format ID and then encoded as a CBOR byte string, to which
    the TN-derived tag number is prepended.
 
-   The Tag CMW is defined in Figure 2 using two different macros.  One
+   The Tag CMW is defined in Figure 3 using two different macros.  One
    for CBOR-encoded types, the other for all other types.  Both macros
    take the CBOR tag number tn as a parameter.  The tag-cm-cbor macro
    takes the CDDL definition of the associated conceptual message fmt as
@@ -326,7 +355,7 @@ Table of Contents
 
    tag-cm-data<tn> = #6.<tn>(bytes)
 
-              Figure 2: CDDL definition of the Tag CMW macros
+              Figure 3: CDDL definition of the Tag CMW macros
 
 3.2.1.  How To Plug in a New Tag CMW
 
@@ -347,6 +376,9 @@ Table of Contents
    1668576935, $cbor-tag would be extended as follows:
 
    $cbor-tag /= tag-cm-data<1668576935>
+
+   Note that since this specification defines no Tag CMW, the socket is
+   currently empty.
 
 3.3.  Collection CMW
 
@@ -372,7 +404,7 @@ Table of Contents
    and it can also be used to carry messages related to multiple devices
    simultaneously.
 
-   The Collection CMW (Figure 3) is defined as a CBOR map or JSON object
+   The Collection CMW (Figure 4) is defined as a CBOR map or JSON object
    containing CMW values.  The position of a cmw entry in the cmw-
    collection is not significant.  Labels can be strings (or integers in
    the CBOR serialization) that serve as a mnemonic for different
@@ -380,11 +412,13 @@ Table of Contents
 
    A Collection MUST have at least one CMW entry.
 
-   The "__cmwc_t" key is reserved for associating an optional type to
-   the overall Collection and MUST NOT be used for a label.  The value
-   of the "__cmwc_t" key is either a Uniform Resource Identifier (URI)
-   or an object identifier (OID).  The OID is always absolute and never
-   relative.  The URI is always in the absolute form (Section 4.3 of
+   The "__cmwc_t" key is reserved for associating an optional type with
+   the overall Collection and MUST NOT be used for any purpose other
+   than described here.
+
+   The value of the "__cmwc_t" key is either a Uniform Resource
+   Identifier (URI) or an object identifier (OID).  The OID MUST be
+   absolute.  The URI MUST be in the absolute form (Section 4.3 of
    [RFC3986]).
 
    The "__cmwc_t" key functions similar to an EAT profile claim (see
@@ -398,7 +432,7 @@ Table of Contents
    Section 4.3.1 of [I-D.ietf-rats-corim].
 
    Since the Collection CMW is recursive (a Collection CMW is itself a
-   CMW), implementations may limit the allowed depth of nesting.
+   CMW), implementations MAY limit the allowed depth of nesting.
 
    json-collection = {
      ? "__cmwc_t": ~uri / oid
@@ -410,7 +444,7 @@ Table of Contents
      + &(label: (int / text)) => cbor-cmw
    }
 
-              Figure 3: CDDL definition of the Collection CMW
+              Figure 4: CDDL definition of the Collection CMW
 
 3.4.  Decapsulation Algorithm
 
@@ -419,21 +453,24 @@ Table of Contents
    1-byte lookahead to determine how to decode the remaining byte
    buffer.  The following pseudo-code illustrates this process:
 
-   func CMWTypeDemux(b []byte) (CMW, error) {
+   func CMWTypeDemux(b []byte) CMWType {
      if len(b) == 0 {
        return Unknown
      }
 
-
-     if b[0] == 0x82 || b[0] == 0x83 || b[0] == 0x9f {
+     switch b[0] {
+     case 0x82: // 2-elements cbor-record (w/o ind field)
+     case 0x83: // 3-elements cbor-record (w/ ind field)
+     case 0x9f: // start of cbor-record using indefinite-length encoding
        return CBORRecord
-     } else if b[0] == 0xda {
+     case 0xda: // tag-cm-cbor (CBOR Tag in the TN range)
        return CBORTag
-     } else if b[0] == 0x5b {
+     case 0x5b: // ASCII '[', start of json-record
        return JSONRecord
-     } else if b[0] == 0x7b {
+     case 0x7b: // ASCII '{', start of json-collection
        return JSONCollection
-     } else if (b[0] >= 0xa0 && b[0] <= 0xbb) || b[0] == 0xbf {
+     case 0xa0..0xbb: // CBOR map start values, start of cbor-collection
+     case 0xbf:       // ditto
        return CBORCollection
      }
 
@@ -461,7 +498,7 @@ Table of Contents
 
    signed-cbor-cmw-protected-hdr = {
      1 => int                            ; alg
-     2 => "application/cmw+cbor" / 10000 ; cty
+     3 => "application/cmw+cbor" / 10000 ; cty
      * cose.label => cose.values
    }
 
@@ -529,9 +566,9 @@ Table of Contents
    A Record CMW carried in a "cmw" JWT claim MUST be a json-record.  A
    Record CMW carried in a "cmw" CWT claim MUST be a cbor-record.
 
-4.4.  Transporting CMW in X.509 Messages
+4.4.  Transporting CMW in PKIX Formats
 
-   CMW may need to be transported in PKIX messages, such as Certificate
+   CMW may need to be transported in PKIX formats, such as Certificate
    Signing Requests (CSRs) or in X.509 Certificates and Certificate
    Revocation Lists (CRLs).
 
@@ -541,7 +578,7 @@ Table of Contents
 
    This section outlines the CMW extension designed to carry CMW
    objects.  Section 8 discusses some privacy considerations related to
-   the transport of CMW within X.509 objects.
+   the transport of CMW in X.509 formats.
 
    The CMW extension MAY be included in X.509 Certificates, CRLs
    [RFC5280], and CSRs.
@@ -798,16 +835,16 @@ lication/signed-corim+cbor"
    media-type = text .abnf ("Content-Type" .cat Content-Type-ABNF)
    base64url-string = text .regexp "[A-Za-z0-9_-]+"
 
+   coap-content-format-type = uint .size 2
+
+   oid = text .regexp "([0-2])((\\.0)|(\\.[1-9][0-9]*))*"
+
    cm-type = &(
      reference-values: 0
      endorsements: 1
      evidence: 2
      attestation-results: 3
    )
-
-   coap-content-format-type = uint .size 2
-
-   oid = text .regexp "([0-2])((\\.0)|(\\.[1-9][0-9]*))*"
 
    Content-Type-ABNF = '
 
@@ -852,7 +889,7 @@ lication/signed-corim+cbor"
 
    signed-cbor-cmw-protected-hdr = {
      1 => int                            ; alg
-     2 => "application/cmw+cbor" / 10000 ; cty
+     3 => "application/cmw+cbor" / 10000 ; cty
      * cose.label => cose.values
    }
 
@@ -932,12 +969,12 @@ lication/signed-corim+cbor"
    (e.g., HSM model, patch level, etc.).  However, they likely do not
    want this information to be publicly accessible.  Applications that
    intend to publicly "broadcast" Evidence claims received from a third
-   party via X.509 certificates should define a Certificate Practices
+   party via X.509 Certificates should define a Certificate Practices
    Statement [RFC3647] that clearly specifies the circumstances under
    which the CA can include such data in the issued certificate.  Note
    that the aforementioned consideration does not apply to cases where
-   X.509 is explicitly designed as a security envelope for Evidence
-   claims, such as in DICE [DICE-arch].
+   X.509 Certificates are explicitly designed as a security envelope for
+   Evidence claims, such as in DICE [DICE-arch].
 
 9.  Security Considerations
 
@@ -1497,17 +1534,17 @@ lication/signed-corim+cbor"
               Deshpande, Y., Niemi, A., and T. Fossati, "Using
               Attestation in Transport Layer Security (TLS) and Datagram
               Transport Layer Security (DTLS)", Work in Progress,
-              Internet-Draft, draft-fossati-tls-attestation-08, 21
-              October 2024, <https://datatracker.ietf.org/doc/html/
-              draft-fossati-tls-attestation-08>.
+              Internet-Draft, draft-fossati-tls-attestation-09, 30 April
+              2025, <https://datatracker.ietf.org/doc/html/draft-
+              fossati-tls-attestation-09>.
 
    [I-D.ietf-lamps-csr-attestation]
               Ounsworth, M., Tschofenig, H., Birkholz, H., Wiseman, M.,
               and N. Smith, "Use of Remote Attestation with
               Certification Signing Requests", Work in Progress,
-              Internet-Draft, draft-ietf-lamps-csr-attestation-18, 19
-              March 2025, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-lamps-csr-attestation-18>.
+              Internet-Draft, draft-ietf-lamps-csr-attestation-19, 25
+              May 2025, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-lamps-csr-attestation-19>.
 
    [I-D.ietf-rats-ar4si]
               Voit, E., Birkholz, H., Hardjono, T., Fossati, T., and V.
@@ -1584,7 +1621,7 @@ lication/signed-corim+cbor"
 
 Appendix A.  Registering and Using CMWs
 
-   Figure 4 describes the registration preconditions for using CMWs in
+   Figure 5 describes the registration preconditions for using CMWs in
    either Record CMW or Tag CMW forms.  When using Collection CMW, the
    preconditions apply for each entry in the Collection.
 
@@ -1617,7 +1654,7 @@ Appendix A.  Registering and Using CMWs
                  /             Record CMW               /
                 `--------------------------------------'
 
-                       Figure 4: How To Create a CMW
+                       Figure 5: How To Create a CMW
 
 Appendix B.  Open Issues
 
