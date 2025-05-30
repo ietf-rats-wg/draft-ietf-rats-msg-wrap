@@ -98,7 +98,7 @@ Section 8 of RFC 9334 defines "conceptual messages" as abstract messages exchang
 This document defines a "conceptual message" wrapper (CMW) format for any RATS conceptual message and describes a collection type that aggregates one or more CMWs into a single message.
 
 In addition, this document specifies a corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, and an X.509 extension.
-These mechanisms enable the embedding of enveloped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols.
+These mechanisms enable the embedding of enveloped conceptual messages into CBOR-based protocols, web APIs, and PKIX formats and protocols.
 Moreover, a Media Type and a CoAP Content-Format are defined for transporting CMWs over HTTP, MIME, CoAP, and other Internet protocols.
 
 --- middle
@@ -154,7 +154,7 @@ or for stable storage of Attestation Results in the form of file system
 objects.
 
 This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
-These allow embedding the wrapped conceptual messages into CBOR-based protocols, web APIs, and PKIX protocols.
+These allow embedding the wrapped conceptual messages into CBOR-based protocols, web APIs, and PKIX formats and protocols.
 In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.
 
 # Conventions and Definitions
@@ -184,7 +184,7 @@ The following snippet outlines the productions associated with the top-level typ
 
 The complete CDDL can be found in {{collected-cddl}}.
 
-{{webtokens}} and {{x509}} describe the transport of CMWs using CBOR and JSON Web Tokens and PKIX messages, including Certificate Signing Requests (CSRs), X.509 Certificates, and Certificate Revocation Lists (CRLs).
+{{webtokens}} and {{x509}} describe the transport of CMWs using CBOR and JSON Web Tokens and PKIX formats, including Certificate Signing Requests (CSRs), X.509 Certificates, and Certificate Revocation Lists (CRLs).
 
 This document only defines an encapsulation, not a security format.
 It is the responsibility of the Attester to ensure that the CMW contents have the necessary security protection.
@@ -411,14 +411,14 @@ A Collection CMW carried in a `"cmw"` CWT claim MUST be a `cbor-collection`.
 A Record CMW carried in a `"cmw"` JWT claim MUST be a `json-record`.
 A Record CMW carried in a `"cmw"` CWT claim MUST be a `cbor-record`.
 
-## Transporting CMW in X.509 Messages {#x509}
+## Transporting CMW in PKIX Formats {#x509}
 
-CMW may need to be transported in PKIX messages, such as Certificate Signing Requests (CSRs) or in X.509 Certificates and Certificate Revocation Lists (CRLs).
+CMW may need to be transported in PKIX formats, such as Certificate Signing Requests (CSRs) or in X.509 Certificates and Certificate Revocation Lists (CRLs).
 
 The use of CMW in CSRs is documented in {{-csr-a}}, while its application in X.509 Certificates and CRLs is detailed in Section 6.1 of {{DICE-arch}}.
 
 This section outlines the CMW extension designed to carry CMW objects.
-{{privcons}} discusses some privacy considerations related to the transport of CMW within X.509 objects.
+{{privcons}} discusses some privacy considerations related to the transport of CMW in X.509 formats.
 
 The CMW extension MAY be included in X.509 Certificates, CRLs {{-pkix}}, and CSRs.
 
@@ -640,8 +640,8 @@ Generally, utilizing secure channels between the parties exchanging CMWs can hel
 A specific scenario arises when a public key certificate is issued based on Evidence information provided by the certificate requestor to the issuing Certification Authority (CA).
 For instance, an individual seeking a publicly-trusted code signing certificate may be willing to disclose the details of the hardware where their code signing keys are stored (e.g., HSM model, patch level, etc.).
 However, they likely do not want this information to be publicly accessible.
-Applications that intend to publicly "broadcast" Evidence claims received from a third party via X.509 certificates should define a Certificate Practices Statement {{-pkix-cps}} that clearly specifies the circumstances under which the CA can include such data in the issued certificate.
-Note that the aforementioned consideration does not apply to cases where X.509 is explicitly designed as a security envelope for Evidence claims, such as in DICE {{DICE-arch}}.
+Applications that intend to publicly "broadcast" Evidence claims received from a third party via X.509 Certificates should define a Certificate Practices Statement {{-pkix-cps}} that clearly specifies the circumstances under which the CA can include such data in the issued certificate.
+Note that the aforementioned consideration does not apply to cases where X.509 Certificates are explicitly designed as a security envelope for Evidence claims, such as in DICE {{DICE-arch}}.
 
 # Security Considerations {#seccons}
 
@@ -652,7 +652,7 @@ The following subsections provide further elaboration on these points, particula
 
 CMW itself does not provide any mechanisms for authenticity, integrity protection, or confidentiality.
 It is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly.
-In some scenarios, a secure channel (e.g., via TLS) or object-level security (e.g., using JWT) may be sufficient, but this is not always the case.
+In some scenarios, a secure channel (e.g., via TLS {{?BCP195}}) or object-level security (e.g., using JWT {{?BCP225}}) may be sufficient, but this is not always the case.
 
 When a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically bound to prevent an attacker from replacing Evidence from a compromised device with that from a non-compromised device.
 Authenticity and integrity protection MUST be provided by the attestation technology.
