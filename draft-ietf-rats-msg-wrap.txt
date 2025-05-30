@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 22 November 2025                                          Intel
+Expires: 1 December 2025                                           Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                             21 May 2025
+                                                             30 May 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -31,9 +31,9 @@ Abstract
    Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, and an X.509
    extension.  These mechanisms enable the embedding of enveloped
    conceptual messages into CBOR-based protocols, web APIs, and PKIX
-   protocols.  Moreover, a Media Type and a CoAP Content-Format are
-   defined for transporting CMWs over HTTP, MIME, CoAP, and other
-   Internet protocols.
+   formats and protocols.  Moreover, a Media Type and a CoAP Content-
+   Format are defined for transporting CMWs over HTTP, MIME, CoAP, and
+   other Internet protocols.
 
 Discussion Venues
 
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 November 2025.
+   This Internet-Draft will expire on 1 December 2025.
 
 Copyright Notice
 
@@ -93,7 +93,7 @@ Table of Contents
      4.2.  Signing JSON CMW using JWS
      4.3.  Transporting CMW in COSE and JOSE Web Tokens
        4.3.1.  Encoding Requirements
-     4.4.  Transporting CMW in X.509 Messages
+     4.4.  Transporting CMW in PKIX Formats
        4.4.1.  ASN.1 Module
        4.4.2.  Compatibility with DICE ConceptualMessageWrapper
    5.  Examples
@@ -206,8 +206,8 @@ Table of Contents
    This document also defines corresponding CBOR tag, JSON Web Tokens
    (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509
    extension.  These allow embedding the wrapped conceptual messages
-   into CBOR-based protocols, web APIs, and PKIX protocols.  In
-   addition, a Media Type and a CoAP Content-Format are defined for
+   into CBOR-based protocols, web APIs, and PKIX formats and protocols.
+   In addition, a Media Type and a CoAP Content-Format are defined for
    transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.
 
 2.  Conventions and Definitions
@@ -247,7 +247,7 @@ Table of Contents
    The complete CDDL can be found in Section 6.
 
    Section 4.3 and Section 4.4 describe the transport of CMWs using CBOR
-   and JSON Web Tokens and PKIX messages, including Certificate Signing
+   and JSON Web Tokens and PKIX formats, including Certificate Signing
    Requests (CSRs), X.509 Certificates, and Certificate Revocation Lists
    (CRLs).
 
@@ -566,9 +566,9 @@ Table of Contents
    A Record CMW carried in a "cmw" JWT claim MUST be a json-record.  A
    Record CMW carried in a "cmw" CWT claim MUST be a cbor-record.
 
-4.4.  Transporting CMW in X.509 Messages
+4.4.  Transporting CMW in PKIX Formats
 
-   CMW may need to be transported in PKIX messages, such as Certificate
+   CMW may need to be transported in PKIX formats, such as Certificate
    Signing Requests (CSRs) or in X.509 Certificates and Certificate
    Revocation Lists (CRLs).
 
@@ -578,7 +578,7 @@ Table of Contents
 
    This section outlines the CMW extension designed to carry CMW
    objects.  Section 8 discusses some privacy considerations related to
-   the transport of CMW within X.509 objects.
+   the transport of CMW in X.509 formats.
 
    The CMW extension MAY be included in X.509 Certificates, CRLs
    [RFC5280], and CSRs.
@@ -969,12 +969,12 @@ lication/signed-corim+cbor"
    (e.g., HSM model, patch level, etc.).  However, they likely do not
    want this information to be publicly accessible.  Applications that
    intend to publicly "broadcast" Evidence claims received from a third
-   party via X.509 certificates should define a Certificate Practices
+   party via X.509 Certificates should define a Certificate Practices
    Statement [RFC3647] that clearly specifies the circumstances under
    which the CA can include such data in the issued certificate.  Note
    that the aforementioned consideration does not apply to cases where
-   X.509 is explicitly designed as a security envelope for Evidence
-   claims, such as in DICE [DICE-arch].
+   X.509 Certificates are explicitly designed as a security envelope for
+   Evidence claims, such as in DICE [DICE-arch].
 
 9.  Security Considerations
 
@@ -989,8 +989,9 @@ lication/signed-corim+cbor"
    integrity protection, or confidentiality.  It is the responsibility
    of the designer for each use case to determine the necessary security
    properties and implement them accordingly.  In some scenarios, a
-   secure channel (e.g., via TLS) or object-level security (e.g., using
-   JWT) may be sufficient, but this is not always the case.
+   secure channel (e.g., via TLS [BCP195]) or object-level security
+   (e.g., using JWT [BCP225]) may be sufficient, but this is not always
+   the case.
 
    When a CMW is used to carry Evidence for composite or layered
    attestation of a single device, all components within the CMW must be
@@ -1516,6 +1517,29 @@ lication/signed-corim+cbor"
 
 11.2.  Informative References
 
+   [BCP195]   Best Current Practice 195,
+              <https://www.rfc-editor.org/info/bcp195>.
+              At the time of writing, this BCP comprises the following:
+
+              Moriarty, K. and S. Farrell, "Deprecating TLS 1.0 and TLS
+              1.1", BCP 195, RFC 8996, DOI 10.17487/RFC8996, March 2021,
+              <https://www.rfc-editor.org/info/rfc8996>.
+
+              Sheffer, Y., Saint-Andre, P., and T. Fossati,
+              "Recommendations for Secure Use of Transport Layer
+              Security (TLS) and Datagram Transport Layer Security
+              (DTLS)", BCP 195, RFC 9325, DOI 10.17487/RFC9325, November
+              2022, <https://www.rfc-editor.org/info/rfc9325>.
+
+   [BCP225]   Best Current Practice 225,
+              <https://www.rfc-editor.org/info/bcp225>.
+              At the time of writing, this BCP comprises the following:
+
+              Sheffer, Y., Hardt, D., and M. Jones, "JSON Web Token Best
+              Current Practices", BCP 225, RFC 8725,
+              DOI 10.17487/RFC8725, February 2020,
+              <https://www.rfc-editor.org/info/rfc8725>.
+
    [DICE-arch]
               Trusted Computing Group, "DICE Attestation Architecture",
               January 2024, <https://trustedcomputinggroup.org/wp-
@@ -1542,9 +1566,9 @@ lication/signed-corim+cbor"
               Ounsworth, M., Tschofenig, H., Birkholz, H., Wiseman, M.,
               and N. Smith, "Use of Remote Attestation with
               Certification Signing Requests", Work in Progress,
-              Internet-Draft, draft-ietf-lamps-csr-attestation-18, 19
-              March 2025, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-lamps-csr-attestation-18>.
+              Internet-Draft, draft-ietf-lamps-csr-attestation-19, 25
+              May 2025, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-lamps-csr-attestation-19>.
 
    [I-D.ietf-rats-ar4si]
               Voit, E., Birkholz, H., Hardjono, T., Fossati, T., and V.
