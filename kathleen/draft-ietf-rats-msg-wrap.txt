@@ -989,8 +989,9 @@ lication/signed-corim+cbor"
    integrity protection, or confidentiality.  It is the responsibility
    of the designer for each use case to determine the necessary security
    properties and implement them accordingly.  In some scenarios, a
-   secure channel (e.g., via TLS) or object-level security (e.g., using
-   JWT) may be sufficient, but this is not always the case.
+   secure channel (e.g., via TLS [BCP195]) or object-level security
+   (e.g., using JWT [BCP225]) may be sufficient, but this is not always
+   the case.
 
    When a CMW is used to carry Evidence for composite or layered
    attestation of a single device, all components within the CMW must be
@@ -1515,6 +1516,29 @@ lication/signed-corim+cbor"
               CCITT Recommendation X.680, July 1994.
 
 11.2.  Informative References
+
+   [BCP195]   Best Current Practice 195,
+              <https://www.rfc-editor.org/info/bcp195>.
+              At the time of writing, this BCP comprises the following:
+
+              Moriarty, K. and S. Farrell, "Deprecating TLS 1.0 and TLS
+              1.1", BCP 195, RFC 8996, DOI 10.17487/RFC8996, March 2021,
+              <https://www.rfc-editor.org/info/rfc8996>.
+
+              Sheffer, Y., Saint-Andre, P., and T. Fossati,
+              "Recommendations for Secure Use of Transport Layer
+              Security (TLS) and Datagram Transport Layer Security
+              (DTLS)", BCP 195, RFC 9325, DOI 10.17487/RFC9325, November
+              2022, <https://www.rfc-editor.org/info/rfc9325>.
+
+   [BCP225]   Best Current Practice 225,
+              <https://www.rfc-editor.org/info/bcp225>.
+              At the time of writing, this BCP comprises the following:
+
+              Sheffer, Y., Hardt, D., and M. Jones, "JSON Web Token Best
+              Current Practices", BCP 225, RFC 8725,
+              DOI 10.17487/RFC8725, February 2020,
+              <https://www.rfc-editor.org/info/rfc8725>.
 
    [DICE-arch]
               Trusted Computing Group, "DICE Attestation Architecture",

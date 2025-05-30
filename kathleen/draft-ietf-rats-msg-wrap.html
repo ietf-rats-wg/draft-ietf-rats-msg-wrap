@@ -2303,7 +2303,7 @@ The following subsections provide further elaboration on these points, particula
         </h3>
 <p id="section-9.1-1">CMW itself does not provide any mechanisms for authenticity, integrity protection, or confidentiality.
 It is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly.
-In some scenarios, a secure channel (e.g., via TLS) or object-level security (e.g., using JWT) may be sufficient, but this is not always the case.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
+In some scenarios, a secure channel (e.g., via TLS <span>[<a href="#BCP195" class="cite xref">BCP195</a>]</span>) or object-level security (e.g., using JWT <span>[<a href="#BCP225" class="cite xref">BCP225</a>]</span>) may be sufficient, but this is not always the case.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
 <p id="section-9.1-2">When a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically bound to prevent an attacker from replacing Evidence from a compromised device with that from a non-compromised device.
 Authenticity and integrity protection <span class="bcp14">MUST</span> be provided by the attestation technology.
 For additional security considerations related to Collections, refer to <a href="#seccons-coll" class="auto internal xref">Section 9.2</a>.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
@@ -3227,6 +3227,24 @@ dotted-decimal notation.  The parameter value is case-insensitive.  It must not 
 <a href="#section-11.2" class="section-number selfRef">11.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
+<dt id="BCP195">[BCP195]</dt>
+        <dd>
+<div class="refInstance">Best Current Practice 195, <span>&lt;<a href="https://www.rfc-editor.org/info/bcp195">https://www.rfc-editor.org/info/bcp195</a>&gt;</span>.<br><span>At the time of writing, this BCP comprises the following:</span>
+</div>
+<div class="refInstance" id="RFC8996">
+            <span class="refAuthor">Moriarty, K.</span> and <span class="refAuthor">S. Farrell</span>, <span class="refTitle">"Deprecating TLS 1.0 and TLS 1.1"</span>, <span class="seriesInfo">BCP 195</span>, <span class="seriesInfo">RFC 8996</span>, <span class="seriesInfo">DOI 10.17487/RFC8996</span>, <time datetime="2021-03" class="refDate">March 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8996">https://www.rfc-editor.org/info/rfc8996</a>&gt;</span>. </div>
+<div class="refInstance" id="RFC9325">
+            <span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Saint-Andre, P.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)"</span>, <span class="seriesInfo">BCP 195</span>, <span class="seriesInfo">RFC 9325</span>, <span class="seriesInfo">DOI 10.17487/RFC9325</span>, <time datetime="2022-11" class="refDate">November 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9325">https://www.rfc-editor.org/info/rfc9325</a>&gt;</span>. </div>
+</dd>
+<dd class="break"></dd>
+<dt id="BCP225">[BCP225]</dt>
+        <dd>
+<div class="refInstance">Best Current Practice 225, <span>&lt;<a href="https://www.rfc-editor.org/info/bcp225">https://www.rfc-editor.org/info/bcp225</a>&gt;</span>.<br><span>At the time of writing, this BCP comprises the following:</span>
+</div>
+<div class="refInstance" id="RFC8725">
+            <span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Hardt, D.</span>, and <span class="refAuthor">M. Jones</span>, <span class="refTitle">"JSON Web Token Best Current Practices"</span>, <span class="seriesInfo">BCP 225</span>, <span class="seriesInfo">RFC 8725</span>, <span class="seriesInfo">DOI 10.17487/RFC8725</span>, <time datetime="2020-02" class="refDate">February 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8725">https://www.rfc-editor.org/info/rfc8725</a>&gt;</span>. </div>
+</dd>
+<dd class="break"></dd>
 <dt id="DICE-arch">[DICE-arch]</dt>
         <dd>
 <span class="refAuthor">Trusted Computing Group</span>, <span class="refTitle">"DICE Attestation Architecture"</span>, <time datetime="2024-01" class="refDate">January 2024</time>, <span>&lt;<a href="https://trustedcomputinggroup.org/wp-content/uploads/DICE-Attestation-Architecture-Version-1.1-Revision-18_pub.pdf">https://trustedcomputinggroup.org/wp-content/uploads/DICE-Attestation-Architecture-Version-1.1-Revision-18_pub.pdf</a>&gt;</span>. </dd>
