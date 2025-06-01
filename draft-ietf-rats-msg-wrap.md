@@ -75,11 +75,12 @@ informative:
     -: cose
     =: RFC9052
   RFC9334: rats-arch
-  I-D.ietf-rats-eat: rats-eat
-  I-D.ietf-rats-eat-media-type: rats-eat-mt
+  RFC9711: rats-eat
+  RFC9782: rats-eat-mt
   I-D.ietf-rats-ar4si: rats-ar4si
-  I-D.ietf-rats-uccs: rats-uccs
-  I-D.fossati-tls-attestation: tls-a
+  RFC9781: rats-uccs
+  I-D.fossati-tls-attestation: tls-a1
+  I-D.fossati-tls-exported-attestation: tls-a2
   I-D.ietf-lamps-csr-attestation: csr-a
   I-D.ietf-rats-corim: rats-corim
   DICE-arch:
@@ -149,7 +150,7 @@ A protocol designer could use these formats, for example, to convey
 Evidence, Endorsements and Reference Values in certificates and CRLs
 extensions ({{DICE-arch}}), to embed Attestation Results or Evidence as
 first-class authentication credentials in TLS handshake messages
-{{-tls-a}}, to transport attestation-related payloads in RESTful APIs,
+{{-tls-a1}} {{-tls-a2}}, to transport attestation-related payloads in RESTful APIs,
 or for stable storage of Attestation Results in the form of file system
 objects.
 
