@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-25T01:05:04.332530+00:00",
+  "timestamp": "2025-06-01T01:12:03.649751+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -3232,6 +3232,56 @@
       "updatedAt": "2025-05-21T07:06:45Z",
       "closedAt": "2025-05-21T07:06:45Z",
       "comments": []
+    },
+    {
+      "number": 220,
+      "id": "I_kwDOIGCt2M646c-R",
+      "title": "Kathleen's review",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/220",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "See https://mailarchive.ietf.org/arch/msg/rats/5eOEAKOb7SFU5vEDgXhJQFHUwSU/\n\n```\nHello!\n\nAs part of the review of the shepard write up, I also reviewed the\ndocument, draft-ietf-rats-msg-wrap\n\nIn the Introduction, I recommend changing PKIX (Public Infrastructure using\nX.509) protocol to PKIX (Public Infrastructure using X.509) formats and\nprotocols. PKI would also extend to inclusion of the format in ITU\nstandards so including the expanded acronym includes X.509 and the CSR,\nX.509 certificate, and CRLs are all formats.\n\nIn section 3, I suggest a similar change:\n\ns/PKIX messages/PKIX formats/\n\n\nA CSR, Certificate, and CRL are more akin to a format/file than a message.\n\n\nSection 4.4 has similar changes that are needed. x.509 certificates\nwere defined in the ITU and a number of other standards and formats\nrelated to PKI were defined in the PKIX working group, so we need to\nbe careful in how we refer to each/all.\n\n\nI'm confused on the title for 4.4, \"Transporting CMW in X.509\nMessages\" CMW is the message, correct? X.509 is a format, not a\nmessage. If you are transporting CMW inside an X.509 certificate, then\nthe X.509 is a format and it was defined in the ITU, not in PKIX. I\ntook a stab at a new heading.\n\n\nOLD:\n\n4.4.  Transporting CMW in X.509 Messages\n\n   CMW may need to be transported in PKIX messages, such as Certificate\n   Signing Requests (CSRs) or in X.509 Certificates and Certificate\n   Revocation Lists (CRLs).\n\n\nNEW:\n\n4.4.  Transporting CMW in X.509 and PKIX Related Formats\n\n   CMW may need to be transported in PKIX formats, such as Certificate\n   Signing Requests (CSRs) or in X.509 Certificates, and Certificate\n   Revocation Lists (CRLs).\n\n\nSection 9.1:\nThe minimum level of TLS recommended should be 1.3. 1.2 is still secure,\nbut it has gone into maintenance mode, so drafts being published now should\nbe recommending TLSv1.3 as the minimum.\n\nThe IANA section looks good, including for the OID request. The language is\nwritten well in this section.\n\nI hope this review was helpful.\n```\n\n",
+      "createdAt": "2025-05-30T07:23:41Z",
+      "updatedAt": "2025-05-30T17:21:01Z",
+      "closedAt": "2025-05-30T17:21:01Z",
+      "comments": []
+    },
+    {
+      "number": 222,
+      "id": "I_kwDOIGCt2M65HHsF",
+      "title": "Cases where secure channel is insufficient",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/222",
+      "state": "OPEN",
+      "author": "muhammad-usama-sardar",
+      "authorAssociation": "NONE",
+      "assignees": [
+        "thomas-fossati",
+        "henkbirkholz"
+      ],
+      "labels": [],
+      "body": "> In some scenarios, a secure channel (e.g., via TLS [[BCP195](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-15.html#BCP195)]) or object-level security (e.g., using JWT [[BCP225](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-15.html#BCP225)]) may be sufficient, but this is not always the case.\n\nExplain the cases where a secure channel is not sufficient. ",
+      "createdAt": "2025-05-31T15:35:26Z",
+      "updatedAt": "2025-05-31T19:13:39Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "An example that comes to mind is remote attestation, but I might be missing something obvious here. Remote attestation could proof the use of certain key protection (key attestation) or the isolation of execution environments (confidentiality attestation).",
+          "createdAt": "2025-05-31T18:35:15Z",
+          "updatedAt": "2025-05-31T18:35:15Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "> An example that comes to mind is remote attestation, but I might be missing something obvious here. Remote attestation could proof the use of certain key protection (key attestation) or the isolation of execution environments (confidentiality attestation).\n\nThat's a very surprising example. As per the title, I would have expected the whole document is about remote attestation, and it is there by default. \nThis statement in the issue seems to be saying secure channel on top of remote attestation is insufficient. To me, it looks like saying attested TLS is insufficient. So why is attested TLS insufficient in the example you have given?",
+          "createdAt": "2025-05-31T19:13:37Z",
+          "updatedAt": "2025-05-31T19:13:37Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -14446,6 +14496,74 @@
           "body": "",
           "createdAt": "2025-05-20T17:18:45Z",
           "updatedAt": "2025-05-20T17:18:45Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 221,
+      "id": "PR_kwDOIGCt2M6YPQEw",
+      "title": "Kathleen's comments",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/221",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #220",
+      "createdAt": "2025-05-30T08:49:25Z",
+      "updatedAt": "2025-05-30T17:21:03Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "24f39337aded5bcb4fc5e19557f7e2988f658ec4",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "kathleen",
+      "headRefOid": "4b8f6c7329595ab277637d69eb22e108ca51bf4e",
+      "closedAt": "2025-05-30T17:21:00Z",
+      "mergedAt": "2025-05-30T17:21:00Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "634baa520a20fea78bc50c2829901d53a9a2f39d"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6rt1-t",
+          "commit": {
+            "abbreviatedOid": "4b8f6c7"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "this captures the essences of Kathleen's feedback.\r\nThank you Kathleen!",
+          "createdAt": "2025-05-30T10:37:22Z",
+          "updatedAt": "2025-05-30T10:37:22Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6rwm4J",
+          "commit": {
+            "abbreviatedOid": "4b8f6c7"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-05-30T15:07:53Z",
+          "updatedAt": "2025-05-30T15:07:53Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6rxXS6",
+          "commit": {
+            "abbreviatedOid": "4b8f6c7"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-30T16:28:51Z",
+          "updatedAt": "2025-05-30T16:28:51Z",
           "comments": []
         }
       ]
