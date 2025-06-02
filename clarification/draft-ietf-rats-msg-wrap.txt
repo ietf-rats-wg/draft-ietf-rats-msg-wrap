@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 3 December 2025                                           Intel
+Expires: 4 December 2025                                           Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                             1 June 2025
+                                                             2 June 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 December 2025.
+   This Internet-Draft will expire on 4 December 2025.
 
 Copyright Notice
 
@@ -989,7 +989,7 @@ lication/signed-corim+cbor"
    integrity protection, or confidentiality.  It is the responsibility
    of the designer for each use case to determine the necessary security
    properties and implement them accordingly.  In some scenarios, for
-   instance, if CMW encapsulates Reference Values and/or Endorsements, a
+   instance, if CMW encapsulates Reference Values or Endorsements, a
    secure channel (e.g., via TLS [BCP195]) or object-level security
    (e.g., using JWT [BCP225]) may suffice, but this is not always the
    case.
