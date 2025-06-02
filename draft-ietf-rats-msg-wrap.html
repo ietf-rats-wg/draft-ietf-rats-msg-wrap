@@ -1055,11 +1055,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">RATS CMW</td>
-<td class="right">May 2025</td>
+<td class="right">June 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 1 December 2025</td>
+<td class="center">Expires 4 December 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1072,12 +1072,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-rats-msg-wrap-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-05-30" class="published">30 May 2025</time>
+<time datetime="2025-06-02" class="published">2 June 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-12-01">1 December 2025</time></dd>
+<dd class="expires"><time datetime="2025-12-04">4 December 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1142,7 +1142,7 @@ Moreover, a Media Type and a CoAP Content-Format are defined for transporting CM
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 1 December 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 4 December 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1392,7 +1392,7 @@ conceptual messages are typically transported over different protocols.
 For example,<a href="#section-1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-2.1">
-          <p id="section-1-2.1.1">In a "background check" topology, Evidence (e.g., EAT <span>[<a href="#I-D.ietf-rats-eat" class="cite xref">I-D.ietf-rats-eat</a>]</span>) first flows from
+          <p id="section-1-2.1.1">In a "background check" topology, Evidence (e.g., EAT <span>[<a href="#RFC9711" class="cite xref">RFC9711</a>]</span>) first flows from
 the Attester to the Relying Party and then from the Relying Party to the Verifier,
 each leg following a separate protocol path.<a href="#section-1-2.1.1" class="pilcrow">¶</a></p>
 </li>
@@ -1431,7 +1431,7 @@ messages that aim to achieve the goals stated above.<a href="#section-1-5" class
 Evidence, Endorsements and Reference Values in certificates and CRLs
 extensions (<span>[<a href="#DICE-arch" class="cite xref">DICE-arch</a>]</span>), to embed Attestation Results or Evidence as
 first-class authentication credentials in TLS handshake messages
-<span>[<a href="#I-D.fossati-tls-attestation" class="cite xref">I-D.fossati-tls-attestation</a>]</span>, to transport attestation-related payloads in RESTful APIs,
+<span>[<a href="#I-D.fossati-tls-attestation" class="cite xref">I-D.fossati-tls-attestation</a>]</span> <span>[<a href="#I-D.fossati-tls-exported-attestation" class="cite xref">I-D.fossati-tls-exported-attestation</a>]</span>, to transport attestation-related payloads in RESTful APIs,
 or for stable storage of Attestation Results in the form of file system
 objects.<a href="#section-1-8" class="pilcrow">¶</a></p>
 <p id="section-1-9">This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
@@ -1515,7 +1515,7 @@ cbor-record = [
 <code>type</code>:</dt>
           <dd style="margin-left: 1.5em" id="section-3.1-4.2">
             <p id="section-3.1-4.2.1">Either a text string representing a Content-Type (e.g., an EAT media type
-<span>[<a href="#I-D.ietf-rats-eat-media-type" class="cite xref">I-D.ietf-rats-eat-media-type</a>]</span>) or an unsigned integer corresponding to a CoAP Content-Format
+<span>[<a href="#RFC9782" class="cite xref">RFC9782</a>]</span>) or an unsigned integer corresponding to a CoAP Content-Format
 ID (<span><a href="https://rfc-editor.org/rfc/rfc7252#section-12.3" class="relref">Section 12.3</a> of [<a href="#RFC7252" class="cite xref">RFC7252</a>]</span>).
 The latter is not used in the JSON serialization.<a href="#section-3.1-4.2.1" class="pilcrow">¶</a></p>
 </dd>
@@ -1649,7 +1649,7 @@ Labels can be strings (or integers in the CBOR serialization) that serve as a mn
 <p id="section-3.3-6">The value of the <code>"__cmwc_t"</code> key is either a Uniform Resource Identifier (URI) or an object identifier (OID).
 The OID <span class="bcp14">MUST</span> be absolute.
 The URI <span class="bcp14">MUST</span> be in the absolute form (<span><a href="https://rfc-editor.org/rfc/rfc3986#section-4.3" class="relref">Section 4.3</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>).<a href="#section-3.3-6" class="pilcrow">¶</a></p>
-<p id="section-3.3-7">The <code>"__cmwc_t"</code> key functions similar to an EAT profile claim (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-31#section-4.3.2" class="relref">Section 4.3.2</a> of [<a href="#I-D.ietf-rats-eat" class="cite xref">I-D.ietf-rats-eat</a>]</span>), but at a higher level.
+<p id="section-3.3-7">The <code>"__cmwc_t"</code> key functions similar to an EAT profile claim (see <span><a href="https://rfc-editor.org/rfc/rfc9711#section-4.3.2" class="relref">Section 4.3.2</a> of [<a href="#RFC9711" class="cite xref">RFC9711</a>]</span>), but at a higher level.
 It can be used to indicate basics like CBOR serialization and COSE algorithms just as a profile in EAT does.
 At the higher level, it can be used to describe the allowed CMW collection assembly (this is somewhat parallel to the way EAT profiles indicate which claims are required and/or allowed).
 For an example of a <code>"__cmwc_t"</code> that is defined for a bundle of endorsements and reference values, see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-07#section-4.3.1" class="relref">Section 4.3.1</a> of [<a href="#I-D.ietf-rats-corim" class="cite xref">I-D.ietf-rats-corim</a>]</span>.<a href="#section-3.3-7" class="pilcrow">¶</a></p>
@@ -2311,7 +2311,7 @@ For additional security considerations related to Collections, refer to <a href=
 If the messages are already protected, no additional security requirements are imposed by this encapsulation.
 If an adversary attempts to modify the payload encapsulation, it will result in incorrect processing of the encapsulated message, leading to an error.
 If the messages are not protected, additional security must be added at a different layer.
-For example, a <code>cbor-record</code> containing an Unprotected CWT Claims Set (UCCS) <span>[<a href="#I-D.ietf-rats-uccs" class="cite xref">I-D.ietf-rats-uccs</a>]</span> can be signed as described in <a href="#signed-cbor-cmw" class="auto internal xref">Section 4.1</a>.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
+For example, a <code>cbor-record</code> containing an Unprotected CWT Claims Set (UCCS) <span>[<a href="#RFC9781" class="cite xref">RFC9781</a>]</span> can be signed as described in <a href="#signed-cbor-cmw" class="auto internal xref">Section 4.1</a>.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
 <p id="section-9.1-4"><a href="#crypto" class="auto internal xref">Section 4</a> describes a number of methods that can be used to add cryptographic protection to CMW.<a href="#section-9.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -3257,6 +3257,10 @@ dotted-decimal notation.  The parameter value is case-insensitive.  It must not 
         <dd>
 <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Howard, P.</span>, <span class="refAuthor">Mihalcea, I.</span>, <span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">Niemi, A.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"Using Attestation in Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-fossati-tls-attestation-09</span>, <time datetime="2025-04-30" class="refDate">30 April 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-fossati-tls-attestation-09">https://datatracker.ietf.org/doc/html/draft-fossati-tls-attestation-09</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="I-D.fossati-tls-exported-attestation">[I-D.fossati-tls-exported-attestation]</dt>
+        <dd>
+<span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Sardar, M. U.</span>, <span class="refAuthor">Reddy.K, T.</span>, <span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Tschofenig, H.</span>, and <span class="refAuthor">I. Mihalcea</span>, <span class="refTitle">"Remote Attestation with Exported Authenticators"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-fossati-tls-exported-attestation-01</span>, <time datetime="2025-05-20" class="refDate">20 May 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-fossati-tls-exported-attestation-01">https://datatracker.ietf.org/doc/html/draft-fossati-tls-exported-attestation-01</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.ietf-lamps-csr-attestation">[I-D.ietf-lamps-csr-attestation]</dt>
         <dd>
 <span class="refAuthor">Ounsworth, M.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Wiseman, M.</span>, and <span class="refAuthor">N. Smith</span>, <span class="refTitle">"Use of Remote Attestation with Certification Signing Requests"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-csr-attestation-19</span>, <time datetime="2025-05-25" class="refDate">25 May 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-csr-attestation-19">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-csr-attestation-19</a>&gt;</span>. </dd>
@@ -3268,18 +3272,6 @@ dotted-decimal notation.  The parameter value is case-insensitive.  It must not 
 <dt id="I-D.ietf-rats-corim">[I-D.ietf-rats-corim]</dt>
         <dd>
 <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Concise Reference Integrity Manifest"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-corim-07</span>, <time datetime="2025-03-03" class="refDate">3 March 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-07">https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-07</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="I-D.ietf-rats-eat">[I-D.ietf-rats-eat]</dt>
-        <dd>
-<span class="refAuthor">Lundblade, L.</span>, <span class="refAuthor">Mandyam, G.</span>, <span class="refAuthor">O'Donoghue, J.</span>, and <span class="refAuthor">C. Wallace</span>, <span class="refTitle">"The Entity Attestation Token (EAT)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-eat-31</span>, <time datetime="2024-09-06" class="refDate">6 September 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-31">https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-31</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="I-D.ietf-rats-eat-media-type">[I-D.ietf-rats-eat-media-type]</dt>
-        <dd>
-<span class="refAuthor">Lundblade, L.</span>, <span class="refAuthor">Birkholz, H.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"EAT Media Types"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-eat-media-type-12</span>, <time datetime="2024-11-03" class="refDate">3 November 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-media-type-12">https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-media-type-12</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="I-D.ietf-rats-uccs">[I-D.ietf-rats-uccs]</dt>
-        <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">O'Donoghue, J.</span>, <span class="refAuthor">Cam-Winget, N.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"A CBOR Tag for Unprotected CWT Claims Sets"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-uccs-12</span>, <time datetime="2024-11-03" class="refDate">3 November 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-uccs-12">https://datatracker.ietf.org/doc/html/draft-ietf-rats-uccs-12</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC3647">[RFC3647]</dt>
         <dd>
@@ -3304,6 +3296,18 @@ dotted-decimal notation.  The parameter value is case-insensitive.  It must not 
 <dt id="RFC9334">[RFC9334]</dt>
         <dd>
 <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Thaler, D.</span>, <span class="refAuthor">Richardson, M.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Remote ATtestation procedureS (RATS) Architecture"</span>, <span class="seriesInfo">RFC 9334</span>, <span class="seriesInfo">DOI 10.17487/RFC9334</span>, <time datetime="2023-01" class="refDate">January 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9334">https://www.rfc-editor.org/rfc/rfc9334</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9711">[RFC9711]</dt>
+        <dd>
+<span class="refAuthor">Lundblade, L.</span>, <span class="refAuthor">Mandyam, G.</span>, <span class="refAuthor">O'Donoghue, J.</span>, and <span class="refAuthor">C. Wallace</span>, <span class="refTitle">"The Entity Attestation Token (EAT)"</span>, <span class="seriesInfo">RFC 9711</span>, <span class="seriesInfo">DOI 10.17487/RFC9711</span>, <time datetime="2025-04" class="refDate">April 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9711">https://www.rfc-editor.org/rfc/rfc9711</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9781">[RFC9781]</dt>
+        <dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">O'Donoghue, J.</span>, <span class="refAuthor">Cam-Winget, N.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"A Concise Binary Object Representation (CBOR) Tag for Unprotected CBOR Web Token Claims Sets (UCCS)"</span>, <span class="seriesInfo">RFC 9781</span>, <span class="seriesInfo">DOI 10.17487/RFC9781</span>, <time datetime="2025-05" class="refDate">May 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9781">https://www.rfc-editor.org/rfc/rfc9781</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9782">[RFC9782]</dt>
+        <dd>
+<span class="refAuthor">Lundblade, L.</span>, <span class="refAuthor">Birkholz, H.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"Entity Attestation Token (EAT) Media Types"</span>, <span class="seriesInfo">RFC 9782</span>, <span class="seriesInfo">DOI 10.17487/RFC9782</span>, <time datetime="2025-05" class="refDate">May 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9782">https://www.rfc-editor.org/rfc/rfc9782</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="STD96">[STD96]</dt>
       <dd>
