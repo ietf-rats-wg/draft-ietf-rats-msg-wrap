@@ -2303,16 +2303,16 @@ The following subsections provide further elaboration on these points, particula
         </h3>
 <p id="section-9.1-1">CMW itself does not provide any mechanisms for authenticity, integrity protection, or confidentiality.
 It is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly.
-In some scenarios, for instance, if CMW encapsulates Reference Values or Endorsements, a secure channel (e.g., via TLS <span>[<a href="#BCP195" class="cite xref">BCP195</a>]</span>) or object-level security (e.g., using JWT <span>[<a href="#BCP225" class="cite xref">BCP225</a>]</span>) may suffice, but this is not always the case.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
-<p id="section-9.1-2">When a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically bound to prevent an attacker from replacing Evidence from a compromised device with that from a non-compromised device.
+In some scenarios, for instance, if CMW encapsulates Reference Values or Endorsements, a secure channel (e.g., via TLS <span>[<a href="#BCP195" class="cite xref">BCP195</a>]</span>) or object-level security (e.g., using JWT <span>[<a href="#BCP225" class="cite xref">BCP225</a>]</span>) may suffice, but this is not always the case.
+When a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically bound to prevent an attacker from replacing Evidence from a compromised device with that from a non-compromised device.
 Authenticity and integrity protection <span class="bcp14">MUST</span> be provided by the attestation technology.
-For additional security considerations related to Collections, refer to <a href="#seccons-coll" class="auto internal xref">Section 9.2</a>.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
-<p id="section-9.1-3">RATS conceptual messages are typically secured using cryptography.
+For additional security considerations related to Collections, refer to <a href="#seccons-coll" class="auto internal xref">Section 9.2</a>.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
+<p id="section-9.1-2">RATS conceptual messages are typically secured using cryptography.
 If the messages are already protected, no additional security requirements are imposed by this encapsulation.
 If an adversary attempts to modify the payload encapsulation, it will result in incorrect processing of the encapsulated message, leading to an error.
 If the messages are not protected, additional security must be added at a different layer.
-For example, a <code>cbor-record</code> containing an Unprotected CWT Claims Set (UCCS) <span>[<a href="#I-D.ietf-rats-uccs" class="cite xref">I-D.ietf-rats-uccs</a>]</span> can be signed as described in <a href="#signed-cbor-cmw" class="auto internal xref">Section 4.1</a>.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
-<p id="section-9.1-4"><a href="#crypto" class="auto internal xref">Section 4</a> describes a number of methods that can be used to add cryptographic protection to CMW.<a href="#section-9.1-4" class="pilcrow">¶</a></p>
+For example, a <code>cbor-record</code> containing an Unprotected CWT Claims Set (UCCS) <span>[<a href="#I-D.ietf-rats-uccs" class="cite xref">I-D.ietf-rats-uccs</a>]</span> can be signed as described in <a href="#signed-cbor-cmw" class="auto internal xref">Section 4.1</a>.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
+<p id="section-9.1-3"><a href="#crypto" class="auto internal xref">Section 4</a> describes a number of methods that can be used to add cryptographic protection to CMW.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="seccons-coll">
