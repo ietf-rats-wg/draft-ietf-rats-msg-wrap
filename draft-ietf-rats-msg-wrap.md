@@ -653,7 +653,7 @@ The following subsections provide further elaboration on these points, particula
 CMW itself does not provide any mechanisms for authenticity, integrity protection, or confidentiality.
 It is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly.
 In some scenarios, for instance, if CMW encapsulates Reference Values or Endorsements, a secure channel (e.g., via TLS {{?BCP195}}) or object-level security (e.g., using JWT {{?BCP225}}) may suffice, but this is not always the case.
-When a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically bound to prevent an attacker from replacing Evidence from a compromised device with that from a non-compromised device.
+When a CMW is used to encapsulate Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically bound to prevent an attacker from replacing Evidence from a compromised device with that from a non-compromised device.
 Authenticity and integrity protection MUST be provided by the attestation technology.
 For additional security considerations related to Collections, refer to {{seccons-coll}}.
 
