@@ -2304,7 +2304,7 @@ The following subsections provide further elaboration on these points, particula
 <p id="section-9.1-1">CMW itself does not provide any mechanisms for authenticity, integrity protection, or confidentiality.
 It is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly.
 In some scenarios, for instance, if CMW encapsulates Reference Values or Endorsements, a secure channel (e.g., via TLS <span>[<a href="#BCP195" class="cite xref">BCP195</a>]</span>) or object-level security (e.g., using JWT <span>[<a href="#BCP225" class="cite xref">BCP225</a>]</span>) may suffice, but this is not always the case.
-When a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically bound to prevent an attacker from replacing Evidence from a compromised device with that from a non-compromised device.
+When a CMW is used to encapsulate Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically bound to prevent an attacker from replacing Evidence from a compromised device with that from a non-compromised device.
 Authenticity and integrity protection <span class="bcp14">MUST</span> be provided by the attestation technology.
 For additional security considerations related to Collections, refer to <a href="#seccons-coll" class="auto internal xref">Section 9.2</a>.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
 <p id="section-9.1-2">RATS conceptual messages are typically secured using cryptography.
