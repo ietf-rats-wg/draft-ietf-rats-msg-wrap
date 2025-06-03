@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-01T01:12:03.649751+00:00",
+  "timestamp": "2025-06-03T01:01:11.196047+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -3264,7 +3264,7 @@
       "labels": [],
       "body": "> In some scenarios, a secure channel (e.g., via TLS [[BCP195](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-15.html#BCP195)]) or object-level security (e.g., using JWT [[BCP225](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-15.html#BCP225)]) may be sufficient, but this is not always the case.\n\nExplain the cases where a secure channel is not sufficient. ",
       "createdAt": "2025-05-31T15:35:26Z",
-      "updatedAt": "2025-05-31T19:13:39Z",
+      "updatedAt": "2025-06-02T12:55:59Z",
       "closedAt": null,
       "comments": [
         {
@@ -3280,6 +3280,114 @@
           "body": "> An example that comes to mind is remote attestation, but I might be missing something obvious here. Remote attestation could proof the use of certain key protection (key attestation) or the isolation of execution environments (confidentiality attestation).\n\nThat's a very surprising example. As per the title, I would have expected the whole document is about remote attestation, and it is there by default. \nThis statement in the issue seems to be saying secure channel on top of remote attestation is insufficient. To me, it looks like saying attested TLS is insufficient. So why is attested TLS insufficient in the example you have given?",
           "createdAt": "2025-05-31T19:13:37Z",
           "updatedAt": "2025-05-31T19:13:37Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > An example that comes to mind is remote attestation, but I might be missing something obvious here. Remote attestation could proof the use of certain key protection (key attestation) or the isolation of execution environments (confidentiality attestation).\n> \n> That's a very surprising example. As per the title, I would have expected the whole document is about remote attestation, and it is there by default. This statement in the issue seems to be saying secure channel on top of remote attestation is insufficient. To me, it looks like saying attested TLS is insufficient. So why is attested TLS insufficient in the example you have given?\n\nThe key point to note is that CMWs wrap *any* RATS messages, which *include* (but are not limited to) Evidence.\n\nWhen CMWs are used for the conveyance of Reference Values, Endorsements and Attestation Results, \u201csimple\u201d transport or object security may be OK.\n\nVice versa, when CMWs are used for Evidence, the security properties (authenticity and integrity protection) need to be rooted in the Attester's root of trust.\n",
+          "createdAt": "2025-06-01T04:27:53Z",
+          "updatedAt": "2025-06-01T04:27:53Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "I am still confused. So let's step back. Your intention with the following sentence\n> In some scenarios, a secure channel (e.g., via TLS [[BCP195](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-15.html#BCP195)]) or object-level security (e.g., using JWT [[BCP225](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-15.html#BCP225)]) may be sufficient, but this is not always the case.\n\nis to say that: (Intentionally skipping object security as I am not interested in that)\n\n- TLS _alone_ (without remote attestation) is insufficient? \n- Attested TLS is insufficient?\n\nThe former does not make any sense to me. I thought CMW is for RATS. Why would someone use CMW without remote attestation? \n\nIf the latter, I am asking for an example/scenario, where attested TLS is insufficient. Given the way it is phrased (excluding \"some scenarios\"), this should not be a big ask.",
+          "createdAt": "2025-06-01T08:01:04Z",
+          "updatedAt": "2025-06-01T08:01:04Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I am still confused. So let's step back. Your intention with the following sentence\n> \n> > In some scenarios, a secure channel (e.g., via TLS [[BCP195](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-15.html#BCP195)]) or object-level security (e.g., using JWT [[BCP225](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-15.html#BCP225)]) may be sufficient, but this is not always the case.\n> \n> is to say that: (Intentionally skipping object security as I am not interested in that)\n> \n> * TLS _alone_ (without remote attestation) is insufficient?\n\nYes, this one.\n\n> * Attested TLS is insufficient?\n\nNo, not this one.\n\n> The former does not make any sense to me. I thought CMW is for RATS. Why would someone use CMW without remote attestation?\n\nSee [above.](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/222#issuecomment-2926474985)\n\n> If the latter, I am asking for an example/scenario, where attested TLS is insufficient. Given the way it is phrased (excluding \"some scenarios\"), this should not be a big ask.\n\nIt\u2019s certainly not the latter, otherwise \u201cTLS\u201d would be \u201cattested TLS\u201d.\n",
+          "createdAt": "2025-06-01T08:58:45Z",
+          "updatedAt": "2025-06-01T08:58:45Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "> Yes, this one.\n\nOk thanks. But then why is the CMW draft discussing about _TLS alone_? Is it possible to use CMW with _TLS alone_ (without remote attestation)?\n\n> It\u2019s certainly not the latter, otherwise \u201cTLS\u201d would be \u201cattested TLS\u201d.\n\nTo me, CMW is only meant to be for RATS. So, \"attested\" is there by default. ",
+          "createdAt": "2025-06-01T09:20:36Z",
+          "updatedAt": "2025-06-01T09:20:36Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Is it possible to use CMW with _TLS alone_ (without remote attestation)?\n\nYes.\n\nFor example, if CMW is used to wrap Endorsements and/or Reference Values, a mutually authenticated TLS channel between Endorser/Reference Value Provider and Verifier *could* be enough.\n\n> > It\u2019s certainly not the latter, otherwise \u201cTLS\u201d would be \u201cattested TLS\u201d.\n> \n> To me, CMW is only meant to be for RATS. So, \"attested\" is there by default.\n\nhmm, no :-)",
+          "createdAt": "2025-06-01T14:17:45Z",
+          "updatedAt": "2025-06-01T14:17:45Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "What about this:\n\n> In some scenarios, for instance, if CMW encapsulates Reference Values and/or Endorsements, a secure channel (e.g., via TLS [BCP195]) or object-level security (e.g., using JWT [BCP225]) may suffice, but this is not always the case.",
+          "createdAt": "2025-06-01T14:24:40Z",
+          "updatedAt": "2025-06-01T14:24:40Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "Quite a long sentence and a bit difficult to parse. I don't like \"and/or\". Please make it more precise. \nPlease also give an example of \"not always the case\". That could be Evidence and give some hints to implementers on what to do in cases where secure channel is insufficient. ",
+          "createdAt": "2025-06-02T07:11:08Z",
+          "updatedAt": "2025-06-02T07:11:08Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Quite a long sentence and a bit difficult to parse. I don't like \"and/or\". Please make it more precise.\n\nWithout a better definition of what \u201cmore precise\u201d means, yours looks like simple editorial preference.\n\nPlease provide a concrete suggestion, or I\u2019ll leave it as-is and let the RFC editor take care of improving its quality.\n\n> Please also give an example of \"not always the case\". That could be Evidence and give some hints to implementers on what to do in cases where secure channel is insufficient.\n\nThat is already articulated in the following paragraph:\n\n> _\"When a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically bound [\u2026]\u201d_",
+          "createdAt": "2025-06-02T07:48:22Z",
+          "updatedAt": "2025-06-02T07:48:22Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "> Without a better definition of what \u201cmore precise\u201d means, yours looks like simple editorial preference.\n\nIf you read it in the context of the previous two sentences in this paragraph, it might make more sense. Particularly,\n> authenticity, integrity protection, or confidentiality.\n> necessary security properties and implement them accordingly. \n\nSo my question precisely is: what are those security properties that the following phrase is referring to: \n\n> this is not always the case.\n\nHere is my concrete suggestion: First two sentences in the paragraph are talking about security properties. But the sentence afterwards is vague. I would like to see which properties are intended in that sentence. \n\n> That is already articulated in the following paragraph:\n\nSo the \"but this is not always the case\" part is only related to composite and layered attester?",
+          "createdAt": "2025-06-02T09:19:28Z",
+          "updatedAt": "2025-06-02T09:19:28Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > Without a better definition of what \u201cmore precise\u201d means, yours looks like simple editorial preference.\n> \n> If you read it in the context of the previous two sentences in this paragraph, it might make more sense. Particularly,\n> \n> > authenticity, integrity protection, or confidentiality.\n> > necessary security properties and implement them accordingly.\n> \n> So my question precisely is: what are those security properties that the following phrase is referring to:\n> \n> > this is not always the case.\n\nthe security properties are the same.  what changes is the \u201cquality\u201d of the signing key material, i.e., \"simple\u201d key vs and \u201cattestation\u201d key.\n\n> Here is my concrete suggestion: First two sentences in the paragraph are talking about security properties. But the sentence afterwards is vague. I would like to see which properties are intended in that sentence.\n> \n> > That is already articulated in the following paragraph:\n> \n> So the \"but this is not always the case\" part is only related to composite and layered attester?\n\nAttesters are the focus of that, as explained in the following para.\n\nPlease have a look at #223 and add your suggestions there.\n",
+          "createdAt": "2025-06-02T09:25:27Z",
+          "updatedAt": "2025-06-02T09:25:27Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "> the security properties are the same. what changes is the \u201cquality\u201d of the signing key material, i.e., \"simple\u201d key vs and \u201cattestation\u201d key.\n\nI don't find this being mentioned anywhere in the security considerations. \n\n> Attesters are the focus of that, as explained in the following para.\n\nWell, that paragraph is only talking about Layered and Composite Attesters, and not Attesters in general. Hence, my question: is it only related to Composite and Layered Attester?\n\n> Please have a look at [#223](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/223) and add your suggestions there.\n\nI don't see anything new in the PR which is not mentioned in this issue. What exactly you would like me to look at there?",
+          "createdAt": "2025-06-02T10:37:00Z",
+          "updatedAt": "2025-06-02T10:37:00Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > the security properties are the same. what changes is the \u201cquality\u201d of the signing key material, i.e., \"simple\u201d key vs and \u201cattestation\u201d key.\n> \n> I don't find this being mentioned anywhere in the security considerations.\n\nIt is literally in the same paragraph: _\u201dAuthenticity and integrity protection MUST be provided by the attestation technology.\"_\n\n> \n> > Attesters are the focus of that, as explained in the following para.\n> \n> Well, that paragraph is only talking about Layered and Composite Attesters, and not Attesters in general. Hence, my question: is it only related to Composite and Layered Attester?\n\nThere is nothing new to be said about \u201csimple\u201d Attesters that hasn\u2019t already been articulated in Section 12.2 of RFC9334.  Since we start the section by telling the reader \u201clook there first\u201d, I reckon it\u2019s not necessary to restate the obvious.  So we only add on top of that, i.e., the case of composite/layered in the context of CMW collections.\n\n> > Please have a look at [#223](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/223) and add your suggestions there.\n> \n> I don't see anything new in the PR which is not mentioned in this issue. What exactly you would like me to look at there?\n\nThe hint was about making editorial suggestions there if you have any.\n\n",
+          "createdAt": "2025-06-02T11:33:39Z",
+          "updatedAt": "2025-06-02T12:55:58Z"
+        }
+      ]
+    },
+    {
+      "number": 225,
+      "id": "I_kwDOIGCt2M65WXIE",
+      "title": "Is \"protection\" integrity?",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/225",
+      "state": "OPEN",
+      "author": "muhammad-usama-sardar",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "> [Cryptographic Protection of CMWs](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-15.html#name-cryptographic-protection-of)\n\nIsn't it integrity protection? or is it something more than that? \n\n> If the messages are already **protected**, no additional security requirements are imposed by this encapsulation. If an adversary attempts to modify the payload encapsulation, it will result in incorrect processing of the encapsulated message, leading to an error. If the messages are not **protected**, ...\n\nThe word \"protected\" is very vague. What does it mean here? Is it integrity?",
+      "createdAt": "2025-06-02T10:51:12Z",
+      "updatedAt": "2025-06-02T11:10:53Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This section starts with this:\n\n> _\"The security considerations discussed in [Section 12.2](https://rfc-editor.org/rfc/rfc9334#section-12.2) of [[RFC9334](https://ietf-rats-wg.github.io/draft-ietf-rats-msg-wrap/draft-ietf-rats-msg-wrap.html#RFC9334)] concerning the protection of conceptual messages are fully applicable.\u201d_\n\nwhich should provide the needed context to interpret the word \u201cprotection\u201d.",
+          "createdAt": "2025-06-02T11:10:11Z",
+          "updatedAt": "2025-06-02T11:10:52Z"
         }
       ]
     }
@@ -14564,6 +14672,225 @@
           "body": "",
           "createdAt": "2025-05-30T16:28:51Z",
           "updatedAt": "2025-05-30T16:28:51Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 223,
+      "id": "PR_kwDOIGCt2M6Ye74G",
+      "title": "clarify when it's ok to TLS only",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/223",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "thomas-fossati"
+      ],
+      "labels": [],
+      "body": "Fix #222 ",
+      "createdAt": "2025-06-01T14:41:24Z",
+      "updatedAt": "2025-06-02T19:27:39Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "634baa520a20fea78bc50c2829901d53a9a2f39d",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "clarification",
+      "headRefOid": "1501e85f06fe7ca1f7020b3fcba33bc4dc84b06d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @muhammad-usama-sardar",
+          "createdAt": "2025-06-01T14:42:07Z",
+          "updatedAt": "2025-06-01T14:42:07Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "Shouldn't this just reference UCCS security considerations? I think it's the same security problem. It's better for the attestation implementor to have only one set of considerations.\r\n",
+          "createdAt": "2025-06-02T17:51:58Z",
+          "updatedAt": "2025-06-02T17:51:58Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Shouldn't this just reference UCCS security considerations? I think it's the same security problem. It's better for the attestation implementor to have only one set of considerations.\r\n\r\nI believe we're discussing a different issue than UCCS.\r\nHere we are saying that attesters (specifically, composite ones) must bind their pieces together, and do so using attestation-grade key material.\r\n",
+          "createdAt": "2025-06-02T18:43:51Z",
+          "updatedAt": "2025-06-02T18:43:51Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "> > Shouldn't this just reference UCCS security considerations? I think it's the same security problem. It's better for the attestation implementor to have only one set of considerations.\r\n> \r\n> I believe we're discussing a different issue than UCCS. Here we are saying that attesters (specifically, composite ones) must bind their pieces together, and do so using attestation-grade key material.\r\n\r\nOK. I'm coming up to speed...\r\n\r\nThree, orthogonal issues, right?:\r\n- Protocol use to secure (e.g., TLS, JWT..)\r\n- Key material used -- for evidence this must be attestation-grade, but not for other uses\r\n- Composition\r\n\r\nSection 9.2 addresses Composition and key material. If composition and key material is what's mean by \"isn't always the case\", can't that phrase be simply deleted because section 9.2 exists?\r\n\r\nI'm pretty sure these three issues are orthogonal.\r\n\r\n\r\n\r\n\r\n",
+          "createdAt": "2025-06-02T19:11:51Z",
+          "updatedAt": "2025-06-02T19:11:51Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > > Shouldn't this just reference UCCS security considerations? I think it's the same security problem. It's better for the attestation implementor to have only one set of considerations.\r\n> > \r\n> > \r\n> > I believe we're discussing a different issue than UCCS. Here we are saying that attesters (specifically, composite ones) must bind their pieces together, and do so using attestation-grade key material.\r\n> \r\n> OK. I'm coming up to speed...\r\n> \r\n> Three, orthogonal issues, right?:\r\n> \r\n> * Protocol use to secure (e.g., TLS, JWT..)\r\n> * Key material used -- for evidence this must be attestation-grade, but not for other uses\r\n> * Composition\r\n> \r\n> Section 9.2 addresses Composition and key material. If composition and key material is what's mean by \"isn't always the case\", can't that phrase be simply deleted because section 9.2 exists?\r\n\r\n_\"isn't always the case\u201d_ is there to:\r\n1. Cover the case of non-Evidence messages that can be wrapped in CMWs (either records or collections) while still not necessarily needing more than an mTLS session to be transported from A to B, and\r\n2. Serve as a transition to the requirement for Evidence to be not only wrapped in a JWT (or similar) but also do so using key material that is anchored in the system\u2019s RoT.\r\n\r\n> I'm pretty sure these three issues are orthogonal.\r\n\r\nMaybe not completely, or maybe I am not able to cleanly separate the axes.",
+          "createdAt": "2025-06-02T19:25:18Z",
+          "updatedAt": "2025-06-02T19:27:38Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6sFVhj",
+          "commit": {
+            "abbreviatedOid": "a16d5fc"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "See comments",
+          "createdAt": "2025-06-02T07:18:33Z",
+          "updatedAt": "2025-06-02T07:20:39Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nIn some scenarios, for instance, if CMW encapsulates Reference Values or Endorsements, a secure channel (e.g., via TLS {{?BCP195}}) or object-level security (e.g., using JWT {{?BCP225}}) may suffice, but this is not always the case.\r\n```",
+              "createdAt": "2025-06-02T07:18:33Z",
+              "updatedAt": "2025-06-02T07:20:39Z"
+            },
+            {
+              "originalPosition": 5,
+              "body": "CMW can be signed. Wouldn't signed CMW address integrity protection and authenticity without needing TLS?",
+              "createdAt": "2025-06-02T07:19:32Z",
+              "updatedAt": "2025-06-02T07:20:39Z"
+            },
+            {
+              "originalPosition": 5,
+              "body": "Given TLS addresses confidentiality, replay, as well as integrity and authenticity. What other threat is remaining?",
+              "createdAt": "2025-06-02T07:20:25Z",
+              "updatedAt": "2025-06-02T07:20:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6sG6y5",
+          "commit": {
+            "abbreviatedOid": "0daa811"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-02T09:20:46Z",
+          "updatedAt": "2025-06-02T09:20:47Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "Removing the paragraph break to make the connection between the two related statements.\r\n\r\n```suggestion\r\n```",
+              "createdAt": "2025-06-02T09:20:46Z",
+              "updatedAt": "2025-06-02T09:20:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6sHPTE",
+          "commit": {
+            "abbreviatedOid": "6fe9373"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-02T09:42:49Z",
+          "updatedAt": "2025-06-02T09:42:50Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nMechanisms to protect CMW that encapsulates Conceptual Messages, such as Reference Values or Endorsements, include secure channels (e.g., via TLS {{?BCP195}}) or object-level security (e.g., using JWT {{?BCP225}}).\r\n```",
+              "createdAt": "2025-06-02T09:42:50Z",
+              "updatedAt": "2025-06-02T09:43:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6sHQn0",
+          "commit": {
+            "abbreviatedOid": "6fe9373"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-02T09:44:39Z",
+          "updatedAt": "2025-06-02T09:44:39Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\r\nWhen a CMW is used to encapsulate Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically bound to prevent an attacker from replacing Evidence from a compromised device with that from a non-compromised device.\r\n```",
+              "createdAt": "2025-06-02T09:44:39Z",
+              "updatedAt": "2025-06-02T10:00:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6sHf2W",
+          "commit": {
+            "abbreviatedOid": "6fe9373"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-02T10:02:57Z",
+          "updatedAt": "2025-06-02T10:02:57Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "Thanks for the suggestion, but I don\u2019t think it increases clarity.",
+              "createdAt": "2025-06-02T10:02:57Z",
+              "updatedAt": "2025-06-02T10:02:57Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 224,
+      "id": "PR_kwDOIGCt2M6Ye8Rf",
+      "title": "update some refs",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/224",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Some drafts have been promoted to RFC.",
+      "createdAt": "2025-06-01T14:42:43Z",
+      "updatedAt": "2025-06-02T07:48:42Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "634baa520a20fea78bc50c2829901d53a9a2f39d",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "refs",
+      "headRefOid": "21bd3f7ac236927343dae0e817d01362e781a015",
+      "closedAt": "2025-06-02T07:48:36Z",
+      "mergedAt": "2025-06-02T07:48:35Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "8e0693d8f3f1491926e650c1894b97bcad99780b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6sFTvj",
+          "commit": {
+            "abbreviatedOid": "21bd3f7"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-06-02T07:15:49Z",
+          "updatedAt": "2025-06-02T07:15:49Z",
           "comments": []
         }
       ]
