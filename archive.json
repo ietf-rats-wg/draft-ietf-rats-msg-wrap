@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-05T01:00:23.491001+00:00",
+  "timestamp": "2025-06-08T01:06:21.021976+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -14697,7 +14697,7 @@
       "labels": [],
       "body": "Fix #222 ",
       "createdAt": "2025-06-01T14:41:24Z",
-      "updatedAt": "2025-06-04T19:43:43Z",
+      "updatedAt": "2025-06-06T19:33:45Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "634baa520a20fea78bc50c2829901d53a9a2f39d",
@@ -14764,6 +14764,20 @@
           "body": "Sorry I am stuck in some urgent work this week. But skimming through, I actually like this:\r\n\r\n> Three, orthogonal issues, right?:\r\n> \r\n> * Protocol use to secure (e.g., TLS, JWT..)\r\n> * Key material used -- for evidence this must be attestation-grade, but not for other uses\r\n> * Composition\r\n\r\nCould we reframe the security section into 3 subsections stated above? I think that would clarify a lot of things, which are currently mixed together in a misleading way. \r\n\r\n---\r\n> _\"isn't always the case\u201d_ is there to:\r\n> \r\n> 1. Cover the case of non-Evidence messages that can be wrapped in CMWs (either records or collections) while still not necessarily needing more than an mTLS session to be transported from A to B, and\r\n> 2. Serve as a transition to the requirement for Evidence to be not only wrapped in a JWT (or similar) but also do so using key material that is anchored in the system\u2019s RoT.\r\n\r\nPlease don't let the readers/implementors speculate and state this as precisely as possible in the draft. ",
           "createdAt": "2025-06-04T19:43:42Z",
           "updatedAt": "2025-06-04T19:43:42Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "Does anyone think there is an important difference between TLS, COSE and JOSE as a protection protocol here? I can't see any myself. I think it's all in the key material -- who owns it, how it is established, how it is protected, who can use it, what it can be used for.  Unfortunately, UCCS didn't discuss this.",
+          "createdAt": "2025-06-06T19:22:09Z",
+          "updatedAt": "2025-06-06T19:22:09Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> Does anyone think there is an important difference between TLS, COSE and JOSE as a protection protocol here?\r\n\r\nTLS as a protection protocol is different because it doesn't have individual signatures on messages, so you can't forward an unsigned CMW to a relying party and maintain the authenticity claim of the originator.\r\n\r\nCOSE and JOSE (specifically JWS) are similar in what they denote, so the protection comes down to the difference in supported algorithms. Then there's the practical aspect of correct implementations of the standards in languages of choice.\r\n",
+          "createdAt": "2025-06-06T19:26:45Z",
+          "updatedAt": "2025-06-06T19:26:45Z"
         }
       ],
       "reviews": [
@@ -14951,6 +14965,26 @@
           "createdAt": "2025-06-03T11:10:03Z",
           "updatedAt": "2025-06-03T11:10:03Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6tNbbG",
+          "commit": {
+            "abbreviatedOid": "2d03f03"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-06T19:33:44Z",
+          "updatedAt": "2025-06-06T19:33:45Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "Is this a normative MUST? I don't think that's necessarily what we're going to see, even if it is unfortunate. The binding is up to the protocol, and not this envelope format.\r\n```suggestion\r\nWhen a CMW is used to encapsulate Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically bound together to prevent an attacker from replacing Evidence from a compromised device with that from a non-compromised device.\r\n```",
+              "createdAt": "2025-06-06T19:33:44Z",
+              "updatedAt": "2025-06-06T19:33:45Z"
+            }
+          ]
         }
       ]
     },
