@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-08T01:06:21.021976+00:00",
+  "timestamp": "2025-06-10T01:01:23.337398+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -14697,7 +14697,7 @@
       "labels": [],
       "body": "Fix #222 ",
       "createdAt": "2025-06-01T14:41:24Z",
-      "updatedAt": "2025-06-06T19:33:45Z",
+      "updatedAt": "2025-06-09T16:54:13Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "634baa520a20fea78bc50c2829901d53a9a2f39d",
@@ -14778,6 +14778,13 @@
           "body": "> Does anyone think there is an important difference between TLS, COSE and JOSE as a protection protocol here?\r\n\r\nTLS as a protection protocol is different because it doesn't have individual signatures on messages, so you can't forward an unsigned CMW to a relying party and maintain the authenticity claim of the originator.\r\n\r\nCOSE and JOSE (specifically JWS) are similar in what they denote, so the protection comes down to the difference in supported algorithms. Then there's the practical aspect of correct implementations of the standards in languages of choice.\r\n",
           "createdAt": "2025-06-06T19:26:45Z",
           "updatedAt": "2025-06-06T19:26:45Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "> > Does anyone think there is an important difference between TLS, COSE and JOSE as a protection protocol here?\r\n> \r\n> TLS as a protection protocol is different because it doesn't have individual signatures on messages, so you can't forward an unsigned CMW to a relying party and maintain the authenticity claim of the originator.\r\n\r\nYes, it is true, but as a security considerations minimalist myself, I wouldn't mention that. \r\n\r\n> \r\n> COSE and JOSE (specifically JWS) are similar in what they denote, so the protection comes down to the difference in supported algorithms. Then there's the practical aspect of correct implementations of the standards in languages of choice.\r\n\r\nI'd avoid mentioning algorithms as there is nothing attestation-related in the algorithm selection.\r\n",
+          "createdAt": "2025-06-09T16:54:11Z",
+          "updatedAt": "2025-06-09T16:54:11Z"
         }
       ],
       "reviews": [
