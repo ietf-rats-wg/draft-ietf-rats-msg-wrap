@@ -664,7 +664,7 @@ For example, a `cbor-record` containing an Unprotected CWT Claims Set (UCCS) {{-
 
 ## Using Collection CMWs for Evidence of Composite or Layered Devices {#seccons-coll}
 
-When a Collection CMW is used to encapsulate Evidence for composite or layered attestation of a single device, all Evidence messages within the CMW must be cryptographically bound together to prevent an attacker from replacing Evidence from a compromised device with that from a non-compromised device.
+When a Collection CMW is used to encapsulate Evidence for composite or layered attestation of a single device, all Evidence messages within the CMW MUST be cryptographically bound together to prevent an attacker from replacing Evidence from a compromised device with that from a non-compromised device.
 If the Collection CMW is not protected from tampering by external security measures (such as object security primitives) or internal mechanisms (such as intra-item binding), an attacker could manipulate the Collection's contents to deceive the Verifier into accepting bogus Evidence as genuine.
 
 Authenticity and integrity protection is expected to be provided by the underlying attestation technology.
