@@ -667,7 +667,7 @@ For example, a `cbor-record` containing an Unprotected CWT Claims Set (UCCS) {{-
 When a Collection CMW is used to encapsulate Evidence for composite or layered attestation of a single device, all Evidence messages within the CMW must be cryptographically bound together to prevent an attacker from replacing Evidence from a compromised device with that from a non-compromised device.
 If the Collection CMW is not protected from tampering by external security measures (such as object security primitives) or internal mechanisms (such as intra-item binding), an attacker could manipulate the Collection's contents to deceive the Verifier into accepting bogus Evidence as genuine.
 
-Authenticity and integrity protection must be provided by the attestation technology.
+Authenticity and integrity protection is expected to be provided by the underlying attestation technology.
 For example, key material used to sign/bind an entire Collection CMW should be an attestation key, handled as described in {{Section 12.1 of -rats-arch}}.
 The binding does not necessarily have to be a signature over the Collection CMW, it might also be achieved through identifiers, cross-linking, signing or hashing between the members of the Collection.
 It is the responsibility of the Attester who creates the Collection CMW to ensure that the contents of the Collection are integrity-protected.
