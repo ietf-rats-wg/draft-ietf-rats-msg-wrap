@@ -672,6 +672,12 @@ For example, key material used to sign/bind an entire Collection CMW should be a
 The binding does not necessarily have to be a signature over the Collection CMW, it might also be achieved through identifiers, cross-linking, signing or hashing between the members of the Collection.
 It is the responsibility of the Attester who creates the Collection CMW to ensure that the contents of the Collection are integrity-protected.
 
+## Integrating CMW into Protocols
+
+When CMW is integrated into a protocol (for example, attested CSR {{-csr-a}} or attested TLS {{-tls-a1}} {{-tls-a2}}), it is up to the "hosting" protocol to describe how CMW is intended to be used and how it fits into the overall security model.
+
+Such an analysis should consider the types of conceptual messages allowed, including the permitted combinations, the protection requirements, the interface with the hosting protocol, and any other security-relevant aspect arising from the interaction between the CMW assembly and the hosting protocol.
+
 # IANA Considerations
 
 [^rfced] Please replace "{{&SELF}}" with the RFC number assigned to this document.
