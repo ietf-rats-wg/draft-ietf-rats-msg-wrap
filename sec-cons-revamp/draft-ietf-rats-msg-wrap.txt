@@ -1009,7 +1009,7 @@ lication/signed-corim+cbor"
 
    When a Collection CMW is used to encapsulate Evidence for composite
    or layered attestation of a single device, all Evidence messages
-   within the CMW must be cryptographically bound together to prevent an
+   within the CMW MUST be cryptographically bound together to prevent an
    attacker from replacing Evidence from a compromised device with that
    from a non-compromised device.  If the Collection CMW is not
    protected from tampering by external security measures (such as
