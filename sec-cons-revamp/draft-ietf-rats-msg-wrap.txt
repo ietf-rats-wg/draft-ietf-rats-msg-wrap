@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 12 December 2025                                          Intel
+Expires: 13 December 2025                                          Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                            10 June 2025
+                                                            11 June 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 December 2025.
+   This Internet-Draft will expire on 13 December 2025.
 
 Copyright Notice
 
@@ -1017,13 +1017,13 @@ lication/signed-corim+cbor"
    item binding), an attacker could manipulate the Collection's contents
    to deceive the Verifier into accepting bogus Evidence as genuine.
 
-   Authenticity and integrity protection must be provided by the
-   attestation technology.  For example, key material used to sign/bind
-   an entire Collection CMW should be an attestation key, handled as
-   described in Section 12.1 of [RFC9334].  The binding does not
-   necessarily have to be a signature over the Collection CMW, it might
-   also be achieved through identifiers, cross-linking, signing or
-   hashing between the members of the Collection.  It is the
+   Authenticity and integrity protection is expected to be provided by
+   the underlying attestation technology.  For example, key material
+   used to sign/bind an entire Collection CMW should be an attestation
+   key, handled as described in Section 12.1 of [RFC9334].  The binding
+   does not necessarily have to be a signature over the Collection CMW,
+   it might also be achieved through identifiers, cross-linking, signing
+   or hashing between the members of the Collection.  It is the
    responsibility of the Attester who creates the Collection CMW to
    ensure that the contents of the Collection are integrity-protected.
 
