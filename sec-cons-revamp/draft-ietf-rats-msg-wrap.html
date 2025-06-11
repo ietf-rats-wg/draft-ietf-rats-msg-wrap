@@ -1283,6 +1283,9 @@ Moreover, a Media Type and a CoAP Content-Format are defined for transporting CM
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
                 <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-using-collection-cmws-for-e" class="internal xref">Using Collection CMWs for Evidence of Composite or Layered Devices</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.3">
+                <p id="section-toc.1-1.9.2.3.1"><a href="#section-9.3" class="auto internal xref">9.3</a>.  <a href="#name-integrating-cmw-into-protoc" class="internal xref">Integrating CMW into Protocols</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
@@ -2322,6 +2325,15 @@ If the Collection CMW is not protected from tampering by external security measu
 For example, key material used to sign/bind an entire Collection CMW should be an attestation key, handled as described in <span><a href="https://rfc-editor.org/rfc/rfc9334#section-12.1" class="relref">Section 12.1</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.
 The binding does not necessarily have to be a signature over the Collection CMW, it might also be achieved through identifiers, cross-linking, signing or hashing between the members of the Collection.
 It is the responsibility of the Attester who creates the Collection CMW to ensure that the contents of the Collection are integrity-protected.<a href="#section-9.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="integrating-cmw-into-protocols">
+<section id="section-9.3">
+        <h3 id="name-integrating-cmw-into-protoc">
+<a href="#section-9.3" class="section-number selfRef">9.3. </a><a href="#name-integrating-cmw-into-protoc" class="section-name selfRef">Integrating CMW into Protocols</a>
+        </h3>
+<p id="section-9.3-1">When CMW is integrated into a protocol (for example, attested CSR <span>[<a href="#I-D.ietf-lamps-csr-attestation" class="cite xref">I-D.ietf-lamps-csr-attestation</a>]</span> or attested TLS <span>[<a href="#I-D.fossati-tls-attestation" class="cite xref">I-D.fossati-tls-attestation</a>]</span> <span>[<a href="#I-D.fossati-tls-exported-attestation" class="cite xref">I-D.fossati-tls-exported-attestation</a>]</span>), it is up to the "hosting" protocol to describe how CMW is intended to be used and how it fits into the overall security model.<a href="#section-9.3-1" class="pilcrow">¶</a></p>
+<p id="section-9.3-2">Such an analysis should consider the types of conceptual messages allowed, including the permitted combinations, the protection requirements, the interface with the hosting protocol, and any other security-relevant aspect arising from the interaction between the CMW assembly and the hosting protocol.<a href="#section-9.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

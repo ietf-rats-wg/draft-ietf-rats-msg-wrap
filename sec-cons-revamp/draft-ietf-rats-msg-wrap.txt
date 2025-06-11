@@ -112,6 +112,7 @@ Table of Contents
      9.1.  CMW Protection
      9.2.  Using Collection CMWs for Evidence of Composite or Layered
            Devices
+     9.3.  Integrating CMW into Protocols
    10. IANA Considerations
      10.1.  CWT cmw Claim Registration
      10.2.  JWT cmw Claim Registration
@@ -1026,6 +1027,21 @@ lication/signed-corim+cbor"
    or hashing between the members of the Collection.  It is the
    responsibility of the Attester who creates the Collection CMW to
    ensure that the contents of the Collection are integrity-protected.
+
+9.3.  Integrating CMW into Protocols
+
+   When CMW is integrated into a protocol (for example, attested CSR
+   [I-D.ietf-lamps-csr-attestation] or attested TLS
+   [I-D.fossati-tls-attestation]
+   [I-D.fossati-tls-exported-attestation]), it is up to the "hosting"
+   protocol to describe how CMW is intended to be used and how it fits
+   into the overall security model.
+
+   Such an analysis should consider the types of conceptual messages
+   allowed, including the permitted combinations, the protection
+   requirements, the interface with the hosting protocol, and any other
+   security-relevant aspect arising from the interaction between the CMW
+   assembly and the hosting protocol.
 
 10.  IANA Considerations
 
