@@ -651,7 +651,7 @@ The following subsections provide further elaboration on these points, particula
 
 ## CMW Protection
 
-CMW Records, Tags and Collections alone don't offer authenticity, integrity protection, or confidentiality.
+CMW Records, Tags and Collections alone do not offer authenticity, integrity protection, or confidentiality.
 It is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly.
 
 RATS conceptual messages are typically secured using cryptography.
