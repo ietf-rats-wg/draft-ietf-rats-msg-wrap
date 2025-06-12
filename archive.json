@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-10T01:01:23.337398+00:00",
+  "timestamp": "2025-06-12T01:00:30.387889+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -14688,7 +14688,7 @@
       "id": "PR_kwDOIGCt2M6Ye74G",
       "title": "clarify when it's ok to TLS only",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/223",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -14697,14 +14697,14 @@
       "labels": [],
       "body": "Fix #222 ",
       "createdAt": "2025-06-01T14:41:24Z",
-      "updatedAt": "2025-06-09T16:54:13Z",
+      "updatedAt": "2025-06-10T12:08:30Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "634baa520a20fea78bc50c2829901d53a9a2f39d",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "clarification",
       "headRefOid": "2d03f03ca2986ad05b071e5a84b2c6d04eae1c6f",
-      "closedAt": null,
+      "closedAt": "2025-06-10T12:08:30Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -14785,6 +14785,13 @@
           "body": "> > Does anyone think there is an important difference between TLS, COSE and JOSE as a protection protocol here?\r\n> \r\n> TLS as a protection protocol is different because it doesn't have individual signatures on messages, so you can't forward an unsigned CMW to a relying party and maintain the authenticity claim of the originator.\r\n\r\nYes, it is true, but as a security considerations minimalist myself, I wouldn't mention that. \r\n\r\n> \r\n> COSE and JOSE (specifically JWS) are similar in what they denote, so the protection comes down to the difference in supported algorithms. Then there's the practical aspect of correct implementations of the standards in languages of choice.\r\n\r\nI'd avoid mentioning algorithms as there is nothing attestation-related in the algorithm selection.\r\n",
           "createdAt": "2025-06-09T16:54:11Z",
           "updatedAt": "2025-06-09T16:54:11Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I will attempt a full rewrite of the security considerations in a separate PR.\r\nI hope starting from a clean slate can help create consensus.",
+          "createdAt": "2025-06-10T12:08:30Z",
+          "updatedAt": "2025-06-10T12:08:30Z"
         }
       ],
       "reviews": [
@@ -15034,6 +15041,199 @@
           "createdAt": "2025-06-02T07:15:49Z",
           "updatedAt": "2025-06-02T07:15:49Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 226,
+      "id": "PR_kwDOIGCt2M6Z2hA5",
+      "title": "Security Consideration revamp",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/226",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "A simplified version, free from redundancy and controversial statements, that can (hopefully) foster a more productive discussion.\r\n\r\nIn the process, I believe the reasons for confusion described in #222 should have been eliminated.\r\n\r\nRendered [here](https://ietf-rats-wg.github.io/draft-ietf-rats-msg-wrap/sec-cons-revamp/draft-ietf-rats-msg-wrap.html#name-security-considerations)",
+      "createdAt": "2025-06-10T12:32:56Z",
+      "updatedAt": "2025-06-12T00:03:53Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "8e0693d8f3f1491926e650c1894b97bcad99780b",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "sec-cons-revamp",
+      "headRefOid": "aa33ae6af887ae26387bd0098815fb40a981e67f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @muhammad-usama-sardar",
+          "createdAt": "2025-06-10T12:33:55Z",
+          "updatedAt": "2025-06-10T12:33:55Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6twGS6",
+          "commit": {
+            "abbreviatedOid": "5369b5d"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-10T21:21:39Z",
+          "updatedAt": "2025-06-10T21:21:40Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "```suggestion\r\nWhen a Collection CMW is used to encapsulate Evidence for composite or layered attestation of a single device, all Evidence messages within the CMW MUST be cryptographically bound together to prevent an attacker from replacing Evidence from a compromised device with that from a non-compromised device.\r\n```\r\n?",
+              "createdAt": "2025-06-10T21:21:39Z",
+              "updatedAt": "2025-06-10T21:21:40Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6twoln",
+          "commit": {
+            "abbreviatedOid": "5369b5d"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-10T22:46:44Z",
+          "updatedAt": "2025-06-10T22:46:44Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "Why couldn't a secure session, signed token, signed certificate, or other signed object suffice to ensure various parts of a CMW or collection of CMWs be used to prevent substitution attacks?",
+              "createdAt": "2025-06-10T22:46:44Z",
+              "updatedAt": "2025-06-10T22:46:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6twpdY",
+          "commit": {
+            "abbreviatedOid": "5369b5d"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-10T22:49:56Z",
+          "updatedAt": "2025-06-10T22:54:48Z",
+          "comments": [
+            {
+              "originalPosition": 29,
+              "body": "```suggestion\r\nIf the Collection CMW is not protected from tampering by external security measures (such as object security primitives) or internal mechanisms (such as intra-item binding), an attacker could manipulate the Collection's contents to accept unintended Evidence.\r\n```",
+              "createdAt": "2025-06-10T22:49:56Z",
+              "updatedAt": "2025-06-10T22:54:48Z"
+            },
+            {
+              "originalPosition": 29,
+              "body": "The verifier accepts all Evidence claims from the Attester. It doesn't mean they are genuine or trustworthy. Reference Values are used to corroborate evidence. If an unintended evidence claims appears but there isn't a corresponding reference claims, the verifier doesn't conclude that the evidence is either bogus or genuine only that it was asserted by the Attester and not corroborated by reference.",
+              "createdAt": "2025-06-10T22:52:13Z",
+              "updatedAt": "2025-06-10T22:54:48Z"
+            },
+            {
+              "originalPosition": 31,
+              "body": "```suggestion\r\nAuthenticity and integrity protection is expected to be provided by the underlying attestation technology.\r\n```",
+              "createdAt": "2025-06-10T22:52:46Z",
+              "updatedAt": "2025-06-10T22:57:39Z"
+            },
+            {
+              "originalPosition": 28,
+              "body": "Doesn't line 673 already say this but in a more succinct way?",
+              "createdAt": "2025-06-10T22:54:34Z",
+              "updatedAt": "2025-06-10T22:56:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6tzzOI",
+          "commit": {
+            "abbreviatedOid": "5369b5d"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-11T07:50:34Z",
+          "updatedAt": "2025-06-11T07:50:34Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "> Why couldn't a secure session, signed token, signed certificate, or other signed object suffice to ensure various parts of a CMW or collection of CMWs be used to prevent substitution attacks?\r\n\r\nThey could.  What in that sentence makes you think they are not allowed to?",
+              "createdAt": "2025-06-11T07:50:34Z",
+              "updatedAt": "2025-06-11T07:50:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6tz6-r",
+          "commit": {
+            "abbreviatedOid": "5369b5d"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-11T08:01:03Z",
+          "updatedAt": "2025-06-11T08:01:04Z",
+          "comments": [
+            {
+              "originalPosition": 29,
+              "body": "> The verifier accepts all Evidence claims from the Attester. It doesn't mean they are genuine or trustworthy. Reference Values are used to corroborate evidence. If an unintended evidence claims appears but there isn't a corresponding reference claims, the verifier doesn't conclude that the evidence is either bogus or genuine only that it was asserted by the Attester and not corroborated by reference.\r\n\r\nThe case here is that of a composite device (A, B) whose evidence [a, b] has been tweaked by the attacker and reassembled as [a, b\u2019], where b\u2019 is evidence from a \u201cgood\u201d device B\u2019.  The verifier has a known-good-value for b\u2019, which will allow it to corroborate evidence [a, b\u2019].  The same verifier does not have a known-good-value for b (or has a known-bad-value for it), which would *not* corroborate the real evidence [a, b]. \r\n",
+              "createdAt": "2025-06-11T08:01:04Z",
+              "updatedAt": "2025-06-11T08:01:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6tz9bH",
+          "commit": {
+            "abbreviatedOid": "5369b5d"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-11T08:04:34Z",
+          "updatedAt": "2025-06-11T08:04:34Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "Yes, L673 concisely reiterates this.",
+              "createdAt": "2025-06-11T08:04:34Z",
+              "updatedAt": "2025-06-11T08:04:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6t_IPh",
+          "commit": {
+            "abbreviatedOid": "5369b5d"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-12T00:03:53Z",
+          "updatedAt": "2025-06-12T00:03:53Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "> What in that sentence makes you think they are not allowed to?\r\n\r\nI think is just the context of it being a single sentence that begins with \"When a collection CMW is used...\"  and includes \"Evidence messages\" presumably these could be a variety of structures including signed structures but ends with \"CMW MUST be cryptographically bound\" seems to say that if there are non-CMW \"messages\" inside a collection CMW, that they have to be cryptographically bound by a CMW structure. \r\n\r\nIf the idea is that \"the contents of a collection CMW have to be cryptographically bound to each other\", then there is a simpler way to say it (as I just did). ",
+              "createdAt": "2025-06-12T00:03:53Z",
+              "updatedAt": "2025-06-12T00:03:54Z"
+            }
+          ]
         }
       ]
     }
