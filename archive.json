@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-12T01:00:30.387889+00:00",
+  "timestamp": "2025-06-15T01:07:36.073429+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -15056,13 +15056,13 @@
       "labels": [],
       "body": "A simplified version, free from redundancy and controversial statements, that can (hopefully) foster a more productive discussion.\r\n\r\nIn the process, I believe the reasons for confusion described in #222 should have been eliminated.\r\n\r\nRendered [here](https://ietf-rats-wg.github.io/draft-ietf-rats-msg-wrap/sec-cons-revamp/draft-ietf-rats-msg-wrap.html#name-security-considerations)",
       "createdAt": "2025-06-10T12:32:56Z",
-      "updatedAt": "2025-06-12T00:03:53Z",
+      "updatedAt": "2025-06-13T20:15:49Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "8e0693d8f3f1491926e650c1894b97bcad99780b",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "sec-cons-revamp",
-      "headRefOid": "aa33ae6af887ae26387bd0098815fb40a981e67f",
+      "headRefOid": "115240f08fdb0d2075f2490960704ece7ae39c99",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -15074,6 +15074,55 @@
           "body": "cc @muhammad-usama-sardar",
           "createdAt": "2025-06-10T12:33:55Z",
           "updatedAt": "2025-06-10T12:33:55Z"
+        },
+        {
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "body": "While it is great that you spent all this time to re-write the security considerations of the CMW draft I wonder why we turn this into rocket science.\r\n\r\nCMW is just a container for carrying attestation messages around - nothing more. I do not know how much need to be said about the lack of security. This is by design - not by accident.",
+          "createdAt": "2025-06-12T09:23:38Z",
+          "updatedAt": "2025-06-12T09:23:38Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> While it is great that you spent all this time to re-write the security considerations of the CMW draft I wonder why we turn this into rocket science.\r\n\r\nUsama opened https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/222 which Kathleen wants to see resolved before the document moves forward.\r\n\r\nMy previous attempt at a fix (#223) crashed.  I therefore took a step back and tried reflowing the section to eliminate redundancies, awkward phrasing and confusing sentences.\r\n\r\nI hope I managed to simplify/clarify enough so that people won\u2019t trip over ambiguous words.\r\n\r\n> CMW is just a container for carrying attestation messages around - nothing more. I do not know how much need to be said about the lack of security. This is by design - not by accident.\r\n\r\nAn emphatic YES.\r\n",
+          "createdAt": "2025-06-13T08:40:55Z",
+          "updatedAt": "2025-06-13T08:40:55Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "> While it is great that you spent all this time to re-write the security considerations of the CMW draft I wonder why we turn this into rocket science.\r\n\r\nUnless you have a wildly broken definition of \"rocket science\", I would argue the jargon in security considerations of v15 that no editor was able to explain adequately qualifies more to be called as \"rocket science\" than an attempt to state it more precisely. ",
+          "createdAt": "2025-06-13T14:05:53Z",
+          "updatedAt": "2025-06-13T14:05:53Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "> While it is great that you spent all this time to re-write the security considerations of the CMW draft I wonder why we turn this into rocket science.\r\n> \r\n> CMW is just a container for carrying attestation messages around - nothing more. I do not know how much need to be said about the lack of security. This is by design - not by accident.\r\n\r\nCMW is very much a format for Evidence aggregation for composite device attestation. Security for this is not something that can be handled by just wrapping it up in TLS. When used like this, it's not just a container.\r\n\r\nAlso note that it does now include formats for security. Seemed the right thing to do given CWT, CoSWID and such include security.",
+          "createdAt": "2025-06-13T18:56:39Z",
+          "updatedAt": "2025-06-13T18:56:39Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "I like the paragraph on composition. It is a critical and central use case that we can make a recommendation on. (UCCS should have had the same statement, but I didn't think of it then; it is somewhat implied in EAT and RATs Architecture).\r\n\r\nI'd propose to replace all the other security considerations text with this simple statement:\r\n\r\n> This document describes methods for securing CMWs using COSE, JOSE, and certain PKIX formats. Additionally, CMWs can be protected using other security protocols like TLS.\r\n> \r\n> CMWs have diverse use cases with varying security requirements. Given this, it\u2019s not feasible to provide security recommendations in this document. In some scenarios, no additional security may be necessary, such as when a RATS Conceptual Message is already protected. In others, robust mechanisms involving complex protocols and carefully managed cryptographic key lifecycles may be required.\r\n> \r\n> The analysis, design of security for a use case is entirely up to the CMW implementor.\r\n\r\n\r\n\r\n",
+          "createdAt": "2025-06-13T19:42:36Z",
+          "updatedAt": "2025-06-13T19:42:36Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "> CMW is very much a format for Evidence aggregation for composite device attestation. \r\n\r\nI think it is also for other conceptual messages beyond just Evidence, right?\r\n> Security for this is not something that can be handled by just wrapping it up in TLS. When used like this, it's not just a container.\r\n\r\nCould you please explain this?",
+          "createdAt": "2025-06-13T20:09:28Z",
+          "updatedAt": "2025-06-13T20:09:28Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "> I like the paragraph on composition. \r\n\r\nnot sure which section/paragraph are you referring to? Perhaps section 9.2? If yes, first or second paragraph?",
+          "createdAt": "2025-06-13T20:15:49Z",
+          "updatedAt": "2025-06-13T20:15:49Z"
         }
       ],
       "reviews": [
@@ -15232,6 +15281,165 @@
               "body": "> What in that sentence makes you think they are not allowed to?\r\n\r\nI think is just the context of it being a single sentence that begins with \"When a collection CMW is used...\"  and includes \"Evidence messages\" presumably these could be a variety of structures including signed structures but ends with \"CMW MUST be cryptographically bound\" seems to say that if there are non-CMW \"messages\" inside a collection CMW, that they have to be cryptographically bound by a CMW structure. \r\n\r\nIf the idea is that \"the contents of a collection CMW have to be cryptographically bound to each other\", then there is a simpler way to say it (as I just did). ",
               "createdAt": "2025-06-12T00:03:53Z",
               "updatedAt": "2025-06-12T00:03:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6uCYZk",
+          "commit": {
+            "abbreviatedOid": "5369b5d"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-12T07:25:57Z",
+          "updatedAt": "2025-06-12T07:25:58Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "> > > Why couldn't a secure session, signed token, signed certificate, or other signed object suffice to ensure various parts of a CMW or collection of CMWs be used to prevent substitution attacks?\r\n> >\r\n> > What in that sentence makes you think they are not allowed to?\r\n\r\nAlso, note that the paragraph explicitly suggests that a possible binding method uses _\u201d[\u2026] external security measures (such as object security primitives)\u201d_, so I am not sure I\u2019m getting your original concern.\r\n\r\n> I think is just the context of it being a single sentence that begins with \"When a collection CMW is used...\" and includes \"Evidence messages\u201d\r\n\r\nYes, but this is because the sentence starts the \u201cUsing Collection CMWs for Evidence of Composite or Layered Devices\u201d section.\r\n\r\n> presumably these could be a variety of structures including signed structures but ends with \"CMW MUST be cryptographically bound\" seems to say that if there are non-CMW \"messages\" inside a collection CMW,\r\n\r\nSorry, I can\u2019t parse _non-CMW \"messages\" inside a collection CMW_: all the \u201cmessages\u201d inside a `{cbor,json}-collection` are `{cbor-json}-cmw`.\r\n\r\n> that they have to be cryptographically bound by a CMW structure.\r\n> \r\n> If the idea is that \"the contents of a collection CMW have to be cryptographically bound to each other\", then there is a simpler way to say it (as I just did).\r\n\r\nYes, that generally applies.\r\nHowever, this section discusses the use of CMW collections to ship composite attesters\u2019 Evidence.  In doing so, it gives further clarification regarding the specific threat.  That\u2019s where the added complexity comes frmo.",
+              "createdAt": "2025-06-12T07:25:58Z",
+              "updatedAt": "2025-06-12T07:25:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6uDw6c",
+          "commit": {
+            "abbreviatedOid": "aa33ae6"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-12T09:20:23Z",
+          "updatedAt": "2025-06-12T09:20:23Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nCMW Records, Tags and Collections alone do not offer authenticity, integrity protection, or confidentiality.\r\n```",
+              "createdAt": "2025-06-12T09:20:23Z",
+              "updatedAt": "2025-06-12T09:20:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6uJCMZ",
+          "commit": {
+            "abbreviatedOid": "115240f"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-06-12T15:04:41Z",
+          "updatedAt": "2025-06-12T15:04:41Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6uUFAv",
+          "commit": {
+            "abbreviatedOid": "115240f"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-13T11:32:16Z",
+          "updatedAt": "2025-06-13T11:32:16Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "This phrasing seemed to be have caused confusion with some. Tbh, I think it is a pretty clear preamble for the following paragraph.",
+              "createdAt": "2025-06-13T11:32:16Z",
+              "updatedAt": "2025-06-13T11:32:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6uVP8w",
+          "commit": {
+            "abbreviatedOid": "115240f"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "I am OK with this PR but I find the re-write unncessary. There are not security issues that need to be addressed here because this is just a container for some payloads. Let us be realistic here.",
+          "createdAt": "2025-06-13T13:26:03Z",
+          "updatedAt": "2025-06-13T13:26:03Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6uV6VG",
+          "commit": {
+            "abbreviatedOid": "115240f"
+          },
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-13T14:10:36Z",
+          "updatedAt": "2025-06-13T14:10:37Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "Is \"hosting\" required? CMW is not a protocol. Is there any ambiguity without the word \"hosting\"?",
+              "createdAt": "2025-06-13T14:10:36Z",
+              "updatedAt": "2025-06-13T14:10:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6uWDqp",
+          "commit": {
+            "abbreviatedOid": "115240f"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-13T14:22:06Z",
+          "updatedAt": "2025-06-13T14:22:06Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "No, I don\u2019t htink there\u2019s any ambiguity.  \u201cHosting\u201d is used to better characterise it.",
+              "createdAt": "2025-06-13T14:22:06Z",
+              "updatedAt": "2025-06-13T14:22:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6uWgM5",
+          "commit": {
+            "abbreviatedOid": "115240f"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "> Is \"hosting\" required? CMW is not a protocol. Is there any ambiguity without the word \"hosting\"?\r\n\r\nHow is it possible to arrive at the assumption that \"CMW is a protocol\" by the use of the term \"hosting\"? That takes quite some thinking and I am kinda lost on my way there. This whole discussion somehow feels like we are talking past each other. The explanation #222 is looking for was directly in the following paragraph.\r\n\r\nThe new text is different and reads as if dancing around some topics now. For the sake of making this stop and moving on, I'll approve. It's good enough, sure, but I do not think any useful improvements were achieved. (Thanks @thomas-fossati, though, for putting so much time into this! Appreciated!) ",
+          "createdAt": "2025-06-13T14:58:18Z",
+          "updatedAt": "2025-06-13T14:58:18Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6uYvty",
+          "commit": {
+            "abbreviatedOid": "115240f"
+          },
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-13T17:42:53Z",
+          "updatedAt": "2025-06-13T17:42:53Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "I suggest removing it then. Please do not invent new terminologies, unless required. ",
+              "createdAt": "2025-06-13T17:42:53Z",
+              "updatedAt": "2025-06-13T17:42:54Z"
             }
           ]
         }
