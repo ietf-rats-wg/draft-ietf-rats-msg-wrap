@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-15T01:07:36.073429+00:00",
+  "timestamp": "2025-06-17T01:01:06.332448+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -15056,7 +15056,7 @@
       "labels": [],
       "body": "A simplified version, free from redundancy and controversial statements, that can (hopefully) foster a more productive discussion.\r\n\r\nIn the process, I believe the reasons for confusion described in #222 should have been eliminated.\r\n\r\nRendered [here](https://ietf-rats-wg.github.io/draft-ietf-rats-msg-wrap/sec-cons-revamp/draft-ietf-rats-msg-wrap.html#name-security-considerations)",
       "createdAt": "2025-06-10T12:32:56Z",
-      "updatedAt": "2025-06-13T20:15:49Z",
+      "updatedAt": "2025-06-16T21:53:41Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "8e0693d8f3f1491926e650c1894b97bcad99780b",
@@ -15123,6 +15123,34 @@
           "body": "> I like the paragraph on composition. \r\n\r\nnot sure which section/paragraph are you referring to? Perhaps section 9.2? If yes, first or second paragraph?",
           "createdAt": "2025-06-13T20:15:49Z",
           "updatedAt": "2025-06-13T20:15:49Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> This document describes methods for securing CMWs using COSE, JOSE, and certain PKIX formats. Additionally, CMWs can be protected using other security protocols like TLS.\r\n> \r\n> CMWs have diverse use cases with varying security requirements. Given this, it\u2019s not feasible to provide security recommendations in this document. In some scenarios, no additional security may be necessary, such as when a RATS Conceptual Message is already protected. In others, robust mechanisms involving complex protocols and carefully managed cryptographic key lifecycles may be required.\r\n> \r\n> The analysis, design of security for a use case is entirely up to the CMW implementor.\r\n\r\nI'm pleased to do that, provided we all agree not to relitigate it.\r\n\r\n@hannestschofenig @muhammad-usama-sardar @henkbirkholz @nedmsmith @deeglaze WDYT?\r\n\r\n\r\n\r\n",
+          "createdAt": "2025-06-16T10:04:02Z",
+          "updatedAt": "2025-06-16T10:04:02Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "> @muhammad-usama-sardar WDYT?\r\n\r\nI first need answers to my questions ([here](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/226#issuecomment-2971534558) and [here](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/226#issuecomment-2971546213)) to be able to say something. \r\nIn general, I think insecure by design or insecure by accident is still insecure, and so security considerations need to mention the insecurities, and provide some guidance to implementors on possible mitigations.\r\n",
+          "createdAt": "2025-06-16T11:57:18Z",
+          "updatedAt": "2025-06-16T11:57:18Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> In general, I think insecure by design or insecure by accident is still insecure\r\n\r\nI think \"insecure by design/accident\" is not an accurate description.\r\n\r\nCMW provides several security wrappers (https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-15.html#section-4).\r\n\r\nHowever, the way these wrappers are utilised (or not) depends on the use case.\r\n\r\nThat\u2019s pretty much all we can do.\r\n\r\n> and so security considerations need to mention the insecurities, and provide some guidance to implementors on possible mitigations.\r\n\r\n\u201cInsecurity\" doesn't exist in the abstract.  It always depends on a threat model.  And the threat model, in turn, depends on the use case.\r\n\r\nFrom this vantage point, it is simply impossible to provide guidance because we can\u2019t know what all the use cases will be.\r\n\r\nIt\u2019s the users of CMW who know what their use case is and shall define how CMW is used securely in their context.\r\n",
+          "createdAt": "2025-06-16T12:28:17Z",
+          "updatedAt": "2025-06-16T12:29:39Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "> > CMW is very much a format for Evidence aggregation for composite device attestation.\r\n> \r\n> I think it is also for other conceptual messages beyond just Evidence, right?\r\n\r\nYes. That's why security requirements vary wildly.\r\n\r\n> \r\n> > Security for this is not something that can be handled by just wrapping it up in TLS. When used like this, it's not just a container.\r\n> \r\n> Could you please explain this?\r\n\r\nCMW can be used to aggregate sub modules for composite devices. The cryptographic binding together of those must be with attestation-oriented key material, not keys you get from Let's Encrypt, VeriSign and such to authenticate web sites. The key generation, protections and lifecycle for attestation keys is entirely different.\r\n\r\nIt's fine to use TLS for the attestation-securing protocol, as long as TLS is used with attestation-oriented key material.\r\n\r\nBecause this is poorly understood and a very major RATS/CMW use case, I think it must be explicitly explained in security considerations. Hence: https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-15.html#name-collection-cmws\r\n\r\n\r\n",
+          "createdAt": "2025-06-16T20:47:21Z",
+          "updatedAt": "2025-06-16T21:53:41Z"
         }
       ],
       "reviews": [
