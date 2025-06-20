@@ -669,7 +669,7 @@ If the Collection CMW is not protected from tampering by external security measu
 
 Authenticity and integrity protection is expected to be provided by the underlying attestation technology.
 For example, key material used to sign/bind an entire Collection CMW should be an attestation key, handled as described in {{Section 12.1 of -rats-arch}}.
-The binding does not necessarily have to be a signature over the Collection CMW, it might also be achieved through identifiers, cross-linking, signing or hashing between the members of the Collection.
+The binding does not necessarily have to be a signature over the Collection CMW, it might also be achieved through identifiers, linking claims (e.g., nonces) across CMW collection items, signing or hashing between the members of the Collection.
 It is the responsibility of the Attester who creates the Collection CMW to ensure that the contents of the Collection are integrity-protected.
 
 ## Integrating CMW into Protocols
