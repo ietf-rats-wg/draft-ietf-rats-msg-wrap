@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 14 December 2025                                          Intel
+Expires: 22 December 2025                                          Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                            12 June 2025
+                                                            20 June 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 December 2025.
+   This Internet-Draft will expire on 22 December 2025.
 
 Copyright Notice
 
@@ -1023,10 +1023,11 @@ lication/signed-corim+cbor"
    used to sign/bind an entire Collection CMW should be an attestation
    key, handled as described in Section 12.1 of [RFC9334].  The binding
    does not necessarily have to be a signature over the Collection CMW,
-   it might also be achieved through identifiers, cross-linking, signing
-   or hashing between the members of the Collection.  It is the
-   responsibility of the Attester who creates the Collection CMW to
-   ensure that the contents of the Collection are integrity-protected.
+   it might also be achieved through identifiers, linking claims (e.g.,
+   nonces) across CMW collection items, signing or hashing between the
+   members of the Collection.  It is the responsibility of the Attester
+   who creates the Collection CMW to ensure that the contents of the
+   Collection are integrity-protected.
 
 9.3.  Integrating CMW into Protocols
 
