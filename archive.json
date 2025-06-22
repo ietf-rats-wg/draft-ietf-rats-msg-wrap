@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-19T01:01:09.460929+00:00",
+  "timestamp": "2025-06-22T01:06:58.025327+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -15056,13 +15056,13 @@
       "labels": [],
       "body": "A simplified version, free from redundancy and controversial statements, that can (hopefully) foster a more productive discussion.\r\n\r\nIn the process, I believe the reasons for confusion described in #222 should have been eliminated.\r\n\r\nRendered [here](https://ietf-rats-wg.github.io/draft-ietf-rats-msg-wrap/sec-cons-revamp/draft-ietf-rats-msg-wrap.html#name-security-considerations)",
       "createdAt": "2025-06-10T12:32:56Z",
-      "updatedAt": "2025-06-17T18:50:16Z",
+      "updatedAt": "2025-06-21T07:11:51Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "8e0693d8f3f1491926e650c1894b97bcad99780b",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "sec-cons-revamp",
-      "headRefOid": "115240f08fdb0d2075f2490960704ece7ae39c99",
+      "headRefOid": "10bda1e61f8be9b13294c5fee43134f3f1ff2525",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -15186,6 +15186,34 @@
           "body": "> > > Because this is poorly understood and a very major RATS/CMW use case, I think it must be explicitly explained in security considerations. Hence: https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-15.html#name-collection-cmws\r\n> > \r\n> > \r\n> > Thanks for clarification, but that paragraph does not address my [concerns](https://mailarchive.ietf.org/arch/msg/rats/1CCyEWpkTb84at43Hil7xVCg-aU/).\r\n> > > It's fine to use TLS for the attestation-securing protocol, as long as TLS is used with attestation-oriented key material.\r\n> > \r\n> > \r\n> > I believe this is poorly understood, too. So I don't think a one-liner is sufficient here.\r\n> > \r\n> > * I am yet to see a real use case for \"attestation-only\" for TLS.\r\n> > * Such a solution poses [security risks](https://mailarchive.ietf.org/arch/msg/tls/Jx_yPoYWMIKaqXmPsytKZBDq23o/).\r\n> \r\n> Yes, 9.2 should probably be improved. \r\n\r\nIt surely should be. \r\n> We need to find the right level of detail though. It is things to consider, not a security design. We can't describe a secure design for TLS-based attestation in it.\r\n> \r\n\r\nSure, I am not asking for a secure design, but an explicit mention of security risks, and offer mitigations if possible. \r\n> So let's take a go around and make specific comments on section 9.2 with the above in mind.\r\n\r\nI believe the [comments](https://mailarchive.ietf.org/arch/msg/rats/1CCyEWpkTb84at43Hil7xVCg-aU/) are specific enough: \r\n\r\n> - As another example, explain how client-authenticated TLS can be used for binding in Sec. 9.2? Client was never mentioned before in the text. Is the client acting as Attester here?\r\n> - Define or add appropriate references, e.g., what is cross-linking?\r\n> - Is the ending of 9.2 saying: \"do TLS but without PKIX\"?\r\n\r\nWhat do you find non-specific here?",
           "createdAt": "2025-06-17T18:50:16Z",
           "updatedAt": "2025-06-17T18:50:16Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > CMW is very much a format for Evidence aggregation for composite device attestation.\r\n> \r\n> I think it is also for other conceptual messages beyond just Evidence, right?\r\n\r\nYes, of course.\r\n\r\n> > Security for this is not something that can be handled by just wrapping it up in TLS. When used like this, it's not just a container.\r\n> \r\n> Could you please explain this?\r\n\r\nI understand _\"Security for this is not something that can be handled by just wrapping it up in TLS.\u201d_ to mean that, for Evidence, you cannot just rely on the protection (integrity, authentication, reply protection and encryption) offered by your \u201cvanilla\u201d [TLS 1.3 session](https://www.rfc-editor.org/rfc/rfc8446#appendix-E).\r\n\r\nAnd I understand _\"When used like this, it's not just a container.\u201d_ to mean that when transporting Evidence CMWs over a TLS session, the CMW is not \u201cjust\u201d a container for some unprotected claims-set: it must have intrinsic protection.\r\n\r\n",
+          "createdAt": "2025-06-20T14:08:23Z",
+          "updatedAt": "2025-06-20T14:08:23Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> * As another example, explain how client-authenticated TLS can be used for binding in Sec. 9.2?\r\n\r\n\u00a79.2 in this PR does not mention client-authenticated TLS, so I am not sure what your question is.\r\n\r\n> * Define or add appropriate references, e.g., what is cross-linking?\r\n\r\nIt is some form of linking across CMW collection items.  I will expand the text.\r\n\r\nEDIT: see [10bda1e](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/226/commits/10bda1e61f8be9b13294c5fee43134f3f1ff2525)\r\n\r\n> * Is the ending of 9.2 saying: \"do TLS but without PKIX\u201d?\r\n\r\nNo, it isn\u2019t.\r\n\r\nThere is no mention of TLS in 9.2.  Please take time to re-read the rewrite in its entirety [here](https://ietf-rats-wg.github.io/draft-ietf-rats-msg-wrap/sec-cons-revamp/draft-ietf-rats-msg-wrap.html#section-9).\r\n\r\nOn top of that, please also read [Section 12.2 of RFC9334](https://www.ietf.org/rfc/rfc9334.html#section-12.2) in its entirety, because *everything* in there is to be assumed as context to interpret the security considerations of CMW.\r\n",
+          "createdAt": "2025-06-20T14:23:57Z",
+          "updatedAt": "2025-06-20T14:26:31Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "> \u00a79.2 in this PR does not mention client-authenticated TLS, so I am not sure what your question is.\r\n\r\n> There is no mention of TLS in 9.2. Please take time to re-read the rewrite in its entirety [here](https://ietf-rats-wg.github.io/draft-ietf-rats-msg-wrap/sec-cons-revamp/draft-ietf-rats-msg-wrap.html#section-9).\r\n\r\nI may be mistaken but @laurencelundblade was clearly talking about the older text (see [here](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/226#issuecomment-2978082269))\r\n",
+          "createdAt": "2025-06-20T20:56:11Z",
+          "updatedAt": "2025-06-20T20:56:11Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I may be mistaken but @laurencelundblade was clearly talking about the older text (see [here](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/226#issuecomment-2978082269))\r\n\r\nOK, maybe.  But let\u2019s focus on this PR, please.  We aim to reach consensus on this specific version of the Security Considerations section and publish -16 once this is merged.\r\n\r\nAgain, take time to re-read the [new Security Considerations section](https://ietf-rats-wg.github.io/draft-ietf-rats-msg-wrap/sec-cons-revamp/draft-ietf-rats-msg-wrap.html#section-9) in its entirety together with [Section 12.2 of RFC9334](https://www.ietf.org/rfc/rfc9334.html#section-12.2), and let us know if you can live with it.  If not, please provide *concrete* editorial suggestions to improve it.\r\n\r\n",
+          "createdAt": "2025-06-21T07:11:51Z",
+          "updatedAt": "2025-06-21T07:11:51Z"
         }
       ],
       "reviews": [
