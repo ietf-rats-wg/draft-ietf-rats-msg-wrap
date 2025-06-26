@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-22T01:06:58.025327+00:00",
+  "timestamp": "2025-06-26T01:01:24.854693+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -3379,15 +3379,15 @@
       "id": "I_kwDOIGCt2M65WXIE",
       "title": "Is \"protection\" integrity?",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/225",
-      "state": "CLOSED",
+      "state": "OPEN",
       "author": "muhammad-usama-sardar",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "> [Cryptographic Protection of CMWs](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-15.html#name-cryptographic-protection-of)\n\nIsn't it integrity protection? or is it something more than that? \n\n> If the messages are already **protected**, no additional security requirements are imposed by this encapsulation. If an adversary attempts to modify the payload encapsulation, it will result in incorrect processing of the encapsulated message, leading to an error. If the messages are not **protected**, ...\n\nThe word \"protected\" is very vague. What does it mean here? Is it integrity?",
       "createdAt": "2025-06-02T10:51:12Z",
-      "updatedAt": "2025-06-03T10:25:33Z",
-      "closedAt": "2025-06-03T10:25:33Z",
+      "updatedAt": "2025-06-25T12:08:09Z",
+      "closedAt": null,
       "comments": [
         {
           "author": "thomas-fossati",
@@ -3395,6 +3395,13 @@
           "body": "This section starts with this:\n\n> _\"The security considerations discussed in [Section 12.2](https://rfc-editor.org/rfc/rfc9334#section-12.2) of [[RFC9334](https://ietf-rats-wg.github.io/draft-ietf-rats-msg-wrap/draft-ietf-rats-msg-wrap.html#RFC9334)] concerning the protection of conceptual messages are fully applicable.\u201d_\n\nwhich should provide the needed context to interpret the word \u201cprotection\u201d.",
           "createdAt": "2025-06-02T11:10:11Z",
           "updatedAt": "2025-06-02T11:10:52Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The cryptographic mechanisms detailed in \u00a74 are all signature envelopes.\n\nThey provide authentication, integrity and potentially (if they are used in the context of a challenge-response protocol) anti-replay.",
+          "createdAt": "2025-06-25T12:08:09Z",
+          "updatedAt": "2025-06-25T12:08:09Z"
         }
       ]
     }
@@ -15533,6 +15540,68 @@
               "updatedAt": "2025-06-13T17:42:54Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 227,
+      "id": "PR_kwDOIGCt2M6cC-2M",
+      "title": "fully articulate \"cryptographic protection\"",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/227",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #225",
+      "createdAt": "2025-06-25T12:15:03Z",
+      "updatedAt": "2025-06-25T18:22:52Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "8e0693d8f3f1491926e650c1894b97bcad99780b",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "protection",
+      "headRefOid": "a1c8586b959c6496ec4ce5d8915400b91f7ed0e8",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @muhammad-usama-sardar",
+          "createdAt": "2025-06-25T12:16:26Z",
+          "updatedAt": "2025-06-25T12:16:26Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "[a1c8586](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/227/commits/a1c8586b959c6496ec4ce5d8915400b91f7ed0e8) cherry picked from #226 to make the CI green",
+          "createdAt": "2025-06-25T12:20:04Z",
+          "updatedAt": "2025-06-25T12:20:38Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "LGTM, thank you!",
+          "createdAt": "2025-06-25T18:22:52Z",
+          "updatedAt": "2025-06-25T18:22:52Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6wXCgL",
+          "commit": {
+            "abbreviatedOid": "a1c8586"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-06-25T16:13:58Z",
+          "updatedAt": "2025-06-25T16:13:58Z",
+          "comments": []
         }
       ]
     }
