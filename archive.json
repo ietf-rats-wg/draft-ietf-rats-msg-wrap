@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-26T01:01:24.854693+00:00",
+  "timestamp": "2025-06-29T01:08:28.525967+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -15063,7 +15063,7 @@
       "labels": [],
       "body": "A simplified version, free from redundancy and controversial statements, that can (hopefully) foster a more productive discussion.\r\n\r\nIn the process, I believe the reasons for confusion described in #222 should have been eliminated.\r\n\r\nRendered [here](https://ietf-rats-wg.github.io/draft-ietf-rats-msg-wrap/sec-cons-revamp/draft-ietf-rats-msg-wrap.html#name-security-considerations)",
       "createdAt": "2025-06-10T12:32:56Z",
-      "updatedAt": "2025-06-21T07:11:51Z",
+      "updatedAt": "2025-06-26T17:40:50Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "8e0693d8f3f1491926e650c1894b97bcad99780b",
@@ -15221,6 +15221,13 @@
           "body": "> I may be mistaken but @laurencelundblade was clearly talking about the older text (see [here](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/226#issuecomment-2978082269))\r\n\r\nOK, maybe.  But let\u2019s focus on this PR, please.  We aim to reach consensus on this specific version of the Security Considerations section and publish -16 once this is merged.\r\n\r\nAgain, take time to re-read the [new Security Considerations section](https://ietf-rats-wg.github.io/draft-ietf-rats-msg-wrap/sec-cons-revamp/draft-ietf-rats-msg-wrap.html#section-9) in its entirety together with [Section 12.2 of RFC9334](https://www.ietf.org/rfc/rfc9334.html#section-12.2), and let us know if you can live with it.  If not, please provide *concrete* editorial suggestions to improve it.\r\n\r\n",
           "createdAt": "2025-06-21T07:11:51Z",
           "updatedAt": "2025-06-21T07:11:51Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "There clearly is rough consensus on the alternative (and not necessarily better) new version in this PR.",
+          "createdAt": "2025-06-26T17:40:50Z",
+          "updatedAt": "2025-06-26T17:40:50Z"
         }
       ],
       "reviews": [
@@ -15555,7 +15562,7 @@
       "labels": [],
       "body": "Fix #225",
       "createdAt": "2025-06-25T12:15:03Z",
-      "updatedAt": "2025-06-25T18:22:52Z",
+      "updatedAt": "2025-06-26T17:54:00Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "8e0693d8f3f1491926e650c1894b97bcad99780b",
@@ -15602,6 +15609,46 @@
           "createdAt": "2025-06-25T16:13:58Z",
           "updatedAt": "2025-06-25T16:13:58Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6wmoB6",
+          "commit": {
+            "abbreviatedOid": "a1c8586"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-26T17:38:35Z",
+          "updatedAt": "2025-06-26T17:38:35Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "do we dare to dabble in freshness here?",
+              "createdAt": "2025-06-26T17:38:35Z",
+              "updatedAt": "2025-06-26T17:38:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6wm0rz",
+          "commit": {
+            "abbreviatedOid": "a1c8586"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-26T17:54:00Z",
+          "updatedAt": "2025-06-26T17:54:00Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "It\u2019s a conditional dabbling.  Looks safe to me.",
+              "createdAt": "2025-06-26T17:54:00Z",
+              "updatedAt": "2025-06-26T17:54:00Z"
+            }
+          ]
         }
       ]
     }
