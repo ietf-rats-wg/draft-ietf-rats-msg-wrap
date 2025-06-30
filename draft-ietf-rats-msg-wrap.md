@@ -101,7 +101,8 @@ These messages can appear in different formats and be transported via various pr
 This document introduces the Conceptual Message Wrapper (CMW) that provides a common structure to encapsulate these messages.
 It defines a dedicated CBOR tag, corresponding JSON Web Token (JWT) and CBOR Web Token (CWT) claims, and an X.509 extension.
 
-This allows CMWs to be used in CBOR-based protocols, web APIs using JWTs and CWTs, and PKIX artifacts like X.509 certificates. Additionally, the draft defines a media type and a CoAP content format to transport CMWs over protocols like HTTP, MIME, and CoAP.
+This allows CMWs to be used in CBOR-based protocols, web APIs using JWTs and CWTs, and PKIX artifacts like X.509 certificates.
+Additionally, the draft defines a media type and a CoAP content format to transport CMWs over protocols like HTTP, MIME, and CoAP.
 
 The goal is to improve the interoperability and flexibility of remote attestation protocols. By introducing a shared message format like the CMW, we can support different attestation message types consistently, evolve message serialization formats without breaking compatibility, and avoid needing to redefine how messages are handled in each protocol.
 
