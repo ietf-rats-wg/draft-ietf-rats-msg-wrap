@@ -95,8 +95,8 @@ entity:
 
 --- abstract
 
-The Remote Attestation Procedures architecture (RFC9334) defines several types of conceptual messages, such as Evidence, Attestation Results, Endorsements, and Reference Values.
-These messages can appear in different formats and be transported via various protocols.
+The Remote Attestation Procedures architecture (RFC 9334) defines several types of conceptual messages, such as Evidence, Attestation
+Results, Endorsements, and Reference Values. These messages can appear in different formats and be transported via various protocols.
 
 This document introduces the Conceptual Message Wrapper (CMW) that provides a common structure to encapsulate these messages.
 It defines a dedicated CBOR tag, corresponding JSON Web Token (JWT) and CBOR Web Token (CWT) claims, and an X.509 extension.
@@ -105,7 +105,8 @@ This allows CMWs to be used in CBOR-based protocols, web APIs using JWTs and CWT
 Additionally, the draft defines a media type and a CoAP content format to transport CMWs over protocols like HTTP, MIME, and CoAP.
 
 The goal is to improve the interoperability and flexibility of remote attestation protocols.
-By introducing a shared message format like the CMW, we can consistently support different attestation message types, evolve message serialization formats without breaking compatibility, and avoid having to redefine how messages are handled in each protocol.
+By introducing a shared message format like the CMW, we can consistently support different attestation message types, evolve message
+serialization formats without breaking compatibility, and avoid having to redefine how messages are handled in each protocol.
 
 --- middle
 
