@@ -104,7 +104,8 @@ It defines a dedicated CBOR tag, corresponding JSON Web Token (JWT) and CBOR Web
 This allows CMWs to be used in CBOR-based protocols, web APIs using JWTs and CWTs, and PKIX artifacts like X.509 certificates.
 Additionally, the draft defines a media type and a CoAP content format to transport CMWs over protocols like HTTP, MIME, and CoAP.
 
-The goal is to improve the interoperability and flexibility of remote attestation protocols. By introducing a shared message format like the CMW, we can support different attestation message types consistently, evolve message serialization formats without breaking compatibility, and avoid needing to redefine how messages are handled in each protocol.
+The goal is to improve the interoperability and flexibility of remote attestation protocols.
+By introducing a shared message format like the CMW, we can consistently support different attestation message types, evolve message serialization formats without breaking compatibility, and avoid having to redefine how messages are handled in each protocol.
 
 --- middle
 
