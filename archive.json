@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-29T01:08:28.525967+00:00",
+  "timestamp": "2025-07-01T01:08:45.551002+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -3404,6 +3404,22 @@
           "updatedAt": "2025-06-25T12:08:09Z"
         }
       ]
+    },
+    {
+      "number": 229,
+      "id": "I_kwDOIGCt2M6-HcR2",
+      "title": "Add appraisal policies to `cm-type`",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/229",
+      "state": "OPEN",
+      "author": "steven-bellock",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Related issue https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/26 and @nedmsmith's comment in https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/26#issuecomment-1513491741. Even if RATS is not going to define a format for appraisal policies, the concept still exists in the RATS architecture, and CMW is generic enough that it can just identify appraisal policies. It would be nice to define it in the initial specification and then that maps completely to https://www.rfc-editor.org/rfc/rfc9334#section-8.\n\n```\ncm-type = &(\n  reference-values: 0\n  endorsements: 1\n  evidence: 2\n  attestation-results: 3\n  appraisal-policy-evidence: 4\n  appraisal-policy-attestation-results: 5\n)\n```",
+      "createdAt": "2025-06-30T19:29:32Z",
+      "updatedAt": "2025-06-30T19:29:32Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -15063,7 +15079,7 @@
       "labels": [],
       "body": "A simplified version, free from redundancy and controversial statements, that can (hopefully) foster a more productive discussion.\r\n\r\nIn the process, I believe the reasons for confusion described in #222 should have been eliminated.\r\n\r\nRendered [here](https://ietf-rats-wg.github.io/draft-ietf-rats-msg-wrap/sec-cons-revamp/draft-ietf-rats-msg-wrap.html#name-security-considerations)",
       "createdAt": "2025-06-10T12:32:56Z",
-      "updatedAt": "2025-06-26T17:40:50Z",
+      "updatedAt": "2025-06-30T17:01:09Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "8e0693d8f3f1491926e650c1894b97bcad99780b",
@@ -15228,6 +15244,20 @@
           "body": "There clearly is rough consensus on the alternative (and not necessarily better) new version in this PR.",
           "createdAt": "2025-06-26T17:40:50Z",
           "updatedAt": "2025-06-26T17:40:50Z"
+        },
+        {
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Why are we not merging this PR?",
+          "createdAt": "2025-06-30T16:44:27Z",
+          "updatedAt": "2025-06-30T16:44:27Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Why are we not merging this PR?\r\n\r\nI asked @muhammad-usama-sardar to check if he\u2019s happy with the new content/flow, since he\u2019s the one who raised the issues with the previous incarnation.\r\n\r\nTo avoid further back and forth, I\u2019d like to ensure we are all on the same page before merging and publishing -16.\r\n",
+          "createdAt": "2025-06-30T17:01:09Z",
+          "updatedAt": "2025-06-30T17:01:09Z"
         }
       ],
       "reviews": [
@@ -15562,7 +15592,7 @@
       "labels": [],
       "body": "Fix #225",
       "createdAt": "2025-06-25T12:15:03Z",
-      "updatedAt": "2025-06-26T17:54:00Z",
+      "updatedAt": "2025-06-30T07:52:29Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "8e0693d8f3f1491926e650c1894b97bcad99780b",
@@ -15647,6 +15677,91 @@
               "body": "It\u2019s a conditional dabbling.  Looks safe to me.",
               "createdAt": "2025-06-26T17:54:00Z",
               "updatedAt": "2025-06-26T17:54:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6xCnET",
+          "commit": {
+            "abbreviatedOid": "a1c8586"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-30T07:52:29Z",
+          "updatedAt": "2025-06-30T07:52:29Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Looks good to me",
+              "createdAt": "2025-06-30T07:52:29Z",
+              "updatedAt": "2025-06-30T07:52:29Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 228,
+      "id": "PR_kwDOIGCt2M6crRJd",
+      "title": "Re-write of the Abstract",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/228",
+      "state": "OPEN",
+      "author": "hannestschofenig",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Tried to improve the introduction. Maybe it worked.",
+      "createdAt": "2025-06-30T11:12:26Z",
+      "updatedAt": "2025-06-30T16:42:54Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "8e0693d8f3f1491926e650c1894b97bcad99780b",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "hannestschofenig-patch-1",
+      "headRefOid": "b782e157da54bc3a68fc8df502d144f00a7134f9",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M6xFvt1",
+          "commit": {
+            "abbreviatedOid": "cb13919"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks, LGTM.\r\n\r\nSmall suggestions inline.",
+          "createdAt": "2025-06-30T12:39:04Z",
+          "updatedAt": "2025-06-30T12:44:51Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "NSNL + replace acronym with reference.\r\n\r\n```suggestion\r\nThe Remote Attestation Procedures architecture (RFC9334) defines several types of conceptual messages, such as Evidence, Attestation Results, Endorsements, and Reference Values.\r\nThese messages can appear in different formats and be transported via various protocols.\r\n```",
+              "createdAt": "2025-06-30T12:39:04Z",
+              "updatedAt": "2025-06-30T12:44:51Z"
+            },
+            {
+              "originalPosition": 11,
+              "body": "NSNL\r\n\r\n```suggestion\r\nThis document introduces the Conceptual Message Wrapper (CMW) that provides a common structure to encapsulate these messages.\r\nIt defines a dedicated CBOR tag, corresponding JSON Web Token (JWT) and CBOR Web Token (CWT) claims, and an X.509 extension.\r\n```",
+              "createdAt": "2025-06-30T12:41:41Z",
+              "updatedAt": "2025-06-30T12:44:51Z"
+            },
+            {
+              "originalPosition": 13,
+              "body": "NSNL\r\n\r\n```suggestion\r\nThis allows CMWs to be used in CBOR-based protocols, web APIs using JWTs and CWTs, and PKIX artifacts like X.509 certificates.\r\nAdditionally, the draft defines a media type and a CoAP content format to transport CMWs over protocols like HTTP, MIME, and CoAP.\r\n```",
+              "createdAt": "2025-06-30T12:42:12Z",
+              "updatedAt": "2025-06-30T12:44:51Z"
+            },
+            {
+              "originalPosition": 15,
+              "body": "NSNL + words\r\n\r\n```suggestion\r\nThe goal is to improve the interoperability and flexibility of remote attestation protocols.\r\nBy introducing a shared message format like the CMW, we can consistently support different attestation message types, evolve message serialization formats without breaking compatibility, and avoid having to redefine how messages are handled in each protocol.\r\n```",
+              "createdAt": "2025-06-30T12:43:57Z",
+              "updatedAt": "2025-06-30T12:44:51Z"
             }
           ]
         }
