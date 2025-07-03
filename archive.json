@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-01T01:08:45.551002+00:00",
+  "timestamp": "2025-07-03T01:01:39.198873+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -15079,7 +15079,7 @@
       "labels": [],
       "body": "A simplified version, free from redundancy and controversial statements, that can (hopefully) foster a more productive discussion.\r\n\r\nIn the process, I believe the reasons for confusion described in #222 should have been eliminated.\r\n\r\nRendered [here](https://ietf-rats-wg.github.io/draft-ietf-rats-msg-wrap/sec-cons-revamp/draft-ietf-rats-msg-wrap.html#name-security-considerations)",
       "createdAt": "2025-06-10T12:32:56Z",
-      "updatedAt": "2025-06-30T17:01:09Z",
+      "updatedAt": "2025-07-02T18:07:34Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "8e0693d8f3f1491926e650c1894b97bcad99780b",
@@ -15258,6 +15258,90 @@
           "body": "> Why are we not merging this PR?\r\n\r\nI asked @muhammad-usama-sardar to check if he\u2019s happy with the new content/flow, since he\u2019s the one who raised the issues with the previous incarnation.\r\n\r\nTo avoid further back and forth, I\u2019d like to ensure we are all on the same page before merging and publishing -16.\r\n",
           "createdAt": "2025-06-30T17:01:09Z",
           "updatedAt": "2025-06-30T17:01:09Z"
+        },
+        {
+          "author": "ionut-arm",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Indeed, it would be good to move this forward. There seems to be (rough) consensus on both the intended way to deal with securing Collection CMWs when using them for evidence, and for the way it is written up in this new PR.\r\n\r\nI'd set a deadline for end-of-day Thu (3rd July), and then we can proceed if nothing substantial surfaces, since we have a cutoff on Monday.",
+          "createdAt": "2025-07-01T14:07:42Z",
+          "updatedAt": "2025-07-01T14:07:55Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "I am OK with the section on composition in the PR.\r\n\r\n@muhammad-usama-sardar, like Thomas said, it would be good if you made more specific comments against the proposed text in this PR.\r\n\r\nI still prefer this text for the section on CMW Protection:\r\n> This document describes methods for securing CMWs using COSE, JOSE, and certain PKIX formats. Additionally, CMWs can be protected using other security protocols like TLS.\r\n> \r\n> CMWs have diverse use cases with varying security requirements. Given this, it\u2019s not feasible to provide security recommendations in this document. In some scenarios, no additional security may be necessary, such as when a RATS Conceptual Message is already protected. In others, robust mechanisms involving complex protocols and carefully managed cryptographic key lifecycles may be required.\r\n> \r\n> The analysis and design of security for a use case is entirely up to the CMW implementor.\r\n> \r\n\r\nWe should publish before the cut off with the best we have.\r\n\r\n\r\n",
+          "createdAt": "2025-07-01T14:23:04Z",
+          "updatedAt": "2025-07-01T14:23:04Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Indeed, it would be good to move this forward. There seems to be (rough) consensus on both the intended way to deal with securing Collection CMWs when using them for evidence, and for the way it is written up in this new PR.\r\n> \r\n> I'd set a deadline for end-of-day Thu (3rd July), and then we can proceed if nothing substantial surfaces, since we have a cutoff on Monday.\r\n\r\nSounds like a very reasonable buffer.\r\n\r\n",
+          "createdAt": "2025-07-01T14:23:39Z",
+          "updatedAt": "2025-07-01T14:23:39Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "> > Why are we not merging this PR?\r\n> \r\n> I asked @muhammad-usama-sardar to check if he\u2019s happy with the new content/flow, since he\u2019s the one who raised the issues with the previous incarnation.\r\n> \r\n> To avoid further back and forth, I\u2019d like to ensure we are all on the same page before merging and publishing -16.\r\n\r\nWe were supposed to meet at 11 yesterday about it but you left the call after attested TLS meeting. ",
+          "createdAt": "2025-07-01T15:12:17Z",
+          "updatedAt": "2025-07-01T15:12:46Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "> @muhammad-usama-sardar, like Thomas said, it would be good if you made more specific comments against the proposed text in this PR.\r\n\r\nWhat could be more specific than saying that \"please remove hosting\", for instance, and \"please do NOT fabricate your own terminology\". Now I see that conversation marked as complete without actually making changes (even after agreement). Could editors explain why that was marked as complete without changes? \r\nPlease take care of ALL the concerns that I have shared on issues and on the list. Once this is done, feel free to merge. ",
+          "createdAt": "2025-07-01T15:15:09Z",
+          "updatedAt": "2025-07-01T15:15:09Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > > Why are we not merging this PR?\r\n> > \r\n> > \r\n> > I asked @muhammad-usama-sardar to check if he\u2019s happy with the new content/flow, since he\u2019s the one who raised the issues with the previous incarnation.\r\n> > To avoid further back and forth, I\u2019d like to ensure we are all on the same page before merging and publishing -16.\r\n> \r\n> We were supposed to meet at 11 yesterday about it but you left the call after attested TLS meeting.\r\n\r\nI didn\u2019t receive any invite for that.  Also, my 11-12 slot on Mondays is permanently booked.",
+          "createdAt": "2025-07-01T15:21:15Z",
+          "updatedAt": "2025-07-01T15:21:15Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > @muhammad-usama-sardar, like Thomas said, it would be good if you made more specific comments against the proposed text in this PR.\r\n> \r\n> What could be more specific than saying that \"please remove hosting\", for instance, and \"please do NOT fabricate your own terminology\". Now I see that conversation marked as complete without actually making changes (even after agreement). Could editors explain why that was marked as complete without changes?\r\n\r\nThe \u201chosting\u201d removal is purely editorial, and it\u2019s the editor's prerogative to decide whether to take the advice.\r\n\r\n> Please take care of ALL the concerns that I have shared on issues and on the list. Once this is done, feel free to merge.\r\n\r\nCan you please collect the issues in one place (i.e., here) so that we don\u2019t have to gather the information from different places \u2014 with the risk of losing bits here and there.\r\n\r\nBesides, the text has changed significantly with respect to what you reviewed, so some of your comments may not be applicable anymore.",
+          "createdAt": "2025-07-01T15:26:45Z",
+          "updatedAt": "2025-07-01T15:30:09Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "> > > > Why are we not merging this PR?\r\n> > > \r\n> > > \r\n> > > I asked @muhammad-usama-sardar to check if he\u2019s happy with the new content/flow, since he\u2019s the one who raised the issues with the previous incarnation.\r\n> > > To avoid further back and forth, I\u2019d like to ensure we are all on the same page before merging and publishing -16.\r\n> > \r\n> > \r\n> > We were supposed to meet at 11 yesterday about it but you left the call after attested TLS meeting.\r\n> \r\n> I didn\u2019t receive any invite for that. Also, my 11-12 slot on Mondays is permanently booked.\r\n\r\nSee slack: \r\n> Let's meet directly after attested TLS call to sort out remaining issues.",
+          "createdAt": "2025-07-01T15:34:34Z",
+          "updatedAt": "2025-07-01T15:34:34Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > > > > Why are we not merging this PR?\r\n> > > > \r\n> > > > \r\n> > > > I asked @muhammad-usama-sardar to check if he\u2019s happy with the new content/flow, since he\u2019s the one who raised the issues with the previous incarnation.\r\n> > > > To avoid further back and forth, I\u2019d like to ensure we are all on the same page before merging and publishing -16.\r\n> > > \r\n> > > \r\n> > > We were supposed to meet at 11 yesterday about it but you left the call after attested TLS meeting.\r\n> > \r\n> > \r\n> > I didn\u2019t receive any invite for that. Also, my 11-12 slot on Mondays is permanently booked.\r\n> \r\n> See slack:\r\n> \r\n> > Let's meet directly after attested TLS call to sort out remaining issues.\r\n\r\nIt fell through the cracks.  If you want to have a chat, it\u2019s safer to send me an invite.\r\n",
+          "createdAt": "2025-07-01T15:50:03Z",
+          "updatedAt": "2025-07-01T15:50:21Z"
+        },
+        {
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "body": "> > @muhammad-usama-sardar, like Thomas said, it would be good if you made more specific comments against the proposed text in this PR.\r\n> \r\n> What could be more specific than saying that \"please remove hosting\", for instance, and \"please do NOT fabricate your own terminology\". Now I see that conversation marked as complete without actually making changes (even after agreement). Could editors explain why that was marked as complete without changes? Please take care of ALL the concerns that I have shared on issues and on the list. Once this is done, feel free to merge.\r\n\r\nHi Usama,\r\n\r\nYou're a smart guy, so we'd like to take your thoughts into account. Personally, I am a bit old and slow so it's hard to follow all the threads and references. For example, I don't know what \"new terminology\" you refer to and why it is bad.\r\n\r\nIt's pretty common for commenters to provide replacement text for what they don't like. For example, I proposed replacement text one of the sections in security considerations (but was still a bit lazy as I didn't provide it as a PR).\r\n\r\nAlso, in the end this is consensus and has to get published, so it can happen that all your concerns don't get addressed. That certainly happens to me all the time.\r\n\r\nLL",
+          "createdAt": "2025-07-01T19:00:44Z",
+          "updatedAt": "2025-07-01T19:00:44Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "> You're a smart guy, so we'd like to take your thoughts into account. \r\n\r\nIt's an unexpected compliment. I don't consider myself smart. \r\n\r\n> Personally, I am a bit old and slow so it's hard to follow all the threads and references. For example, I don't know what \"new terminology\" you refer to and why it is bad.\r\n\r\nApologies. I was talking about [this](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/226/files#r2145187103). We already have enough terminology hell in RATS. Let's not create more, please!\r\n> \r\n> It's pretty common for commenters to provide replacement text for what they don't like. For example, I proposed replacement text one of the sections in security considerations (but was still a bit lazy as I didn't provide it as a PR).\r\n> \r\nIt's a simple removal of a single word \"hosting\". Do you really think I need to provide a PR for this? \r\n> Also, in the end this is consensus and has to get published, so it can happen that all your concerns don't get addressed. \r\n\r\nI surely understand that. But agreeing and then still marking it as complete without change seems quite weird to me.\r\n\r\n",
+          "createdAt": "2025-07-01T20:04:22Z",
+          "updatedAt": "2025-07-01T20:04:22Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "On this specific point:\r\n\r\n> [\u2026] But agreeing and then still marking it as complete without change seems quite weird to me.\r\n\r\nI never agreed to make that change.  I don't know where you got that impression from.\r\n\r\nI explained to you why I don\u2019t think that the change you suggested is necessary. As editor of the document, I take full responsibility for deciding whether to take *purely editorial* comments on board.  There's nothing technical about it; it's just a matter of choice of words.  Spending even more cycles in it is not a productive use of our time and energy.\r\n",
+          "createdAt": "2025-07-02T04:30:20Z",
+          "updatedAt": "2025-07-02T04:30:20Z"
         }
       ],
       "reviews": [
@@ -15577,6 +15661,106 @@
               "updatedAt": "2025-06-13T17:42:54Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6xYad9",
+          "commit": {
+            "abbreviatedOid": "115240f"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-01T15:31:08Z",
+          "updatedAt": "2025-07-01T15:31:08Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "It\u2019s not new terminology, just a simple adjective.",
+              "createdAt": "2025-07-01T15:31:08Z",
+              "updatedAt": "2025-07-01T15:31:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6xYe0j",
+          "commit": {
+            "abbreviatedOid": "115240f"
+          },
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-01T15:37:13Z",
+          "updatedAt": "2025-07-01T15:37:13Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "WHY is this adjective required?",
+              "createdAt": "2025-07-01T15:37:13Z",
+              "updatedAt": "2025-07-01T15:37:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6xYtp2",
+          "commit": {
+            "abbreviatedOid": "115240f"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-01T15:53:50Z",
+          "updatedAt": "2025-07-01T15:53:51Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "It is not strictly _required_.  It\u2019s an editorial choice which helps to clarify which \"protocol\u201d we are talking about.\r\n\r\nThe flip question is: why are you so hung up on an adjective?  It's certainly not a definition; otherwise, it would have been capitalised and introduced in the glossary.",
+              "createdAt": "2025-07-01T15:53:50Z",
+              "updatedAt": "2025-07-01T15:54:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6xbR2E",
+          "commit": {
+            "abbreviatedOid": "115240f"
+          },
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-01T19:32:34Z",
+          "updatedAt": "2025-07-01T19:32:34Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "> It\u2019s an editorial choice which helps to clarify which \"protocol\u201d we are talking about.\r\n\r\nThere is only one protocol under discussion. There is no ambiguity here. \r\nThe addition of \"hosting\" adds more trouble than helping. ",
+              "createdAt": "2025-07-01T19:32:34Z",
+              "updatedAt": "2025-07-01T19:32:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6xoYkm",
+          "commit": {
+            "abbreviatedOid": "115240f"
+          },
+          "author": "laurencelundblade",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-02T18:07:34Z",
+          "updatedAt": "2025-07-02T18:07:34Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "I'm afraid that I agree with Thomas here. The full context of the use of the word \"hosting\" is just one paragraph and thus not any addition to RATS terminology. Also the paragraph is not part of a normative requirement.\r\n\r\nTo be constructive here, Usama, propose alternate text. Maybe you have a better word, or you have a better way to write the paragraph.",
+              "createdAt": "2025-07-02T18:07:34Z",
+              "updatedAt": "2025-07-02T18:07:34Z"
+            }
+          ]
         }
       ]
     },
@@ -15592,7 +15776,7 @@
       "labels": [],
       "body": "Fix #225",
       "createdAt": "2025-06-25T12:15:03Z",
-      "updatedAt": "2025-06-30T07:52:29Z",
+      "updatedAt": "2025-07-02T04:39:43Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "8e0693d8f3f1491926e650c1894b97bcad99780b",
@@ -15697,6 +15881,126 @@
               "body": "Looks good to me",
               "createdAt": "2025-06-30T07:52:29Z",
               "updatedAt": "2025-06-30T07:52:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6xYPAt",
+          "commit": {
+            "abbreviatedOid": "a1c8586"
+          },
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-01T15:18:20Z",
+          "updatedAt": "2025-07-01T15:18:20Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Signature alone does not provide \"authentication\" [[Ref](https://www.researchgate.net/publication/375592777_Formal_Specification_and_Verification_of_Architecturally-defined_Attestation_Mechanisms_in_Arm_CCA_and_Intel_TDX)]. So where is authentication coming from? ",
+              "createdAt": "2025-07-01T15:18:20Z",
+              "updatedAt": "2025-07-01T15:18:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6xYljn",
+          "commit": {
+            "abbreviatedOid": "a1c8586"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-01T15:46:35Z",
+          "updatedAt": "2025-07-01T15:46:35Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "> Signature alone does not provide \"authentication\" [[Ref](https://www.researchgate.net/publication/375592777_Formal_Specification_and_Verification_of_Architecturally-defined_Attestation_Mechanisms_in_Arm_CCA_and_Intel_TDX)]. So where is authentication coming from?\r\n\r\nIIRC, the paper you reference states that it is not possible to distinguish a specific instance among multiple parallel instances of the same workload/realm executing on a given host using only Evidence in a challenge-response protocol with a Verifier.\r\n\r\nHowever, this may be perfectly acceptable from an authentication perspective if the RP is only interested in interacting with a specific 'class' of workloads and is satisfied with class authentication rather than authentication of a specific instance.\r\n\r\nIn any case, if this isn't working for you anymore, could you suggest some different wording?",
+              "createdAt": "2025-07-01T15:46:35Z",
+              "updatedAt": "2025-07-01T15:46:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6xa2Fu",
+          "commit": {
+            "abbreviatedOid": "a1c8586"
+          },
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-01T18:41:31Z",
+          "updatedAt": "2025-07-01T18:41:31Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "> However, this may be perfectly acceptable from an authentication perspective if the RP is only interested in interacting with a specific 'class' of workloads and is satisfied with class authentication rather than authentication of a specific instance.\r\n\r\nI think that's not generally true. In any case, this context (\"if ...\") does not appear in the document. \r\n- You seem to be implicitly assuming secure transport underneath. \r\n- Authentication needs to be qualified here. \r\n- Standard definition of authentication in the literature refers to an instance, and not to a class. \r\n\r\n> In any case, if this isn't working for you anymore, could you suggest some different wording?\r\n\r\nRemoving authentication is the easiest; otherwise, see the above proposals.",
+              "createdAt": "2025-07-01T18:41:31Z",
+              "updatedAt": "2025-07-01T18:41:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6xbJUh",
+          "commit": {
+            "abbreviatedOid": "a1c8586"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-01T19:14:45Z",
+          "updatedAt": "2025-07-01T19:14:45Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "> * You seem to be implicitly assuming secure transport underneath.\r\n\r\nYes, of course, there's no way around that.\r\n\r\n> * Authentication needs to be qualified here.\r\n\r\nI don\u2019t think there\u2019s a need for it, but please feel free to suggest the needed qualifier.\r\n\r\n> * Standard definition of authentication in the literature refers to an instance, and not to a class.\r\n\r\nNot sure.  Can you provide an authoritative source for this assertion?  I am personally aware of multiple group authentication schemes.  I wrote my thesis on the topic ;-)\r\n\r\n> > In any case, if this isn't working for you anymore, could you suggest some different wording?\r\n> \r\n> Removing authentication is the easiest; otherwise, see the above proposals.\r\n\r\nI don\u2019t think removing authentication makes sense.",
+              "createdAt": "2025-07-01T19:14:45Z",
+              "updatedAt": "2025-07-01T19:14:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6xbumI",
+          "commit": {
+            "abbreviatedOid": "a1c8586"
+          },
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-01T20:23:58Z",
+          "updatedAt": "2025-07-01T20:23:58Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "> > * You seem to be implicitly assuming secure transport underneath.\r\n> \r\n> Yes, of course, there's no way around that.\r\n> \r\nWhere do you indicate that in this document?\r\n> > * Authentication needs to be qualified here.\r\n> \r\n> I don\u2019t think there\u2019s a need for it, but please feel free to suggest the needed qualifier.\r\n> \r\nWe have discussed this many times on the list. Standalone authentication is not acceptable, specially in this case where there is a special condition \"if RP ...\"\r\nI don't want to cook up terminology. This needs literature review and is unfortunately not possible until the deadline set by the shepherd. \r\n> > * Standard definition of authentication in the literature refers to an instance, and not to a class.\r\n> \r\n> Not sure. Can you provide an authoritative source for this assertion? \r\n\r\nYes, but unfortunately not until the deadline set by the shepherd. \r\n> I am personally aware of multiple group authentication schemes. I wrote my thesis on the topic ;-)\r\n\r\nInteresting. Could you share a link to your thesis?",
+              "createdAt": "2025-07-01T20:23:58Z",
+              "updatedAt": "2025-07-01T20:23:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M6xe1LP",
+          "commit": {
+            "abbreviatedOid": "a1c8586"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-02T04:39:42Z",
+          "updatedAt": "2025-07-02T04:39:43Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "OK, if you can't provide constructive feedback by Thursday, there's no reason to delay any further. This PR can be merged as it is.",
+              "createdAt": "2025-07-02T04:39:43Z",
+              "updatedAt": "2025-07-02T04:39:43Z"
             }
           ]
         }
