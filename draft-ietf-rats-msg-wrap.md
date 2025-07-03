@@ -651,13 +651,8 @@ The following subsections provide further elaboration on these points, particula
 
 ## CMW Protection
 
-CMW itself does not provide any mechanisms for authenticity, integrity protection, or confidentiality.
+CMW Records, Tags and Collections alone do not offer authenticity, integrity protection, or confidentiality.
 It is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly.
-In some scenarios, a secure channel (e.g., via TLS {{?BCP195}}) or object-level security (e.g., using JWT {{?BCP225}}) may be sufficient, but this is not always the case.
-
-When a CMW is used to carry Evidence for composite or layered attestation of a single device, all components within the CMW must be cryptographically bound to prevent an attacker from replacing Evidence from a compromised device with that from a non-compromised device.
-Authenticity and integrity protection MUST be provided by the attestation technology.
-For additional security considerations related to Collections, refer to {{seccons-coll}}.
 
 RATS conceptual messages are typically secured using cryptography.
 If the messages are already protected, no additional security requirements are imposed by this encapsulation.
@@ -667,19 +662,21 @@ For example, a `cbor-record` containing an Unprotected CWT Claims Set (UCCS) {{-
 
 {{crypto}} describes a number of methods that can be used to add cryptographic protection to CMW.
 
-## Collection CMWs {#seccons-coll}
+## Using Collection CMWs for Evidence of Composite or Layered Devices {#seccons-coll}
 
-If the Collection CMW is not protected from tampering by external security measures (such as object security primitives) or internal mechanisms (such as intra-item binding), an attacker could easily manipulate the Collection's contents.
-It is the responsibility of the Attester who creates the Collection CMW to ensure that the contents of the Collection are integrity-protected.
-The designer of the attestation technology is typically in charge of ensuring that the security properties are met, not the user of the conceptual message wrapper.
-In particular, when a CMW is used to carry multiple Evidence messages for a composite device or layered attestation, there should be strong binding between the Evidence messages within the Collection.
-This binding is needed to prevent attacks where Evidence from a subverted part of the device is replaced by Evidence from a separate non-subverted device.
-The binding of Evidence messages should be some form of attestation.
+When a Collection CMW is used to encapsulate Evidence for composite or layered attestation of a single device, all Evidence messages within the CMW MUST be cryptographically bound together to prevent an attacker from replacing Evidence from a compromised device with that from a non-compromised device.
+If the Collection CMW is not protected from tampering by external security measures (such as object security primitives) or internal mechanisms (such as intra-item binding), an attacker could manipulate the Collection's contents to deceive the Verifier into accepting bogus Evidence as genuine.
+
+Authenticity and integrity protection is expected to be provided by the underlying attestation technology.
 For example, key material used to sign/bind an entire Collection CMW should be an attestation key, handled as described in {{Section 12.1 of -rats-arch}}.
-The binding does not necessarily have to be a signature over the Collection CMW, it might also be achieved through identifiers, cross-linking, signing or hashing between the members of the Collection.
-Client-authenticated TLS may be used to bind a Collection CMW of Evidence messages.
-However, the client key used with TLS should not be that of the end-user or owner of the device.
-Instead, it should be attestation-oriented key material from the device or the attester manufacturer.
+The binding does not necessarily have to be a signature over the Collection CMW, it might also be achieved through identifiers, linking claims (e.g., nonces) across CMW collection items, signing or hashing between the members of the Collection.
+It is the responsibility of the Attester who creates the Collection CMW to ensure that the contents of the Collection are integrity-protected.
+
+## Integrating CMW into Protocols
+
+When CMW is integrated into a protocol (for example, attested CSR {{-csr-a}} or attested TLS {{-tls-a1}} {{-tls-a2}}), it is up to the "hosting" protocol to describe how CMW is intended to be used and how it fits into the overall security model.
+
+Such an analysis should consider the types of conceptual messages allowed, including the permitted combinations, the protection requirements, the interface with the hosting protocol, and any other security-relevant aspect arising from the interaction between the CMW assembly and the hosting protocol.
 
 # IANA Considerations
 
