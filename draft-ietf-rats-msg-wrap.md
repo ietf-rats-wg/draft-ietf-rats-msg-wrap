@@ -635,7 +635,7 @@ The organisation hosts two libraries which allow encoding, decoding, and
 manipulation of CMW payloads: one for the Golang ecosystem
 ([](https://github.com/veraison/cmw)), and one for Rust
 ([](https://github.com/veraison/rust-cmw)).
-The implementations cover all the features presented in this draft.
+These implementations cover all the features presented in this draft.
 The maturity level is alpha.
 The license is Apache 2.0.
 The developers can be contacted on the Zulip channel:
