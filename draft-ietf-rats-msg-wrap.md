@@ -628,12 +628,14 @@ fit".
 
 ## Project Veraison
 
-The organization responsible for this implementation is Project Veraison, a
+The organization responsible for these implementations is Project Veraison, a
 Linux Foundation project hosted at the Confidential Computing Consortium.
 
-The software, hosted at [](https://github.com/veraison/cmw), provides a Golang
-package that allows encoding and decoding of CMW payloads.
-The implementation covers all the features presented in this draft.
+The organisation hosts two libraries which allow encoding, decoding, and
+manipulation of CMW payloads: one for the Golang ecosystem
+([](https://github.com/veraison/cmw)), and one for Rust
+([](https://github.com/veraison/rust-cmw)).
+These implementations cover all the features presented in this draft.
 The maturity level is alpha.
 The license is Apache 2.0.
 The developers can be contacted on the Zulip channel:
