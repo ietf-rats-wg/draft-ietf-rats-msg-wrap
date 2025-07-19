@@ -361,7 +361,7 @@ func CMWTypeDemux(b []byte) CMWType {
 
 # Cryptographic Protection of CMWs {#crypto}
 
-This section highlights a number of mechanisms to add authentication, integrity and, if used with a challenge-response protocol, anti-replay protection to CMWs.
+This section highlights a number of mechanisms through which protocol designers can add authentication (within the limits of the security model), integrity and, if used with a challenge-response protocol, anti-replay protection to their use of CMWs.
 
 ## Signing CBOR CMW using COSE Sign1 {#signed-cbor-cmw}
 
