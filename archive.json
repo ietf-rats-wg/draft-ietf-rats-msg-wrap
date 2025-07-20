@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-06T01:07:38.146852+00:00",
+  "timestamp": "2025-07-20T01:11:10.475849+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -16076,6 +16076,142 @@
           ]
         }
       ]
+    },
+    {
+      "number": 230,
+      "id": "PR_kwDOIGCt2M6fZu8o",
+      "title": "Add Rust library",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/230",
+      "state": "MERGED",
+      "author": "ionut-arm",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-07-17T15:20:12Z",
+      "updatedAt": "2025-07-17T15:39:28Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "f0f76dcdba8087bf28321d6ce60c7333b98f46b5",
+      "headRepository": "ionut-arm/draft-ietf-rats-msg-wrap",
+      "headRefName": "rust-cmw",
+      "headRefOid": "69349c493b453e06bfda83cf4957e931acc5ea7f",
+      "closedAt": "2025-07-17T15:34:44Z",
+      "mergedAt": "2025-07-17T15:34:44Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "7200ad71099331fda7f4fa410855e784dac8e43b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M60mt1E",
+          "commit": {
+            "abbreviatedOid": "9746891"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-17T15:33:49Z",
+          "updatedAt": "2025-07-17T15:33:49Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\nThese implementations cover all the features presented in this draft.\n```",
+              "createdAt": "2025-07-17T15:33:49Z",
+              "updatedAt": "2025-07-17T15:33:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M60muEF",
+          "commit": {
+            "abbreviatedOid": "9746891"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-17T15:34:07Z",
+          "updatedAt": "2025-07-17T15:34:07Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 231,
+      "id": "PR_kwDOIGCt2M6faHSC",
+      "title": "slides for IETF 123",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/231",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-07-17T15:56:20Z",
+      "updatedAt": "2025-07-18T19:25:36Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "7200ad71099331fda7f4fa410855e784dac8e43b",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "ietf-123-material",
+      "headRefOid": "52d9e472267b140dc38a7f52e60c4ee68640cc7c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M604Ou_",
+          "commit": {
+            "abbreviatedOid": "52d9e47"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-07-18T19:25:36Z",
+          "updatedAt": "2025-07-18T19:25:36Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 232,
+      "id": "PR_kwDOIGCt2M6frSxJ",
+      "title": "further clarify \u201cprotected\"",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/232",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As per hackathon discussion.  Text provided by @ionut-arm ",
+      "createdAt": "2025-07-19T09:43:22Z",
+      "updatedAt": "2025-07-19T09:44:45Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "7200ad71099331fda7f4fa410855e784dac8e43b",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "authentication",
+      "headRefOid": "e9307c1d391de770b3832d4878a99ea676008d4f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @muhammad-usama-sardar",
+          "createdAt": "2025-07-19T09:44:02Z",
+          "updatedAt": "2025-07-19T09:44:02Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
