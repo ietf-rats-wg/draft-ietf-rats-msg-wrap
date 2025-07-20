@@ -24,6 +24,22 @@ Changes since -12 [(diff)](https://author-tools.ietf.org/iddiff?url1=draft-ietf-
 # Updates since IETF 122 (cont.)
 
 * Clarify "protected" in Section 4 (Usama)
+
+```
+OLD
+   This section highlights a number of mechanisms to add authentication,
+   integrity and, if used with a challenge-response protocol, anti-
+   replay protection to CMWs.
+
+NEW
+   This section highlights a number of mechanisms through which protocol
+   designers can add authentication (within the limits of the security
+   model), integrity and, if used with a challenge-response protocol,
+   anti-replay protection to their use of CMWs.
+```
+
+---
+
 * fix `content type` claim in `signed-cbor-cmw-protected-hdr` (Carl)
 * use allocated codepoint for `id-pe-cmw` (35) (Russ)
 * added Section 8 "Privacy Considerations" (Mike O)
