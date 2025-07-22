@@ -22,8 +22,8 @@ author:
    organization: Fraunhofer SIT
    email: henk.birkholz@ietf.contact
  - name: Ned Smith
-   organization: Intel
-   email: ned.smith@intel.com
+   organization: Independent
+   email: ned.smith.ietf@outlook.com
  - name: Thomas Fossati
    organization: Linaro
    email: thomas.fossati@linaro.org
