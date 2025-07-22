@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-20T01:11:10.475849+00:00",
+  "timestamp": "2025-07-22T01:04:59.827454+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -16151,13 +16151,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-07-17T15:56:20Z",
-      "updatedAt": "2025-07-18T19:25:36Z",
+      "updatedAt": "2025-07-20T22:40:14Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "7200ad71099331fda7f4fa410855e784dac8e43b",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "ietf-123-material",
-      "headRefOid": "52d9e472267b140dc38a7f52e60c4ee68640cc7c",
+      "headRefOid": "6e6cda158e1f2d3ef0ebe4727e6c280ad4583019",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -16176,6 +16176,19 @@
           "createdAt": "2025-07-18T19:25:36Z",
           "updatedAt": "2025-07-18T19:25:36Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M60-Ndm",
+          "commit": {
+            "abbreviatedOid": "6e6cda1"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-07-20T22:40:14Z",
+          "updatedAt": "2025-07-20T22:40:14Z",
+          "comments": []
         }
       ]
     },
@@ -16191,13 +16204,13 @@
       "labels": [],
       "body": "As per hackathon discussion.  Text provided by @ionut-arm ",
       "createdAt": "2025-07-19T09:43:22Z",
-      "updatedAt": "2025-07-19T09:44:45Z",
+      "updatedAt": "2025-07-20T14:14:53Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "7200ad71099331fda7f4fa410855e784dac8e43b",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "authentication",
-      "headRefOid": "e9307c1d391de770b3832d4878a99ea676008d4f",
+      "headRefOid": "1ec1621a1be4ef0e5bf9a7a238d4e7289410f5a3",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
