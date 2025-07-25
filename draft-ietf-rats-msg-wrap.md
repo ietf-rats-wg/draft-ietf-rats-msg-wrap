@@ -1103,13 +1103,15 @@ The authors would like to thank
 Brian Campbell,
 Carl Wallace,
 Carsten Bormann,
+Dave Thaler,
 {{{Ionuț Mihalcea}}},
 Michael B. Jones,
 Mike Ounsworth,
 Mohit Sethi,
 Russ Housley,
+Tom Jones,
 and
-Tom Jones
+Usama Sardar
 for their reviews and suggestions.
 
 The definition of a Collection CMW has been modelled on a proposal originally made by Simon Frost for an EAT-based Evidence collection type.  The Collection CMW aims at superseding it by generalizing the allowed Evidence formats.
