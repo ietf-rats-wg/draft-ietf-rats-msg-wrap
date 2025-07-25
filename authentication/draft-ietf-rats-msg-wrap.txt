@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 21 January 2026                                           Intel
+Expires: 26 January 2026                                           Intel
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                            20 July 2025
+                                                            25 July 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -68,7 +68,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 January 2026.
+   This Internet-Draft will expire on 26 January 2026.
 
 Copyright Notice
 
@@ -490,10 +490,10 @@ Table of Contents
 4.  Cryptographic Protection of CMWs
 
    This section highlights a number of mechanisms through which protocol
-   designers can add authentication, integrity and, if used with a
-   challenge-response protocol, anti-replay protection when employing
-   CMWs.  These properties must be evaluated carefully in the context of
-   the relevant security model.
+   designers can add data origin authentication, integrity and, if used
+   with a challenge-response protocol, anti-replay protection when
+   employing CMWs.  These properties must be evaluated carefully in the
+   context of the relevant security model.
 
 4.1.  Signing CBOR CMW using COSE Sign1
 
