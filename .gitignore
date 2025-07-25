@@ -21,3 +21,7 @@ draft-ietf-rats-msg-wrap.xml
 package-lock.json
 report.xml
 !requirements.txt
+*.cbor
+*.pretty
+.mailmap
+.DS_Store

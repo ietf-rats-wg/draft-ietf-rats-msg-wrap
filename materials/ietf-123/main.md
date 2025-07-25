@@ -59,6 +59,12 @@ NEWER (PR#232)
 * Fix `cty` claim in `signed-cbor-cmw-protected-hdr` (Carl)
 * Use allocated codepoint for `id-pe-cmw` (35) (Russ)
 * Add Section 8 "Privacy Considerations" (Mike O)
+
+---
+
+* fix `content type` claim in `signed-cbor-cmw-protected-hdr` (Carl)
+* use allocated codepoint for `id-pe-cmw` (35) (Russ)
+* added Section 8 "Privacy Considerations" (Mike O)
 * Reflow "Security Considerations" (Usama)
 
 ---
@@ -69,7 +75,7 @@ New Rust crate contributed by Ionuț:
 
 * [https://github.com/veraison/rust-cmw](https://github.com/veraison/rust-cmw)
 
-Updated Go implementation to match latest version:
+Updated Go implementation to match the latest version:
 
 * [https://github.com/veraison/cmw](https://github.com/veraison/cmw)
 
