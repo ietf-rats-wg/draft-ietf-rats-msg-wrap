@@ -493,7 +493,7 @@ Table of Contents
    designers can add data origin authentication, integrity and, if used
    with a challenge-response protocol, anti-replay protection when
    employing CMWs.  These properties must be evaluated carefully in the
-   context of the relevant security model.
+   context of the overall security model of the protocol.
 
 4.1.  Signing CBOR CMW using COSE Sign1
 
