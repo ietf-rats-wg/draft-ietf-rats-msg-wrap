@@ -10,7 +10,16 @@ autoscale: true
 
 ---
 
-# Updates since IETF 122
+# 3rd WGLC
+
+* 28 April 2025 - 12 May 2025
+* Thank you, reviewers!
+* Worked on addressing all the comments
+* -16 published on the 3rd of July 2025
+
+---
+
+# WGLC Updates
 
 Changes since -12 [(diff)](https://author-tools.ietf.org/iddiff?url1=draft-ietf-rats-msg-wrap-12&url2=draft-ietf-rats-msg-wrap-16&difftype=--html)
 
@@ -21,7 +30,7 @@ Changes since -12 [(diff)](https://author-tools.ietf.org/iddiff?url1=draft-ietf-
 
 ---
 
-# Updates since IETF 122 (cont.)
+# WGLC Updates (cont.)
 
 * Clarify "protected" in Section 4 (Usama)
 
@@ -45,7 +54,7 @@ NEWER (PR#232)
 
 ---
 
-# Updates since IETF 122 (cont.)
+# WGLC Updates (cont.)
 
 * Fix `cty` claim in `signed-cbor-cmw-protected-hdr` (Carl)
 * Use allocated codepoint for `id-pe-cmw` (35) (Russ)
