@@ -361,7 +361,8 @@ func CMWTypeDemux(b []byte) CMWType {
 
 # Cryptographic Protection of CMWs {#crypto}
 
-This section highlights a number of mechanisms to add authentication, integrity and, if used with a challenge-response protocol, anti-replay protection to CMWs.
+This section highlights a number of mechanisms through which protocol designers can add data origin authentication, integrity and, if used with a challenge-response protocol, anti-replay protection when employing CMWs.
+These properties must be evaluated carefully in the context of the overall security model of the protocol.
 
 ## Signing CBOR CMW using COSE Sign1 {#signed-cbor-cmw}
 
@@ -1102,13 +1103,15 @@ The authors would like to thank
 Brian Campbell,
 Carl Wallace,
 Carsten Bormann,
+Dave Thaler,
 {{{Ionuț Mihalcea}}},
 Michael B. Jones,
 Mike Ounsworth,
 Mohit Sethi,
 Russ Housley,
+Tom Jones,
 and
-Tom Jones
+Usama Sardar
 for their reviews and suggestions.
 
 The definition of a Collection CMW has been modelled on a proposal originally made by Simon Frost for an EAT-based Evidence collection type.  The Collection CMW aims at superseding it by generalizing the allowed Evidence formats.
