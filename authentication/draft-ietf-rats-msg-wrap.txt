@@ -1685,8 +1685,9 @@ Appendix B.  Open Issues
 Acknowledgments
 
    The authors would like to thank Brian Campbell, Carl Wallace, Carsten
-   Bormann, Ionuț Mihalcea, Michael B.  Jones, Mike Ounsworth, Mohit
-   Sethi, Russ Housley, and Tom Jones for their reviews and suggestions.
+   Bormann, Dave Thaler, Ionuț Mihalcea, Michael B.  Jones, Mike
+   Ounsworth, Mohit Sethi, Russ Housley, Tom Jones, and Usama Sardar for
+   their reviews and suggestions.
 
    The definition of a Collection CMW has been modelled on a proposal
    originally made by Simon Frost for an EAT-based Evidence collection
