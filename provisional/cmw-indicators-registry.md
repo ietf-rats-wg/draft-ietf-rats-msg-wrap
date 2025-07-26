@@ -16,6 +16,5 @@ For rationale about how to pick names and codepoints, see [Section 8.4 of draft-
 | 1 | Endorsements |
 | 2 | Evidence |
 | 3 | Attestation Results	|
-| 4 | Appraisal Policy for Evidence	|
-| 5 | Appraisal Policy for Attestation Results	|
-| 6-15 | Unassigned	|
+| 4 | Appraisal Policy |
+| 5-15 | Unassigned	|
