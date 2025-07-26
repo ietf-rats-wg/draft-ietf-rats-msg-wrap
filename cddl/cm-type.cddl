@@ -3,4 +3,5 @@ cm-type = &(
   endorsements: 1
   evidence: 2
   attestation-results: 3
+  appraisal-policy: 4
 )
