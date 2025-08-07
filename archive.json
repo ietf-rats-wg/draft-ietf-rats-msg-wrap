@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-27T01:11:19.986789+00:00",
+  "timestamp": "2025-08-07T01:07:01.376312+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -16451,7 +16451,7 @@
       "labels": [],
       "body": "Update cmw-indicators-registry.md to add policy CMs",
       "createdAt": "2025-07-25T22:05:26Z",
-      "updatedAt": "2025-07-26T14:37:48Z",
+      "updatedAt": "2025-08-05T12:26:05Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "b5b2b058fe7f59ed3f03352a4ee41fb3518f6e7b",
@@ -16462,7 +16462,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "ionut-arm",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I'm confused, why isn't this part of #235 ",
+          "createdAt": "2025-08-05T12:26:04Z",
+          "updatedAt": "2025-08-05T12:26:04Z"
+        }
+      ],
       "reviews": []
     },
     {
@@ -16477,7 +16485,7 @@
       "labels": [],
       "body": "While defining appraisal policies is beyond the scope of the current RATS character, it makes sense to add a code point for the conceptual message.\r\n\r\nFix #229 ",
       "createdAt": "2025-07-26T14:35:03Z",
-      "updatedAt": "2025-07-26T14:40:35Z",
+      "updatedAt": "2025-08-05T12:25:44Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "b5b2b058fe7f59ed3f03352a4ee41fb3518f6e7b",
@@ -16489,7 +16497,28 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M64EADi",
+          "commit": {
+            "abbreviatedOid": "a9ef73b"
+          },
+          "author": "ionut-arm",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-08-05T12:24:17Z",
+          "updatedAt": "2025-08-05T12:25:44Z",
+          "comments": [
+            {
+              "originalPosition": 22,
+              "body": "```suggestion\r\n| 3 | Attestation Results | {{cm-type}} of {{&SELF}} |\r\n```",
+              "createdAt": "2025-08-05T12:24:17Z",
+              "updatedAt": "2025-08-05T12:25:44Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
