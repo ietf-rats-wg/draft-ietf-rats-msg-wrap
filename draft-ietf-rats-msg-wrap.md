@@ -235,7 +235,7 @@ potentially ambiguous, and there is no further context available to the
 CMW consumer to decide.  For example, this might be the case if the base
 media type is not profiled (e.g., `application/eat+cwt`), if the `value`
 field contains multiple conceptual messages with different types (e.g.,
-both Reference Values and Endorsements within the same `application/signed-corim+cbor`), or if the same profile identifier is
+both Reference Values and Endorsements within the same `application/rim+cose`), or if the same profile identifier is
 shared by different conceptual messages.
 The value MUST be non-zero. The absence of conceptual message indicator information is indicated by omitting the `ind` field entirely.
 For further details, see {{cm-type}}.
@@ -562,16 +562,8 @@ This is an example of a signed CoRIM (Concise Reference Integrity Manifest) {{-r
 
 with the following wire representation:
 
-<!-- fold -w71 cddl/cmw-example-3.pretty -->
 ~~~
-83                                      # array(3)
-   78 1d                                # text(29)
-      6170706c69636174696f6e2f7369676e65642d636f72696d2b63626f72 # "app
-lication/signed-corim+cbor"
-   4d                                   # bytes(13)
-      d901f6d28440a044d901f5a040        # "\xD9\u0001\xF6҄@\xA0D\xD9\u00
-01\xF5\xA0@"
-   03                                   # unsigned(3)
+{::include-fold cddl/cmw-example-3.pretty}
 ~~~
 
 ## CBOR-encoded Collection
