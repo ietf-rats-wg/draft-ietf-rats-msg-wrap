@@ -793,7 +793,7 @@ The initial registrations for the registry are detailed in {{tab-ind-regs}}.
 | 0 | Reference Values | {{cm-type}} of {{&SELF}} |
 | 1 | Endorsements | {{cm-type}} of {{&SELF}} |
 | 2 | Evidence | {{cm-type}} of {{&SELF}} |
-| 3 | Attestation of Results | {{cm-type}} of {{&SELF}} |
+| 3 | Attestation Results | {{cm-type}} of {{&SELF}} |
 | 4 | Appraisal Policy | {{cm-type}} of {{&SELF}} |
 | 5-31 | Unassigned | |
 {: #tab-ind-regs title="CMW Indicators Registry Initial Contents"}
