@@ -21,14 +21,14 @@ Additionally, the draft defines a media type and a CoAP content format to transp
 By introducing a shared message format like the CMW, we can consistently support different attestation message types, evolve message
 serialization formats without breaking compatibility, and avoid having to redefine how messages are handled in each protocol. 
     " name="description">
-<meta content="xml2rfc 3.29.0" name="generator">
+<meta content="xml2rfc 3.30.0" name="generator">
 <meta content="evidence" name="keyword">
 <meta content="attestation results" name="keyword">
 <meta content="endorsements" name="keyword">
 <meta content="reference values" name="keyword">
 <meta content="draft-ietf-rats-msg-wrap-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.29.0
+  xml2rfc 3.30.0
     Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
@@ -1059,11 +1059,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">RATS CMW</td>
-<td class="right">July 2025</td>
+<td class="right">August 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 4 January 2026</td>
+<td class="center">Expires 12 February 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1076,12 +1076,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-rats-msg-wrap-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-07-03" class="published">3 July 2025</time>
+<time datetime="2025-08-11" class="published">11 August 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-01-04">4 January 2026</time></dd>
+<dd class="expires"><time datetime="2026-02-12">12 February 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1090,7 +1090,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </div>
 <div class="author">
       <div class="author-name">N. Smith</div>
-<div class="org">Intel</div>
+<div class="org">Independent</div>
 </div>
 <div class="author">
       <div class="author-name">T. Fossati</div>
@@ -1150,7 +1150,7 @@ serialization formats without breaking compatibility, and avoid having to redefi
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 4 January 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 12 February 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1552,7 +1552,7 @@ potentially ambiguous, and there is no further context available to the
 CMW consumer to decide.  For example, this might be the case if the base
 media type is not profiled (e.g., <code>application/eat+cwt</code>), if the <code>value</code>
 field contains multiple conceptual messages with different types (e.g.,
-both Reference Values and Endorsements within the same <code>application/signed-corim+cbor</code>), or if the same profile identifier is
+both Reference Values and Endorsements within the same <code>application/rim+cose</code>), or if the same profile identifier is
 shared by different conceptual messages.
 The value <span class="bcp14">MUST</span> be non-zero. The absence of conceptual message indicator information is indicated by omitting the <code>ind</code> field entirely.
 For further details, see <a href="#cm-type" class="auto internal xref">Section 3.1.1</a>.<a href="#section-3.1-4.6.1" class="pilcrow">¶</a></p>
@@ -1663,7 +1663,7 @@ The URI <span class="bcp14">MUST</span> be in the absolute form (<span><a href="
 <p id="section-3.3-7">The <code>"__cmwc_t"</code> key functions similar to an EAT profile claim (see <span><a href="https://rfc-editor.org/rfc/rfc9711#section-4.3.2" class="relref">Section 4.3.2</a> of [<a href="#RFC9711" class="cite xref">RFC9711</a>]</span>), but at a higher level.
 It can be used to indicate basics like CBOR serialization and COSE algorithms just as a profile in EAT does.
 At the higher level, it can be used to describe the allowed CMW collection assembly (this is somewhat parallel to the way EAT profiles indicate which claims are required and/or allowed).
-For an example of a <code>"__cmwc_t"</code> that is defined for a bundle of endorsements and reference values, see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-07#section-4.3.1" class="relref">Section 4.3.1</a> of [<a href="#I-D.ietf-rats-corim" class="cite xref">I-D.ietf-rats-corim</a>]</span>.<a href="#section-3.3-7" class="pilcrow">¶</a></p>
+For an example of a <code>"__cmwc_t"</code> that is defined for a bundle of endorsements and reference values, see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-08#section-4.3.1" class="relref">Section 4.3.1</a> of [<a href="#I-D.ietf-rats-corim" class="cite xref">I-D.ietf-rats-corim</a>]</span>.<a href="#section-3.3-7" class="pilcrow">¶</a></p>
 <p id="section-3.3-8">Since the Collection CMW is recursive (a Collection CMW is itself a CMW), implementations <span class="bcp14">MAY</span> limit the allowed depth of nesting.<a href="#section-3.3-8" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-of-the-coll"></span><div id="fig-cddl-collection">
 <figure id="figure-4">
@@ -1729,7 +1729,8 @@ func CMWTypeDemux(b []byte) CMWType {
       <h2 id="name-cryptographic-protection-of">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-cryptographic-protection-of" class="section-name selfRef">Cryptographic Protection of CMWs</a>
       </h2>
-<p id="section-4-1">This section highlights a number of mechanisms to add authentication, integrity and, if used with a challenge-response protocol, anti-replay protection to CMWs.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">This section highlights a number of mechanisms through which protocol designers can add data origin authentication, integrity and, if used with a challenge-response protocol, anti-replay protection when employing CMWs.
+These properties must be evaluated carefully in the context of the overall security model of the protocol.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div id="signed-cbor-cmw">
 <section id="section-4.1">
         <h3 id="name-signing-cbor-cmw-using-cose">
@@ -2011,8 +2012,8 @@ da 637476a7    # tag(1668576935)
 <div class="lang-cbor-diag sourcecode" id="section-5.4-2">
 <pre>
 [
-  "application/signed-corim+cbor",
-  h'd901f6d28440a044d901f5a040',
+  "application/rim+cose",
+  h'd28440a044d901f5a040',
   3
 ]
 </pre><a href="#section-5.4-2" class="pilcrow">¶</a>
@@ -2020,13 +2021,15 @@ da 637476a7    # tag(1668576935)
 <p id="section-5.4-3">with the following wire representation:<a href="#section-5.4-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.4-4">
 <pre>
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
 83                                      # array(3)
-   78 1d                                # text(29)
-      6170706c69636174696f6e2f7369676e65642d636f72696d2b63626f72 # "app
-lication/signed-corim+cbor"
-   4d                                   # bytes(13)
-      d901f6d28440a044d901f5a040        # "\xD9\u0001\xF6҄@\xA0D\xD9\u00
-01\xF5\xA0@"
+   74                                   # text(20)
+      6170706c69636174696f6e2f72696d2b636f7365 # "application/rim+\
+                                                                cose"
+   4a                                   # bytes(10)
+      d28440a044d901f5a040              # "҄@\xA0D\xD9\u0001\xF5\xA0\
+                                                                   @"
    03                                   # unsigned(3)
 </pre><a href="#section-5.4-4" class="pilcrow">¶</a>
 </div>
@@ -2272,11 +2275,13 @@ fit".<a href="#section-7-2" class="pilcrow">¶</a></p>
         <h3 id="name-project-veraison">
 <a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-project-veraison" class="section-name selfRef">Project Veraison</a>
         </h3>
-<p id="section-7.1-1">The organization responsible for this implementation is Project Veraison, a
+<p id="section-7.1-1">The organization responsible for these implementations is Project Veraison, a
 Linux Foundation project hosted at the Confidential Computing Consortium.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
-<p id="section-7.1-2">The software, hosted at <span><a href="https://github.com/veraison/cmw">https://github.com/veraison/cmw</a></span>, provides a Golang
-package that allows encoding and decoding of CMW payloads.
-The implementation covers all the features presented in this draft.
+<p id="section-7.1-2">The organisation hosts two libraries which allow encoding, decoding, and
+manipulation of CMW payloads: one for the Golang ecosystem
+(<span><a href="https://github.com/veraison/cmw">https://github.com/veraison/cmw</a></span>), and one for Rust
+(<span><a href="https://github.com/veraison/rust-cmw">https://github.com/veraison/rust-cmw</a></span>).
+These implementations cover all the features presented in this draft.
 The maturity level is alpha.
 The license is Apache 2.0.
 The developers can be contacted on the Zulip channel:
@@ -3244,7 +3249,7 @@ dotted-decimal notation.  The parameter value is case-insensitive.  It must not 
 <dd class="break"></dd>
 <dt id="I-D.bormann-cbor-draft-numbers">[I-D.bormann-cbor-draft-numbers]</dt>
         <dd>
-<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"Managing CBOR codepoints in Internet-Drafts"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-cbor-draft-numbers-05</span>, <time datetime="2025-03-01" class="refDate">1 March 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-draft-numbers-05">https://datatracker.ietf.org/doc/html/draft-bormann-cbor-draft-numbers-05</a>&gt;</span>. </dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"Managing CBOR codepoints in Internet-Drafts"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-cbor-draft-numbers-06</span>, <time datetime="2025-07-07" class="refDate">7 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-draft-numbers-06">https://datatracker.ietf.org/doc/html/draft-bormann-cbor-draft-numbers-06</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.fossati-tls-attestation">[I-D.fossati-tls-attestation]</dt>
         <dd>
@@ -3256,7 +3261,7 @@ dotted-decimal notation.  The parameter value is case-insensitive.  It must not 
 <dd class="break"></dd>
 <dt id="I-D.ietf-lamps-csr-attestation">[I-D.ietf-lamps-csr-attestation]</dt>
         <dd>
-<span class="refAuthor">Ounsworth, M.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Wiseman, M.</span>, and <span class="refAuthor">N. Smith</span>, <span class="refTitle">"Use of Remote Attestation with Certification Signing Requests"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-csr-attestation-19</span>, <time datetime="2025-05-25" class="refDate">25 May 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-csr-attestation-19">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-csr-attestation-19</a>&gt;</span>. </dd>
+<span class="refAuthor">Ounsworth, M.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Wiseman, M.</span>, and <span class="refAuthor">N. Smith</span>, <span class="refTitle">"Use of Remote Attestation with Certification Signing Requests"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-csr-attestation-20</span>, <time datetime="2025-07-07" class="refDate">7 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-csr-attestation-20">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-csr-attestation-20</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-ar4si">[I-D.ietf-rats-ar4si]</dt>
         <dd>
@@ -3264,7 +3269,7 @@ dotted-decimal notation.  The parameter value is case-insensitive.  It must not 
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-corim">[I-D.ietf-rats-corim]</dt>
         <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Concise Reference Integrity Manifest"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-corim-07</span>, <time datetime="2025-03-03" class="refDate">3 March 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-07">https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-07</a>&gt;</span>. </dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Concise Reference Integrity Manifest"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-corim-08</span>, <time datetime="2025-07-07" class="refDate">7 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-08">https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-08</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC3647">[RFC3647]</dt>
         <dd>
@@ -3441,13 +3446,15 @@ When using Collection CMW, the preconditions apply for each entry in the Collect
 Brian Campbell,
 Carl Wallace,
 Carsten Bormann,
+Dave Thaler,
 <span class="contact-name">Ionuț Mihalcea</span>,
 Michael B. Jones,
 Mike Ounsworth,
 Mohit Sethi,
 Russ Housley,
+Tom Jones,
 and
-Tom Jones
+Usama Sardar
 for their reviews and suggestions.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
 <p id="appendix-C-2">The definition of a Collection CMW has been modelled on a proposal originally made by Simon Frost for an EAT-based Evidence collection type.  The Collection CMW aims at superseding it by generalizing the allowed Evidence formats.<a href="#appendix-C-2" class="pilcrow">¶</a></p>
 </section>
@@ -3483,10 +3490,10 @@ for their reviews and suggestions.<a href="#appendix-C-1" class="pilcrow">¶</a>
 </address>
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Ned Smith</span></div>
-<div dir="auto" class="left"><span class="org">Intel</span></div>
+<div dir="auto" class="left"><span class="org">Independent</span></div>
 <div class="email">
 <span>Email:</span>
-<a href="mailto:ned.smith@intel.com" class="email">ned.smith@intel.com</a>
+<a href="mailto:ned.smith.ietf@outlook.com" class="email">ned.smith.ietf@outlook.com</a>
 </div>
 </address>
 <address class="vcard">

@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 4 January 2026                                            Intel
+Expires: 12 February 2026                                    Independent
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                             3 July 2025
+                                                          11 August 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -68,7 +68,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 January 2026.
+   This Internet-Draft will expire on 12 February 2026.
 
 Copyright Notice
 
@@ -316,7 +316,7 @@ Table of Contents
       profiled (e.g., application/eat+cwt), if the value field contains
       multiple conceptual messages with different types (e.g., both
       Reference Values and Endorsements within the same application/
-      signed-corim+cbor), or if the same profile identifier is shared by
+      rim+cose), or if the same profile identifier is shared by
       different conceptual messages.  The value MUST be non-zero.  The
       absence of conceptual message indicator information is indicated
       by omitting the ind field entirely.  For further details, see
@@ -489,9 +489,11 @@ Table of Contents
 
 4.  Cryptographic Protection of CMWs
 
-   This section highlights a number of mechanisms to add authentication,
-   integrity and, if used with a challenge-response protocol, anti-
-   replay protection to CMWs.
+   This section highlights a number of mechanisms through which protocol
+   designers can add data origin authentication, integrity and, if used
+   with a challenge-response protocol, anti-replay protection when
+   employing CMWs.  These properties must be evaluated carefully in the
+   context of the overall security model of the protocol.
 
 4.1.  Signing CBOR CMW using COSE Sign1
 
@@ -728,21 +730,23 @@ Table of Contents
    Reference Values and Endorsements.
 
    [
-     "application/signed-corim+cbor",
-     h'd901f6d28440a044d901f5a040',
+     "application/rim+cose",
+     h'd28440a044d901f5a040',
      3
    ]
 
    with the following wire representation:
 
-83                                      # array(3)
-   78 1d                                # text(29)
-      6170706c69636174696f6e2f7369676e65642d636f72696d2b63626f72 # "app
-lication/signed-corim+cbor"
-   4d                                   # bytes(13)
-      d901f6d28440a044d901f5a040        # "\xD9\u0001\xF6҄@\xA0D\xD9\u00
-01\xF5\xA0@"
-   03                                   # unsigned(3)
+   =============== NOTE: '\' line wrapping per RFC 8792 ================
+
+   83                                      # array(3)
+      74                                   # text(20)
+         6170706c69636174696f6e2f72696d2b636f7365 # "application/rim+\
+                                                                   cose"
+      4a                                   # bytes(10)
+         d28440a044d901f5a040              # "҄@\xA0D\xD9\u0001\xF5\xA0\
+                                                                      @"
+      03                                   # unsigned(3)
 
 5.5.  CBOR-encoded Collection
 
@@ -952,16 +956,18 @@ lication/signed-corim+cbor"
 
 7.1.  Project Veraison
 
-   The organization responsible for this implementation is Project
+   The organization responsible for these implementations is Project
    Veraison, a Linux Foundation project hosted at the Confidential
    Computing Consortium.
 
-   The software, hosted at https://github.com/veraison/cmw, provides a
-   Golang package that allows encoding and decoding of CMW payloads.
-   The implementation covers all the features presented in this draft.
-   The maturity level is alpha.  The license is Apache 2.0.  The
-   developers can be contacted on the Zulip channel:
-   https://veraison.zulipchat.com/#narrow/stream/383526-CMW/.
+   The organisation hosts two libraries which allow encoding, decoding,
+   and manipulation of CMW payloads: one for the Golang ecosystem
+   (https://github.com/veraison/cmw), and one for Rust
+   (https://github.com/veraison/rust-cmw).  These implementations cover
+   all the features presented in this draft.  The maturity level is
+   alpha.  The license is Apache 2.0.  The developers can be contacted
+   on the Zulip channel: https://veraison.zulipchat.com/#narrow/
+   stream/383526-CMW/.
 
 8.  Privacy Considerations
 
@@ -1536,9 +1542,9 @@ lication/signed-corim+cbor"
    [I-D.bormann-cbor-draft-numbers]
               Bormann, C., "Managing CBOR codepoints in Internet-
               Drafts", Work in Progress, Internet-Draft, draft-bormann-
-              cbor-draft-numbers-05, 1 March 2025,
+              cbor-draft-numbers-06, 7 July 2025,
               <https://datatracker.ietf.org/doc/html/draft-bormann-cbor-
-              draft-numbers-05>.
+              draft-numbers-06>.
 
    [I-D.fossati-tls-attestation]
               Tschofenig, H., Sheffer, Y., Howard, P., Mihalcea, I.,
@@ -1561,9 +1567,9 @@ lication/signed-corim+cbor"
               Ounsworth, M., Tschofenig, H., Birkholz, H., Wiseman, M.,
               and N. Smith, "Use of Remote Attestation with
               Certification Signing Requests", Work in Progress,
-              Internet-Draft, draft-ietf-lamps-csr-attestation-19, 25
-              May 2025, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-lamps-csr-attestation-19>.
+              Internet-Draft, draft-ietf-lamps-csr-attestation-20, 7
+              July 2025, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-lamps-csr-attestation-20>.
 
    [I-D.ietf-rats-ar4si]
               Voit, E., Birkholz, H., Hardjono, T., Fossati, T., and V.
@@ -1576,9 +1582,9 @@ lication/signed-corim+cbor"
    [I-D.ietf-rats-corim]
               Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
               W. Pan, "Concise Reference Integrity Manifest", Work in
-              Progress, Internet-Draft, draft-ietf-rats-corim-07, 3
-              March 2025, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-rats-corim-07>.
+              Progress, Internet-Draft, draft-ietf-rats-corim-08, 7 July
+              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              rats-corim-08>.
 
    [RFC3647]  Chokhani, S., Ford, W., Sabett, R., Merrill, C., and S.
               Wu, "Internet X.509 Public Key Infrastructure Certificate
@@ -1681,8 +1687,9 @@ Appendix B.  Open Issues
 Acknowledgments
 
    The authors would like to thank Brian Campbell, Carl Wallace, Carsten
-   Bormann, Ionuț Mihalcea, Michael B.  Jones, Mike Ounsworth, Mohit
-   Sethi, Russ Housley, and Tom Jones for their reviews and suggestions.
+   Bormann, Dave Thaler, Ionuț Mihalcea, Michael B.  Jones, Mike
+   Ounsworth, Mohit Sethi, Russ Housley, Tom Jones, and Usama Sardar for
+   their reviews and suggestions.
 
    The definition of a Collection CMW has been modelled on a proposal
    originally made by Simon Frost for an EAT-based Evidence collection
@@ -1707,8 +1714,8 @@ Authors' Addresses
 
 
    Ned Smith
-   Intel
-   Email: ned.smith@intel.com
+   Independent
+   Email: ned.smith.ietf@outlook.com
 
 
    Thomas Fossati
