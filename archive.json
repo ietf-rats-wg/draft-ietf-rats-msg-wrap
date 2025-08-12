@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-07T01:07:01.376312+00:00",
+  "timestamp": "2025-08-12T01:01:00.555275+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -16444,21 +16444,21 @@
       "id": "PR_kwDOIGCt2M6gsvMg",
       "title": "add policy CMs",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/234",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Update cmw-indicators-registry.md to add policy CMs",
       "createdAt": "2025-07-25T22:05:26Z",
-      "updatedAt": "2025-08-05T12:26:05Z",
+      "updatedAt": "2025-08-11T09:31:44Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "b5b2b058fe7f59ed3f03352a4ee41fb3518f6e7b",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "register-policy-cms",
       "headRefOid": "0f239c0ef3a096635836b6974e86ec3b1c8ef87d",
-      "closedAt": null,
+      "closedAt": "2025-08-11T09:31:43Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -16469,6 +16469,13 @@
           "body": "I'm confused, why isn't this part of #235 ",
           "createdAt": "2025-08-05T12:26:04Z",
           "updatedAt": "2025-08-05T12:26:04Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I'm confused, why isn't this part of #235\r\n\r\nAnd rightly so :-)\r\n\r\nI have now added it to #235 and will close this.",
+          "createdAt": "2025-08-11T09:31:43Z",
+          "updatedAt": "2025-08-11T09:31:43Z"
         }
       ],
       "reviews": []
@@ -16485,13 +16492,13 @@
       "labels": [],
       "body": "While defining appraisal policies is beyond the scope of the current RATS character, it makes sense to add a code point for the conceptual message.\r\n\r\nFix #229 ",
       "createdAt": "2025-07-26T14:35:03Z",
-      "updatedAt": "2025-08-05T12:25:44Z",
+      "updatedAt": "2025-08-11T09:30:46Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "b5b2b058fe7f59ed3f03352a4ee41fb3518f6e7b",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "policy-cms",
-      "headRefOid": "a9ef73b5bcba835ff3dfcd0dbe93d56776c6a09f",
+      "headRefOid": "cd84dff9daaf4edf05c6374c6c7f9969c1b6c7f6",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -16519,6 +16526,32 @@
           ]
         }
       ]
+    },
+    {
+      "number": 236,
+      "id": "PR_kwDOIGCt2M6jAW9q",
+      "title": "Fix CoRIM media type",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/236",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "s/signed-corim+cbor/rim+cose/",
+      "createdAt": "2025-08-11T09:27:26Z",
+      "updatedAt": "2025-08-11T09:27:38Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "b5b2b058fe7f59ed3f03352a4ee41fb3518f6e7b",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "fix-corim-media-type",
+      "headRefOid": "e997bba818daf46c72cf601b734c17e548fa30b0",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
