@@ -1059,11 +1059,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">RATS CMW</td>
-<td class="right">July 2025</td>
+<td class="right">August 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 26 January 2026</td>
+<td class="center">Expires 13 February 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1076,12 +1076,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-rats-msg-wrap-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-07-25" class="published">25 July 2025</time>
+<time datetime="2025-08-12" class="published">12 August 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-01-26">26 January 2026</time></dd>
+<dd class="expires"><time datetime="2026-02-13">13 February 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1150,7 +1150,7 @@ serialization formats without breaking compatibility, and avoid having to redefi
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 26 January 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 13 February 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1552,7 +1552,7 @@ potentially ambiguous, and there is no further context available to the
 CMW consumer to decide.  For example, this might be the case if the base
 media type is not profiled (e.g., <code>application/eat+cwt</code>), if the <code>value</code>
 field contains multiple conceptual messages with different types (e.g.,
-both Reference Values and Endorsements within the same <code>application/signed-corim+cbor</code>), or if the same profile identifier is
+both Reference Values and Endorsements within the same <code>application/rim+cose</code>), or if the same profile identifier is
 shared by different conceptual messages.
 The value <span class="bcp14">MUST</span> be non-zero. The absence of conceptual message indicator information is indicated by omitting the <code>ind</code> field entirely.
 For further details, see <a href="#cm-type" class="auto internal xref">Section 3.1.1</a>.<a href="#section-3.1-4.6.1" class="pilcrow">¶</a></p>
@@ -2012,8 +2012,8 @@ da 637476a7    # tag(1668576935)
 <div class="lang-cbor-diag sourcecode" id="section-5.4-2">
 <pre>
 [
-  "application/signed-corim+cbor",
-  h'd901f6d28440a044d901f5a040',
+  "application/rim+cose",
+  h'd28440a044d901f5a040',
   3
 ]
 </pre><a href="#section-5.4-2" class="pilcrow">¶</a>
@@ -2021,13 +2021,15 @@ da 637476a7    # tag(1668576935)
 <p id="section-5.4-3">with the following wire representation:<a href="#section-5.4-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.4-4">
 <pre>
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
 83                                      # array(3)
-   78 1d                                # text(29)
-      6170706c69636174696f6e2f7369676e65642d636f72696d2b63626f72 # "app
-lication/signed-corim+cbor"
-   4d                                   # bytes(13)
-      d901f6d28440a044d901f5a040        # "\xD9\u0001\xF6҄@\xA0D\xD9\u00
-01\xF5\xA0@"
+   74                                   # text(20)
+      6170706c69636174696f6e2f72696d2b636f7365 # "application/rim+\
+                                                                cose"
+   4a                                   # bytes(10)
+      d28440a044d901f5a040              # "҄@\xA0D\xD9\u0001\xF5\xA0\
+                                                                   @"
    03                                   # unsigned(3)
 </pre><a href="#section-5.4-4" class="pilcrow">¶</a>
 </div>
