@@ -1575,6 +1575,7 @@ cm-type = &amp;(
   endorsements: 1
   evidence: 2
   attestation-results: 3
+  appraisal-policy: 4
 )
 </pre>
 </div>
@@ -1582,7 +1583,8 @@ cm-type = &amp;(
 <a href="#name-cddl-definition-of-the-cm-t" class="selfRef">CDDL definition of the CM Type</a>
             </figcaption></figure>
 </div>
-<p id="section-3.1.1-3">The <code>cm-type</code> currently has four allowed values: Reference Values, Endorsements, Evidence and Attestation Results, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9334#section-8" class="relref">Section 8</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-3">The <code>cm-type</code> currently has five allowed values: Reference Values, Endorsements, Evidence, Attestation Results, and Appraisal Policy, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9334#section-8" class="relref">Section 8</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.
+Note that that an Appraisal Policy may refer to the appraisal of Evidence or Attestation Results, depending on whether the consumer of the conceptual message is a Verifier or a Relying Party.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.1.1-4">Future specifications that extend the RATS Conceptual Messages set can add new values to the <code>cm-type</code> using the process defined in <a href="#iana-ind-ext" class="auto internal xref">Section 10.5</a>.<a href="#section-3.1.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2170,6 +2172,7 @@ cm-type = &amp;(
   endorsements: 1
   evidence: 2
   attestation-results: 3
+  appraisal-policy: 4
 )
 
 Content-Type-ABNF = '
@@ -2560,27 +2563,37 @@ The IETF has change control over this registration.<a href="#section-10.3.1-1.18
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">0</td>
                 <td class="text-left" rowspan="1" colspan="1">Reference Values</td>
-                <td class="text-left" rowspan="1" colspan="1">RFCthis</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#cm-type" class="auto internal xref">Section 3.1.1</a> of RFCthis</td>
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">1</td>
                 <td class="text-left" rowspan="1" colspan="1">Endorsements</td>
-                <td class="text-left" rowspan="1" colspan="1">RFCthis</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#cm-type" class="auto internal xref">Section 3.1.1</a> of RFCthis</td>
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">2</td>
                 <td class="text-left" rowspan="1" colspan="1">Evidence</td>
-                <td class="text-left" rowspan="1" colspan="1">RFCthis</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#cm-type" class="auto internal xref">Section 3.1.1</a> of RFCthis</td>
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">3</td>
                 <td class="text-left" rowspan="1" colspan="1">Attestation Results</td>
-                <td class="text-left" rowspan="1" colspan="1">RFCthis</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#cm-type" class="auto internal xref">Section 3.1.1</a> of RFCthis</td>
               </tr>
               <tr>
-                <td class="text-left" rowspan="1" colspan="1">4-31</td>
+                <td class="text-left" rowspan="1" colspan="1">4</td>
+                <td class="text-left" rowspan="1" colspan="1">Appraisal Policy</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#cm-type" class="auto internal xref">Section 3.1.1</a> of RFCthis</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">5-31</td>
                 <td class="text-left" rowspan="1" colspan="1">Unassigned</td>
-                <td class="text-left" rowspan="1" colspan="1">RFCthis</td>
+                <td class="text-left" rowspan="1" colspan="1"> </td>
               </tr>
             </tbody>
           </table>
@@ -3452,6 +3465,7 @@ Michael B. Jones,
 Mike Ounsworth,
 Mohit Sethi,
 Russ Housley,
+Steven Bellock,
 Tom Jones,
 and
 Usama Sardar

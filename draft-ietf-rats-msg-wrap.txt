@@ -332,13 +332,17 @@ Table of Contents
      endorsements: 1
      evidence: 2
      attestation-results: 3
+     appraisal-policy: 4
    )
 
                   Figure 2: CDDL definition of the CM Type
 
-   The cm-type currently has four allowed values: Reference Values,
-   Endorsements, Evidence and Attestation Results, as defined in
-   Section 8 of [RFC9334].
+   The cm-type currently has five allowed values: Reference Values,
+   Endorsements, Evidence, Attestation Results, and Appraisal Policy, as
+   defined in Section 8 of [RFC9334].  Note that that an Appraisal
+   Policy may refer to the appraisal of Evidence or Attestation Results,
+   depending on whether the consumer of the conceptual message is a
+   Verifier or a Relying Party.
 
    Future specifications that extend the RATS Conceptual Messages set
    can add new values to the cm-type using the process defined in
@@ -859,6 +863,7 @@ Table of Contents
      endorsements: 1
      evidence: 2
      attestation-results: 3
+     appraisal-policy: 4
    )
 
    Content-Type-ABNF = '
@@ -1183,19 +1188,26 @@ Table of Contents
 
    The initial registrations for the registry are detailed in Table 2.
 
-         +=================+=========================+===========+
-         | Indicator value | Conceptual Message name | Reference |
-         +=================+=========================+===========+
-         | 0               | Reference Values        | RFCthis   |
-         +-----------------+-------------------------+-----------+
-         | 1               | Endorsements            | RFCthis   |
-         +-----------------+-------------------------+-----------+
-         | 2               | Evidence                | RFCthis   |
-         +-----------------+-------------------------+-----------+
-         | 3               | Attestation Results     | RFCthis   |
-         +-----------------+-------------------------+-----------+
-         | 4-31            | Unassigned              | RFCthis   |
-         +-----------------+-------------------------+-----------+
+       +=================+=========================+===============+
+       | Indicator value | Conceptual Message name | Reference     |
+       +=================+=========================+===============+
+       | 0               | Reference Values        | Section 3.1.1 |
+       |                 |                         | of RFCthis    |
+       +-----------------+-------------------------+---------------+
+       | 1               | Endorsements            | Section 3.1.1 |
+       |                 |                         | of RFCthis    |
+       +-----------------+-------------------------+---------------+
+       | 2               | Evidence                | Section 3.1.1 |
+       |                 |                         | of RFCthis    |
+       +-----------------+-------------------------+---------------+
+       | 3               | Attestation Results     | Section 3.1.1 |
+       |                 |                         | of RFCthis    |
+       +-----------------+-------------------------+---------------+
+       | 4               | Appraisal Policy        | Section 3.1.1 |
+       |                 |                         | of RFCthis    |
+       +-----------------+-------------------------+---------------+
+       | 5-31            | Unassigned              |               |
+       +-----------------+-------------------------+---------------+
 
              Table 2: CMW Indicators Registry Initial Contents
 
@@ -1688,8 +1700,8 @@ Acknowledgments
 
    The authors would like to thank Brian Campbell, Carl Wallace, Carsten
    Bormann, Dave Thaler, Ionuț Mihalcea, Michael B.  Jones, Mike
-   Ounsworth, Mohit Sethi, Russ Housley, Tom Jones, and Usama Sardar for
-   their reviews and suggestions.
+   Ounsworth, Mohit Sethi, Russ Housley, Steven Bellock, Tom Jones, and
+   Usama Sardar for their reviews and suggestions.
 
    The definition of a Collection CMW has been modelled on a proposal
    originally made by Simon Frost for an EAT-based Evidence collection
