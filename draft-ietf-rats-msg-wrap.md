@@ -251,7 +251,8 @@ As such, it indicates which bits are allowed to be set in the `ind` byte string.
 {: #fig-cddl-cm-type artwork-align="left"
    title="CDDL definition of the CM Type"}
 
-The `cm-type` currently has four allowed values: Reference Values, Endorsements, Evidence and Attestation Results, as defined in {{Section 8 of -rats-arch}}.
+The `cm-type` currently has five allowed values: Reference Values, Endorsements, Evidence, Attestation Results, and Appraisal Policy, as defined in {{Section 8 of -rats-arch}}.
+Note that that an Appraisal Policy may refer to the appraisal of Evidence or Attestation Results, depending on whether the consumer of the conceptual message is a Verifier or a Relying Party.
 
 Future specifications that extend the RATS Conceptual Messages set can add new values to the `cm-type` using the process defined in {{iana-ind-ext}}.
 
@@ -781,11 +782,12 @@ The initial registrations for the registry are detailed in {{tab-ind-regs}}.
 
 | Indicator value | Conceptual Message name | Reference |
 |-----------------|-------------------------|-----------|
-| 0 | Reference Values | {{&SELF}} |
-| 1 | Endorsements | {{&SELF}} |
-| 2 | Evidence | {{&SELF}} |
-| 3 | Attestation Results | {{&SELF}} |
-| 4-31 | Unassigned | {{&SELF}} |
+| 0 | Reference Values | {{cm-type}} of {{&SELF}} |
+| 1 | Endorsements | {{cm-type}} of {{&SELF}} |
+| 2 | Evidence | {{cm-type}} of {{&SELF}} |
+| 3 | Attestation Results | {{cm-type}} of {{&SELF}} |
+| 4 | Appraisal Policy | {{cm-type}} of {{&SELF}} |
+| 5-31 | Unassigned | |
 {: #tab-ind-regs title="CMW Indicators Registry Initial Contents"}
 
 ### Provisional Registration
@@ -1101,6 +1103,7 @@ Michael B. Jones,
 Mike Ounsworth,
 Mohit Sethi,
 Russ Housley,
+Steven Bellock,
 Tom Jones,
 and
 Usama Sardar
