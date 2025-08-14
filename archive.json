@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-12T01:01:00.555275+00:00",
+  "timestamp": "2025-08-14T01:02:29.360728+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -3410,15 +3410,15 @@
       "id": "I_kwDOIGCt2M6-HcR2",
       "title": "Add appraisal policies to `cm-type`",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/229",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "steven-bellock",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "Related issue https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/26 and @nedmsmith's comment in https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/26#issuecomment-1513491741. Even if RATS is not going to define a format for appraisal policies, the concept still exists in the RATS architecture, and CMW is generic enough that it can just identify appraisal policies. It would be nice to define it in the initial specification and then that maps completely to https://www.rfc-editor.org/rfc/rfc9334#section-8.\n\n```\ncm-type = &(\n  reference-values: 0\n  endorsements: 1\n  evidence: 2\n  attestation-results: 3\n  appraisal-policy-evidence: 4\n  appraisal-policy-attestation-results: 5\n)\n```",
       "createdAt": "2025-06-30T19:29:32Z",
-      "updatedAt": "2025-06-30T19:29:32Z",
-      "closedAt": null,
+      "updatedAt": "2025-08-12T10:42:24Z",
+      "closedAt": "2025-08-12T10:42:24Z",
       "comments": []
     }
   ],
@@ -16485,24 +16485,26 @@
       "id": "PR_kwDOIGCt2M6gwyGS",
       "title": "add appraisal policy to the CM types",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/235",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "While defining appraisal policies is beyond the scope of the current RATS character, it makes sense to add a code point for the conceptual message.\r\n\r\nFix #229 ",
+      "body": "While defining appraisal policies is beyond the scope of the current RATS charter, it makes sense to add a code point for the conceptual message.\r\n\r\nFix #229 ",
       "createdAt": "2025-07-26T14:35:03Z",
-      "updatedAt": "2025-08-11T09:30:46Z",
+      "updatedAt": "2025-08-12T10:42:26Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "b5b2b058fe7f59ed3f03352a4ee41fb3518f6e7b",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "policy-cms",
       "headRefOid": "cd84dff9daaf4edf05c6374c6c7f9969c1b6c7f6",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-08-12T10:42:23Z",
+      "mergedAt": "2025-08-12T10:42:23Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "76cc9a39a944ba543393f7f22245467dd501d86f"
+      },
       "comments": [],
       "reviews": [
         {
@@ -16524,6 +16526,19 @@
               "updatedAt": "2025-08-05T12:25:44Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M65XJ9I",
+          "commit": {
+            "abbreviatedOid": "cd84dff"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "This creates the desired symmetry with Section 8 in RFC 9334. Not entire sure, if we will have to differentiate types of policy later on? But as the context typically drives this disambiguation, the proposal seems to be the minimal viable solution approach.",
+          "createdAt": "2025-08-12T10:41:57Z",
+          "updatedAt": "2025-08-12T10:41:57Z",
+          "comments": []
         }
       ]
     },
@@ -16532,26 +16547,42 @@
       "id": "PR_kwDOIGCt2M6jAW9q",
       "title": "Fix CoRIM media type",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/236",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "s/signed-corim+cbor/rim+cose/",
       "createdAt": "2025-08-11T09:27:26Z",
-      "updatedAt": "2025-08-11T09:27:38Z",
+      "updatedAt": "2025-08-12T10:28:06Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "b5b2b058fe7f59ed3f03352a4ee41fb3518f6e7b",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "fix-corim-media-type",
       "headRefOid": "e997bba818daf46c72cf601b734c17e548fa30b0",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-08-12T10:28:06Z",
+      "mergedAt": "2025-08-12T10:28:06Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "5eb3a3f71f3e99dc6d2313e88e432a36cb8c3c42"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M65W-L6",
+          "commit": {
+            "abbreviatedOid": "e997bba"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "this is already set in stone. thanks for the fix. appreciated.",
+          "createdAt": "2025-08-12T10:27:27Z",
+          "updatedAt": "2025-08-12T10:27:27Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
