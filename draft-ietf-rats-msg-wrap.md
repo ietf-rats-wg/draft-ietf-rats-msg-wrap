@@ -600,6 +600,8 @@ The following example shows the use of the `"cmw"` JWT claim to transport a Coll
 
 # Implementation Status
 
+[^rfced] Please remove the entire section before publication, as well as the reference to RFC 7942.
+
 This section records the status of known implementations of the protocol
 defined by this specification at the time of posting of this Internet-Draft,
 and is based on a proposal described in {{-impl-status}}.
