@@ -21,24 +21,24 @@ Additionally, the draft defines a media type and a CoAP content format to transp
 By introducing a shared message format like the CMW, we can consistently support different attestation message types, evolve message
 serialization formats without breaking compatibility, and avoid having to redefine how messages are handled in each protocol. 
     " name="description">
-<meta content="xml2rfc 3.30.0" name="generator">
+<meta content="xml2rfc 3.30.2" name="generator">
 <meta content="evidence" name="keyword">
 <meta content="attestation results" name="keyword">
 <meta content="endorsements" name="keyword">
 <meta content="reference values" name="keyword">
 <meta content="draft-ietf-rats-msg-wrap-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.30.0
+  xml2rfc 3.30.2
     Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
     lxml 5.3.1
-    platformdirs 4.3.8
+    platformdirs 4.4.0
     pycountry 24.6.1
     PyYAML 6.0.2
-    requests 2.32.4
+    requests 2.32.5
     setuptools 80.9.0
     wcwidth 0.2.13
 -->
@@ -1059,11 +1059,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">RATS CMW</td>
-<td class="right">July 2025</td>
+<td class="right">September 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 27 January 2026</td>
+<td class="center">Expires 26 March 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1076,12 +1076,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-rats-msg-wrap-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-07-26" class="published">26 July 2025</time>
+<time datetime="2025-09-22" class="published">22 September 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-01-27">27 January 2026</time></dd>
+<dd class="expires"><time datetime="2026-03-26">26 March 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1150,7 +1150,7 @@ serialization formats without breaking compatibility, and avoid having to redefi
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 27 January 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 26 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1552,7 +1552,7 @@ potentially ambiguous, and there is no further context available to the
 CMW consumer to decide.  For example, this might be the case if the base
 media type is not profiled (e.g., <code>application/eat+cwt</code>), if the <code>value</code>
 field contains multiple conceptual messages with different types (e.g.,
-both Reference Values and Endorsements within the same <code>application/signed-corim+cbor</code>), or if the same profile identifier is
+both Reference Values and Endorsements within the same <code>application/rim+cose</code>), or if the same profile identifier is
 shared by different conceptual messages.
 The value <span class="bcp14">MUST</span> be non-zero. The absence of conceptual message indicator information is indicated by omitting the <code>ind</code> field entirely.
 For further details, see <a href="#cm-type" class="auto internal xref">Section 3.1.1</a>.<a href="#section-3.1-4.6.1" class="pilcrow">¶</a></p>
@@ -1575,6 +1575,7 @@ cm-type = &amp;(
   endorsements: 1
   evidence: 2
   attestation-results: 3
+  appraisal-policy: 4
 )
 </pre>
 </div>
@@ -1582,7 +1583,8 @@ cm-type = &amp;(
 <a href="#name-cddl-definition-of-the-cm-t" class="selfRef">CDDL definition of the CM Type</a>
             </figcaption></figure>
 </div>
-<p id="section-3.1.1-3">The <code>cm-type</code> currently has four allowed values: Reference Values, Endorsements, Evidence and Attestation Results, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9334#section-8" class="relref">Section 8</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-3">The <code>cm-type</code> currently has five allowed values: Reference Values, Endorsements, Evidence, Attestation Results, and Appraisal Policy, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9334#section-8" class="relref">Section 8</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.
+Note that that an Appraisal Policy may refer to the appraisal of Evidence or Attestation Results, depending on whether the consumer of the conceptual message is a Verifier or a Relying Party.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.1.1-4">Future specifications that extend the RATS Conceptual Messages set can add new values to the <code>cm-type</code> using the process defined in <a href="#iana-ind-ext" class="auto internal xref">Section 10.5</a>.<a href="#section-3.1.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2012,8 +2014,8 @@ da 637476a7    # tag(1668576935)
 <div class="lang-cbor-diag sourcecode" id="section-5.4-2">
 <pre>
 [
-  "application/signed-corim+cbor",
-  h'd901f6d28440a044d901f5a040',
+  "application/rim+cose",
+  h'd28440a044d901f5a040',
   3
 ]
 </pre><a href="#section-5.4-2" class="pilcrow">¶</a>
@@ -2021,13 +2023,15 @@ da 637476a7    # tag(1668576935)
 <p id="section-5.4-3">with the following wire representation:<a href="#section-5.4-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.4-4">
 <pre>
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
 83                                      # array(3)
-   78 1d                                # text(29)
-      6170706c69636174696f6e2f7369676e65642d636f72696d2b63626f72 # "app
-lication/signed-corim+cbor"
-   4d                                   # bytes(13)
-      d901f6d28440a044d901f5a040        # "\xD9\u0001\xF6҄@\xA0D\xD9\u00
-01\xF5\xA0@"
+   74                                   # text(20)
+      6170706c69636174696f6e2f72696d2b636f7365 # "application/rim+\
+                                                                cose"
+   4a                                   # bytes(10)
+      d28440a044d901f5a040              # "҄@\xA0D\xD9\u0001\xF5\xA0\
+                                                                   @"
    03                                   # unsigned(3)
 </pre><a href="#section-5.4-4" class="pilcrow">¶</a>
 </div>
@@ -2168,6 +2172,7 @@ cm-type = &amp;(
   endorsements: 1
   evidence: 2
   attestation-results: 3
+  appraisal-policy: 4
 )
 
 Content-Type-ABNF = '
@@ -2250,7 +2255,8 @@ signed-json-cmw-unprotected-hdr = {
       <h2 id="name-implementation-status">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-implementation-status" class="section-name selfRef">Implementation Status</a>
       </h2>
-<p id="section-7-1">This section records the status of known implementations of the protocol
+<p id="section-7-1"><span class="cref" id="rfced">RFC Editor:</span> Please remove the entire section before publication, as well as the reference to RFC 7942.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">This section records the status of known implementations of the protocol
 defined by this specification at the time of posting of this Internet-Draft,
 and is based on a proposal described in <span>[<a href="#RFC7942" class="cite xref">RFC7942</a>]</span>.
 The description of implementations in this section is intended to assist the
@@ -2261,13 +2267,13 @@ Furthermore, no effort has been spent to verify the information presented here
 that was supplied by IETF contributors.
 This is not intended as, and must not be construed to be, a catalog of
 available implementations or their features.
-Readers are advised to note that other implementations may exist.<a href="#section-7-1" class="pilcrow">¶</a></p>
-<p id="section-7-2">According to <span>[<a href="#RFC7942" class="cite xref">RFC7942</a>]</span>, "this will allow reviewers and working groups to
+Readers are advised to note that other implementations may exist.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-3">According to <span>[<a href="#RFC7942" class="cite xref">RFC7942</a>]</span>, "this will allow reviewers and working groups to
 assign due consideration to documents that have the benefit of running code,
 which may serve as evidence of valuable experimentation and feedback that have
 made the implemented protocols more mature.
 It is up to the individual working groups to use this information as they see
-fit".<a href="#section-7-2" class="pilcrow">¶</a></p>
+fit".<a href="#section-7-3" class="pilcrow">¶</a></p>
 <div id="project-veraison">
 <section id="section-7.1">
         <h3 id="name-project-veraison">
@@ -2354,8 +2360,8 @@ It is the responsibility of the Attester who creates the Collection CMW to ensur
       <h2 id="name-iana-considerations">
 <a href="#section-10" class="section-number selfRef">10. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-10-1"><span class="cref" id="rfced">RFC Editor:</span> Please replace "RFCthis" with the RFC number assigned to this document.<a href="#section-10-1" class="pilcrow">¶</a></p>
-<p id="section-10-2"><span class="cref" id="rfced_1">RFC Editor:</span> This document uses the CPA (code point allocation) convention described in <span>[<a href="#I-D.bormann-cbor-draft-numbers" class="cite xref">I-D.bormann-cbor-draft-numbers</a>]</span>. For each usage of the term "CPA", please remove the prefix "CPA" from the indicated value and replace the residue with the value assigned by IANA; perform an analogous substitution for all other occurrences of the prefix "CPA" in the document. Finally, please remove this note.<a href="#section-10-2" class="pilcrow">¶</a></p>
+<p id="section-10-1"><span class="cref" id="rfced_1">RFC Editor:</span> Please replace "RFCthis" with the RFC number assigned to this document.<a href="#section-10-1" class="pilcrow">¶</a></p>
+<p id="section-10-2"><span class="cref" id="rfced_2">RFC Editor:</span> This document uses the CPA (code point allocation) convention described in <span>[<a href="#I-D.bormann-cbor-draft-numbers" class="cite xref">I-D.bormann-cbor-draft-numbers</a>]</span>. For each usage of the term "CPA", please remove the prefix "CPA" from the indicated value and replace the residue with the value assigned by IANA; perform an analogous substitution for all other occurrences of the prefix "CPA" in the document. Finally, please remove this note.<a href="#section-10-2" class="pilcrow">¶</a></p>
 <div id="iana-cwt">
 <section id="section-10.1">
         <h3 id="name-cwt-cmw-claim-registration">
@@ -2558,27 +2564,37 @@ The IETF has change control over this registration.<a href="#section-10.3.1-1.18
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">0</td>
                 <td class="text-left" rowspan="1" colspan="1">Reference Values</td>
-                <td class="text-left" rowspan="1" colspan="1">RFCthis</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#cm-type" class="auto internal xref">Section 3.1.1</a> of RFCthis</td>
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">1</td>
                 <td class="text-left" rowspan="1" colspan="1">Endorsements</td>
-                <td class="text-left" rowspan="1" colspan="1">RFCthis</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#cm-type" class="auto internal xref">Section 3.1.1</a> of RFCthis</td>
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">2</td>
                 <td class="text-left" rowspan="1" colspan="1">Evidence</td>
-                <td class="text-left" rowspan="1" colspan="1">RFCthis</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#cm-type" class="auto internal xref">Section 3.1.1</a> of RFCthis</td>
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">3</td>
                 <td class="text-left" rowspan="1" colspan="1">Attestation Results</td>
-                <td class="text-left" rowspan="1" colspan="1">RFCthis</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#cm-type" class="auto internal xref">Section 3.1.1</a> of RFCthis</td>
               </tr>
               <tr>
-                <td class="text-left" rowspan="1" colspan="1">4-31</td>
+                <td class="text-left" rowspan="1" colspan="1">4</td>
+                <td class="text-left" rowspan="1" colspan="1">Appraisal Policy</td>
+                <td class="text-left" rowspan="1" colspan="1">
+                  <a href="#cm-type" class="auto internal xref">Section 3.1.1</a> of RFCthis</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">5-31</td>
                 <td class="text-left" rowspan="1" colspan="1">Unassigned</td>
-                <td class="text-left" rowspan="1" colspan="1">RFCthis</td>
+                <td class="text-left" rowspan="1" colspan="1"> </td>
               </tr>
             </tbody>
           </table>
@@ -3263,7 +3279,7 @@ dotted-decimal notation.  The parameter value is case-insensitive.  It must not 
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-ar4si">[I-D.ietf-rats-ar4si]</dt>
         <dd>
-<span class="refAuthor">Voit, E.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Hardjono, T.</span>, <span class="refAuthor">Fossati, T.</span>, and <span class="refAuthor">V. Scarlata</span>, <span class="refTitle">"Attestation Results for Secure Interactions"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-ar4si-08</span>, <time datetime="2025-02-06" class="refDate">6 February 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-ar4si-08">https://datatracker.ietf.org/doc/html/draft-ietf-rats-ar4si-08</a>&gt;</span>. </dd>
+<span class="refAuthor">Voit, E.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Hardjono, T.</span>, <span class="refAuthor">Fossati, T.</span>, and <span class="refAuthor">V. Scarlata</span>, <span class="refTitle">"Attestation Results for Secure Interactions"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-ar4si-09</span>, <time datetime="2025-08-15" class="refDate">15 August 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-ar4si-09">https://datatracker.ietf.org/doc/html/draft-ietf-rats-ar4si-09</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-corim">[I-D.ietf-rats-corim]</dt>
         <dd>
@@ -3432,7 +3448,7 @@ When using Collection CMW, the preconditions apply for each entry in the Collect
       </h2>
 <p id="appendix-B-1">The list of currently open issues for this documents can be found at
 <span><a href="https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues">https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues</a></span>.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<p id="appendix-B-2"><span class="cref" id="rfced_2">RFC Editor:</span> please remove before publication.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
+<p id="appendix-B-2"><span class="cref" id="rfced_3">RFC Editor:</span> please remove before publication.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="acknowledgments">
@@ -3450,6 +3466,7 @@ Michael B. Jones,
 Mike Ounsworth,
 Mohit Sethi,
 Russ Housley,
+Steven Bellock,
 Tom Jones,
 and
 Usama Sardar
