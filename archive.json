@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-14T01:02:29.360728+00:00",
+  "timestamp": "2025-09-23T00:54:35.854444+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -16580,6 +16580,81 @@
           "body": "this is already set in stone. thanks for the fix. appreciated.",
           "createdAt": "2025-08-12T10:27:27Z",
           "updatedAt": "2025-08-12T10:27:27Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 237,
+      "id": "PR_kwDOIGCt2M6p3zlU",
+      "title": "add note to remove \u00a77",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/237",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-22T15:19:22Z",
+      "updatedAt": "2025-09-22T17:23:19Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "76cc9a39a944ba543393f7f22245467dd501d86f",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "section-7-must-go",
+      "headRefOid": "13c687534d492e9fa27e2c7ca1e387dcbde4c903",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@deeglaze while we are at it, do you want to update your email contact?",
+          "createdAt": "2025-09-22T15:37:31Z",
+          "updatedAt": "2025-09-22T15:37:31Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> @deeglaze while we are at it, do you want to update your email contact?\n\nNo, I don't have approval to represent Apple on an I-D yet.",
+          "createdAt": "2025-09-22T17:09:45Z",
+          "updatedAt": "2025-09-22T17:09:45Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > @deeglaze while we are at it, do you want to update your email contact?\r\n> \r\n> No, I don't have approval to represent Apple on an I-D yet.\r\n\r\nYou don\u2019t need a backing company.  You can represent yourself :-)",
+          "createdAt": "2025-09-22T17:23:19Z",
+          "updatedAt": "2025-09-22T17:23:19Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7B7XaN",
+          "commit": {
+            "abbreviatedOid": "13c6875"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-09-22T15:30:09Z",
+          "updatedAt": "2025-09-22T15:30:09Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M7B8WvN",
+          "commit": {
+            "abbreviatedOid": "13c6875"
+          },
+          "author": "steven-bellock",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-09-22T16:14:35Z",
+          "updatedAt": "2025-09-22T16:14:35Z",
           "comments": []
         }
       ]
