@@ -95,8 +95,9 @@ entity:
 
 --- abstract
 
-The Remote Attestation Procedures architecture (RFC 9334) defines several types of conceptual messages, such as Evidence, Attestation
-Results, Endorsements, and Reference Values. These messages can appear in different formats and be transported via various protocols.
+The Conceptual Messages introduced by the RATS Architecture (RFC9334) are protocol-agnostic data units that are conveyed between RATS roles during remote attestation procedures.
+Conceptual Messages describe the meaning and function of such data units within RATS data flows without specifying a wire format, encoding, transport mechanism, or processing details.
+The initial set of Conceptual Messages is defined in Section 8 of RFC9334 and includes Evidence, Attestation Results, Endorsements, Reference Values, and Appraisal Policies.
 
 This document introduces the Conceptual Message Wrapper (CMW) that provides a common structure to encapsulate these messages.
 It defines a dedicated CBOR tag, corresponding JSON Web Token (JWT) and CBOR Web Token (CWT) claims, and an X.509 extension.
