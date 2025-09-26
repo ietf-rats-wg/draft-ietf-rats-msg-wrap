@@ -313,7 +313,7 @@ A Collection MUST have at least one CMW entry.
 The `"__cmwc_t"` key is reserved for associating an optional type with the overall Collection and MUST NOT be used for any purpose other than described here.
 
 The value of the `"__cmwc_t"` key is either a Uniform Resource Identifier (URI) or an object identifier (OID).
-The OID MUST be absolute.
+The OID is always absolute and never relative.
 The URI MUST be in the absolute form ({{Section 4.3 of -uri}}).
 
 The `"__cmwc_t"` key functions similar to an EAT profile claim (see {{Section 4.3.2 of -rats-eat}}), but at a higher level.
