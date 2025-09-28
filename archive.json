@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-23T00:54:35.854444+00:00",
+  "timestamp": "2025-09-28T01:01:14.411339+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -3419,6 +3419,22 @@
       "createdAt": "2025-06-30T19:29:32Z",
       "updatedAt": "2025-08-12T10:42:24Z",
       "closedAt": "2025-08-12T10:42:24Z",
+      "comments": []
+    },
+    {
+      "number": 239,
+      "id": "I_kwDOIGCt2M7ODG2w",
+      "title": "Deb's AD review",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/239",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "---\n\n* [x] General:  Please double check all code snippets and figures for correctness.\n\n---\n\n* [x] General:  What is the rationale for the word 'conceptual'?  Are the 'messages' theoretical? [I looked in RFC 9334 and it is never defined.]  At some point does this draft discuss real message types? Or only theoretical message types?\n\nSee https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/238\n\n---\n\n* [x] Section 3.1:  Record CMWs can only be JSON or CBOR?  No other conceptual message representations are possible?\n\nNo.  ASN.1 has been discussed.  The rough consensus is to not include it in this version of the document.\n\nFor the details, see also sub-thread starting at https://mailarchive.ietf.org/arch/msg/rats/RMbum4W01sP2mZrD8qVa2K2W-jo/\n\n---\n\n* [x] Section 3.1, ind:  json-record has a bitmap?  How is that encoded?\n\nSame as the CBOR `ind`.\n\nRelevant excerpt from https://mailarchive.ietf.org/arch/msg/rats/jl_ZIS9jrw8FB4Fz3fyWuziiYlQ/ :\n\n>  Yes, it is encoded in the same way as in the cbor-record.  It is described in \u00a73.1.1 \"CM Type\" [4].\n> For an example, see [5] where 0b0000_0011 (3) means Reference Values (0-th bit in the ind bit-map) + Endorsements (bit 1 in the ind bit-map).\n> \n> [4] https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-17.html#section-3.1.1\n> [5] https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-17.html#section-5.4\n\n---\n\n* [ ] Section 3.3, para 6:  Can OIDs be something other than 'absolute\u2019?\n\nProposal made in https://mailarchive.ietf.org/arch/msg/rats/YJomPOeuEAwGey-p-P5S-gmlzAk/\n\nRelevant excerpt:\n\n> More than happy to clarify, but I am slightly unsure what the specific ambiguity is, and therefore what the solution should be.\n> \n> Are you suggesting:\n> \n> OLD\n>   The OID MUST be absolute.\n> \n> NEW\n>   The OID MUST be absolute and never relative.\n> \n> as done in RFC9711?  Or something else?\n\n---\n\n* [ ] Section 4.4, para 6:  'Legacy relying parties' will ignore non-critical extensions and will reject the certificate for unknown critical extensions.  Is this the desired outcome?  There are very few critical extensions in a certificate normally.  I suggest removing ', and there is a risk that legacy relying parties would bypass such controls.'\n\nHopefully explained in https://mailarchive.ietf.org/arch/msg/rats/YJomPOeuEAwGey-p-P5S-gmlzAk/\n\nRelevant excerpt:\n\n> It's Ned who brought up the use case, and he's likely a more authoritative voice for this, but I'll try to give my reading anyway.\n> \n> Regarding the criticality of extensions, RFC5280, \u00a74.2 states: \"[\u2026] caution ought to be exercised in adopting any critical extensions in certificates that might prevent use in a general context.\"\n> \n> So, generally, for an extension that needs to be deployed across multiple environments and applications, \"SHOULD NOT be marked critical\" seems to be the sensible default choice.\n> \n> If the extension is only deployed in controlled environments (e.g., the certificate is only used in the context of a specific, attestation-aware application), whether or not the extension is marked as critical is irrelevant, as the attestation-aware RP will process its contents either way.  So, the \"SHOULD NOT be marked critical\u201d remains a valid option here too.\n> \n> The exception to this is the case highlighted in para 6, where \u201cthe attestation-related information is essential for granting resource access, and there is a risk that legacy relying parties would bypass such controls.\"  In this case, to avoid false positives, you really want to make an exception to the default rule and mark it as critical.\n\n---\n\n* [x] Section 7:  Please add the statement suggested by RFC 7942, section 2.1 to advise the Editor to remove the section before publication.\n\nSee https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/237\n\n---\n",
+      "createdAt": "2025-09-26T10:31:21Z",
+      "updatedAt": "2025-09-26T10:36:56Z",
+      "closedAt": null,
       "comments": []
     }
   ],
@@ -16596,7 +16612,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-09-22T15:19:22Z",
-      "updatedAt": "2025-09-22T17:23:19Z",
+      "updatedAt": "2025-09-26T12:32:30Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "76cc9a39a944ba543393f7f22245467dd501d86f",
@@ -16628,6 +16644,13 @@
           "body": "> > @deeglaze while we are at it, do you want to update your email contact?\r\n> \r\n> No, I don't have approval to represent Apple on an I-D yet.\r\n\r\nYou don\u2019t need a backing company.  You can represent yourself :-)",
           "createdAt": "2025-09-22T17:23:19Z",
           "updatedAt": "2025-09-22T17:23:19Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @ionut-arm ",
+          "createdAt": "2025-09-26T10:16:45Z",
+          "updatedAt": "2025-09-26T10:16:45Z"
         }
       ],
       "reviews": [
@@ -16656,8 +16679,103 @@
           "createdAt": "2025-09-22T16:14:35Z",
           "updatedAt": "2025-09-22T16:14:35Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M7DB2Hv",
+          "commit": {
+            "abbreviatedOid": "13c6875"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "That is BCP for BCP 205 and I do not think it needs a note, but why not.\r\n\r\nHaving written that, this note is necessary because BCP 205 is not followed correctly. Maybe we could have handled that better. Good enough, fn.",
+          "createdAt": "2025-09-26T12:32:30Z",
+          "updatedAt": "2025-09-26T12:32:30Z",
+          "comments": []
         }
       ]
+    },
+    {
+      "number": 238,
+      "id": "PR_kwDOIGCt2M6qrXLN",
+      "title": "add CM definition to abstract",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/238",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As per https://mailarchive.ietf.org/arch/msg/rats/e2jiOn3pDCKUtYytpV2FkU7_PuY/",
+      "createdAt": "2025-09-26T10:15:50Z",
+      "updatedAt": "2025-09-26T12:33:37Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "76cc9a39a944ba543393f7f22245467dd501d86f",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "cm-def",
+      "headRefOid": "5cc63fc675a8e834c84007a93b8c0ac3975b8ac1",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @ionut-arm ",
+          "createdAt": "2025-09-26T10:16:22Z",
+          "updatedAt": "2025-09-26T10:16:22Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7DB3B_",
+          "commit": {
+            "abbreviatedOid": "5cc63fc"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": ":ship: it",
+          "createdAt": "2025-09-26T12:33:37Z",
+          "updatedAt": "2025-09-26T12:33:37Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 240,
+      "id": "PR_kwDOIGCt2M6qvowj",
+      "title": "OID requirements",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/240",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-26T15:30:32Z",
+      "updatedAt": "2025-09-26T15:58:38Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "76cc9a39a944ba543393f7f22245467dd501d86f",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "x",
+      "headRefOid": "f65e49e50721657ee65ef72b033b31ecd6b3ed77",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "debcooley",
+          "authorAssociation": "NONE",
+          "body": "perfect.  TY",
+          "createdAt": "2025-09-26T15:58:38Z",
+          "updatedAt": "2025-09-26T15:58:38Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
