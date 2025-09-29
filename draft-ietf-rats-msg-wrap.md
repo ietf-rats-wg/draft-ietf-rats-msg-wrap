@@ -95,7 +95,7 @@ entity:
 
 --- abstract
 
-The Conceptual Messages introduced by the RATS Architecture (RFC9334) are protocol-agnostic data units that are conveyed between RATS roles during remote attestation procedures.
+The Conceptual Messages introduced by the RATS architecture (RFC9334) are protocol-agnostic data units that are conveyed between RATS roles during remote attestation procedures.
 Conceptual Messages describe the meaning and function of such data units within RATS data flows without specifying a wire format, encoding, transport mechanism, or processing details.
 The initial set of Conceptual Messages is defined in Section 8 of RFC9334 and includes Evidence, Attestation Results, Endorsements, Reference Values, and Appraisal Policies.
 
@@ -113,8 +113,10 @@ serialization formats without breaking compatibility, and avoid having to redefi
 
 # Introduction
 
-The IETF Remote ATtestation procedureS (RATS) architecture defines a handful of conceptual messages
-(see {{Section 8 of -rats-arch}}), such as Evidence and Attestation Results.
+The Conceptual Messages introduced by the Remote ATtestation procedureS (RATS) architecture {{-rats-arch}} are protocol-agnostic data units that are conveyed between RATS roles during remote attestation procedures.
+Conceptual Messages describe the meaning and function of such data units within RATS data flows without specifying a wire format, encoding, transport mechanism, or processing details.
+The initial set of Conceptual Messages is defined in {{Section 8 of -rats-arch}} and includes Evidence, Attestation Results, Endorsements, Reference Values, and Appraisal Policies.
+
 Each conceptual message can have multiple claims encoding and serialization
 formats ({{Section 9 of -rats-arch}}). Throughout their lifetime, RATS
 conceptual messages are typically transported over different protocols.
