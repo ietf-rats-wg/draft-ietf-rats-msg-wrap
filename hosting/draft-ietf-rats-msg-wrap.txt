@@ -1062,7 +1062,7 @@ Table of Contents
    When CMW is integrated into some hosting protocol (for example,
    attested CSR [I-D.ietf-lamps-csr-attestation] or attested TLS
    [I-D.fossati-tls-attestation]
-   [I-D.fossati-tls-exported-attestation]), it is up to the hosting
+   [I-D.fossati-tls-exported-attestation]), it is up to that hosting
    protocol to describe how CMW is intended to be used and how it fits
    into the overall security model.
 
