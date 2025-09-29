@@ -424,7 +424,7 @@ A Record CMW carried in a `"cmw"` CWT claim MUST be a `cbor-record`.
 
 CMW may need to be transported in PKIX formats, such as Certificate Signing Requests (CSRs) or in X.509 Certificates and Certificate Revocation Lists (CRLs).
 
-The use of CMW in CSRs is documented in {{-csr-a}}, while its application in X.509 Certificates and CRLs is detailed in Section 6.1 of {{DICE-arch}}.
+The use of CMW in CSRs is documented in {{-csr-a}}, while one of the possible applications in X.509 Certificates and CRLs is detailed in Section 6.1 of {{DICE-arch}}.
 
 This section outlines the CMW extension designed to carry CMW objects.
 {{privcons}} discusses some privacy considerations related to the transport of CMW in X.509 formats.
@@ -440,7 +440,7 @@ id-pe-cmw  OBJECT IDENTIFIER ::=
 ~~~
 
 This extension SHOULD NOT be marked critical.
-It MAY be marked critical in cases where the attestation-related information is essential for granting resource access, and there is a risk that legacy relying parties would bypass such controls.
+In cases where the wrapped Conceptual Message is essential for granting resource access, and there is a risk that legacy relying parties would bypass crucial controls, it is acceptable to mark the extension as critical.
 
 The CMW extension MUST have the following syntax:
 
