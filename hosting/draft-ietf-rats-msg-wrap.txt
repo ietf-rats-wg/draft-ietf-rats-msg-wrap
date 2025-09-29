@@ -1709,8 +1709,9 @@ Acknowledgments
 
    The authors would like to thank Brian Campbell, Carl Wallace, Carsten
    Bormann, Dave Thaler, Deb Cooley, Ionuț Mihalcea, Michael B.  Jones,
-   Mike Ounsworth, Mohit Sethi, Russ Housley, Steven Bellock, Tom Jones,
-   and Usama Sardar for their reviews and suggestions.
+   Mike Ounsworth, Mohit Sethi, Paul Howard, Russ Housley, Steven
+   Bellock, Tom Jones, and Usama Sardar for their reviews and
+   suggestions.
 
    The definition of a Collection CMW has been modelled on a proposal
    originally made by Simon Frost for an EAT-based Evidence collection
