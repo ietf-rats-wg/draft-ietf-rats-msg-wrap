@@ -435,9 +435,9 @@ Table of Contents
    than described here.
 
    The value of the "__cmwc_t" key is either a Uniform Resource
-   Identifier (URI) or an object identifier (OID).  The OID MUST be
-   absolute.  The URI MUST be in the absolute form (Section 4.3 of
-   [RFC3986]).
+   Identifier (URI) or an object identifier (OID).  The OID is always
+   absolute and never relative.  The URI MUST be in the absolute form
+   (Section 4.3 of [RFC3986]).
 
    The "__cmwc_t" key functions similar to an EAT profile claim (see
    Section 4.3.2 of [RFC9711]), but at a higher level.  It can be used
@@ -594,8 +594,9 @@ Table of Contents
    Revocation Lists (CRLs).
 
    The use of CMW in CSRs is documented in
-   [I-D.ietf-lamps-csr-attestation], while its application in X.509
-   Certificates and CRLs is detailed in Section 6.1 of [DICE-arch].
+   [I-D.ietf-lamps-csr-attestation], while one of the possible
+   applications in X.509 Certificates and CRLs is detailed in
+   Section 6.1 of [DICE-arch].
 
    This section outlines the CMW extension designed to carry CMW
    objects.  Section 8 discusses some privacy considerations related to
@@ -611,10 +612,10 @@ Table of Contents
            { iso(1) identified-organization(3) dod(6) internet(1)
              security(5) mechanisms(5) pkix(7) id-pe(1) 35 }
 
-   This extension SHOULD NOT be marked critical.  It MAY be marked
-   critical in cases where the attestation-related information is
-   essential for granting resource access, and there is a risk that
-   legacy relying parties would bypass such controls.
+   This extension SHOULD NOT be marked critical.  In cases where the
+   wrapped Conceptual Message is essential for granting resource access,
+   and there is a risk that legacy relying parties would bypass crucial
+   controls, it is acceptable to mark the extension as critical.
 
    The CMW extension MUST have the following syntax:
 
@@ -1707,9 +1708,9 @@ Appendix B.  Open Issues
 Acknowledgments
 
    The authors would like to thank Brian Campbell, Carl Wallace, Carsten
-   Bormann, Dave Thaler, Ionuț Mihalcea, Michael B.  Jones, Mike
-   Ounsworth, Mohit Sethi, Russ Housley, Steven Bellock, Tom Jones, and
-   Usama Sardar for their reviews and suggestions.
+   Bormann, Dave Thaler, Deb Cooley, Ionuț Mihalcea, Michael B.  Jones,
+   Mike Ounsworth, Mohit Sethi, Russ Housley, Steven Bellock, Tom Jones,
+   and Usama Sardar for their reviews and suggestions.
 
    The definition of a Collection CMW has been modelled on a proposal
    originally made by Simon Frost for an EAT-based Evidence collection

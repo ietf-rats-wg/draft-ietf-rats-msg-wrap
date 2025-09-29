@@ -1662,7 +1662,7 @@ Labels can be strings (or integers in the CBOR serialization) that serve as a mn
 <p id="section-3.3-4">A Collection <span class="bcp14">MUST</span> have at least one CMW entry.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
 <p id="section-3.3-5">The <code>"__cmwc_t"</code> key is reserved for associating an optional type with the overall Collection and <span class="bcp14">MUST NOT</span> be used for any purpose other than described here.<a href="#section-3.3-5" class="pilcrow">¶</a></p>
 <p id="section-3.3-6">The value of the <code>"__cmwc_t"</code> key is either a Uniform Resource Identifier (URI) or an object identifier (OID).
-The OID <span class="bcp14">MUST</span> be absolute.
+The OID is always absolute and never relative.
 The URI <span class="bcp14">MUST</span> be in the absolute form (<span><a href="https://rfc-editor.org/rfc/rfc3986#section-4.3" class="relref">Section 4.3</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>).<a href="#section-3.3-6" class="pilcrow">¶</a></p>
 <p id="section-3.3-7">The <code>"__cmwc_t"</code> key functions similar to an EAT profile claim (see <span><a href="https://rfc-editor.org/rfc/rfc9711#section-4.3.2" class="relref">Section 4.3.2</a> of [<a href="#RFC9711" class="cite xref">RFC9711</a>]</span>), but at a higher level.
 It can be used to indicate basics like CBOR serialization and COSE algorithms just as a profile in EAT does.
@@ -1838,7 +1838,7 @@ A Record CMW carried in a <code>"cmw"</code> CWT claim <span class="bcp14">MUST<
 <a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-transporting-cmw-in-pkix-fo" class="section-name selfRef">Transporting CMW in PKIX Formats</a>
         </h3>
 <p id="section-4.4-1">CMW may need to be transported in PKIX formats, such as Certificate Signing Requests (CSRs) or in X.509 Certificates and Certificate Revocation Lists (CRLs).<a href="#section-4.4-1" class="pilcrow">¶</a></p>
-<p id="section-4.4-2">The use of CMW in CSRs is documented in <span>[<a href="#I-D.ietf-lamps-csr-attestation" class="cite xref">I-D.ietf-lamps-csr-attestation</a>]</span>, while its application in X.509 Certificates and CRLs is detailed in Section 6.1 of <span>[<a href="#DICE-arch" class="cite xref">DICE-arch</a>]</span>.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
+<p id="section-4.4-2">The use of CMW in CSRs is documented in <span>[<a href="#I-D.ietf-lamps-csr-attestation" class="cite xref">I-D.ietf-lamps-csr-attestation</a>]</span>, while one of the possible applications in X.509 Certificates and CRLs is detailed in Section 6.1 of <span>[<a href="#DICE-arch" class="cite xref">DICE-arch</a>]</span>.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
 <p id="section-4.4-3">This section outlines the CMW extension designed to carry CMW objects.
 <a href="#privcons" class="auto internal xref">Section 8</a> discusses some privacy considerations related to the transport of CMW in X.509 formats.<a href="#section-4.4-3" class="pilcrow">¶</a></p>
 <p id="section-4.4-4">The CMW extension <span class="bcp14">MAY</span> be included in X.509 Certificates, CRLs <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>, and CSRs.<a href="#section-4.4-4" class="pilcrow">¶</a></p>
@@ -1851,7 +1851,7 @@ id-pe-cmw  OBJECT IDENTIFIER ::=
 </pre><a href="#section-4.4-6" class="pilcrow">¶</a>
 </div>
 <p id="section-4.4-7">This extension <span class="bcp14">SHOULD NOT</span> be marked critical.
-It <span class="bcp14">MAY</span> be marked critical in cases where the attestation-related information is essential for granting resource access, and there is a risk that legacy relying parties would bypass such controls.<a href="#section-4.4-7" class="pilcrow">¶</a></p>
+In cases where the wrapped Conceptual Message is essential for granting resource access, and there is a risk that legacy relying parties would bypass crucial controls, it is acceptable to mark the extension as critical.<a href="#section-4.4-7" class="pilcrow">¶</a></p>
 <p id="section-4.4-8">The CMW extension <span class="bcp14">MUST</span> have the following syntax:<a href="#section-4.4-8" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-4.4-9">
 <pre>
@@ -3463,6 +3463,7 @@ Brian Campbell,
 Carl Wallace,
 Carsten Bormann,
 Dave Thaler,
+Deb Cooley,
 <span class="contact-name">Ionuț Mihalcea</span>,
 Michael B. Jones,
 Mike Ounsworth,
