@@ -10,3 +10,8 @@ signed-cbor-cmw-unprotected-hdr = {
 
 cose.label = int / text
 cose.values = any
+
+; Note: TBD1 is a placeholder for the CoAP C-F codepoint corresponding
+; to 'application/cmw+cbor'.  This CDDL fragment needs to be updated
+; (and this note removed) once the relevant C-F codepoint has been
+; assigned by IANA.
