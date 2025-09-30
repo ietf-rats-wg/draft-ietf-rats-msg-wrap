@@ -1,9 +1,9 @@
 json-collection = {
   ? "__cmwc_t": ~uri / oid
-  + &(label: text) => json-cmw
+  + &(label: text-label) => json-cmw
 }
 
 cbor-collection = {
   ? "__cmwc_t": ~uri / oid
-  + &(label: (int / text)) => cbor-cmw
+  + &(label: (int / text-label)) => cbor-cmw
 }

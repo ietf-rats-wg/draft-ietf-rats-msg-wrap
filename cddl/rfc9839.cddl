@@ -1,0 +1,9 @@
+; from RFC9839
+Unicode-Scalar-ABNF = '
+
+unicode-scalars = 1*unicode-scalar
+
+unicode-scalar =
+   %x0-D7FF /    ; exclude surrogates
+   %xE000-10FFFF
+'

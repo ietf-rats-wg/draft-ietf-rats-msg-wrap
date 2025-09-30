@@ -55,6 +55,7 @@ normative:
   RFC8610: cddl
   RFC9165: cddlplus
   RFC9277:
+  RFC9839: unicode-subsets
   STD94:
     -: cbor
     =: RFC8949
@@ -308,6 +309,7 @@ A single Collection CMW can contain a mix of different message types, and it can
 The Collection CMW ({{fig-cddl-collection}}) is defined as a CBOR map or JSON object containing CMW values.
 The position of a `cmw` entry in the `cmw-collection` is not significant.
 Labels can be strings (or integers in the CBOR serialization) that serve as a mnemonic for different conceptual messages in the Collection.
+The character set allowed in the string representation of a label is the "Unicode Scalars" defined in {{Section 4.1 of -unicode-subsets}}.
 
 A Collection MUST have at least one CMW entry.
 

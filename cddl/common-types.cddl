@@ -4,3 +4,5 @@ base64url-string = text .regexp "[A-Za-z0-9_-]+"
 coap-content-format-type = uint .size 2
 
 oid = text .regexp "([0-2])((\\.0)|(\\.[1-9][0-9]*))*"
+
+text-label = text .abnf ("unicode-scalars" .cat Unicode-Scalar-ABNF)
