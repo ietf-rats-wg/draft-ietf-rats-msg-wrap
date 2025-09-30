@@ -1110,6 +1110,7 @@ Mike Ounsworth,
 Mohit Sethi,
 Russ Housley,
 Steven Bellock,
+Tim Bray,
 Tom Jones,
 and
 Usama Sardar
