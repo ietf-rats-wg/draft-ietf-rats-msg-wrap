@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-28T01:01:14.411339+00:00",
+  "timestamp": "2025-09-30T00:56:13.828393+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -3426,16 +3426,31 @@
       "id": "I_kwDOIGCt2M7ODG2w",
       "title": "Deb's AD review",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/239",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "---\n\n* [x] General:  Please double check all code snippets and figures for correctness.\n\n---\n\n* [x] General:  What is the rationale for the word 'conceptual'?  Are the 'messages' theoretical? [I looked in RFC 9334 and it is never defined.]  At some point does this draft discuss real message types? Or only theoretical message types?\n\nSee https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/238\n\n---\n\n* [x] Section 3.1:  Record CMWs can only be JSON or CBOR?  No other conceptual message representations are possible?\n\nNo.  ASN.1 has been discussed.  The rough consensus is to not include it in this version of the document.\n\nFor the details, see also sub-thread starting at https://mailarchive.ietf.org/arch/msg/rats/RMbum4W01sP2mZrD8qVa2K2W-jo/\n\n---\n\n* [x] Section 3.1, ind:  json-record has a bitmap?  How is that encoded?\n\nSame as the CBOR `ind`.\n\nRelevant excerpt from https://mailarchive.ietf.org/arch/msg/rats/jl_ZIS9jrw8FB4Fz3fyWuziiYlQ/ :\n\n>  Yes, it is encoded in the same way as in the cbor-record.  It is described in \u00a73.1.1 \"CM Type\" [4].\n> For an example, see [5] where 0b0000_0011 (3) means Reference Values (0-th bit in the ind bit-map) + Endorsements (bit 1 in the ind bit-map).\n> \n> [4] https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-17.html#section-3.1.1\n> [5] https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-17.html#section-5.4\n\n---\n\n* [ ] Section 3.3, para 6:  Can OIDs be something other than 'absolute\u2019?\n\nProposal made in https://mailarchive.ietf.org/arch/msg/rats/YJomPOeuEAwGey-p-P5S-gmlzAk/\n\nRelevant excerpt:\n\n> More than happy to clarify, but I am slightly unsure what the specific ambiguity is, and therefore what the solution should be.\n> \n> Are you suggesting:\n> \n> OLD\n>   The OID MUST be absolute.\n> \n> NEW\n>   The OID MUST be absolute and never relative.\n> \n> as done in RFC9711?  Or something else?\n\n---\n\n* [ ] Section 4.4, para 6:  'Legacy relying parties' will ignore non-critical extensions and will reject the certificate for unknown critical extensions.  Is this the desired outcome?  There are very few critical extensions in a certificate normally.  I suggest removing ', and there is a risk that legacy relying parties would bypass such controls.'\n\nHopefully explained in https://mailarchive.ietf.org/arch/msg/rats/YJomPOeuEAwGey-p-P5S-gmlzAk/\n\nRelevant excerpt:\n\n> It's Ned who brought up the use case, and he's likely a more authoritative voice for this, but I'll try to give my reading anyway.\n> \n> Regarding the criticality of extensions, RFC5280, \u00a74.2 states: \"[\u2026] caution ought to be exercised in adopting any critical extensions in certificates that might prevent use in a general context.\"\n> \n> So, generally, for an extension that needs to be deployed across multiple environments and applications, \"SHOULD NOT be marked critical\" seems to be the sensible default choice.\n> \n> If the extension is only deployed in controlled environments (e.g., the certificate is only used in the context of a specific, attestation-aware application), whether or not the extension is marked as critical is irrelevant, as the attestation-aware RP will process its contents either way.  So, the \"SHOULD NOT be marked critical\u201d remains a valid option here too.\n> \n> The exception to this is the case highlighted in para 6, where \u201cthe attestation-related information is essential for granting resource access, and there is a risk that legacy relying parties would bypass such controls.\"  In this case, to avoid false positives, you really want to make an exception to the default rule and mark it as critical.\n\n---\n\n* [x] Section 7:  Please add the statement suggested by RFC 7942, section 2.1 to advise the Editor to remove the section before publication.\n\nSee https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/237\n\n---\n",
+      "body": "---\n\n* [x] General:  Please double check all code snippets and figures for correctness.\n\n---\n\n* [x] General:  What is the rationale for the word 'conceptual'?  Are the 'messages' theoretical? [I looked in RFC 9334 and it is never defined.]  At some point does this draft discuss real message types? Or only theoretical message types?\n\nSee https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/238\n\n---\n\n* [x] Section 3.1:  Record CMWs can only be JSON or CBOR?  No other conceptual message representations are possible?\n\nNo.  ASN.1 has been discussed.  The rough consensus is to not include it in this version of the document.\n\nFor the details, see also sub-thread starting at https://mailarchive.ietf.org/arch/msg/rats/RMbum4W01sP2mZrD8qVa2K2W-jo/\n\n---\n\n* [x] Section 3.1, ind:  json-record has a bitmap?  How is that encoded?\n\nSame as the CBOR `ind`.\n\nRelevant excerpt from https://mailarchive.ietf.org/arch/msg/rats/jl_ZIS9jrw8FB4Fz3fyWuziiYlQ/ :\n\n>  Yes, it is encoded in the same way as in the cbor-record.  It is described in \u00a73.1.1 \"CM Type\" [4].\n> For an example, see [5] where 0b0000_0011 (3) means Reference Values (0-th bit in the ind bit-map) + Endorsements (bit 1 in the ind bit-map).\n> \n> [4] https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-17.html#section-3.1.1\n> [5] https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-17.html#section-5.4\n\n---\n\n* [x] Section 3.3, para 6:  Can OIDs be something other than 'absolute\u2019?\n\nProposal made in https://mailarchive.ietf.org/arch/msg/rats/YJomPOeuEAwGey-p-P5S-gmlzAk/\n\nRelevant excerpt:\n\n> More than happy to clarify, but I am slightly unsure what the specific ambiguity is, and therefore what the solution should be.\n> \n> Are you suggesting:\n> \n> OLD\n>   The OID MUST be absolute.\n> \n> NEW\n>   The OID MUST be absolute and never relative.\n> \n> as done in RFC9711?  Or something else?\n\n---\n\n* [x] Section 4.4, para 6:  'Legacy relying parties' will ignore non-critical extensions and will reject the certificate for unknown critical extensions.  Is this the desired outcome?  There are very few critical extensions in a certificate normally.  I suggest removing ', and there is a risk that legacy relying parties would bypass such controls.'\n\nHopefully explained in https://mailarchive.ietf.org/arch/msg/rats/YJomPOeuEAwGey-p-P5S-gmlzAk/\n\nRelevant excerpt:\n\n> It's Ned who brought up the use case, and he's likely a more authoritative voice for this, but I'll try to give my reading anyway.\n> \n> Regarding the criticality of extensions, RFC5280, \u00a74.2 states: \"[\u2026] caution ought to be exercised in adopting any critical extensions in certificates that might prevent use in a general context.\"\n> \n> So, generally, for an extension that needs to be deployed across multiple environments and applications, \"SHOULD NOT be marked critical\" seems to be the sensible default choice.\n> \n> If the extension is only deployed in controlled environments (e.g., the certificate is only used in the context of a specific, attestation-aware application), whether or not the extension is marked as critical is irrelevant, as the attestation-aware RP will process its contents either way.  So, the \"SHOULD NOT be marked critical\u201d remains a valid option here too.\n> \n> The exception to this is the case highlighted in para 6, where \u201cthe attestation-related information is essential for granting resource access, and there is a risk that legacy relying parties would bypass such controls.\"  In this case, to avoid false positives, you really want to make an exception to the default rule and mark it as critical.\n\n---\n\n* [x] Section 7:  Please add the statement suggested by RFC 7942, section 2.1 to advise the Editor to remove the section before publication.\n\nSee https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/237\n\n---\n",
       "createdAt": "2025-09-26T10:31:21Z",
-      "updatedAt": "2025-09-26T10:36:56Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-09-29T09:38:15Z",
+      "closedAt": "2025-09-29T09:38:15Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "More from Deb on Section 4.4.\n\n> I have a couple of suggestions which can be accepted separately or together:\n> \n> 1.  Section 4.4, para 2:  Currently has ' The use of CMW in CSRs is documented in [[I-D.ietf-lamps-csr-attestation](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-17.html#I-D.ietf-lamps-csr-attestation)], while its application in X.509 Certificates and CRLs is detailed in Section 6.1 of [[DICE-arch](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-17.html#DICE-arch)]'  We could add a phrase which gives the impression/possibility of use cases/applications other than a DICE application.  Maybe '...while one of the possible applications in X.509\u2026\u2019\n> \n> 2.  Section 4.4, para 6, sentence 2:  Perhaps rearranging this sentence to bring out the 'when is it ok to ignore the SHOULD NOT'.  Maybe:   'In cases where the attestation-related information is essential for granting resource access, and there is a risk that legacy relying parties would bypass crucial/mandatory/critical controls, it is acceptable to mark the extension as critical.'  You choose the word in front of controls (I wasn't happy with any of these I listed).  Notice I didn't use a BCP 14 word, but only because it didn't really flow very well.  If you have better ideas, I'm all ears.\n> \n> Let me know what you think.  My goal is to make it more obvious that DICE is an example, and the SHOULD NOT/MAY paragraph more clear.",
+          "createdAt": "2025-09-29T08:00:13Z",
+          "updatedAt": "2025-09-29T08:00:13Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Addressed in #241 #240 #238 #237 ",
+          "createdAt": "2025-09-29T09:37:33Z",
+          "updatedAt": "2025-09-29T09:37:33Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -16605,24 +16620,26 @@
       "id": "PR_kwDOIGCt2M6p3zlU",
       "title": "add note to remove \u00a77",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/237",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-09-22T15:19:22Z",
-      "updatedAt": "2025-09-26T12:32:30Z",
+      "updatedAt": "2025-09-29T09:36:16Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "76cc9a39a944ba543393f7f22245467dd501d86f",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "section-7-must-go",
       "headRefOid": "13c687534d492e9fa27e2c7ca1e387dcbde4c903",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-09-29T09:36:16Z",
+      "mergedAt": "2025-09-29T09:36:16Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "0fe34b97d7ed035bf3d15cbe51af74e6a885413b"
+      },
       "comments": [
         {
           "author": "thomas-fossati",
@@ -16700,24 +16717,26 @@
       "id": "PR_kwDOIGCt2M6qrXLN",
       "title": "add CM definition to abstract",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/238",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "As per https://mailarchive.ietf.org/arch/msg/rats/e2jiOn3pDCKUtYytpV2FkU7_PuY/",
       "createdAt": "2025-09-26T10:15:50Z",
-      "updatedAt": "2025-09-26T12:33:37Z",
+      "updatedAt": "2025-09-29T09:36:33Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "76cc9a39a944ba543393f7f22245467dd501d86f",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "cm-def",
       "headRefOid": "5cc63fc675a8e834c84007a93b8c0ac3975b8ac1",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-09-29T09:36:33Z",
+      "mergedAt": "2025-09-29T09:36:33Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "5b1f347413e43de73c03aca480532f396fc9f95c"
+      },
       "comments": [
         {
           "author": "thomas-fossati",
@@ -16748,24 +16767,26 @@
       "id": "PR_kwDOIGCt2M6qvowj",
       "title": "OID requirements",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/240",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-09-26T15:30:32Z",
-      "updatedAt": "2025-09-26T15:58:38Z",
+      "updatedAt": "2025-09-29T09:36:46Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "76cc9a39a944ba543393f7f22245467dd501d86f",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "x",
       "headRefOid": "f65e49e50721657ee65ef72b033b31ecd6b3ed77",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-09-29T09:36:46Z",
+      "mergedAt": "2025-09-29T09:36:46Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "86ac5d9cd9f2d08d2284dbe62ad49d9a1b4d44dd"
+      },
       "comments": [
         {
           "author": "debcooley",
@@ -16775,6 +16796,161 @@
           "updatedAt": "2025-09-26T15:58:38Z"
         }
       ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7DbqRi",
+          "commit": {
+            "abbreviatedOid": "f65e49e"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-09-29T09:34:15Z",
+          "updatedAt": "2025-09-29T09:34:15Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 241,
+      "id": "PR_kwDOIGCt2M6rDLP6",
+      "title": "Apply Deb\u2019s suggestions for \u00a74.4",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/241",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-29T09:19:28Z",
+      "updatedAt": "2025-09-29T09:36:59Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "76cc9a39a944ba543393f7f22245467dd501d86f",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "debs-suggestions",
+      "headRefOid": "5afddcf7b038dc348b4c6f3f15e983c572a9c9b0",
+      "closedAt": "2025-09-29T09:36:58Z",
+      "mergedAt": "2025-09-29T09:36:58Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "eeeb41a9b7aa1d898543504f6e748f1ed514f08c"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7Dbr10",
+          "commit": {
+            "abbreviatedOid": "5afddcf"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-09-29T09:35:47Z",
+          "updatedAt": "2025-09-29T09:35:47Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 242,
+      "id": "PR_kwDOIGCt2M6rFRD5",
+      "title": "add CM definition to intro",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/242",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As per [Deb\u2019s request](https://mailarchive.ietf.org/arch/msg/rats/BDfR5ZjvpHV2vq5F6xprxVMUCTo/).",
+      "createdAt": "2025-09-29T11:51:50Z",
+      "updatedAt": "2025-09-29T11:52:35Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "eeeb41a9b7aa1d898543504f6e748f1ed514f08c",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "intro-def",
+      "headRefOid": "6fabef8668276191318a8cee982e21fe2a328449",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 243,
+      "id": "PR_kwDOIGCt2M6rFzxx",
+      "title": "reflow the hosting sentence",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/243",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-29T12:25:03Z",
+      "updatedAt": "2025-09-29T12:28:32Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "eeeb41a9b7aa1d898543504f6e748f1ed514f08c",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "hosting",
+      "headRefOid": "180ea75b40f66503ffae63bafd1015cc8b50aacc",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7DeWKp",
+          "commit": {
+            "abbreviatedOid": "f6a9410"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-29T12:28:10Z",
+          "updatedAt": "2025-09-29T12:28:11Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nWhen CMW is integrated into some hosting protocol (for example, attested CSR {{-csr-a}} or attested TLS {{-tls-a1}} {{-tls-a2}}), it is up to that hosting protocol to describe how CMW is intended to be used and how it fits into the overall security model.\r\n```",
+              "createdAt": "2025-09-29T12:28:10Z",
+              "updatedAt": "2025-09-29T12:28:11Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 244,
+      "id": "PR_kwDOIGCt2M6rGv9x",
+      "title": "10000 is just a placeholder for TBD1",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/244",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-29T13:32:31Z",
+      "updatedAt": "2025-09-29T13:32:44Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "eeeb41a9b7aa1d898543504f6e748f1ed514f08c",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "tbd1",
+      "headRefOid": "4d83923b331106c646183d8d1e92850229fb7343",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
       "reviews": []
     }
   ]
