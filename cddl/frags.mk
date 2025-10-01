@@ -5,6 +5,7 @@ CMW_FRAGS += cmw-collection.cddl
 CMW_FRAGS += common-types.cddl
 CMW_FRAGS += cm-type.cddl
 CMW_FRAGS += rfc9193.cddl
+CMW_FRAGS += rfc9839.cddl
 # CBOR tags used in examples
 CMW_FRAGS += cmw-example-tag-1668576935-def.cddl
 CMW_FRAGS += cmw-example-tag-1668576819-def.cddl
@@ -29,6 +30,7 @@ EAT_FRAGS += cmw-collection.cddl
 EAT_FRAGS += common-types.cddl
 EAT_FRAGS += cm-type.cddl
 EAT_FRAGS += rfc9193.cddl
+EAT_FRAGS += rfc9839.cddl
 
 EAT_JSON_EXAMPLES := eat-example-1.json
 
@@ -39,6 +41,7 @@ COLLECTED_CDDL_FRAGS += cmw-collection.cddl
 COLLECTED_CDDL_FRAGS += common-types.cddl
 COLLECTED_CDDL_FRAGS += cm-type.cddl
 COLLECTED_CDDL_FRAGS += rfc9193.cddl
+COLLECTED_CDDL_FRAGS += rfc9839.cddl
 COLLECTED_CDDL_FRAGS += signed-cbor-cmw.cddl
 COLLECTED_CDDL_FRAGS += signed-cbor-cmw-headers.cddl
 COLLECTED_CDDL_FRAGS += signed-json-cmw.cddl
@@ -53,6 +56,7 @@ SIGNED_CBOR_CMW_CDDL_FRAGS += cmw-collection.cddl
 SIGNED_CBOR_CMW_CDDL_FRAGS += common-types.cddl
 SIGNED_CBOR_CMW_CDDL_FRAGS += cm-type.cddl
 SIGNED_CBOR_CMW_CDDL_FRAGS += rfc9193.cddl
+SIGNED_CBOR_CMW_CDDL_FRAGS += rfc9839.cddl
 
 SIGNED_JSON_CMW_CDDL_FRAGS += signed-json-cmw.cddl
 SIGNED_JSON_CMW_CDDL_FRAGS += signed-json-cmw-headers.cddl
@@ -63,5 +67,6 @@ SIGNED_JSON_CMW_CDDL_FRAGS += cmw-collection.cddl
 SIGNED_JSON_CMW_CDDL_FRAGS += common-types.cddl
 SIGNED_JSON_CMW_CDDL_FRAGS += cm-type.cddl
 SIGNED_JSON_CMW_CDDL_FRAGS += rfc9193.cddl
+SIGNED_JSON_CMW_CDDL_FRAGS += rfc9839.cddl
 
 
