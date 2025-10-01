@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 3 April 2026                                        Independent
+Expires: 4 April 2026                                        Independent
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                       30 September 2025
+                                                          1 October 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -72,7 +72,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 April 2026.
+   This Internet-Draft will expire on 4 April 2026.
 
 Copyright Notice
 
@@ -427,8 +427,8 @@ Table of Contents
    collection is not significant.  Labels can be strings (or integers in
    the CBOR serialization) that serve as a mnemonic for different
    conceptual messages in the Collection.  The character set allowed in
-   the string representation of a label is the "Unicode Scalars" defined
-   in Section 4.1 of [RFC9839].
+   the string representation of a label is the "Unicode Assignables"
+   defined in Section 4.3 of [RFC9839].
 
    A Collection MUST have at least one CMW entry.
 
@@ -865,7 +865,7 @@ Table of Contents
 
    oid = text .regexp "([0-2])((\\.0)|(\\.[1-9][0-9]*))*"
 
-   text-label = text .abnf ("unicode-scalars" .cat Unicode-Scalar-ABNF)
+   text-label = text .abnf ("unicode-assignables" .cat UC-Assignables-ABNF)
 
    cm-type = &(
      reference-values: 0
@@ -909,13 +909,24 @@ Table of Contents
    VCHAR     =  %x21-7E           ; printable ASCII (no SP)
    '
 
-   Unicode-Scalar-ABNF = '
+   UC-Assignables-ABNF = '
 
-   unicode-scalars = 1*unicode-scalar
+   unicode-assignables = 1*unicode-assignable
 
-   unicode-scalar =
-      %x0-D7FF /    ; exclude surrogates
-      %xE000-10FFFF
+   unicode-assignable =
+      %x9 / %xA / %xD /               ; useful controls
+      %x20-7E /                       ; exclude C1 controls and DEL
+      %xA0-D7FF /                     ; exclude surrogates
+      %xE000-FDCF /                   ; exclude FDD0 nonchars
+      %xFDF0-FFFD /                   ; exclude FFFE and FFFF nonchars
+      %x10000-1FFFD / %x20000-2FFFD / ; (repeat per plane)
+      %x30000-3FFFD / %x40000-4FFFD /
+      %x50000-5FFFD / %x60000-6FFFD /
+      %x70000-7FFFD / %x80000-8FFFD /
+      %x90000-9FFFD / %xA0000-AFFFD /
+      %xB0000-BFFFD / %xC0000-CFFFD /
+      %xD0000-DFFFD / %xE0000-EFFFD /
+      %xF0000-FFFFD / %x100000-10FFFD
    '
 
    signed-cbor-cmw = [
