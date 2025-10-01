@@ -5,4 +5,4 @@ coap-content-format-type = uint .size 2
 
 oid = text .regexp "([0-2])((\\.0)|(\\.[1-9][0-9]*))*"
 
-text-label = text .abnf ("unicode-scalars" .cat Unicode-Scalar-ABNF)
+text-label = text .abnf ("unicode-assignables" .cat UC-Assignables-ABNF)
