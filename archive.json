@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-30T00:56:13.828393+00:00",
+  "timestamp": "2025-10-02T00:54:33.134983+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -16952,6 +16952,259 @@
       "mergeCommit": null,
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 245,
+      "id": "PR_kwDOIGCt2M6rRrsI",
+      "title": "clarify that cmwc provides a namespace for the collection labels",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/245",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-30T09:00:25Z",
+      "updatedAt": "2025-09-30T09:00:38Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "eeeb41a9b7aa1d898543504f6e748f1ed514f08c",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "cmwc-ns",
+      "headRefOid": "4a281f2bace067ad0ea5492748a5476553710afd",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 246,
+      "id": "PR_kwDOIGCt2M6rS6Y5",
+      "title": "limit label charset to the Unicode Assignables subset",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/246",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Address Tim\u2019s Last Call [review](https://mailarchive.ietf.org/arch/msg/rats/luqh0QnFFzGN9AhosmfD-yrSRUk/)",
+      "createdAt": "2025-09-30T10:16:08Z",
+      "updatedAt": "2025-10-01T19:01:09Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "eeeb41a9b7aa1d898543504f6e748f1ed514f08c",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "tim",
+      "headRefOid": "ea7022a60a1ec03faffd88332ec17842fa96dd61",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7Du2eH",
+          "commit": {
+            "abbreviatedOid": "4aae639"
+          },
+          "author": "cabo",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-30T10:26:08Z",
+          "updatedAt": "2025-09-30T10:26:09Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "So the semantic content of this CDDL is that a text-label is at least one character?\r\n(CDDL cannot deal with non-unicode text strings, so the rest of the changes is redundant, but may be useful for exposition.)",
+              "createdAt": "2025-09-30T10:26:08Z",
+              "updatedAt": "2025-09-30T10:26:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M7Dvb92",
+          "commit": {
+            "abbreviatedOid": "4aae639"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-30T10:52:59Z",
+          "updatedAt": "2025-09-30T10:52:59Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "Yes, it\u2019s to match the new prose in \u00a73.3.",
+              "createdAt": "2025-09-30T10:52:59Z",
+              "updatedAt": "2025-09-30T10:52:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M7D3Q9A",
+          "commit": {
+            "abbreviatedOid": "4aae639"
+          },
+          "author": "timbray",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-30T17:29:47Z",
+          "updatedAt": "2025-09-30T17:29:53Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "I apologize if this input makes no sense; I don't understand the RATS space.  Is a `text-label` expected to be seen by humans? If so, the choice of Unicode Scalars means that a value such as. `\"\\u0000\\u007F\\uAFFFE\"` is allowed (the characters are NUL, DEL, and a noncharacter).  If that's OK, fine, but if not, consider using the \"Unicode Assignables\" subset from 9839.",
+              "createdAt": "2025-09-30T17:29:48Z",
+              "updatedAt": "2025-09-30T17:29:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M7D39b-",
+          "commit": {
+            "abbreviatedOid": "4aae639"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-30T18:29:02Z",
+          "updatedAt": "2025-09-30T18:29:02Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "While human readability is an advantage, the main requirement is that they are valid JSON object or CBOR map keys.\r\nIf you think \u201cUnicode assignables\u201d would be a better fit, we can make the change.",
+              "createdAt": "2025-09-30T18:29:02Z",
+              "updatedAt": "2025-09-30T18:29:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M7D4Br1",
+          "commit": {
+            "abbreviatedOid": "4aae639"
+          },
+          "author": "timbray",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-30T18:35:29Z",
+          "updatedAt": "2025-09-30T18:35:29Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "It really depends if these things might need to be displayed to a human.  If not, then Scalars is a good choice, exclude the surrogates (they can break some software) and you're done.  If it would be advantageous to show them to people sometimes, Assignables really would be a better choice, because `\"\\u0000\\u007F\\uAFFFE\"` is just not going to be legible to human eyes.",
+              "createdAt": "2025-09-30T18:35:29Z",
+              "updatedAt": "2025-09-30T18:35:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M7D4K3y",
+          "commit": {
+            "abbreviatedOid": "4aae639"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-30T18:46:41Z",
+          "updatedAt": "2025-09-30T18:46:41Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "Let\u2019s make labels Assignables, then.",
+              "createdAt": "2025-09-30T18:46:41Z",
+              "updatedAt": "2025-09-30T18:46:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M7D4Vwv",
+          "commit": {
+            "abbreviatedOid": "4aae639"
+          },
+          "author": "cabo",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-30T18:59:45Z",
+          "updatedAt": "2025-09-30T18:59:45Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "Well, this contaminates the present document with Unicode esoterics.  It is the job of people defining a name to make that useful, \"assignables\" is not going to help with that at all.\r\n",
+              "createdAt": "2025-09-30T18:59:45Z",
+              "updatedAt": "2025-09-30T18:59:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M7D4oL_",
+          "commit": {
+            "abbreviatedOid": "4aae639"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-30T19:20:12Z",
+          "updatedAt": "2025-09-30T19:20:12Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "> Well, this contaminates the present document with Unicode esoterics.\r\n\r\nMy ignorance prevents me from understanding the esoteric nature of this.  Assignables seems like a sensible and simple enough input filter to me.\r\n\r\n> It is the job of people defining a name to make that useful,\r\n\r\nSure, no doubt about that.\r\n\r\n> \"assignables\" is not going to help with that at all.\r\n\r\nAs far as I understand, the argument here is about making the receiver more robust in the event of malicious input.  If the lower layers can apply the assignables filter, there is less chance of the upper layers screwing up.\r\n\r\n@timbray is that not the whole point?\r\n",
+              "createdAt": "2025-09-30T19:20:12Z",
+              "updatedAt": "2025-09-30T19:20:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M7D5cRr",
+          "commit": {
+            "abbreviatedOid": "4aae639"
+          },
+          "author": "timbray",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-30T20:27:39Z",
+          "updatedAt": "2025-09-30T20:27:40Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "My opinion is this is exactly the kind of situation where RFC9839 was designed to be helpful in exactly the way you're proposing to use it, import the ABNF and cite and you're done.",
+              "createdAt": "2025-09-30T20:27:40Z",
+              "updatedAt": "2025-09-30T20:27:40Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M7EBLuR",
+          "commit": {
+            "abbreviatedOid": "4aae639"
+          },
+          "author": "cabo",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-01T11:24:18Z",
+          "updatedAt": "2025-10-01T11:24:18Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "> My opinion is this is exactly the kind of situation where RFC9839 was designed to be helpful in exactly the way you're proposing to use it, import the ABNF and cite and you're done.\r\n\r\nIt is easy to reference.  It also contains all the wrong information.  For instance, you now explicitly say that text-labels with HT (TAB) characters and isolated CR (carriage-returns) are fine.  This is of course nonsense, but it happens because 9839 does *not* actually address what you want to put into these labels, so blindly referencing one of the choices of 9839 usually has negative value.\r\n\r\nI think we already agreed to disagree here; I just think that this document is a nice example for the negative value that it brings to the table.",
+              "createdAt": "2025-10-01T11:24:18Z",
+              "updatedAt": "2025-10-01T11:24:18Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
