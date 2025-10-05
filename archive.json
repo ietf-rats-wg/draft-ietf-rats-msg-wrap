@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-02T00:54:33.134983+00:00",
+  "timestamp": "2025-10-05T01:00:20.168233+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -16883,16 +16883,16 @@
     {
       "number": 243,
       "id": "PR_kwDOIGCt2M6rFzxx",
-      "title": "reflow the hosting sentence",
+      "title": "reflow the \u201chosting protocol\" sentence",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/243",
       "state": "OPEN",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "",
+      "body": "Make sure that our definition of \"hosting protocol\" is unambiguous.",
       "createdAt": "2025-09-29T12:25:03Z",
-      "updatedAt": "2025-09-29T12:28:32Z",
+      "updatedAt": "2025-10-02T08:16:29Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "eeeb41a9b7aa1d898543504f6e748f1ed514f08c",
@@ -17203,6 +17203,46 @@
               "updatedAt": "2025-10-01T11:24:18Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 247,
+      "id": "PR_kwDOIGCt2M6rrHgI",
+      "title": "there are 5 registered CMs, not 4",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/247",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-10-02T02:27:29Z",
+      "updatedAt": "2025-10-02T02:42:26Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "eeeb41a9b7aa1d898543504f6e748f1ed514f08c",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "5-not-4",
+      "headRefOid": "f6b65fa48c4bee2e6f9779b0c952962ecb08efe5",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7ENdB9",
+          "commit": {
+            "abbreviatedOid": "f6b65fa"
+          },
+          "author": "steven-bellock",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-02T02:42:26Z",
+          "updatedAt": "2025-10-02T02:42:26Z",
+          "comments": []
         }
       ]
     }
