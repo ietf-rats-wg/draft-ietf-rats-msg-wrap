@@ -1768,6 +1768,11 @@ signed-cbor-cmw-unprotected-hdr = {
 
 cose.label = int / text
 cose.values = any
+
+; Note: 10000 is a placeholder for the CoAP C-F codepoint corresponding
+; to 'application/cmw+cbor'.  This CDDL fragment needs to be updated
+; (and this note removed) once the relevant C-F codepoint has been
+; assigned by IANA.
 </pre><a href="#section-4.1-4" class="pilcrow">¶</a>
 </div>
 <p id="section-4.1-5">The protected header <span class="bcp14">MUST</span> include the signature algorithm identifier.
@@ -2231,6 +2236,7 @@ signed-cbor-cmw-unprotected-hdr = {
 
 cose.label = int / text
 cose.values = any
+
 
 signed-json-cmw = {
   "protected": text .b64u (text .json signed-json-cmw-protected-hdr)

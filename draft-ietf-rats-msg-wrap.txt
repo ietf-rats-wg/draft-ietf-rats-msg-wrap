@@ -538,6 +538,11 @@ Table of Contents
    cose.label = int / text
    cose.values = any
 
+   ; Note: 10000 is a placeholder for the CoAP C-F codepoint corresponding
+   ; to 'application/cmw+cbor'.  This CDDL fragment needs to be updated
+   ; (and this note removed) once the relevant C-F codepoint has been
+   ; assigned by IANA.
+
    The protected header MUST include the signature algorithm identifier.
    The protected header MUST include either the content type
    application/cmw+cbor or the CoAP Content-Format TBD1.  Other header
@@ -932,6 +937,7 @@ Table of Contents
 
    cose.label = int / text
    cose.values = any
+
 
    signed-json-cmw = {
      "protected": text .b64u (text .json signed-json-cmw-protected-hdr)
