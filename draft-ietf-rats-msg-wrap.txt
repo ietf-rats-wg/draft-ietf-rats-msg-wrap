@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 2 April 2026                                        Independent
+Expires: 9 April 2026                                        Independent
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                       29 September 2025
+                                                          6 October 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -20,7 +20,7 @@ Expires: 2 April 2026                                        Independent
 
 Abstract
 
-   The Conceptual Messages introduced by the RATS Architecture (RFC9334)
+   The Conceptual Messages introduced by the RATS architecture (RFC9334)
    are protocol-agnostic data units that are conveyed between RATS roles
    during remote attestation procedures.  Conceptual Messages describe
    the meaning and function of such data units within RATS data flows
@@ -72,7 +72,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 April 2026.
+   This Internet-Draft will expire on 9 April 2026.
 
 Copyright Notice
 
@@ -154,12 +154,20 @@ Table of Contents
 
 1.  Introduction
 
-   The IETF Remote ATtestation procedureS (RATS) architecture defines a
-   handful of conceptual messages (see Section 8 of [RFC9334]), such as
-   Evidence and Attestation Results.  Each conceptual message can have
-   multiple claims encoding and serialization formats (Section 9 of
-   [RFC9334]).  Throughout their lifetime, RATS conceptual messages are
-   typically transported over different protocols.  For example,
+   The Conceptual Messages introduced by the Remote ATtestation
+   procedureS (RATS) architecture [RFC9334] are protocol-agnostic data
+   units that are conveyed between RATS roles during remote attestation
+   procedures.  Conceptual Messages describe the meaning and function of
+   such data units within RATS data flows without specifying a wire
+   format, encoding, transport mechanism, or processing details.  The
+   initial set of Conceptual Messages is defined in Section 8 of
+   [RFC9334] and includes Evidence, Attestation Results, Endorsements,
+   Reference Values, and Appraisal Policies.
+
+   Each conceptual message can have multiple claims encoding and
+   serialization formats (Section 9 of [RFC9334]).  Throughout their
+   lifetime, RATS conceptual messages are typically transported over
+   different protocols.  For example,
 
    *  In a "background check" topology, Evidence (e.g., EAT [RFC9711])
       first flows from the Attester to the Relying Party and then from
@@ -594,8 +602,9 @@ Table of Contents
    Revocation Lists (CRLs).
 
    The use of CMW in CSRs is documented in
-   [I-D.ietf-lamps-csr-attestation], while its application in X.509
-   Certificates and CRLs is detailed in Section 6.1 of [DICE-arch].
+   [I-D.ietf-lamps-csr-attestation], while one of the possible
+   applications in X.509 Certificates and CRLs is detailed in
+   Section 6.1 of [DICE-arch].
 
    This section outlines the CMW extension designed to carry CMW
    objects.  Section 8 discusses some privacy considerations related to
@@ -611,10 +620,10 @@ Table of Contents
            { iso(1) identified-organization(3) dod(6) internet(1)
              security(5) mechanisms(5) pkix(7) id-pe(1) 35 }
 
-   This extension SHOULD NOT be marked critical.  It MAY be marked
-   critical in cases where the attestation-related information is
-   essential for granting resource access, and there is a risk that
-   legacy relying parties would bypass such controls.
+   This extension SHOULD NOT be marked critical.  In cases where the
+   wrapped Conceptual Message is essential for granting resource access,
+   and there is a risk that legacy relying parties would bypass crucial
+   controls, it is acceptable to mark the extension as critical.
 
    The CMW extension MUST have the following syntax:
 
@@ -1587,9 +1596,9 @@ Table of Contents
               Ounsworth, M., Tschofenig, H., Birkholz, H., Wiseman, M.,
               and N. Smith, "Use of Remote Attestation with
               Certification Signing Requests", Work in Progress,
-              Internet-Draft, draft-ietf-lamps-csr-attestation-20, 7
-              July 2025, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-lamps-csr-attestation-20>.
+              Internet-Draft, draft-ietf-lamps-csr-attestation-21, 5
+              October 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-lamps-csr-attestation-21>.
 
    [I-D.ietf-rats-ar4si]
               Voit, E., Birkholz, H., Hardjono, T., Fossati, T., and V.
@@ -1707,9 +1716,9 @@ Appendix B.  Open Issues
 Acknowledgments
 
    The authors would like to thank Brian Campbell, Carl Wallace, Carsten
-   Bormann, Dave Thaler, Ionuț Mihalcea, Michael B.  Jones, Mike
-   Ounsworth, Mohit Sethi, Russ Housley, Steven Bellock, Tom Jones, and
-   Usama Sardar for their reviews and suggestions.
+   Bormann, Dave Thaler, Deb Cooley, Ionuț Mihalcea, Michael B.  Jones,
+   Mike Ounsworth, Mohit Sethi, Russ Housley, Steven Bellock, Tom Jones,
+   and Usama Sardar for their reviews and suggestions.
 
    The definition of a Collection CMW has been modelled on a proposal
    originally made by Simon Frost for an EAT-based Evidence collection

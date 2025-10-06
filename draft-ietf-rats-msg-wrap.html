@@ -11,7 +11,7 @@
 <meta content="Hannes Tschofenig" name="author">
 <meta content="Dionna Glaze" name="author">
 <meta content="
-       The Conceptual Messages introduced by the RATS Architecture (RFC9334) are protocol-agnostic data units that are conveyed between RATS roles during remote attestation procedures.
+       The Conceptual Messages introduced by the RATS architecture (RFC9334) are protocol-agnostic data units that are conveyed between RATS roles during remote attestation procedures.
 Conceptual Messages describe the meaning and function of such data units within RATS data flows without specifying a wire format, encoding, transport mechanism, or processing details.
 The initial set of Conceptual Messages is defined in Section 8 of RFC9334 and includes Evidence, Attestation Results, Endorsements, Reference Values, and Appraisal Policies. 
        This document introduces the Conceptual Message Wrapper (CMW) that provides a common structure to encapsulate these messages.
@@ -41,7 +41,7 @@ serialization formats without breaking compatibility, and avoid having to redefi
     PyYAML 6.0.2
     requests 2.32.5
     setuptools 80.9.0
-    wcwidth 0.2.13
+    wcwidth 0.2.14
 -->
 <link href="draft-ietf-rats-msg-wrap.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1060,11 +1060,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">RATS CMW</td>
-<td class="right">September 2025</td>
+<td class="right">October 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 2 April 2026</td>
+<td class="center">Expires 9 April 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1077,12 +1077,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-rats-msg-wrap-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-09-29" class="published">29 September 2025</time>
+<time datetime="2025-10-06" class="published">6 October 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-04-02">2 April 2026</time></dd>
+<dd class="expires"><time datetime="2026-04-09">9 April 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1111,7 +1111,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">RATS Conceptual Messages Wrapper (CMW)</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">The Conceptual Messages introduced by the RATS Architecture (RFC9334) are protocol-agnostic data units that are conveyed between RATS roles during remote attestation procedures.
+<p id="section-abstract-1">The Conceptual Messages introduced by the RATS architecture (RFC9334) are protocol-agnostic data units that are conveyed between RATS roles during remote attestation procedures.
 Conceptual Messages describe the meaning and function of such data units within RATS data flows without specifying a wire format, encoding, transport mechanism, or processing details.
 The initial set of Conceptual Messages is defined in Section 8 of RFC9334 and includes Evidence, Attestation Results, Endorsements, Reference Values, and Appraisal Policies.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <p id="section-abstract-2">This document introduces the Conceptual Message Wrapper (CMW) that provides a common structure to encapsulate these messages.
@@ -1152,7 +1152,7 @@ serialization formats without breaking compatibility, and avoid having to redefi
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 2 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 9 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1397,25 +1397,26 @@ serialization formats without breaking compatibility, and avoid having to redefi
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">The IETF Remote ATtestation procedureS (RATS) architecture defines a handful of conceptual messages
-(see <span><a href="https://rfc-editor.org/rfc/rfc9334#section-8" class="relref">Section 8</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>), such as Evidence and Attestation Results.
-Each conceptual message can have multiple claims encoding and serialization
+<p id="section-1-1">The Conceptual Messages introduced by the Remote ATtestation procedureS (RATS) architecture <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> are protocol-agnostic data units that are conveyed between RATS roles during remote attestation procedures.
+Conceptual Messages describe the meaning and function of such data units within RATS data flows without specifying a wire format, encoding, transport mechanism, or processing details.
+The initial set of Conceptual Messages is defined in <span><a href="https://rfc-editor.org/rfc/rfc9334#section-8" class="relref">Section 8</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> and includes Evidence, Attestation Results, Endorsements, Reference Values, and Appraisal Policies.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">Each conceptual message can have multiple claims encoding and serialization
 formats (<span><a href="https://rfc-editor.org/rfc/rfc9334#section-9" class="relref">Section 9</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>). Throughout their lifetime, RATS
 conceptual messages are typically transported over different protocols.
-For example,<a href="#section-1-1" class="pilcrow">¶</a></p>
+For example,<a href="#section-1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-1-2.1">
-          <p id="section-1-2.1.1">In a "background check" topology, Evidence (e.g., EAT <span>[<a href="#RFC9711" class="cite xref">RFC9711</a>]</span>) first flows from
+<li class="normal" id="section-1-3.1">
+          <p id="section-1-3.1.1">In a "background check" topology, Evidence (e.g., EAT <span>[<a href="#RFC9711" class="cite xref">RFC9711</a>]</span>) first flows from
 the Attester to the Relying Party and then from the Relying Party to the Verifier,
-each leg following a separate protocol path.<a href="#section-1-2.1.1" class="pilcrow">¶</a></p>
+each leg following a separate protocol path.<a href="#section-1-3.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-2.2">
-          <p id="section-1-2.2.1">In a "passport" topology, an attestation result payload (e.g., Attestation Results for Secure Interactions (AR4SI) <span>[<a href="#I-D.ietf-rats-ar4si" class="cite xref">I-D.ietf-rats-ar4si</a>]</span>)
+        <li class="normal" id="section-1-3.2">
+          <p id="section-1-3.2.1">In a "passport" topology, an attestation result payload (e.g., Attestation Results for Secure Interactions (AR4SI) <span>[<a href="#I-D.ietf-rats-ar4si" class="cite xref">I-D.ietf-rats-ar4si</a>]</span>)
 is initially sent from the Verifier to the Attester, and later,
-via a different channel, from the Attester to the Relying Party.<a href="#section-1-2.2.1" class="pilcrow">¶</a></p>
+via a different channel, from the Attester to the Relying Party.<a href="#section-1-3.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-1-3">By using the CMW format outlined in this document, protocol designers can avoid the need
+<p id="section-1-4">By using the CMW format outlined in this document, protocol designers can avoid the need
 to update protocol specifications to accommodate different conceptual messages and
 serialization formats used by various attestation technologies. This approach streamlines
 the implementation process for developers, enabling easier support for diverse attestation
@@ -1423,33 +1424,33 @@ technologies. For instance, a Relying Party application implementer does not nee
 attestation-related messages, such as Evidence from Attesters on IoT devices with Trusted
 Platform Modules (TPM) or servers using confidential computing hardware like Intel Trust
 Domain Extensions (TDX). Instead, they can leverage the CMW format, remaining agnostic
-to the specific attestation technology.<a href="#section-1-3" class="pilcrow">¶</a></p>
-<p id="section-1-4">A further design goal is extensibility.
+to the specific attestation technology.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-5">A further design goal is extensibility.
 This means that adding support for new conceptual messages and new attestation technologies should not change the core of the processor, and that a CMW stack can be designed to offer a plug-in interface for both encoding and decoding.
 To achieve this, the format must provide consistent message encapsulation and explicit typing.
 These features allow for selecting the appropriate message handler based on its type identifier.
-An opaque message can then be passed between the core and the handler.<a href="#section-1-4" class="pilcrow">¶</a></p>
-<p id="section-1-5">This document defines two encapsulation formats for RATS conceptual
-messages that aim to achieve the goals stated above.<a href="#section-1-5" class="pilcrow">¶</a></p>
-<p id="section-1-6">These encapsulation formats have been specifically designed to possess the following characteristics:<a href="#section-1-6" class="pilcrow">¶</a></p>
+An opaque message can then be passed between the core and the handler.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6">This document defines two encapsulation formats for RATS conceptual
+messages that aim to achieve the goals stated above.<a href="#section-1-6" class="pilcrow">¶</a></p>
+<p id="section-1-7">These encapsulation formats have been specifically designed to possess the following characteristics:<a href="#section-1-7" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-1-7.1">
-          <p id="section-1-7.1.1">They are self-describing, which means that they can convey precise typing information without relying on the framing provided by the embedding protocol or the storage system.<a href="#section-1-7.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-1-8.1">
+          <p id="section-1-8.1.1">They are self-describing, which means that they can convey precise typing information without relying on the framing provided by the embedding protocol or the storage system.<a href="#section-1-8.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-7.2">
-          <p id="section-1-7.2.1">They are based on media types <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>, which allows the cost of their registration to be spread across numerous usage scenarios.<a href="#section-1-7.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-1-8.2">
+          <p id="section-1-8.2.1">They are based on media types <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>, which allows the cost of their registration to be spread across numerous usage scenarios.<a href="#section-1-8.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-1-8">A protocol designer could use these formats, for example, to convey
+<p id="section-1-9">A protocol designer could use these formats, for example, to convey
 Evidence, Endorsements and Reference Values in certificates and CRLs
 extensions (<span>[<a href="#DICE-arch" class="cite xref">DICE-arch</a>]</span>), to embed Attestation Results or Evidence as
 first-class authentication credentials in TLS handshake messages
 <span>[<a href="#I-D.fossati-tls-attestation" class="cite xref">I-D.fossati-tls-attestation</a>]</span> <span>[<a href="#I-D.fossati-tls-exported-attestation" class="cite xref">I-D.fossati-tls-exported-attestation</a>]</span>, to transport attestation-related payloads in RESTful APIs,
 or for stable storage of Attestation Results in the form of file system
-objects.<a href="#section-1-8" class="pilcrow">¶</a></p>
-<p id="section-1-9">This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
+objects.<a href="#section-1-9" class="pilcrow">¶</a></p>
+<p id="section-1-10">This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
 These allow embedding the wrapped conceptual messages into CBOR-based protocols, web APIs, and PKIX formats and protocols.
-In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.<a href="#section-1-9" class="pilcrow">¶</a></p>
+In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.<a href="#section-1-10" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1838,7 +1839,7 @@ A Record CMW carried in a <code>"cmw"</code> CWT claim <span class="bcp14">MUST<
 <a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-transporting-cmw-in-pkix-fo" class="section-name selfRef">Transporting CMW in PKIX Formats</a>
         </h3>
 <p id="section-4.4-1">CMW may need to be transported in PKIX formats, such as Certificate Signing Requests (CSRs) or in X.509 Certificates and Certificate Revocation Lists (CRLs).<a href="#section-4.4-1" class="pilcrow">¶</a></p>
-<p id="section-4.4-2">The use of CMW in CSRs is documented in <span>[<a href="#I-D.ietf-lamps-csr-attestation" class="cite xref">I-D.ietf-lamps-csr-attestation</a>]</span>, while its application in X.509 Certificates and CRLs is detailed in Section 6.1 of <span>[<a href="#DICE-arch" class="cite xref">DICE-arch</a>]</span>.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
+<p id="section-4.4-2">The use of CMW in CSRs is documented in <span>[<a href="#I-D.ietf-lamps-csr-attestation" class="cite xref">I-D.ietf-lamps-csr-attestation</a>]</span>, while one of the possible applications in X.509 Certificates and CRLs is detailed in Section 6.1 of <span>[<a href="#DICE-arch" class="cite xref">DICE-arch</a>]</span>.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
 <p id="section-4.4-3">This section outlines the CMW extension designed to carry CMW objects.
 <a href="#privcons" class="auto internal xref">Section 8</a> discusses some privacy considerations related to the transport of CMW in X.509 formats.<a href="#section-4.4-3" class="pilcrow">¶</a></p>
 <p id="section-4.4-4">The CMW extension <span class="bcp14">MAY</span> be included in X.509 Certificates, CRLs <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>, and CSRs.<a href="#section-4.4-4" class="pilcrow">¶</a></p>
@@ -1851,7 +1852,7 @@ id-pe-cmw  OBJECT IDENTIFIER ::=
 </pre><a href="#section-4.4-6" class="pilcrow">¶</a>
 </div>
 <p id="section-4.4-7">This extension <span class="bcp14">SHOULD NOT</span> be marked critical.
-It <span class="bcp14">MAY</span> be marked critical in cases where the attestation-related information is essential for granting resource access, and there is a risk that legacy relying parties would bypass such controls.<a href="#section-4.4-7" class="pilcrow">¶</a></p>
+In cases where the wrapped Conceptual Message is essential for granting resource access, and there is a risk that legacy relying parties would bypass crucial controls, it is acceptable to mark the extension as critical.<a href="#section-4.4-7" class="pilcrow">¶</a></p>
 <p id="section-4.4-8">The CMW extension <span class="bcp14">MUST</span> have the following syntax:<a href="#section-4.4-8" class="pilcrow">¶</a></p>
 <div class="lang-asn.1 sourcecode" id="section-4.4-9">
 <pre>
@@ -3277,7 +3278,7 @@ dotted-decimal notation.  The parameter value is case-insensitive.  It must not 
 <dd class="break"></dd>
 <dt id="I-D.ietf-lamps-csr-attestation">[I-D.ietf-lamps-csr-attestation]</dt>
         <dd>
-<span class="refAuthor">Ounsworth, M.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Wiseman, M.</span>, and <span class="refAuthor">N. Smith</span>, <span class="refTitle">"Use of Remote Attestation with Certification Signing Requests"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-csr-attestation-20</span>, <time datetime="2025-07-07" class="refDate">7 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-csr-attestation-20">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-csr-attestation-20</a>&gt;</span>. </dd>
+<span class="refAuthor">Ounsworth, M.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Wiseman, M.</span>, and <span class="refAuthor">N. Smith</span>, <span class="refTitle">"Use of Remote Attestation with Certification Signing Requests"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-csr-attestation-21</span>, <time datetime="2025-10-05" class="refDate">5 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-csr-attestation-21">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-csr-attestation-21</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-ar4si">[I-D.ietf-rats-ar4si]</dt>
         <dd>
@@ -3463,6 +3464,7 @@ Brian Campbell,
 Carl Wallace,
 Carsten Bormann,
 Dave Thaler,
+Deb Cooley,
 <span class="contact-name">Ionuț Mihalcea</span>,
 Michael B. Jones,
 Mike Ounsworth,
