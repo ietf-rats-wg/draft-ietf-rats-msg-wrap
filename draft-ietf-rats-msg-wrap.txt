@@ -1067,10 +1067,10 @@ Table of Contents
 
 9.3.  Integrating CMW into Protocols
 
-   When CMW is integrated into a protocol (for example, attested CSR
-   [I-D.ietf-lamps-csr-attestation] or attested TLS
+   When CMW is integrated into some hosting protocol (for example,
+   attested CSR [I-D.ietf-lamps-csr-attestation] or attested TLS
    [I-D.fossati-tls-attestation]
-   [I-D.fossati-tls-exported-attestation]), it is up to the "hosting"
+   [I-D.fossati-tls-exported-attestation]), it is up to that hosting
    protocol to describe how CMW is intended to be used and how it fits
    into the overall security model.
 
@@ -1717,8 +1717,9 @@ Acknowledgments
 
    The authors would like to thank Brian Campbell, Carl Wallace, Carsten
    Bormann, Dave Thaler, Deb Cooley, Ionuț Mihalcea, Michael B.  Jones,
-   Mike Ounsworth, Mohit Sethi, Russ Housley, Steven Bellock, Tom Jones,
-   and Usama Sardar for their reviews and suggestions.
+   Mike Ounsworth, Mohit Sethi, Paul Howard, Russ Housley, Steven
+   Bellock, Tom Jones, and Usama Sardar for their reviews and
+   suggestions.
 
    The definition of a Collection CMW has been modelled on a proposal
    originally made by Simon Frost for an EAT-based Evidence collection
