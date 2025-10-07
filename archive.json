@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-05T01:00:20.168233+00:00",
+  "timestamp": "2025-10-07T00:55:27.772172+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -16859,50 +16859,68 @@
       "id": "PR_kwDOIGCt2M6rFRD5",
       "title": "add CM definition to intro",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/242",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "As per [Deb\u2019s request](https://mailarchive.ietf.org/arch/msg/rats/BDfR5ZjvpHV2vq5F6xprxVMUCTo/).",
       "createdAt": "2025-09-29T11:51:50Z",
-      "updatedAt": "2025-09-29T11:52:35Z",
+      "updatedAt": "2025-10-06T12:20:41Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "eeeb41a9b7aa1d898543504f6e748f1ed514f08c",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "intro-def",
       "headRefOid": "6fabef8668276191318a8cee982e21fe2a328449",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-06T12:20:37Z",
+      "mergedAt": "2025-10-06T12:20:37Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "2b663d49195af6471bc098019e7ede4dc08e3b44"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7E8rk6",
+          "commit": {
+            "abbreviatedOid": "6fabef8"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "lgtm",
+          "createdAt": "2025-10-06T12:15:33Z",
+          "updatedAt": "2025-10-06T12:15:33Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 243,
       "id": "PR_kwDOIGCt2M6rFzxx",
       "title": "reflow the \u201chosting protocol\" sentence",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/243",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Make sure that our definition of \"hosting protocol\" is unambiguous.",
       "createdAt": "2025-09-29T12:25:03Z",
-      "updatedAt": "2025-10-02T08:16:29Z",
+      "updatedAt": "2025-10-06T12:21:12Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "eeeb41a9b7aa1d898543504f6e748f1ed514f08c",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "hosting",
       "headRefOid": "180ea75b40f66503ffae63bafd1015cc8b50aacc",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-06T12:21:09Z",
+      "mergedAt": "2025-10-06T12:21:09Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "5242e2da64f2329fa780a0a3dae7656002c975cd"
+      },
       "comments": [],
       "reviews": [
         {
@@ -16924,6 +16942,19 @@
               "updatedAt": "2025-09-29T12:28:11Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M7E8sPa",
+          "commit": {
+            "abbreviatedOid": "180ea75"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "maybe this resonates better with the wg",
+          "createdAt": "2025-10-06T12:16:18Z",
+          "updatedAt": "2025-10-06T12:16:18Z",
+          "comments": []
         }
       ]
     },
@@ -16932,52 +16963,84 @@
       "id": "PR_kwDOIGCt2M6rGv9x",
       "title": "10000 is just a placeholder for TBD1",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/244",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-09-29T13:32:31Z",
-      "updatedAt": "2025-09-29T13:32:44Z",
+      "updatedAt": "2025-10-06T12:21:30Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "eeeb41a9b7aa1d898543504f6e748f1ed514f08c",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "tbd1",
       "headRefOid": "4d83923b331106c646183d8d1e92850229fb7343",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-06T12:21:26Z",
+      "mergedAt": "2025-10-06T12:21:26Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "210b7b5571292eccb293253221b8b3a78e8bfb73"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7E8s0y",
+          "commit": {
+            "abbreviatedOid": "4d83923"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": ":+1:",
+          "createdAt": "2025-10-06T12:16:55Z",
+          "updatedAt": "2025-10-06T12:16:55Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 245,
       "id": "PR_kwDOIGCt2M6rRrsI",
       "title": "clarify that cmwc provides a namespace for the collection labels",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/245",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-09-30T09:00:25Z",
-      "updatedAt": "2025-09-30T09:00:38Z",
+      "updatedAt": "2025-10-06T12:21:51Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "eeeb41a9b7aa1d898543504f6e748f1ed514f08c",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "cmwc-ns",
       "headRefOid": "4a281f2bace067ad0ea5492748a5476553710afd",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-06T12:21:49Z",
+      "mergedAt": "2025-10-06T12:21:49Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "d3da323083c459ef2e94d1e71d96693243d81261"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7E8ulf",
+          "commit": {
+            "abbreviatedOid": "4a281f2"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-06T12:18:49Z",
+          "updatedAt": "2025-10-06T12:18:49Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 246,
@@ -16991,7 +17054,7 @@
       "labels": [],
       "body": "Address Tim\u2019s Last Call [review](https://mailarchive.ietf.org/arch/msg/rats/luqh0QnFFzGN9AhosmfD-yrSRUk/)",
       "createdAt": "2025-09-30T10:16:08Z",
-      "updatedAt": "2025-10-01T19:01:09Z",
+      "updatedAt": "2025-10-06T12:23:02Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "eeeb41a9b7aa1d898543504f6e748f1ed514f08c",
@@ -17203,6 +17266,19 @@
               "updatedAt": "2025-10-01T11:24:18Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOIGCt2M7E8yKG",
+          "commit": {
+            "abbreviatedOid": "ea7022a"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "CHANGES_REQUESTED",
+          "body": "@cabo braught up convincing arguments that we do not want `unicode-assignables` in here via https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/246#discussion_r2394239636",
+          "createdAt": "2025-10-06T12:23:02Z",
+          "updatedAt": "2025-10-06T12:23:02Z",
+          "comments": []
         }
       ]
     },
@@ -17211,24 +17287,26 @@
       "id": "PR_kwDOIGCt2M6rrHgI",
       "title": "there are 5 registered CMs, not 4",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/247",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-10-02T02:27:29Z",
-      "updatedAt": "2025-10-02T02:42:26Z",
+      "updatedAt": "2025-10-06T12:22:15Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "eeeb41a9b7aa1d898543504f6e748f1ed514f08c",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "5-not-4",
       "headRefOid": "f6b65fa48c4bee2e6f9779b0c952962ecb08efe5",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-06T12:22:12Z",
+      "mergedAt": "2025-10-06T12:22:12Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "87db780e8a53d5a39bd4d25a636443d7551085d8"
+      },
       "comments": [],
       "reviews": [
         {
@@ -17242,6 +17320,19 @@
           "body": "",
           "createdAt": "2025-10-02T02:42:26Z",
           "updatedAt": "2025-10-02T02:42:26Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M7E8qzj",
+          "commit": {
+            "abbreviatedOid": "f6b65fa"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-06T12:14:39Z",
+          "updatedAt": "2025-10-06T12:14:39Z",
           "comments": []
         }
       ]
