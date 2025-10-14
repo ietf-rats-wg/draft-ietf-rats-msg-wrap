@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-07T00:55:27.772172+00:00",
+  "timestamp": "2025-10-14T00:55:41.805338+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -3451,6 +3451,38 @@
           "updatedAt": "2025-09-29T09:37:33Z"
         }
       ]
+    },
+    {
+      "number": 248,
+      "id": "I_kwDOIGCt2M7RKj7v",
+      "title": "cm-indicators should be IETF review",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/248",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The CM indicators registry is currently Expert Review.\n\nIn his [secdir review](https://mailarchive.ietf.org/arch/msg/secdir/QMqJHFL21FmVqSV-Wt2AgA2pprk/), Ben suggested this is not appropriate.\n\nAfter some discussion, it appears that [IETF Review](https://www.rfc-editor.org/rfc/rfc8126.html#section-4.8) should be the right policy.",
+      "createdAt": "2025-10-13T09:29:58Z",
+      "updatedAt": "2025-10-13T09:29:58Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 249,
+      "id": "I_kwDOIGCt2M7RKn1V",
+      "title": "de-emphasise the demux function",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/249",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "In his [secdir review](https://mailarchive.ietf.org/arch/msg/secdir/QMqJHFL21FmVqSV-Wt2AgA2pprk/), Ben suggests that the demux function presented in [\u00a73.4](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-18.html#section-3.4) is confusing in its scope and not generally recommended.\n\nWe should de-emphasise its importance and place it in a clearer \u201cintended usage\" context.",
+      "createdAt": "2025-10-13T09:35:05Z",
+      "updatedAt": "2025-10-13T09:35:05Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -17333,6 +17365,86 @@
           "body": "",
           "createdAt": "2025-10-06T12:14:39Z",
           "updatedAt": "2025-10-06T12:14:39Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 250,
+      "id": "PR_kwDOIGCt2M6tbK92",
+      "title": "move CM-ind registry to IETF review",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/250",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #248",
+      "createdAt": "2025-10-13T10:06:15Z",
+      "updatedAt": "2025-10-13T16:09:12Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "87db780e8a53d5a39bd4d25a636443d7551085d8",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "ietf-review",
+      "headRefOid": "34996e634d2ca251b82791f9378e79da17583e8a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7Gna7b",
+          "commit": {
+            "abbreviatedOid": "34996e6"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": ":+1:",
+          "createdAt": "2025-10-13T16:09:12Z",
+          "updatedAt": "2025-10-13T16:09:12Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 251,
+      "id": "PR_kwDOIGCt2M6tc5qJ",
+      "title": "De-emphasise importance of the demuxing algorithm",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/251",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #249",
+      "createdAt": "2025-10-13T12:15:44Z",
+      "updatedAt": "2025-10-13T16:13:50Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "87db780e8a53d5a39bd4d25a636443d7551085d8",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "de-emph-de-mux",
+      "headRefOid": "ba161c9364fd75f63830c58c7adccc8e557e9553",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7GneUQ",
+          "commit": {
+            "abbreviatedOid": "ba161c9"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-13T16:13:50Z",
+          "updatedAt": "2025-10-13T16:13:50Z",
           "comments": []
         }
       ]
