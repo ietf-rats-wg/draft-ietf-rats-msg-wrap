@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-14T00:55:41.805338+00:00",
+  "timestamp": "2025-10-16T00:56:42.194040+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -17086,7 +17086,7 @@
       "labels": [],
       "body": "Address Tim\u2019s Last Call [review](https://mailarchive.ietf.org/arch/msg/rats/luqh0QnFFzGN9AhosmfD-yrSRUk/)",
       "createdAt": "2025-09-30T10:16:08Z",
-      "updatedAt": "2025-10-06T12:23:02Z",
+      "updatedAt": "2025-10-14T15:51:38Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "eeeb41a9b7aa1d898543504f6e748f1ed514f08c",
@@ -17097,7 +17097,22 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> @cabo braught up convincing arguments that we do not want `unicode-assignables` in here via [#246 (comment)](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/246#discussion_r2394239636)\r\n\r\nI'm not totally convinced by @cabo's reasoning.\r\n\r\nIf I put on my most pessimistic glasses, the proposed change is harmless.  And if I remove them, it seems to bring about an improvement, albeit incrementally.\r\n\r\n@cabo, @timbray: do you think we could find a middle ground here?\r\n",
+          "createdAt": "2025-10-14T12:09:33Z",
+          "updatedAt": "2025-10-14T12:09:33Z"
+        },
+        {
+          "author": "timbray",
+          "authorAssociation": "NONE",
+          "body": "I think that your original observation from 2 weeks ago was exactly correct:\r\n\r\n> As far as I understand, the argument here is about making the receiver more robust in the event of malicious input. If the lower layers can apply the assignables filter, there is less chance of the upper layers screwing up.\r\n\r\nAssignables excludes things that no human would ever type in, so probably due to a bug upstream. If you think it would add value to say more about things that humans might type in like CR or HT, go ahead. I probably wouldn't bother.\r\n\r\nBTW there's history and I'm sorry you're getting exposed to it: Carsten was strongly against RFC9839 at every stage of its development, but at the end of the conversation the IESG approved the document as representing IETF consensus.\r\n",
+          "createdAt": "2025-10-14T15:51:38Z",
+          "updatedAt": "2025-10-14T15:51:38Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOIGCt2M7Du2eH",
