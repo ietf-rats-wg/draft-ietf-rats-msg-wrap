@@ -333,10 +333,11 @@ Since the Collection CMW is recursive (a Collection CMW is itself a CMW), implem
 {: #fig-cddl-collection artwork-align="left"
    title="CDDL definition of the Collection CMW"}
 
-## Decapsulation Algorithm
+## Demuxing
 
-Once any external framing is removed (for example, if the CMW is carried in a certificate extension), the CMW decoder performs a 1-byte lookahead to determine how to decode the remaining byte buffer.
-The following pseudo-code illustrates this process:
+The split in the JSON/CBOR decoding path is expected to occur via the media type or content format (see {{iana-mt}} and {{iana-cf}}, respectively), or via the container context of the embedded CMW (see {{iana-cwt}} and {{iana-jwt}} for CWT/JWT, and {{iana-smi}} for X.509).
+
+The following pseudocode illustrates how a one-byte look-ahead is sufficient to determine how to decode the remaining byte buffer.
 
 ~~~
 func CMWTypeDemux(b []byte) CMWType {
@@ -363,6 +364,9 @@ func CMWTypeDemux(b []byte) CMWType {
   return Unknown
 }
 ~~~
+
+This code is provided for informational purposes only.
+It is not expected that implementations will follow this demuxing strategy.
 
 # Cryptographic Protection of CMWs {#crypto}
 
@@ -802,7 +806,7 @@ Before the creation of the registry by IANA, new codepoints can be added to the 
 
 The provisional registry will be discontinued once IANA establishes the permanent registry, which is expected to coincide with the publication of the current document.
 
-## Media Types
+## Media Types {#iana-mt}
 
 IANA is requested to add the following media types to the "Media Types" registry {{!IANA.media-types}}.
 
@@ -1010,7 +1014,7 @@ Author/Change controller:
 Provisional registration:
 : no
 
-## CoAP Content-Formats
+## CoAP Content-Formats {#iana-cf}
 
 IANA is requested to register the following Content-Format IDs in the "CoAP Content-Formats" registry, within the "Constrained RESTful Environments (CoRE) Parameters" registry group {{!IANA.core-parameters}}:
 
@@ -1032,7 +1036,7 @@ When assigning a new CoAP Content-Format ID for a CMW media type that utilizes t
 * The corresponding CMW is a Collection ({{cmw-coll}}), and
 * The `cmwc_t` value is either a (non-relative) OID or an absolute URI.
 
-## New SMI Numbers Registrations
+## New SMI Numbers Registrations {#iana-smi}
 
 IANA has assigned an object identifier (OID) for the CMW extension defined in {{x509}} in the "SMI Security for PKIX Certificate Extension" registry of the "SMI Numbers" {{!IANA.smi-numbers}} registry group as follows:
 
