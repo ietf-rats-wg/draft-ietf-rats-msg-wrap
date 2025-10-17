@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 9 April 2026                                        Independent
+Expires: 20 April 2026                                       Independent
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                          6 October 2025
+                                                         17 October 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -72,7 +72,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 April 2026.
+   This Internet-Draft will expire on 20 April 2026.
 
 Copyright Notice
 
@@ -131,9 +131,8 @@ Table of Contents
        10.3.1.  Registry Contents
      10.4.  CBOR Tag Registration
      10.5.  RATS Conceptual Message Wrapper (CMW) Indicators Registry
-       10.5.1.  Instructions for the Designated Expert
-       10.5.2.  Structure of Entries
-       10.5.3.  Provisional Registration
+       10.5.1.  Structure of Entries
+       10.5.2.  Provisional Registration
      10.6.  Media Types
        10.6.1.  application/cmw+cbor
        10.6.2.  application/cmw+json
@@ -1179,23 +1178,21 @@ Table of Contents
 10.5.  RATS Conceptual Message Wrapper (CMW) Indicators Registry
 
    This specification defines a new "RATS Conceptual Message Wrapper
-   (CMW) Indicators" registry, with the policy "Expert Review"
-   (Section 4.5 of [BCP26]).
+   (CMW) Indicators" registry, with "IETF Review" policy (Section 4.8 of
+   [BCP26]).
 
-   The objective is to have CMW Indicators values registered for all
-   RATS Conceptual Messages (Section 8 of [RFC9334]).
+   The objective is to register CMW Indicator values for all RATS
+   Conceptual Messages (see Section 8 of [RFC9334]).
 
    This registry is to be added to the Remote Attestation Procedures
    (RATS) registry group at [IANA.rats].
 
-10.5.1.  Instructions for the Designated Expert
+   Indicator values should be added in ascending order.
 
-   The expert is instructed to add the values incrementally.
+   Acceptable values correspond to the RATS conceptual messages defined
+   by the RATS architecture [RFC9334] and any updates to it.
 
-   Acceptable values are those corresponding to RATS Conceptual Messages
-   defined by the RATS architecture [RFC9334] and any of its updates.
-
-10.5.2.  Structure of Entries
+10.5.1.  Structure of Entries
 
    Each entry in the registry must include:
 
@@ -1235,7 +1232,7 @@ Table of Contents
 
              Table 2: CMW Indicators Registry Initial Contents
 
-10.5.3.  Provisional Registration
+10.5.2.  Provisional Registration
 
    Before the creation of the registry by IANA, new codepoints can be
    added to the provisional CMW Indicators registry (https://github.com/
