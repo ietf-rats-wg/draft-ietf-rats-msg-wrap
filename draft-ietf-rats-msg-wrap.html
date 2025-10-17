@@ -1210,7 +1210,7 @@ serialization formats without breaking compatibility, and avoid having to redefi
                 <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-collection-cmw" class="internal xref">Collection CMW</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
-                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-decapsulation-algorithm" class="internal xref">Decapsulation Algorithm</a></p>
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-demuxing" class="internal xref">Demuxing</a></p>
 </li>
             </ul>
 </li>
@@ -1689,14 +1689,14 @@ cbor-collection = {
 </div>
 </section>
 </div>
-<div id="decapsulation-algorithm">
+<div id="demuxing">
 <section id="section-3.4">
-        <h3 id="name-decapsulation-algorithm">
-<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-decapsulation-algorithm" class="section-name selfRef">Decapsulation Algorithm</a>
+        <h3 id="name-demuxing">
+<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-demuxing" class="section-name selfRef">Demuxing</a>
         </h3>
-<p id="section-3.4-1">Once any external framing is removed (for example, if the CMW is carried in a certificate extension), the CMW decoder performs a 1-byte lookahead to determine how to decode the remaining byte buffer.
-The following pseudo-code illustrates this process:<a href="#section-3.4-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-3.4-2">
+<p id="section-3.4-1">The split in the JSON/CBOR decoding path is expected to occur via the media type or content format (see <a href="#iana-mt" class="auto internal xref">Section 10.6</a> and <a href="#iana-cf" class="auto internal xref">Section 10.7</a>, respectively), or via the container context of the embedded CMW (see <a href="#iana-cwt" class="auto internal xref">Section 10.1</a> and <a href="#iana-jwt" class="auto internal xref">Section 10.2</a> for CWT/JWT, and <a href="#iana-smi" class="auto internal xref">Section 10.8</a> for X.509).<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.4-2">The following pseudocode illustrates how a one-byte look-ahead is sufficient to determine how to decode the remaining byte buffer.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.4-3">
 <pre>
 func CMWTypeDemux(b []byte) CMWType {
   if len(b) == 0 {
@@ -1721,8 +1721,10 @@ func CMWTypeDemux(b []byte) CMWType {
 
   return Unknown
 }
-</pre><a href="#section-3.4-2" class="pilcrow">¶</a>
+</pre><a href="#section-3.4-3" class="pilcrow">¶</a>
 </div>
+<p id="section-3.4-4">This code is provided for informational purposes only.
+It is not expected that implementations will follow this demuxing strategy.<a href="#section-3.4-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2613,7 +2615,7 @@ The IETF has change control over this registration.<a href="#section-10.3.1-1.18
 </div>
 </section>
 </div>
-<div id="media-types">
+<div id="iana-mt">
 <section id="section-10.6">
         <h3 id="name-media-types">
 <a href="#section-10.6" class="section-number selfRef">10.6. </a><a href="#name-media-types" class="section-name selfRef">Media Types</a>
@@ -3018,7 +3020,7 @@ dotted-decimal notation.  The parameter value is case-insensitive.  It must not 
 </div>
 </section>
 </div>
-<div id="coap-content-formats">
+<div id="iana-cf">
 <section id="section-10.7">
         <h3 id="name-coap-content-formats">
 <a href="#section-10.7" class="section-number selfRef">10.7. </a><a href="#name-coap-content-formats" class="section-name selfRef">CoAP Content-Formats</a>
@@ -3088,7 +3090,7 @@ dotted-decimal notation.  The parameter value is case-insensitive.  It must not 
 </div>
 </section>
 </div>
-<div id="new-smi-numbers-registrations">
+<div id="iana-smi">
 <section id="section-10.8">
         <h3 id="name-new-smi-numbers-registratio">
 <a href="#section-10.8" class="section-number selfRef">10.8. </a><a href="#name-new-smi-numbers-registratio" class="section-name selfRef">New SMI Numbers Registrations</a>

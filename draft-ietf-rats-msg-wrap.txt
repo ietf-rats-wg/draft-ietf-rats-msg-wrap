@@ -98,7 +98,7 @@ Table of Contents
      3.2.  Tag CMW
        3.2.1.  How To Plug in a New Tag CMW
      3.3.  Collection CMW
-     3.4.  Decapsulation Algorithm
+     3.4.  Demuxing
    4.  Cryptographic Protection of CMWs
      4.1.  Signing CBOR CMW using COSE Sign1
      4.2.  Signing JSON CMW using JWS
@@ -472,12 +472,16 @@ Table of Contents
 
               Figure 4: CDDL definition of the Collection CMW
 
-3.4.  Decapsulation Algorithm
+3.4.  Demuxing
 
-   Once any external framing is removed (for example, if the CMW is
-   carried in a certificate extension), the CMW decoder performs a
-   1-byte lookahead to determine how to decode the remaining byte
-   buffer.  The following pseudo-code illustrates this process:
+   The split in the JSON/CBOR decoding path is expected to occur via the
+   media type or content format (see Section 10.6 and Section 10.7,
+   respectively), or via the container context of the embedded CMW (see
+   Section 10.1 and Section 10.2 for CWT/JWT, and Section 10.8 for
+   X.509).
+
+   The following pseudocode illustrates how a one-byte look-ahead is
+   sufficient to determine how to decode the remaining byte buffer.
 
    func CMWTypeDemux(b []byte) CMWType {
      if len(b) == 0 {
@@ -502,6 +506,9 @@ Table of Contents
 
      return Unknown
    }
+
+   This code is provided for informational purposes only.  It is not
+   expected that implementations will follow this demuxing strategy.
 
 4.  Cryptographic Protection of CMWs
 
