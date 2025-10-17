@@ -758,17 +758,15 @@ IANA is requested to add the following tag to the "CBOR Tags" {{!IANA.cbor-tags}
 
 ## RATS Conceptual Message Wrapper (CMW) Indicators Registry {#iana-ind-ext}
 
-This specification defines a new "RATS Conceptual Message Wrapper (CMW) Indicators" registry, with the policy "Expert Review" ({{Section 4.5 of -ianacons}}).
+This specification defines a new "RATS Conceptual Message Wrapper (CMW) Indicators" registry, with "IETF Review" policy ({{Section 4.8 of -ianacons}}).
 
-The objective is to have CMW Indicators values registered for all RATS Conceptual Messages ({{Section 8 of -rats-arch}}).
+The objective is to register CMW Indicator values for all RATS Conceptual Messages (see {{Section 8 of -rats-arch}}).
 
 This registry is to be added to the Remote Attestation Procedures (RATS) registry group at {{!IANA.rats}}.
 
-### Instructions for the Designated Expert {#de-instructions}
+Indicator values should be added in ascending order.
 
-The expert is instructed to add the values incrementally.
-
-Acceptable values are those corresponding to RATS Conceptual Messages defined by the RATS architecture {{-rats-arch}} and any of its updates.
+Acceptable values correspond to the RATS conceptual messages defined by the RATS architecture {{-rats-arch}} and any updates to it.
 
 ### Structure of Entries
 
