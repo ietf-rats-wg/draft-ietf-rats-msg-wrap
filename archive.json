@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-16T00:56:42.194040+00:00",
+  "timestamp": "2025-10-19T01:03:09.967003+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -3457,15 +3457,15 @@
       "id": "I_kwDOIGCt2M7RKj7v",
       "title": "cm-indicators should be IETF review",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/248",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The CM indicators registry is currently Expert Review.\n\nIn his [secdir review](https://mailarchive.ietf.org/arch/msg/secdir/QMqJHFL21FmVqSV-Wt2AgA2pprk/), Ben suggested this is not appropriate.\n\nAfter some discussion, it appears that [IETF Review](https://www.rfc-editor.org/rfc/rfc8126.html#section-4.8) should be the right policy.",
       "createdAt": "2025-10-13T09:29:58Z",
-      "updatedAt": "2025-10-13T09:29:58Z",
-      "closedAt": null,
+      "updatedAt": "2025-10-17T12:30:49Z",
+      "closedAt": "2025-10-17T12:30:49Z",
       "comments": []
     },
     {
@@ -3473,15 +3473,15 @@
       "id": "I_kwDOIGCt2M7RKn1V",
       "title": "de-emphasise the demux function",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/249",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "In his [secdir review](https://mailarchive.ietf.org/arch/msg/secdir/QMqJHFL21FmVqSV-Wt2AgA2pprk/), Ben suggests that the demux function presented in [\u00a73.4](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-18.html#section-3.4) is confusing in its scope and not generally recommended.\n\nWe should de-emphasise its importance and place it in a clearer \u201cintended usage\" context.",
       "createdAt": "2025-10-13T09:35:05Z",
-      "updatedAt": "2025-10-13T09:35:05Z",
-      "closedAt": null,
+      "updatedAt": "2025-10-17T12:36:56Z",
+      "closedAt": "2025-10-17T12:36:56Z",
       "comments": []
     }
   ],
@@ -17083,10 +17083,12 @@
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "wontfix"
+      ],
       "body": "Address Tim\u2019s Last Call [review](https://mailarchive.ietf.org/arch/msg/rats/luqh0QnFFzGN9AhosmfD-yrSRUk/)",
       "createdAt": "2025-09-30T10:16:08Z",
-      "updatedAt": "2025-10-14T15:51:38Z",
+      "updatedAt": "2025-10-17T15:50:40Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "eeeb41a9b7aa1d898543504f6e748f1ed514f08c",
@@ -17111,6 +17113,13 @@
           "body": "I think that your original observation from 2 weeks ago was exactly correct:\r\n\r\n> As far as I understand, the argument here is about making the receiver more robust in the event of malicious input. If the lower layers can apply the assignables filter, there is less chance of the upper layers screwing up.\r\n\r\nAssignables excludes things that no human would ever type in, so probably due to a bug upstream. If you think it would add value to say more about things that humans might type in like CR or HT, go ahead. I probably wouldn't bother.\r\n\r\nBTW there's history and I'm sorry you're getting exposed to it: Carsten was strongly against RFC9839 at every stage of its development, but at the end of the conversation the IESG approved the document as representing IETF consensus.\r\n",
           "createdAt": "2025-10-14T15:51:38Z",
           "updatedAt": "2025-10-14T15:51:38Z"
+        },
+        {
+          "author": "steven-bellock",
+          "authorAssociation": "NONE",
+          "body": "@henkbirkholz you are sending mixed signals.\r\n<img width=\"487\" height=\"132\" alt=\"image\" src=\"https://github.com/user-attachments/assets/bfc29304-2e9a-4764-80da-51c2de7c6382\" />\r\n",
+          "createdAt": "2025-10-17T15:50:40Z",
+          "updatedAt": "2025-10-17T15:50:40Z"
         }
       ],
       "reviews": [
@@ -17326,6 +17335,19 @@
           "createdAt": "2025-10-06T12:23:02Z",
           "updatedAt": "2025-10-06T12:23:02Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M7HrNd1",
+          "commit": {
+            "abbreviatedOid": "ea7022a"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-17T12:18:21Z",
+          "updatedAt": "2025-10-17T12:18:21Z",
+          "comments": []
         }
       ]
     },
@@ -17389,24 +17411,26 @@
       "id": "PR_kwDOIGCt2M6tbK92",
       "title": "move CM-ind registry to IETF review",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/250",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fix #248",
       "createdAt": "2025-10-13T10:06:15Z",
-      "updatedAt": "2025-10-13T16:09:12Z",
+      "updatedAt": "2025-10-17T12:30:51Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "87db780e8a53d5a39bd4d25a636443d7551085d8",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "ietf-review",
       "headRefOid": "34996e634d2ca251b82791f9378e79da17583e8a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-17T12:30:48Z",
+      "mergedAt": "2025-10-17T12:30:48Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "10758dbb7cae0ee93921c51e02b4984bf6b5b3aa"
+      },
       "comments": [],
       "reviews": [
         {
@@ -17421,6 +17445,19 @@
           "createdAt": "2025-10-13T16:09:12Z",
           "updatedAt": "2025-10-13T16:09:12Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M7HrSb3",
+          "commit": {
+            "abbreviatedOid": "34996e6"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-17T12:21:35Z",
+          "updatedAt": "2025-10-17T12:21:35Z",
+          "comments": []
         }
       ]
     },
@@ -17429,24 +17466,26 @@
       "id": "PR_kwDOIGCt2M6tc5qJ",
       "title": "De-emphasise importance of the demuxing algorithm",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/251",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fix #249",
       "createdAt": "2025-10-13T12:15:44Z",
-      "updatedAt": "2025-10-13T16:13:50Z",
+      "updatedAt": "2025-10-17T12:36:58Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "87db780e8a53d5a39bd4d25a636443d7551085d8",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "de-emph-de-mux",
       "headRefOid": "ba161c9364fd75f63830c58c7adccc8e557e9553",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-17T12:36:55Z",
+      "mergedAt": "2025-10-17T12:36:55Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "f41116ae445745cc6989a1ef3d8e179285912d6d"
+      },
       "comments": [],
       "reviews": [
         {
@@ -17461,8 +17500,47 @@
           "createdAt": "2025-10-13T16:13:50Z",
           "updatedAt": "2025-10-13T16:13:50Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M7HrpO3",
+          "commit": {
+            "abbreviatedOid": "ba161c9"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-17T12:36:54Z",
+          "updatedAt": "2025-10-17T12:36:54Z",
+          "comments": []
         }
       ]
+    },
+    {
+      "number": 252,
+      "id": "PR_kwDOIGCt2M6uTlqd",
+      "title": "more ACKs",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/252",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-10-17T12:49:50Z",
+      "updatedAt": "2025-10-17T12:49:50Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "f41116ae445745cc6989a1ef3d8e179285912d6d",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "acks",
+      "headRefOid": "5cb78ca0d6e46f34e2710881ed31d05b852a41d0",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
