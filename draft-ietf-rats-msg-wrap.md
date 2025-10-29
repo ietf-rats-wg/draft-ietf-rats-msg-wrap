@@ -734,7 +734,7 @@ References:
 : {{-jws}}
 
 Encoding Considerations:
-: 8bit; values are represented as a JSON Object or as a series of base64url-encoded values each separated from the next by a single period ('.') character.
+: binary; values are represented as a JSON Object or as a series of base64url-encoded values each separated from the next by a single period ('.') character.
 
 Interoperability Considerations:
 : n/a
