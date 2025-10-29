@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 2 April 2026                                        Independent
+Expires: 2 May 2026                                          Independent
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                       29 September 2025
+                                                         29 October 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -20,10 +20,14 @@ Expires: 2 April 2026                                        Independent
 
 Abstract
 
-   The Remote Attestation Procedures architecture (RFC 9334) defines
-   several types of conceptual messages, such as Evidence, Attestation
-   Results, Endorsements, and Reference Values.  These messages can
-   appear in different formats and be transported via various protocols.
+   The Conceptual Messages introduced by the RATS architecture (RFC9334)
+   are protocol-agnostic data units that are conveyed between RATS roles
+   during remote attestation procedures.  Conceptual Messages describe
+   the meaning and function of such data units within RATS data flows
+   without specifying a wire format, encoding, transport mechanism, or
+   processing details.  The initial set of Conceptual Messages is
+   defined in Section 8 of RFC9334 and includes Evidence, Attestation
+   Results, Endorsements, Reference Values, and Appraisal Policies.
 
    This document introduces the Conceptual Message Wrapper (CMW) that
    provides a common structure to encapsulate these messages.  It
@@ -68,7 +72,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 April 2026.
+   This Internet-Draft will expire on 2 May 2026.
 
 Copyright Notice
 
@@ -94,7 +98,7 @@ Table of Contents
      3.2.  Tag CMW
        3.2.1.  How To Plug in a New Tag CMW
      3.3.  Collection CMW
-     3.4.  Decapsulation Algorithm
+     3.4.  Demuxing
    4.  Cryptographic Protection of CMWs
      4.1.  Signing CBOR CMW using COSE Sign1
      4.2.  Signing JSON CMW using JWS
@@ -127,9 +131,8 @@ Table of Contents
        10.3.1.  Registry Contents
      10.4.  CBOR Tag Registration
      10.5.  RATS Conceptual Message Wrapper (CMW) Indicators Registry
-       10.5.1.  Instructions for the Designated Expert
-       10.5.2.  Structure of Entries
-       10.5.3.  Provisional Registration
+       10.5.1.  Structure of Entries
+       10.5.2.  Provisional Registration
      10.6.  Media Types
        10.6.1.  application/cmw+cbor
        10.6.2.  application/cmw+json
@@ -150,12 +153,20 @@ Table of Contents
 
 1.  Introduction
 
-   The IETF Remote ATtestation procedureS (RATS) architecture defines a
-   handful of conceptual messages (see Section 8 of [RFC9334]), such as
-   Evidence and Attestation Results.  Each conceptual message can have
-   multiple claims encoding and serialization formats (Section 9 of
-   [RFC9334]).  Throughout their lifetime, RATS conceptual messages are
-   typically transported over different protocols.  For example,
+   The Conceptual Messages introduced by the Remote ATtestation
+   procedureS (RATS) architecture [RFC9334] are protocol-agnostic data
+   units that are conveyed between RATS roles during remote attestation
+   procedures.  Conceptual Messages describe the meaning and function of
+   such data units within RATS data flows without specifying a wire
+   format, encoding, transport mechanism, or processing details.  The
+   initial set of Conceptual Messages is defined in Section 8 of
+   [RFC9334] and includes Evidence, Attestation Results, Endorsements,
+   Reference Values, and Appraisal Policies.
+
+   Each conceptual message can have multiple claims encoding and
+   serialization formats (Section 9 of [RFC9334]).  Throughout their
+   lifetime, RATS conceptual messages are typically transported over
+   different protocols.  For example,
 
    *  In a "background check" topology, Evidence (e.g., EAT [RFC9711])
       first flows from the Attester to the Relying Party and then from
@@ -308,8 +319,8 @@ Table of Contents
       An optional bitmap with a maximum size of 4 bytes that indicates
       which conceptual message types are carried in the value field.
       Any combination (i.e., any value between 1 and 2^32-1 included) is
-      allowed.  Only four values are registered at the time of writing,
-      so the acceptable values are currently limited to 1 to 15.  This
+      allowed.  Only five values are registered at the time of writing,
+      so the acceptable values are currently limited to 1 to 31.  This
       is useful only if the type is potentially ambiguous, and there is
       no further context available to the CMW consumer to decide.  For
       example, this might be the case if the base media type is not
@@ -431,19 +442,20 @@ Table of Contents
    than described here.
 
    The value of the "__cmwc_t" key is either a Uniform Resource
-   Identifier (URI) or an object identifier (OID).  The OID MUST be
-   absolute.  The URI MUST be in the absolute form (Section 4.3 of
-   [RFC3986]).
+   Identifier (URI) or an object identifier (OID).  The OID is always
+   absolute and never relative.  The URI MUST be in the absolute form
+   (Section 4.3 of [RFC3986]).
 
    The "__cmwc_t" key functions similar to an EAT profile claim (see
    Section 4.3.2 of [RFC9711]), but at a higher level.  It can be used
    to indicate basics like CBOR serialization and COSE algorithms just
-   as a profile in EAT does.  At the higher level, it can be used to
-   describe the allowed CMW collection assembly (this is somewhat
-   parallel to the way EAT profiles indicate which claims are required
-   and/or allowed).  For an example of a "__cmwc_t" that is defined for
-   a bundle of endorsements and reference values, see Section 4.3.1 of
-   [I-D.ietf-rats-corim].
+   as a profile in EAT does.  It provides a namespace in which the
+   collection labels are interpreted.  At the higher level, it can be
+   used to describe the allowed CMW collection assembly (this is
+   somewhat parallel to the way EAT profiles indicate which claims are
+   required and/or allowed).  For an example of a "__cmwc_t" that is
+   defined for a bundle of endorsements and reference values, see
+   Section 4.3.1 of [I-D.ietf-rats-corim].
 
    Since the Collection CMW is recursive (a Collection CMW is itself a
    CMW), implementations MAY limit the allowed depth of nesting.
@@ -460,12 +472,16 @@ Table of Contents
 
               Figure 4: CDDL definition of the Collection CMW
 
-3.4.  Decapsulation Algorithm
+3.4.  Demuxing
 
-   Once any external framing is removed (for example, if the CMW is
-   carried in a certificate extension), the CMW decoder performs a
-   1-byte lookahead to determine how to decode the remaining byte
-   buffer.  The following pseudo-code illustrates this process:
+   The split in the JSON/CBOR decoding path is expected to occur via the
+   media type or content format (see Section 10.6 and Section 10.7,
+   respectively), or via the container context of the embedded CMW (see
+   Section 10.1 and Section 10.2 for CWT/JWT, and Section 10.8 for
+   X.509).
+
+   The following pseudocode illustrates how a one-byte look-ahead is
+   sufficient to determine how to decode the remaining byte buffer.
 
    func CMWTypeDemux(b []byte) CMWType {
      if len(b) == 0 {
@@ -490,6 +506,9 @@ Table of Contents
 
      return Unknown
    }
+
+   This code is provided for informational purposes only.  It is not
+   expected that implementations will follow this demuxing strategy.
 
 4.  Cryptographic Protection of CMWs
 
@@ -525,6 +544,11 @@ Table of Contents
 
    cose.label = int / text
    cose.values = any
+
+   ; Note: 10000 is a placeholder for the CoAP C-F codepoint corresponding
+   ; to 'application/cmw+cbor'.  This CDDL fragment needs to be updated
+   ; (and this note removed) once the relevant C-F codepoint has been
+   ; assigned by IANA.
 
    The protected header MUST include the signature algorithm identifier.
    The protected header MUST include either the content type
@@ -921,6 +945,7 @@ Table of Contents
    cose.label = int / text
    cose.values = any
 
+
    signed-json-cmw = {
      "protected": text .b64u (text .json signed-json-cmw-protected-hdr)
      ? "header": text .b64u (text .json signed-json-cmw-unprotected-hdr)
@@ -939,6 +964,10 @@ Table of Contents
    }
 
 7.  Implementation Status
+
+
+   // RFC Editor: Please remove the entire section before publication,
+   as well as the reference to RFC 7942.
 
    This section records the status of known implementations of the
    protocol defined by this specification at the time of posting of this
@@ -1051,10 +1080,10 @@ Table of Contents
 
 9.3.  Integrating CMW into Protocols
 
-   When CMW is integrated into a protocol (for example, attested CSR
-   [I-D.ietf-lamps-csr-attestation] or attested TLS
+   When CMW is integrated into some hosting protocol (for example,
+   attested CSR [I-D.ietf-lamps-csr-attestation] or attested TLS
    [I-D.fossati-tls-attestation]
-   [I-D.fossati-tls-exported-attestation]), it is up to the "hosting"
+   [I-D.fossati-tls-exported-attestation]), it is up to that hosting
    protocol to describe how CMW is intended to be used and how it fits
    into the overall security model.
 
@@ -1125,7 +1154,7 @@ Table of Contents
    Name:  JSON Web Signature (JWS)
    +suffix:  +jws
    References:  [RFC7515]
-   Encoding Considerations:  8bit; values are represented as a JSON
+   Encoding Considerations:  binary; values are represented as a JSON
       Object or as a series of base64url-encoded values each separated
       from the next by a single period ('.') character.
    Interoperability Considerations:  n/a
@@ -1156,23 +1185,21 @@ Table of Contents
 10.5.  RATS Conceptual Message Wrapper (CMW) Indicators Registry
 
    This specification defines a new "RATS Conceptual Message Wrapper
-   (CMW) Indicators" registry, with the policy "Expert Review"
-   (Section 4.5 of [BCP26]).
+   (CMW) Indicators" registry, with "IETF Review" policy (Section 4.8 of
+   [BCP26]).
 
-   The objective is to have CMW Indicators values registered for all
-   RATS Conceptual Messages (Section 8 of [RFC9334]).
+   The objective is to register CMW Indicator values for all RATS
+   Conceptual Messages (see Section 8 of [RFC9334]).
 
    This registry is to be added to the Remote Attestation Procedures
    (RATS) registry group at [IANA.rats].
 
-10.5.1.  Instructions for the Designated Expert
+   Indicator values should be added in ascending order.
 
-   The expert is instructed to add the values incrementally.
+   Acceptable values correspond to the RATS conceptual messages defined
+   by the RATS architecture [RFC9334] and any updates to it.
 
-   Acceptable values are those corresponding to RATS Conceptual Messages
-   defined by the RATS architecture [RFC9334] and any of its updates.
-
-10.5.2.  Structure of Entries
+10.5.1.  Structure of Entries
 
    Each entry in the registry must include:
 
@@ -1212,7 +1239,7 @@ Table of Contents
 
              Table 2: CMW Indicators Registry Initial Contents
 
-10.5.3.  Provisional Registration
+10.5.2.  Provisional Registration
 
    Before the creation of the registry by IANA, new codepoints can be
    added to the provisional CMW Indicators registry (https://github.com/
@@ -1580,9 +1607,9 @@ Table of Contents
               Ounsworth, M., Tschofenig, H., Birkholz, H., Wiseman, M.,
               and N. Smith, "Use of Remote Attestation with
               Certification Signing Requests", Work in Progress,
-              Internet-Draft, draft-ietf-lamps-csr-attestation-20, 7
-              July 2025, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-lamps-csr-attestation-20>.
+              Internet-Draft, draft-ietf-lamps-csr-attestation-21, 5
+              October 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-lamps-csr-attestation-21>.
 
    [I-D.ietf-rats-ar4si]
               Voit, E., Birkholz, H., Hardjono, T., Fossati, T., and V.
@@ -1595,9 +1622,9 @@ Table of Contents
    [I-D.ietf-rats-corim]
               Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
               W. Pan, "Concise Reference Integrity Manifest", Work in
-              Progress, Internet-Draft, draft-ietf-rats-corim-08, 7 July
-              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              rats-corim-08>.
+              Progress, Internet-Draft, draft-ietf-rats-corim-09, 20
+              October 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-corim-09>.
 
    [RFC3647]  Chokhani, S., Ford, W., Sabett, R., Merrill, C., and S.
               Wu, "Internet X.509 Public Key Infrastructure Certificate
@@ -1701,8 +1728,9 @@ Acknowledgments
 
    The authors would like to thank Brian Campbell, Carl Wallace, Carsten
    Bormann, Dave Thaler, Deb Cooley, Ionuț Mihalcea, Michael B.  Jones,
-   Mike Ounsworth, Mohit Sethi, Russ Housley, Steven Bellock, Tom Jones,
-   and Usama Sardar for their reviews and suggestions.
+   Mike Ounsworth, Mohit Sethi, Paul Howard, Russ Housley, Steven
+   Bellock, Tom Jones, and Usama Sardar for their reviews and
+   suggestions.
 
    The definition of a Collection CMW has been modelled on a proposal
    originally made by Simon Frost for an EAT-based Evidence collection
