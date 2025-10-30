@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-19T01:03:09.967003+00:00",
+  "timestamp": "2025-10-30T01:00:22.685460+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -3482,6 +3482,22 @@
       "createdAt": "2025-10-13T09:35:05Z",
       "updatedAt": "2025-10-17T12:36:56Z",
       "closedAt": "2025-10-17T12:36:56Z",
+      "comments": []
+    },
+    {
+      "number": 253,
+      "id": "I_kwDOIGCt2M7UjyYV",
+      "title": "+jwt registration fix",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/253",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "See [Alexey\u2019s review](https://mailarchive.ietf.org/arch/msg/rats/4bBU5Uo6rq49ZPffGVluKfU7dCQ/).",
+      "createdAt": "2025-10-29T14:01:09Z",
+      "updatedAt": "2025-10-29T14:01:09Z",
+      "closedAt": null,
       "comments": []
     }
   ],
@@ -17535,6 +17551,32 @@
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "acks",
       "headRefOid": "5cb78ca0d6e46f34e2710881ed31d05b852a41d0",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 254,
+      "id": "PR_kwDOIGCt2M6wYUg0",
+      "title": "change `+jws` encoding considerations from 8bit to binary",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/254",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #253 ",
+      "createdAt": "2025-10-29T14:02:35Z",
+      "updatedAt": "2025-10-29T14:02:50Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "f41116ae445745cc6989a1ef3d8e179285912d6d",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "jws-enc-cons",
+      "headRefOid": "643649b46544500506692eb4318bb20f6fc59309",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
