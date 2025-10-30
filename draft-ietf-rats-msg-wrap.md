@@ -95,9 +95,9 @@ entity:
 
 --- abstract
 
-The Conceptual Messages introduced by the RATS architecture (RFC9334) are protocol-agnostic data units that are conveyed between RATS roles during remote attestation procedures.
+The Conceptual Messages introduced by the RATS architecture (RFC 9334) are protocol-agnostic data units that are conveyed between RATS roles during remote attestation procedures.
 Conceptual Messages describe the meaning and function of such data units within RATS data flows without specifying a wire format, encoding, transport mechanism, or processing details.
-The initial set of Conceptual Messages is defined in Section 8 of RFC9334 and includes Evidence, Attestation Results, Endorsements, Reference Values, and Appraisal Policies.
+The initial set of Conceptual Messages is defined in Section 8 of RFC 9334 and includes Evidence, Attestation Results, Endorsements, Reference Values, and Appraisal Policies.
 
 This document introduces the Conceptual Message Wrapper (CMW) that provides a common structure to encapsulate these messages.
 It defines a dedicated CBOR tag, corresponding JSON Web Token (JWT) and CBOR Web Token (CWT) claims, and an X.509 extension.
@@ -233,8 +233,8 @@ When using CBOR, the value field MUST be encoded as a CBOR byte string.
 `ind`:
 : An optional bitmap with a maximum size of 4 bytes that indicates which conceptual message types are
 carried in the `value` field.  Any combination (i.e., any value between
-1 and 2<sup>32</sup>-1 included) is allowed.  Only five values are registered at the time of writing, so the acceptable values are currently limited to 1 to 31.  This is useful only if the `type` is
-potentially ambiguous, and there is no further context available to the
+1 and 2<sup>32</sup>-1 inclusive) is allowed.  Only five bits are registered at the time of writing, so, the acceptable values are currently limited to 1 to 31.  This is useful only if the `type` is
+potentially ambiguous and there is no further context available to the
 CMW consumer to decide.  For example, this might be the case if the base
 media type is not profiled (e.g., `application/eat+cwt`), if the `value`
 field contains multiple conceptual messages with different types (e.g.,
@@ -370,7 +370,7 @@ It is not expected that implementations will follow this demuxing strategy.
 
 # Cryptographic Protection of CMWs {#crypto}
 
-This section highlights a number of mechanisms through which protocol designers can add data origin authentication, integrity and, if used with a challenge-response protocol, anti-replay protection when employing CMWs.
+This section highlights a number of mechanisms through which protocol designers can add data origin authentication, integrity, and, if used with a challenge-response protocol, anti-replay protection when employing CMWs.
 These properties must be evaluated carefully in the context of the overall security model of the protocol.
 
 ## Signing CBOR CMW using COSE Sign1 {#signed-cbor-cmw}
@@ -382,7 +382,7 @@ A `signed-cbor-cmw` is a `COSE_Sign1` with the following layout:
 {::include cddl/signed-cbor-cmw.cddl}
 ~~~
 
-The payload MUST be the CBOR-encoded Tag, Record or Collection CMW.
+The payload MUST be the CBOR-encoded Tag, Record, or Collection CMW.
 
 ~~~ cddl
 {::include cddl/signed-cbor-cmw-headers.cddl}
@@ -401,7 +401,7 @@ A `signed-json-cmw` is a JWS object with the following layout:
 {::include cddl/signed-json-cmw.cddl}
 ~~~
 
-The payload MUST be the JSON-encoded Record or Collection CMW.
+The payload MUST be the JSON-encoded Record, or Collection CMW.
 
 ~~~ cddl
 {::include cddl/signed-json-cmw-headers.cddl}
@@ -543,7 +543,7 @@ with the following wire representation:
 Note that a Media-Type-Name can also be used with the CBOR-encoded Record form,
 for example if it is known that the receiver cannot handle CoAP
 Content-Formats, or (unlike the case in point) if a CoAP Content-Format
-ID has not been registrered.
+ID has not been registered.
 
 ~~~ cbor-diag
 {::include cddl/cmw-example-2.diag}
@@ -601,6 +601,8 @@ The following example shows the use of the `"cmw"` JWT claim to transport a Coll
 ~~~
 
 # Collected CDDL {#collected-cddl}
+
+This appendix contains all the CDDL definitions included in this specification.
 
 ~~~ cddl
 {::include cddl/collected-cddl-autogen.cddl}
@@ -663,7 +665,7 @@ The following subsections provide further elaboration on these points, particula
 
 ## CMW Protection
 
-CMW Records, Tags and Collections alone do not offer authenticity, integrity protection, or confidentiality.
+CMW Records, Tags, and Collections alone do not offer authenticity, integrity protection, or confidentiality.
 It is the responsibility of the designer for each use case to determine the necessary security properties and implement them accordingly.
 
 RATS conceptual messages are typically secured using cryptography.
@@ -768,7 +770,7 @@ The objective is to register CMW Indicator values for all RATS Conceptual Messag
 
 This registry is to be added to the Remote Attestation Procedures (RATS) registry group at {{!IANA.rats}}.
 
-Indicator values should be added in ascending order.
+Indicator values should be added in ascending order, with no gaps between them.
 
 Acceptable values correspond to the RATS conceptual messages defined by the RATS architecture {{-rats-arch}} and any updates to it.
 
@@ -800,9 +802,11 @@ The initial registrations for the registry are detailed in {{tab-ind-regs}}.
 
 ### Provisional Registration
 
+[^rfced] Please remove this section before publication, as well as the reference to the provisional CMW Indicators registry.
+
 Before the creation of the registry by IANA, new codepoints can be added to the [provisional CMW Indicators registry](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/blob/main/provisional/cmw-indicators-registry.md) by following the documented procedure.
 
-{{tab-ind-regs}} will be regularly updated to match the contents of the provisional registry.
+{{tab-ind-regs}} will be regularly updated, prior to publication of this specification as an RFC, to match the contents of the provisional registry.
 
 The provisional registry will be discontinued once IANA establishes the permanent registry, which is expected to coincide with the publication of the current document.
 
