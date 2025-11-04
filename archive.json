@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-02T01:02:19.944658+00:00",
+  "timestamp": "2025-11-04T00:58:57.275149+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -17560,19 +17560,33 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-10-17T12:49:50Z",
-      "updatedAt": "2025-10-30T09:13:57Z",
+      "updatedAt": "2025-11-03T20:36:11Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "f41116ae445745cc6989a1ef3d8e179285912d6d",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "acks",
-      "headRefOid": "1a9b928a92de8da29663375e40c6f025d9b16b61",
+      "headRefOid": "a782a92485e13e57259f760247feafb9b8f78c42",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7La7OA",
+          "commit": {
+            "abbreviatedOid": "a782a92"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-11-03T20:36:11Z",
+          "updatedAt": "2025-11-03T20:36:11Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 254,
