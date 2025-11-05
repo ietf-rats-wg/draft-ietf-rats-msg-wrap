@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 20 April 2026                                       Independent
+Expires: 9 May 2026                                          Independent
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                         17 October 2025
+                                                         5 November 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -72,7 +72,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 April 2026.
+   This Internet-Draft will expire on 9 May 2026.
 
 Copyright Notice
 
@@ -1622,9 +1622,9 @@ Table of Contents
    [I-D.ietf-rats-corim]
               Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
               W. Pan, "Concise Reference Integrity Manifest", Work in
-              Progress, Internet-Draft, draft-ietf-rats-corim-08, 7 July
-              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              rats-corim-08>.
+              Progress, Internet-Draft, draft-ietf-rats-corim-09, 20
+              October 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-corim-09>.
 
    [RFC3647]  Chokhani, S., Ford, W., Sabett, R., Merrill, C., and S.
               Wu, "Internet X.509 Public Key Infrastructure Certificate
@@ -1726,10 +1726,11 @@ Appendix B.  Open Issues
 
 Acknowledgments
 
-   The authors would like to thank Brian Campbell, Carl Wallace, Carsten
-   Bormann, Dave Thaler, Deb Cooley, Ionuț Mihalcea, Michael B.  Jones,
-   Mike Ounsworth, Mohit Sethi, Paul Howard, Russ Housley, Steven
-   Bellock, Tom Jones, and Usama Sardar for their reviews and
+   The authors would like to thank Alexey Melnikov, Benjamin Schwartz,
+   Brian Campbell, Carl Wallace, Carsten Bormann, Dave Thaler, Deb
+   Cooley, Ionuț Mihalcea, Michael B.  Jones, Mike Ounsworth, Michael
+   StJohns, Mohit Sethi, Paul Howard, Peter Yee, Russ Housley, Steven
+   Bellock, Tim Bray, Tom Jones, and Usama Sardar for their reviews and
    suggestions.
 
    The definition of a Collection CMW has been modelled on a proposal
