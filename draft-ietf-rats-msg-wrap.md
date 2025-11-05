@@ -1102,6 +1102,8 @@ The list of currently open issues for this documents can be found at
 {:numbered="false"}
 
 The authors would like to thank
+Alexey Melnikov,
+Benjamin Schwartz,
 Brian Campbell,
 Carl Wallace,
 Carsten Bormann,
@@ -1110,10 +1112,13 @@ Deb Cooley,
 {{{Ionuț Mihalcea}}},
 Michael B. Jones,
 Mike Ounsworth,
+Michael StJohns,
 Mohit Sethi,
 Paul Howard,
+Peter Yee,
 Russ Housley,
 Steven Bellock,
+Tim Bray,
 Tom Jones,
 and
 Usama Sardar
