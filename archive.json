@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-04T00:58:57.275149+00:00",
+  "timestamp": "2025-11-06T00:59:29.011006+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -3489,15 +3489,15 @@
       "id": "I_kwDOIGCt2M7UjyYV",
       "title": "+jwt registration fix",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/253",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "See [Alexey\u2019s review](https://mailarchive.ietf.org/arch/msg/rats/4bBU5Uo6rq49ZPffGVluKfU7dCQ/).",
       "createdAt": "2025-10-29T14:01:09Z",
-      "updatedAt": "2025-10-29T14:01:09Z",
-      "closedAt": null,
+      "updatedAt": "2025-11-05T13:40:18Z",
+      "closedAt": "2025-11-05T13:40:18Z",
       "comments": []
     },
     {
@@ -17553,24 +17553,26 @@
       "id": "PR_kwDOIGCt2M6uTlqd",
       "title": "more ACKs",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/252",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-10-17T12:49:50Z",
-      "updatedAt": "2025-11-03T20:36:11Z",
+      "updatedAt": "2025-11-05T08:20:17Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "f41116ae445745cc6989a1ef3d8e179285912d6d",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "acks",
       "headRefOid": "a782a92485e13e57259f760247feafb9b8f78c42",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-11-05T08:20:13Z",
+      "mergedAt": "2025-11-05T08:20:13Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "2e06efcc92bae7c3d12ff9ca9872da1f95f6e67e"
+      },
       "comments": [],
       "reviews": [
         {
@@ -17593,52 +17595,84 @@
       "id": "PR_kwDOIGCt2M6wYUg0",
       "title": "change `+jws` encoding considerations from 8bit to binary",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/254",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fix #253 ",
       "createdAt": "2025-10-29T14:02:35Z",
-      "updatedAt": "2025-10-29T14:02:50Z",
+      "updatedAt": "2025-11-05T13:40:17Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "f41116ae445745cc6989a1ef3d8e179285912d6d",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "jws-enc-cons",
       "headRefOid": "643649b46544500506692eb4318bb20f6fc59309",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-11-05T13:40:17Z",
+      "mergedAt": "2025-11-05T13:40:17Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "966ecdd5d6a69097e9517bf2e26b7799c0b16578"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7L-VwK",
+          "commit": {
+            "abbreviatedOid": "643649b"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-11-05T13:40:03Z",
+          "updatedAt": "2025-11-05T13:40:03Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 256,
       "id": "PR_kwDOIGCt2M6wlkxC",
       "title": "Gen-ART review editorial comments",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/256",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Also fixes one of the two \"minor issues.\u201d\r\n\r\nAddresses #255 ",
       "createdAt": "2025-10-30T10:50:00Z",
-      "updatedAt": "2025-10-30T10:50:20Z",
+      "updatedAt": "2025-11-05T13:41:38Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "f41116ae445745cc6989a1ef3d8e179285912d6d",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "gen-art",
       "headRefOid": "c0e7bb2c27060e6339cff49d6cf5938e75512992",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-11-05T13:41:38Z",
+      "mergedAt": "2025-11-05T13:41:38Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "0a7273d4df244436b96661fd3fe4d3643e16ec4c"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7L-W-g",
+          "commit": {
+            "abbreviatedOid": "c0e7bb2"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-11-05T13:40:50Z",
+          "updatedAt": "2025-11-05T13:40:50Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
