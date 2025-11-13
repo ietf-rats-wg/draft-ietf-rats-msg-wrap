@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 16 April 2026                                       Independent
+Expires: 17 May 2026                                         Independent
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                         13 October 2025
+                                                        13 November 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -20,14 +20,15 @@ Expires: 16 April 2026                                       Independent
 
 Abstract
 
-   The Conceptual Messages introduced by the RATS architecture (RFC9334)
-   are protocol-agnostic data units that are conveyed between RATS roles
-   during remote attestation procedures.  Conceptual Messages describe
-   the meaning and function of such data units within RATS data flows
-   without specifying a wire format, encoding, transport mechanism, or
-   processing details.  The initial set of Conceptual Messages is
-   defined in Section 8 of RFC9334 and includes Evidence, Attestation
-   Results, Endorsements, Reference Values, and Appraisal Policies.
+   The Conceptual Messages introduced by the RATS architecture (RFC
+   9334) are protocol-agnostic data units that are conveyed between RATS
+   roles during remote attestation procedures.  Conceptual Messages
+   describe the meaning and function of such data units within RATS data
+   flows without specifying a wire format, encoding, transport
+   mechanism, or processing details.  The initial set of Conceptual
+   Messages is defined in Section 8 of RFC 9334 and includes Evidence,
+   Attestation Results, Endorsements, Reference Values, and Appraisal
+   Policies.
 
    This document introduces the Conceptual Message Wrapper (CMW) that
    provides a common structure to encapsulate these messages.  It
@@ -72,7 +73,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 April 2026.
+   This Internet-Draft will expire on 17 May 2026.
 
 Copyright Notice
 
@@ -98,7 +99,7 @@ Table of Contents
      3.2.  Tag CMW
        3.2.1.  How To Plug in a New Tag CMW
      3.3.  Collection CMW
-     3.4.  Decapsulation Algorithm
+     3.4.  Demuxing
    4.  Cryptographic Protection of CMWs
      4.1.  Signing CBOR CMW using COSE Sign1
      4.2.  Signing JSON CMW using JWS
@@ -318,10 +319,10 @@ Table of Contents
    ind:
       An optional bitmap with a maximum size of 4 bytes that indicates
       which conceptual message types are carried in the value field.
-      Any combination (i.e., any value between 1 and 2^32-1 included) is
-      allowed.  Only five values are registered at the time of writing,
-      so the acceptable values are currently limited to 1 to 31.  This
-      is useful only if the type is potentially ambiguous, and there is
+      Any combination (i.e., any value between 1 and 2^32-1 inclusive)
+      is allowed.  Only five bits are registered at the time of writing,
+      so, the acceptable values are currently limited to 1 to 31.  This
+      is useful only if the type is potentially ambiguous and there is
       no further context available to the CMW consumer to decide.  For
       example, this might be the case if the base media type is not
       profiled (e.g., application/eat+cwt), if the value field contains
@@ -472,12 +473,16 @@ Table of Contents
 
               Figure 4: CDDL definition of the Collection CMW
 
-3.4.  Decapsulation Algorithm
+3.4.  Demuxing
 
-   Once any external framing is removed (for example, if the CMW is
-   carried in a certificate extension), the CMW decoder performs a
-   1-byte lookahead to determine how to decode the remaining byte
-   buffer.  The following pseudo-code illustrates this process:
+   The split in the JSON/CBOR decoding path is expected to occur via the
+   media type or content format (see Section 10.6 and Section 10.7,
+   respectively), or via the container context of the embedded CMW (see
+   Section 10.1 and Section 10.2 for CWT/JWT, and Section 10.8 for
+   X.509).
+
+   The following pseudocode illustrates how a one-byte look-ahead is
+   sufficient to determine how to decode the remaining byte buffer.
 
    func CMWTypeDemux(b []byte) CMWType {
      if len(b) == 0 {
@@ -503,10 +508,13 @@ Table of Contents
      return Unknown
    }
 
+   This code is provided for informational purposes only.  It is not
+   expected that implementations will follow this demuxing strategy.
+
 4.  Cryptographic Protection of CMWs
 
    This section highlights a number of mechanisms through which protocol
-   designers can add data origin authentication, integrity and, if used
+   designers can add data origin authentication, integrity, and, if used
    with a challenge-response protocol, anti-replay protection when
    employing CMWs.  These properties must be evaluated carefully in the
    context of the overall security model of the protocol.
@@ -523,7 +531,7 @@ Table of Contents
      signature: bytes
    ]
 
-   The payload MUST be the CBOR-encoded Tag, Record or Collection CMW.
+   The payload MUST be the CBOR-encoded Tag, Record, or Collection CMW.
 
    signed-cbor-cmw-protected-hdr = {
      1 => int                            ; alg
@@ -561,7 +569,7 @@ Table of Contents
      "signature": text .b64u bytes
    }
 
-   The payload MUST be the JSON-encoded Record or Collection CMW.
+   The payload MUST be the JSON-encoded Record, or Collection CMW.
 
    signed-json-cmw-protected-hdr = {
      "alg": text
@@ -727,7 +735,7 @@ Table of Contents
    Note that a Media-Type-Name can also be used with the CBOR-encoded
    Record form, for example if it is known that the receiver cannot
    handle CoAP Content-Formats, or (unlike the case in point) if a CoAP
-   Content-Format ID has not been registrered.
+   Content-Format ID has not been registered.
 
    [
      "application/vnd.example.rats-conceptual-msg",
@@ -835,6 +843,9 @@ Table of Contents
    }
 
 6.  Collected CDDL
+
+   This appendix contains all the CDDL definitions included in this
+   specification.
 
    start = cmw
 
@@ -1030,7 +1041,7 @@ Table of Contents
 
 9.1.  CMW Protection
 
-   CMW Records, Tags and Collections alone do not offer authenticity,
+   CMW Records, Tags, and Collections alone do not offer authenticity,
    integrity protection, or confidentiality.  It is the responsibility
    of the designer for each use case to determine the necessary security
    properties and implement them accordingly.
@@ -1147,7 +1158,7 @@ Table of Contents
    Name:  JSON Web Signature (JWS)
    +suffix:  +jws
    References:  [RFC7515]
-   Encoding Considerations:  8bit; values are represented as a JSON
+   Encoding Considerations:  binary; values are represented as a JSON
       Object or as a series of base64url-encoded values each separated
       from the next by a single period ('.') character.
    Interoperability Considerations:  n/a
@@ -1187,7 +1198,8 @@ Table of Contents
    This registry is to be added to the Remote Attestation Procedures
    (RATS) registry group at [IANA.rats].
 
-   Indicator values should be added in ascending order.
+   Indicator values should be added in ascending order, with no gaps
+   between them.
 
    Acceptable values correspond to the RATS conceptual messages defined
    by the RATS architecture [RFC9334] and any updates to it.
@@ -1234,13 +1246,18 @@ Table of Contents
 
 10.5.2.  Provisional Registration
 
+
+   // RFC Editor: Please remove this section before publication, as well
+   as the reference to the provisional CMW Indicators registry.
+
    Before the creation of the registry by IANA, new codepoints can be
    added to the provisional CMW Indicators registry (https://github.com/
    ietf-rats-wg/draft-ietf-rats-msg-wrap/blob/main/provisional/cmw-
    indicators-registry.md) by following the documented procedure.
 
-   Table 2 will be regularly updated to match the contents of the
-   provisional registry.
+   Table 2 will be regularly updated, prior to publication of this
+   specification as an RFC, to match the contents of the provisional
+   registry.
 
    The provisional registry will be discontinued once IANA establishes
    the permanent registry, which is expected to coincide with the
@@ -1615,9 +1632,9 @@ Table of Contents
    [I-D.ietf-rats-corim]
               Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
               W. Pan, "Concise Reference Integrity Manifest", Work in
-              Progress, Internet-Draft, draft-ietf-rats-corim-08, 7 July
-              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              rats-corim-08>.
+              Progress, Internet-Draft, draft-ietf-rats-corim-09, 20
+              October 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-corim-09>.
 
    [RFC3647]  Chokhani, S., Ford, W., Sabett, R., Merrill, C., and S.
               Wu, "Internet X.509 Public Key Infrastructure Certificate
@@ -1719,10 +1736,11 @@ Appendix B.  Open Issues
 
 Acknowledgments
 
-   The authors would like to thank Brian Campbell, Carl Wallace, Carsten
-   Bormann, Dave Thaler, Deb Cooley, Ionuț Mihalcea, Michael B.  Jones,
-   Mike Ounsworth, Mohit Sethi, Paul Howard, Russ Housley, Steven
-   Bellock, Tom Jones, and Usama Sardar for their reviews and
+   The authors would like to thank Alexey Melnikov, Benjamin Schwartz,
+   Brian Campbell, Carl Wallace, Carsten Bormann, Dave Thaler, Deb
+   Cooley, Ionuț Mihalcea, Michael B.  Jones, Mike Ounsworth, Michael
+   StJohns, Mohit Sethi, Paul Howard, Peter Yee, Russ Housley, Steven
+   Bellock, Tim Bray, Tom Jones, and Usama Sardar for their reviews and
    suggestions.
 
    The definition of a Collection CMW has been modelled on a proposal
