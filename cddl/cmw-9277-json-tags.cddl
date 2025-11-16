@@ -1,0 +1,2 @@
+$cbor-tag /= tag-cm-data<1668547093> ; bstr(cmw+json collection)
+$cbor-tag /= tag-cm-data<1668547094> ; bstr(cmw+jws)

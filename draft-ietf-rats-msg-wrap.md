@@ -754,14 +754,6 @@ Author/Change Controller:
 : Remote ATtestation ProcedureS (RATS) Working Group.
   The IETF has change control over this registration.
 
-## CBOR Tag Registration {#iana-cbor-tag}
-
-IANA is requested to add the following tag to the "CBOR Tags" {{!IANA.cbor-tags}} registry.
-
-| CBOR Tag | Data Item | Semantics | Reference |
-|----------|-----------|-----------|-----------|
-| CPA907 | CBOR map, CBOR array, CBOR tag | RATS Conceptual Message Wrapper | {{type-n-val}}, {{cbor-tag}} and {{cmw-coll}} of {{&SELF}} |
-
 ## RATS Conceptual Message Wrapper (CMW) Indicators Registry {#iana-ind-ext}
 
 This specification defines a new "RATS Conceptual Message Wrapper (CMW) Indicators" registry, with "IETF Review" policy ({{Section 4.8 of -ianacons}}).
@@ -1027,7 +1019,7 @@ IANA is requested to register the following Content-Format IDs in the "CoAP Cont
 | application/cmw+json | - | TBD2 | {{type-n-val}} and {{cmw-coll}} of {{&SELF}} |
 | application/cmw+cose | - | TBD3 | {{signed-cbor-cmw}} of {{&SELF}} |
 | application/cmw+jws | - | TBD4 | {{signed-json-cmw}} of {{&SELF}} |
-{: align="left" title="New CoAP Content Formats"}
+{: #tab-cf-regs align="left" title="New CoAP Content Formats"}
 
 If possible, TBD1, TBD2, TBD3 and TBD4 should be assigned in the 256..9999 range.
 
@@ -1039,6 +1031,30 @@ When assigning a new CoAP Content-Format ID for a CMW media type that utilizes t
 
 * The corresponding CMW is a Collection ({{cmw-coll}}), and
 * The `cmwc_t` value is either a (non-relative) OID or an absolute URI.
+
+### RFC9277 CBOR Tags
+
+[^rfced] Once IANA has allocated TBD1..TBD4, please replace the placeholders in the first column of {{tab-9277-tags}} with the values computed using the TN() formula in {{Appendix B of RFC9277}}.  Similarly, replace the macro parameters in {{fig-9277-tags}}.
+
+Registering the CoAP Content-Formats listed in {{tab-cf-regs}} automatically allocates CBOR Tags in the range \[1668546817, 1668612095\], using the `TN()` transform defined in {{Appendix B of RFC9277}}.
+The allocated CBOR Tag numbers and the corresponding data items are listed in {{tab-9277-tags}}.
+
+| Tag Number | Tag Content |
+| TN(TBD1) | `bytes .cbor cbor-cmw` |
+| TN(TBD2) | bstr-wrapped `json-cmw` |
+| TN(TBD3) | `bytes .cbor signed-cbor-cmw` |
+| TN(TBD4) | bstr-wrapped `signed-json-cmw` or equivalent using JWS Compact Serialization ({{Section 3.1 of -jws}}) |
+{: #tab-9277-tags align="left" title="TN-derived CBOR Tags"}
+
+{{fig-9277-tags}} extends the `$cbor-tag` socket defined in {{cbor-tag}} to add the definitions of the associated Tag CMWs.
+Note that CMWs in Tag and Record form are excluded from the productions.
+This is because they can already be represented as a CMW, so the extra wrapping would be redundant.
+
+~~~ cddl
+{::include cddl/cmw-9277-cbor-tags.cddl}
+{::include cddl/cmw-9277-json-tags.cddl}
+~~~
+{: #fig-9277-tags align="left" title="Tag CMW definitions"}
 
 ## New SMI Numbers Registrations {#iana-smi}
 
@@ -1111,6 +1127,7 @@ Benjamin Schwartz,
 Brian Campbell,
 Carl Wallace,
 Carsten Bormann,
+{{{Christian Amsüss}},
 Dave Thaler,
 Deb Cooley,
 {{{Ionuț Mihalcea}}},
