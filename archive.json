@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-06T00:59:29.011006+00:00",
+  "timestamp": "2025-11-18T00:59:29.083376+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -17670,6 +17670,46 @@
           "body": "",
           "createdAt": "2025-11-05T13:40:50Z",
           "updatedAt": "2025-11-05T13:40:50Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 257,
+      "id": "PR_kwDOIGCt2M6zvBZJ",
+      "title": "Drop CBOR tag registration",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/257",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Also, add a subsection to the C-F registrations to explicilty document the 9277-derived Tags.",
+      "createdAt": "2025-11-16T18:26:27Z",
+      "updatedAt": "2025-11-17T10:39:16Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "0a7273d4df244436b96661fd3fe4d3643e16ec4c",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "9277-tags",
+      "headRefOid": "a350faa2adaf240fbacb920f203d80bc09e1cc6f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7O87Y3",
+          "commit": {
+            "abbreviatedOid": "a350faa"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-11-17T10:39:16Z",
+          "updatedAt": "2025-11-17T10:39:16Z",
           "comments": []
         }
       ]
