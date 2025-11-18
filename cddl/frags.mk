@@ -53,6 +53,7 @@ SIGNED_CBOR_CMW_CDDL_FRAGS += cmw-collection.cddl
 SIGNED_CBOR_CMW_CDDL_FRAGS += common-types.cddl
 SIGNED_CBOR_CMW_CDDL_FRAGS += cm-type.cddl
 SIGNED_CBOR_CMW_CDDL_FRAGS += rfc9193.cddl
+SIGNED_CBOR_CMW_CDDL_FRAGS += cmw-9277-cbor-tags.cddl
 
 SIGNED_JSON_CMW_CDDL_FRAGS += signed-json-cmw.cddl
 SIGNED_JSON_CMW_CDDL_FRAGS += signed-json-cmw-headers.cddl
@@ -63,5 +64,6 @@ SIGNED_JSON_CMW_CDDL_FRAGS += cmw-collection.cddl
 SIGNED_JSON_CMW_CDDL_FRAGS += common-types.cddl
 SIGNED_JSON_CMW_CDDL_FRAGS += cm-type.cddl
 SIGNED_JSON_CMW_CDDL_FRAGS += rfc9193.cddl
+SIGNED_JSON_CMW_CDDL_FRAGS += cmw-9277-json-tags.cddl
 
-
+# CMW 9277 CBOR tags
