@@ -1063,7 +1063,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 21 May 2026</td>
+<td class="center">Expires 22 May 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1076,12 +1076,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-rats-msg-wrap-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-11-17" class="published">17 November 2025</time>
+<time datetime="2025-11-18" class="published">18 November 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-05-21">21 May 2026</time></dd>
+<dd class="expires"><time datetime="2026-05-22">22 May 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1151,7 +1151,7 @@ serialization formats without breaking compatibility, and avoid having to redefi
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 21 May 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 22 May 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1626,7 +1626,7 @@ tag-cm-data&lt;tn&gt; = #6.&lt;tn&gt;(bytes)
 $cbor-tag /= tag-cm-cbor&lt;1668576819, my-evidence&gt;
 
 my-evidence = {
-  &amp;(eat_nonce: 10) =&gt; bstr .size (8..64)
+  &amp;(eat_nonce: 10) =&gt; bytes .size (8..64)
 }
 </pre><a href="#section-3.2.1-3" class="pilcrow">¶</a>
 </div>
@@ -3092,7 +3092,7 @@ The allocated CBOR Tag numbers and the corresponding data items are listed in <a
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">TN(TBD2)</td>
-                <td class="text-left" rowspan="1" colspan="1">bstr-wrapped <code>json-cmw</code>
+                <td class="text-left" rowspan="1" colspan="1">bytes-wrapped <code>json-cmw</code>
 </td>
               </tr>
               <tr>
@@ -3103,7 +3103,7 @@ The allocated CBOR Tag numbers and the corresponding data items are listed in <a
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">TN(TBD4)</td>
-                <td class="text-left" rowspan="1" colspan="1">bstr-wrapped <code>signed-json-cmw</code> or equivalent using JWS Compact Serialization (<span><a href="https://rfc-editor.org/rfc/rfc7515#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>)</td>
+                <td class="text-left" rowspan="1" colspan="1">bytes-wrapped <code>signed-json-cmw</code> or equivalent using JWS Compact Serialization (<span><a href="https://rfc-editor.org/rfc/rfc7515#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>)</td>
               </tr>
             </tbody>
           </table>
@@ -3117,8 +3117,8 @@ This is because they can already be represented as a CMW, so the extra wrapping 
 <pre>
 $cbor-tag /= tag-cm-cbor&lt;1668547091, cbor-collection&gt;
 $cbor-tag /= tag-cm-cbor&lt;1668547092, signed-cbor-cmw&gt;
-$cbor-tag /= tag-cm-data&lt;1668547093&gt; ; bstr(cmw+json collection)
-$cbor-tag /= tag-cm-data&lt;1668547094&gt; ; bstr(cmw+jws)
+$cbor-tag /= tag-cm-data&lt;1668547093&gt; ; bytes(cmw+json collection)
+$cbor-tag /= tag-cm-data&lt;1668547094&gt; ; bytes(cmw+jws)
 </pre>
 </div>
 <figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:

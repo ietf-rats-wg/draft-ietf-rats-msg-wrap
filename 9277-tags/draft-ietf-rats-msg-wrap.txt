@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 21 May 2026                                         Independent
+Expires: 22 May 2026                                         Independent
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                        17 November 2025
+                                                        18 November 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -73,7 +73,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 May 2026.
+   This Internet-Draft will expire on 22 May 2026.
 
 Copyright Notice
 
@@ -395,7 +395,7 @@ Table of Contents
    $cbor-tag /= tag-cm-cbor<1668576819, my-evidence>
 
    my-evidence = {
-     &(eat_nonce: 10) => bstr .size (8..64)
+     &(eat_nonce: 10) => bytes .size (8..64)
    }
 
    Instead, if a (non-CBOR) conceptual message has a TN-derived CBOR tag
@@ -1442,12 +1442,12 @@ Table of Contents
    +============+======================================================+
    | TN(TBD1)   | bytes .cbor cbor-cmw                                 |
    +------------+------------------------------------------------------+
-   | TN(TBD2)   | bstr-wrapped json-cmw                                |
+   | TN(TBD2)   | bytes-wrapped json-cmw                               |
    +------------+------------------------------------------------------+
    | TN(TBD3)   | bytes .cbor signed-cbor-cmw                          |
    +------------+------------------------------------------------------+
-   | TN(TBD4)   | bstr-wrapped signed-json-cmw or equivalent using JWS |
-   |            | Compact Serialization (Section 3.1 of [RFC7515])     |
+   | TN(TBD4)   | bytes-wrapped signed-json-cmw or equivalent using    |
+   |            | JWS Compact Serialization (Section 3.1 of [RFC7515]) |
    +------------+------------------------------------------------------+
 
                        Table 4: TN-derived CBOR Tags
@@ -1460,8 +1460,8 @@ Table of Contents
 
    $cbor-tag /= tag-cm-cbor<1668547091, cbor-collection>
    $cbor-tag /= tag-cm-cbor<1668547092, signed-cbor-cmw>
-   $cbor-tag /= tag-cm-data<1668547093> ; bstr(cmw+json collection)
-   $cbor-tag /= tag-cm-data<1668547094> ; bstr(cmw+jws)
+   $cbor-tag /= tag-cm-data<1668547093> ; bytes(cmw+json collection)
+   $cbor-tag /= tag-cm-data<1668547094> ; bytes(cmw+jws)
 
                        Figure 5: Tag CMW definitions
 
