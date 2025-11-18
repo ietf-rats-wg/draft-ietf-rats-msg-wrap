@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 9 May 2026                                          Independent
+Expires: 22 May 2026                                         Independent
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                         5 November 2025
+                                                        18 November 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -73,7 +73,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 May 2026.
+   This Internet-Draft will expire on 22 May 2026.
 
 Copyright Notice
 
@@ -130,19 +130,19 @@ Table of Contents
      10.2.  JWT cmw Claim Registration
      10.3.  +jws Structured Syntax Suffix
        10.3.1.  Registry Contents
-     10.4.  CBOR Tag Registration
-     10.5.  RATS Conceptual Message Wrapper (CMW) Indicators Registry
-       10.5.1.  Structure of Entries
-       10.5.2.  Provisional Registration
-     10.6.  Media Types
-       10.6.1.  application/cmw+cbor
-       10.6.2.  application/cmw+json
-       10.6.3.  application/cmw+cose
-       10.6.4.  application/cmw+jws
-     10.7.  CoAP Content-Formats
-       10.7.1.  Registering new CoAP Content-Formats for Parameterized
+     10.4.  RATS Conceptual Message Wrapper (CMW) Indicators Registry
+       10.4.1.  Structure of Entries
+       10.4.2.  Provisional Registration
+     10.5.  Media Types
+       10.5.1.  application/cmw+cbor
+       10.5.2.  application/cmw+json
+       10.5.3.  application/cmw+cose
+       10.5.4.  application/cmw+jws
+     10.6.  CoAP Content-Formats
+       10.6.1.  Registering new CoAP Content-Formats for Parameterized
                CMW Media Types
-     10.8.  New SMI Numbers Registrations
+       10.6.2.  RFC9277 CBOR Tags
+     10.7.  New SMI Numbers Registrations
    11. References
      11.1.  Normative References
      11.2.  Informative References
@@ -358,7 +358,7 @@ Table of Contents
 
    Future specifications that extend the RATS Conceptual Messages set
    can add new values to the cm-type using the process defined in
-   Section 10.5.
+   Section 10.4.
 
 3.2.  Tag CMW
 
@@ -395,7 +395,7 @@ Table of Contents
    $cbor-tag /= tag-cm-cbor<1668576819, my-evidence>
 
    my-evidence = {
-     &(eat_nonce: 10) => bstr .size (8..64)
+     &(eat_nonce: 10) => bytes .size (8..64)
    }
 
    Instead, if a (non-CBOR) conceptual message has a TN-derived CBOR tag
@@ -476,9 +476,9 @@ Table of Contents
 3.4.  Demuxing
 
    The split in the JSON/CBOR decoding path is expected to occur via the
-   media type or content format (see Section 10.6 and Section 10.7,
+   media type or content format (see Section 10.5 and Section 10.6,
    respectively), or via the container context of the embedded CMW (see
-   Section 10.1 and Section 10.2 for CWT/JWT, and Section 10.8 for
+   Section 10.1 and Section 10.2 for CWT/JWT, and Section 10.7 for
    X.509).
 
    The following pseudocode illustrates how a one-byte look-ahead is
@@ -1170,23 +1170,7 @@ Table of Contents
       Working Group.  The IETF has change control over this
       registration.
 
-10.4.  CBOR Tag Registration
-
-   IANA is requested to add the following tag to the "CBOR Tags"
-   [IANA.cbor-tags] registry.
-
-    +========+=============+=================+========================+
-    | CBOR   | Data Item   | Semantics       | Reference              |
-    | Tag    |             |                 |                        |
-    +========+=============+=================+========================+
-    | CPA907 | CBOR map,   | RATS Conceptual | Section 3.1,           |
-    |        | CBOR array, | Message Wrapper | Section 3.2 and        |
-    |        | CBOR tag    |                 | Section 3.3 of RFCthis |
-    +--------+-------------+-----------------+------------------------+
-
-                                  Table 1
-
-10.5.  RATS Conceptual Message Wrapper (CMW) Indicators Registry
+10.4.  RATS Conceptual Message Wrapper (CMW) Indicators Registry
 
    This specification defines a new "RATS Conceptual Message Wrapper
    (CMW) Indicators" registry, with "IETF Review" policy (Section 4.8 of
@@ -1204,7 +1188,7 @@ Table of Contents
    Acceptable values correspond to the RATS conceptual messages defined
    by the RATS architecture [RFC9334] and any updates to it.
 
-10.5.1.  Structure of Entries
+10.4.1.  Structure of Entries
 
    Each entry in the registry must include:
 
@@ -1219,7 +1203,7 @@ Table of Contents
    Reference:
       A reference to a document, if available, or the registrant.
 
-   The initial registrations for the registry are detailed in Table 2.
+   The initial registrations for the registry are detailed in Table 1.
 
        +=================+=========================+===============+
        | Indicator value | Conceptual Message name | Reference     |
@@ -1242,9 +1226,9 @@ Table of Contents
        | 5-31            | Unassigned              |               |
        +-----------------+-------------------------+---------------+
 
-             Table 2: CMW Indicators Registry Initial Contents
+             Table 1: CMW Indicators Registry Initial Contents
 
-10.5.2.  Provisional Registration
+10.4.2.  Provisional Registration
 
 
    // RFC Editor: Please remove this section before publication, as well
@@ -1255,7 +1239,7 @@ Table of Contents
    ietf-rats-wg/draft-ietf-rats-msg-wrap/blob/main/provisional/cmw-
    indicators-registry.md) by following the documented procedure.
 
-   Table 2 will be regularly updated, prior to publication of this
+   Table 1 will be regularly updated, prior to publication of this
    specification as an RFC, to match the contents of the provisional
    registry.
 
@@ -1263,7 +1247,7 @@ Table of Contents
    the permanent registry, which is expected to coincide with the
    publication of the current document.
 
-10.6.  Media Types
+10.5.  Media Types
 
    IANA is requested to add the following media types to the "Media
    Types" registry [IANA.media-types].
@@ -1282,9 +1266,9 @@ Table of Contents
      | cmw+jws  | application/cmw+jws  | Section 4.2 of RFCthis     |
      +----------+----------------------+----------------------------+
 
-                         Table 3: CMW Media Types
+                         Table 2: CMW Media Types
 
-10.6.1.  application/cmw+cbor
+10.5.1.  application/cmw+cbor
 
    Type name:  application
    Subtype name:  cmw+cbor
@@ -1312,7 +1296,7 @@ Table of Contents
    Author/Change controller:  IETF
    Provisional registration:  no
 
-10.6.2.  application/cmw+json
+10.5.2.  application/cmw+json
 
    Type name:  application
    Subtype name:  cmw+json
@@ -1340,7 +1324,7 @@ Table of Contents
    Author/Change controller:  IETF
    Provisional registration:  no
 
-10.6.3.  application/cmw+cose
+10.5.3.  application/cmw+cose
 
    Type name:  application
    Subtype name:  cmw+cose
@@ -1366,7 +1350,7 @@ Table of Contents
    Author/Change controller:  IETF
    Provisional registration:  no
 
-10.6.4.  application/cmw+jws
+10.5.4.  application/cmw+jws
 
    Type name:  application
    Subtype name:  cmw+jws
@@ -1393,7 +1377,7 @@ Table of Contents
    Author/Change controller:  IETF
    Provisional registration:  no
 
-10.7.  CoAP Content-Formats
+10.6.  CoAP Content-Formats
 
    IANA is requested to register the following Content-Format IDs in the
    "CoAP Content-Formats" registry, within the "Constrained RESTful
@@ -1417,12 +1401,12 @@ Table of Contents
    | cmw+jws      |                |      |                            |
    +--------------+----------------+------+----------------------------+
 
-                     Table 4: New CoAP Content Formats
+                     Table 3: New CoAP Content Formats
 
    If possible, TBD1, TBD2, TBD3 and TBD4 should be assigned in the
    256..9999 range.
 
-10.7.1.  Registering new CoAP Content-Formats for Parameterized CMW
+10.6.1.  Registering new CoAP Content-Formats for Parameterized CMW
          Media Types
 
    New CoAP Content-Formats can be created based on parameterized
@@ -1438,7 +1422,50 @@ Table of Contents
    *  The cmwc_t value is either a (non-relative) OID or an absolute
       URI.
 
-10.8.  New SMI Numbers Registrations
+10.6.2.  RFC9277 CBOR Tags
+
+
+   // RFC Editor: Once IANA has allocated TBD1..TBD4, please replace the
+   placeholders in the first column of Table 4 with the values computed
+   using the TN() formula in Appendix B of [RFC9277].  Similarly,
+   replace the macro parameters in Figure 5.
+
+   Registering the CoAP Content-Formats listed in Table 3 automatically
+   allocates CBOR Tags in the range [1668546817, 1668612095], using the
+   TN() transform defined in Appendix B of [RFC9277].  The allocated
+   CBOR Tag numbers and the corresponding data items are listed in
+   Table 4.
+
+   +============+======================================================+
+   | Tag        | Tag Content                                          |
+   | Number     |                                                      |
+   +============+======================================================+
+   | TN(TBD1)   | bytes .cbor cbor-cmw                                 |
+   +------------+------------------------------------------------------+
+   | TN(TBD2)   | bytes-wrapped json-cmw                               |
+   +------------+------------------------------------------------------+
+   | TN(TBD3)   | bytes .cbor signed-cbor-cmw                          |
+   +------------+------------------------------------------------------+
+   | TN(TBD4)   | bytes-wrapped signed-json-cmw or equivalent using    |
+   |            | JWS Compact Serialization (Section 3.1 of [RFC7515]) |
+   +------------+------------------------------------------------------+
+
+                       Table 4: TN-derived CBOR Tags
+
+   Figure 5 extends the $cbor-tag socket defined in Section 3.2 to add
+   the definitions of the associated Tag CMWs.  Note that CMWs in Tag
+   and Record form are excluded from the productions.  This is because
+   they can already be represented as a CMW, so the extra wrapping would
+   be redundant.
+
+   $cbor-tag /= tag-cm-cbor<1668547091, cbor-collection>
+   $cbor-tag /= tag-cm-cbor<1668547092, signed-cbor-cmw>
+   $cbor-tag /= tag-cm-data<1668547093> ; bytes(cmw+json collection)
+   $cbor-tag /= tag-cm-data<1668547094> ; bytes(cmw+jws)
+
+                       Figure 5: Tag CMW definitions
+
+10.7.  New SMI Numbers Registrations
 
    IANA has assigned an object identifier (OID) for the CMW extension
    defined in Section 4.4 in the "SMI Security for PKIX Certificate
@@ -1474,10 +1501,6 @@ Table of Contents
               Writing an IANA Considerations Section in RFCs", BCP 26,
               RFC 8126, DOI 10.17487/RFC8126, June 2017,
               <https://www.rfc-editor.org/rfc/rfc8126>.
-
-   [IANA.cbor-tags]
-              IANA, "Concise Binary Object Representation (CBOR) Tags",
-              <https://www.iana.org/assignments/cbor-tags>.
 
    [IANA.core-parameters]
               IANA, "Constrained RESTful Environments (CoRE)
@@ -1691,7 +1714,7 @@ Table of Contents
 
 Appendix A.  Registering and Using CMWs
 
-   Figure 5 describes the registration preconditions for using CMWs in
+   Figure 6 describes the registration preconditions for using CMWs in
    either Record CMW or Tag CMW forms.  When using Collection CMW, the
    preconditions apply for each entry in the Collection.
 
@@ -1724,7 +1747,7 @@ Appendix A.  Registering and Using CMWs
                  /             Record CMW               /
                 `--------------------------------------'
 
-                       Figure 5: How To Create a CMW
+                       Figure 6: How To Create a CMW
 
 Appendix B.  Open Issues
 
@@ -1737,11 +1760,11 @@ Appendix B.  Open Issues
 Acknowledgments
 
    The authors would like to thank Alexey Melnikov, Benjamin Schwartz,
-   Brian Campbell, Carl Wallace, Carsten Bormann, Dave Thaler, Deb
-   Cooley, Ionuț Mihalcea, Michael B.  Jones, Mike Ounsworth, Michael
-   StJohns, Mohit Sethi, Paul Howard, Peter Yee, Russ Housley, Steven
-   Bellock, Tim Bray, Tom Jones, and Usama Sardar for their reviews and
-   suggestions.
+   Brian Campbell, Carl Wallace, Carsten Bormann, Christian Amsüss, Dave
+   Thaler, Deb Cooley, Ionuț Mihalcea, Michael B.  Jones, Mike
+   Ounsworth, Michael StJohns, Mohit Sethi, Paul Howard, Peter Yee, Russ
+   Housley, Steven Bellock, Tim Bray, Tom Jones, and Usama Sardar for
+   their reviews and suggestions.
 
    The definition of a Collection CMW has been modelled on a proposal
    originally made by Simon Frost for an EAT-based Evidence collection
