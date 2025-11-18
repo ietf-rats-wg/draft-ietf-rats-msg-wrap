@@ -1041,9 +1041,9 @@ The allocated CBOR Tag numbers and the corresponding data items are listed in {{
 
 | Tag Number | Tag Content |
 | TN(TBD1) | `bytes .cbor cbor-cmw` |
-| TN(TBD2) | bstr-wrapped `json-cmw` |
+| TN(TBD2) | bytes-wrapped `json-cmw` |
 | TN(TBD3) | `bytes .cbor signed-cbor-cmw` |
-| TN(TBD4) | bstr-wrapped `signed-json-cmw` or equivalent using JWS Compact Serialization ({{Section 3.1 of -jws}}) |
+| TN(TBD4) | bytes-wrapped `signed-json-cmw` or equivalent using JWS Compact Serialization ({{Section 3.1 of -jws}}) |
 {: #tab-9277-tags align="left" title="TN-derived CBOR Tags"}
 
 {{fig-9277-tags}} extends the `$cbor-tag` socket defined in {{cbor-tag}} to add the definitions of the associated Tag CMWs.
