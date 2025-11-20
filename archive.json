@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-18T00:59:29.083376+00:00",
+  "timestamp": "2025-11-20T00:58:21.561150+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -3513,6 +3513,22 @@
       "body": "Excerpt from [Peter\u2019s Gen-art review](https://mailarchive.ietf.org/arch/msg/rats/yiyANBXGrVdeYqs7MnoCsug7n6A/):\n\n```\nMinor issues:\n\nPage 10, 6th paragraph: Is there some expectation of what happens when a\nsending implementation allows more nesting depth than a receiving\nimplementation?\n\nPage 26, section 10.5, 4th paragraph: do indicator values need to be in\nmonotonically ascending order or are gaps fine?\n\nNits/editorial comments:\n\nPage 1, Abstract, 1st paragraph, 1st sentence: since the use of \u201c(RFC9334)\u201d is\nnot a reference (which are not allowed in abstracts in any case), then it\nshould be written as \u201c(RFC 9334\u201d. (See RFC 7322, section 3.5.)\n\nPage 1, Abstract, 1st paragraph, last sentence. The same correction applies\nhere as well.\n\nPage 7, ind definition, 2nd sentence: change \u201cincluded\u201d to \u201cinclusive\u201d.\n\nPage 7, ind definition, 3rd sentence: change \u201cvalues\u201d to \u201cbits\u201d. There are many\nmore values than bits, as the previous sentence shows. Append a comma after\n\u201cso\u201d. Delete the comma after \u201cambiguous\u201d.\n\nPage 11, section 4, 1st sentence: append a comma after \u201cintegrity\u201d.\n\nPage 12, section 4.1, sentence after \u201csigned-cbor-cmw\u201d layout: append a comma\nafter \u201cRecord\u201d.\n\nPage 16, section 5.2, paragraph after the wire registration: change\n\u201cregistrered\u201d to \u201cregistered\u201d.\n\nPage 19, section 6: at least one sentence explaining what this section is\nwouldn\u2019t be a bad thing.\n\nPage 23, section 9.1, 1st paragraph, 1st sentence: append a comma after \u201cTags\u201d.\n\nPage 28, section 10.5.2, 2nd paragraph: append \u201cprior to publication of this\nspecification as an RFC\u201d after \u201cregularly updated\u201d to make it clearer what\u2019s\ngoing on here. The 3rd paragraph helps that understanding, but reading the 2nd\nparagraph in order might leave the reader confused as to what\u2019s going on here.\nAnother thought is to mark section 10.5.2 as to be deleted by the RFC Editor on\npublication as it is almost completely irrelevant after that.\n```",
       "createdAt": "2025-10-30T09:11:18Z",
       "updatedAt": "2025-10-30T09:11:18Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 258,
+      "id": "I_kwDOIGCt2M7Y8c4t",
+      "title": "Consistent Usage of bytes vs bstr",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/258",
+      "state": "OPEN",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "A nit: there is just one instance of bstr and I am aware that bytes and bstr are synonyms according to RFC 8610 \u263a\ufe0f",
+      "createdAt": "2025-11-18T19:25:29Z",
+      "updatedAt": "2025-11-18T19:25:29Z",
       "closedAt": null,
       "comments": []
     }
@@ -17679,24 +17695,26 @@
       "id": "PR_kwDOIGCt2M6zvBZJ",
       "title": "Drop CBOR tag registration",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/257",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Also, add a subsection to the C-F registrations to explicilty document the 9277-derived Tags.",
       "createdAt": "2025-11-16T18:26:27Z",
-      "updatedAt": "2025-11-17T10:39:16Z",
+      "updatedAt": "2025-11-18T20:12:59Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "0a7273d4df244436b96661fd3fe4d3643e16ec4c",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "9277-tags",
-      "headRefOid": "a350faa2adaf240fbacb920f203d80bc09e1cc6f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "95f5ffc85cf77e6cc654a6cc4f7004c3187af5a5",
+      "closedAt": "2025-11-18T20:12:56Z",
+      "mergedAt": "2025-11-18T20:12:56Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "64df3015bd4425ae019074d7d7504c61442e1904"
+      },
       "comments": [],
       "reviews": [
         {
