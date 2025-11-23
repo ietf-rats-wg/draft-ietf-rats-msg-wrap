@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-20T00:58:21.561150+00:00",
+  "timestamp": "2025-11-23T01:07:32.097136+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -3521,16 +3521,24 @@
       "id": "I_kwDOIGCt2M7Y8c4t",
       "title": "Consistent Usage of bytes vs bstr",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/258",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "henkbirkholz",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "A nit: there is just one instance of bstr and I am aware that bytes and bstr are synonyms according to RFC 8610 \u263a\ufe0f",
       "createdAt": "2025-11-18T19:25:29Z",
-      "updatedAt": "2025-11-18T19:25:29Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-11-20T11:08:20Z",
+      "closedAt": "2025-11-20T11:08:19Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Done in https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/257/commits/95f5ffc85cf77e6cc654a6cc4f7004c3187af5a5",
+          "createdAt": "2025-11-20T11:08:19Z",
+          "updatedAt": "2025-11-20T11:08:19Z"
+        }
+      ]
     }
   ],
   "pulls": [
