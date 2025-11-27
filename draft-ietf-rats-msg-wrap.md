@@ -236,7 +236,7 @@ When using CBOR, the value field MUST be encoded as a CBOR byte string.
 `ind`:
 : An optional bitmap with a maximum size of 4 bytes that indicates which conceptual message types are
 carried in the `value` field.  Any combination (i.e., any value between
-1 and 2<sup>32</sup>-1 inclusive) is allowed.  Only five bits are registered at the time of writing, so, the acceptable values are currently limited to 1 to 31.  This is useful only if the `type` is
+1 and 2<sup>32</sup>-1 inclusive) is allowed.  Only five bits are registered in this document, so, the acceptable values are currently limited to 1 to 31.  This is useful only if the `type` is
 potentially ambiguous and there is no further context available to the
 CMW consumer to decide.  For example, this might be the case if the base
 media type is not profiled (e.g., `application/eat+cwt`), if the `value`
