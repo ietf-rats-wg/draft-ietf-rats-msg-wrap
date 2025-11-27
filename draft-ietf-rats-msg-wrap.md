@@ -79,7 +79,7 @@ informative:
     =: RFC9052
   RFC9711: rats-eat
   RFC9782: rats-eat-mt
-  I-D.ietf-rats-ar4si: rats-ar4si
+  I-D.ietf-rats-ear: rats-ear
   RFC9781: rats-uccs
   I-D.fossati-tls-attestation: tls-a1
   I-D.fossati-tls-exported-attestation: tls-a2
@@ -125,13 +125,37 @@ formats ({{Section 9 of -rats-arch}}). Throughout their lifetime, RATS
 conceptual messages are typically transported over different protocols.
 For example,
 
-- In a "background check" topology ({{Section 5.2 of -rats-arch}}), Evidence (e.g., EAT {{-rats-eat}}) first flows from
-the Attester to the Relying Party and then from the Relying Party to the Verifier,
-each leg following a separate protocol path.
+- In a "background check" topology ({{Section 5.2 of -rats-arch}}), Evidence (e.g., EAT {{-rats-eat}}) first flows from the Attester to the Relying Party and then from the Relying Party to the Verifier, each leg following a separate protocol path.
 
-- In a "passport" topology ({{Section 5.1 of -rats-arch}}), an attestation result payload (e.g., Attestation Results for Secure Interactions (AR4SI) {{-rats-ar4si}})
-is initially sent from the Verifier to the Attester, and later,
-via a different channel, from the Attester to the Relying Party.
+~~~ aasvg
+                            .------------.
+                            |  Verifier  |
+                            '------------'
+                                ^
+                                | EAT
+                                | over
+                                | REST API
+.------------.              .---|--------.
+|  Attester  +------------->|--'      RP |
+'------------' EAT over TLS '------------'
+~~~
+{: artwork-align="center"}
+
+- In a "passport" topology ({{Section 5.1 of -rats-arch}}), an attestation result payload (e.g., EAT Attestation Result (EAR) {{-rats-ear}}) is initially sent from the Verifier to the Attester, and later, via a different channel, from the Attester to the Relying Party.
+
+~~~ aasvg
+ .------------.
+ |  Verifier  |
+ '--------+---'
+      EAR |
+     over |
+ REST API |
+          v
+ .------------.              .------------.
+ |  Attester  +------------->|     RP     |
+ '------------' EAR over TLS '------------'
+~~~
+{: artwork-align="center"}
 
 By using the CMW format outlined in this document, protocol designers can avoid the need
 to update protocol specifications to accommodate different conceptual messages and
