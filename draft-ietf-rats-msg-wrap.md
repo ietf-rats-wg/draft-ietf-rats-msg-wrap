@@ -257,7 +257,7 @@ As such, it indicates which bits are allowed to be set in the `ind` byte string.
 {: #fig-cddl-cm-type artwork-align="left"
    title="CDDL definition of the CM Type"}
 
-The `cm-type` currently has five allowed values: Reference Values, Endorsements, Evidence, Attestation Results, and Appraisal Policy, as defined in {{Section 8 of -rats-arch}}.
+The `cm-type` as defined by this document has five allowed values: Reference Values, Endorsements, Evidence, Attestation Results, and Appraisal Policy, as defined in {{Section 8 of -rats-arch}}.
 Note that an Appraisal Policy may refer to the appraisal of Evidence or Attestation Results, depending on whether the consumer of the conceptual message is a Verifier or a Relying Party.
 
 It is recommended that future specifications extending the RATS Conceptual Messages set add new values to the `cm-type` using the process defined in {{iana-ind-ext}}.
