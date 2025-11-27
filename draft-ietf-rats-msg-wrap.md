@@ -109,8 +109,8 @@ This allows CMWs to be used in CBOR-based protocols, web APIs using JWTs and CWT
 Additionally, the draft defines a media type and a CoAP content format to transport CMWs over protocols like HTTP, MIME, and CoAP.
 
 The goal is to improve the interoperability and flexibility of remote attestation protocols.
-By introducing a shared message format like the CMW, we can consistently support different attestation message types, evolve message
-serialization formats without breaking compatibility, and avoid having to redefine how messages are handled in each protocol.
+Introducing a shared message format such as CMW enables consistent support for different attestation message types, evolving message
+serialization formats without breaking compatibility, and avoiding the need to redefine how messages are handled within each protocol.
 
 --- middle
 
