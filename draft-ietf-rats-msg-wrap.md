@@ -514,11 +514,11 @@ CMW ::= CHOICE {
 END
 ~~~
 
-### Compatibility with DICE `ConceptualMessageWrapper`
+### Compatibility with Trusted Computing Group (TCG) `ConceptualMessageWrapper`
 
 Section 6.1.8 of {{DICE-arch}} specifies the ConceptualMessageWrapper (CMW) format and its corresponding object identifier.
 The CMW format outlined in {{DICE-arch}} permits only a subset of the CMW grammar defined in this document.
-In particular, the Collection format cannot be encoded using DICE CMWs.
+In particular, the Collection format cannot be encoded using TCG CMWs.
 
 # Examples
 
@@ -665,7 +665,7 @@ A specific scenario arises when a public key certificate is issued based on Evid
 For instance, an individual seeking a publicly-trusted code signing certificate may be willing to disclose the details of the hardware where their code signing keys are stored (e.g., HSM model, patch level, etc.).
 However, they likely do not want this information to be publicly accessible.
 Applications that intend to publicly "broadcast" Evidence claims received from a third party via X.509 Certificates should define a Certificate Practices Statement {{-pkix-cps}} that clearly specifies the circumstances under which the CA can include such data in the issued certificate.
-Note that the aforementioned consideration does not apply to cases where X.509 Certificates are explicitly designed as a security envelope for Evidence claims, such as in DICE {{DICE-arch}}.
+Note that the aforementioned consideration does not apply to cases where X.509 Certificates are explicitly designed as a security envelope for Evidence claims, such as in {{DICE-arch}}.
 
 # Security Considerations {#seccons}
 
