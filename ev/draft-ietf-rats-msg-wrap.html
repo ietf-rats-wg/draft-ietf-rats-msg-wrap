@@ -1514,7 +1514,7 @@ messages that aim to achieve the goals stated above.<a href="#section-1-9" class
 Evidence, Endorsements and Reference Values in certificates and CRLs
 extensions (<span>[<a href="#DICE-arch" class="cite xref">DICE-arch</a>]</span>), to embed Attestation Results or Evidence as
 first-class authentication credentials in TLS handshake messages
-<span>[<a href="#I-D.fossati-tls-attestation" class="cite xref">I-D.fossati-tls-attestation</a>]</span> <span>[<a href="#I-D.fossati-tls-exported-attestation" class="cite xref">I-D.fossati-tls-exported-attestation</a>]</span>, to transport attestation-related payloads in RESTful APIs,
+<span>[<a href="#I-D.fossati-tls-attestation" class="cite xref">I-D.fossati-tls-attestation</a>]</span> <span>[<a href="#I-D.fossati-seat-expat" class="cite xref">I-D.fossati-seat-expat</a>]</span>, to transport attestation-related payloads in RESTful APIs,
 or for stable storage of Attestation Results in the form of file system
 objects.<a href="#section-1-12" class="pilcrow">¶</a></p>
 <p id="section-1-13">This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
@@ -2431,7 +2431,7 @@ It is the responsibility of the Attester who creates the Collection CMW to ensur
         <h3 id="name-integrating-cmw-into-protoc">
 <a href="#section-9.3" class="section-number selfRef">9.3. </a><a href="#name-integrating-cmw-into-protoc" class="section-name selfRef">Integrating CMW into Protocols</a>
         </h3>
-<p id="section-9.3-1">When CMW is integrated into some hosting protocol (for example, attested CSR <span>[<a href="#I-D.ietf-lamps-csr-attestation" class="cite xref">I-D.ietf-lamps-csr-attestation</a>]</span> or attested TLS <span>[<a href="#I-D.fossati-tls-attestation" class="cite xref">I-D.fossati-tls-attestation</a>]</span> <span>[<a href="#I-D.fossati-tls-exported-attestation" class="cite xref">I-D.fossati-tls-exported-attestation</a>]</span>), it is up to that hosting protocol to describe how CMW is intended to be used and how it fits into the overall security model.<a href="#section-9.3-1" class="pilcrow">¶</a></p>
+<p id="section-9.3-1">When CMW is integrated into some hosting protocol (for example, attested CSR <span>[<a href="#I-D.ietf-lamps-csr-attestation" class="cite xref">I-D.ietf-lamps-csr-attestation</a>]</span> or attested TLS <span>[<a href="#I-D.fossati-tls-attestation" class="cite xref">I-D.fossati-tls-attestation</a>]</span> <span>[<a href="#I-D.fossati-seat-expat" class="cite xref">I-D.fossati-seat-expat</a>]</span>), it is up to that hosting protocol to describe how CMW is intended to be used and how it fits into the overall security model.<a href="#section-9.3-1" class="pilcrow">¶</a></p>
 <p id="section-9.3-2">Such an analysis should consider the types of conceptual messages allowed, including the permitted combinations, the protection requirements, the interface with the hosting protocol, and any other security-relevant aspect arising from the interaction between the CMW assembly and the hosting protocol.<a href="#section-9.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -3375,13 +3375,13 @@ $cbor-tag /= tag-cm-data&lt;1668547094&gt; ; bytes(cmw+jws)
         <dd>
 <span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"Managing CBOR codepoints in Internet-Drafts"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-cbor-draft-numbers-06</span>, <time datetime="2025-07-07" class="refDate">7 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-draft-numbers-06">https://datatracker.ietf.org/doc/html/draft-bormann-cbor-draft-numbers-06</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="I-D.fossati-seat-expat">[I-D.fossati-seat-expat]</dt>
+        <dd>
+<span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Sardar, M. U.</span>, <span class="refAuthor">Reddy.K, T.</span>, <span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Tschofenig, H.</span>, and <span class="refAuthor">I. Mihalcea</span>, <span class="refTitle">"Remote Attestation with Exported Authenticators"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-fossati-seat-expat-00</span>, <time datetime="2025-10-20" class="refDate">20 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-fossati-seat-expat-00">https://datatracker.ietf.org/doc/html/draft-fossati-seat-expat-00</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.fossati-tls-attestation">[I-D.fossati-tls-attestation]</dt>
         <dd>
 <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Howard, P.</span>, <span class="refAuthor">Mihalcea, I.</span>, <span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">Niemi, A.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"Using Attestation in Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-fossati-tls-attestation-09</span>, <time datetime="2025-04-30" class="refDate">30 April 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-fossati-tls-attestation-09">https://datatracker.ietf.org/doc/html/draft-fossati-tls-attestation-09</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="I-D.fossati-tls-exported-attestation">[I-D.fossati-tls-exported-attestation]</dt>
-        <dd>
-<span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Sardar, M. U.</span>, <span class="refAuthor">Reddy.K, T.</span>, <span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Tschofenig, H.</span>, and <span class="refAuthor">I. Mihalcea</span>, <span class="refTitle">"Remote Attestation with Exported Authenticators"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-fossati-tls-exported-attestation-02</span>, <time datetime="2025-07-03" class="refDate">3 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-fossati-tls-exported-attestation-02">https://datatracker.ietf.org/doc/html/draft-fossati-tls-exported-attestation-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-lamps-csr-attestation">[I-D.ietf-lamps-csr-attestation]</dt>
         <dd>

@@ -242,10 +242,9 @@ Table of Contents
    Evidence, Endorsements and Reference Values in certificates and CRLs
    extensions ([DICE-arch]), to embed Attestation Results or Evidence as
    first-class authentication credentials in TLS handshake messages
-   [I-D.fossati-tls-attestation] [I-D.fossati-tls-exported-attestation],
-   to transport attestation-related payloads in RESTful APIs, or for
-   stable storage of Attestation Results in the form of file system
-   objects.
+   [I-D.fossati-tls-attestation] [I-D.fossati-seat-expat], to transport
+   attestation-related payloads in RESTful APIs, or for stable storage
+   of Attestation Results in the form of file system objects.
 
    This document also defines corresponding CBOR tag, JSON Web Tokens
    (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509
@@ -1109,10 +1108,9 @@ Table of Contents
 
    When CMW is integrated into some hosting protocol (for example,
    attested CSR [I-D.ietf-lamps-csr-attestation] or attested TLS
-   [I-D.fossati-tls-attestation]
-   [I-D.fossati-tls-exported-attestation]), it is up to that hosting
-   protocol to describe how CMW is intended to be used and how it fits
-   into the overall security model.
+   [I-D.fossati-tls-attestation] [I-D.fossati-seat-expat]), it is up to
+   that hosting protocol to describe how CMW is intended to be used and
+   how it fits into the overall security model.
 
    Such an analysis should consider the types of conceptual messages
    allowed, including the permitted combinations, the protection
@@ -1642,6 +1640,14 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-bormann-cbor-
               draft-numbers-06>.
 
+   [I-D.fossati-seat-expat]
+              Fossati, T., Sardar, M. U., Reddy.K, T., Sheffer, Y.,
+              Tschofenig, H., and I. Mihalcea, "Remote Attestation with
+              Exported Authenticators", Work in Progress, Internet-
+              Draft, draft-fossati-seat-expat-00, 20 October 2025,
+              <https://datatracker.ietf.org/doc/html/draft-fossati-seat-
+              expat-00>.
+
    [I-D.fossati-tls-attestation]
               Tschofenig, H., Sheffer, Y., Howard, P., Mihalcea, I.,
               Deshpande, Y., Niemi, A., and T. Fossati, "Using
@@ -1650,14 +1656,6 @@ Table of Contents
               Internet-Draft, draft-fossati-tls-attestation-09, 30 April
               2025, <https://datatracker.ietf.org/doc/html/draft-
               fossati-tls-attestation-09>.
-
-   [I-D.fossati-tls-exported-attestation]
-              Fossati, T., Sardar, M. U., Reddy.K, T., Sheffer, Y.,
-              Tschofenig, H., and I. Mihalcea, "Remote Attestation with
-              Exported Authenticators", Work in Progress, Internet-
-              Draft, draft-fossati-tls-exported-attestation-02, 3 July
-              2025, <https://datatracker.ietf.org/doc/html/draft-
-              fossati-tls-exported-attestation-02>.
 
    [I-D.ietf-lamps-csr-attestation]
               Ounsworth, M., Tschofenig, H., Birkholz, H., Wiseman, M.,
