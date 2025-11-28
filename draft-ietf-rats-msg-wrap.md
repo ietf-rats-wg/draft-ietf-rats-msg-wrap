@@ -77,10 +77,10 @@ informative:
   RFC9334: rats-arch
   RFC9711: rats-eat
   RFC9782: rats-eat-mt
-  I-D.ietf-rats-ar4si: rats-ar4si
+  I-D.ietf-rats-ear: rats-ear
   RFC9781: rats-uccs
   I-D.fossati-tls-attestation: tls-a1
-  I-D.fossati-tls-exported-attestation: tls-a2
+  I-D.fossati-seat-expat: tls-a2
   I-D.ietf-lamps-csr-attestation: csr-a
   I-D.ietf-rats-corim: rats-corim
   DICE-arch:
@@ -106,8 +106,8 @@ This allows CMWs to be used in CBOR-based protocols, web APIs using JWTs and CWT
 Additionally, the draft defines a media type and a CoAP content format to transport CMWs over protocols like HTTP, MIME, and CoAP.
 
 The goal is to improve the interoperability and flexibility of remote attestation protocols.
-By introducing a shared message format like the CMW, we can consistently support different attestation message types, evolve message
-serialization formats without breaking compatibility, and avoid having to redefine how messages are handled in each protocol.
+Introducing a shared message format such as CMW enables consistent support for different attestation message types, evolving message
+serialization formats without breaking compatibility, and avoiding the need to redefine how messages are handled within each protocol.
 
 --- middle
 
@@ -126,9 +126,37 @@ For example,
 the Attester to the Relying Party and then from the Relying Party to the Verifier,
 each leg following a separate protocol path.
 
-- In a "passport" topology, an attestation result payload (e.g., Attestation Results for Secure Interactions (AR4SI) {{-rats-ar4si}})
+~~~~ aasvg
+                            .------------.
+                            |  Verifier  |
+                            '------------'
+                                ^
+                                | EAT
+                                | over
+                                | REST API
+.------------.              .---|--------.
+|  Attester  +------------->|--'      RP |
+'------------' EAT over TLS '------------'
+~~~~
+{: artwork-align="center"}
+
+- In a "passport" topology, an attestation result payload (e.g., EAT Attestation Result (EAR) {{-rats-ear}})
 is initially sent from the Verifier to the Attester, and later,
 via a different channel, from the Attester to the Relying Party.
+
+~~~~ aasvg
+ .------------.
+ |  Verifier  |
+ '--------+---'
+      EAR |
+     over |
+ REST API |
+          v
+ .------------.              .------------.
+ |  Attester  +------------->|     RP     |
+ '------------' EAR over TLS '------------'
+~~~~
+{: artwork-align="center"}
 
 By using the CMW format outlined in this document, protocol designers can avoid the need
 to update protocol specifications to accommodate different conceptual messages and
@@ -233,7 +261,7 @@ When using CBOR, the value field MUST be encoded as a CBOR byte string.
 `ind`:
 : An optional bitmap with a maximum size of 4 bytes that indicates which conceptual message types are
 carried in the `value` field.  Any combination (i.e., any value between
-1 and 2<sup>32</sup>-1 inclusive) is allowed.  Only five bits are registered at the time of writing, so, the acceptable values are currently limited to 1 to 31.  This is useful only if the `type` is
+1 and 2<sup>32</sup>-1 inclusive) is allowed.  Only five bits are registered in this document, so, the acceptable values are currently limited to 1 to 31.  This is useful only if the `type` is
 potentially ambiguous and there is no further context available to the
 CMW consumer to decide.  For example, this might be the case if the base
 media type is not profiled (e.g., `application/eat+cwt`), if the `value`
@@ -254,7 +282,7 @@ As such, it indicates which bits are allowed to be set in the `ind` byte string.
 {: #fig-cddl-cm-type artwork-align="left"
    title="CDDL definition of the CM Type"}
 
-The `cm-type` currently has five allowed values: Reference Values, Endorsements, Evidence, Attestation Results, and Appraisal Policy, as defined in {{Section 8 of -rats-arch}}.
+The `cm-type` as defined by this document has five allowed values: Reference Values, Endorsements, Evidence, Attestation Results, and Appraisal Policy, as defined in {{Section 8 of -rats-arch}}.
 Note that that an Appraisal Policy may refer to the appraisal of Evidence or Attestation Results, depending on whether the consumer of the conceptual message is a Verifier or a Relying Party.
 
 Future specifications that extend the RATS Conceptual Messages set can add new values to the `cm-type` using the process defined in {{iana-ind-ext}}.
@@ -505,11 +533,11 @@ CMW ::= CHOICE {
 END
 ~~~
 
-### Compatibility with DICE `ConceptualMessageWrapper`
+### Compatibility with Trusted Computing Group (TCG) `ConceptualMessageWrapper`
 
 Section 6.1.8 of {{DICE-arch}} specifies the ConceptualMessageWrapper (CMW) format and its corresponding object identifier.
 The CMW format outlined in {{DICE-arch}} permits only a subset of the CMW grammar defined in this document.
-In particular, the Collection format cannot be encoded using DICE CMWs.
+In particular, the Collection format cannot be encoded using TCG CMWs.
 
 # Examples
 
@@ -602,7 +630,7 @@ The following example shows the use of the `"cmw"` JWT claim to transport a Coll
 
 # Collected CDDL {#collected-cddl}
 
-This appendix contains all the CDDL definitions included in this specification.
+This section contains all the CDDL definitions included in this specification.
 
 ~~~ cddl
 {::include cddl/collected-cddl-autogen.cddl}
@@ -656,7 +684,7 @@ A specific scenario arises when a public key certificate is issued based on Evid
 For instance, an individual seeking a publicly-trusted code signing certificate may be willing to disclose the details of the hardware where their code signing keys are stored (e.g., HSM model, patch level, etc.).
 However, they likely do not want this information to be publicly accessible.
 Applications that intend to publicly "broadcast" Evidence claims received from a third party via X.509 Certificates should define a Certificate Practices Statement {{-pkix-cps}} that clearly specifies the circumstances under which the CA can include such data in the issued certificate.
-Note that the aforementioned consideration does not apply to cases where X.509 Certificates are explicitly designed as a security envelope for Evidence claims, such as in DICE {{DICE-arch}}.
+Note that the aforementioned consideration does not apply to cases where X.509 Certificates are explicitly designed as a security envelope for Evidence claims, such as in {{DICE-arch}}.
 
 # Security Considerations {#seccons}
 
@@ -1130,6 +1158,7 @@ Carsten Bormann,
 {{{Christian Amsüss}},
 Dave Thaler,
 Deb Cooley,
+{{{Éric Vyncke}}},
 {{{Ionuț Mihalcea}}},
 Michael B. Jones,
 Mike Ounsworth,
