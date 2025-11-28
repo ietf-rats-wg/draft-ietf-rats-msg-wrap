@@ -82,7 +82,7 @@ informative:
   I-D.ietf-rats-ear: rats-ear
   RFC9781: rats-uccs
   I-D.fossati-tls-attestation: tls-a1
-  I-D.fossati-tls-exported-attestation: tls-a2
+  I-D.fossati-seat-expat: tls-a2
   I-D.ietf-lamps-csr-attestation: csr-a
   I-D.ietf-rats-corim: rats-corim
   DICE-arch:
