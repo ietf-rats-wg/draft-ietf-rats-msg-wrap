@@ -635,7 +635,7 @@ The following example shows the use of the `"cmw"` JWT claim to transport a Coll
 
 # Collected CDDL {#collected-cddl}
 
-This appendix contains all the CDDL definitions included in this specification.
+This section contains all the CDDL definitions included in this specification.
 
 ~~~ cddl
 {::include cddl/collected-cddl-autogen.cddl}
