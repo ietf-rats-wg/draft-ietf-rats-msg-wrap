@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-23T01:07:32.097136+00:00",
+  "timestamp": "2025-11-30T01:07:17.540419+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -3537,6 +3537,30 @@
           "body": "Done in https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/257/commits/95f5ffc85cf77e6cc654a6cc4f7004c3187af5a5",
           "createdAt": "2025-11-20T11:08:19Z",
           "updatedAt": "2025-11-20T11:08:19Z"
+        }
+      ]
+    },
+    {
+      "number": 259,
+      "id": "I_kwDOIGCt2M7ayogi",
+      "title": "\u00c9ric Vyncke\u2019s IESG review",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/259",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Archived-at: https://mailarchive.ietf.org/arch/msg/rats/hAneVgSFBvAnPlQUeXug8QNlqXE/\n\n## COMMENTS (non-blocking)\n\n### Abstract\n\nWho is the `we` ? The authors ? The WG ? The IETF ? Let's avoid the use of\nambiguous \"we\" (possibly also in other places).\n\n### Section 1\n\nSome graphics with all the parties and messages will make the text easier to\nread by non-RATS readers, pretty much like firgure 6 (even with SVG!) in\nappendix A.\n\n### Section 3.1\n\nMay I assume that CBOR encoding can discreminate between an integer and a\nstring ? This is about the \"type\" member.\n\ns/ are registered at the time of writing,/ are registered *in this document*,/\n\n### Section 3.1.1\n\ns/The cm-type currently has five allowed values/The cm-type as defined by this\ndocument has five allowed values/\n\n### Section 4.4.2\n\nPlease expand DICE at first use.\n",
+      "createdAt": "2025-11-27T10:04:09Z",
+      "updatedAt": "2025-11-27T10:18:08Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> May I assume that CBOR encoding can discreminate between an integer and a string ? This is about the \"type\" member.\n\nYes.  See, for example: https://github.com/veraison/cmw/blob/0879f4960b0746177930320a07f53432ab08038a/type.go#L60-L77 and similar code in https://github.com/veraison/rust-cmw/blob/main/src/type.rs",
+          "createdAt": "2025-11-27T10:18:08Z",
+          "updatedAt": "2025-11-27T10:18:08Z"
         }
       ]
     }
@@ -17739,6 +17763,40 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 260,
+      "id": "PR_kwDOIGCt2M610yz9",
+      "title": "\u00c9ric's IESG review",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/260",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #259",
+      "createdAt": "2025-11-27T10:49:33Z",
+      "updatedAt": "2025-11-28T12:26:56Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "64df3015bd4425ae019074d7d7504c61442e1904",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "ev",
+      "headRefOid": "cdb6f4498574423b8a6c9246fae87ca6f708a5c3",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @evyncke",
+          "createdAt": "2025-11-27T10:50:13Z",
+          "updatedAt": "2025-11-27T10:50:13Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
