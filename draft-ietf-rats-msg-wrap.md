@@ -45,6 +45,8 @@ normative:
   RFC3986: uri
   RFC4648: base64
   RFC5280: pkix
+  RFC5912: pkix-mods
+  RFC6268: more-pkix-mods
   RFC6838: media-types
   RFC7252: coap
   RFC7515: jws
@@ -68,8 +70,6 @@ normative:
 
 informative:
   RFC3647: pkix-cps
-  RFC5912: pkix-mods
-  RFC6268: more-pkix-mods
   RFC7942: impl-status
   RFC9193: senml-cf
   STD96:
