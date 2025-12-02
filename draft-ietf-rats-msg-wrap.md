@@ -57,6 +57,7 @@ normative:
   RFC8610: cddl
   RFC9165: cddlplus
   RFC9277:
+  RFC9334: rats-arch
   STD94:
     -: cbor
     =: RFC8949
@@ -75,7 +76,6 @@ informative:
   STD96:
     -: cose
     =: RFC9052
-  RFC9334: rats-arch
   RFC9711: rats-eat
   RFC9782: rats-eat-mt
   I-D.ietf-rats-ar4si: rats-ar4si
