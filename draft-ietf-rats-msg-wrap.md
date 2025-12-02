@@ -255,7 +255,7 @@ As such, it indicates which bits are allowed to be set in the `ind` byte string.
    title="CDDL definition of the CM Type"}
 
 The `cm-type` currently has five allowed values: Reference Values, Endorsements, Evidence, Attestation Results, and Appraisal Policy, as defined in {{Section 8 of -rats-arch}}.
-Note that that an Appraisal Policy may refer to the appraisal of Evidence or Attestation Results, depending on whether the consumer of the conceptual message is a Verifier or a Relying Party.
+Note that an Appraisal Policy may refer to the appraisal of Evidence or Attestation Results, depending on whether the consumer of the conceptual message is a Verifier or a Relying Party.
 
 Future specifications that extend the RATS Conceptual Messages set can add new values to the `cm-type` using the process defined in {{iana-ind-ext}}.
 
@@ -637,7 +637,7 @@ fit".
 The organization responsible for these implementations is Project Veraison, a
 Linux Foundation project hosted at the Confidential Computing Consortium.
 
-The organisation hosts two libraries which allow encoding, decoding, and
+The organization hosts two libraries which allow encoding, decoding, and
 manipulation of CMW payloads: one for the Golang ecosystem
 ([](https://github.com/veraison/cmw)), and one for Rust
 ([](https://github.com/veraison/rust-cmw)).
@@ -1113,7 +1113,7 @@ When using Collection CMW, the preconditions apply for each entry in the Collect
 
 # Open Issues
 
-The list of currently open issues for this documents can be found at
+The list of currently open issues for this document can be found at
 [](https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues).
 
 [^rfced] please remove before publication.
