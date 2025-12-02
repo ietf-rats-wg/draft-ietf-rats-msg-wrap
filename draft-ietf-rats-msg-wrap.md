@@ -90,6 +90,7 @@ informative:
     title: "DICE Attestation Architecture"
     target: https://trustedcomputinggroup.org/wp-content/uploads/DICE-Attestation-Architecture-Version-1.1-Revision-18_pub.pdf
     date: January, 2024
+  RFC8792:
 
 entity:
   SELF: "RFCthis"
@@ -123,11 +124,11 @@ formats ({{Section 9 of -rats-arch}}). Throughout their lifetime, RATS
 conceptual messages are typically transported over different protocols.
 For example,
 
-- In a "background check" topology, Evidence (e.g., EAT {{-rats-eat}}) first flows from
+- In a "background check" topology ({{Section 5.2 of -rats-arch}}), Evidence (e.g., EAT {{-rats-eat}}) first flows from
 the Attester to the Relying Party and then from the Relying Party to the Verifier,
 each leg following a separate protocol path.
 
-- In a "passport" topology, an attestation result payload (e.g., Attestation Results for Secure Interactions (AR4SI) {{-rats-ar4si}})
+- In a "passport" topology ({{Section 5.1 of -rats-arch}}), an attestation result payload (e.g., Attestation Results for Secure Interactions (AR4SI) {{-rats-ar4si}})
 is initially sent from the Verifier to the Attester, and later,
 via a different channel, from the Attester to the Relying Party.
 
@@ -258,7 +259,7 @@ As such, it indicates which bits are allowed to be set in the `ind` byte string.
 The `cm-type` currently has five allowed values: Reference Values, Endorsements, Evidence, Attestation Results, and Appraisal Policy, as defined in {{Section 8 of -rats-arch}}.
 Note that that an Appraisal Policy may refer to the appraisal of Evidence or Attestation Results, depending on whether the consumer of the conceptual message is a Verifier or a Relying Party.
 
-Future specifications that extend the RATS Conceptual Messages set can add new values to the `cm-type` using the process defined in {{iana-ind-ext}}.
+It is recommended that future specifications extending the RATS Conceptual Messages set add new values to the `cm-type` using the process defined in {{iana-ind-ext}}.
 
 ## Tag CMW {#cbor-tag}
 
@@ -341,7 +342,7 @@ The split in the JSON/CBOR decoding path is expected to occur via the media type
 The following pseudocode illustrates how a one-byte look-ahead is sufficient to determine how to decode the remaining byte buffer.
 
 ~~~
-func CMWTypeDemux(b []byte) CMWType {
+func exampleCMWTypeDemux(b []byte) CMWType {
   if len(b) == 0 {
     return Unknown
   }
@@ -408,8 +409,7 @@ The payload MUST be the JSON-encoded Record, or Collection CMW.
 {::include cddl/signed-json-cmw-headers.cddl}
 ~~~
 
-The protected header MUST include the signature algorithm identifier.
-The protected header MUST include the content type `application/cmw+json`.
+The protected header MUST include the signature algorithm identifier and the content type `application/cmw+json`.
 Other header parameters MAY be added to the header buckets, for example a `kid` that identifies the signing key.
 
 For clarity, the above uses the Flattened JSON Serialization ({{Section 7.2.2 of -jws}}).
@@ -451,7 +451,7 @@ id-pe-cmw  OBJECT IDENTIFIER ::=
 This extension SHOULD NOT be marked critical.
 In cases where the wrapped Conceptual Message is essential for granting resource access, and there is a risk that legacy relying parties would bypass crucial controls, it is acceptable to mark the extension as critical.
 
-The CMW extension MUST have the following syntax:
+The CMW extension has the following syntax:
 
 ~~~asn.1
 CMW ::= CHOICE {
@@ -1128,13 +1128,14 @@ Benjamin Schwartz,
 Brian Campbell,
 Carl Wallace,
 Carsten Bormann,
-{{{Christian Amsüss}},
+{{{Christian Amsüss}}},
 Dave Thaler,
 Deb Cooley,
 {{{Ionuț Mihalcea}}},
 Michael B. Jones,
 Mike Ounsworth,
 Michael StJohns,
+Mohamed Boucadair,
 Mohit Sethi,
 Paul Howard,
 Peter Yee,
