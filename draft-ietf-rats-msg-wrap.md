@@ -63,7 +63,8 @@ normative:
   BCP26:
     -: ianacons
     =: RFC8126
-  X.680: CCITT.X680.1994
+  X.680: CCITT.X680.2002
+  X.690: CCITT.X690.2002
 
 informative:
   RFC3647: pkix-cps
@@ -461,7 +462,7 @@ CMW ::= CHOICE {
 
 The CMW MUST include the serialized CMW object in either JSON or CBOR format, utilizing the appropriate CHOICE entry.
 
-The DER-encoded CMW is the value of the OCTET STRING for the extnValue field of the extension.
+The DER-encoded {{X.690}} CMW is the value of the OCTET STRING for the extnValue field of the extension.
 
 ### ASN.1 Module {#asn1-x509}
 
