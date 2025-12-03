@@ -1402,9 +1402,7 @@ conceptual messages are typically transported over different protocols.
 For example,<a href="#section-1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-3.1">
-          <p id="section-1-3.1.1">In a "background check" topology (<span><a href="https://rfc-editor.org/rfc/rfc9334#section-5.2" class="relref">Section 5.2</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>), Evidence (e.g., EAT <span>[<a href="#RFC9711" class="cite xref">RFC9711</a>]</span>) first flows from
-the Attester to the Relying Party and then from the Relying Party to the Verifier,
-each leg following a separate protocol path.<a href="#section-1-3.1.1" class="pilcrow">¶</a></p>
+          <p id="section-1-3.1.1">In a "background check" topology (<span><a href="https://rfc-editor.org/rfc/rfc9334#section-5.2" class="relref">Section 5.2</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>), Evidence (e.g., EAT <span>[<a href="#RFC9711" class="cite xref">RFC9711</a>]</span>) first flows from the Attester to the Relying Party and then from the Relying Party to the Verifier, each leg following a separate protocol path.<a href="#section-1-3.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <div id="section-1-4">
@@ -1446,13 +1444,11 @@ each leg following a separate protocol path.<a href="#section-1-3.1.1" class="pi
 </div>
 <ul class="normal">
 <li class="normal" id="section-1-5.1">
-          <p id="section-1-5.1.1">In a "passport" topology (<span><a href="https://rfc-editor.org/rfc/rfc9334#section-5.1" class="relref">Section 5.1</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>), an attestation result payload (e.g., EAT Attestation Result (EAR) <span>[<a href="#I-D.ietf-rats-ear" class="cite xref">I-D.ietf-rats-ear</a>]</span>)<a href="#section-1-5.1.1" class="pilcrow">¶</a></p>
+          <p id="section-1-5.1.1">In a "passport" topology (<span><a href="https://rfc-editor.org/rfc/rfc9334#section-5.1" class="relref">Section 5.1</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>), an attestation result payload (e.g., EAT Attestation Result (EAR) <span>[<a href="#I-D.ietf-rats-ear" class="cite xref">I-D.ietf-rats-ear</a>]</span>) is initially sent from the Verifier to the Attester, and later, via a different channel, from the Attester to the Relying Party.<a href="#section-1-5.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-1-6">is initially sent from the Verifier to the Attester, and later,
-via a different channel, from the Attester to the Relying Party.<a href="#section-1-6" class="pilcrow">¶</a></p>
-<div id="section-1-7">
-        <div class="alignCenter art-svg artwork" id="section-1-7.1">
+<div id="section-1-6">
+        <div class="alignCenter art-svg artwork" id="section-1-6.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="208" width="344" viewBox="0 0 344 208" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
             <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
             <path d="M 8,144 L 8,176" fill="none" stroke="black"></path>
@@ -1482,10 +1478,10 @@ via a different channel, from the Attester to the Relying Party.<a href="#sectio
               <text x="172" y="180">over</text>
               <text x="208" y="180">TLS</text>
             </g>
-          </svg><a href="#section-1-7.1" class="pilcrow">¶</a>
+          </svg><a href="#section-1-6.1" class="pilcrow">¶</a>
 </div>
 </div>
-<p id="section-1-8">By using the CMW format outlined in this document, protocol designers can avoid the need
+<p id="section-1-7">By using the CMW format outlined in this document, protocol designers can avoid the need
 to update protocol specifications to accommodate different conceptual messages and
 serialization formats used by various attestation technologies. This approach streamlines
 the implementation process for developers, enabling easier support for diverse attestation
@@ -1493,33 +1489,33 @@ technologies. For instance, a Relying Party application implementer does not nee
 attestation-related messages, such as Evidence from Attesters on IoT devices with Trusted
 Platform Modules (TPM) or servers using confidential computing hardware like Intel Trust
 Domain Extensions (TDX). Instead, they can leverage the CMW format, remaining agnostic
-to the specific attestation technology.<a href="#section-1-8" class="pilcrow">¶</a></p>
-<p id="section-1-9">A further design goal is extensibility.
+to the specific attestation technology.<a href="#section-1-7" class="pilcrow">¶</a></p>
+<p id="section-1-8">A further design goal is extensibility.
 This means that adding support for new conceptual messages and new attestation technologies should not change the core of the processor, and that a CMW stack can be designed to offer a plug-in interface for both encoding and decoding.
 To achieve this, the format must provide consistent message encapsulation and explicit typing.
 These features allow for selecting the appropriate message handler based on its type identifier.
-An opaque message can then be passed between the core and the handler.<a href="#section-1-9" class="pilcrow">¶</a></p>
-<p id="section-1-10">This document defines two encapsulation formats for RATS conceptual
-messages that aim to achieve the goals stated above.<a href="#section-1-10" class="pilcrow">¶</a></p>
-<p id="section-1-11">These encapsulation formats have been specifically designed to possess the following characteristics:<a href="#section-1-11" class="pilcrow">¶</a></p>
+An opaque message can then be passed between the core and the handler.<a href="#section-1-8" class="pilcrow">¶</a></p>
+<p id="section-1-9">This document defines two encapsulation formats for RATS conceptual
+messages that aim to achieve the goals stated above.<a href="#section-1-9" class="pilcrow">¶</a></p>
+<p id="section-1-10">These encapsulation formats have been specifically designed to possess the following characteristics:<a href="#section-1-10" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-1-12.1">
-          <p id="section-1-12.1.1">They are self-describing, which means that they can convey precise typing information without relying on the framing provided by the embedding protocol or the storage system.<a href="#section-1-12.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-1-11.1">
+          <p id="section-1-11.1.1">They are self-describing, which means that they can convey precise typing information without relying on the framing provided by the embedding protocol or the storage system.<a href="#section-1-11.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-12.2">
-          <p id="section-1-12.2.1">They are based on media types <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>, which allows the cost of their registration to be spread across numerous usage scenarios.<a href="#section-1-12.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-1-11.2">
+          <p id="section-1-11.2.1">They are based on media types <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>, which allows the cost of their registration to be spread across numerous usage scenarios.<a href="#section-1-11.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-1-13">A protocol designer could use these formats, for example, to convey
+<p id="section-1-12">A protocol designer could use these formats, for example, to convey
 Evidence, Endorsements and Reference Values in certificates and CRLs
 extensions (<span>[<a href="#DICE-arch" class="cite xref">DICE-arch</a>]</span>), to embed Attestation Results or Evidence as
 first-class authentication credentials in TLS handshake messages
 <span>[<a href="#I-D.fossati-tls-attestation" class="cite xref">I-D.fossati-tls-attestation</a>]</span> <span>[<a href="#I-D.fossati-seat-expat" class="cite xref">I-D.fossati-seat-expat</a>]</span>, to transport attestation-related payloads in RESTful APIs,
 or for stable storage of Attestation Results in the form of file system
-objects.<a href="#section-1-13" class="pilcrow">¶</a></p>
-<p id="section-1-14">This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
+objects.<a href="#section-1-12" class="pilcrow">¶</a></p>
+<p id="section-1-13">This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
 These allow embedding the wrapped conceptual messages into CBOR-based protocols, web APIs, and PKIX formats and protocols.
-In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.<a href="#section-1-14" class="pilcrow">¶</a></p>
+In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.<a href="#section-1-13" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1656,7 +1652,7 @@ cm-type = &amp;(
             </figcaption></figure>
 </div>
 <p id="section-3.1.1-3">The <code>cm-type</code> as defined by this document has five allowed values: Reference Values, Endorsements, Evidence, Attestation Results, and Appraisal Policy, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9334#section-8" class="relref">Section 8</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.
-Note that that an Appraisal Policy may refer to the appraisal of Evidence or Attestation Results, depending on whether the consumer of the conceptual message is a Verifier or a Relying Party.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
+Note that an Appraisal Policy may refer to the appraisal of Evidence or Attestation Results, depending on whether the consumer of the conceptual message is a Verifier or a Relying Party.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.1.1-4">It is recommended that future specifications extending the RATS Conceptual Messages set add new values to the <code>cm-type</code> using the process defined in <a href="#iana-ind-ext" class="auto internal xref">Section 10.4</a>.<a href="#section-3.1.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>

@@ -188,10 +188,9 @@ Table of Contents
 
    *  In a "passport" topology (Section 5.1 of [RFC9334]), an
       attestation result payload (e.g., EAT Attestation Result (EAR)
-      [I-D.ietf-rats-ear])
-
-   is initially sent from the Verifier to the Attester, and later, via a
-   different channel, from the Attester to the Relying Party.
+      [I-D.ietf-rats-ear]) is initially sent from the Verifier to the
+      Attester, and later, via a different channel, from the Attester to
+      the Relying Party.
 
                  .------------.
                  |  Verifier  |
@@ -374,8 +373,8 @@ Table of Contents
 
    The cm-type as defined by this document has five allowed values:
    Reference Values, Endorsements, Evidence, Attestation Results, and
-   Appraisal Policy, as defined in Section 8 of [RFC9334].  Note that
-   that an Appraisal Policy may refer to the appraisal of Evidence or
+   Appraisal Policy, as defined in Section 8 of [RFC9334].  Note that an
+   Appraisal Policy may refer to the appraisal of Evidence or
    Attestation Results, depending on whether the consumer of the
    conceptual message is a Verifier or a Relying Party.
 
