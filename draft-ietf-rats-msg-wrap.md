@@ -313,6 +313,12 @@ The Collection CMW ({{fig-cddl-collection}}) is defined as a CBOR map or JSON ob
 The position of a `cmw` entry in the `cmw-collection` is not significant.
 Labels can be strings (or integers in the CBOR serialization) that serve as a mnemonic for different conceptual messages in the Collection.
 
+~~~ cddl
+{::include cddl/cmw-collection.cddl}
+~~~
+{: #fig-cddl-collection artwork-align="left"
+   title="CDDL definition of the Collection CMW"}
+
 A Collection MUST have at least one CMW entry.
 
 The `"__cmwc_t"` key is reserved for associating an optional type with the overall Collection and MUST NOT be used for any purpose other than described here.
@@ -329,14 +335,9 @@ For an example of a `"__cmwc_t"` that is defined for a bundle of endorsements an
 
 Since the Collection CMW is recursive (a Collection CMW is itself a CMW), implementations MAY limit the allowed depth of nesting.
 
-> Implementation note: An API that uses CMW may support "max-cmw-depth" as a discoverable attribute, allowing applications to advertise their own limits. Also, a protocol using CMW may require a minimum depth from its users. The exact details about how such limit is discovered or set are out of scope.
-
-
-~~~ cddl
-{::include cddl/cmw-collection.cddl}
-~~~
-{: #fig-cddl-collection artwork-align="left"
-   title="CDDL definition of the Collection CMW"}
+> Implementation note: An API that uses CMW may support a discoverable "max-cmw-depth" attribute, allowing applications to advertise their own limits.
+Also, a protocol using CMW may require its users to specify a minimum depth.
+The exact details of how such a limit is discovered or set are out of scope of this document.
 
 ## Demuxing
 
