@@ -351,10 +351,10 @@ Table of Contents
 
    The cm-type currently has five allowed values: Reference Values,
    Endorsements, Evidence, Attestation Results, and Appraisal Policy, as
-   defined in Section 8 of [RFC9334].  Note that that an Appraisal
-   Policy may refer to the appraisal of Evidence or Attestation Results,
-   depending on whether the consumer of the conceptual message is a
-   Verifier or a Relying Party.
+   defined in Section 8 of [RFC9334].  Note that an Appraisal Policy may
+   refer to the appraisal of Evidence or Attestation Results, depending
+   on whether the consumer of the conceptual message is a Verifier or a
+   Relying Party.
 
    It is recommended that future specifications extending the RATS
    Conceptual Messages set add new values to the cm-type using the
@@ -1014,7 +1014,7 @@ Table of Contents
    Veraison, a Linux Foundation project hosted at the Confidential
    Computing Consortium.
 
-   The organisation hosts two libraries which allow encoding, decoding,
+   The organization hosts two libraries which allow encoding, decoding,
    and manipulation of CMW payloads: one for the Golang ecosystem
    (https://github.com/veraison/cmw), and one for Rust
    (https://github.com/veraison/rust-cmw).  These implementations cover
@@ -1780,7 +1780,7 @@ Appendix A.  Registering and Using CMWs
 
 Appendix B.  Open Issues
 
-   The list of currently open issues for this documents can be found at
+   The list of currently open issues for this document can be found at
    https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues.
 
 
@@ -1790,10 +1790,11 @@ Acknowledgments
 
    The authors would like to thank Alexey Melnikov, Benjamin Schwartz,
    Brian Campbell, Carl Wallace, Carsten Bormann, Christian Amsüss, Dave
-   Thaler, Deb Cooley, Ionuț Mihalcea, Michael B.  Jones, Mike
-   Ounsworth, Michael StJohns, Mohamed Boucadair, Mohit Sethi, Orie
-   Steele, Paul Howard, Peter Yee, Russ Housley, Steven Bellock, Tim
-   Bray, Tom Jones, and Usama Sardar for their reviews and suggestions.
+   Thaler, Deb Cooley, Ionuț Mihalcea, Mahesh Jethanandani, Michael B.
+   Jones, Mike Ounsworth, Michael StJohns, Mohamed Boucadair, Mohit
+   Sethi, Orie Steele, Paul Howard, Peter Yee, Russ Housley, Steven
+   Bellock, Tim Bray, Tom Jones, and Usama Sardar for their reviews and
+   suggestions.
 
    The definition of a Collection CMW has been modelled on a proposal
    originally made by Simon Frost for an EAT-based Evidence collection
