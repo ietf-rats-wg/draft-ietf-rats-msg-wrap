@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 1 June 2026                                         Independent
+Expires: 6 June 2026                                         Independent
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                        28 November 2025
+                                                         3 December 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -73,7 +73,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 June 2026.
+   This Internet-Draft will expire on 6 June 2026.
 
 Copyright Notice
 
@@ -170,10 +170,10 @@ Table of Contents
    lifetime, RATS conceptual messages are typically transported over
    different protocols.  For example,
 
-   *  In a "background check" topology, Evidence (e.g., EAT [RFC9711])
-      first flows from the Attester to the Relying Party and then from
-      the Relying Party to the Verifier, each leg following a separate
-      protocol path.
+   *  In a "background check" topology (Section 5.2 of [RFC9334]),
+      Evidence (e.g., EAT [RFC9711]) first flows from the Attester to
+      the Relying Party and then from the Relying Party to the Verifier,
+      each leg following a separate protocol path.
 
                                             .------------.
                                             |  Verifier  |
@@ -186,10 +186,12 @@ Table of Contents
                 |  Attester  +------------->|--'      RP |
                 '------------' EAT over TLS '------------'
 
-   *  In a "passport" topology, an attestation result payload (e.g., EAT
-      Attestation Result (EAR) [I-D.ietf-rats-ear]) is initially sent
-      from the Verifier to the Attester, and later, via a different
-      channel, from the Attester to the Relying Party.
+   *  In a "passport" topology (Section 5.1 of [RFC9334]), an
+      attestation result payload (e.g., EAT Attestation Result (EAR)
+      [I-D.ietf-rats-ear])
+
+   is initially sent from the Verifier to the Attester, and later, via a
+   different channel, from the Attester to the Relying Party.
 
                  .------------.
                  |  Verifier  |
@@ -377,9 +379,9 @@ Table of Contents
    Attestation Results, depending on whether the consumer of the
    conceptual message is a Verifier or a Relying Party.
 
-   Future specifications that extend the RATS Conceptual Messages set
-   can add new values to the cm-type using the process defined in
-   Section 10.4.
+   It is recommended that future specifications extending the RATS
+   Conceptual Messages set add new values to the cm-type using the
+   process defined in Section 10.4.
 
 3.2.  Tag CMW
 
@@ -457,6 +459,18 @@ Table of Contents
    the CBOR serialization) that serve as a mnemonic for different
    conceptual messages in the Collection.
 
+   json-collection = {
+     ? "__cmwc_t": ~uri / oid
+     + &(label: text) => json-cmw
+   }
+
+   cbor-collection = {
+     ? "__cmwc_t": ~uri / oid
+     + &(label: (int / text)) => cbor-cmw
+   }
+
+              Figure 4: CDDL definition of the Collection CMW
+
    A Collection MUST have at least one CMW entry.
 
    The "__cmwc_t" key is reserved for associating an optional type with
@@ -482,17 +496,12 @@ Table of Contents
    Since the Collection CMW is recursive (a Collection CMW is itself a
    CMW), implementations MAY limit the allowed depth of nesting.
 
-   json-collection = {
-     ? "__cmwc_t": ~uri / oid
-     + &(label: text) => json-cmw
-   }
-
-   cbor-collection = {
-     ? "__cmwc_t": ~uri / oid
-     + &(label: (int / text)) => cbor-cmw
-   }
-
-              Figure 4: CDDL definition of the Collection CMW
+      Implementation note: An API that uses CMW may support a
+      discoverable "max-cmw-depth" attribute, allowing applications to
+      advertise their own limits.  Also, a protocol using CMW may
+      require its users to specify a minimum depth.  The exact details
+      of how such a limit is discovered or set are out of scope of this
+      document.
 
 3.4.  Demuxing
 
@@ -505,7 +514,7 @@ Table of Contents
    The following pseudocode illustrates how a one-byte look-ahead is
    sufficient to determine how to decode the remaining byte buffer.
 
-   func CMWTypeDemux(b []byte) CMWType {
+   func exampleCMWTypeDemux(b []byte) CMWType {
      if len(b) == 0 {
        return Unknown
      }
@@ -602,10 +611,10 @@ Table of Contents
      * text => text
    }
 
-   The protected header MUST include the signature algorithm identifier.
-   The protected header MUST include the content type application/
-   cmw+json.  Other header parameters MAY be added to the header
-   buckets, for example a kid that identifies the signing key.
+   The protected header MUST include the signature algorithm identifier
+   and the content type application/cmw+json.  Other header parameters
+   MAY be added to the header buckets, for example a kid that identifies
+   the signing key.
 
    For clarity, the above uses the Flattened JSON Serialization
    (Section 7.2.2 of [RFC7515]).  However, the Compact Serialization
@@ -659,7 +668,7 @@ Table of Contents
    and there is a risk that legacy relying parties would bypass crucial
    controls, it is acceptable to mark the extension as critical.
 
-   The CMW extension MUST have the following syntax:
+   The CMW extension has the following syntax:
 
    CMW ::= CHOICE {
        json UTF8String,
@@ -669,7 +678,7 @@ Table of Contents
    The CMW MUST include the serialized CMW object in either JSON or CBOR
    format, utilizing the appropriate CHOICE entry.
 
-   The DER-encoded CMW is the value of the OCTET STRING for the
+   The DER-encoded [X.690] CMW is the value of the OCTET STRING for the
    extnValue field of the extension.
 
 4.4.1.  ASN.1 Module
@@ -1572,6 +1581,17 @@ Table of Contents
               (CRL) Profile", RFC 5280, DOI 10.17487/RFC5280, May 2008,
               <https://www.rfc-editor.org/rfc/rfc5280>.
 
+   [RFC5912]  Hoffman, P. and J. Schaad, "New ASN.1 Modules for the
+              Public Key Infrastructure Using X.509 (PKIX)", RFC 5912,
+              DOI 10.17487/RFC5912, June 2010,
+              <https://www.rfc-editor.org/rfc/rfc5912>.
+
+   [RFC6268]  Schaad, J. and S. Turner, "Additional New ASN.1 Modules
+              for the Cryptographic Message Syntax (CMS) and the Public
+              Key Infrastructure Using X.509 (PKIX)", RFC 6268,
+              DOI 10.17487/RFC6268, July 2011,
+              <https://www.rfc-editor.org/rfc/rfc6268>.
+
    [RFC6838]  Freed, N., Klensin, J., and T. Hansen, "Media Type
               Specifications and Registration Procedures", BCP 13,
               RFC 6838, DOI 10.17487/RFC6838, January 2013,
@@ -1610,6 +1630,11 @@ Table of Contents
               RFC 9277, DOI 10.17487/RFC9277, August 2022,
               <https://www.rfc-editor.org/rfc/rfc9277>.
 
+   [RFC9334]  Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
+              W. Pan, "Remote ATtestation procedureS (RATS)
+              Architecture", RFC 9334, DOI 10.17487/RFC9334, January
+              2023, <https://www.rfc-editor.org/rfc/rfc9334>.
+
    [STD90]    Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
               Interchange Format", STD 90, RFC 8259,
               DOI 10.17487/RFC8259, December 2017,
@@ -1621,9 +1646,15 @@ Table of Contents
               <https://www.rfc-editor.org/rfc/rfc8949>.
 
    [X.680]    International Telephone and Telegraph Consultative
-              Committee, "Specification of Abstract Syntax Notation One
-              (ASN.1): Specification of Basic Notation",
-              CCITT Recommendation X.680, July 1994.
+              Committee, "Abstract Syntax Notation One (ASN.1):
+              Specification of basic notation", CCITT Recommendation
+              X.680, July 2002.
+
+   [X.690]    International Telephone and Telegraph Consultative
+              Committee, "ASN.1 encoding rules: Specification of basic
+              encoding Rules (BER), Canonical encoding rules (CER) and
+              Distinguished encoding rules (DER)", CCITT Recommendation
+              X.690, July 2002.
 
 11.2.  Informative References
 
@@ -1685,31 +1716,20 @@ Table of Contents
               DOI 10.17487/RFC3647, November 2003,
               <https://www.rfc-editor.org/rfc/rfc3647>.
 
-   [RFC5912]  Hoffman, P. and J. Schaad, "New ASN.1 Modules for the
-              Public Key Infrastructure Using X.509 (PKIX)", RFC 5912,
-              DOI 10.17487/RFC5912, June 2010,
-              <https://www.rfc-editor.org/rfc/rfc5912>.
-
-   [RFC6268]  Schaad, J. and S. Turner, "Additional New ASN.1 Modules
-              for the Cryptographic Message Syntax (CMS) and the Public
-              Key Infrastructure Using X.509 (PKIX)", RFC 6268,
-              DOI 10.17487/RFC6268, July 2011,
-              <https://www.rfc-editor.org/rfc/rfc6268>.
-
    [RFC7942]  Sheffer, Y. and A. Farrel, "Improving Awareness of Running
               Code: The Implementation Status Section", BCP 205,
               RFC 7942, DOI 10.17487/RFC7942, July 2016,
               <https://www.rfc-editor.org/rfc/rfc7942>.
 
+   [RFC8792]  Watsen, K., Auerswald, E., Farrel, A., and Q. Wu,
+              "Handling Long Lines in Content of Internet-Drafts and
+              RFCs", RFC 8792, DOI 10.17487/RFC8792, June 2020,
+              <https://www.rfc-editor.org/rfc/rfc8792>.
+
    [RFC9193]  Keränen, A. and C. Bormann, "Sensor Measurement Lists
               (SenML) Fields for Indicating Data Value Content-Format",
               RFC 9193, DOI 10.17487/RFC9193, June 2022,
               <https://www.rfc-editor.org/rfc/rfc9193>.
-
-   [RFC9334]  Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
-              W. Pan, "Remote ATtestation procedureS (RATS)
-              Architecture", RFC 9334, DOI 10.17487/RFC9334, January
-              2023, <https://www.rfc-editor.org/rfc/rfc9334>.
 
    [RFC9711]  Lundblade, L., Mandyam, G., O'Donoghue, J., and C.
               Wallace, "The Entity Attestation Token (EAT)", RFC 9711,
@@ -1782,9 +1802,9 @@ Acknowledgments
    The authors would like to thank Alexey Melnikov, Benjamin Schwartz,
    Brian Campbell, Carl Wallace, Carsten Bormann, Christian Amsüss, Dave
    Thaler, Deb Cooley, Éric Vyncke, Ionuț Mihalcea, Michael B.  Jones,
-   Mike Ounsworth, Michael StJohns, Mohit Sethi, Paul Howard, Peter Yee,
-   Russ Housley, Steven Bellock, Tim Bray, Tom Jones, and Usama Sardar
-   for their reviews and suggestions.
+   Mike Ounsworth, Michael StJohns, Mohamed Boucadair, Mohit Sethi, Paul
+   Howard, Peter Yee, Russ Housley, Steven Bellock, Tim Bray, Tom Jones,
+   and Usama Sardar for their reviews and suggestions.
 
    The definition of a Collection CMW has been modelled on a proposal
    originally made by Simon Frost for an EAT-based Evidence collection
