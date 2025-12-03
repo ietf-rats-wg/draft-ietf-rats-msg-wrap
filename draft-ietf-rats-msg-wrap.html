@@ -19,8 +19,8 @@ It defines a dedicated CBOR tag, corresponding JSON Web Token (JWT) and CBOR Web
        This allows CMWs to be used in CBOR-based protocols, web APIs using JWTs and CWTs, and PKIX artifacts like X.509 certificates.
 Additionally, the draft defines a media type and a CoAP content format to transport CMWs over protocols like HTTP, MIME, and CoAP. 
        The goal is to improve the interoperability and flexibility of remote attestation protocols.
-By introducing a shared message format like the CMW, we can consistently support different attestation message types, evolve message
-serialization formats without breaking compatibility, and avoid having to redefine how messages are handled in each protocol. 
+Introducing a shared message format such as CMW enables consistent support for different attestation message types, evolving message
+serialization formats without breaking compatibility, and avoiding the need to redefine how messages are handled within each protocol. 
     " name="description">
 <meta content="xml2rfc 3.31.0" name="generator">
 <meta content="evidence" name="keyword">
@@ -1118,8 +1118,8 @@ It defines a dedicated CBOR tag, corresponding JSON Web Token (JWT) and CBOR Web
 <p id="section-abstract-3">This allows CMWs to be used in CBOR-based protocols, web APIs using JWTs and CWTs, and PKIX artifacts like X.509 certificates.
 Additionally, the draft defines a media type and a CoAP content format to transport CMWs over protocols like HTTP, MIME, and CoAP.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
 <p id="section-abstract-4">The goal is to improve the interoperability and flexibility of remote attestation protocols.
-By introducing a shared message format like the CMW, we can consistently support different attestation message types, evolve message
-serialization formats without breaking compatibility, and avoid having to redefine how messages are handled in each protocol.<a href="#section-abstract-4" class="pilcrow">¶</a></p>
+Introducing a shared message format such as CMW enables consistent support for different attestation message types, evolving message
+serialization formats without breaking compatibility, and avoiding the need to redefine how messages are handled within each protocol.<a href="#section-abstract-4" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-discussion-venues">
@@ -1237,7 +1237,7 @@ serialization formats without breaking compatibility, and avoid having to redefi
                     <p id="section-toc.1-1.4.2.4.2.1.1"><a href="#section-4.4.1" class="auto internal xref">4.4.1</a>.  <a href="#name-asn1-module" class="internal xref">ASN.1 Module</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4.2.2">
-                    <p id="section-toc.1-1.4.2.4.2.2.1"><a href="#section-4.4.2" class="auto internal xref">4.4.2</a>.  <a href="#name-compatibility-with-dice-con" class="internal xref">Compatibility with DICE <code>ConceptualMessageWrapper</code></a></p>
+                    <p id="section-toc.1-1.4.2.4.2.2.1"><a href="#section-4.4.2" class="auto internal xref">4.4.2</a>.  <a href="#name-compatibility-with-trusted-" class="internal xref">Compatibility with Trusted Computing Group (TCG) <code>ConceptualMessageWrapper</code></a></p>
 </li>
                 </ul>
 </li>
@@ -1402,17 +1402,86 @@ conceptual messages are typically transported over different protocols.
 For example,<a href="#section-1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-3.1">
-          <p id="section-1-3.1.1">In a "background check" topology (<span><a href="https://rfc-editor.org/rfc/rfc9334#section-5.2" class="relref">Section 5.2</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>), Evidence (e.g., EAT <span>[<a href="#RFC9711" class="cite xref">RFC9711</a>]</span>) first flows from
-the Attester to the Relying Party and then from the Relying Party to the Verifier,
-each leg following a separate protocol path.<a href="#section-1-3.1.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-1-3.2">
-          <p id="section-1-3.2.1">In a "passport" topology (<span><a href="https://rfc-editor.org/rfc/rfc9334#section-5.1" class="relref">Section 5.1</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>), an attestation result payload (e.g., Attestation Results for Secure Interactions (AR4SI) <span>[<a href="#I-D.ietf-rats-ar4si" class="cite xref">I-D.ietf-rats-ar4si</a>]</span>)
-is initially sent from the Verifier to the Attester, and later,
-via a different channel, from the Attester to the Relying Party.<a href="#section-1-3.2.1" class="pilcrow">¶</a></p>
+          <p id="section-1-3.1.1">In a "background check" topology (<span><a href="https://rfc-editor.org/rfc/rfc9334#section-5.2" class="relref">Section 5.2</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>), Evidence (e.g., EAT <span>[<a href="#RFC9711" class="cite xref">RFC9711</a>]</span>) first flows from the Attester to the Relying Party and then from the Relying Party to the Verifier, each leg following a separate protocol path.<a href="#section-1-3.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-1-4">By using the CMW format outlined in this document, protocol designers can avoid the need
+<div id="section-1-4">
+        <div class="alignCenter art-svg artwork" id="section-1-4.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="192" width="344" viewBox="0 0 344 192" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+            <path d="M 8,144 L 8,176" fill="none" stroke="black"></path>
+            <path d="M 112,144 L 112,176" fill="none" stroke="black"></path>
+            <path d="M 232,32 L 232,64" fill="none" stroke="black"></path>
+            <path d="M 232,144 L 232,176" fill="none" stroke="black"></path>
+            <path d="M 264,72 L 264,144" fill="none" stroke="black"></path>
+            <path d="M 336,32 L 336,64" fill="none" stroke="black"></path>
+            <path d="M 336,144 L 336,176" fill="none" stroke="black"></path>
+            <path d="M 232,32 L 336,32" fill="none" stroke="black"></path>
+            <path d="M 232,64 L 336,64" fill="none" stroke="black"></path>
+            <path d="M 8,144 L 112,144" fill="none" stroke="black"></path>
+            <path d="M 232,144 L 256,144" fill="none" stroke="black"></path>
+            <path d="M 272,144 L 336,144" fill="none" stroke="black"></path>
+            <path d="M 112,160 L 224,160" fill="none" stroke="black"></path>
+            <path d="M 240,160 L 248,160" fill="none" stroke="black"></path>
+            <path d="M 8,176 L 112,176" fill="none" stroke="black"></path>
+            <path d="M 232,176 L 336,176" fill="none" stroke="black"></path>
+            <path d="M 248,160 C 256.83064,160 264,152.83064 264,144" fill="none" stroke="black"></path>
+            <polygon class="arrowhead" points="272,72 260,66.4 260,77.6" fill="black" transform="rotate(270,264,72)"></polygon>
+            <polygon class="arrowhead" points="232,160 220,154.4 220,165.6" fill="black" transform="rotate(0,224,160)"></polygon>
+            <g class="text">
+              <text x="284" y="52">Verifier</text>
+              <text x="288" y="100">EAT</text>
+              <text x="292" y="116">over</text>
+              <text x="292" y="132">REST</text>
+              <text x="328" y="132">API</text>
+              <text x="60" y="164">Attester</text>
+              <text x="316" y="164">RP</text>
+              <text x="136" y="180">EAT</text>
+              <text x="172" y="180">over</text>
+              <text x="208" y="180">TLS</text>
+            </g>
+          </svg><a href="#section-1-4.1" class="pilcrow">¶</a>
+</div>
+</div>
+<ul class="normal">
+<li class="normal" id="section-1-5.1">
+          <p id="section-1-5.1.1">In a "passport" topology (<span><a href="https://rfc-editor.org/rfc/rfc9334#section-5.1" class="relref">Section 5.1</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>), an attestation result payload (e.g., EAT Attestation Result (EAR) <span>[<a href="#I-D.ietf-rats-ear" class="cite xref">I-D.ietf-rats-ear</a>]</span>) is initially sent from the Verifier to the Attester, and later, via a different channel, from the Attester to the Relying Party.<a href="#section-1-5.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<div id="section-1-6">
+        <div class="alignCenter art-svg artwork" id="section-1-6.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="208" width="344" viewBox="0 0 344 208" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+            <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
+            <path d="M 8,144 L 8,176" fill="none" stroke="black"></path>
+            <path d="M 80,64 L 80,136" fill="none" stroke="black"></path>
+            <path d="M 112,32 L 112,64" fill="none" stroke="black"></path>
+            <path d="M 112,144 L 112,176" fill="none" stroke="black"></path>
+            <path d="M 232,144 L 232,176" fill="none" stroke="black"></path>
+            <path d="M 336,144 L 336,176" fill="none" stroke="black"></path>
+            <path d="M 8,32 L 112,32" fill="none" stroke="black"></path>
+            <path d="M 8,64 L 112,64" fill="none" stroke="black"></path>
+            <path d="M 8,144 L 112,144" fill="none" stroke="black"></path>
+            <path d="M 232,144 L 336,144" fill="none" stroke="black"></path>
+            <path d="M 112,160 L 224,160" fill="none" stroke="black"></path>
+            <path d="M 8,176 L 112,176" fill="none" stroke="black"></path>
+            <path d="M 232,176 L 336,176" fill="none" stroke="black"></path>
+            <polygon class="arrowhead" points="232,160 220,154.4 220,165.6" fill="black" transform="rotate(0,224,160)"></polygon>
+            <polygon class="arrowhead" points="88,136 76,130.4 76,141.6" fill="black" transform="rotate(90,80,136)"></polygon>
+            <g class="text">
+              <text x="60" y="52">Verifier</text>
+              <text x="56" y="84">EAR</text>
+              <text x="52" y="100">over</text>
+              <text x="20" y="116">REST</text>
+              <text x="56" y="116">API</text>
+              <text x="60" y="164">Attester</text>
+              <text x="284" y="164">RP</text>
+              <text x="136" y="180">EAR</text>
+              <text x="172" y="180">over</text>
+              <text x="208" y="180">TLS</text>
+            </g>
+          </svg><a href="#section-1-6.1" class="pilcrow">¶</a>
+</div>
+</div>
+<p id="section-1-7">By using the CMW format outlined in this document, protocol designers can avoid the need
 to update protocol specifications to accommodate different conceptual messages and
 serialization formats used by various attestation technologies. This approach streamlines
 the implementation process for developers, enabling easier support for diverse attestation
@@ -1420,33 +1489,33 @@ technologies. For instance, a Relying Party application implementer does not nee
 attestation-related messages, such as Evidence from Attesters on IoT devices with Trusted
 Platform Modules (TPM) or servers using confidential computing hardware like Intel Trust
 Domain Extensions (TDX). Instead, they can leverage the CMW format, remaining agnostic
-to the specific attestation technology.<a href="#section-1-4" class="pilcrow">¶</a></p>
-<p id="section-1-5">A further design goal is extensibility.
+to the specific attestation technology.<a href="#section-1-7" class="pilcrow">¶</a></p>
+<p id="section-1-8">A further design goal is extensibility.
 This means that adding support for new conceptual messages and new attestation technologies should not change the core of the processor, and that a CMW stack can be designed to offer a plug-in interface for both encoding and decoding.
 To achieve this, the format must provide consistent message encapsulation and explicit typing.
 These features allow for selecting the appropriate message handler based on its type identifier.
-An opaque message can then be passed between the core and the handler.<a href="#section-1-5" class="pilcrow">¶</a></p>
-<p id="section-1-6">This document defines two encapsulation formats for RATS conceptual
-messages that aim to achieve the goals stated above.<a href="#section-1-6" class="pilcrow">¶</a></p>
-<p id="section-1-7">These encapsulation formats have been specifically designed to possess the following characteristics:<a href="#section-1-7" class="pilcrow">¶</a></p>
+An opaque message can then be passed between the core and the handler.<a href="#section-1-8" class="pilcrow">¶</a></p>
+<p id="section-1-9">This document defines two encapsulation formats for RATS conceptual
+messages that aim to achieve the goals stated above.<a href="#section-1-9" class="pilcrow">¶</a></p>
+<p id="section-1-10">These encapsulation formats have been specifically designed to possess the following characteristics:<a href="#section-1-10" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-1-8.1">
-          <p id="section-1-8.1.1">They are self-describing, which means that they can convey precise typing information without relying on the framing provided by the embedding protocol or the storage system.<a href="#section-1-8.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-1-11.1">
+          <p id="section-1-11.1.1">They are self-describing, which means that they can convey precise typing information without relying on the framing provided by the embedding protocol or the storage system.<a href="#section-1-11.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-8.2">
-          <p id="section-1-8.2.1">They are based on media types <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>, which allows the cost of their registration to be spread across numerous usage scenarios.<a href="#section-1-8.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-1-11.2">
+          <p id="section-1-11.2.1">They are based on media types <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>, which allows the cost of their registration to be spread across numerous usage scenarios.<a href="#section-1-11.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-1-9">A protocol designer could use these formats, for example, to convey
+<p id="section-1-12">A protocol designer could use these formats, for example, to convey
 Evidence, Endorsements and Reference Values in certificates and CRLs
 extensions (<span>[<a href="#DICE-arch" class="cite xref">DICE-arch</a>]</span>), to embed Attestation Results or Evidence as
 first-class authentication credentials in TLS handshake messages
-<span>[<a href="#I-D.fossati-tls-attestation" class="cite xref">I-D.fossati-tls-attestation</a>]</span> <span>[<a href="#I-D.fossati-tls-exported-attestation" class="cite xref">I-D.fossati-tls-exported-attestation</a>]</span>, to transport attestation-related payloads in RESTful APIs,
+<span>[<a href="#I-D.fossati-tls-attestation" class="cite xref">I-D.fossati-tls-attestation</a>]</span> <span>[<a href="#I-D.fossati-seat-expat" class="cite xref">I-D.fossati-seat-expat</a>]</span>, to transport attestation-related payloads in RESTful APIs,
 or for stable storage of Attestation Results in the form of file system
-objects.<a href="#section-1-9" class="pilcrow">¶</a></p>
-<p id="section-1-10">This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
+objects.<a href="#section-1-12" class="pilcrow">¶</a></p>
+<p id="section-1-13">This document also defines corresponding CBOR tag, JSON Web Tokens (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509 extension.
 These allow embedding the wrapped conceptual messages into CBOR-based protocols, web APIs, and PKIX formats and protocols.
-In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.<a href="#section-1-10" class="pilcrow">¶</a></p>
+In addition, a Media Type and a CoAP Content-Format are defined for transporting CMWs in HTTP, MIME, CoAP and other Internet protocols.<a href="#section-1-13" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1546,7 +1615,7 @@ When using CBOR, the value field <span class="bcp14">MUST</span> be encoded as a
           <dd style="margin-left: 1.5em" id="section-3.1-4.6">
             <p id="section-3.1-4.6.1">An optional bitmap with a maximum size of 4 bytes that indicates which conceptual message types are
 carried in the <code>value</code> field.  Any combination (i.e., any value between
-1 and 2<sup>32</sup>-1 inclusive) is allowed.  Only five bits are registered at the time of writing, so, the acceptable values are currently limited to 1 to 31.  This is useful only if the <code>type</code> is
+1 and 2<sup>32</sup>-1 inclusive) is allowed.  Only five bits are registered in this document, so, the acceptable values are currently limited to 1 to 31.  This is useful only if the <code>type</code> is
 potentially ambiguous and there is no further context available to the
 CMW consumer to decide.  For example, this might be the case if the base
 media type is not profiled (e.g., <code>application/eat+cwt</code>), if the <code>value</code>
@@ -1582,7 +1651,7 @@ cm-type = &amp;(
 <a href="#name-cddl-definition-of-the-cm-t" class="selfRef">CDDL definition of the CM Type</a>
             </figcaption></figure>
 </div>
-<p id="section-3.1.1-3">The <code>cm-type</code> currently has five allowed values: Reference Values, Endorsements, Evidence, Attestation Results, and Appraisal Policy, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9334#section-8" class="relref">Section 8</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.
+<p id="section-3.1.1-3">The <code>cm-type</code> as defined by this document has five allowed values: Reference Values, Endorsements, Evidence, Attestation Results, and Appraisal Policy, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9334#section-8" class="relref">Section 8</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.
 Note that an Appraisal Policy may refer to the appraisal of Evidence or Attestation Results, depending on whether the consumer of the conceptual message is a Verifier or a Relying Party.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.1.1-4">It is recommended that future specifications extending the RATS Conceptual Messages set add new values to the <code>cm-type</code> using the process defined in <a href="#iana-ind-ext" class="auto internal xref">Section 10.4</a>.<a href="#section-3.1.1-4" class="pilcrow">¶</a></p>
 </section>
@@ -1929,14 +1998,14 @@ END
 </div>
 </section>
 </div>
-<div id="compatibility-with-dice-conceptualmessagewrapper">
+<div id="compatibility-with-trusted-computing-group-tcg-conceptualmessagewrapper">
 <section id="section-4.4.2">
-          <h4 id="name-compatibility-with-dice-con">
-<a href="#section-4.4.2" class="section-number selfRef">4.4.2. </a><a href="#name-compatibility-with-dice-con" class="section-name selfRef">Compatibility with DICE <code>ConceptualMessageWrapper</code></a>
+          <h4 id="name-compatibility-with-trusted-">
+<a href="#section-4.4.2" class="section-number selfRef">4.4.2. </a><a href="#name-compatibility-with-trusted-" class="section-name selfRef">Compatibility with Trusted Computing Group (TCG) <code>ConceptualMessageWrapper</code></a>
           </h4>
 <p id="section-4.4.2-1">Section 6.1.8 of <span>[<a href="#DICE-arch" class="cite xref">DICE-arch</a>]</span> specifies the ConceptualMessageWrapper (CMW) format and its corresponding object identifier.
 The CMW format outlined in <span>[<a href="#DICE-arch" class="cite xref">DICE-arch</a>]</span> permits only a subset of the CMW grammar defined in this document.
-In particular, the Collection format cannot be encoded using DICE CMWs.<a href="#section-4.4.2-1" class="pilcrow">¶</a></p>
+In particular, the Collection format cannot be encoded using TCG CMWs.<a href="#section-4.4.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2146,7 +2215,7 @@ It is given an explicit <code>"__cmwc_t"</code> using the URI form.<a href="#sec
       <h2 id="name-collected-cddl">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-collected-cddl" class="section-name selfRef">Collected CDDL</a>
       </h2>
-<p id="section-6-1">This appendix contains all the CDDL definitions included in this specification.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">This section contains all the CDDL definitions included in this specification.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <div class="breakable lang-cddl sourcecode" id="section-6-2">
 <pre>
 start = cmw
@@ -2329,7 +2398,7 @@ A specific scenario arises when a public key certificate is issued based on Evid
 For instance, an individual seeking a publicly-trusted code signing certificate may be willing to disclose the details of the hardware where their code signing keys are stored (e.g., HSM model, patch level, etc.).
 However, they likely do not want this information to be publicly accessible.
 Applications that intend to publicly "broadcast" Evidence claims received from a third party via X.509 Certificates should define a Certificate Practices Statement <span>[<a href="#RFC3647" class="cite xref">RFC3647</a>]</span> that clearly specifies the circumstances under which the CA can include such data in the issued certificate.
-Note that the aforementioned consideration does not apply to cases where X.509 Certificates are explicitly designed as a security envelope for Evidence claims, such as in DICE <span>[<a href="#DICE-arch" class="cite xref">DICE-arch</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
+Note that the aforementioned consideration does not apply to cases where X.509 Certificates are explicitly designed as a security envelope for Evidence claims, such as in <span>[<a href="#DICE-arch" class="cite xref">DICE-arch</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="seccons">
@@ -2372,7 +2441,7 @@ It is the responsibility of the Attester who creates the Collection CMW to ensur
         <h3 id="name-integrating-cmw-into-protoc">
 <a href="#section-9.3" class="section-number selfRef">9.3. </a><a href="#name-integrating-cmw-into-protoc" class="section-name selfRef">Integrating CMW into Protocols</a>
         </h3>
-<p id="section-9.3-1">When CMW is integrated into some hosting protocol (for example, attested CSR <span>[<a href="#I-D.ietf-lamps-csr-attestation" class="cite xref">I-D.ietf-lamps-csr-attestation</a>]</span> or attested TLS <span>[<a href="#I-D.fossati-tls-attestation" class="cite xref">I-D.fossati-tls-attestation</a>]</span> <span>[<a href="#I-D.fossati-tls-exported-attestation" class="cite xref">I-D.fossati-tls-exported-attestation</a>]</span>), it is up to that hosting protocol to describe how CMW is intended to be used and how it fits into the overall security model.<a href="#section-9.3-1" class="pilcrow">¶</a></p>
+<p id="section-9.3-1">When CMW is integrated into some hosting protocol (for example, attested CSR <span>[<a href="#I-D.ietf-lamps-csr-attestation" class="cite xref">I-D.ietf-lamps-csr-attestation</a>]</span> or attested TLS <span>[<a href="#I-D.fossati-tls-attestation" class="cite xref">I-D.fossati-tls-attestation</a>]</span> <span>[<a href="#I-D.fossati-seat-expat" class="cite xref">I-D.fossati-seat-expat</a>]</span>), it is up to that hosting protocol to describe how CMW is intended to be used and how it fits into the overall security model.<a href="#section-9.3-1" class="pilcrow">¶</a></p>
 <p id="section-9.3-2">Such an analysis should consider the types of conceptual messages allowed, including the permitted combinations, the protection requirements, the interface with the hosting protocol, and any other security-relevant aspect arising from the interaction between the CMW assembly and the hosting protocol.<a href="#section-9.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -3337,25 +3406,25 @@ $cbor-tag /= tag-cm-data&lt;1668547094&gt; ; bytes(cmw+jws)
         <dd>
 <span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"Managing CBOR codepoints in Internet-Drafts"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-cbor-draft-numbers-06</span>, <time datetime="2025-07-07" class="refDate">7 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-cbor-draft-numbers-06">https://datatracker.ietf.org/doc/html/draft-bormann-cbor-draft-numbers-06</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="I-D.fossati-seat-expat">[I-D.fossati-seat-expat]</dt>
+        <dd>
+<span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Sardar, M. U.</span>, <span class="refAuthor">Reddy.K, T.</span>, <span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Tschofenig, H.</span>, and <span class="refAuthor">I. Mihalcea</span>, <span class="refTitle">"Remote Attestation with Exported Authenticators"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-fossati-seat-expat-00</span>, <time datetime="2025-10-20" class="refDate">20 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-fossati-seat-expat-00">https://datatracker.ietf.org/doc/html/draft-fossati-seat-expat-00</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.fossati-tls-attestation">[I-D.fossati-tls-attestation]</dt>
         <dd>
 <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Howard, P.</span>, <span class="refAuthor">Mihalcea, I.</span>, <span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">Niemi, A.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"Using Attestation in Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-fossati-tls-attestation-09</span>, <time datetime="2025-04-30" class="refDate">30 April 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-fossati-tls-attestation-09">https://datatracker.ietf.org/doc/html/draft-fossati-tls-attestation-09</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="I-D.fossati-tls-exported-attestation">[I-D.fossati-tls-exported-attestation]</dt>
-        <dd>
-<span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Sardar, M. U.</span>, <span class="refAuthor">Reddy.K, T.</span>, <span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Tschofenig, H.</span>, and <span class="refAuthor">I. Mihalcea</span>, <span class="refTitle">"Remote Attestation with Exported Authenticators"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-fossati-tls-exported-attestation-02</span>, <time datetime="2025-07-03" class="refDate">3 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-fossati-tls-exported-attestation-02">https://datatracker.ietf.org/doc/html/draft-fossati-tls-exported-attestation-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-lamps-csr-attestation">[I-D.ietf-lamps-csr-attestation]</dt>
         <dd>
 <span class="refAuthor">Ounsworth, M.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Wiseman, M.</span>, and <span class="refAuthor">N. Smith</span>, <span class="refTitle">"Use of Remote Attestation with Certification Signing Requests"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-csr-attestation-21</span>, <time datetime="2025-10-05" class="refDate">5 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-csr-attestation-21">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-csr-attestation-21</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="I-D.ietf-rats-ar4si">[I-D.ietf-rats-ar4si]</dt>
-        <dd>
-<span class="refAuthor">Voit, E.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Hardjono, T.</span>, <span class="refAuthor">Fossati, T.</span>, and <span class="refAuthor">V. Scarlata</span>, <span class="refTitle">"Attestation Results for Secure Interactions"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-ar4si-09</span>, <time datetime="2025-08-15" class="refDate">15 August 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-ar4si-09">https://datatracker.ietf.org/doc/html/draft-ietf-rats-ar4si-09</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="I-D.ietf-rats-corim">[I-D.ietf-rats-corim]</dt>
         <dd>
 <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Concise Reference Integrity Manifest"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-corim-09</span>, <time datetime="2025-10-20" class="refDate">20 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-09">https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-09</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-rats-ear">[I-D.ietf-rats-ear]</dt>
+        <dd>
+<span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Voit, E.</span>, <span class="refAuthor">Trofimov, S.</span>, and <span class="refAuthor">H. Birkholz</span>, <span class="refTitle">"EAT Attestation Results"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-ear-01</span>, <time datetime="2025-07-24" class="refDate">24 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-ear-01">https://datatracker.ietf.org/doc/html/draft-ietf-rats-ear-01</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC3647">[RFC3647]</dt>
         <dd>
@@ -3529,6 +3598,7 @@ Carsten Bormann,
 <span class="contact-name">Christian Amsüss</span>,
 Dave Thaler,
 Deb Cooley,
+<span class="contact-name">Éric Vyncke</span>,
 <span class="contact-name">Ionuț Mihalcea</span>,
 Mahesh Jethanandani,
 Michael B. Jones,

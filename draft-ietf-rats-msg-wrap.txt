@@ -41,11 +41,11 @@ Abstract
    format to transport CMWs over protocols like HTTP, MIME, and CoAP.
 
    The goal is to improve the interoperability and flexibility of remote
-   attestation protocols.  By introducing a shared message format like
-   the CMW, we can consistently support different attestation message
-   types, evolve message serialization formats without breaking
-   compatibility, and avoid having to redefine how messages are handled
-   in each protocol.
+   attestation protocols.  Introducing a shared message format such as
+   CMW enables consistent support for different attestation message
+   types, evolving message serialization formats without breaking
+   compatibility, and avoiding the need to redefine how messages are
+   handled within each protocol.
 
 Discussion Venues
 
@@ -107,7 +107,8 @@ Table of Contents
        4.3.1.  Encoding Requirements
      4.4.  Transporting CMW in PKIX Formats
        4.4.1.  ASN.1 Module
-       4.4.2.  Compatibility with DICE ConceptualMessageWrapper
+       4.4.2.  Compatibility with Trusted Computing Group (TCG)
+               ConceptualMessageWrapper
    5.  Examples
      5.1.  JSON-encoded Record
      5.2.  CBOR-encoded Record
@@ -174,11 +175,33 @@ Table of Contents
       the Relying Party and then from the Relying Party to the Verifier,
       each leg following a separate protocol path.
 
+                                            .------------.
+                                            |  Verifier  |
+                                            '------------'
+                                                ^
+                                                | EAT
+                                                | over
+                                                | REST API
+                .------------.              .---|--------.
+                |  Attester  +------------->|--'      RP |
+                '------------' EAT over TLS '------------'
+
    *  In a "passport" topology (Section 5.1 of [RFC9334]), an
-      attestation result payload (e.g., Attestation Results for Secure
-      Interactions (AR4SI) [I-D.ietf-rats-ar4si]) is initially sent from
-      the Verifier to the Attester, and later, via a different channel,
-      from the Attester to the Relying Party.
+      attestation result payload (e.g., EAT Attestation Result (EAR)
+      [I-D.ietf-rats-ear]) is initially sent from the Verifier to the
+      Attester, and later, via a different channel, from the Attester to
+      the Relying Party.
+
+                 .------------.
+                 |  Verifier  |
+                 '--------+---'
+                      EAR |
+                     over |
+                 REST API |
+                          v
+                 .------------.              .------------.
+                 |  Attester  +------------->|     RP     |
+                 '------------' EAR over TLS '------------'
 
    By using the CMW format outlined in this document, protocol designers
    can avoid the need to update protocol specifications to accommodate
@@ -220,10 +243,9 @@ Table of Contents
    Evidence, Endorsements and Reference Values in certificates and CRLs
    extensions ([DICE-arch]), to embed Attestation Results or Evidence as
    first-class authentication credentials in TLS handshake messages
-   [I-D.fossati-tls-attestation] [I-D.fossati-tls-exported-attestation],
-   to transport attestation-related payloads in RESTful APIs, or for
-   stable storage of Attestation Results in the form of file system
-   objects.
+   [I-D.fossati-tls-attestation] [I-D.fossati-seat-expat], to transport
+   attestation-related payloads in RESTful APIs, or for stable storage
+   of Attestation Results in the form of file system objects.
 
    This document also defines corresponding CBOR tag, JSON Web Tokens
    (JWT) and CBOR Web Tokens (CWT) claims, as well as an X.509
@@ -320,10 +342,10 @@ Table of Contents
       An optional bitmap with a maximum size of 4 bytes that indicates
       which conceptual message types are carried in the value field.
       Any combination (i.e., any value between 1 and 2^32-1 inclusive)
-      is allowed.  Only five bits are registered at the time of writing,
-      so, the acceptable values are currently limited to 1 to 31.  This
-      is useful only if the type is potentially ambiguous and there is
-      no further context available to the CMW consumer to decide.  For
+      is allowed.  Only five bits are registered in this document, so,
+      the acceptable values are currently limited to 1 to 31.  This is
+      useful only if the type is potentially ambiguous and there is no
+      further context available to the CMW consumer to decide.  For
       example, this might be the case if the base media type is not
       profiled (e.g., application/eat+cwt), if the value field contains
       multiple conceptual messages with different types (e.g., both
@@ -349,12 +371,12 @@ Table of Contents
 
                   Figure 2: CDDL definition of the CM Type
 
-   The cm-type currently has five allowed values: Reference Values,
-   Endorsements, Evidence, Attestation Results, and Appraisal Policy, as
-   defined in Section 8 of [RFC9334].  Note that an Appraisal Policy may
-   refer to the appraisal of Evidence or Attestation Results, depending
-   on whether the consumer of the conceptual message is a Verifier or a
-   Relying Party.
+   The cm-type as defined by this document has five allowed values:
+   Reference Values, Endorsements, Evidence, Attestation Results, and
+   Appraisal Policy, as defined in Section 8 of [RFC9334].  Note that an
+   Appraisal Policy may refer to the appraisal of Evidence or
+   Attestation Results, depending on whether the consumer of the
+   conceptual message is a Verifier or a Relying Party.
 
    It is recommended that future specifications extending the RATS
    Conceptual Messages set add new values to the cm-type using the
@@ -707,13 +729,14 @@ Table of Contents
 
    END
 
-4.4.2.  Compatibility with DICE ConceptualMessageWrapper
+4.4.2.  Compatibility with Trusted Computing Group (TCG)
+        ConceptualMessageWrapper
 
    Section 6.1.8 of [DICE-arch] specifies the ConceptualMessageWrapper
    (CMW) format and its corresponding object identifier.  The CMW format
    outlined in [DICE-arch] permits only a subset of the CMW grammar
    defined in this document.  In particular, the Collection format
-   cannot be encoded using DICE CMWs.
+   cannot be encoded using TCG CMWs.
 
 5.  Examples
 
@@ -859,7 +882,7 @@ Table of Contents
 
 6.  Collected CDDL
 
-   This appendix contains all the CDDL definitions included in this
+   This section contains all the CDDL definitions included in this
    specification.
 
    start = cmw
@@ -1045,7 +1068,7 @@ Table of Contents
    which the CA can include such data in the issued certificate.  Note
    that the aforementioned consideration does not apply to cases where
    X.509 Certificates are explicitly designed as a security envelope for
-   Evidence claims, such as in DICE [DICE-arch].
+   Evidence claims, such as in [DICE-arch].
 
 9.  Security Considerations
 
@@ -1101,10 +1124,9 @@ Table of Contents
 
    When CMW is integrated into some hosting protocol (for example,
    attested CSR [I-D.ietf-lamps-csr-attestation] or attested TLS
-   [I-D.fossati-tls-attestation]
-   [I-D.fossati-tls-exported-attestation]), it is up to that hosting
-   protocol to describe how CMW is intended to be used and how it fits
-   into the overall security model.
+   [I-D.fossati-tls-attestation] [I-D.fossati-seat-expat]), it is up to
+   that hosting protocol to describe how CMW is intended to be used and
+   how it fits into the overall security model.
 
    Such an analysis should consider the types of conceptual messages
    allowed, including the permitted combinations, the protection
@@ -1659,6 +1681,14 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-bormann-cbor-
               draft-numbers-06>.
 
+   [I-D.fossati-seat-expat]
+              Fossati, T., Sardar, M. U., Reddy.K, T., Sheffer, Y.,
+              Tschofenig, H., and I. Mihalcea, "Remote Attestation with
+              Exported Authenticators", Work in Progress, Internet-
+              Draft, draft-fossati-seat-expat-00, 20 October 2025,
+              <https://datatracker.ietf.org/doc/html/draft-fossati-seat-
+              expat-00>.
+
    [I-D.fossati-tls-attestation]
               Tschofenig, H., Sheffer, Y., Howard, P., Mihalcea, I.,
               Deshpande, Y., Niemi, A., and T. Fossati, "Using
@@ -1668,14 +1698,6 @@ Table of Contents
               2025, <https://datatracker.ietf.org/doc/html/draft-
               fossati-tls-attestation-09>.
 
-   [I-D.fossati-tls-exported-attestation]
-              Fossati, T., Sardar, M. U., Reddy.K, T., Sheffer, Y.,
-              Tschofenig, H., and I. Mihalcea, "Remote Attestation with
-              Exported Authenticators", Work in Progress, Internet-
-              Draft, draft-fossati-tls-exported-attestation-02, 3 July
-              2025, <https://datatracker.ietf.org/doc/html/draft-
-              fossati-tls-exported-attestation-02>.
-
    [I-D.ietf-lamps-csr-attestation]
               Ounsworth, M., Tschofenig, H., Birkholz, H., Wiseman, M.,
               and N. Smith, "Use of Remote Attestation with
@@ -1684,20 +1706,19 @@ Table of Contents
               October 2025, <https://datatracker.ietf.org/doc/html/
               draft-ietf-lamps-csr-attestation-21>.
 
-   [I-D.ietf-rats-ar4si]
-              Voit, E., Birkholz, H., Hardjono, T., Fossati, T., and V.
-              Scarlata, "Attestation Results for Secure Interactions",
-              Work in Progress, Internet-Draft, draft-ietf-rats-ar4si-
-              09, 15 August 2025,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              ar4si-09>.
-
    [I-D.ietf-rats-corim]
               Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
               W. Pan, "Concise Reference Integrity Manifest", Work in
               Progress, Internet-Draft, draft-ietf-rats-corim-09, 20
               October 2025, <https://datatracker.ietf.org/doc/html/
               draft-ietf-rats-corim-09>.
+
+   [I-D.ietf-rats-ear]
+              Fossati, T., Voit, E., Trofimov, S., and H. Birkholz, "EAT
+              Attestation Results", Work in Progress, Internet-Draft,
+              draft-ietf-rats-ear-01, 24 July 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
+              ear-01>.
 
    [RFC3647]  Chokhani, S., Ford, W., Sabett, R., Merrill, C., and S.
               Wu, "Internet X.509 Public Key Infrastructure Certificate
@@ -1790,11 +1811,11 @@ Acknowledgments
 
    The authors would like to thank Alexey Melnikov, Benjamin Schwartz,
    Brian Campbell, Carl Wallace, Carsten Bormann, Christian Amsüss, Dave
-   Thaler, Deb Cooley, Ionuț Mihalcea, Mahesh Jethanandani, Michael B.
-   Jones, Mike Ounsworth, Michael StJohns, Mohamed Boucadair, Mohit
-   Sethi, Orie Steele, Paul Howard, Peter Yee, Russ Housley, Steven
-   Bellock, Tim Bray, Tom Jones, and Usama Sardar for their reviews and
-   suggestions.
+   Thaler, Deb Cooley, Éric Vyncke, Ionuț Mihalcea, Mahesh Jethanandani,
+   Michael B.  Jones, Mike Ounsworth, Michael StJohns, Mohamed
+   Boucadair, Mohit Sethi, Orie Steele, Paul Howard, Peter Yee, Russ
+   Housley, Steven Bellock, Tim Bray, Tom Jones, and Usama Sardar for
+   their reviews and suggestions.
 
    The definition of a Collection CMW has been modelled on a proposal
    originally made by Simon Frost for an EAT-based Evidence collection
