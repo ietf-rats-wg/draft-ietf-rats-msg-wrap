@@ -240,8 +240,8 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-   In this document, CDDL [RFC8610] [RFC9165] is used to describe the
-   data formats.
+   In this document, CDDL [RFC8610] [RFC9165] [RFC9741] is used to
+   describe the data formats.
 
    The reader is assumed to be familiar with the vocabulary and concepts
    defined in [RFC9334].
@@ -567,14 +567,26 @@ Table of Contents
 4.2.  Signing JSON CMW using JWS
 
    A JSON CMW can be signed using JSON Web Signature (JWS) [RFC7515].  A
-   signed-json-cmw is a JWS object with the following layout:
+   signed-json-cmw uses either the Flattened JSON Serialization
+   (Section 7.2.2 of [RFC7515]) or the Compact Serialization
+   (Section 3.1 of [RFC7515]).
 
-   signed-json-cmw = {
-     "protected": text .b64u (text .json signed-json-cmw-protected-hdr)
-     ? "header": text .b64u (text .json signed-json-cmw-unprotected-hdr)
-     "payload": text .b64u (text .json json-cmw)
-     "signature": text .b64u bytes
+   signed-json-cmw = jws-flattened-json / jws-compact
+
+   jws-flattened-json = {
+     "protected": protected
+     ? "header": unprotected
+     "payload": payload
+     "signature": signature
    }
+
+   jws-compact =
+     (((protected .cat ".") .cat payload) .cat ".") .cat signature
+
+   protected = text .b64u (text .json signed-json-cmw-protected-hdr)
+   unprotected = text .b64u (text .json signed-json-cmw-unprotected-hdr)
+   payload = text .b64u (text .json json-cmw)
+   signature = text .b64u bytes
 
    The payload MUST be the JSON-encoded Record, or Collection CMW.
 
@@ -592,10 +604,6 @@ Table of Contents
    and the content type application/cmw+json.  Other header parameters
    MAY be added to the header buckets, for example a kid that identifies
    the signing key.
-
-   For clarity, the above uses the Flattened JSON Serialization
-   (Section 7.2.2 of [RFC7515]).  However, the Compact Serialization
-   (Section 3.1 of [RFC7515]) can also be used.
 
 4.3.  Transporting CMW in COSE and JOSE Web Tokens
 
@@ -957,11 +965,11 @@ Table of Contents
    cose.values = any
 
 
-   signed-json-cmw = {
-     "protected": text .b64u (text .json signed-json-cmw-protected-hdr)
-     ? "header": text .b64u (text .json signed-json-cmw-unprotected-hdr)
-     "payload": text .b64u (text .json json-cmw)
-     "signature": text .b64u bytes
+   jws-flattened-json = {
+     "protected": protected
+     ? "header": unprotected
+     "payload": payload
+     "signature": signature
    }
 
    signed-json-cmw-protected-hdr = {
@@ -1443,21 +1451,19 @@ Table of Contents
    CBOR Tag numbers and the corresponding data items are listed in
    Table 4.
 
-   +============+======================================================+
-   | Tag        | Tag Content                                          |
-   | Number     |                                                      |
-   +============+======================================================+
-   | TN(TBD1)   | bytes .cbor cbor-cmw                                 |
-   +------------+------------------------------------------------------+
-   | TN(TBD2)   | bytes-wrapped json-cmw                               |
-   +------------+------------------------------------------------------+
-   | TN(TBD3)   | bytes .cbor signed-cbor-cmw                          |
-   +------------+------------------------------------------------------+
-   | TN(TBD4)   | bytes-wrapped signed-json-cmw or equivalent using    |
-   |            | JWS Compact Serialization (Section 3.1 of [RFC7515]) |
-   +------------+------------------------------------------------------+
+   +============+===============================+
+   | Tag Number | Tag Content                   |
+   +============+===============================+
+   | TN(TBD1)   | bytes .cbor cbor-cmw          |
+   +------------+-------------------------------+
+   | TN(TBD2)   | bytes-wrapped json-cmw        |
+   +------------+-------------------------------+
+   | TN(TBD3)   | bytes .cbor signed-cbor-cmw   |
+   +------------+-------------------------------+
+   | TN(TBD4)   | bytes-wrapped signed-json-cmw |
+   +------------+-------------------------------+
 
-                       Table 4: TN-derived CBOR Tags
+           Table 4: TN-derived CBOR Tags
 
    Figure 5 extends the $cbor-tag socket defined in Section 3.2 to add
    the definitions of the associated Tag CMWs.  Note that CMWs in Tag
@@ -1611,6 +1617,11 @@ Table of Contents
               W. Pan, "Remote ATtestation procedureS (RATS)
               Architecture", RFC 9334, DOI 10.17487/RFC9334, January
               2023, <https://www.rfc-editor.org/rfc/rfc9334>.
+
+   [RFC9741]  Bormann, C., "Concise Data Definition Language (CDDL):
+              Additional Control Operators for the Conversion and
+              Processing of Text", RFC 9741, DOI 10.17487/RFC9741, March
+              2025, <https://www.rfc-editor.org/rfc/rfc9741>.
 
    [STD90]    Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
               Interchange Format", STD 90, RFC 8259,
@@ -1780,9 +1791,9 @@ Acknowledgments
    The authors would like to thank Alexey Melnikov, Benjamin Schwartz,
    Brian Campbell, Carl Wallace, Carsten Bormann, Christian Amsüss, Dave
    Thaler, Deb Cooley, Ionuț Mihalcea, Michael B.  Jones, Mike
-   Ounsworth, Michael StJohns, Mohamed Boucadair, Mohit Sethi, Paul
-   Howard, Peter Yee, Russ Housley, Steven Bellock, Tim Bray, Tom Jones,
-   and Usama Sardar for their reviews and suggestions.
+   Ounsworth, Michael StJohns, Mohamed Boucadair, Mohit Sethi, Orie
+   Steele, Paul Howard, Peter Yee, Russ Housley, Steven Bellock, Tim
+   Bray, Tom Jones, and Usama Sardar for their reviews and suggestions.
 
    The definition of a Collection CMW has been modelled on a proposal
    originally made by Simon Frost for an EAT-based Evidence collection
