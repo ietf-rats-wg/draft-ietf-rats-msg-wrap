@@ -1,0 +1,4 @@
+protected = text .b64u (text .json signed-json-cmw-protected-hdr)
+unprotected = text .b64u (text .json signed-json-cmw-unprotected-hdr)
+payload = text .b64u (text .json json-cmw)
+signature = text .b64u bytes
