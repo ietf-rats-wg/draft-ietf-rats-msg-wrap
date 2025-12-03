@@ -56,6 +56,7 @@ normative:
     =: RFC8259
   RFC8610: cddl
   RFC9165: cddlplus
+  RFC9741: cddlplusplus
   RFC9277:
   RFC9334: rats-arch
   STD94:
@@ -173,7 +174,7 @@ In addition, a Media Type and a CoAP Content-Format are defined for transporting
 
 {::boilerplate bcp14-tagged}
 
-In this document, CDDL {{-cddl}} {{-cddlplus}} is used to describe the
+In this document, CDDL {{-cddl}} {{-cddlplus}} {{-cddlplusplus}} is used to describe the
 data formats.
 
 The reader is assumed to be familiar with the vocabulary and concepts
