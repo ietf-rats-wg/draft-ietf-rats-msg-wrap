@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 5 June 2026                                         Independent
+Expires: 6 June 2026                                         Independent
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                         2 December 2025
+                                                         3 December 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -73,7 +73,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 June 2026.
+   This Internet-Draft will expire on 6 June 2026.
 
 Copyright Notice
 
@@ -1761,10 +1761,10 @@ Acknowledgments
 
    The authors would like to thank Alexey Melnikov, Benjamin Schwartz,
    Brian Campbell, Carl Wallace, Carsten Bormann, Christian Amsüss, Dave
-   Thaler, Deb Cooley, Ionuț Mihalcea, Michael B.  Jones, Mike
-   Ounsworth, Michael StJohns, Mohit Sethi, Paul Howard, Peter Yee, Russ
-   Housley, Steven Bellock, Tim Bray, Tom Jones, and Usama Sardar for
-   their reviews and suggestions.
+   Thaler, Deb Cooley, Ionuț Mihalcea, Mahesh Jethanandani, Michael B.
+   Jones, Mike Ounsworth, Michael StJohns, Mohit Sethi, Paul Howard,
+   Peter Yee, Russ Housley, Steven Bellock, Tim Bray, Tom Jones, and
+   Usama Sardar for their reviews and suggestions.
 
    The definition of a Collection CMW has been modelled on a proposal
    originally made by Simon Frost for an EAT-based Evidence collection
