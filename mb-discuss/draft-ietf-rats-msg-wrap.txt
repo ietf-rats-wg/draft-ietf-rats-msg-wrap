@@ -436,6 +436,18 @@ Table of Contents
    the CBOR serialization) that serve as a mnemonic for different
    conceptual messages in the Collection.
 
+   json-collection = {
+     ? "__cmwc_t": ~uri / oid
+     + &(label: text) => json-cmw
+   }
+
+   cbor-collection = {
+     ? "__cmwc_t": ~uri / oid
+     + &(label: (int / text)) => cbor-cmw
+   }
+
+              Figure 4: CDDL definition of the Collection CMW
+
    A Collection MUST have at least one CMW entry.
 
    The "__cmwc_t" key is reserved for associating an optional type with
@@ -461,23 +473,12 @@ Table of Contents
    Since the Collection CMW is recursive (a Collection CMW is itself a
    CMW), implementations MAY limit the allowed depth of nesting.
 
-      Implementation note: An API that uses CMW may support "max-cmw-
-      depth" as a discoverable attribute, allowing applications to
+      Implementation note: An API that uses CMW may support a
+      discoverable "max-cmw-depth" attribute, allowing applications to
       advertise their own limits.  Also, a protocol using CMW may
-      require a minimum depth from its users.  The exact details about
-      how such limit is discovered or set are out of scope.
-
-   json-collection = {
-     ? "__cmwc_t": ~uri / oid
-     + &(label: text) => json-cmw
-   }
-
-   cbor-collection = {
-     ? "__cmwc_t": ~uri / oid
-     + &(label: (int / text)) => cbor-cmw
-   }
-
-              Figure 4: CDDL definition of the Collection CMW
+      require its users to specify a minimum depth.  The exact details
+      of how such a limit is discovered or set are out of scope of this
+      document.
 
 3.4.  Demuxing
 

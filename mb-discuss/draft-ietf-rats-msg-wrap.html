@@ -1656,25 +1656,9 @@ A single Collection CMW can contain a mix of different message types, and it can
 <p id="section-3.3-3">The Collection CMW (<a href="#fig-cddl-collection" class="auto internal xref">Figure 4</a>) is defined as a CBOR map or JSON object containing CMW values.
 The position of a <code>cmw</code> entry in the <code>cmw-collection</code> is not significant.
 Labels can be strings (or integers in the CBOR serialization) that serve as a mnemonic for different conceptual messages in the Collection.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
-<p id="section-3.3-4">A Collection <span class="bcp14">MUST</span> have at least one CMW entry.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
-<p id="section-3.3-5">The <code>"__cmwc_t"</code> key is reserved for associating an optional type with the overall Collection and <span class="bcp14">MUST NOT</span> be used for any purpose other than described here.<a href="#section-3.3-5" class="pilcrow">¶</a></p>
-<p id="section-3.3-6">The value of the <code>"__cmwc_t"</code> key is either a Uniform Resource Identifier (URI) or an object identifier (OID).
-The OID is always absolute and never relative.
-The URI <span class="bcp14">MUST</span> be in the absolute form (<span><a href="https://rfc-editor.org/rfc/rfc3986#section-4.3" class="relref">Section 4.3</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>).<a href="#section-3.3-6" class="pilcrow">¶</a></p>
-<p id="section-3.3-7">The <code>"__cmwc_t"</code> key functions similar to an EAT profile claim (see <span><a href="https://rfc-editor.org/rfc/rfc9711#section-4.3.2" class="relref">Section 4.3.2</a> of [<a href="#RFC9711" class="cite xref">RFC9711</a>]</span>), but at a higher level.
-It can be used to indicate basics like CBOR serialization and COSE algorithms just as a profile in EAT does.
-It provides a namespace in which the collection labels are interpreted.
-At the higher level, it can be used to describe the allowed CMW collection assembly (this is somewhat parallel to the way EAT profiles indicate which claims are required and/or allowed).
-For an example of a <code>"__cmwc_t"</code> that is defined for a bundle of endorsements and reference values, see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-09#section-4.3.1" class="relref">Section 4.3.1</a> of [<a href="#I-D.ietf-rats-corim" class="cite xref">I-D.ietf-rats-corim</a>]</span>.<a href="#section-3.3-7" class="pilcrow">¶</a></p>
-<p id="section-3.3-8">Since the Collection CMW is recursive (a Collection CMW is itself a CMW), implementations <span class="bcp14">MAY</span> limit the allowed depth of nesting.<a href="#section-3.3-8" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.3-9.1">
-            <p id="section-3.3-9.1.1">Implementation note: An API that uses CMW may support "max-cmw-depth" as a discoverable attribute, allowing applications to advertise their own limits. Also, a protocol using CMW may require a minimum depth from its users. The exact details about how such limit is discovered or set are out of scope.<a href="#section-3.3-9.1.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
 <span id="name-cddl-definition-of-the-coll"></span><div id="fig-cddl-collection">
 <figure id="figure-4">
-          <div class="alignLeft art-cddl art-text artwork" id="section-3.3-10.1">
+          <div class="alignLeft art-cddl art-text artwork" id="section-3.3-4.1">
 <pre>
 json-collection = {
   ? "__cmwc_t": ~uri / oid
@@ -1691,6 +1675,24 @@ cbor-collection = {
 <a href="#name-cddl-definition-of-the-coll" class="selfRef">CDDL definition of the Collection CMW</a>
           </figcaption></figure>
 </div>
+<p id="section-3.3-5">A Collection <span class="bcp14">MUST</span> have at least one CMW entry.<a href="#section-3.3-5" class="pilcrow">¶</a></p>
+<p id="section-3.3-6">The <code>"__cmwc_t"</code> key is reserved for associating an optional type with the overall Collection and <span class="bcp14">MUST NOT</span> be used for any purpose other than described here.<a href="#section-3.3-6" class="pilcrow">¶</a></p>
+<p id="section-3.3-7">The value of the <code>"__cmwc_t"</code> key is either a Uniform Resource Identifier (URI) or an object identifier (OID).
+The OID is always absolute and never relative.
+The URI <span class="bcp14">MUST</span> be in the absolute form (<span><a href="https://rfc-editor.org/rfc/rfc3986#section-4.3" class="relref">Section 4.3</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>).<a href="#section-3.3-7" class="pilcrow">¶</a></p>
+<p id="section-3.3-8">The <code>"__cmwc_t"</code> key functions similar to an EAT profile claim (see <span><a href="https://rfc-editor.org/rfc/rfc9711#section-4.3.2" class="relref">Section 4.3.2</a> of [<a href="#RFC9711" class="cite xref">RFC9711</a>]</span>), but at a higher level.
+It can be used to indicate basics like CBOR serialization and COSE algorithms just as a profile in EAT does.
+It provides a namespace in which the collection labels are interpreted.
+At the higher level, it can be used to describe the allowed CMW collection assembly (this is somewhat parallel to the way EAT profiles indicate which claims are required and/or allowed).
+For an example of a <code>"__cmwc_t"</code> that is defined for a bundle of endorsements and reference values, see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-09#section-4.3.1" class="relref">Section 4.3.1</a> of [<a href="#I-D.ietf-rats-corim" class="cite xref">I-D.ietf-rats-corim</a>]</span>.<a href="#section-3.3-8" class="pilcrow">¶</a></p>
+<p id="section-3.3-9">Since the Collection CMW is recursive (a Collection CMW is itself a CMW), implementations <span class="bcp14">MAY</span> limit the allowed depth of nesting.<a href="#section-3.3-9" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3.3-10.1">
+            <p id="section-3.3-10.1.1">Implementation note: An API that uses CMW may support a discoverable "max-cmw-depth" attribute, allowing applications to advertise their own limits.
+Also, a protocol using CMW may require its users to specify a minimum depth.
+The exact details of how such a limit is discovered or set are out of scope of this document.<a href="#section-3.3-10.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
 </section>
 </div>
 <div id="demuxing">
