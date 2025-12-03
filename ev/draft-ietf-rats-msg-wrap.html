@@ -1531,7 +1531,7 @@ In addition, a Media Type and a CoAP Content-Format are defined for transporting
 "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
 appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">In this document, CDDL <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span> <span>[<a href="#RFC9165" class="cite xref">RFC9165</a>]</span> is used to describe the
+<p id="section-2-2">In this document, CDDL <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span> <span>[<a href="#RFC9165" class="cite xref">RFC9165</a>]</span> <span>[<a href="#RFC9741" class="cite xref">RFC9741</a>]</span> is used to describe the
 data formats.<a href="#section-2-2" class="pilcrow">¶</a></p>
 <p id="section-2-3">The reader is assumed to be familiar with the vocabulary and concepts
 defined in <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.<a href="#section-2-3" class="pilcrow">¶</a></p>
@@ -1865,15 +1865,25 @@ Other header parameters <span class="bcp14">MAY</span> be added to the header bu
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-signing-json-cmw-using-jws" class="section-name selfRef">Signing JSON CMW using JWS</a>
         </h3>
 <p id="section-4.2-1">A JSON CMW can be signed using JSON Web Signature (JWS) <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>.
-A <code>signed-json-cmw</code> is a JWS object with the following layout:<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+A <code>signed-json-cmw</code> uses either the Flattened JSON Serialization (<span><a href="https://rfc-editor.org/rfc/rfc7515#section-7.2.2" class="relref">Section 7.2.2</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>) or the Compact Serialization (<span><a href="https://rfc-editor.org/rfc/rfc7515#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>).<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <div class="lang-cddl sourcecode" id="section-4.2-2">
 <pre>
-signed-json-cmw = {
-  "protected": text .b64u (text .json signed-json-cmw-protected-hdr)
-  ? "header": text .b64u (text .json signed-json-cmw-unprotected-hdr)
-  "payload": text .b64u (text .json json-cmw)
-  "signature": text .b64u bytes
+signed-json-cmw = jws-flattened-json / jws-compact
+
+jws-flattened-json = {
+  "protected": protected
+  ? "header": unprotected
+  "payload": payload
+  "signature": signature
 }
+
+jws-compact =
+  (((protected .cat ".") .cat payload) .cat ".") .cat signature
+
+protected = text .b64u (text .json signed-json-cmw-protected-hdr)
+unprotected = text .b64u (text .json signed-json-cmw-unprotected-hdr)
+payload = text .b64u (text .json json-cmw)
+signature = text .b64u bytes
 </pre><a href="#section-4.2-2" class="pilcrow">¶</a>
 </div>
 <p id="section-4.2-3">The payload <span class="bcp14">MUST</span> be the JSON-encoded Record, or Collection CMW.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
@@ -1892,8 +1902,6 @@ signed-json-cmw-unprotected-hdr = {
 </div>
 <p id="section-4.2-5">The protected header <span class="bcp14">MUST</span> include the signature algorithm identifier and the content type <code>application/cmw+json</code>.
 Other header parameters <span class="bcp14">MAY</span> be added to the header buckets, for example a <code>kid</code> that identifies the signing key.<a href="#section-4.2-5" class="pilcrow">¶</a></p>
-<p id="section-4.2-6">For clarity, the above uses the Flattened JSON Serialization (<span><a href="https://rfc-editor.org/rfc/rfc7515#section-7.2.2" class="relref">Section 7.2.2</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>).
-However, the Compact Serialization (<span><a href="https://rfc-editor.org/rfc/rfc7515#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>) can also be used.<a href="#section-4.2-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="webtokens">
@@ -2317,11 +2325,11 @@ cose.label = int / text
 cose.values = any
 
 
-signed-json-cmw = {
-  "protected": text .b64u (text .json signed-json-cmw-protected-hdr)
-  ? "header": text .b64u (text .json signed-json-cmw-unprotected-hdr)
-  "payload": text .b64u (text .json json-cmw)
-  "signature": text .b64u bytes
+jws-flattened-json = {
+  "protected": protected
+  ? "header": unprotected
+  "payload": payload
+  "signature": signature
 }
 
 signed-json-cmw-protected-hdr = {
@@ -2369,7 +2377,7 @@ fit".<a href="#section-7-3" class="pilcrow">¶</a></p>
         </h3>
 <p id="section-7.1-1">The organization responsible for these implementations is Project Veraison, a
 Linux Foundation project hosted at the Confidential Computing Consortium.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
-<p id="section-7.1-2">The organisation hosts two libraries which allow encoding, decoding, and
+<p id="section-7.1-2">The organization hosts two libraries which allow encoding, decoding, and
 manipulation of CMW payloads: one for the Golang ecosystem
 (<span><a href="https://github.com/veraison/cmw">https://github.com/veraison/cmw</a></span>), and one for Rust
 (<span><a href="https://github.com/veraison/rust-cmw">https://github.com/veraison/rust-cmw</a></span>).
@@ -3182,7 +3190,8 @@ The allocated CBOR Tag numbers and the corresponding data items are listed in <a
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">TN(TBD4)</td>
-                <td class="text-left" rowspan="1" colspan="1">bytes-wrapped <code>signed-json-cmw</code> or equivalent using JWS Compact Serialization (<span><a href="https://rfc-editor.org/rfc/rfc7515#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>)</td>
+                <td class="text-left" rowspan="1" colspan="1">bytes-wrapped <code>signed-json-cmw</code>
+</td>
               </tr>
             </tbody>
           </table>
@@ -3363,6 +3372,10 @@ $cbor-tag /= tag-cm-data&lt;1668547094&gt; ; bytes(cmw+jws)
 <dt id="RFC9334">[RFC9334]</dt>
         <dd>
 <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Thaler, D.</span>, <span class="refAuthor">Richardson, M.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Remote ATtestation procedureS (RATS) Architecture"</span>, <span class="seriesInfo">RFC 9334</span>, <span class="seriesInfo">DOI 10.17487/RFC9334</span>, <time datetime="2023-01" class="refDate">January 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9334">https://www.rfc-editor.org/rfc/rfc9334</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9741">[RFC9741]</dt>
+        <dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"Concise Data Definition Language (CDDL): Additional Control Operators for the Conversion and Processing of Text"</span>, <span class="seriesInfo">RFC 9741</span>, <span class="seriesInfo">DOI 10.17487/RFC9741</span>, <time datetime="2025-03" class="refDate">March 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9741">https://www.rfc-editor.org/rfc/rfc9741</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="STD90">[STD90]</dt>
         <dd>
@@ -3570,7 +3583,7 @@ When using Collection CMW, the preconditions apply for each entry in the Collect
       <h2 id="name-open-issues">
 <a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-open-issues" class="section-name selfRef">Open Issues</a>
       </h2>
-<p id="appendix-B-1">The list of currently open issues for this documents can be found at
+<p id="appendix-B-1">The list of currently open issues for this document can be found at
 <span><a href="https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues">https://github.com/thomas-fossati/draft-ftbs-rats-msg-wrap/issues</a></span>.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <p id="appendix-B-2"><span class="cref" id="rfced_5">RFC Editor:</span> please remove before publication.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
 </section>
@@ -3591,11 +3604,13 @@ Dave Thaler,
 Deb Cooley,
 <span class="contact-name">Éric Vyncke</span>,
 <span class="contact-name">Ionuț Mihalcea</span>,
+Mahesh Jethanandani,
 Michael B. Jones,
 Mike Ounsworth,
 Michael StJohns,
 Mohamed Boucadair,
 Mohit Sethi,
+Orie Steele,
 Paul Howard,
 Peter Yee,
 Russ Housley,
