@@ -329,6 +329,9 @@ For an example of a `"__cmwc_t"` that is defined for a bundle of endorsements an
 
 Since the Collection CMW is recursive (a Collection CMW is itself a CMW), implementations MAY limit the allowed depth of nesting.
 
+> Implementation note: An API that uses CMW may support "max-cmw-depth" as a discoverable attribute, allowing applications to advertise their own limits. Also, a protocol using CMW may require a minimum depth from its users. The exact details about how such limit is discovered or set are out of scope.
+
+
 ~~~ cddl
 {::include cddl/cmw-collection.cddl}
 ~~~
