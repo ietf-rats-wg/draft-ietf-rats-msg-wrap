@@ -240,8 +240,8 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-   In this document, CDDL [RFC8610] [RFC9165] is used to describe the
-   data formats.
+   In this document, CDDL [RFC8610] [RFC9165] [RFC9741] is used to
+   describe the data formats.
 
    The reader is assumed to be familiar with the vocabulary and concepts
    defined in [RFC9334].
@@ -1594,6 +1594,11 @@ Table of Contents
               Items in Concise Binary Object Representation (CBOR)",
               RFC 9277, DOI 10.17487/RFC9277, August 2022,
               <https://www.rfc-editor.org/rfc/rfc9277>.
+
+   [RFC9741]  Bormann, C., "Concise Data Definition Language (CDDL):
+              Additional Control Operators for the Conversion and
+              Processing of Text", RFC 9741, DOI 10.17487/RFC9741, March
+              2025, <https://www.rfc-editor.org/rfc/rfc9741>.
 
    [STD90]    Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
               Interchange Format", STD 90, RFC 8259,
