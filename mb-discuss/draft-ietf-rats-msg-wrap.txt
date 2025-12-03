@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 5 June 2026                                         Independent
+Expires: 6 June 2026                                         Independent
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                         2 December 2025
+                                                         3 December 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -73,7 +73,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 June 2026.
+   This Internet-Draft will expire on 6 June 2026.
 
 Copyright Notice
 
@@ -460,6 +460,12 @@ Table of Contents
 
    Since the Collection CMW is recursive (a Collection CMW is itself a
    CMW), implementations MAY limit the allowed depth of nesting.
+
+      Implementation note: An API that uses CMW may support "max-cmw-
+      depth" as a discoverable attribute, allowing applications to
+      advertise their own limits.  Also, a protocol using CMW may
+      require a minimum depth from its users.  The exact details about
+      how such limit is discovered or set are out of scope.
 
    json-collection = {
      ? "__cmwc_t": ~uri / oid
