@@ -1,0 +1,2 @@
+jws-compact =
+  (((protected .cat ".") .cat payload) .cat ".") .cat signature

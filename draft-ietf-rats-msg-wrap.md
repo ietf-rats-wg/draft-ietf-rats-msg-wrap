@@ -401,10 +401,16 @@ Other header parameters MAY be added to the header buckets, for example a `kid` 
 ## Signing JSON CMW using JWS {#signed-json-cmw}
 
 A JSON CMW can be signed using JSON Web Signature (JWS) {{-jws}}.
-A `signed-json-cmw` is a JWS object with the following layout:
+A `signed-json-cmw` uses either the Flattened JSON Serialization ({{Section 7.2.2 of -jws}}) or the Compact Serialization ({{Section 3.1 of -jws}}).
 
 ~~~ cddl
+{::include cddl/jws-cmw.cddl}
+
 {::include cddl/signed-json-cmw.cddl}
+
+{::include-fold cddl/signed-compact-cmw.cddl}
+
+{::include cddl/jws-cmw-types.cddl}
 ~~~
 
 The payload MUST be the JSON-encoded Record, or Collection CMW.
@@ -415,9 +421,6 @@ The payload MUST be the JSON-encoded Record, or Collection CMW.
 
 The protected header MUST include the signature algorithm identifier and the content type `application/cmw+json`.
 Other header parameters MAY be added to the header buckets, for example a `kid` that identifies the signing key.
-
-For clarity, the above uses the Flattened JSON Serialization ({{Section 7.2.2 of -jws}}).
-However, the Compact Serialization ({{Section 3.1 of -jws}}) can also be used.
 
 ## Transporting CMW in COSE and JOSE Web Tokens {#webtokens}
 
@@ -1048,7 +1051,7 @@ The allocated CBOR Tag numbers and the corresponding data items are listed in {{
 | TN(TBD1) | `bytes .cbor cbor-cmw` |
 | TN(TBD2) | bytes-wrapped `json-cmw` |
 | TN(TBD3) | `bytes .cbor signed-cbor-cmw` |
-| TN(TBD4) | bytes-wrapped `signed-json-cmw` or equivalent using JWS Compact Serialization ({{Section 3.1 of -jws}}) |
+| TN(TBD4) | bytes-wrapped `signed-json-cmw` |
 {: #tab-9277-tags align="left" title="TN-derived CBOR Tags"}
 
 {{fig-9277-tags}} extends the `$cbor-tag` socket defined in {{cbor-tag}} to add the definitions of the associated Tag CMWs.
