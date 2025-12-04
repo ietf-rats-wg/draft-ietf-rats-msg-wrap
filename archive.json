@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-30T01:07:17.540419+00:00",
+  "timestamp": "2025-12-04T01:01:06.313490+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -3545,15 +3545,15 @@
       "id": "I_kwDOIGCt2M7ayogi",
       "title": "\u00c9ric Vyncke\u2019s IESG review",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/259",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Archived-at: https://mailarchive.ietf.org/arch/msg/rats/hAneVgSFBvAnPlQUeXug8QNlqXE/\n\n## COMMENTS (non-blocking)\n\n### Abstract\n\nWho is the `we` ? The authors ? The WG ? The IETF ? Let's avoid the use of\nambiguous \"we\" (possibly also in other places).\n\n### Section 1\n\nSome graphics with all the parties and messages will make the text easier to\nread by non-RATS readers, pretty much like firgure 6 (even with SVG!) in\nappendix A.\n\n### Section 3.1\n\nMay I assume that CBOR encoding can discreminate between an integer and a\nstring ? This is about the \"type\" member.\n\ns/ are registered at the time of writing,/ are registered *in this document*,/\n\n### Section 3.1.1\n\ns/The cm-type currently has five allowed values/The cm-type as defined by this\ndocument has five allowed values/\n\n### Section 4.4.2\n\nPlease expand DICE at first use.\n",
       "createdAt": "2025-11-27T10:04:09Z",
-      "updatedAt": "2025-11-27T10:18:08Z",
-      "closedAt": null,
+      "updatedAt": "2025-12-03T20:52:02Z",
+      "closedAt": "2025-12-03T20:52:02Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -3563,6 +3563,109 @@
           "updatedAt": "2025-11-27T10:18:08Z"
         }
       ]
+    },
+    {
+      "number": 261,
+      "id": "I_kwDOIGCt2M7bsGR_",
+      "title": "Orie Steele\u2019s IESG review (DISCUSS)",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/261",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Archived-At: https://mailarchive.ietf.org/arch/msg/rats/FbSmnmsmzoZoHJEjlnYPzZib6zk/\n\n## Discuss\n\n### +jws\n\n```\n1152       Name:  JSON Web Signature (JWS)\n1153       +suffix:  +jws\n1154       References:  [RFC7515]\n1155       Encoding Considerations:  binary; values are represented as a JSON\n1156          Object or as a series of base64url-encoded values each separated\n1157          from the next by a single period ('.') character.\n```\n\nGiven that SD-JWT (https://datatracker.ietf.org/doc/rfc9901/) now exists, do\nyou want to include support for \"~\u201d ?\n\nNote, that without doing so, you could have json encoded sd-jwt values, that\ncannot be converted to compact serialization.\n\nYou already have this issue with JSON encoded JWS that cannot be converted to\ncompact, when the \"header\" parameter is required.",
+      "createdAt": "2025-12-02T13:08:21Z",
+      "updatedAt": "2025-12-02T14:06:32Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Doesn't RFC9901 already cover those cases?\n\n[Section 11.3](https://www.rfc-editor.org/rfc/rfc9901.html#section-11.3) defines `+sd-jwt` as\n\n> _[...] a series of base64url-encoded values (some of which may be the empty string) separated by period ('.') or tilde ('~') characters._",
+          "createdAt": "2025-12-02T14:06:32Z",
+          "updatedAt": "2025-12-02T14:06:32Z"
+        }
+      ]
+    },
+    {
+      "number": 262,
+      "id": "I_kwDOIGCt2M7bsHer",
+      "title": "Orie Steele\u2019s IEGS review (COMMENTS)",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/262",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Archived-at: https://mailarchive.ietf.org/arch/msg/rats/FbSmnmsmzoZoHJEjlnYPzZib6zk/\n\n## Comments\n\n### Which JWS Serialization?\n\n```\n560        A JSON CMW can be signed using JSON Web Signature (JWS) [RFC7515].  A\n561        signed-json-cmw is a JWS object with the following layout:\n\n563        signed-json-cmw = {\n564          \"protected\": text .b64u (text .json signed-json-cmw-protected-hdr)\n565          ? \"header\": text .b64u (text .json signed-json-cmw-unprotected-hdr)\n566          \"payload\": text .b64u (text .json json-cmw)\n567          \"signature\": text .b64u bytes\n568        }\n```\n\nhttps://datatracker.ietf.org/doc/html/rfc7515#section-7.2.1\n\nImplication is that multiple signatures are not supported, and that some\nimportant information might be in \"header\" which cannot be protected by the\nsignature.\n\n... You cannot use \"header\" in compact serialization.\n\nit would be clearer to provide CDDL for the exact serializations that are\nsupported, for example:\n\n```\ngeneral-jws-json / flattened-jws-json / compact-jws / compact-sd-jwt\n```\n\n## Nits\n\n### Use before definition\n\n```\n544        cose.label = int / text\n545        cose.values = any\n```\n\nIn CDDL where productions like this are used, I always prefer to read them\nbefore their usage... So I don't have to backtrack to understand what has just\nbeen said.\n",
+      "createdAt": "2025-12-02T13:09:26Z",
+      "updatedAt": "2025-12-03T20:32:34Z",
+      "closedAt": "2025-12-03T20:32:34Z",
+      "comments": []
+    },
+    {
+      "number": 263,
+      "id": "I_kwDOIGCt2M7bsIw_",
+      "title": "Mahesh Jethanandani\u2019s IESG review",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/263",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Archived-at: https://mailarchive.ietf.org/arch/msg/rats/L4OrQbtyPpactEMausO3Jf54LLI/\n\n```\n\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\nCOMMENT:\n\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\n\n\"Abstract\", paragraph 0\n> Abstract\n\nI will note that the Shepherd Report called for an IOTDIR review to be done on\nthe document. An early review was done on -04 version of the docuement, which\nput the state as \"Almost ready\". We are at version -21 now. A response from the\nauthors indicates a follow-up was needed, but none can be seen in the mailing\nlist.\n\nThe IANA review of this document seems to not have concluded yet.\n\nNo reference entries found for these items, which were mentioned in the text:\n[draft-ftbs-rats-msg-wrap].\n\n\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\nNIT\n\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\n\nAll comments below are about very minor potential issues that you may choose to\naddress in some way - or ignore - as you see fit. Some were flagged by\nautomated tools (via https://github.com/larseggert/ietf-reviewtool) so there\nwill likely be some false positives. There is no need to let me know what you\ndid with these suggestions.\n\nSection 3.1, paragraph 8\n>  in Section 8 of [RFC9334]. Note that that an Appraisal Policy may refer to\n>                                  ^^^^^^^^^\nPossible typo: you repeated a word.\n\nSection 6, paragraph 16\n> ntial Computing Consortium. The organisation hosts two libraries which allow\n>                                 ^^^^^^^^^^^^\nDo not mix variants of the same word (\"organisation\" and \"organization\") within\na single text.\n\nSection 11.1, paragraph 21\n> e list of currently open issues for this documents can be found at https://gi/\n>                                     ^^^^\nThe singular determiner \"this\" may not agree with the plural noun \u201cdocuments\u201d.\nDid you mean \u201cthese\u201d?\n```",
+      "createdAt": "2025-12-02T13:10:32Z",
+      "updatedAt": "2025-12-03T20:33:01Z",
+      "closedAt": "2025-12-03T20:33:01Z",
+      "comments": []
+    },
+    {
+      "number": 264,
+      "id": "I_kwDOIGCt2M7bsKDK",
+      "title": "Mohamed Boucadair\u2019s IESG review (DISCUSS)",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/264",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Archived-at: https://mailarchive.ietf.org/arch/msg/rats/kPi3XwQuOqvKln7NK1I_fdPdqts/\n\n```\n----------------------------------------------------------------------\nDISCUSS:\n----------------------------------------------------------------------\n\nHi Henk, Ned, Thomas, Hannes, and Dionna,\n\nThank you for the effort put into this specification.\n\nI trust the CDDL and ASN modules were validated.\n\nThe document is well-written. Please find below some few DISCUSS points, mainly\nabout references.\n\n# RFC 9334 is normative\n\n## The concepts manipulated in this draft can\u2019t be understood without RFC9334.\nThis is actually ACKed in Section 2.\n\n## Note that this will be a downref, though. Per RFC3967, I\u2019m afraid that we\nfall under the following:\n\n   For Standards Track or BCP documents requiring normative reference to\n   documents of lower maturity, the normal IETF Last Call procedure will\n   be issued, with the need for the downward reference explicitly\n   documented in the Last Call itself.\n\n# DER Encoding\n\nCURRENT:\n   The DER-encoded CMW is the value of the OCTET STRING for the\n   extnValue field of the extension.\n\nMissing normative reference for DER. Maybe X.690 : Information technology -\nASN.1 encoding rules: Specification of Basic Encoding Rules (BER), Canonical\nEncoding Rules (CER) and Distinguished Encoding Rules (DER)?\n\n# Normative References, again\n\nCURRENT:\n   This section provides an ASN.1 module [X.680] for the CMW extension,\n   following the conventions established in [RFC5912] and [RFC6268].\n\nI guess both 5912 and 6269 should be listed as normative.\n```",
+      "createdAt": "2025-12-02T13:11:32Z",
+      "updatedAt": "2025-12-03T16:56:31Z",
+      "closedAt": "2025-12-03T16:56:31Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I guess both 5912 and 6269 should be listed as normative.\n\nNote that it would be another downref (but RFC5912 and RFC6268 are already listed in the [downref registry](https://datatracker.ietf.org/doc/downref/))",
+          "createdAt": "2025-12-02T15:01:38Z",
+          "updatedAt": "2025-12-02T15:01:38Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> ## Note that this will be a downref, though. Per RFC3967, I\u2019m afraid that we fall under the following:\n>\n>   For Standards Track or BCP documents requiring normative reference to\n>   documents of lower maturity, the normal IETF Last Call procedure will\n>   be issued, with the need for the downward reference explicitly\n>   documented in the Last Call itself.\n\nPlease note that Section 2 of RFC 8067 relaxes this requirement, making it at the discretion of the IESG.",
+          "createdAt": "2025-12-02T15:41:27Z",
+          "updatedAt": "2025-12-02T15:41:27Z"
+        }
+      ]
+    },
+    {
+      "number": 265,
+      "id": "I_kwDOIGCt2M7bsLJp",
+      "title": "Mohamed Boucadair\u2019s IESG review (COMMENTS)",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/265",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Archived-at: https://mailarchive.ietf.org/arch/msg/rats/kPi3XwQuOqvKln7NK1I_fdPdqts/\n\n```\n----------------------------------------------------------------------\nCOMMENT:\n----------------------------------------------------------------------\n\n# JSON/CBOR encoding and Mapping\n\nAs both encoding are specifically provided in the spec, are there any\ndeviations/implications if an implementation decide to follow the rules such as\nin rfc8949#section-3.4.5.2 for mapping the two?\n\nMaybe worth to add a note?\n\n# To ensure extensibility with interop, I guess \u201ccan add\u201d language should be\nbetter strengthened (e.g., \u201cis recommended to add\u201d or the like)\n\nCURRENT:\n   Future specifications that extend the RATS Conceptual Messages set\n   can add new values to the cm-type using the process defined in\n   Section 10.4.\n\n# Recursion Limit\n\nCURRENT:\n   Since the Collection CMW is recursive (a Collection CMW is itself a\n   CMW), implementations MAY limit the allowed depth of nesting.\n\nCan that be controlled? Can we ask an implem to expose the nesting depth it\nsupports or it actually imposes?\n\n# Further highlight this is an example\n\nOLD:\n   func CMWTypeDemux(b []byte) CMWType {\n\nNEW:\n   func example-CMWTypeDemux(b []byte) CMWType {\n\n#  These two MUSTs are redundant\n\nCURRENT:\n   The CMW extension MUST have the following syntax:\n\n   CMW ::= CHOICE {\n       json UTF8String,\n       cbor OCTET STRING\n   }\n\n   The CMW MUST include the serialized CMW object in either JSON or CBOR\n   format, utilizing the appropriate CHOICE entry.\n\n# Unfolding\n\nCURRENT:\n   with the following wire representation:\n\n   =============== NOTE: '\\' line wrapping per RFC 8792 ================\n\nPlease add 8792 to the list of references as this is needed to unfold the\nexample.\n\n# Nits\n\n## Expand RATS in the title.\n\n## Please help readers to find where to locate for Passport and\nBackground-check models: Pointing to Section 5.1 and 5.2 of 9334 in the text\nwould be helpful.\n\n## Section 4.2\n\nOLD:\n   The protected header MUST include the signature algorithm identifier.\n   The protected header MUST include the content type application/\n   cmw+json.\n\nNEW:\n   The protected header MUST include the signature algorithm identifier and\n   the content type application/cmw+json.\n```",
+      "createdAt": "2025-12-02T13:12:28Z",
+      "updatedAt": "2025-12-03T16:56:31Z",
+      "closedAt": "2025-12-03T16:56:31Z",
+      "comments": []
     }
   ],
   "pulls": [
@@ -17769,24 +17872,26 @@
       "id": "PR_kwDOIGCt2M610yz9",
       "title": "\u00c9ric's IESG review",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/260",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fix #259",
       "createdAt": "2025-11-27T10:49:33Z",
-      "updatedAt": "2025-11-28T12:26:56Z",
+      "updatedAt": "2025-12-03T20:52:04Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
-      "baseRefOid": "64df3015bd4425ae019074d7d7504c61442e1904",
+      "baseRefOid": "7c19d2f004fc0babc3de545550833ffafc79f894",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "ev",
-      "headRefOid": "cdb6f4498574423b8a6c9246fae87ca6f708a5c3",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "d74a6215ed6f7ff8af6a5eefbb879694e148bc38",
+      "closedAt": "2025-12-03T20:52:01Z",
+      "mergedAt": "2025-12-03T20:52:01Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "96700499d73fba79353f9a474765b26c1f7be1cc"
+      },
       "comments": [
         {
           "author": "thomas-fossati",
@@ -17796,7 +17901,249 @@
           "updatedAt": "2025-11-27T10:50:13Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7SyTmk",
+          "commit": {
+            "abbreviatedOid": "b8a05a6"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-12-03T18:35:19Z",
+          "updatedAt": "2025-12-03T18:35:19Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 266,
+      "id": "PR_kwDOIGCt2M62pid-",
+      "title": "Med\u2019s IESG review",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/266",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #264 \r\nFix #265 ",
+      "createdAt": "2025-12-02T16:53:58Z",
+      "updatedAt": "2025-12-03T16:56:34Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "64df3015bd4425ae019074d7d7504c61442e1904",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "mb-discuss",
+      "headRefOid": "e9fdd3926638f68539c661a976e01876fa389e3b",
+      "closedAt": "2025-12-03T16:56:30Z",
+      "mergedAt": "2025-12-03T16:56:30Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "c1151e7a8813bdc89f165e73a4a89168bf2a2c4e"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7Sm0ID",
+          "commit": {
+            "abbreviatedOid": "7651a50"
+          },
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Thanks @thomas-fossati ",
+          "createdAt": "2025-12-03T06:24:21Z",
+          "updatedAt": "2025-12-03T06:24:21Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M7Sw805",
+          "commit": {
+            "abbreviatedOid": "e9fdd39"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-12-03T16:55:15Z",
+          "updatedAt": "2025-12-03T16:55:15Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 267,
+      "id": "PR_kwDOIGCt2M62qYSA",
+      "title": "Mahesh\u2019s IESG review",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/267",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #263 ",
+      "createdAt": "2025-12-02T18:02:03Z",
+      "updatedAt": "2025-12-03T20:33:04Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "64df3015bd4425ae019074d7d7504c61442e1904",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "mj",
+      "headRefOid": "44f67fc3fbe4da0e9d8ee02de2f6ef2e0e9b7d2b",
+      "closedAt": "2025-12-03T20:33:00Z",
+      "mergedAt": "2025-12-03T20:33:00Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "7c19d2f004fc0babc3de545550833ffafc79f894"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7SyUHa",
+          "commit": {
+            "abbreviatedOid": "44f67fc"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-12-03T18:36:01Z",
+          "updatedAt": "2025-12-03T18:36:01Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 268,
+      "id": "PR_kwDOIGCt2M62wPoC",
+      "title": "add implem note about recursion limit",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/268",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-12-03T06:33:16Z",
+      "updatedAt": "2025-12-03T08:25:58Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "mb-discuss",
+      "baseRefOid": "7651a504eb307835c3fa6931d2f6dd26191c3916",
+      "headRepository": "boucadair/draft-ietf-rats-msg-wrap",
+      "headRefName": "patch-1",
+      "headRefOid": "6513ce8da5d455ba7e08ef9f95217bff4392454e",
+      "closedAt": "2025-12-03T08:25:57Z",
+      "mergedAt": "2025-12-03T08:25:57Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "e2940cf56a88066473e2b28efe2f2c199f88c40e"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7SoLkz",
+          "commit": {
+            "abbreviatedOid": "6513ce8"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks much!",
+          "createdAt": "2025-12-03T08:25:44Z",
+          "updatedAt": "2025-12-03T08:25:44Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 269,
+      "id": "PR_kwDOIGCt2M623IpT",
+      "title": "CDDL-ise JWS compact serialisation",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/269",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #262 ",
+      "createdAt": "2025-12-03T15:40:19Z",
+      "updatedAt": "2025-12-03T20:32:36Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "64df3015bd4425ae019074d7d7504c61442e1904",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "os",
+      "headRefOid": "8c2047ebbb63c7d3844e62d9e07e300b358f6774",
+      "closedAt": "2025-12-03T20:32:33Z",
+      "mergedAt": "2025-12-03T20:32:33Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "c9060df053e3078ab36fb1594e109bcd1d96d61d"
+      },
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "CC @OR13",
+          "createdAt": "2025-12-03T15:41:14Z",
+          "updatedAt": "2025-12-03T15:41:14Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7Svryn",
+          "commit": {
+            "abbreviatedOid": "053e1eb"
+          },
+          "author": "deeglaze",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-12-03T15:47:02Z",
+          "updatedAt": "2025-12-03T15:47:02Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M7Sv9DD",
+          "commit": {
+            "abbreviatedOid": "ebe7df7"
+          },
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-12-03T16:01:46Z",
+          "updatedAt": "2025-12-03T16:01:46Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M7Sv9Om",
+          "commit": {
+            "abbreviatedOid": "ebe7df7"
+          },
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-12-03T16:01:58Z",
+          "updatedAt": "2025-12-03T16:01:58Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M7SyWaA",
+          "commit": {
+            "abbreviatedOid": "8c2047e"
+          },
+          "author": "nedmsmith",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-12-03T18:39:12Z",
+          "updatedAt": "2025-12-03T18:39:12Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
