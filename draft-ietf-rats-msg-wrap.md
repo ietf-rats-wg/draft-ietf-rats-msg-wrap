@@ -320,7 +320,7 @@ Instead, if a (non-CBOR) conceptual message has a TN-derived CBOR tag `166861207
 {::include cddl/cmw-example-tag-1668612070-def.cddl}
 ~~~
 
-Note that since this specification defines no Tag CMW, the socket is currently empty.
+The socket is initialized as described in {{fig-9277-tags}}.
 
 ## Collection CMW {#cmw-coll}
 
