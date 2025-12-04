@@ -125,7 +125,7 @@ formats ({{Section 9 of -rats-arch}}). Throughout their lifetime, RATS
 conceptual messages are typically transported over different protocols.
 For example,
 
-- In a "background check" topology ({{Section 5.2 of -rats-arch}}), Evidence (e.g., EAT {{-rats-eat}}) first flows from the Attester to the Relying Party and then from the Relying Party to the Verifier, each leg following a separate protocol path.
+- In a "background-check" topology ({{Section 5.2 of -rats-arch}}), Evidence (e.g., EAT {{-rats-eat}}) first flows from the Attester to the Relying Party (RP) and then from the Relying Party to the Verifier, each leg following a separate protocol path. See {{topo-1}}.
 
 ~~~ aasvg
                             .------------.
@@ -139,9 +139,9 @@ For example,
 |  Attester  +------------->|--'      RP |
 '------------' EAT over TLS '------------'
 ~~~
-{: artwork-align="center"}
+{: #topo-1 artwork-align="center"}
 
-- In a "passport" topology ({{Section 5.1 of -rats-arch}}), an attestation result payload (e.g., EAT Attestation Result (EAR) {{-rats-ear}}) is initially sent from the Verifier to the Attester, and later, via a different channel, from the Attester to the Relying Party.
+- In a "passport" topology ({{Section 5.1 of -rats-arch}}), an attestation result payload (e.g., EAT Attestation Result (EAR) {{-rats-ear}}) is initially sent from the Verifier to the Attester, and later, via a different channel, from the Attester to the Relying Party.  See {{topo-1}}.
 
 ~~~ aasvg
  .------------.
@@ -155,7 +155,7 @@ For example,
  |  Attester  +------------->|     RP     |
  '------------' EAR over TLS '------------'
 ~~~
-{: artwork-align="center"}
+{: #topo-2 artwork-align="center"}
 
 By using the CMW format outlined in this document, protocol designers can avoid the need
 to update protocol specifications to accommodate different conceptual messages and
@@ -547,7 +547,7 @@ In particular, the Collection format cannot be encoded using TCG CMWs.
 
 The (equivalent) examples in {{ex-ja}}, {{ex-ca}}, and {{ex-ct}} assume that
 the Media-Type-Name `application/vnd.example.rats-conceptual-msg` has been
-registered alongside a corresponding CoAP Content-Format ID `64999`.  The
+registered alongside a corresponding CoAP Content-Format ID `64999` {{?RFC9876}}.  The
 CBOR tag `1668612070` is derived applying the `TN()` transform as described in
 {{cbor-tag}}.
 
