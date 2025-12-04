@@ -308,17 +308,16 @@ The `tag-cm-cbor` macro takes the CDDL definition of the associated conceptual m
 
 To plug a new Tag CMW into the CDDL defined in {{collected-cddl}}, the `$cbor-tag` type socket must be extended with a new instance of the Tag CMW macro (i.e., one of `tag-cm-cbor` or `tag-cm-data`).
 
-For instance, if a conceptual message of type `my-evidence` has a TN-derived CBOR tag `1668576819`, `$cbor-tag` would be extended as follows:
-
+For instance, if a conceptual message of type `my-evidence` has a TN-derived CBOR tag `1668612069`, `$cbor-tag` would be extended as follows:
 
 ~~~ cddl
-{::include cddl/cmw-example-tag-1668576819-def.cddl}
+{::include cddl/cmw-example-tag-1668612069-def.cddl}
 ~~~
 
-Instead, if a (non-CBOR) conceptual message has a TN-derived CBOR tag `1668576935`, `$cbor-tag` would be extended as follows:
+Instead, if a (non-CBOR) conceptual message has a TN-derived CBOR tag `1668612070`, `$cbor-tag` would be extended as follows:
 
 ~~~ cddl
-{::include cddl/cmw-example-tag-1668576935-def.cddl}
+{::include cddl/cmw-example-tag-1668612070-def.cddl}
 ~~~
 
 Note that since this specification defines no Tag CMW, the socket is currently empty.
@@ -548,8 +547,8 @@ In particular, the Collection format cannot be encoded using TCG CMWs.
 
 The (equivalent) examples in {{ex-ja}}, {{ex-ca}}, and {{ex-ct}} assume that
 the Media-Type-Name `application/vnd.example.rats-conceptual-msg` has been
-registered alongside a corresponding CoAP Content-Format ID `30001`.  The
-CBOR tag `1668576935` is derived applying the `TN()` transform as described in
+registered alongside a corresponding CoAP Content-Format ID `64999`.  The
+CBOR tag `1668612070` is derived applying the `TN()` transform as described in
 {{cbor-tag}}.
 
 All the examples focus on the wrapping aspects.
