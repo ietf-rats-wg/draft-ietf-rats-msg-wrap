@@ -6,8 +6,8 @@ CMW_FRAGS += common-types.cddl
 CMW_FRAGS += cm-type.cddl
 CMW_FRAGS += rfc9193.cddl
 # CBOR tags used in examples
-CMW_FRAGS += cmw-example-tag-1668576935-def.cddl
-CMW_FRAGS += cmw-example-tag-1668576819-def.cddl
+CMW_FRAGS += cmw-example-tag-1668612070-def.cddl
+CMW_FRAGS += cmw-example-tag-1668612069-def.cddl
 
 CMW_CBOR_EXAMPLES := cmw-example-1.diag
 CMW_CBOR_EXAMPLES += cmw-example-2.diag
@@ -41,8 +41,11 @@ COLLECTED_CDDL_FRAGS += cm-type.cddl
 COLLECTED_CDDL_FRAGS += rfc9193.cddl
 COLLECTED_CDDL_FRAGS += signed-cbor-cmw.cddl
 COLLECTED_CDDL_FRAGS += signed-cbor-cmw-headers.cddl
+COLLECTED_CDDL_FRAGS += jws-cmw.cddl
 COLLECTED_CDDL_FRAGS += signed-json-cmw.cddl
+COLLECTED_CDDL_FRAGS += signed-compact-cmw.cddl
 COLLECTED_CDDL_FRAGS += signed-json-cmw-headers.cddl
+COLLECTED_CDDL_FRAGS += jws-cmw-types.cddl
 
 SIGNED_CBOR_CMW_CDDL_FRAGS := signed-cbor-cmw.cddl
 SIGNED_CBOR_CMW_CDDL_FRAGS += signed-cbor-cmw-headers.cddl

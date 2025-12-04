@@ -1,11 +1,11 @@
 {
   "__cmwc_t": "tag:example.com,2024:composite-attester",
   / attester A / 0: [
-    30001,
+    64999,
     h'2347da55',
     4
   ],
-  / attester B / 1: 1668576935(h'2347da55'),
+  / attester B / 1: 1668612070(h'2347da55'),
   / attester C / 2: [
     "application/eat+jwt",
     h'4c693475',
