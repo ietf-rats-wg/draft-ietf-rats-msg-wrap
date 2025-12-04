@@ -1402,84 +1402,92 @@ conceptual messages are typically transported over different protocols.
 For example,<a href="#section-1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-3.1">
-          <p id="section-1-3.1.1">In a "background check" topology (<span><a href="https://rfc-editor.org/rfc/rfc9334#section-5.2" class="relref">Section 5.2</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>), Evidence (e.g., EAT <span>[<a href="#RFC9711" class="cite xref">RFC9711</a>]</span>) first flows from the Attester to the Relying Party and then from the Relying Party to the Verifier, each leg following a separate protocol path.<a href="#section-1-3.1.1" class="pilcrow">¶</a></p>
+          <p id="section-1-3.1.1">In a "background-check" topology (<span><a href="https://rfc-editor.org/rfc/rfc9334#section-5.2" class="relref">Section 5.2</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>), Evidence (e.g., EAT <span>[<a href="#RFC9711" class="cite xref">RFC9711</a>]</span>) first flows from the Attester to the Relying Party (RP) and then from the Relying Party to the Verifier, each leg following a separate protocol path. See <a href="#topo-1" class="auto internal xref">Figure 1</a>.<a href="#section-1-3.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<div id="section-1-4">
-        <div class="alignCenter art-svg artwork" id="section-1-4.1">
+<div id="topo-1">
+<figure id="figure-1">
+        <div id="section-1-4.1">
+          <div class="alignCenter art-svg artwork" id="section-1-4.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="192" width="344" viewBox="0 0 344 192" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
-            <path d="M 8,144 L 8,176" fill="none" stroke="black"></path>
-            <path d="M 112,144 L 112,176" fill="none" stroke="black"></path>
-            <path d="M 232,32 L 232,64" fill="none" stroke="black"></path>
-            <path d="M 232,144 L 232,176" fill="none" stroke="black"></path>
-            <path d="M 264,72 L 264,144" fill="none" stroke="black"></path>
-            <path d="M 336,32 L 336,64" fill="none" stroke="black"></path>
-            <path d="M 336,144 L 336,176" fill="none" stroke="black"></path>
-            <path d="M 232,32 L 336,32" fill="none" stroke="black"></path>
-            <path d="M 232,64 L 336,64" fill="none" stroke="black"></path>
-            <path d="M 8,144 L 112,144" fill="none" stroke="black"></path>
-            <path d="M 232,144 L 256,144" fill="none" stroke="black"></path>
-            <path d="M 272,144 L 336,144" fill="none" stroke="black"></path>
-            <path d="M 112,160 L 224,160" fill="none" stroke="black"></path>
-            <path d="M 240,160 L 248,160" fill="none" stroke="black"></path>
-            <path d="M 8,176 L 112,176" fill="none" stroke="black"></path>
-            <path d="M 232,176 L 336,176" fill="none" stroke="black"></path>
-            <path d="M 248,160 C 256.83064,160 264,152.83064 264,144" fill="none" stroke="black"></path>
-            <polygon class="arrowhead" points="272,72 260,66.4 260,77.6" fill="black" transform="rotate(270,264,72)"></polygon>
-            <polygon class="arrowhead" points="232,160 220,154.4 220,165.6" fill="black" transform="rotate(0,224,160)"></polygon>
-            <g class="text">
-              <text x="284" y="52">Verifier</text>
-              <text x="288" y="100">EAT</text>
-              <text x="292" y="116">over</text>
-              <text x="292" y="132">REST</text>
-              <text x="328" y="132">API</text>
-              <text x="60" y="164">Attester</text>
-              <text x="316" y="164">RP</text>
-              <text x="136" y="180">EAT</text>
-              <text x="172" y="180">over</text>
-              <text x="208" y="180">TLS</text>
-            </g>
-          </svg><a href="#section-1-4.1" class="pilcrow">¶</a>
+              <path d="M 8,144 L 8,176" fill="none" stroke="black"></path>
+              <path d="M 112,144 L 112,176" fill="none" stroke="black"></path>
+              <path d="M 232,32 L 232,64" fill="none" stroke="black"></path>
+              <path d="M 232,144 L 232,176" fill="none" stroke="black"></path>
+              <path d="M 264,72 L 264,144" fill="none" stroke="black"></path>
+              <path d="M 336,32 L 336,64" fill="none" stroke="black"></path>
+              <path d="M 336,144 L 336,176" fill="none" stroke="black"></path>
+              <path d="M 232,32 L 336,32" fill="none" stroke="black"></path>
+              <path d="M 232,64 L 336,64" fill="none" stroke="black"></path>
+              <path d="M 8,144 L 112,144" fill="none" stroke="black"></path>
+              <path d="M 232,144 L 256,144" fill="none" stroke="black"></path>
+              <path d="M 272,144 L 336,144" fill="none" stroke="black"></path>
+              <path d="M 112,160 L 224,160" fill="none" stroke="black"></path>
+              <path d="M 240,160 L 248,160" fill="none" stroke="black"></path>
+              <path d="M 8,176 L 112,176" fill="none" stroke="black"></path>
+              <path d="M 232,176 L 336,176" fill="none" stroke="black"></path>
+              <path d="M 248,160 C 256.83064,160 264,152.83064 264,144" fill="none" stroke="black"></path>
+              <polygon class="arrowhead" points="272,72 260,66.4 260,77.6" fill="black" transform="rotate(270,264,72)"></polygon>
+              <polygon class="arrowhead" points="232,160 220,154.4 220,165.6" fill="black" transform="rotate(0,224,160)"></polygon>
+              <g class="text">
+                <text x="284" y="52">Verifier</text>
+                <text x="288" y="100">EAT</text>
+                <text x="292" y="116">over</text>
+                <text x="292" y="132">REST</text>
+                <text x="328" y="132">API</text>
+                <text x="60" y="164">Attester</text>
+                <text x="316" y="164">RP</text>
+                <text x="136" y="180">EAT</text>
+                <text x="172" y="180">over</text>
+                <text x="208" y="180">TLS</text>
+              </g>
+            </svg><a href="#section-1-4.1.1" class="pilcrow">¶</a>
 </div>
+</div>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a></figcaption></figure>
 </div>
 <ul class="normal">
 <li class="normal" id="section-1-5.1">
-          <p id="section-1-5.1.1">In a "passport" topology (<span><a href="https://rfc-editor.org/rfc/rfc9334#section-5.1" class="relref">Section 5.1</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>), an attestation result payload (e.g., EAT Attestation Result (EAR) <span>[<a href="#I-D.ietf-rats-ear" class="cite xref">I-D.ietf-rats-ear</a>]</span>) is initially sent from the Verifier to the Attester, and later, via a different channel, from the Attester to the Relying Party.<a href="#section-1-5.1.1" class="pilcrow">¶</a></p>
+          <p id="section-1-5.1.1">In a "passport" topology (<span><a href="https://rfc-editor.org/rfc/rfc9334#section-5.1" class="relref">Section 5.1</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>), an attestation result payload (e.g., EAT Attestation Result (EAR) <span>[<a href="#I-D.ietf-rats-ear" class="cite xref">I-D.ietf-rats-ear</a>]</span>) is initially sent from the Verifier to the Attester, and later, via a different channel, from the Attester to the Relying Party.  See <a href="#topo-2" class="auto internal xref">Figure 2</a>.<a href="#section-1-5.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<div id="section-1-6">
-        <div class="alignCenter art-svg artwork" id="section-1-6.1">
+<div id="topo-2">
+<figure id="figure-2">
+        <div id="section-1-6.1">
+          <div class="alignCenter art-svg artwork" id="section-1-6.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="208" width="344" viewBox="0 0 344 208" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
-            <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
-            <path d="M 8,144 L 8,176" fill="none" stroke="black"></path>
-            <path d="M 80,64 L 80,136" fill="none" stroke="black"></path>
-            <path d="M 112,32 L 112,64" fill="none" stroke="black"></path>
-            <path d="M 112,144 L 112,176" fill="none" stroke="black"></path>
-            <path d="M 232,144 L 232,176" fill="none" stroke="black"></path>
-            <path d="M 336,144 L 336,176" fill="none" stroke="black"></path>
-            <path d="M 8,32 L 112,32" fill="none" stroke="black"></path>
-            <path d="M 8,64 L 112,64" fill="none" stroke="black"></path>
-            <path d="M 8,144 L 112,144" fill="none" stroke="black"></path>
-            <path d="M 232,144 L 336,144" fill="none" stroke="black"></path>
-            <path d="M 112,160 L 224,160" fill="none" stroke="black"></path>
-            <path d="M 8,176 L 112,176" fill="none" stroke="black"></path>
-            <path d="M 232,176 L 336,176" fill="none" stroke="black"></path>
-            <polygon class="arrowhead" points="232,160 220,154.4 220,165.6" fill="black" transform="rotate(0,224,160)"></polygon>
-            <polygon class="arrowhead" points="88,136 76,130.4 76,141.6" fill="black" transform="rotate(90,80,136)"></polygon>
-            <g class="text">
-              <text x="60" y="52">Verifier</text>
-              <text x="56" y="84">EAR</text>
-              <text x="52" y="100">over</text>
-              <text x="20" y="116">REST</text>
-              <text x="56" y="116">API</text>
-              <text x="60" y="164">Attester</text>
-              <text x="284" y="164">RP</text>
-              <text x="136" y="180">EAR</text>
-              <text x="172" y="180">over</text>
-              <text x="208" y="180">TLS</text>
-            </g>
-          </svg><a href="#section-1-6.1" class="pilcrow">¶</a>
+              <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
+              <path d="M 8,144 L 8,176" fill="none" stroke="black"></path>
+              <path d="M 80,64 L 80,136" fill="none" stroke="black"></path>
+              <path d="M 112,32 L 112,64" fill="none" stroke="black"></path>
+              <path d="M 112,144 L 112,176" fill="none" stroke="black"></path>
+              <path d="M 232,144 L 232,176" fill="none" stroke="black"></path>
+              <path d="M 336,144 L 336,176" fill="none" stroke="black"></path>
+              <path d="M 8,32 L 112,32" fill="none" stroke="black"></path>
+              <path d="M 8,64 L 112,64" fill="none" stroke="black"></path>
+              <path d="M 8,144 L 112,144" fill="none" stroke="black"></path>
+              <path d="M 232,144 L 336,144" fill="none" stroke="black"></path>
+              <path d="M 112,160 L 224,160" fill="none" stroke="black"></path>
+              <path d="M 8,176 L 112,176" fill="none" stroke="black"></path>
+              <path d="M 232,176 L 336,176" fill="none" stroke="black"></path>
+              <polygon class="arrowhead" points="232,160 220,154.4 220,165.6" fill="black" transform="rotate(0,224,160)"></polygon>
+              <polygon class="arrowhead" points="88,136 76,130.4 76,141.6" fill="black" transform="rotate(90,80,136)"></polygon>
+              <g class="text">
+                <text x="60" y="52">Verifier</text>
+                <text x="56" y="84">EAR</text>
+                <text x="52" y="100">over</text>
+                <text x="20" y="116">REST</text>
+                <text x="56" y="116">API</text>
+                <text x="60" y="164">Attester</text>
+                <text x="284" y="164">RP</text>
+                <text x="136" y="180">EAR</text>
+                <text x="172" y="180">over</text>
+                <text x="208" y="180">TLS</text>
+              </g>
+            </svg><a href="#section-1-6.1.1" class="pilcrow">¶</a>
 </div>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a></figcaption></figure>
 </div>
 <p id="section-1-7">By using the CMW format outlined in this document, protocol designers can avoid the need
 to update protocol specifications to accommodate different conceptual messages and
@@ -1564,11 +1572,11 @@ Security considerations are discussed in <a href="#seccons" class="auto internal
         <h3 id="name-record-cmw">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-record-cmw" class="section-name selfRef">Record CMW</a>
         </h3>
-<p id="section-3.1-1">The format of the Record CMW is shown in <a href="#fig-cddl-record" class="auto internal xref">Figure 1</a>.
+<p id="section-3.1-1">The format of the Record CMW is shown in <a href="#fig-cddl-record" class="auto internal xref">Figure 3</a>.
 The JSON <span>[<a href="#STD90" class="cite xref">STD90</a>]</span> and CBOR <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> representations are provided separately.
 Both the <code>json-record</code> and <code>cbor-record</code> have the same fields except for slight differences in the types discussed below.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-of-the-reco"></span><div id="fig-cddl-record">
-<figure id="figure-1">
+<figure id="figure-3">
           <div class="alignLeft art-cddl art-text artwork" id="section-3.1-2.1">
 <pre>
 json-record = [
@@ -1584,7 +1592,7 @@ cbor-record = [
 ]
 </pre>
 </div>
-<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
 <a href="#name-cddl-definition-of-the-reco" class="selfRef">CDDL definition of the Record CMW</a>
           </figcaption></figure>
 </div>
@@ -1635,7 +1643,7 @@ For further details, see <a href="#cm-type" class="auto internal xref">Section 3
 <p id="section-3.1.1-1">The <code>cm-type</code> type is the control type for the <code>ind</code> field.
 As such, it indicates which bits are allowed to be set in the <code>ind</code> byte string.<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-of-the-cm-t"></span><div id="fig-cddl-cm-type">
-<figure id="figure-2">
+<figure id="figure-4">
             <div class="alignLeft art-cddl art-text artwork" id="section-3.1.1-2.1">
 <pre>
 cm-type = &amp;(
@@ -1647,7 +1655,7 @@ cm-type = &amp;(
 )
 </pre>
 </div>
-<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
 <a href="#name-cddl-definition-of-the-cm-t" class="selfRef">CDDL definition of the CM Type</a>
             </figcaption></figure>
 </div>
@@ -1666,12 +1674,12 @@ Note that an Appraisal Policy may refer to the appraisal of Evidence or Attestat
 <p id="section-3.2-1">Tag CMWs derive their tag numbers from a corresponding CoAP Content-Format ID using the <code>TN()</code> transform defined in <span><a href="https://rfc-editor.org/rfc/rfc9277#appendix-B" class="relref">Appendix B</a> of [<a href="#RFC9277" class="cite xref">RFC9277</a>]</span>.
 Such CBOR tag numbers are in range [1668546817, 1668612095].<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">The RATS conceptual message is first serialized according to the Content-Format ID and then encoded as a CBOR byte string, to which the TN-derived tag number is prepended.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.2-3">The Tag CMW is defined in <a href="#fig-cddl-cbor-tag" class="auto internal xref">Figure 3</a> using two different macros.
+<p id="section-3.2-3">The Tag CMW is defined in <a href="#fig-cddl-cbor-tag" class="auto internal xref">Figure 5</a> using two different macros.
 One for CBOR-encoded types, the other for all other types.
 Both macros take the CBOR tag number <code>tn</code> as a parameter.
 The <code>tag-cm-cbor</code> macro takes the CDDL definition of the associated conceptual message <code>fmt</code> as a second parameter.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-of-the-tag-"></span><div id="fig-cddl-cbor-tag">
-<figure id="figure-3">
+<figure id="figure-5">
           <div class="alignLeft art-cddl art-text artwork" id="section-3.2-4.1">
 <pre>
 tag-cm-cbor&lt;tn, fmt&gt; = #6.&lt;tn&gt;(bytes .cbor fmt)
@@ -1679,7 +1687,7 @@ tag-cm-cbor&lt;tn, fmt&gt; = #6.&lt;tn&gt;(bytes .cbor fmt)
 tag-cm-data&lt;tn&gt; = #6.&lt;tn&gt;(bytes)
 </pre>
 </div>
-<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
 <a href="#name-cddl-definition-of-the-tag-" class="selfRef">CDDL definition of the Tag CMW macros</a>
           </figcaption></figure>
 </div>
@@ -1705,7 +1713,7 @@ my-evidence = {
 $cbor-tag /= tag-cm-data&lt;1668612070&gt;
 </pre><a href="#section-3.2.1-5" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2.1-6">The socket is initialized as described in <a href="#fig-9277-tags" class="auto internal xref">Figure 5</a>.<a href="#section-3.2.1-6" class="pilcrow">¶</a></p>
+<p id="section-3.2.1-6">The socket is initialized as described in <a href="#fig-9277-tags" class="auto internal xref">Figure 7</a>.<a href="#section-3.2.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1722,11 +1730,11 @@ To allow aggregation of multiple, potentially non-homogeneous evidence formats c
 <p id="section-3.3-2">Although originally designed to support layered Attester and composite device use cases, the Collection CMW can be adapted for other scenarios that require the aggregation of RATS conceptual messages.
 For instance, Collections may be used to group Endorsements, Reference Values, Attestation Results, and more.
 A single Collection CMW can contain a mix of different message types, and it can also be used to carry messages related to multiple devices simultaneously.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
-<p id="section-3.3-3">The Collection CMW (<a href="#fig-cddl-collection" class="auto internal xref">Figure 4</a>) is defined as a CBOR map or JSON object containing CMW values.
+<p id="section-3.3-3">The Collection CMW (<a href="#fig-cddl-collection" class="auto internal xref">Figure 6</a>) is defined as a CBOR map or JSON object containing CMW values.
 The position of a <code>cmw</code> entry in the <code>cmw-collection</code> is not significant.
 Labels can be strings (or integers in the CBOR serialization) that serve as a mnemonic for different conceptual messages in the Collection.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
 <span id="name-cddl-definition-of-the-coll"></span><div id="fig-cddl-collection">
-<figure id="figure-4">
+<figure id="figure-6">
           <div class="alignLeft art-cddl art-text artwork" id="section-3.3-4.1">
 <pre>
 json-collection = {
@@ -1740,7 +1748,7 @@ cbor-collection = {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
 <a href="#name-cddl-definition-of-the-coll" class="selfRef">CDDL definition of the Collection CMW</a>
           </figcaption></figure>
 </div>
@@ -2019,7 +2027,7 @@ In particular, the Collection format cannot be encoded using TCG CMWs.<a href="#
       </h2>
 <p id="section-5-1">The (equivalent) examples in <a href="#ex-ja" class="auto internal xref">Section 5.1</a>, <a href="#ex-ca" class="auto internal xref">Section 5.2</a>, and <a href="#ex-ct" class="auto internal xref">Section 5.3</a> assume that
 the Media-Type-Name <code>application/vnd.example.rats-conceptual-msg</code> has been
-registered alongside a corresponding CoAP Content-Format ID <code>64999</code>.  The
+registered alongside a corresponding CoAP Content-Format ID <code>64999</code> <span>[<a href="#RFC9876" class="cite xref">RFC9876</a>]</span>.  The
 CBOR tag <code>1668612070</code> is derived applying the <code>TN()</code> transform as described in
 <a href="#cbor-tag" class="auto internal xref">Section 3.2</a>.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">All the examples focus on the wrapping aspects.
@@ -3167,7 +3175,7 @@ dotted-decimal notation.  The parameter value is case-insensitive.  It must not 
           <h4 id="name-rfc9277-cbor-tags">
 <a href="#section-10.6.2" class="section-number selfRef">10.6.2. </a><a href="#name-rfc9277-cbor-tags" class="section-name selfRef">RFC9277 CBOR Tags</a>
           </h4>
-<p id="section-10.6.2-1"><span class="cref" id="rfced_4">RFC Editor:</span> Once IANA has allocated TBD1..TBD4, please replace the placeholders in the first column of <a href="#tab-9277-tags" class="auto internal xref">Table 4</a> with the values computed using the TN() formula in <span><a href="https://rfc-editor.org/rfc/rfc9277#appendix-B" class="relref">Appendix B</a> of [<a href="#RFC9277" class="cite xref">RFC9277</a>]</span>.  Similarly, replace the macro parameters in <a href="#fig-9277-tags" class="auto internal xref">Figure 5</a>.<a href="#section-10.6.2-1" class="pilcrow">¶</a></p>
+<p id="section-10.6.2-1"><span class="cref" id="rfced_4">RFC Editor:</span> Once IANA has allocated TBD1..TBD4, please replace the placeholders in the first column of <a href="#tab-9277-tags" class="auto internal xref">Table 4</a> with the values computed using the TN() formula in <span><a href="https://rfc-editor.org/rfc/rfc9277#appendix-B" class="relref">Appendix B</a> of [<a href="#RFC9277" class="cite xref">RFC9277</a>]</span>.  Similarly, replace the macro parameters in <a href="#fig-9277-tags" class="auto internal xref">Figure 7</a>.<a href="#section-10.6.2-1" class="pilcrow">¶</a></p>
 <p id="section-10.6.2-2">Registering the CoAP Content-Formats listed in <a href="#tab-cf-regs" class="auto internal xref">Table 3</a> automatically allocates CBOR Tags in the range [1668546817, 1668612095], using the <code>TN()</code> transform defined in <span><a href="https://rfc-editor.org/rfc/rfc9277#appendix-B" class="relref">Appendix B</a> of [<a href="#RFC9277" class="cite xref">RFC9277</a>]</span>.
 The allocated CBOR Tag numbers and the corresponding data items are listed in <a href="#tab-9277-tags" class="auto internal xref">Table 4</a>.<a href="#section-10.6.2-2" class="pilcrow">¶</a></p>
 <span id="name-tn-derived-cbor-tags"></span><div id="tab-9277-tags">
@@ -3208,11 +3216,11 @@ The allocated CBOR Tag numbers and the corresponding data items are listed in <a
             </tbody>
           </table>
 </div>
-<p id="section-10.6.2-4"><a href="#fig-9277-tags" class="auto internal xref">Figure 5</a> extends the <code>$cbor-tag</code> socket defined in <a href="#cbor-tag" class="auto internal xref">Section 3.2</a> to add the definitions of the associated Tag CMWs.
+<p id="section-10.6.2-4"><a href="#fig-9277-tags" class="auto internal xref">Figure 7</a> extends the <code>$cbor-tag</code> socket defined in <a href="#cbor-tag" class="auto internal xref">Section 3.2</a> to add the definitions of the associated Tag CMWs.
 Note that CMWs in Tag and Record form are excluded from the productions.
 This is because they can already be represented as a CMW, so the extra wrapping would be redundant.<a href="#section-10.6.2-4" class="pilcrow">¶</a></p>
 <span id="name-tag-cmw-definitions"></span><div id="fig-9277-tags">
-<figure id="figure-5">
+<figure id="figure-7">
             <div class="lang-cddl sourcecode" id="section-10.6.2-5.1">
 <pre>
 $cbor-tag /= tag-cm-cbor&lt;1668547091, cbor-collection&gt;
@@ -3221,7 +3229,7 @@ $cbor-tag /= tag-cm-data&lt;1668547093&gt; ; bytes(cmw+json collection)
 $cbor-tag /= tag-cm-data&lt;1668547094&gt; ; bytes(cmw+jws)
 </pre>
 </div>
-<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
+<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
 <a href="#name-tag-cmw-definitions" class="selfRef">Tag CMW definitions</a>
             </figcaption></figure>
 </div>
@@ -3470,6 +3478,10 @@ $cbor-tag /= tag-cm-data&lt;1668547094&gt; ; bytes(cmw+jws)
         <dd>
 <span class="refAuthor">Lundblade, L.</span>, <span class="refAuthor">Birkholz, H.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"Entity Attestation Token (EAT) Media Types"</span>, <span class="seriesInfo">RFC 9782</span>, <span class="seriesInfo">DOI 10.17487/RFC9782</span>, <time datetime="2025-05" class="refDate">May 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9782">https://www.rfc-editor.org/rfc/rfc9782</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC9876">[RFC9876]</dt>
+        <dd>
+<span class="refAuthor">Fossati, T.</span> and <span class="refAuthor">E. Dijk</span>, <span class="refTitle">"Updates to the IANA Registration Procedures for Constrained Application Protocol (CoAP) Content-Formats"</span>, <span class="seriesInfo">RFC 9876</span>, <span class="seriesInfo">DOI 10.17487/RFC9876</span>, <time datetime="2025-11" class="refDate">November 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9876">https://www.rfc-editor.org/rfc/rfc9876</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="STD96">[STD96]</dt>
       <dd>
 <span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): Structures and Process"</span>, <span class="seriesInfo">STD 96</span>, <span class="seriesInfo">RFC 9052</span>, <span class="seriesInfo">DOI 10.17487/RFC9052</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9052">https://www.rfc-editor.org/rfc/rfc9052</a>&gt;</span>. </dd>
@@ -3484,11 +3496,11 @@ $cbor-tag /= tag-cm-data&lt;1668547094&gt; ; bytes(cmw+jws)
       <h2 id="name-registering-and-using-cmws">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-registering-and-using-cmws" class="section-name selfRef">Registering and Using CMWs</a>
       </h2>
-<p id="appendix-A-1"><a href="#fig-howto-cmw" class="auto internal xref">Figure 6</a> describes the registration preconditions for using
+<p id="appendix-A-1"><a href="#fig-howto-cmw" class="auto internal xref">Figure 8</a> describes the registration preconditions for using
 CMWs in either Record CMW or Tag CMW forms.
 When using Collection CMW, the preconditions apply for each entry in the Collection.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <span id="name-how-to-create-a-cmw"></span><div id="fig-howto-cmw">
-<figure id="figure-6">
+<figure id="figure-8">
         <div id="appendix-A-2.1">
           <div class="alignCenter art-svg artwork" id="appendix-A-2.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="480" width="344" viewBox="0 0 344 480" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
@@ -3584,7 +3596,7 @@ When using Collection CMW, the preconditions apply for each entry in the Collect
             </svg><a href="#appendix-A-2.1.1" class="pilcrow">¶</a>
 </div>
 </div>
-<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
+<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
 <a href="#name-how-to-create-a-cmw" class="selfRef">How To Create a CMW</a>
         </figcaption></figure>
 </div>

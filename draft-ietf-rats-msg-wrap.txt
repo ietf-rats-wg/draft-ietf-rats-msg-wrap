@@ -170,10 +170,11 @@ Table of Contents
    lifetime, RATS conceptual messages are typically transported over
    different protocols.  For example,
 
-   *  In a "background check" topology (Section 5.2 of [RFC9334]),
+   *  In a "background-check" topology (Section 5.2 of [RFC9334]),
       Evidence (e.g., EAT [RFC9711]) first flows from the Attester to
-      the Relying Party and then from the Relying Party to the Verifier,
-      each leg following a separate protocol path.
+      the Relying Party (RP) and then from the Relying Party to the
+      Verifier, each leg following a separate protocol path.  See
+      Figure 1.
 
                                             .------------.
                                             |  Verifier  |
@@ -186,11 +187,13 @@ Table of Contents
                 |  Attester  +------------->|--'      RP |
                 '------------' EAT over TLS '------------'
 
+                                  Figure 1
+
    *  In a "passport" topology (Section 5.1 of [RFC9334]), an
       attestation result payload (e.g., EAT Attestation Result (EAR)
       [I-D.ietf-rats-ear]) is initially sent from the Verifier to the
       Attester, and later, via a different channel, from the Attester to
-      the Relying Party.
+      the Relying Party.  See Figure 2.
 
                  .------------.
                  |  Verifier  |
@@ -202,6 +205,8 @@ Table of Contents
                  .------------.              .------------.
                  |  Attester  +------------->|     RP     |
                  '------------' EAR over TLS '------------'
+
+                                  Figure 2
 
    By using the CMW format outlined in this document, protocol designers
    can avoid the need to update protocol specifications to accommodate
@@ -302,7 +307,7 @@ Table of Contents
 
 3.1.  Record CMW
 
-   The format of the Record CMW is shown in Figure 1.  The JSON [STD90]
+   The format of the Record CMW is shown in Figure 3.  The JSON [STD90]
    and CBOR [STD94] representations are provided separately.  Both the
    json-record and cbor-record have the same fields except for slight
    differences in the types discussed below.
@@ -319,7 +324,7 @@ Table of Contents
      ? ind: uint .bits cm-type
    ]
 
-                Figure 1: CDDL definition of the Record CMW
+                Figure 3: CDDL definition of the Record CMW
 
    Each contains two or three members:
 
@@ -369,7 +374,7 @@ Table of Contents
      appraisal-policy: 4
    )
 
-                  Figure 2: CDDL definition of the CM Type
+                  Figure 4: CDDL definition of the CM Type
 
    The cm-type as defined by this document has five allowed values:
    Reference Values, Endorsements, Evidence, Attestation Results, and
@@ -393,7 +398,7 @@ Table of Contents
    Content-Format ID and then encoded as a CBOR byte string, to which
    the TN-derived tag number is prepended.
 
-   The Tag CMW is defined in Figure 3 using two different macros.  One
+   The Tag CMW is defined in Figure 5 using two different macros.  One
    for CBOR-encoded types, the other for all other types.  Both macros
    take the CBOR tag number tn as a parameter.  The tag-cm-cbor macro
    takes the CDDL definition of the associated conceptual message fmt as
@@ -403,7 +408,7 @@ Table of Contents
 
    tag-cm-data<tn> = #6.<tn>(bytes)
 
-              Figure 3: CDDL definition of the Tag CMW macros
+              Figure 5: CDDL definition of the Tag CMW macros
 
 3.2.1.  How To Plug in a New Tag CMW
 
@@ -425,7 +430,7 @@ Table of Contents
 
    $cbor-tag /= tag-cm-data<1668612070>
 
-   The socket is initialized as described in Figure 5.
+   The socket is initialized as described in Figure 7.
 
 3.3.  Collection CMW
 
@@ -451,7 +456,7 @@ Table of Contents
    and it can also be used to carry messages related to multiple devices
    simultaneously.
 
-   The Collection CMW (Figure 4) is defined as a CBOR map or JSON object
+   The Collection CMW (Figure 6) is defined as a CBOR map or JSON object
    containing CMW values.  The position of a cmw entry in the cmw-
    collection is not significant.  Labels can be strings (or integers in
    the CBOR serialization) that serve as a mnemonic for different
@@ -467,7 +472,7 @@ Table of Contents
      + &(label: (int / text)) => cbor-cmw
    }
 
-              Figure 4: CDDL definition of the Collection CMW
+              Figure 6: CDDL definition of the Collection CMW
 
    A Collection MUST have at least one CMW entry.
 
@@ -742,8 +747,9 @@ Table of Contents
    The (equivalent) examples in Section 5.1, Section 5.2, and
    Section 5.3 assume that the Media-Type-Name application/
    vnd.example.rats-conceptual-msg has been registered alongside a
-   corresponding CoAP Content-Format ID 64999.  The CBOR tag 1668612070
-   is derived applying the TN() transform as described in Section 3.2.
+   corresponding CoAP Content-Format ID 64999 [RFC9876].  The CBOR tag
+   1668612070 is derived applying the TN() transform as described in
+   Section 3.2.
 
    All the examples focus on the wrapping aspects.  The wrapped messages
    are not instances of real Conceptual Messages.
@@ -1480,7 +1486,7 @@ Table of Contents
    // RFC Editor: Once IANA has allocated TBD1..TBD4, please replace the
    placeholders in the first column of Table 4 with the values computed
    using the TN() formula in Appendix B of [RFC9277].  Similarly,
-   replace the macro parameters in Figure 5.
+   replace the macro parameters in Figure 7.
 
    Registering the CoAP Content-Formats listed in Table 3 automatically
    allocates CBOR Tags in the range [1668546817, 1668612095], using the
@@ -1502,7 +1508,7 @@ Table of Contents
 
            Table 4: TN-derived CBOR Tags
 
-   Figure 5 extends the $cbor-tag socket defined in Section 3.2 to add
+   Figure 7 extends the $cbor-tag socket defined in Section 3.2 to add
    the definitions of the associated Tag CMWs.  Note that CMWs in Tag
    and Record form are excluded from the productions.  This is because
    they can already be represented as a CMW, so the extra wrapping would
@@ -1513,7 +1519,7 @@ Table of Contents
    $cbor-tag /= tag-cm-data<1668547093> ; bytes(cmw+json collection)
    $cbor-tag /= tag-cm-data<1668547094> ; bytes(cmw+jws)
 
-                       Figure 5: Tag CMW definitions
+                       Figure 7: Tag CMW definitions
 
 10.7.  New SMI Numbers Registrations
 
@@ -1772,6 +1778,11 @@ Table of Contents
               DOI 10.17487/RFC9782, May 2025,
               <https://www.rfc-editor.org/rfc/rfc9782>.
 
+   [RFC9876]  Fossati, T. and E. Dijk, "Updates to the IANA Registration
+              Procedures for Constrained Application Protocol (CoAP)
+              Content-Formats", RFC 9876, DOI 10.17487/RFC9876, November
+              2025, <https://www.rfc-editor.org/rfc/rfc9876>.
+
    [STD96]    Schaad, J., "CBOR Object Signing and Encryption (COSE):
               Structures and Process", STD 96, RFC 9052,
               DOI 10.17487/RFC9052, August 2022,
@@ -1779,7 +1790,7 @@ Table of Contents
 
 Appendix A.  Registering and Using CMWs
 
-   Figure 6 describes the registration preconditions for using CMWs in
+   Figure 8 describes the registration preconditions for using CMWs in
    either Record CMW or Tag CMW forms.  When using Collection CMW, the
    preconditions apply for each entry in the Collection.
 
@@ -1812,7 +1823,7 @@ Appendix A.  Registering and Using CMWs
                  /             Record CMW               /
                 `--------------------------------------'
 
-                       Figure 6: How To Create a CMW
+                       Figure 8: How To Create a CMW
 
 Appendix B.  Open Issues
 
