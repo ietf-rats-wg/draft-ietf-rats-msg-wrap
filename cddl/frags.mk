@@ -8,8 +8,6 @@ CMW_FRAGS += rfc9193.cddl
 # CBOR tags used in examples
 CMW_FRAGS += cmw-example-tag-1668612070-def.cddl
 CMW_FRAGS += cmw-example-tag-1668612069-def.cddl
-CMW_FRAGS += cmw-9277-cbor-tags.cddl
-CMW_FRAGS += cmw-9277-json-tags.cddl
 
 CMW_CBOR_EXAMPLES := cmw-example-1.diag
 CMW_CBOR_EXAMPLES += cmw-example-2.diag
