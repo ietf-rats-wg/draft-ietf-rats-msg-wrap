@@ -141,7 +141,7 @@ For example,
 ~~~
 {: #topo-1 artwork-align="center"}
 
-- In a "passport" topology ({{Section 5.1 of -rats-arch}}), an attestation result payload (e.g., EAT Attestation Result (EAR) {{-rats-ear}}) is initially sent from the Verifier to the Attester, and later, via a different channel, from the Attester to the Relying Party.  See {{topo-1}}.
+- In a "passport" topology ({{Section 5.1 of -rats-arch}}), an attestation result payload (e.g., EAT Attestation Result (EAR) {{-rats-ear}}) is initially sent from the Verifier to the Attester, and later, via a different channel, from the Attester to the Relying Party.  See {{topo-2}}.
 
 ~~~ aasvg
  .------------.
