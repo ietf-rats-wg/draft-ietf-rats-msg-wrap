@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 6 June 2026                                         Independent
+Expires: 7 June 2026                                         Independent
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                         3 December 2025
+                                                         4 December 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -73,7 +73,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 June 2026.
+   This Internet-Draft will expire on 7 June 2026.
 
 Copyright Notice
 
@@ -412,21 +412,20 @@ Table of Contents
    macro (i.e., one of tag-cm-cbor or tag-cm-data).
 
    For instance, if a conceptual message of type my-evidence has a TN-
-   derived CBOR tag 1668576819, $cbor-tag would be extended as follows:
+   derived CBOR tag 1668612069, $cbor-tag would be extended as follows:
 
-   $cbor-tag /= tag-cm-cbor<1668576819, my-evidence>
+   $cbor-tag /= tag-cm-cbor<1668612069, my-evidence>
 
    my-evidence = {
      &(eat_nonce: 10) => bytes .size (8..64)
    }
 
    Instead, if a (non-CBOR) conceptual message has a TN-derived CBOR tag
-   1668576935, $cbor-tag would be extended as follows:
+   1668612070, $cbor-tag would be extended as follows:
 
-   $cbor-tag /= tag-cm-data<1668576935>
+   $cbor-tag /= tag-cm-data<1668612070>
 
-   Note that since this specification defines no Tag CMW, the socket is
-   currently empty.
+   The socket is initialized as described in Figure 5.
 
 3.3.  Collection CMW
 
@@ -743,7 +742,7 @@ Table of Contents
    The (equivalent) examples in Section 5.1, Section 5.2, and
    Section 5.3 assume that the Media-Type-Name application/
    vnd.example.rats-conceptual-msg has been registered alongside a
-   corresponding CoAP Content-Format ID 30001.  The CBOR tag 1668576935
+   corresponding CoAP Content-Format ID 64999.  The CBOR tag 1668612070
    is derived applying the TN() transform as described in Section 3.2.
 
    All the examples focus on the wrapping aspects.  The wrapped messages
@@ -759,14 +758,14 @@ Table of Contents
 5.2.  CBOR-encoded Record
 
    [
-     30001,
+     64999,
      h'2347da55'
    ]
 
    with the following wire representation:
 
    82             # array(2)
-      19 7531     # unsigned(30001)
+      19 fde7     # unsigned(64999)
       44          # bytes(4)
          2347da55 # "#G\xDAU"
 
@@ -782,11 +781,11 @@ Table of Contents
 
 5.3.  CBOR-encoded Tag CMW
 
-   1668576935(h'2347da55')
+   1668612070(h'2347da55')
 
    with the following wire representation:
 
-   da 637476a7    # tag(1668576935)
+   da 6374ffe6    # tag(1668612070)
       44          # bytes(4)
          2347da55 # "#G\xDAU"
 
@@ -826,11 +825,11 @@ Table of Contents
    {
      "__cmwc_t": "tag:example.com,2024:composite-attester",
      / attester A / 0: [
-       30001,
+       64999,
        h'2347da55',
        4
      ],
-     / attester B / 1: 1668576935(h'2347da55'),
+     / attester B / 1: 1668612070(h'2347da55'),
      / attester C / 2: [
        "application/eat+jwt",
        h'2e2e2e',
@@ -988,12 +987,17 @@ Table of Contents
    cose.values = any
 
 
+   signed-json-cmw = jws-flattened-json / jws-compact
+
    jws-flattened-json = {
      "protected": protected
      ? "header": unprotected
      "payload": payload
      "signature": signature
    }
+
+   jws-compact =
+     (((protected .cat ".") .cat payload) .cat ".") .cat signature
 
    signed-json-cmw-protected-hdr = {
      "alg": text
@@ -1004,6 +1008,17 @@ Table of Contents
    signed-json-cmw-unprotected-hdr = {
      * text => text
    }
+
+   protected = text .b64u (text .json signed-json-cmw-protected-hdr)
+   unprotected = text .b64u (text .json signed-json-cmw-unprotected-hdr)
+   payload = text .b64u (text .json json-cmw)
+   signature = text .b64u bytes
+
+   $cbor-tag /= tag-cm-cbor<1668547091, cbor-collection>
+   $cbor-tag /= tag-cm-cbor<1668547092, signed-cbor-cmw>
+
+   $cbor-tag /= tag-cm-data<1668547093> ; bytes(cmw+json collection)
+   $cbor-tag /= tag-cm-data<1668547094> ; bytes(cmw+jws)
 
 7.  Implementation Status
 
@@ -1812,10 +1827,10 @@ Acknowledgments
    The authors would like to thank Alexey Melnikov, Benjamin Schwartz,
    Brian Campbell, Carl Wallace, Carsten Bormann, Christian Amsüss, Dave
    Thaler, Deb Cooley, Éric Vyncke, Ionuț Mihalcea, Mahesh Jethanandani,
-   Michael B.  Jones, Mike Ounsworth, Michael StJohns, Mohamed
-   Boucadair, Mohit Sethi, Orie Steele, Paul Howard, Peter Yee, Russ
-   Housley, Steven Bellock, Tim Bray, Tom Jones, and Usama Sardar for
-   their reviews and suggestions.
+   Michael B.  Jones, Mike Ounsworth, Michael StJohns, Mike Bishop,
+   Mohamed Boucadair, Mohit Sethi, Orie Steele, Paul Howard, Peter Yee,
+   Russ Housley, Steven Bellock, Tim Bray, Tom Jones, and Usama Sardar
+   for their reviews and suggestions.
 
    The definition of a Collection CMW has been modelled on a proposal
    originally made by Simon Frost for an EAT-based Evidence collection
