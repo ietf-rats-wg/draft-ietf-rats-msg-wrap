@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-04T01:01:06.313490+00:00",
+  "timestamp": "2025-12-07T01:07:24.369022+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -3254,7 +3254,7 @@
       "id": "I_kwDOIGCt2M65HHsF",
       "title": "Cases where secure channel is insufficient",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/222",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "muhammad-usama-sardar",
       "authorAssociation": "NONE",
       "assignees": [
@@ -3264,8 +3264,8 @@
       "labels": [],
       "body": "> In some scenarios, a secure channel (e.g., via TLS [[BCP195](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-15.html#BCP195)]) or object-level security (e.g., using JWT [[BCP225](https://www.ietf.org/archive/id/draft-ietf-rats-msg-wrap-15.html#BCP225)]) may be sufficient, but this is not always the case.\n\nExplain the cases where a secure channel is not sufficient. ",
       "createdAt": "2025-05-31T15:35:26Z",
-      "updatedAt": "2025-06-03T18:27:44Z",
-      "closedAt": null,
+      "updatedAt": "2025-12-04T15:06:38Z",
+      "closedAt": "2025-12-04T15:06:38Z",
       "comments": [
         {
           "author": "henkbirkholz",
@@ -3505,15 +3505,15 @@
       "id": "I_kwDOIGCt2M7UxF4y",
       "title": "Gen-art review",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/255",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Excerpt from [Peter\u2019s Gen-art review](https://mailarchive.ietf.org/arch/msg/rats/yiyANBXGrVdeYqs7MnoCsug7n6A/):\n\n```\nMinor issues:\n\nPage 10, 6th paragraph: Is there some expectation of what happens when a\nsending implementation allows more nesting depth than a receiving\nimplementation?\n\nPage 26, section 10.5, 4th paragraph: do indicator values need to be in\nmonotonically ascending order or are gaps fine?\n\nNits/editorial comments:\n\nPage 1, Abstract, 1st paragraph, 1st sentence: since the use of \u201c(RFC9334)\u201d is\nnot a reference (which are not allowed in abstracts in any case), then it\nshould be written as \u201c(RFC 9334\u201d. (See RFC 7322, section 3.5.)\n\nPage 1, Abstract, 1st paragraph, last sentence. The same correction applies\nhere as well.\n\nPage 7, ind definition, 2nd sentence: change \u201cincluded\u201d to \u201cinclusive\u201d.\n\nPage 7, ind definition, 3rd sentence: change \u201cvalues\u201d to \u201cbits\u201d. There are many\nmore values than bits, as the previous sentence shows. Append a comma after\n\u201cso\u201d. Delete the comma after \u201cambiguous\u201d.\n\nPage 11, section 4, 1st sentence: append a comma after \u201cintegrity\u201d.\n\nPage 12, section 4.1, sentence after \u201csigned-cbor-cmw\u201d layout: append a comma\nafter \u201cRecord\u201d.\n\nPage 16, section 5.2, paragraph after the wire registration: change\n\u201cregistrered\u201d to \u201cregistered\u201d.\n\nPage 19, section 6: at least one sentence explaining what this section is\nwouldn\u2019t be a bad thing.\n\nPage 23, section 9.1, 1st paragraph, 1st sentence: append a comma after \u201cTags\u201d.\n\nPage 28, section 10.5.2, 2nd paragraph: append \u201cprior to publication of this\nspecification as an RFC\u201d after \u201cregularly updated\u201d to make it clearer what\u2019s\ngoing on here. The 3rd paragraph helps that understanding, but reading the 2nd\nparagraph in order might leave the reader confused as to what\u2019s going on here.\nAnother thought is to mark section 10.5.2 as to be deleted by the RFC Editor on\npublication as it is almost completely irrelevant after that.\n```",
       "createdAt": "2025-10-30T09:11:18Z",
-      "updatedAt": "2025-10-30T09:11:18Z",
-      "closedAt": null,
+      "updatedAt": "2025-12-04T15:06:19Z",
+      "closedAt": "2025-12-04T15:06:19Z",
       "comments": []
     },
     {
@@ -3569,15 +3569,15 @@
       "id": "I_kwDOIGCt2M7bsGR_",
       "title": "Orie Steele\u2019s IESG review (DISCUSS)",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/261",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Archived-At: https://mailarchive.ietf.org/arch/msg/rats/FbSmnmsmzoZoHJEjlnYPzZib6zk/\n\n## Discuss\n\n### +jws\n\n```\n1152       Name:  JSON Web Signature (JWS)\n1153       +suffix:  +jws\n1154       References:  [RFC7515]\n1155       Encoding Considerations:  binary; values are represented as a JSON\n1156          Object or as a series of base64url-encoded values each separated\n1157          from the next by a single period ('.') character.\n```\n\nGiven that SD-JWT (https://datatracker.ietf.org/doc/rfc9901/) now exists, do\nyou want to include support for \"~\u201d ?\n\nNote, that without doing so, you could have json encoded sd-jwt values, that\ncannot be converted to compact serialization.\n\nYou already have this issue with JSON encoded JWS that cannot be converted to\ncompact, when the \"header\" parameter is required.",
       "createdAt": "2025-12-02T13:08:21Z",
-      "updatedAt": "2025-12-02T14:06:32Z",
-      "closedAt": null,
+      "updatedAt": "2025-12-04T15:06:10Z",
+      "closedAt": "2025-12-04T15:06:10Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -3666,6 +3666,30 @@
       "updatedAt": "2025-12-03T16:56:31Z",
       "closedAt": "2025-12-03T16:56:31Z",
       "comments": []
+    },
+    {
+      "number": 272,
+      "id": "I_kwDOIGCt2M7cPrnF",
+      "title": "expand RP",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/issues/272",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Archived-at: https://mailarchive.ietf.org/arch/msg/rats/ZHOma2VVq2Jpl_ytu5usX1DR-3E/\n\nMed\u2019s editorial suggestion:\n\n```\n> One very minor comment about the newly added figures: Other than that these are\n> not called out in the main text, it is obvious that RP shown there is about\n> Relying Party. You may consider s/Relying Party/Relying Party (RP) + adding\n> captions for these two figures. Obviously, this is the kind of changes that can\n> wait for AUTH48.\n```",
+      "createdAt": "2025-12-04T15:08:45Z",
+      "updatedAt": "2025-12-04T15:42:41Z",
+      "closedAt": "2025-12-04T15:42:41Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fixed by #271 ",
+          "createdAt": "2025-12-04T15:42:41Z",
+          "updatedAt": "2025-12-04T15:42:41Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -18141,6 +18165,106 @@
           "body": "LGTM",
           "createdAt": "2025-12-03T18:39:12Z",
           "updatedAt": "2025-12-03T18:39:12Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 270,
+      "id": "PR_kwDOIGCt2M63BK7g",
+      "title": "Use C-F reserved for documentation",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/270",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Thank you RFC9876!",
+      "createdAt": "2025-12-04T09:45:24Z",
+      "updatedAt": "2025-12-04T12:59:38Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "96700499d73fba79353f9a474765b26c1f7be1cc",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "mb",
+      "headRefOid": "644436b7377f3cf7c6bf2b23bec5a6e6e8c65e6c",
+      "closedAt": "2025-12-04T12:59:35Z",
+      "mergedAt": "2025-12-04T12:59:35Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "98c99a90e820689e91a075fca5b78fed722296be"
+      },
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> TIL RFC9876 defines [two C-F for documentation](https://www.rfc-editor.org/rfc/rfc9876.html#section-4.3).\r\n\r\nAnd we use both!  Just because ;-)",
+          "createdAt": "2025-12-04T12:57:34Z",
+          "updatedAt": "2025-12-04T12:57:34Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7S_coo",
+          "commit": {
+            "abbreviatedOid": "644436b"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "TIL RFC9876 defines [two C-F for documentation](https://www.rfc-editor.org/rfc/rfc9876.html#section-4.3).",
+          "createdAt": "2025-12-04T12:46:36Z",
+          "updatedAt": "2025-12-04T12:46:36Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 271,
+      "id": "PR_kwDOIGCt2M63FWR6",
+      "title": "nity nits",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/271",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-12-04T14:31:40Z",
+      "updatedAt": "2025-12-04T15:41:52Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "98c99a90e820689e91a075fca5b78fed722296be",
+      "headRepository": "boucadair/draft-ietf-rats-msg-wrap",
+      "headRefName": "main",
+      "headRefOid": "6a1a1a8c4077062ab54bb843da81956d80f860c7",
+      "closedAt": "2025-12-04T15:41:52Z",
+      "mergedAt": "2025-12-04T15:41:52Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "227d09d9402f85403e81e9de22901c0b35074fe7"
+      },
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fix #272 ",
+          "createdAt": "2025-12-04T15:41:26Z",
+          "updatedAt": "2025-12-04T15:41:26Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7TCiQf",
+          "commit": {
+            "abbreviatedOid": "6a1a1a8"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "magic :-)",
+          "createdAt": "2025-12-04T15:41:45Z",
+          "updatedAt": "2025-12-04T15:41:45Z",
           "comments": []
         }
       ]
