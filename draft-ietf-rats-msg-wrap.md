@@ -810,7 +810,7 @@ Conceptual Message name:
 : A text string describing the RATS conceptual message this indicator corresponds to.
 
 Reference:
-: A reference to a document, if available, or the registrant.
+: A reference to an IETF-stream RFC.
 
 The initial registrations for the registry are detailed in {{tab-ind-regs}}.
 
@@ -823,16 +823,6 @@ The initial registrations for the registry are detailed in {{tab-ind-regs}}.
 | 4 | Appraisal Policy | {{cm-type}} of {{&SELF}} |
 | 5-31 | Unassigned | |
 {: #tab-ind-regs title="CMW Indicators Registry Initial Contents"}
-
-### Provisional Registration
-
-[^rfced] Please remove this section before publication, as well as the reference to the provisional CMW Indicators registry.
-
-Before the creation of the registry by IANA, new codepoints can be added to the [provisional CMW Indicators registry](https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/blob/main/provisional/cmw-indicators-registry.md) by following the documented procedure.
-
-{{tab-ind-regs}} will be regularly updated, prior to publication of this specification as an RFC, to match the contents of the provisional registry.
-
-The provisional registry will be discontinued once IANA establishes the permanent registry, which is expected to coincide with the publication of the current document.
 
 ## Media Types {#iana-mt}
 
