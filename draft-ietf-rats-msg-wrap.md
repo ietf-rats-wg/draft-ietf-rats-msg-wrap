@@ -1066,16 +1066,14 @@ When assigning a new CoAP Content-Format ID for a CMW media type that utilizes t
 
 ### RFC9277 CBOR Tags
 
-[^rfced] Once IANA has allocated TBD1..TBD4, please replace the placeholders in the first column of {{tab-9277-tags}} with the values computed using the TN() formula in {{Appendix B of RFC9277}}.  Similarly, replace the macro parameters in {{fig-9277-tags}}.
-
 Registering the CoAP Content-Formats listed in {{tab-cf-regs}} automatically allocates CBOR Tags in the range \[1668546817, 1668612095\], using the `TN()` transform defined in {{Appendix B of RFC9277}}.
 The allocated CBOR Tag numbers and the corresponding data items are listed in {{tab-9277-tags}}.
 
 | Tag Number | Tag Content |
-| TN(TBD1) | `bytes .cbor cbor-cmw` |
-| TN(TBD2) | bytes-wrapped `json-cmw` |
-| TN(TBD3) | `bytes .cbor signed-cbor-cmw` |
-| TN(TBD4) | bytes-wrapped `signed-json-cmw` |
+| 1668547091 | `bytes .cbor cbor-cmw` |
+| 1668547092 | bytes-wrapped `json-cmw` |
+| 1668547093 | `bytes .cbor signed-cbor-cmw` |
+| 1668547094 | bytes-wrapped `signed-json-cmw` |
 {: #tab-9277-tags align="left" title="TN-derived CBOR Tags"}
 
 {{fig-9277-tags}} extends the `$cbor-tag` socket defined in {{cbor-tag}} to add the definitions of the associated Tag CMWs.
