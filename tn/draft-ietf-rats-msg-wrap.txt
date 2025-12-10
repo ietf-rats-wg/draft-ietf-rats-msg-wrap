@@ -133,7 +133,6 @@ Table of Contents
        10.3.1.  Registry Contents
      10.4.  RATS Conceptual Message Wrapper (CMW) Indicators Registry
        10.4.1.  Structure of Entries
-       10.4.2.  Provisional Registration
      10.5.  Media Types
        10.5.1.  application/cmw+cbor
        10.5.2.  application/cmw+json
@@ -1259,7 +1258,7 @@ Table of Contents
       indicator corresponds to.
 
    Reference:
-      A reference to a document, if available, or the registrant.
+      A reference to an IETF-stream RFC.
 
    The initial registrations for the registry are detailed in Table 1.
 
@@ -1285,25 +1284,6 @@ Table of Contents
        +-----------------+-------------------------+---------------+
 
              Table 1: CMW Indicators Registry Initial Contents
-
-10.4.2.  Provisional Registration
-
-
-   // RFC Editor: Please remove this section before publication, as well
-   as the reference to the provisional CMW Indicators registry.
-
-   Before the creation of the registry by IANA, new codepoints can be
-   added to the provisional CMW Indicators registry (https://github.com/
-   ietf-rats-wg/draft-ietf-rats-msg-wrap/blob/main/provisional/cmw-
-   indicators-registry.md) by following the documented procedure.
-
-   Table 1 will be regularly updated, prior to publication of this
-   specification as an RFC, to match the contents of the provisional
-   registry.
-
-   The provisional registry will be discontinued once IANA establishes
-   the permanent registry, which is expected to coincide with the
-   publication of the current document.
 
 10.5.  Media Types
 
