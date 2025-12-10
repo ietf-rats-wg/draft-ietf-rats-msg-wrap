@@ -1143,6 +1143,7 @@ The list of currently open issues for this document can be found at
 
 The authors would like to thank
 Alexey Melnikov,
+Amanda Baber,
 Benjamin Schwartz,
 Brian Campbell,
 Carl Wallace,
