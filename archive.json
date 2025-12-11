@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-07T01:07:24.369022+00:00",
+  "timestamp": "2025-12-11T01:03:37.201171+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -18265,6 +18265,54 @@
           "body": "magic :-)",
           "createdAt": "2025-12-04T15:41:45Z",
           "updatedAt": "2025-12-04T15:41:45Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 273,
+      "id": "PR_kwDOIGCt2M64F2Y8",
+      "title": "update \u00a710.6.2 with the computed TN tags",
+      "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/273",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-12-10T09:09:53Z",
+      "updatedAt": "2025-12-10T22:46:10Z",
+      "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "baseRefName": "main",
+      "baseRefOid": "227d09d9402f85403e81e9de22901c0b35074fe7",
+      "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
+      "headRefName": "tn",
+      "headRefOid": "a37e382f720d321a1d4c9c58e8b039a8f5a9e026",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @ionut-arm ",
+          "createdAt": "2025-12-10T09:10:22Z",
+          "updatedAt": "2025-12-10T09:10:22Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIGCt2M7UeoMV",
+          "commit": {
+            "abbreviatedOid": "a37e382"
+          },
+          "author": "ionut-arm",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "\ud83d\ude80 ",
+          "createdAt": "2025-12-10T22:46:10Z",
+          "updatedAt": "2025-12-10T22:46:10Z",
           "comments": []
         }
       ]
