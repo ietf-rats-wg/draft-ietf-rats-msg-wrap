@@ -5,14 +5,14 @@
 Remote ATtestation ProcedureS                                H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                                N. Smith
-Expires: 7 June 2026                                         Independent
+Expires: 14 June 2026                                        Independent
                                                               T. Fossati
                                                                   Linaro
                                                            H. Tschofenig
                                                                    H-BRS
                                                                 D. Glaze
                                                               Google LLC
-                                                         4 December 2025
+                                                        11 December 2025
 
 
                  RATS Conceptual Messages Wrapper (CMW)
@@ -73,7 +73,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 June 2026.
+   This Internet-Draft will expire on 14 June 2026.
 
 Copyright Notice
 
@@ -133,7 +133,6 @@ Table of Contents
        10.3.1.  Registry Contents
      10.4.  RATS Conceptual Message Wrapper (CMW) Indicators Registry
        10.4.1.  Structure of Entries
-       10.4.2.  Provisional Registration
      10.5.  Media Types
        10.5.1.  application/cmw+cbor
        10.5.2.  application/cmw+json
@@ -1259,7 +1258,7 @@ Table of Contents
       indicator corresponds to.
 
    Reference:
-      A reference to a document, if available, or the registrant.
+      A reference to an IETF-stream RFC.
 
    The initial registrations for the registry are detailed in Table 1.
 
@@ -1285,25 +1284,6 @@ Table of Contents
        +-----------------+-------------------------+---------------+
 
              Table 1: CMW Indicators Registry Initial Contents
-
-10.4.2.  Provisional Registration
-
-
-   // RFC Editor: Please remove this section before publication, as well
-   as the reference to the provisional CMW Indicators registry.
-
-   Before the creation of the registry by IANA, new codepoints can be
-   added to the provisional CMW Indicators registry (https://github.com/
-   ietf-rats-wg/draft-ietf-rats-msg-wrap/blob/main/provisional/cmw-
-   indicators-registry.md) by following the documented procedure.
-
-   Table 1 will be regularly updated, prior to publication of this
-   specification as an RFC, to match the contents of the provisional
-   registry.
-
-   The provisional registry will be discontinued once IANA establishes
-   the permanent registry, which is expected to coincide with the
-   publication of the current document.
 
 10.5.  Media Types
 
@@ -1482,12 +1462,6 @@ Table of Contents
 
 10.6.2.  RFC9277 CBOR Tags
 
-
-   // RFC Editor: Once IANA has allocated TBD1..TBD4, please replace the
-   placeholders in the first column of Table 4 with the values computed
-   using the TN() formula in Appendix B of [RFC9277].  Similarly,
-   replace the macro parameters in Figure 7.
-
    Registering the CoAP Content-Formats listed in Table 3 automatically
    allocates CBOR Tags in the range [1668546817, 1668612095], using the
    TN() transform defined in Appendix B of [RFC9277].  The allocated
@@ -1497,13 +1471,13 @@ Table of Contents
    +============+===============================+
    | Tag Number | Tag Content                   |
    +============+===============================+
-   | TN(TBD1)   | bytes .cbor cbor-cmw          |
+   | 1668547091 | bytes .cbor cbor-cmw          |
    +------------+-------------------------------+
-   | TN(TBD2)   | bytes-wrapped json-cmw        |
+   | 1668547092 | bytes-wrapped json-cmw        |
    +------------+-------------------------------+
-   | TN(TBD3)   | bytes .cbor signed-cbor-cmw   |
+   | 1668547093 | bytes .cbor signed-cbor-cmw   |
    +------------+-------------------------------+
-   | TN(TBD4)   | bytes-wrapped signed-json-cmw |
+   | 1668547094 | bytes-wrapped signed-json-cmw |
    +------------+-------------------------------+
 
            Table 4: TN-derived CBOR Tags
@@ -1835,13 +1809,13 @@ Appendix B.  Open Issues
 
 Acknowledgments
 
-   The authors would like to thank Alexey Melnikov, Benjamin Schwartz,
-   Brian Campbell, Carl Wallace, Carsten Bormann, Christian Amsüss, Dave
-   Thaler, Deb Cooley, Éric Vyncke, Ionuț Mihalcea, Mahesh Jethanandani,
-   Michael B.  Jones, Mike Ounsworth, Michael StJohns, Mike Bishop,
-   Mohamed Boucadair, Mohit Sethi, Orie Steele, Paul Howard, Peter Yee,
-   Russ Housley, Steven Bellock, Tim Bray, Tom Jones, and Usama Sardar
-   for their reviews and suggestions.
+   The authors would like to thank Alexey Melnikov, Amanda Baber,
+   Benjamin Schwartz, Brian Campbell, Carl Wallace, Carsten Bormann,
+   Christian Amsüss, Dave Thaler, Deb Cooley, Éric Vyncke, Ionuț
+   Mihalcea, Mahesh Jethanandani, Michael B.  Jones, Mike Ounsworth,
+   Michael StJohns, Mike Bishop, Mohamed Boucadair, Mohit Sethi, Orie
+   Steele, Paul Howard, Peter Yee, Russ Housley, Steven Bellock, Tim
+   Bray, Tom Jones, and Usama Sardar for their reviews and suggestions.
 
    The definition of a Collection CMW has been modelled on a proposal
    originally made by Simon Frost for an EAT-based Evidence collection
