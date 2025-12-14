@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-11T01:03:37.201171+00:00",
+  "timestamp": "2025-12-14T01:07:46.932889+00:00",
   "repo": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
   "labels": [
     {
@@ -18274,24 +18274,26 @@
       "id": "PR_kwDOIGCt2M64F2Y8",
       "title": "update \u00a710.6.2 with the computed TN tags",
       "url": "https://github.com/ietf-rats-wg/draft-ietf-rats-msg-wrap/pull/273",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-12-10T09:09:53Z",
-      "updatedAt": "2025-12-10T22:46:10Z",
+      "updatedAt": "2025-12-11T09:42:18Z",
       "baseRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "baseRefName": "main",
       "baseRefOid": "227d09d9402f85403e81e9de22901c0b35074fe7",
       "headRepository": "ietf-rats-wg/draft-ietf-rats-msg-wrap",
       "headRefName": "tn",
       "headRefOid": "a37e382f720d321a1d4c9c58e8b039a8f5a9e026",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-12-11T09:42:14Z",
+      "mergedAt": "2025-12-11T09:42:14Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "f45f5a1d85d4b1a157c7c335d46b76a732df60f2"
+      },
       "comments": [
         {
           "author": "thomas-fossati",
@@ -18313,6 +18315,19 @@
           "body": "\ud83d\ude80 ",
           "createdAt": "2025-12-10T22:46:10Z",
           "updatedAt": "2025-12-10T22:46:10Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIGCt2M7UkvOU",
+          "commit": {
+            "abbreviatedOid": "a37e382"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-12-11T09:00:44Z",
+          "updatedAt": "2025-12-11T09:00:44Z",
           "comments": []
         }
       ]
